@@ -1,0 +1,133 @@
+@import 'bootstrap';
+
+body {
+  padding-top: 50px;
+}
+
+p {
+  font-size: 18px;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-nav {
+  font-family: Georgia, serif;
+}
+
+hr {
+  border-color: #666;
+}
+
+#about {
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+
+.jumbotron {
+  padding-top: 0;
+  height: 600px;
+  h1 {
+    font-weight: bold;
+  }
+  .content {
+    top: 50px;
+  }
+}
+
+.hero-secondary {
+  text-align: center;
+  .content {
+    margin: 90px auto;
+  }
+  h2 {
+    color: white;
+    font-weight: bold;
+  }
+}
+
+.covered {
+  position: relative;
+  overflow: hidden;
+  .content {
+    position: relative;
+  }
+  .cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    right: 0;
+    left: 0;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+  }
+}
+
+.navbar-brand {
+  font-family: Georgia, serif;
+  text-transform: uppercase;
+}
+
+.navbar-nav {
+  text-transform: uppercase;
+  a {
+    -webkit-transition: margin-top .2s, color .2s;
+    transition: margin-top .2s, color .2s;
+    &:hover {
+      margin-top: -1px;
+    }
+  }
+}
+
+.img-step {
+  height: 200px;
+  max-width: 100%;
+}
+
+.footer {
+  background-color: #222;
+  color: #9d9d9d;
+  .colophon {
+    padding: 5px;
+    font-family: Georgia, serif;
+    text-transform: uppercase;
+    text-align: right;
+  }
+}
+
+.slide-in {
+  -webkit-animation-name: slideIn;
+  -webkit-animation-timing-function: ease-out;
+  -webkit-animation-duration: .5s;
+  -webkit-animation-fill-mode: forwards;
+  animation-name: slideIn;
+  animation-timing-function: ease-out;
+  animation-duration: .5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+article {
+  img, video, audio {
+    max-width: 100%;
+  }
+}
