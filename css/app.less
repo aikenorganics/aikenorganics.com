@@ -1,5 +1,9 @@
+// Vendor
 @import 'bootstrap';
+
+// Modules
 @import 'animation';
+@import 'covered';
 
 body {
   padding-top: 50px;
@@ -15,6 +19,12 @@ h1, h2, h3, h4, h5, h6, .navbar-nav {
 
 hr {
   border-color: #666;
+}
+
+article {
+  img, video, audio {
+    max-width: 100%;
+  }
 }
 
 #about {
@@ -44,24 +54,6 @@ hr {
   }
 }
 
-.covered {
-  position: relative;
-  overflow: hidden;
-  .content {
-    position: relative;
-  }
-  .cover {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    right: 0;
-    left: 0;
-    background-attachment: fixed;
-    background-position: center center;
-    background-size: cover;
-  }
-}
-
 .navbar-brand {
   font-family: Georgia, serif;
   text-transform: uppercase;
@@ -85,11 +77,5 @@ hr {
     font-family: Georgia, serif;
     text-transform: uppercase;
     text-align: right;
-  }
-}
-
-article {
-  img, video, audio {
-    max-width: 100%;
   }
 }
