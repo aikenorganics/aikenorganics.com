@@ -1,5 +1,5 @@
 #!/bin/sh
 
-lessc css/app.less > public/css/app.css
+lessc css/app.less | cleancss > public/css/app.css
 
 uglifyjs js/jquery.js js/bootstrap.js > public/js/app.js
