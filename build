@@ -3,3 +3,5 @@
 lessc css/app.less | cleancss > public/css/app.css
 
 uglifyjs js/jquery.js js/bootstrap.js > public/js/app.js
+
+convert public/img/emblem.png -resize 48x48 public/favicon.ico
