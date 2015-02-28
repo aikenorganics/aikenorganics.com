@@ -1,10 +1,6 @@
 // Slide In
 
 .slide-in {
-  -webkit-animation-name: slideIn;
-  -webkit-animation-timing-function: ease-out;
-  -webkit-animation-duration: .5s;
-  -webkit-animation-fill-mode: forwards;
   animation-name: slideIn;
   animation-timing-function: ease-out;
   animation-duration: .5s;
@@ -12,17 +8,6 @@
 }
 
 @keyframes slideIn {
-  0% {
-    opacity: 0;
-    transform: translateX(-25px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@-webkit-keyframes slideIn {
   0% {
     opacity: 0;
     transform: translateX(-25px);
