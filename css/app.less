@@ -1,4 +1,5 @@
 @import 'bootstrap';
+@import 'animation';
 
 body {
   padding-top: 50px;
@@ -6,11 +7,6 @@ body {
 
 p {
   font-size: 18px;
-}
-
-// Ensure that images don't overflow the page on mobile.
-img {
-  max-width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6, .navbar-nav {
@@ -90,39 +86,6 @@ hr {
     font-family: Georgia, serif;
     text-transform: uppercase;
     text-align: right;
-  }
-}
-
-.slide-in {
-  -webkit-animation-name: slideIn;
-  -webkit-animation-timing-function: ease-out;
-  -webkit-animation-duration: .5s;
-  -webkit-animation-fill-mode: forwards;
-  animation-name: slideIn;
-  animation-timing-function: ease-out;
-  animation-duration: .5s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes slideIn {
-  0% {
-    opacity: 0;
-    transform: translateX(-25px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@-webkit-keyframes slideIn {
-  0% {
-    opacity: 0;
-    transform: translateX(-25px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
   }
 }
 
