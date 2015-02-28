@@ -1,10 +1,14 @@
 // Vendor
 var express = require('express');
-var app = express();
+var compression = require('compression');
 
-// Middleware
+// The App!
+var app = express();
 app.set('view engine', 'ejs');
 app.engine('ejs', require('ejs').renderFile);
+
+// Middleware
+app.use(compression());
 app.use(express.static('public'));
 
 app.get('/', function(req, res) {
