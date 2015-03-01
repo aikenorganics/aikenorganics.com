@@ -83,6 +83,7 @@ router.post('/signup', function(req, res) {
       email: email,
       password: hash
     }).then(function(user) {
+      res.cookie('aikenorganics-user-id', user.id, {signed: true});
       res.redirect('/');
     });
   });
