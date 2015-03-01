@@ -7,4 +7,6 @@ createdb aikenorganics_test &>/dev/null || true
 foreman run --env=.testenv sequelize db:migrate
 
 # App Tests
-foreman run --env=.testenv tape test/home.js
+foreman run --env=.testenv tape \
+  test/home.js \
+  test/auth.js

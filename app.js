@@ -16,9 +16,7 @@ app.use(body.urlencoded({extended: false}));
 app.use(multer());
 app.use(compression());
 app.use(express.static('public'));
+app.use(require('./middleware/user'));
 
-// Info Router
-app.use('/', require('./routers/info'));
-
-// Auth router
-app.use('/', require('./routers/auth'));
+require('./routes/info')(app);
+require('./routes/auth')(app);
