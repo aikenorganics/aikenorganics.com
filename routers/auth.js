@@ -1,9 +1,17 @@
 var bcrypt = require('bcrypt');
 var express = require('express');
-var User = require('./models/user');
+var User = require('../models/user');
 
 // Export the Router
 var router = module.exports = express.Router();
+
+// Middleware
+router.use(require('../middleware/user'));
+
+router.get('/signout', function(req, res) {
+  res.clearCookie('aikenorganics-user-id');
+  res.redirect('/');
+});
 
 router.get('/signin', function(req, res) {
   res.render('signin');
@@ -24,6 +32,7 @@ router.post('/signin', function(req, res) {
     }
 
     bcrypt.compare(password, user.password, function(e, match) {
+      if (e) throw e;
 
       // Is the password correct?
       if (!match) {

@@ -17,11 +17,10 @@ app.use(multer());
 app.use(compression());
 app.use(express.static('public'));
 
-app.get('/', function(req, res) {
-  res.render('index');
-});
+// Info Router
+app.use('/', require('./routers/info'));
 
 // Auth router
-app.use('/', require('./auth'));
+app.use('/', require('./routers/auth'));
 
 app.listen(process.env.PORT || 3333);
