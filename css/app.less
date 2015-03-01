@@ -15,12 +15,8 @@ p {
   font-size: 18px;
 }
 
-h1, h2, h3, h4, h5, h6, .navbar-nav {
+h1, h2, h3, h4, h5, h6, {
   font-family: Georgia, serif;
-}
-
-.navbar-nav {
-  font-weight: bold;
 }
 
 hr {
@@ -69,14 +65,10 @@ article {
   text-transform: uppercase;
 }
 
-.navbar-nav {
+.navbar-nav > li > a {
+  font-weight: bold;
+  font-family: Georgia, serif;
   text-transform: uppercase;
-  a {
-    transition: margin-top .2s, color .2s;
-    &:hover {
-      margin-top: -1px;
-    }
-  }
 }
 
 .footer {
