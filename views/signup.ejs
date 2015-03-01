@@ -7,28 +7,33 @@
 
 <% include nav %>
 
-<div class='panel panel-default login'>
-  <div class='panel-heading'>
-    <h3 class='panel-title'>Sign Up</h3>
-  </div>
-  <div class='panel-body'>
-    <form>
+<form method='POST' action='/signup'>
+  <div class='panel panel-default login'>
+    <div class='panel-heading'>
+      <h3 class='panel-title'>Sign Up</h3>
+    </div>
+    <div class='panel-body'>
       <div class='form-group'>
         <label for='email'>Email</label>
-        <input type='text' id='email' class='form-control' placeholder='you@example.com'>
+        <input type='text' id='email' name='email' class='form-control' placeholder='you@example.com' <% if (locals.email) { %>value='<%= locals.email%>'<% } %>>
       </div>
       <div class='form-group'>
         <label for='password'>Password</label>
-        <input type='password' id='password' class='form-control'>
+        <input type='password' id='password' name='password' class='form-control'>
       </div>
-    </form>
+      <% if (locals.flash) { %>
+        <div class='alert alert-danger'>
+          <%= locals.flash %>
+        </div>
+      <% } %>
+    </div>
+    <div class='panel-footer text-right'>
+      <button type='submit' class='btn btn-primary'>
+        Sign Up
+      </button>
+    </div>
   </div>
-  <div class='panel-footer text-right'>
-    <button type='submit' class='btn btn-primary'>
-      Sign Up
-    </button>
-  </div>
-</div>
+</form>
 
 <% include footer %>
 
