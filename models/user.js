@@ -15,5 +15,10 @@ module.exports = sql.define('User', {
     allowNull: false
   }
 }, {
-  tableName: 'users'
+  tableName: 'users',
+  instanceMethods: {
+    isAdmin: function() {
+      return this.email === 'dunbarb2@gmail.com';
+    }
+  }
 });
