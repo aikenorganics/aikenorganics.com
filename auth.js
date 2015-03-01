@@ -5,8 +5,8 @@ var User = require('./models/user');
 // Export the Router
 var router = module.exports = express.Router();
 
-router.get('/login', function(req, res) {
-  res.render('login');
+router.get('/signin', function(req, res) {
+  res.render('signin');
 });
 
 router.get('/signup', function(req, res) {
