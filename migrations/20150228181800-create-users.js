@@ -8,11 +8,11 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         allowNull: false
       },
-      updatedAt: {
+      updated_at: {
         type: DataTypes.DATE,
         allowNull: false
       },

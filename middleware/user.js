@@ -1,4 +1,4 @@
-var User = require('../models/user');
+var User = require('../models').User;
 
 module.exports = function(req, res, next) {
   var id = req.signedCookies['aikenorganics-user-id'];
