@@ -13,7 +13,7 @@ module.exports = function(app) {
   });
 
   app.post('/signin', function(req, res) {
-    var email = req.body.email || '';
+    var email = (req.body.email || '').trim();
     var password = (req.body.password || '').trim();
 
     User.find({where: {email: email}}).then(function(user) {
@@ -51,7 +51,7 @@ module.exports = function(app) {
   });
 
   app.post('/signup', function(req, res) {
-    var email = req.body.email || '';
+    var email = (req.body.email || '').trim();
     var password = (req.body.password || '').trim();
 
     // Validate the password.
@@ -71,16 +71,29 @@ module.exports = function(app) {
       return;
     }
 
-    // Hash the password and store the user.
-    bcrypt.hash(password, 12, function(e, hash) {
-      if (e) throw e;
-      User.create({
-        email: email,
-        password: hash
-      }).then(function(user) {
-        res.cookie('aikenorganics-user-id', user.id, {signed: true});
-        res.redirect('/');
+    User.find({where: {email: email}}).then(function(user) {
+
+      // Does this user already exist?
+      if (user) {
+        res.render('signup', {
+          email: email,
+          flash: 'That user already exists! Is it you?'
+        });
+        return;
+      }
+
+      // Hash the password and store the user.
+      bcrypt.hash(password, 12, function(e, hash) {
+        if (e) throw e;
+        User.create({
+          email: email,
+          password: hash
+        }).then(function(user) {
+          res.cookie('aikenorganics-user-id', user.id, {signed: true});
+          res.redirect('/');
+        });
       });
+
     });
   });
 
