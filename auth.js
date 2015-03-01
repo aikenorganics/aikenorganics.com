@@ -9,6 +9,37 @@ router.get('/signin', function(req, res) {
   res.render('signin');
 });
 
+router.post('/signin', function(req, res) {
+  var email = req.body.email || '';
+  var password = (req.body.password || '').trim();
+
+  User.find({where: {email: email}}).then(function(user) {
+
+    // Does the user exist?
+    if (!user) {
+      res.render('signin', {
+        flash: 'Sorry! We can’t find a user with that email. Have you already registered?'
+      });
+      return;
+    }
+
+    bcrypt.compare(password, user.password, function(e, match) {
+
+      // Is the password correct?
+      if (!match) {
+        res.render('signin', {
+          flash: 'Sorry! That password is incorrect.'
+        });
+        return;
+      }
+
+      res.redirect('/');
+
+    });
+
+  });
+});
+
 router.get('/signup', function(req, res) {
   res.render('signup');
 });

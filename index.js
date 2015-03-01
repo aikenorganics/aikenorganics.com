@@ -2,6 +2,7 @@
 var express = require('express');
 var compression = require('compression');
 var body = require('body-parser');
+var multer = require('multer');
 
 // The App!
 var app = express();
@@ -10,6 +11,7 @@ app.engine('ejs', require('ejs').renderFile);
 
 // Middleware
 app.use(body.urlencoded());
+app.use(multer());
 app.use(compression());
 app.use(express.static('public'));
 
