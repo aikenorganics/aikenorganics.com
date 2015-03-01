@@ -28,11 +28,13 @@ router.post('/signin', function(req, res) {
       // Is the password correct?
       if (!match) {
         res.render('signin', {
+          email: email,
           flash: 'Sorry! That password is incorrect.'
         });
         return;
       }
 
+      res.cookie('aikenorganics-user-id', user.id, {signed: true});
       res.redirect('/');
 
     });
