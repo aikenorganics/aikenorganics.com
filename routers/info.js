@@ -7,7 +7,5 @@ var router = module.exports = express.Router();
 router.use(require('../middleware/user'));
 
 router.get('/', function(req, res) {
-  res.render('index', {
-    user: req.user
-  });
+  res.render('index');
 });
