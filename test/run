@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+# Failure means the database already exists.
+createdb aikenorganics_test &>/dev/null || true
+
+# Migrate the test database.
+foreman run --env=.testenv sequelize db:migrate

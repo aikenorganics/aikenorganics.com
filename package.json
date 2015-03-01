@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "./build",
-    "start": "foreman start"
+    "start": "foreman start",
+    "test": "./test/run"
   },
   "repository": {
     "type": "git",
