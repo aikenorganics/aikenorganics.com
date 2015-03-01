@@ -40,7 +40,25 @@ var Post = exports.Post = sql.define('Post', {
   content: {
     type: Sql.TEXT,
     allowNull: false
+  },
+  author_id: {
+    type: Sql.INTEGER,
+    allowNull: false
   }
 }, {
-  tableName: 'posts'
+  tableName: 'posts',
+  createdAt: 'created_at',
+  updatedAt: 'updated_at'
+});
+
+// Relations
+
+User.hasMany(Post, {
+  as: 'Posts',
+  foreignKey: 'author_id'
+});
+
+Post.belongsTo(User, {
+  as: 'Author',
+  foreignKey: 'author_id'
 });
