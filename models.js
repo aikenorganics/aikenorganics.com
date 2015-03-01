@@ -44,5 +44,3 @@ var Post = exports.Post = sql.define('Post', {
 }, {
   tableName: 'posts'
 });
-
-Post.belongsTo(User);
