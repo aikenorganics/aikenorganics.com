@@ -2,6 +2,6 @@
 
 lessc css/app.less | autoprefixer | cleancss > public/css/app.css
 
-uglifyjs js/jquery.js js/bootstrap.js > public/js/app.js
+browserify js/app.js | uglifyjs > public/js/app.js
 
 convert public/img/emblem.png -resize 48x48 public/favicon.ico

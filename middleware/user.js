@@ -1,7 +1,7 @@
 var User = require('../models').User;
 
 module.exports = function(req, res, next) {
-  var id = req.signedCookies['aikenorganics-user-id'];
+  var id = req.session.userId;
   if (!id) return next();
   User.find(id).then(function(user) {
     if (!user) return next();

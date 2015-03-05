@@ -6,8 +6,8 @@ createdb aikenorganics_test &>/dev/null || true
 # Migrate the test database.
 foreman run --env=.testenv sequelize db:migrate
 
+# Fill it with fixtures.
+foreman run --env=.testenv ./bin/fixtures.js
+
 # App Tests
-foreman run --env=.testenv tape \
-  test/home.js \
-  test/auth.js \
-  test/posts.js
+foreman run --env=.testenv tape test/all.js

@@ -2,23 +2,18 @@ var test = require('tape');
 var request = require('supertest');
 var app = require('../app');
 
-var cookie = require('cookie');
-var sign = require('cookie-signature').sign;
-
 test('signup page is a 200', function(t) {
   request(app)
-  .get('/signup')
+  .get('/auth/signup')
   .expect(200)
   .end(t.end);
 });
 
-test('signup page is a 200 with a missing user', function(t) {
+test('Can sign in with password', function(t) {
   request(app)
-  .get('/signup')
-  .set('Cookie', cookie.serialize(
-    'aikenorganics-user-id',
-    's:' + sign('123456789', process.env.SECRET)
-  ) + ';')
-  .expect(200)
+  .post('/auth/signin')
+  .field('email', 'admin@example.com')
+  .field('password', 'password')
+  .expect(302)
   .end(t.end);
 });

@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+  <% include ../head %>
+</head>
+<body>
+
+<% include ../nav %>
+
+<div class='container'>
+  <h1><%= grower.name %></h1>
+  <span class='pull-right'>
+    <a href='/growers'>&larr; All Growers</a>
+    &bull;
+    <a href='/growers/<%= grower.id %>/edit'>Edit</a>
+  </span>
+  <% if (grower.email) { %>
+    <a href='mailto:<%= grower.email %>' target='_blank'>
+      <%= grower.email %>
+    </a>
+  <% } %>
+  <% if (grower.email && grower.url) { %>
+    &bull;
+  <% } %>
+  <% if (grower.url) { %>
+    <a href='<%= grower.url %>' target='_blank'>
+      <%= grower.url %>
+    </a>
+  <% } %>
+  <div class='clearfix'>
+    <hr>
+  </div>
+  <%- marked(grower.description) %>
+  <h2>Products</h2>
+  <a class='btn btn-primary' href='/growers/<%= grower.id %>/products/new'>
+    New Product
+  </a>
+  <hr>
+  <% locals.products.forEach(function(product) { %>
+    <h3>
+      <a href='/products/<%= product.id %>'><%= product.name %></a>
+      <small><a href='/products/<%= product.id %>/edit'>Edit</a></small>
+    </h3>
+  <% }); %>
+</div>
+
+<% include ../footer %>
+
+<script src='/js/app.js'></script>
+
+</body>
+</html>

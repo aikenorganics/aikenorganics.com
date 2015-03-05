@@ -1,4 +1,12 @@
 <nav class='navbar navbar-inverse navbar-fixed-top'>
+  <% if (locals.flash && flash.success) { %>
+    <div id='message' class='active'>
+      <span class='alert alert-success'>
+        <span class='octicon octicon-check'></span>
+        <%= flash.success %>
+      </span>
+    </div>
+  <% } %>
   <div class='container'>
     <div class='collapse navbar-collapse pull-right'>
       <ul class='nav navbar-nav'>
@@ -20,10 +28,18 @@
               </a>
               <ul class='dropdown-menu' role='menu'>
                 <li role='presentation' class='dropdown-header'>
-                  <%= locals.user.email %>
+                  <% if (user.first || user.last) { %>
+                    <%= user.first %>
+                    <%= user.last %>
+                    <br>
+                  <% } %>
+                  <%= user.email %>
                 </li>
                 <li>
-                  <a href='/signout'>Sign Out</a>
+                  <a href='/settings/account'>Settings</a>
+                </li>
+                <li>
+                  <a href='/auth/signout'>Sign Out</a>
                 </li>
               </ul>
             <% } else { %>

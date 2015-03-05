@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <% include ../head %>
+</head>
+<body>
+
+<% include ../nav %>
+
+<div class='container'>
+  <h1>Growers</h1>
+  <p class='text-right'>
+    <a class='btn btn-primary' href='/growers/new'>New</a>
+  </p>
+  <hr>
+  <% growers.forEach(function(grower) { %>
+    <h3>
+      <a href='/growers/<%= grower.id %>'><%= grower.name %></a>
+      <small><a href='/growers/<%= grower.id %>/edit'>Edit</a></small>
+    </h3>
+  <% }); %>
+</div>
+
+<% include ../footer %>
+
+<script src='/js/app.js'></script>
+
+</body>
+</html>

@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
 <head>
-  <% include head %>
+  <% include ../head %>
 </head>
 <body>
 
-<% include nav %>
+<% include ../nav %>
 
-<form method='POST' action='/signin' enctype='multipart/form-data'>
-  <div class='panel panel-default signin'>
+<form method='POST' action='/auth/signup' enctype='multipart/form-data'>
+  <div class='panel panel-default signup'>
     <div class='panel-heading'>
-      <h3 class='panel-title'>Sign In</h3>
+      <h3 class='panel-title'>Sign Up</h3>
     </div>
     <div class='panel-body'>
       <div class='form-group'>
         <label for='email'>Email</label>
-        <input type='text' id='email' name='email' class='form-control' placeholder='you@example.com' required <% if (locals.email) { %>value='<%= locals.email%>'<% } %> autofocus>
+        <input type='text' id='email' name='email' class='form-control' placeholder='you@example.com' <% if (locals.email) { %>value='<%= locals.email%>'<% } %> autofocus>
       </div>
       <div class='form-group'>
         <label for='password'>Password</label>
-        <input type='password' id='password' name='password' class='form-control' required>
+        <input type='password' id='password' name='password' class='form-control'>
       </div>
       <% if (locals.flash) { %>
         <div class='alert alert-danger'>
@@ -29,13 +29,13 @@
     </div>
     <div class='panel-footer text-right'>
       <button type='submit' class='btn btn-primary'>
-        Sign In
+        Sign Up
       </button>
     </div>
   </div>
 </form>
 
-<% include footer %>
+<% include ../footer %>
 
 <script src='/js/app.js'></script>
 

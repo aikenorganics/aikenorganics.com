@@ -1,24 +1,46 @@
 // Vendor
+var marked = require('marked');
 var express = require('express');
 var compression = require('compression');
 var body = require('body-parser');
 var multer = require('multer');
-var cookieParser = require('cookie-parser');
+var session = require('cookie-session');
 
 // The App!
 var app = module.exports = express();
 app.set('view engine', 'ejs');
 app.engine('ejs', require('ejs').renderFile);
 
+// Markdown
+marked.setOptions({sanitize: true});
+app.locals.marked = marked;
+
 // Middleware
-app.use(cookieParser(process.env.SECRET));
+app.use(session({
+  signed: true,
+  // secure: true,
+  name: 'aikenorganics',
+  secret: process.env.SECRET,
+  maxAge: 1000 * 60 * 60 * 24 * 7
+}));
 app.use(body.urlencoded({extended: false}));
 app.use(multer());
 app.use(compression());
 app.use(express.static('public'));
-
 app.use(require('./middleware/user'));
+app.use(require('./middleware/flash'));
 
-require('./routes/info')(app);
-require('./routes/auth')(app);
-require('./routes/posts')(app);
+// Routes
+app.use('/auth', require('./routes/auth'));
+app.use('/posts', require('./routes/posts'));
+app.use('/growers', require('./routes/growers'));
+app.use('/products', require('./routes/products'));
+app.use('/settings', require('./routes/settings'));
+
+app.get('/', function(req, res) {
+  res.render('index');
+});
+
+app.get('*', function(req, res) {
+  res.status(404).render('404');
+});

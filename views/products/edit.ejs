@@ -8,8 +8,9 @@
 <% include ../nav %>
 
 <div class='container'>
-  <h1>New Post</h1>
-  <form method='POST' action='/posts' enctype='multipart/form-data'>
+  <h1>Edit Product</h1>
+  <h4><%= locals.grower.name %></h4>
+  <form method='POST' action='/products/<%= locals.product.id %>' enctype='multipart/form-data'>
     <% include form %>
   </form>
 </div>
