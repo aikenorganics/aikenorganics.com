@@ -44,6 +44,10 @@ var Post = exports.Post = sql.define('Post', {
   author_id: {
     type: Sql.INTEGER,
     allowNull: false
+  },
+  title: {
+    type: Sql.STRING,
+    allowNull: false
   }
 }, {
   tableName: 'posts',

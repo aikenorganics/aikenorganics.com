@@ -16,7 +16,9 @@ app.use(body.urlencoded({extended: false}));
 app.use(multer());
 app.use(compression());
 app.use(express.static('public'));
+
 app.use(require('./middleware/user'));
 
 require('./routes/info')(app);
 require('./routes/auth')(app);
+require('./routes/posts')(app);
