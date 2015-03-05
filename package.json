@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "./build",
+    "build": "./bin/build",
     "start": "foreman start",
-    "test": "./test/run"
+    "test": "./bin/test"
   },
   "repository": {
     "type": "git",
