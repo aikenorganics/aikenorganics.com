@@ -6,6 +6,7 @@ var models = require('../models');
 
 var User = models.User;
 var Grower = models.Grower;
+var Product = models.Product;
 var Category = models.Category;
 
 // password
@@ -40,6 +41,20 @@ Promise.all([
   Category.findOrCreate({where: {name: 'Beauty'}}),
   Category.findOrCreate({where: {name: 'Dairy & Eggs'}}),
   Category.findOrCreate({where: {name: 'Meat'}})
-]).then(function() {
-  models.close();
+]).then(function(results) {
+  var watsonia = results[2][0];
+
+  return Promise.all([
+    Product.findOrCreate({
+      where: {grower_id: watsonia.id, name: 'Peaches'},
+      defaults: {
+        cost: '14',
+        unit: 'Box',
+        available: 22,
+        description: 'A box of peaches.'
+      }
+    })
+  ]).then(function() {
+    models.close();
+  });
 });

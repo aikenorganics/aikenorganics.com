@@ -1,23 +1,11 @@
 var express = require('express');
+var find = require('../mid/find');
 var adminOnly = require('../mid/admin-only');
 var Post = require('../models').Post;
-
 var router = module.exports = express.Router();
 
 router.use(adminOnly);
-
-// Find a post.
-router.param('post_id', function(req, res, next, id) {
-  if (!id) return next();
-  Post.find(id).then(function(post) {
-    if (!post) {
-      res.status(404).render('404')
-      return;
-    }
-    req.post = res.locals.post = post;
-    next();
-  });
-});
+router.param('post_id', find('post', Post));
 
 router.get('/', function(req, res) {
   Post.findAll().then(function(posts) {

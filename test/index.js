@@ -5,6 +5,7 @@ require('./auth');
 require('./growers');
 require('./home');
 require('./posts');
+require('./products');
 require('./categories');
 
 test('teardown', function(t) {

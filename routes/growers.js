@@ -1,24 +1,12 @@
 var express = require('express');
+var find = require('../mid/find');
 var Grower = require('../models').Grower;
 var Product = require('../models').Product;
 var adminOnly = require('../mid/admin-only');
-
 var router = module.exports = express.Router();
 
 router.use(adminOnly);
-
-// Find the grower!
-router.param('grower_id', function(req, res, next, id) {
-  if (!id) return next();
-  Grower.find(id).then(function(grower) {
-    if (!grower) {
-      res.status(404).render('404');
-      return;
-    }
-    req.grower = res.locals.grower = grower;
-    next();
-  });
-});
+router.param('grower_id', find('grower', Grower));
 
 router.get('/', function(req, res) {
   Grower.findAll().then(function(growers) {

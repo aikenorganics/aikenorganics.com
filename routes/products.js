@@ -1,26 +1,20 @@
 var express = require('express');
+var find = require('../mid/find');
 var adminOnly = require('../mid/admin-only');
 var Grower = require('../models').Grower;
 var Product = require('../models').Product;
-
 var router = module.exports = express.Router();
+var findProduct = find('product', Product);
 
 router.use(adminOnly);
-
-// Find the product!
 router.param('product_id', function(req, res, next, id) {
-  if (!id) return next();
-  Product.find(id).then(function(product) {
-    if (!product) {
-      res.status(404).render('404');
-      return;
-    }
-    req.product = res.locals.product = product;
-    product.getGrower().then(function(grower) {
+  findProduct(req, res, function() {
+    if (!req.product) return next();
+    req.product.getGrower().then(function(grower) {
       req.grower = res.locals.grower = grower;
       next();
     });
-  });
+  }, id);
 });
 
 router.get('/:product_id', function(req, res) {

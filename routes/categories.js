@@ -1,23 +1,12 @@
 var bcrypt = require('bcrypt');
 var express = require('express');
+var find = require('../mid/find');
 var adminOnly = require('../mid/admin-only');
 var Category = require('../models').Category;
-
 var router = module.exports = express.Router();
 
 router.use(adminOnly);
-
-router.param('category_id', function(req, res, next, id) {
-  if (!id) return next();
-  Category.find(id).then(function(category) {
-    if (!category) {
-      res.status(404).render('404');
-      return;
-    }
-    req.category = res.locals.category = category;
-    next();
-  });
-});
+router.param('category_id', find('category', Category));
 
 router.get('/', function(req, res) {
   Category.findAll().then(function(categories) {

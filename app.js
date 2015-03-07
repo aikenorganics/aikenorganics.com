@@ -50,5 +50,6 @@ app.get('*', function(req, res) {
 
 // 500
 app.use(function(e, req, res, next) {
+  console.error(e);
   res.status(500).render('500');
 });
