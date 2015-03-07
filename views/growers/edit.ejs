@@ -9,9 +9,29 @@
 
 <div class='container'>
   <h1>Edit Grower</h1>
-  <form method='POST' action='/growers/<%= grower.id %>' enctype='multipart/form-data'>
-    <% include form %>
-  </form>
+  <div class='row'>
+    <div class='col-md-8'>
+      <form method='POST' action='/growers/<%= grower.id %>' enctype='multipart/form-data'>
+        <% include form %>
+      </form>
+    </div>
+    <div class='col-md-4'>
+      <form method='POST' action='<%= growerImageUrl(grower) %>' enctype='multipart/form-data'>
+        <input type='hidden' name='return_to' value='<%= growerEditUrl(grower) %>'>
+        <div class='form-group text-center'>
+          <img class='img-rounded' src='<%= imageUrl(grower, 'medium') %>'>
+        </div>
+        <div class='form-group'>
+          <input type='file' name='image' class='form-control'>
+        </div>
+        <div class='form-group text-right'>
+          <button type='submit' class='btn btn-primary'>
+            Upload
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
 <% include ../footer %>

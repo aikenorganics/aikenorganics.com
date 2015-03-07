@@ -42,6 +42,9 @@ module.exports = sql.define('Grower', {
     set: function(value) {
       this.setDataValue('description', value || '');
     }
+  },
+  imaged_at: {
+    type: Sql.DATE
   }
 }, {
   tableName: 'growers',

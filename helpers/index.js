@@ -28,6 +28,7 @@ exports.imageUrl = function(model, size) {
 
 [
   models.User,
+  models.Grower,
   models.Product
 ].forEach(function(Model) {
 
