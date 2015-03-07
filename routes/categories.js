@@ -4,10 +4,7 @@ var Category = require('../models').Category;
 
 var router = module.exports = express.Router();
 
-router.use(function(req, res, next) {
-  if (req.user && req.user.isAdmin()) return next();
-  res.status(401).render('401');
-});
+router.use(require('../middleware/admin-only'));
 
 router.param('category_id', function(req, res, next, id) {
   if (!id) return next();

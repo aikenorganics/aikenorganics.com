@@ -3,6 +3,8 @@ var Post = require('../models').Post;
 
 var router = module.exports = express.Router();
 
+router.use(require('../middleware/admin-only'));
+
 // Find a post.
 router.param('post_id', function(req, res, next, id) {
   if (!id) return next();
@@ -14,12 +16,6 @@ router.param('post_id', function(req, res, next, id) {
     req.post = res.locals.post = post;
     next();
   });
-});
-
-// Admin only
-router.use(function(req, res, next) {
-  if (req.user && req.user.isAdmin()) return next();
-  res.status(401).render('401');
 });
 
 router.get('/', function(req, res) {

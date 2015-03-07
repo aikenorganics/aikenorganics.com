@@ -4,6 +4,8 @@ var Product = require('../models').Product;
 
 var router = module.exports = express.Router();
 
+router.use(require('../middleware/admin-only'));
+
 // Find the grower!
 router.param('grower_id', function(req, res, next, id) {
   if (!id) return next();
@@ -15,12 +17,6 @@ router.param('grower_id', function(req, res, next, id) {
     req.grower = res.locals.grower = grower;
     next();
   });
-});
-
-// Just admins for now.
-router.use(function(req, res, next) {
-  if (req.user && req.user.isAdmin()) return next();
-  res.status(401).render('401');
 });
 
 router.get('/', function(req, res) {

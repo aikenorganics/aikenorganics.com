@@ -5,6 +5,7 @@ require('./auth');
 require('./growers');
 require('./home');
 require('./posts');
+require('./categories');
 
 test('teardown', function(t) {
   models.close();

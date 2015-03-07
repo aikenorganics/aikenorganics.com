@@ -10,4 +10,4 @@ foreman run --env=.testenv sequelize db:migrate
 foreman run --env=.testenv ./bin/fixtures.js
 
 # App Tests
-foreman run --env=.testenv tape test/all.js
+foreman run --env=.testenv tape test/index.js
