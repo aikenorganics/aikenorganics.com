@@ -20,7 +20,7 @@ router.param('grower_id', function(req, res, next, id) {
 // Just admins for now.
 router.use(function(req, res, next) {
   if (req.user && req.user.isAdmin()) return next();
-  res.status(401).end();
+  res.status(401).render('401');
 });
 
 router.get('/', function(req, res) {
