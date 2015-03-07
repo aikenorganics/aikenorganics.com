@@ -11,13 +11,13 @@
   <h1>Edit User</h1>
   <div class='row'>
     <div class='col-md-8'>
-      <form method='POST' action='/users/<%= _user.id %>' enctype='multipart/form-data'>
+      <form method='POST' action='<%= userUrl(_user) %>' enctype='multipart/form-data'>
         <% include form %>
       </form>
     </div>
     <div class='col-md-4'>
-      <form method='POST' action='/users/<%= _user.id %>/image' enctype='multipart/form-data'>
-        <input type='hidden' name='return_to' value='/users/<%= _user.id %>/edit'>
+      <form method='POST' action='<%= userImageUrl(_user) %>' enctype='multipart/form-data'>
+        <input type='hidden' name='return_to' value='<%= userEditUrl(_user) %>'>
         <div class='form-group text-center'>
           <img class='img-rounded' src='<%= imageUrl(_user, 'medium') %>'>
         </div>

@@ -23,7 +23,7 @@
     <tbody>
       <% users.forEach(function(user) { %>
         <tr>
-          <td><a href='/users/<%= user.id %>/edit'>Edit</a></td>
+          <td><a href='<%= userEditUrl(user) %>'>Edit</a></td>
           <td><%= user.email %></td>
           <td><%= user.first || '-' %></td>
           <td><%= user.last || '-' %></td>

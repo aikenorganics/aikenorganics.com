@@ -17,14 +17,20 @@ Promise.all([
     where: {email: 'admin@example.com'},
     defaults: {
       is_admin: true,
-      password: password
+      password: password,
+      first: 'Admin',
+      last: 'User',
+      phone: '803.555.5555'
     }
   }),
   User.findOrCreate({
     where: {email: 'user@example.com'},
     defaults: {
       is_admin: false,
-      password: password
+      password: password,
+      first: 'Regular',
+      last: 'User',
+      phone: '803.532.5859'
     }
   }),
   Grower.findOrCreate({
