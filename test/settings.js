@@ -7,6 +7,9 @@ test('/settings/account is a 200 as an admin', function(t) {
     if (e) return t.end(e);
     agent.get('/settings/account')
     .expect(200)
+    .expect(function(res){
+      if (/is_admin/.test(res.text)) return 'should not see is_admin';
+    })
     .end(t.end);
   });
 });
@@ -16,6 +19,9 @@ test('/settings/account is a 200 as a regular user', function(t) {
     if (e) return t.end(e);
     agent.get('/settings/account')
     .expect(200)
+    .expect(function(res){
+      if (/is_admin/.test(res.text)) return 'should not see is_admin';
+    })
     .end(t.end);
   });
 });

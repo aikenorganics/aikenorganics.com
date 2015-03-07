@@ -18,6 +18,7 @@ test('/users/show is a 200 as an admin', function(t) {
     request.getAdmin().then(function(user) {
       agent.get('/users/' + user.id + '/edit')
       .expect(200)
+      .expect(/is_admin/)
       .end(t.end);
     });
   });

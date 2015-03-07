@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:user_id/edit', function(req, res) {
-  res.render('users/edit');
+  res.render('users/edit', {showAdmin: true});
 });
 
 router.post('/:user_id', function(req, res) {
