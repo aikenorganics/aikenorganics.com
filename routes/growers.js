@@ -37,6 +37,7 @@ router.post('/:grower_id', function(req, res) {
   req.grower.updateAttributes(req.body, {
     fields: ['name', 'email', 'url', 'location', 'description']
   }).then(function() {
+    res.flash('success', 'Saved');
     res.redirect('/growers/' + req.grower.id);
   });
 });
@@ -49,6 +50,7 @@ router.post('/', function(req, res) {
     location: req.body.location,
     description: req.body.description
   }).then(function(grower) {
+    res.flash('success', 'Saved');
     res.redirect('/growers/' + grower.id);
   });
 });
@@ -68,6 +70,7 @@ router.post('/:grower_id/products', function(req, res) {
     category_id: req.body.category_id,
     description: req.body.description
   }).then(function(product) {
+    res.flash('success', 'Saved');
     res.redirect('/products/' + product.id);
   });
 });
