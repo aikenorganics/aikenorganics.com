@@ -42,6 +42,12 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
+// 404
 app.get('*', function(req, res) {
   res.status(404).render('404');
+});
+
+// 500
+app.use(function(e, req, res, next) {
+  res.status(500).render('500');
 });
