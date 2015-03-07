@@ -1,9 +1,10 @@
 var express = require('express');
+var adminOnly = require('../mid/admin-only');
 var Post = require('../models').Post;
 
 var router = module.exports = express.Router();
 
-router.use(require('../mid/admin-only'));
+router.use(adminOnly);
 
 // Find a post.
 router.param('post_id', function(req, res, next, id) {

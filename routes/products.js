@@ -1,10 +1,11 @@
 var express = require('express');
+var adminOnly = require('../mid/admin-only');
 var Grower = require('../models').Grower;
 var Product = require('../models').Product;
 
 var router = module.exports = express.Router();
 
-router.use(require('../mid/admin-only'));
+router.use(adminOnly);
 
 // Find the product!
 router.param('product_id', function(req, res, next, id) {
