@@ -1,7 +1,7 @@
 {
   "name": "aikenorganics",
   "version": "1.0.0",
-  "description": "",
+  "description": "aikenorganics.com",
   "main": "index.js",
   "engines": {
     "node": "0.12.x"
