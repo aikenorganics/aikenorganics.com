@@ -7,6 +7,7 @@ var User = exports.User = require('./user');
 var Post = exports.Post = require('./post');
 var Grower = exports.Grower = require('./grower');
 var Product = exports.Product = require('./product');
+var Category = exports.Category = require('./category');
 
 // Relations
 

@@ -16,7 +16,7 @@ router.post('/account', function(req, res) {
   req.user.updateAttributes(req.body, {
     fields: ['first', 'last', 'phone']
   }).then(function() {
-    res.flash('success', 'Saved. Thanks for being awesome!');
+    res.flash('success', 'Saved - thanks for being awesome!');
     res.redirect('/settings/account');
   });
 });

@@ -36,6 +36,7 @@ app.use('/posts', require('./routes/posts'));
 app.use('/growers', require('./routes/growers'));
 app.use('/products', require('./routes/products'));
 app.use('/settings', require('./routes/settings'));
+app.use('/categories', require('./routes/categories'));
 
 app.get('/', function(req, res) {
   res.render('index');
