@@ -1,7 +1,6 @@
 var test = require('tape');
 var request = require('./helper');
 var app = require('../app');
-var User = require('../models').User;
 
 test('/settings/account is a 200 as an admin', function(t) {
   var agent = request(app).signIn('admin@example.com', function(e) {

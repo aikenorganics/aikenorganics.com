@@ -5,6 +5,7 @@ require('./auth');
 require('./growers');
 require('./home');
 require('./posts');
+require('./users');
 require('./products');
 require('./settings');
 require('./categories');
