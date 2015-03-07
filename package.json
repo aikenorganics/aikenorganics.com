@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "0.12.x"
+  },
   "scripts": {
     "build": "./bin/build",
     "start": "foreman start",
