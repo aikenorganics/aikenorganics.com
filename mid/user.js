@@ -6,7 +6,7 @@ module.exports = function(req, res, next) {
   User.find(id).then(function(user) {
     if (!user) return next();
     req.user = res.locals.user = user;
-    req.isAdmin = res.locals.isAdmin = user.isAdmin();
+    req.admin = res.locals.admin = user.is_admin;
     next();
   });
 };

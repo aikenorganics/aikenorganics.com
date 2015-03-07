@@ -49,12 +49,5 @@ module.exports = sql.define('User', {
 }, {
   tableName: 'users',
   createdAt: 'created_at',
-  updatedAt: 'updated_at',
-  instanceMethods: {
-    isAdmin: function() {
-      return this.is_admin ||
-        this.email.toLowerCase() === 'dunbarb2@gmail.com' ||
-        this.email.toLowerCase() === 'alexandrea@aikenorganics.com';
-    }
-  }
+  updatedAt: 'updated_at'
 });
