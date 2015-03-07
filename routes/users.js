@@ -19,7 +19,7 @@ router.get('/:user_id/edit', function(req, res) {
 
 router.post('/:user_id', function(req, res) {
   req._user.updateAttributes(req.body, {
-    fields: ['first', 'last', 'phone']
+    fields: ['first', 'last', 'phone', 'is_admin']
   }).then(function() {
     res.flash('success', 'Saved');
     res.redirect('/users');
