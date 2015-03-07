@@ -1,7 +1,7 @@
 var express = require('express');
 var User = require('../models').User;
-var find = require('../middleware/find');
-var adminOnly = require('../middleware/admin-only');
+var find = require('../mid/find');
+var adminOnly = require('../mid/admin-only');
 var router = module.exports = express.Router();
 
 router.use(adminOnly);
