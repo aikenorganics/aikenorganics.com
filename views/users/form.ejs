@@ -1,0 +1,17 @@
+<div class='form-group'>
+  <label for='first'>First Name</label>
+  <input autofocus type='text' id='first' name='first' class='form-control' <% if (locals._user) { %>value='<%= _user.first %>'<% } %>>
+</div>
+<div class='form-group'>
+  <label for='last'>Last Name</label>
+  <input autofocus type='text' id='last' name='last' class='form-control' <% if (locals._user) { %>value='<%= _user.last %>'<% } %>>
+</div>
+<div class='form-group'>
+  <label for='phone'>Phone Number</label>
+  <input autofocus type='text' id='phone' name='phone' class='form-control' <% if (locals._user) { %>value='<%= _user.phone %>'<% } %>>
+</div>
+<div class='form-group'>
+  <button type='submit' class='btn btn-primary'>
+    Save
+  </button>
+</div>

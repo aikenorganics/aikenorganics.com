@@ -9,7 +9,7 @@ router.use(function(req, res, next) {
 });
 
 router.get('/account', function(req, res) {
-  res.render('settings/account');
+  res.render('settings/account', {_user: req.user});
 });
 
 router.post('/account', function(req, res) {

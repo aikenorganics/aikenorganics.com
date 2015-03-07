@@ -8,9 +8,9 @@
 <% include ../nav %>
 
 <div class='container'>
-  <h1>Account Settings</h1>
-  <form method='POST' action='/settings/account' enctype='multipart/form-data'>
-    <% include ../users/form %>
+  <h1>Edit User</h1>
+  <form method='POST' action='/users/<%= _user.id %>' enctype='multipart/form-data'>
+    <% include form %>
   </form>
 </div>
 
@@ -20,4 +20,3 @@
 
 </body>
 </html>
-
