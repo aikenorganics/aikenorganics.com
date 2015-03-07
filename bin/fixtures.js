@@ -33,6 +33,26 @@ Promise.all([
       phone: '803.532.5859'
     }
   }),
+  User.findOrCreate({
+    where: {email: 'jake@example.com'},
+    defaults: {
+      is_admin: false,
+      password: password,
+      first: 'Jake',
+      last: 'TheDog',
+      phone: '803.532.5859'
+    }
+  }),
+  User.findOrCreate({
+    where: {email: 'finn@example.com'},
+    defaults: {
+      is_admin: false,
+      password: password,
+      first: 'Finn',
+      last: 'TheHuman',
+      phone: '803.532.5859'
+    }
+  }),
   Grower.findOrCreate({
     where: {name: 'Watsonia Farms'},
     defaults: {
@@ -48,7 +68,7 @@ Promise.all([
   Category.findOrCreate({where: {name: 'Dairy & Eggs'}}),
   Category.findOrCreate({where: {name: 'Meat'}})
 ]).then(function(results) {
-  var watsonia = results[2][0];
+  var watsonia = results[4][0];
 
   return Promise.all([
     Product.findOrCreate({
@@ -63,4 +83,6 @@ Promise.all([
   ]).then(function() {
     models.close();
   });
+}).catch(function(e) {
+  console.log(e);
 });

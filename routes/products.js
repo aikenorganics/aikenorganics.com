@@ -1,6 +1,7 @@
 var express = require('express');
 var find = require('../mid/find');
 var adminOnly = require('../mid/admin-only');
+var upload = require('../mid/image-upload');
 var Grower = require('../models').Grower;
 var Product = require('../models').Product;
 var Category = require('../models').Category;
@@ -41,3 +42,5 @@ router.post('/:product_id', function(req, res) {
     res.redirect('/products/' + req.product.id);
   });
 });
+
+router.post('/:product_id/image', upload('product'));

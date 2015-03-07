@@ -45,6 +45,9 @@ module.exports = sql.define('User', {
     set: function(value) {
       this.setDataValue('phone', value || '');
     }
+  },
+  imaged_at: {
+    type: Sql.DATE
   }
 }, {
   tableName: 'users',

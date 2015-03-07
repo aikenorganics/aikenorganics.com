@@ -23,8 +23,12 @@ module.exports = function(name) {
           console.log(e);
           return res.status(500).render('500');
         }
-        res.flash('success', 'Image uploaded.');
-        res.redirect(req.body.return_to);
+        model.updateAttributes({
+          imaged_at: new Date
+        }, ['imaged_at']).then(function() {
+          res.flash('success', 'Image uploaded.');
+          res.redirect(req.body.return_to);
+        });
       });
     });
 

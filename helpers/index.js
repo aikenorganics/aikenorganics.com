@@ -1,29 +1,52 @@
 var marked = require('marked');
+var models = require('../models');
 
 // Markdown
 marked.setOptions({sanitize: true});
 exports.marked = marked;
 
+var IMAGES = [
+  '/img/vegetables-square.jpg',
+  '/img/veggies-in-boxes-square.jpg',
+  '/img/food-basket-square.jpg',
+  '/img/pen-and-pad-square.jpg'
+];
+
 // Image helpers
 exports.imageUrl = function(model, size) {
-  var tableName = model.Model.tableName;
-  return '/assets/' + tableName + '/' + model.id + '/' + size + '.jpg';
+  if (model.imaged_at) {
+    var tableName = model.Model.tableName;
+    return [
+      '/assets',
+      tableName,
+      model.id,
+      size + '.jpg?' + +model.imaged_at
+    ].join('/');
+  }
+  return IMAGES[model.id % IMAGES.length];
 };
 
-// Users
+[
+  models.User,
+  models.Product
+].forEach(function(Model) {
 
-exports.usersUrl = function() {
-  return '/users';
-};
+  var tableName = Model.tableName;
 
-exports.userEditUrl = function(user) {
-  return '/users/' + user.id + '/edit';
-};
+  exports[tableName + 'Url'] = function() {
+    return '/' + tableName;
+  };
 
-exports.userImageUrl = function(user) {
-  return '/users/' + user.id + '/image';
-};
+  exports[tableName.slice(0, -1) + 'Url'] = function(model) {
+    return '/' + tableName + '/' + model.id;
+  };
 
-exports.userUrl = function(user) {
-  return '/users/' + user.id;
-};
+  exports[tableName.slice(0, -1) + 'EditUrl'] = function(model) {
+    return '/' + tableName + '/' + model.id + '/edit';
+  };
+
+  exports[tableName.slice(0, -1) + 'ImageUrl'] = function(model) {
+    return '/' + tableName + '/' + model.id + '/image';
+  };
+
+});

@@ -28,11 +28,6 @@
   <label for='description'>Description</label>
   <textarea rows='5' id='description' name='description' class='form-control'><% if (locals.product) { %><%= product.description %><% } %></textarea>
 </div>
-<% if (locals.flash) { %>
-  <div class='alert alert-danger'>
-    <%= locals.flash %>
-  </div>
-<% } %>
 <p class='text-right'>
   <button type='submit' class='btn btn-primary'>
     Save
