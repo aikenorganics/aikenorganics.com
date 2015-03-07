@@ -10,14 +10,7 @@ var session = require('cookie-session');
 var app = module.exports = express();
 app.set('view engine', 'ejs');
 app.engine('ejs', require('ejs').renderFile);
-
-// Helpers
-marked.setOptions({sanitize: true});
-app.locals.marked = marked;
-app.locals.imageUrl = function(model, size) {
-  var tableName = model.Model.tableName;
-  return '/assets/' + tableName + '/' + model.id + '/' + size + '.jpg';
-};
+app.locals = require('./helpers');
 
 // Middleware
 app.use(session({
