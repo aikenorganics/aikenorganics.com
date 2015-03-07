@@ -1,6 +1,7 @@
 var express = require('express');
 var User = require('../models').User;
 var find = require('../mid/find');
+var upload = require('../mid/image-upload');
 var adminOnly = require('../mid/admin-only');
 var router = module.exports = express.Router();
 
@@ -25,3 +26,5 @@ router.post('/:user_id', function(req, res) {
     res.redirect('/users');
   });
 });
+
+router.post('/:user_id/image', upload('_user'));

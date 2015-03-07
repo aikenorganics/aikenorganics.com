@@ -11,9 +11,13 @@ var app = module.exports = express();
 app.set('view engine', 'ejs');
 app.engine('ejs', require('ejs').renderFile);
 
-// Markdown
+// Helpers
 marked.setOptions({sanitize: true});
 app.locals.marked = marked;
+app.locals.imageUrl = function(model, size) {
+  var tableName = model.Model.tableName;
+  return '/assets/' + tableName + '/' + model.id + '/' + size + '.jpg';
+};
 
 // Middleware
 app.use(session({
@@ -24,7 +28,7 @@ app.use(session({
   maxAge: 1000 * 60 * 60 * 24 * 7
 }));
 app.use(body.urlencoded({extended: false}));
-app.use(multer());
+app.use(multer({dest: './tmp/uploads/', putSingleFilesInArray: true}));
 app.use(compression());
 app.use(express.static('public'));
 app.use(require('./mid/user'));
@@ -50,6 +54,6 @@ app.get('*', function(req, res) {
 
 // 500
 app.use(function(e, req, res, next) {
-  console.error(e);
+  console.log(e);
   res.status(500).render('500');
 });
