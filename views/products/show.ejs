@@ -18,11 +18,13 @@
   per
   <%= product.unit %>
   &bull;
+  <%= product.available %> Available
+  &bull;
   <a href='/growers/<%= grower.id %>'>
     <%= grower.name %>
   </a>
   &bull;
-  <%= product.available %> Available
+  <%= category.name %>
   <div class='clearfix'>
     <hr>
   </div>

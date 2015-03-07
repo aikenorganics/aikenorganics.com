@@ -30,3 +30,13 @@ Product.belongsTo(Grower, {
   as: 'Grower',
   foreignKey: 'grower_id'
 });
+
+Category.hasMany(Product, {
+  as: 'Products',
+  foreignKey: 'category_id'
+});
+
+Product.belongsTo(Category, {
+  as: 'Category',
+  foreignKey: 'category_id'
+});

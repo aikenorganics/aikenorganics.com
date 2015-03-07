@@ -2,6 +2,7 @@ var express = require('express');
 var find = require('../mid/find');
 var Grower = require('../models').Grower;
 var Product = require('../models').Product;
+var Category = require('../models').Category;
 var adminOnly = require('../mid/admin-only');
 var router = module.exports = express.Router();
 
@@ -53,7 +54,9 @@ router.post('/', function(req, res) {
 });
 
 router.get('/:grower_id/products/new', function(req, res) {
-  res.render('products/new');
+  Category.findAll().then(function(categories) {
+    res.render('products/new', {categories: categories});
+  });
 });
 
 router.post('/:grower_id/products', function(req, res) {
@@ -62,6 +65,7 @@ router.post('/:grower_id/products', function(req, res) {
     cost: req.body.cost,
     unit: req.body.unit,
     available: req.body.available,
+    category_id: req.body.category_id,
     description: req.body.description
   }).then(function(product) {
     res.redirect('/products/' + product.id);
