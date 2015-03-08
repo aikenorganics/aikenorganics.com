@@ -71,8 +71,7 @@ test('POST /auth/reset is a 302 for valid tokens', function(t) {
   .expect(302)
   .end(function() {
     Token.findAll({order: [['expires_at', 'DESC']]}).then(function(tokens) {
-      agent.post('/auth/reset')
-      .field('token', tokens[0].id)
+      agent.post('/auth/reset/' + tokens[0].id)
       .field('password', 'password')
       .expect(302)
       .end(t.end);
@@ -90,10 +89,16 @@ test('POST /auth/reset is a 404 for missing tokens', function(t) {
 });
 
 test('POST /auth/reset enforces password length of 8', function(t) {
-  request(app)
-  .post('/auth/reset')
-  .field('token', 'does not exist')
-  .field('password', 'secret')
-  .expect(422)
-  .end(t.end);
+  var agent = request(app);
+  agent.post('/auth/forgot')
+  .field('email', 'admin@example.com')
+  .expect(302)
+  .end(function() {
+    Token.findAll({order: [['expires_at', 'DESC']]}).then(function(tokens) {
+      agent.post('/auth/reset/' + tokens[0].id)
+      .field('password', 'secret')
+      .expect(422)
+      .end(t.end);
+    });
+  });
 });

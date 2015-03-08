@@ -2,16 +2,20 @@ var bcrypt = require('bcrypt');
 var crypto = require('crypto');
 var express = require('express');
 var postmark = require('postmark');
+var find = require('../mid/find');
 var User = require('../models').User;
 var Token = require('../models').Token;
 
 var router = module.exports = express.Router();
 
+// Mock the postmark API for testing.
 if (process.env.POSTMARK_API_TOKEN) {
   var mailer = new postmark.Client(process.env.POSTMARK_API_TOKEN);
 } else {
   var mailer = {sendEmail: function(options, next){ next(); }};
 }
+
+router.param('token_id', find('token', Token));
 
 router.get('/forgot', function(req, res) {
   res.render('auth/forgot');
@@ -46,20 +50,17 @@ router.post('/forgot', function(req, res) {
   });
 });
 
-router.get('/reset/:token', function(req, res) {
-  Token.find(req.params.token).then(function(token) {
+router.get('/reset/:token_id', function(req, res) {
+  if (!req.token || req.token.expires_at < new Date) {
+    return res.status(404).render('auth/reset', {
+      error: 'Sorry! That token is expired.'
+    });
+  }
 
-    if (!token || token.expires_at < new Date) {
-      return res.status(404).render('auth/reset', {
-        error: 'Sorry! That token is expired.'
-      });
-    }
-
-    res.render('auth/reset', {token: token});
-  });
+  res.render('auth/reset');
 });
 
-router.post('/reset', function(req, res) {
+router.post('/reset/:token_id', function(req, res) {
 
   if ((req.body.password || '').length < 8) {
     return res.status(422).render('auth/reset', {
@@ -67,28 +68,23 @@ router.post('/reset', function(req, res) {
     });
   }
 
-  Token.find(req.body.token).then(function(token) {
+  if (!req.token || req.token.expires_at < new Date) {
+    return res.status(404).render('auth/reset', {
+      error: 'Sorry! That token is expired.'
+    });
+  }
 
-    if (!token || token.expires_at < new Date) {
-      return res.status(404).render('auth/reset', {
-        error: 'Sorry! That token is expired.'
-      });
+  // Hash the password and store the user.
+  bcrypt.hash(req.body.password, 12, function(e, hash) {
+    if (e) {
+      console.log(e);
+      return res.status(500).render('500');
     }
-
-    // Hash the password and store the user.
-    bcrypt.hash(req.body.password, 12, function(e, hash) {
-      if (e) {
-        console.log(e);
-        return res.status(500).render('500');
-      }
-      token.getUser().then(function(user){
-        user.updateAttributes({
-          password: hash
-        }, ['password']).then(function() {
-          res.flash('success', 'Password Changed');
-          req.session.userId = user.id;
-          res.redirect('/');
-        });
+    req.token.getUser().then(function(user){
+      user.updateAttributes({password: hash}, ['password']).then(function() {
+        res.flash('success', 'Password Changed');
+        req.session.userId = user.id;
+        res.redirect('/');
       });
     });
   });
