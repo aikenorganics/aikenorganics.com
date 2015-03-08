@@ -8,15 +8,15 @@
 <% include ../nav %>
 
 <div class='container'>
-  <h1>Categories</h1>
-  <p class='text-right'>
-    <a class='btn btn-primary' href='/categories/new'>New</a>
-  </p>
+  <h1>
+    Categories
+    <a class='btn btn-default btn-xs' href='/categories/new'>New Category</a>
+  </h1>
   <hr>
   <% categories.forEach(function(category) { %>
     <h3>
       <a href='/categories/<%= category.id %>'><%= category.name %></a>
-      <small><a href='/categories/<%= category.id %>/edit'>Edit</a></small>
+      <small><a class='btn btn-default btn-xs' href='/categories/<%= category.id %>/edit'>Edit</a></small>
     </h3>
   <% }); %>
 </div>
