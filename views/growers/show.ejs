@@ -11,8 +11,10 @@
   <h1><%= grower.name %></h1>
   <span class='pull-right'>
     <a href='/growers'>&larr; All Growers</a>
-    &bull;
-    <a href='/growers/<%= grower.id %>/edit'>Edit</a>
+    <% if (locals.admin) { %>
+      &bull;
+      <a href='/growers/<%= grower.id %>/edit'>Edit</a>
+    <% } %>
   </span>
   <% if (grower.email) { %>
     <a href='mailto:<%= grower.email %>' target='_blank'>
