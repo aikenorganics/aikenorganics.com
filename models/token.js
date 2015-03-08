@@ -1,7 +1,7 @@
 var Sql = require('sequelize');
 var sql = require('./sequelize');
 
-module.exports = sql.define('Token', {
+module.exports = sql.define('tokens', {
   id: {
     type: Sql.STRING,
     primaryKey: true

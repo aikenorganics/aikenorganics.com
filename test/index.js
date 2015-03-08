@@ -6,7 +6,6 @@ require('./growers');
 require('./home');
 require('./posts');
 require('./users');
-require('./market');
 require('./products');
 require('./settings');
 require('./categories');

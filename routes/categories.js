@@ -1,11 +1,17 @@
 var bcrypt = require('bcrypt');
 var express = require('express');
+var Promise = require('sequelize').Promise;
 var find = require('../mid/find');
-var adminOnly = require('../mid/admin-only');
-var Category = require('../models').Category;
+var models = require('../models');
+var Grower = models.Grower;
+var Category = models.Category;
 var router = module.exports = express.Router();
 
-router.use(adminOnly);
+router.use(function(req, res, next) {
+  if (req.admin) return next();
+  res.status(401).render('401');
+});
+
 router.param('category_id', find('category', Category));
 
 router.get('/', function(req, res) {
@@ -39,5 +45,19 @@ router.post('/:category_id', function(req, res) {
   }).then(function() {
     res.flash('success', 'Saved');
     res.redirect('/categories');
+  });
+});
+
+router.get('/:category_id', function(req, res) {
+  Promise.all([
+    Category.findAll(),
+    req.category.getProducts({
+      include: [{model: Grower, as: 'grower'}]
+    })
+  ]).spread(function(categories, products) {
+    res.render('categories/show', {
+      categories: categories,
+      products: products
+    });
   });
 });

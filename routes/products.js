@@ -27,6 +27,23 @@ router.param('product_id', function(req, res, next, id) {
   }, id);
 });
 
+router.get('/', function(req, res) {
+  var category_id = req.query.category_id;
+
+  Promise.all([
+    Category.findAll(),
+    Product.findAll({
+      where: category_id ? {category_id: category_id} : {},
+      include: [{model: Grower, as: 'grower'}]
+    })
+  ]).spread(function(categories, products) {
+    res.render('products/index', {
+      categories: categories,
+      products: products
+    });
+  });
+});
+
 router.get('/:product_id', function(req, res) {
   res.render('products/show');
 });

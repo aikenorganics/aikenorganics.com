@@ -1,6 +1,8 @@
 var test = require('tape');
 var request = require('./helper');
 var app = require('../app');
+var models = require('../models');
+var Category = models.Category;
 
 test('/categories/show is a 404 for missing ids', function(t) {
   var agent = request(app).signIn('admin@example.com', function(e) {
@@ -19,4 +21,3 @@ test('/categories/new is a 200', function(t) {
     .end(t.end);
   });
 });
-

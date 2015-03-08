@@ -1,7 +1,7 @@
 var Sql = require('sequelize');
 var sql = require('./sequelize');
 
-module.exports = sql.define('Post', {
+module.exports = sql.define('posts', {
   id: {
     type: Sql.INTEGER,
     primaryKey: true

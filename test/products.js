@@ -1,7 +1,9 @@
 var test = require('tape');
 var request = require('./helper');
 var app = require('../app');
-var Product = require('../models').Product;
+var models = require('../models');
+var Product = models.Product;
+var Category = models.Category;
 
 test('GET /products/show is a 200 as an admin', function(t) {
   Product.findAll({limit: 1}).then(function(products) {
@@ -61,5 +63,21 @@ test('POST /products/:id/image is a 401 as a non-admin', function(t) {
       .expect(401)
       .end(t.end);
     });
+  });
+});
+
+test('GET /products is a 200', function(t) {
+  request(app)
+  .get('/products')
+  .expect(200)
+  .end(t.end);
+});
+
+test('GET /products?category_id=:id is a 200', function(t) {
+  Category.findAll({limit: 1}).then(function(categories) {
+    request(app)
+    .get('/products?category_id=' + categories[0].id)
+    .expect(200)
+    .end(t.end);
   });
 });
