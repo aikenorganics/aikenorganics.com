@@ -8,7 +8,10 @@ module.exports = sql.define('users', {
   },
   email: {
     type: Sql.STRING,
-    allowNull: false
+    allowNull: false,
+    set: function(value) {
+      this.setDataValue('email', (value || '').toLowerCase());
+    }
   },
   password: {
     type: Sql.STRING,
