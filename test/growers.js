@@ -3,6 +3,13 @@ var request = require('./helper');
 var app = require('../app');
 var Grower = require('../models').Grower;
 
+test('GET /growers is a 200', function(t) {
+  request(app)
+  .get('/growers')
+  .expect(200)
+  .end(t.end);
+});
+
 test('GET /growers/:id is a 200', function(t) {
   Grower.findAll({limit: 1}).then(function(growers) {
     request(app)

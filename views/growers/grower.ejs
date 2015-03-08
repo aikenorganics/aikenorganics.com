@@ -1,0 +1,13 @@
+<div class='media'>
+  <div class='media-left'>
+    <a href='/growers/<%= grower.id %>'>
+      <img class='img-rounded' src='<%= imageUrl(grower, 'small') %>' style='max-width: 64px; max-height: 64px;'>
+    </a>
+  </div>
+  <div class='media-body'>
+    <h3 class='media-heading'>
+      <a href='/growers/<%= grower.id %>'><%= grower.name %></a>
+    </h3>
+    <%- marked(grower.description) %>
+  </div>
+</div>

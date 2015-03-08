@@ -13,6 +13,10 @@ app.engine('ejs', require('ejs').renderFile);
 app.locals = require('./helpers');
 
 // Middleware
+app.use(function(req, res, next) {
+  res.locals.req = req;
+  next();
+});
 app.use(session({
   signed: true,
   // secure: true,

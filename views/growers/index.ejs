@@ -7,19 +7,27 @@
 
 <% include ../nav %>
 
-<div class='container'>
-  <h1>Growers</h1>
-  <p class='text-right'>
-    <a class='btn btn-primary' href='/growers/new'>New</a>
-  </p>
-  <hr>
-  <% growers.forEach(function(grower) { %>
-    <h3>
-      <a href='/growers/<%= grower.id %>'><%= grower.name %></a>
-      <small><a href='/growers/<%= grower.id %>/edit'>Edit</a></small>
-    </h3>
-  <% }); %>
-</div>
+<main class='container'>
+
+  <% include ../subnav %>
+
+  <div class='row'>
+    <div class='col-md-3'>
+      <h3>Growers</h3>
+      <% if (locals.admin) { %>
+        <a class='btn btn-primary' href='/growers/new'>
+          New Grower
+        </a>
+      <% } %>
+    </div>
+    <div class='col-md-9'>
+      <% growers.forEach(function(grower) { %>
+        <% include grower %>
+      <% }); %>
+    </div>
+  </div>
+
+</main>
 
 <% include ../footer %>
 
