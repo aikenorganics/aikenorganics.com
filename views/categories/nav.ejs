@@ -1,6 +1,6 @@
 <ul class='nav nav-pills nav-stacked'>
   <% categories.forEach(function(category) { %>
-    <li<% if (locals.category && locals.category.id === category.id) { %> class='active'<% } %>>
+    <li<% if (+req.query.category_id === category.id) { %> class='active'<% } %>>
       <a href='/products?category_id=<%= category.id %>'>
         <%= category.name %>
       </a>
