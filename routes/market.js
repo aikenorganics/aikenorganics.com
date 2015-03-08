@@ -8,11 +8,6 @@ var router = module.exports = express.Router();
 
 router.param('category_id', find('category', Category));
 
-router.use(function(req, res, next) {
-  if (req.user) return next();
-  res.status(401).render('401');
-});
-
 router.get('/', function(req, res){
   Category.findAll().then(function(categories) {
     res.render('market/index', {
