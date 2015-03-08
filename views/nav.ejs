@@ -22,40 +22,38 @@
         <li>
           <a href='/products'>Market</a>
         </li>
-        <% if (locals.admin) { %>
-          <li>
-            <% if (locals.user) { %>
-              <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button'>
-                Account
-                <span class='caret'></span>
-              </a>
-              <ul class='dropdown-menu' role='menu'>
-                <li class='dropdown-header'>
-                  <% if (user.first || user.last) { %>
-                    <%= user.first %>
-                    <%= user.last %>
-                    <br>
-                  <% } %>
-                  <%= user.email %>
-                </li>
-                <li>
-                  <a href='/settings/account'>Settings</a>
-                </li>
-                <li>
-                  <a href='/auth/signout'>Sign Out</a>
-                </li>
-                <% if (locals.admin) { %>
-                  <li class='divider'></li>
-                  <li class='dropdown-header'>Admin Links</li>
-                  <li><a href='<%= usersUrl() %>'>Users</a></li>
-                  <li><a href='<%= categoriesUrl() %>'>Categories</a></li>
+        <li>
+          <% if (locals.user) { %>
+            <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button'>
+              Account
+              <span class='caret'></span>
+            </a>
+            <ul class='dropdown-menu' role='menu'>
+              <li class='dropdown-header'>
+                <% if (user.first || user.last) { %>
+                  <%= user.first %>
+                  <%= user.last %>
+                  <br>
                 <% } %>
-              </ul>
-            <% } else { %>
-              <a href='/signin'>Sign In</a>
-            <% } %>
-          </li>
-        <% } %>
+                <%= user.email %>
+              </li>
+              <li>
+                <a href='/settings/account'>Settings</a>
+              </li>
+              <li>
+                <a href='/auth/signout'>Sign Out</a>
+              </li>
+              <% if (locals.admin) { %>
+                <li class='divider'></li>
+                <li class='dropdown-header'>Admin Links</li>
+                <li><a href='<%= usersUrl() %>'>Users</a></li>
+                <li><a href='<%= categoriesUrl() %>'>Categories</a></li>
+              <% } %>
+            </ul>
+          <% } else { %>
+            <a href='/signin'>Sign In</a>
+          <% } %>
+        </li>
       </ul>
     </div>
     <div class="navbar-header">
