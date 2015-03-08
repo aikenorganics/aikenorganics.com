@@ -27,7 +27,7 @@
                 <span class='caret'></span>
               </a>
               <ul class='dropdown-menu' role='menu'>
-                <li role='presentation' class='dropdown-header'>
+                <li class='dropdown-header'>
                   <% if (user.first || user.last) { %>
                     <%= user.first %>
                     <%= user.last %>
@@ -41,6 +41,12 @@
                 <li>
                   <a href='/auth/signout'>Sign Out</a>
                 </li>
+                <% if (locals.admin) { %>
+                  <li class='divider'></li>
+                  <li class='dropdown-header'>Admin Links</li>
+                  <li><a href='<%= usersUrl() %>'>Users</a></li>
+                  <li><a href='<%= categoriesUrl() %>'>Categories</a></li>
+                <% } %>
               </ul>
             <% } else { %>
               <a href='/signin'>Sign In</a>

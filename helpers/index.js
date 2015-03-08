@@ -29,9 +29,10 @@ exports.imageUrl = function(model, size) {
 };
 
 [
-  models.User,
+  models.Category,
   models.Grower,
-  models.Product
+  models.Product,
+  models.User
 ].forEach(function(Model) {
 
   var tableName = Model.tableName;
