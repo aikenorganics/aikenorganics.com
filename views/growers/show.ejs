@@ -46,10 +46,7 @@
   </a>
   <hr>
   <% locals.products.forEach(function(product) { %>
-    <h3>
-      <a href='/products/<%= product.id %>'><%= product.name %></a>
-      <small><a href='/products/<%= product.id %>/edit'>Edit</a></small>
-    </h3>
+    <% include ../products/product %>
   <% }); %>
 </div>
 

@@ -11,7 +11,7 @@ test('/market is a 200', function(t) {
   .end(t.end);
 });
 
-test('/market/category/show is a 200', function(t) {
+test('/market/category/:id is a 200', function(t) {
   Category.findAll({limit: 1}).then(function(categories) {
     request(app)
     .get('/market/category/' + categories[0].id)
