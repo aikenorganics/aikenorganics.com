@@ -4,10 +4,13 @@ var upload = require('../mid/image-upload');
 var Grower = require('../models').Grower;
 var Product = require('../models').Product;
 var Category = require('../models').Category;
-var adminOnly = require('../mid/admin-only');
 var router = module.exports = express.Router();
 
-router.use(adminOnly);
+function authorize(req, res, next) {
+  if (req.admin) return next();
+  res.status(401).render('401');
+}
+
 router.param('grower_id', find('grower', Grower));
 
 router.get('/', function(req, res) {
@@ -18,7 +21,7 @@ router.get('/', function(req, res) {
   });
 });
 
-router.get('/new', function(req, res) {
+router.get('/new', authorize, function(req, res) {
   res.render('growers/new');
 });
 
@@ -30,11 +33,11 @@ router.get('/:grower_id', function(req, res) {
   });
 });
 
-router.get('/:grower_id/edit', function(req, res) {
+router.get('/:grower_id/edit', authorize, function(req, res) {
   res.render('growers/edit');
 });
 
-router.post('/:grower_id', function(req, res) {
+router.post('/:grower_id', authorize, function(req, res) {
   req.grower.updateAttributes(req.body, {
     fields: ['name', 'email', 'url', 'location', 'description']
   }).then(function() {
@@ -43,7 +46,7 @@ router.post('/:grower_id', function(req, res) {
   });
 });
 
-router.post('/', function(req, res) {
+router.post('/', authorize, function(req, res) {
   Grower.create({
     url: req.body.url,
     name: req.body.name,
@@ -56,13 +59,13 @@ router.post('/', function(req, res) {
   });
 });
 
-router.get('/:grower_id/products/new', function(req, res) {
+router.get('/:grower_id/products/new', authorize, function(req, res) {
   Category.findAll().then(function(categories) {
     res.render('products/new', {categories: categories});
   });
 });
 
-router.post('/:grower_id/products', function(req, res) {
+router.post('/:grower_id/products', authorize, function(req, res) {
   req.grower.createProduct({
     name: req.body.name,
     cost: req.body.cost,
