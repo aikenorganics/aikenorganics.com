@@ -1,18 +1,20 @@
 var test = require('tape');
 var request = require('./helper');
 var app = require('../app');
+var models = require('../models');
+var Category = models.Category;
 
-test('/market is a 404 signed out', function(t) {
+test('/market is a 200', function(t) {
   request(app)
   .get('/market')
-  .expect(401)
+  .expect(200)
   .end(t.end);
 });
 
-test('/market is a 200 signed in', function(t) {
-  var agent = request(app).signIn('user@example.com', function() {
-    agent
-    .get('/market')
+test('/market/category/show is a 200', function(t) {
+  Category.findAll({limit: 1}).then(function(categories) {
+    request(app)
+    .get('/market/category/' + categories[0].id)
     .expect(200)
     .end(t.end);
   });

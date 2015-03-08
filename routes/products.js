@@ -1,6 +1,5 @@
 var express = require('express');
 var find = require('../mid/find');
-var adminOnly = require('../mid/admin-only');
 var upload = require('../mid/image-upload');
 var Grower = require('../models').Grower;
 var Product = require('../models').Product;
@@ -9,7 +8,11 @@ var Promise = require('sequelize').Promise;
 var router = module.exports = express.Router();
 var findProduct = find('product', Product);
 
-router.use(adminOnly);
+function authorize(req, res, next) {
+  if (req.admin) return next();
+  res.status(401).render('401');
+}
+
 router.param('product_id', function(req, res, next, id) {
   findProduct(req, res, function() {
     if (!req.product) return next();
@@ -28,13 +31,13 @@ router.get('/:product_id', function(req, res) {
   res.render('products/show');
 });
 
-router.get('/:product_id/edit', function(req, res) {
+router.get('/:product_id/edit', authorize, function(req, res) {
   Category.findAll().then(function(categories) {
     res.render('products/edit', {categories: categories});
   });
 });
 
-router.post('/:product_id', function(req, res) {
+router.post('/:product_id', authorize, function(req, res) {
   req.product.updateAttributes(req.body, {
     fields: ['name', 'cost', 'available', 'unit', 'description', 'category_id']
   }).then(function() {
@@ -43,4 +46,4 @@ router.post('/:product_id', function(req, res) {
   });
 });
 
-router.post('/:product_id/image', upload('product'));
+router.post('/:product_id/image', authorize, upload('product'));
