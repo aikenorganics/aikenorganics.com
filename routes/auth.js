@@ -1,10 +1,17 @@
 var bcrypt = require('bcrypt');
 var crypto = require('crypto');
 var express = require('express');
+var postmark = require('postmark');
 var User = require('../models').User;
 var Token = require('../models').Token;
 
 var router = module.exports = express.Router();
+
+if (process.env.POSTMARK_API_TOKEN) {
+  var mailer = new postmark.Client(process.env.POSTMARK_API_TOKEN);
+} else {
+  var mailer = {sendEmail: function(options, next){ next(); }};
+}
 
 router.get('/forgot', function(req, res) {
   res.render('auth/forgot');
@@ -25,8 +32,16 @@ router.post('/forgot', function(req, res) {
       id: crypto.randomBytes(20).toString('hex'),
       expires_at: expires_at
     }).then(function(token) {
-      res.flash('success', 'Thanks! We’ll send you an email to reset your password.');
-      res.redirect('/');
+      mailer.sendEmail({
+        To: user.email,
+        From: 'support@aikenorganics.com',
+        Subject: 'Aiken Organics: Password Reset',
+        TextBody: 'http://' + process.env.DOMAIN + '/auth/reset/' + token.id
+      }, function(e) {
+        if (e) return res.status(500).render('500');
+        res.flash('success', 'Thanks! We sent you an email to reset your password.');
+        res.redirect('/');
+      });
     });
   });
 });
