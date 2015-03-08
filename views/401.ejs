@@ -7,17 +7,21 @@
 
 <% include nav %>
 
-<div class='container text-center'>
+<div class='container'>
 
-  <h1>
+  <h1 class='text-center'>
     <img src='/img/logo-small.png'>
   </h1>
 
-  <h1>Uh oh! Looks like you don't have access to this page.</h1>
-
-  <p>
-    Go back to the <a href='/'>home page</a>?
-  </p>
+  <% if (locals.user) { %>
+    <h1 class='text-center'>Uh oh! Looks like you don't have access to this page.</h1>
+    <p class='text-center'>
+      Go back to the <a href='/'>home page</a>?
+    </p>
+  <% } else { %>
+    <p class='text-center'>You need to sign in to access to this page.</p>
+    <% include auth/signin-form %>
+  <% } %>
 
 </div>
 
