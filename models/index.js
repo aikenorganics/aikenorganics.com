@@ -13,41 +13,41 @@ var Category = exports.Category = require('./category');
 // Relations
 
 User.hasMany(Post, {
-  as: 'Posts',
+  as: 'posts',
   foreignKey: 'author_id'
 });
 
 Post.belongsTo(User, {
-  as: 'Author',
+  as: 'author',
   foreignKey: 'author_id'
 });
 
 Grower.hasMany(Product, {
-  as: 'Products',
+  as: 'products',
   foreignKey: 'grower_id'
 });
 
 Product.belongsTo(Grower, {
-  as: 'Grower',
+  as: 'grower',
   foreignKey: 'grower_id'
 });
 
 Category.hasMany(Product, {
-  as: 'Products',
+  as: 'products',
   foreignKey: 'category_id'
 });
 
 Product.belongsTo(Category, {
-  as: 'Category',
+  as: 'category',
   foreignKey: 'category_id'
 });
 
 User.hasMany(Token, {
-  as: 'Tokens',
+  as: 'tokens',
   foreignKey: 'user_id'
 });
 
 Token.belongsTo(User, {
-  as: 'User',
+  as: 'user',
   foreignKey: 'user_id'
 });

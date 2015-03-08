@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+  <% include ../head %>
+</head>
+<body>
+
+<% include ../nav %>
+
+<main class='container'>
+
+  <div class='row'>
+    <div class='col-md-3'>
+      <% include nav %>
+    </div>
+    <div class='col-md-9'>
+      <% products.forEach(function(product) { %>
+        <div class='media'>
+          <div class='media-left'>
+            <a href='/products/<%= product.id %>'>
+              <img class='img-rounded' src='<%= imageUrl(product, 'small') %>' style='max-width: 64px; max-height: 64px;'>
+            </a>
+          </div>
+          <div class='media-body'>
+            <h3 class='media-heading'>
+              <a href='/products/<%= product.id %>'><%= product.name %></a>
+            </h3>
+            <strong>
+              $<%= product.cost %> per <%= product.unit %>
+              &bull;
+              <%= product.available %> Available
+              &bull;
+              <a href='/growers/<%= product.grower %>'>
+                <%= product.grower.name %>
+              </a>
+            </strong>
+            <%- marked(product.description) %>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+
+</main>
+
+<% include ../footer %>
+
+<script src='/js/app.js'></script>
+
+</body>
+</html>
+

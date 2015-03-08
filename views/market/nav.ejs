@@ -1,0 +1,12 @@
+<h1>
+  <img src='/img/logo-small.png' style='max-width: 100%;'>
+</h1>
+<ul class='nav nav-pills nav-stacked'>
+  <% categories.forEach(function(category) { %>
+    <li<% if (locals.category && locals.category.id === category.id) { %> class='active'<% } %>>
+      <a href='/market/category/<%= category.id %>'>
+        <%= category.name %>
+      </a>
+    </li>
+  <% }); %>
+</ul>
