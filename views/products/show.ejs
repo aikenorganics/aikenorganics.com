@@ -28,7 +28,14 @@
   <div class='clearfix'>
     <hr>
   </div>
-  <%- marked(product.description) %>
+  <div class='row'>
+    <div class='col-md-8'>
+      <%- marked(product.description) %>
+    </div>
+    <div class='col-md-4'>
+      <img class='img-rounded' src='<%= imageUrl(product, 'medium') %>'>
+    </div>
+  </div>
 </div>
 
 <% include ../footer %>

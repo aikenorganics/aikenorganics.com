@@ -31,6 +31,7 @@ app.use(require('./mid/flash'));
 app.use('/auth', require('./routes/auth'));
 app.use('/posts', require('./routes/posts'));
 app.use('/users', require('./routes/users'));
+app.use('/assets', require('./routes/assets'));
 app.use('/growers', require('./routes/growers'));
 app.use('/products', require('./routes/products'));
 app.use('/settings', require('./routes/settings'));

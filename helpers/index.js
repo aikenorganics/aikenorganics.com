@@ -5,6 +5,8 @@ var models = require('../models');
 marked.setOptions({sanitize: true});
 exports.marked = marked;
 
+// Images
+
 var IMAGES = [
   '/img/vegetables-square.jpg',
   '/img/veggies-in-boxes-square.jpg',
@@ -14,16 +16,16 @@ var IMAGES = [
 
 // Image helpers
 exports.imageUrl = function(model, size) {
-  if (model.imaged_at) {
-    var tableName = model.Model.tableName;
-    return [
-      '/assets',
-      tableName,
-      model.id,
-      size + '.jpg?' + +model.imaged_at
-    ].join('/');
-  }
-  return IMAGES[model.id % IMAGES.length];
+  if (!model.imaged_at) return IMAGES[model.id % IMAGES.length];
+
+  var tableName = model.Model.tableName;
+
+  return [
+    '/assets',
+    tableName,
+    model.id,
+    size + '.jpg?' + +model.imaged_at
+  ].join('/');
 };
 
 [
