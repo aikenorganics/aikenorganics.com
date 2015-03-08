@@ -1,8 +1,83 @@
 var bcrypt = require('bcrypt');
+var crypto = require('crypto');
 var express = require('express');
 var User = require('../models').User;
+var Token = require('../models').Token;
 
 var router = module.exports = express.Router();
+
+router.get('/forgot', function(req, res) {
+  res.render('auth/forgot');
+});
+
+router.post('/forgot', function(req, res) {
+  User.find({where: {email: req.body.email}}).then(function(user) {
+    if (!user) {
+      return res.status(404).render('auth/forgot', {
+        error: 'Sorry! We don’t recognize that email.'
+      });
+    }
+
+    var expires_at = new Date;
+    expires_at.setDate(expires_at.getDate() + 7);
+
+    user.createToken({
+      id: crypto.randomBytes(20).toString('hex'),
+      expires_at: expires_at
+    }).then(function(token) {
+      res.flash('success', 'Thanks! We’ll send you an email to reset your password.');
+      res.redirect('/');
+    });
+  });
+});
+
+router.get('/reset/:token', function(req, res) {
+  Token.find(req.params.token).then(function(token) {
+
+    if (!token || token.expires_at < new Date) {
+      return res.status(404).render('auth/reset', {
+        error: 'Sorry! That token is expired.'
+      });
+    }
+
+    res.render('auth/reset', {token: token});
+  });
+});
+
+router.post('/reset', function(req, res) {
+
+  if ((req.body.password || '').length < 8) {
+    return res.status(422).render('auth/reset', {
+      error: 'Sorry! Passwords must be at least eight characters long.'
+    });
+  }
+
+  Token.find(req.body.token).then(function(token) {
+
+    if (!token || token.expires_at < new Date) {
+      return res.status(404).render('auth/reset', {
+        error: 'Sorry! That token is expired.'
+      });
+    }
+
+    // Hash the password and store the user.
+    bcrypt.hash(req.body.password, 12, function(e, hash) {
+      if (e) {
+        console.log(e);
+        return res.status(500).render('500');
+      }
+      token.getUser().then(function(user){
+        user.updateAttributes({
+          password: hash
+        }, ['password']).then(function() {
+          res.flash('success', 'Password Changed');
+          req.session.userId = user.id;
+          res.redirect('/');
+        });
+      });
+    });
+  });
+});
 
 router.get('/signout', function(req, res) {
   delete req.session.userId;
@@ -85,7 +160,10 @@ router.post('/signup', function(req, res) {
 
     // Hash the password and store the user.
     bcrypt.hash(password, 12, function(e, hash) {
-      if (e) throw e;
+      if (e) {
+        console.log(e);
+        return res.status(500).render('500');
+      }
       User.create({
         email: email,
         password: hash

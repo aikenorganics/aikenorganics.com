@@ -5,6 +5,7 @@ exports.close = function() { sql.close(); };
 
 var User = exports.User = require('./user');
 var Post = exports.Post = require('./post');
+var Token = exports.Token = require('./token');
 var Grower = exports.Grower = require('./grower');
 var Product = exports.Product = require('./product');
 var Category = exports.Category = require('./category');
@@ -39,4 +40,14 @@ Category.hasMany(Product, {
 Product.belongsTo(Category, {
   as: 'Category',
   foreignKey: 'category_id'
+});
+
+User.hasMany(Token, {
+  as: 'Tokens',
+  foreignKey: 'user_id'
+});
+
+Token.belongsTo(User, {
+  as: 'User',
+  foreignKey: 'user_id'
 });
