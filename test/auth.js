@@ -119,3 +119,12 @@ test('POST /auth/forgot handles mixed case emails', function(t) {
   .expect(302)
   .end(t.end);
 });
+
+test('POST /auth/signup handles mixed case emails', function(t) {
+  request(app)
+  .post('/auth/signup')
+  .field('email', 'AdMiN@eXaMpLe.CoM')
+  .field('password', 'password')
+  .expect(422)
+  .end(t.end);
+});

@@ -143,7 +143,7 @@ router.post('/signup', function(req, res) {
 
   // Validate the password.
   if (password.length < 8) {
-    res.render('auth/signup', {
+    res.status(422).render('auth/signup', {
       email: email,
       flash: 'Password must be at least eight characters long.'
     });
@@ -152,17 +152,17 @@ router.post('/signup', function(req, res) {
 
   // Validate the email.
   if (!/\S+@\S+\.\S+/.test(email)) {
-    res.render('auth/signup', {
+    res.status(422).render('auth/signup', {
       flash: 'Please enter a valid email address.'
     });
     return;
   }
 
-  User.find({where: {email: email}}).then(function(user) {
+  User.find({where: ['lower(email) = lower(?)', email]}).then(function(user) {
 
     // Does this user already exist?
     if (user) {
-      res.render('auth/signup', {
+      res.status(422).render('auth/signup', {
         email: email,
         flash: 'That user already exists! Is it you?'
       });
