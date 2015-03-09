@@ -56,7 +56,7 @@ router.get('/:product_id/edit', authorize, function(req, res) {
 
 router.post('/:product_id', authorize, function(req, res) {
   req.product.updateAttributes(req.body, {
-    fields: ['name', 'cost', 'available', 'unit', 'description', 'category_id']
+    fields: ['name', 'cost', 'supply', 'unit', 'description', 'category_id']
   }).then(function() {
     res.flash('success', 'Saved');
     res.redirect('/products/' + req.product.id);

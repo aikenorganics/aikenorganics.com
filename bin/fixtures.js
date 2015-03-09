@@ -77,7 +77,7 @@ Promise.all([
       defaults: {
         cost: '14',
         unit: 'Box',
-        available: 22,
+        supply: 22,
         category_id: category.id,
         description: 'A box of peaches.'
       }

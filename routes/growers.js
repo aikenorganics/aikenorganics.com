@@ -70,7 +70,7 @@ router.post('/:grower_id/products', authorize, function(req, res) {
     name: req.body.name,
     cost: req.body.cost,
     unit: req.body.unit,
-    available: req.body.available,
+    supply: req.body.supply,
     category_id: req.body.category_id,
     description: req.body.description
   }).then(function(product) {

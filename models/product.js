@@ -22,12 +22,12 @@ module.exports = sql.define('products', {
       this.setDataValue('cost', value || '0');
     }
   },
-  available: {
+  supply: {
     type: Sql.INTEGER,
     allowNull: false,
     defaultValue: 0,
     set: function(value) {
-      this.setDataValue('available', Math.abs(value));
+      this.setDataValue('supply', Math.abs(value));
     }
   },
   unit: {

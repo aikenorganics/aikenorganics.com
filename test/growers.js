@@ -146,7 +146,7 @@ test('POST /growers/:id/products is a 302 for admins', function(t) {
         agent.post('/growers/' + growers[0].id + '/products')
         .field('name', 'New Grower')
         .field('cost', '2.45')
-        .field('available', 32)
+        .field('supply', 32)
         .field('category_id', categories[0].id)
         .expect(302)
         .end(t.end);
@@ -161,7 +161,7 @@ test('POST /growers/:id/products is a 401 for non-admins', function(t) {
       agent.post('/growers/' + growers[0].id + '/products')
       .field('name', 'New Grower')
       .field('cost', '2.45')
-      .field('available', 32)
+      .field('supply', 32)
       .expect(401)
       .end(t.end);
     });
