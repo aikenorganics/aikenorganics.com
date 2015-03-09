@@ -102,3 +102,20 @@ test('POST /auth/reset enforces password length of 8', function(t) {
     });
   });
 });
+
+test('POST /auth/signin handles mixed case emails', function(t) {
+  request(app)
+  .post('/auth/signin')
+  .field('email', 'AdMiN@eXaMpLe.CoM')
+  .field('password', 'password')
+  .expect(302)
+  .end(t.end);
+});
+
+test('POST /auth/forgot handles mixed case emails', function(t) {
+  request(app)
+  .post('/auth/forgot')
+  .field('email', 'AdMiN@eXaMpLe.CoM')
+  .expect(302)
+  .end(t.end);
+});

@@ -22,7 +22,7 @@ router.get('/forgot', function(req, res) {
 });
 
 router.post('/forgot', function(req, res) {
-  User.find({where: {email: req.body.email}}).then(function(user) {
+  User.find({where: ['lower(email) = lower(?)', req.body.email]}).then(function(user) {
     if (!user) {
       return res.status(404).render('auth/forgot', {
         error: 'Sorry! We don’t recognize that email.'
@@ -103,11 +103,11 @@ router.post('/signin', function(req, res) {
   var email = (req.body.email || '').trim();
   var password = (req.body.password || '').trim();
 
-  User.find({where: {email: email}}).then(function(user) {
+  User.find({where: ['lower(email) = lower(?)', email]}).then(function(user) {
 
     // Does the user exist?
     if (!user) {
-      res.render('auth/signin', {
+      res.status(404).render('auth/signin', {
         flash: 'Sorry! We can’t find a user with that email. Have you already registered?'
       });
       return;
