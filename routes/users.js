@@ -9,7 +9,7 @@ router.use(adminOnly);
 router.param('user_id', find('_user', User));
 
 router.get('/', function(req, res) {
-  User.findAll().then(function(users) {
+  User.findAll({order: [['email', 'ASC']]}).then(function(users) {
     res.render('users/index', {users: users});
   });
 });
@@ -19,7 +19,7 @@ router.get('/:user_id/edit', function(req, res) {
 });
 
 router.post('/:user_id', function(req, res) {
-  req._user.updateAttributes(req.body, {
+  req._user.update(req.body, {
     fields: ['first', 'last', 'phone', 'is_admin']
   }).then(function() {
     res.flash('success', 'Saved');

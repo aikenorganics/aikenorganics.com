@@ -105,9 +105,7 @@ Upload.prototype.rename = function(size, next) {
 
 Upload.prototype.update = function(e) {
   if (e) return this.error(e);
-  this.model.updateAttributes({
-    imaged_at: new Date
-  }, ['imaged_at']).then(this.finish.bind(this));
+  this.model.update({imaged_at: new Date}).then(this.finish.bind(this));
 };
 
 Upload.prototype.finish = function() {

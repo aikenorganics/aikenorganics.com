@@ -34,7 +34,7 @@ router.get('/:post_id/edit', function(req, res) {
 });
 
 router.post('/:post_id', function(req, res) {
-  req.post.updateAttributes(req.body, {
+  req.post.update(req.body, {
     fields: ['title', 'content']
   }).then(function() {
     res.redirect('/posts/' + req.post.id + '/edit');

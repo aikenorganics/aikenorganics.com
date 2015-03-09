@@ -4,7 +4,6 @@ var upload = require('../mid/image-upload');
 var Grower = require('../models').Grower;
 var Product = require('../models').Product;
 var Category = require('../models').Category;
-var Promise = require('sequelize').Promise;
 var router = module.exports = express.Router();
 var findProduct = find('product', Product);
 
@@ -19,9 +18,9 @@ router.param('product_id', function(req, res, next, id) {
     Promise.all([
       req.product.getGrower(),
       req.product.getCategory()
-    ]).spread(function(grower, category) {
-      req.grower = res.locals.grower = grower;
-      req.category = res.locals.category = category;
+    ]).then(function(results) {
+      req.grower = res.locals.grower = results[0];
+      req.category = res.locals.category = results[1];
       next();
     });
   }, id);
@@ -37,10 +36,10 @@ router.get('/', function(req, res) {
       where: category_id ? {category_id: category_id} : {},
       include: [{model: Grower, as: 'grower'}]
     })
-  ]).spread(function(categories, products) {
+  ]).then(function(results) {
     res.render('products/index', {
-      categories: categories,
-      products: products
+      categories: results[0],
+      products: results[1]
     });
   });
 });
@@ -56,7 +55,7 @@ router.get('/:product_id/edit', authorize, function(req, res) {
 });
 
 router.post('/:product_id', authorize, function(req, res) {
-  req.product.updateAttributes(req.body, {
+  req.product.update(req.body, {
     fields: ['name', 'cost', 'supply', 'unit', 'description', 'category_id']
   }).then(function() {
     res.flash('success', 'Saved');

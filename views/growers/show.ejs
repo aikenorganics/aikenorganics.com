@@ -11,48 +11,48 @@
 
   <% include ../subnav %>
 
-  <h1><%= grower.name %></h1>
-  <span class='pull-right'>
-    <% if (locals.admin) { %>
-      <a href='/growers/<%= grower.id %>/edit'>Edit</a>
-    <% } %>
-  </span>
-  <% if (grower.email) { %>
-    <a href='mailto:<%= grower.email %>' target='_blank'>
-      <%= grower.email %>
-    </a>
-  <% } %>
-  <% if (grower.email && grower.url) { %>
-    &bull;
-  <% } %>
-  <% if (grower.url) { %>
-    <a href='<%= grower.url %>' target='_blank'>
-      <%= grower.url %>
-    </a>
-  <% } %>
-  <div class='clearfix'>
-    <hr>
-  </div>
   <div class='row'>
-    <div class='col-md-8'>
-      <%- marked(grower.description) %>
-    </div>
-    <div class='col-md-4'>
+    <div class='col-md-3'>
       <img class='img-rounded' src='<%= imageUrl(grower, 'medium') %>'>
     </div>
+    <div class='col-md-9'>
+      <h1><%= grower.name %></h1>
+      <span class='pull-right'>
+        <% if (locals.admin) { %>
+          <a href='/growers/<%= grower.id %>/edit'>Edit</a>
+        <% } %>
+      </span>
+      <% if (grower.email) { %>
+        <a href='mailto:<%= grower.email %>' target='_blank'>
+          <%= grower.email %>
+        </a>
+      <% } %>
+      <% if (grower.email && grower.url) { %>
+        &bull;
+      <% } %>
+      <% if (grower.url) { %>
+        <a href='<%= grower.url %>' target='_blank'>
+          <%= grower.url %>
+        </a>
+      <% } %>
+      <div class='clearfix'>
+        <hr>
+      </div>
+      <%- marked(grower.description) %>
+      <h2>
+        Products
+        <% if (locals.admin) { %>
+          <a class='btn btn-default btn-xs' href='/growers/<%= grower.id %>/products/new'>
+            New Product
+          </a>
+        <% } %>
+      </h2>
+      <hr>
+      <% locals.products.forEach(function(product) { %>
+        <% include ../products/product %>
+      <% }); %>
+    </div>
   </div>
-  <h2>
-    Products
-    <% if (locals.admin) { %>
-      <a class='btn btn-default btn-xs' href='/growers/<%= grower.id %>/products/new'>
-        New Product
-      </a>
-    <% } %>
-  </h2>
-  <hr>
-  <% locals.products.forEach(function(product) { %>
-    <% include ../products/product %>
-  <% }); %>
 
 </main>
 

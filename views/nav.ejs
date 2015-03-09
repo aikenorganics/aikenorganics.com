@@ -22,8 +22,8 @@
         <li>
           <a href='/products'>Market</a>
         </li>
-        <li>
-          <% if (locals.user) { %>
+        <% if (locals.user) { %>
+          <li>
             <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button'>
               Account
               <span class='caret'></span>
@@ -50,10 +50,15 @@
                 <li><a href='<%= categoriesUrl() %>'>Categories</a></li>
               <% } %>
             </ul>
-          <% } else { %>
+          </li>
+        <% } else { %>
+          <li>
             <a href='/auth/signin'>Sign In</a>
-          <% } %>
-        </li>
+          </li>
+          <li>
+            <a href='/auth/signup'>Sign Up</a>
+          </li>
+        <% } %>
       </ul>
     </div>
     <div class="navbar-header">

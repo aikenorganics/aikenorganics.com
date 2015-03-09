@@ -81,7 +81,7 @@ router.post('/reset/:token_id', function(req, res) {
       return res.status(500).render('500');
     }
     req.token.getUser().then(function(user){
-      user.updateAttributes({password: hash}, ['password']).then(function() {
+      user.update({password: hash}).then(function() {
         res.flash('success', 'Password Changed');
         req.session.userId = user.id;
         res.redirect('/');
@@ -177,7 +177,10 @@ router.post('/signup', function(req, res) {
       }
       User.create({
         email: email,
-        password: hash
+        password: hash,
+        first: req.body.first,
+        last: req.body.last,
+        phone: req.body.phone
       }).then(function(user) {
         req.session.userId = user.id;
         res.redirect('/');

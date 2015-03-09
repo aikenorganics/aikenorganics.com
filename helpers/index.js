@@ -1,6 +1,9 @@
 var marked = require('marked');
 var models = require('../models');
 
+// Settings
+exports.open = !!process.env.OPEN;
+
 // Markdown
 marked.setOptions({sanitize: true});
 exports.marked = marked;

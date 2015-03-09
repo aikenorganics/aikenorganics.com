@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 var bcrypt = require('bcrypt');
-var Promise = require('sequelize').Promise;
 var models = require('../models');
 
 var User = models.User;
@@ -83,7 +82,7 @@ Promise.all([
       }
     })
   ]).then(function() {
-    models.close();
+    models.sequelize.close();
   });
 }).catch(function(e) {
   console.log(e);

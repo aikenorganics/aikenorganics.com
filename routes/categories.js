@@ -38,7 +38,7 @@ router.post('/', function(req, res) {
 });
 
 router.post('/:category_id', function(req, res) {
-  req.category.updateAttributes(req.body, {
+  req.category.update(req.body, {
     fields: ['name', 'position']
   }).then(function() {
     res.flash('success', 'Saved');

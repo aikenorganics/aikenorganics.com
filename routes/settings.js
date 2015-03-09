@@ -13,7 +13,7 @@ router.get('/account', function(req, res) {
 });
 
 router.post('/account', function(req, res) {
-  req.user.updateAttributes(req.body, {
+  req.user.update(req.body, {
     fields: ['first', 'last', 'phone']
   }).then(function() {
     res.flash('success', 'Saved - thanks for being awesome!');

@@ -42,7 +42,7 @@ router.get('/:grower_id/edit', authorize, function(req, res) {
 });
 
 router.post('/:grower_id', authorize, function(req, res) {
-  req.grower.updateAttributes(req.body, {
+  req.grower.update(req.body, {
     fields: ['name', 'email', 'url', 'location', 'description']
   }).then(function() {
     res.flash('success', 'Saved');

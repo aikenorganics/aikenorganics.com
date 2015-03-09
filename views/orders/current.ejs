@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+  <% include ../head %>
+</head>
+<body>
+
+<% include ../nav %>
+
+<main class='container'>
+
+  <% include ../subnav %>
+
+  <h1>Current Order</h1>
+  <% if (locals.productOrders) { %>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Cost</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% productOrders.forEach(function(po) { %>
+          <tr>
+            <td><a href='/products/<%= po.product.id %>'><%= po.product.name %></a></td>
+            <td>$<%= po.product.cost %></td>
+            <td><%= po.quantity %></td>
+            <td><%= (+po.product.cost * po.quantity).toFixed(2) %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+      <tfoot>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><strong>$<%= productOrders.reduce(function(total, po){ return total + +po.product.cost * po.quantity; }, 0).toFixed(2); %></strong></td>
+      </tfoot>
+    </table>
+    <form method='POST' action='/orders/<%= order.id %>/cancel' enctype='multipart/form-data'>
+      <div class='text-right'>
+        <button type='submit' class='btn btn-danger'>
+          Cancel Order
+        </button>
+      </div>
+    </form>
+  <% } else { %>
+    <p class='text-center'>You haven't placed an order yet.</p>
+  <% } %>
+
+</main>
+
+<% include ../footer %>
+
+<script src='/js/app.js'></script>
+
+</body>
+</html>

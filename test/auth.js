@@ -128,3 +128,15 @@ test('POST /auth/signup handles mixed case emails', function(t) {
   .expect(422)
   .end(t.end);
 });
+
+test('POST /auth/signup handles first, last, and phone', function(t) {
+  request(app)
+  .post('/auth/signup')
+  .field('first', 'Finn')
+  .field('last', 'Mertens')
+  .field('phone', '803.512.3421')
+  .field('email', 'finn@ooo.net')
+  .field('password', 'password')
+  .expect(302)
+  .end(t.end);
+});

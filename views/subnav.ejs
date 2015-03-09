@@ -1,13 +1,40 @@
-<div class='alert alert-warning text-center'>
-  <p>
-    <strong>The market is currently closed.</strong> Check back later to place your order.
-  </p>
-</div>
+<% if (locals.open) { %>
+  <div class='alert alert-info'>
+    <p>
+      <strong>Hi!</strong> Aiken Organics is still under development, so please bear with us
+      while we work out the kinks! If something goes wrong, or you have a
+      question, or you just want to shoot the breeze, send an email to
+      <a href='mailto:support@aikenorganics.com'>support@aikenorganics.com</a>.
+    </p>
+  </div> <% } else { %>
+  <div class='alert alert-warning text-center'>
+    <p>
+      <strong>The market is currently closed.</strong> Check back later to place your order.
+    </p>
+  </div>
+<% } %>
 <ul class='nav nav-tabs subnav'>
-  <li<% if (/\/products/i.test(req.originalUrl)) { %> class='active'<% } %>>
+  <li<% if (/^\/products/i.test(req.originalUrl)) { %> class='active'<% } %>>
     <a href='/products'>Products</a>
   </li>
-  <li<% if (/\/growers/i.test(req.originalUrl)) { %> class='active'<% } %>>
+  <li<% if (/^\/growers/i.test(req.originalUrl)) { %> class='active'<% } %>>
     <a href='/growers'>Growers</a>
   </li>
+  <% if (locals.open && locals.user) { %>
+    <li<% if (/^\/cart/i.test(req.originalUrl)) { %> class='active'<% } %>>
+      <a href='/cart'>
+        Cart
+        <span class='badge'>
+          <%= cart.size() %>
+        </span>
+      </a>
+    </li>
+  <% } %>
+  <% if (locals.user) { %>
+    <li<% if (/^\/orders\/current/i.test(req.originalUrl)) { %> class='active'<% } %>>
+      <a href='/orders/current'>
+        Orders
+      </a>
+    </li>
+  <% } %>
 </ul>

@@ -28,14 +28,17 @@ app.use(body.urlencoded({extended: false}));
 app.use(multer({dest: './tmp/uploads/', putSingleFilesInArray: true}));
 app.use(compression());
 app.use(express.static('public'));
+app.use(require('./mid/cart'));
 app.use(require('./mid/user'));
 app.use(require('./mid/flash'));
 
 // Routes
 app.use('/auth', require('./routes/auth'));
+app.use('/cart', require('./routes/cart'));
 app.use('/posts', require('./routes/posts'));
 app.use('/users', require('./routes/users'));
 app.use('/assets', require('./routes/assets'));
+app.use('/orders', require('./routes/orders'));
 app.use('/growers', require('./routes/growers'));
 app.use('/products', require('./routes/products'));
 app.use('/settings', require('./routes/settings'));
@@ -52,6 +55,6 @@ app.get('*', function(req, res) {
 
 // 500
 app.use(function(e, req, res, next) {
-  console.log(e);
+  console.log(e.stack);
   res.status(500).render('500');
 });

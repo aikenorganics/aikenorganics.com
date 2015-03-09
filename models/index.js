@@ -1,14 +1,18 @@
-var Sql = require('sequelize');
-var sql = require('./sequelize');
 
-exports.close = function() { sql.close(); };
+// Convenience
+
+exports.sequelize = require('./sequelize');
+
+// Models
 
 var User = exports.User = require('./user');
 var Post = exports.Post = require('./post');
+var Order = exports.Order = require('./order');
 var Token = exports.Token = require('./token');
 var Grower = exports.Grower = require('./grower');
 var Product = exports.Product = require('./product');
 var Category = exports.Category = require('./category');
+var ProductOrder = exports.ProductOrder = require('./product-order');
 
 // Relations
 
@@ -50,4 +54,44 @@ User.hasMany(Token, {
 Token.belongsTo(User, {
   as: 'user',
   foreignKey: 'user_id'
+});
+
+User.hasMany(Order, {
+  as: 'orders',
+  foreignKey: 'user_id'
+});
+
+Order.belongsTo(User, {
+  as: 'user',
+  foreignKey: 'user_id'
+});
+
+Product.hasMany(ProductOrder, {
+  as: 'product_orders',
+  foreignKey: 'product_id'
+});
+
+ProductOrder.belongsTo(Product, {
+  as: 'product',
+  foreignKey: 'product_id'
+});
+
+Product.belongsToMany(Order, {
+  through: ProductOrder,
+  foreignKey: 'product_id'
+});
+
+Order.hasMany(ProductOrder, {
+  as: 'product_orders',
+  foreignKey: 'order_id'
+});
+
+ProductOrder.belongsTo(Order, {
+  as: 'order',
+  foreignKey: 'order_id'
+});
+
+Order.belongsToMany(Product, {
+  through: ProductOrder,
+  foreignKey: 'order_id'
 });

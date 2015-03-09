@@ -11,32 +11,37 @@
 
   <% include ../subnav %>
 
-  <h1><%= product.name %></h1>
-  <% if (locals.admin) { %>
-    <span class='pull-right'>
-      <a href='/products/<%= product.id %>/edit'>Edit</a>
-    </span>
-  <% } %>
-  $<%= product.cost %>
-  per
-  <%= product.unit %>
-  &bull;
-  <%= product.supply %> Available
-  &bull;
-  <a href='/growers/<%= grower.id %>'>
-    <%= grower.name %>
-  </a>
-  &bull;
-  <%= category.name %>
-  <div class='clearfix'>
-    <hr>
-  </div>
   <div class='row'>
-    <div class='col-md-8'>
-      <%- marked(product.description) %>
+    <div class='col-md-3 text-center'>
+      <p>
+        <img class='img-rounded' src='<%= imageUrl(product, 'medium') %>'>
+      </p>
+      <p>
+        <% include ../cart/form %>
+      </p>
     </div>
-    <div class='col-md-4'>
-      <img class='img-rounded' src='<%= imageUrl(product, 'medium') %>'>
+    <div class='col-md-9'>
+      <h1><%= product.name %></h1>
+      <% if (locals.admin) { %>
+        <span class='pull-right'>
+          <a href='/products/<%= product.id %>/edit'>Edit</a>
+        </span>
+      <% } %>
+      $<%= product.cost %>
+      per
+      <%= product.unit %>
+      &bull;
+      <%= product.available() %> Available
+      &bull;
+      <a href='/growers/<%= grower.id %>'>
+        <%= grower.name %>
+      </a>
+      &bull;
+      <%= category.name %>
+      <div class='clearfix'>
+        <hr>
+      </div>
+      <%- marked(product.description) %>
     </div>
   </div>
 

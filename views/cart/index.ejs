@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+  <% include ../head %>
+</head>
+<body>
+
+<% include ../nav %>
+
+<main class='container'>
+
+  <% include ../subnav %>
+
+  <h1>Shopping Cart</h1>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Cost</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% products.forEach(function(product) { %>
+        <tr>
+          <td><a href='/products/<%= product.id %>'><%= product.name %></a></td>
+          <td>$<%= product.cost %> per <%= product.unit %></td>
+          <td><%= cart.quantity(product) %></td>
+          <td>$<%= cart.total(product).toFixed(2) %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+    <tfoot>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><strong>$<%= cart.total(products).toFixed(2) %></strong></td>
+    </tfoot>
+  </table>
+
+  <% if (cart.size()) { %>
+    <form method='POST' action='/cart/checkout' enctype='multipart/form-data'>
+      <div class='text-right'>
+        <button type='submit' class='btn btn-primary'>
+          Check Out
+        </button>
+      </div>
+    </form>
+  <% } %>
+
+</main>
+
+<% include ../footer %>
+
+<script src='/js/app.js'></script>
+
+</body>
+</html>
