@@ -14,7 +14,9 @@ function authorize(req, res, next) {
 router.param('grower_id', find('grower', Grower));
 
 router.get('/', function(req, res) {
-  Grower.findAll().then(function(growers) {
+  Grower.findAll({
+    order: [['name', 'ASC']]
+  }).then(function(growers) {
     res.render('growers/index', {
       growers: growers
     });
@@ -26,7 +28,9 @@ router.get('/new', authorize, function(req, res) {
 });
 
 router.get('/:grower_id', function(req, res) {
-  req.grower.getProducts().then(function(products) {
+  req.grower.getProducts({
+    order: [['name', 'ASC']]
+  }).then(function(products) {
     res.render('growers/show', {
       products: products
     });

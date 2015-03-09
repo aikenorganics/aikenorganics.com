@@ -33,6 +33,7 @@ router.get('/', function(req, res) {
   Promise.all([
     Category.findAll({order: [['position', 'ASC']]}),
     Product.findAll({
+      order: [['name', 'ASC']],
       where: category_id ? {category_id: category_id} : {},
       include: [{model: Grower, as: 'grower'}]
     })
