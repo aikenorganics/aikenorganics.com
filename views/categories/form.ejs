@@ -2,6 +2,10 @@
   <label for='name'>Name</label>
   <input autofocus type='text' id='name' name='name' class='form-control' required <% if (locals.category) { %>value='<%= category.name %>'<% } %>>
 </div>
+<div class='form-group'>
+  <label for='position'>Position</label>
+  <input autofocus type='text' id='position' name='position' class='form-control' required <% if (locals.category) { %>value='<%= category.position %>'<% } %>>
+</div>
 <p class='text-right'>
   <button type='submit' class='btn btn-primary'>
     Save

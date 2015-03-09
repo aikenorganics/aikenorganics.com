@@ -31,7 +31,7 @@ router.get('/', function(req, res) {
   var category_id = req.query.category_id;
 
   Promise.all([
-    Category.findAll(),
+    Category.findAll({order: [['position', 'ASC']]}),
     Product.findAll({
       where: category_id ? {category_id: category_id} : {},
       include: [{model: Grower, as: 'grower'}]
@@ -49,7 +49,7 @@ router.get('/:product_id', function(req, res) {
 });
 
 router.get('/:product_id/edit', authorize, function(req, res) {
-  Category.findAll().then(function(categories) {
+  Category.findAll({order: [['position', 'ASC']]}).then(function(categories) {
     res.render('products/edit', {categories: categories});
   });
 });

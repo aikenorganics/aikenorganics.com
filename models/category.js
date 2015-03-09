@@ -13,6 +13,14 @@ module.exports = sql.define('categories', {
     set: function(value) {
       this.setDataValue('name', value || '');
     }
+  },
+  position: {
+    type: Sql.FLOAT,
+    allowNull: false,
+    defaultValue: 0,
+    set: function(value) {
+      this.setDataValue('position', value || 0);
+    }
   }
 }, {
   tableName: 'categories',

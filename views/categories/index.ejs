@@ -13,12 +13,24 @@
     <a class='btn btn-default btn-xs' href='/categories/new'>New Category</a>
   </h1>
   <hr>
-  <% categories.forEach(function(category) { %>
-    <h3>
-      <a href='/categories/<%= category.id %>'><%= category.name %></a>
-      <small><a class='btn btn-default btn-xs' href='/categories/<%= category.id %>/edit'>Edit</a></small>
-    </h3>
-  <% }); %>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Position</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% categories.forEach(function(category) { %>
+        <tr>
+          <td><a class='btn btn-default btn-xs' href='/categories/<%= category.id %>/edit'>Edit</a></td>
+          <td><%= category.name %></td>
+          <td><%= category.position %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
 </div>
 
 <% include ../footer %>
