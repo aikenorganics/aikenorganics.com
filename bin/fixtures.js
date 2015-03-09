@@ -69,6 +69,7 @@ Promise.all([
   Category.findOrCreate({where: {name: 'Meat'}})
 ]).then(function(results) {
   var watsonia = results[4][0];
+  var category = results[5][0];
 
   return Promise.all([
     Product.findOrCreate({
@@ -77,6 +78,7 @@ Promise.all([
         cost: '14',
         unit: 'Box',
         available: 22,
+        category_id: category.id,
         description: 'A box of peaches.'
       }
     })

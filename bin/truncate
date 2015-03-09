@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+cat <<CMD | psql $DATABASE_URL
+  truncate users, categories, growers, posts, products, tokens, users;
+CMD

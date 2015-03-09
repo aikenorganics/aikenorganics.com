@@ -2,6 +2,7 @@ var test = require('tape');
 var request = require('./helper');
 var app = require('../app');
 var Grower = require('../models').Grower;
+var Category = require('../models').Category;
 
 test('GET /growers is a 200', function(t) {
   request(app)
@@ -140,13 +141,16 @@ test('POST /growers is a 302 for admins', function(t) {
 
 test('POST /growers/:id/products is a 302 for admins', function(t) {
   Grower.findAll({limit: 1}).then(function(growers) {
-    var agent = request(app).signIn('admin@example.com', function(e) {
-      agent.post('/growers/' + growers[0].id + '/products')
-      .field('name', 'New Grower')
-      .field('cost', '2.45')
-      .field('available', 32)
-      .expect(302)
-      .end(t.end);
+    Category.findAll({limit: 1}).then(function(categories) {
+      var agent = request(app).signIn('admin@example.com', function(e) {
+        agent.post('/growers/' + growers[0].id + '/products')
+        .field('name', 'New Grower')
+        .field('cost', '2.45')
+        .field('available', 32)
+        .field('category_id', categories[0].id)
+        .expect(302)
+        .end(t.end);
+      });
     });
   });
 });

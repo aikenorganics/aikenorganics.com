@@ -3,6 +3,9 @@
 # Migrate the test database.
 foreman run --env=.testenv sequelize db:migrate
 
+# Truncate some tables.
+foreman run --env=.testenv ./bin/truncate
+
 # Fill it with fixtures.
 foreman run --env=.testenv ./bin/fixtures.js
 
