@@ -19,6 +19,7 @@
         <th>Cost</th>
         <th>Quantity</th>
         <th>Total</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -28,6 +29,7 @@
           <td>$<%= product.cost %> per <%= product.unit %></td>
           <td><%= cart.quantity(product) %></td>
           <td>$<%= cart.total(product).toFixed(2) %></td>
+          <td><% include remove %></td>
         </tr>
       <% }); %>
     </tbody>
@@ -36,6 +38,7 @@
       <td></td>
       <td></td>
       <td><strong>$<%= cart.total(products).toFixed(2) %></strong></td>
+      <td></td>
     </tfoot>
   </table>
 

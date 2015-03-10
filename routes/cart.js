@@ -96,12 +96,6 @@ Checkout.prototype = {
         {quantity: this.cart.quantity(product)},
         {transaction: this.t}
       );
-    }.bind(this))).then(this.updateReserved.bind(this));;
-  },
-
-  updateReserved: function() {
-    return Promise.all(this.products.map(function(product) {
-      return product.updateReserved({transaction: this.t});
     }.bind(this)));
   }
 

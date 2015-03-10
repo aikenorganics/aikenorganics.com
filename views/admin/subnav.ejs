@@ -1,0 +1,14 @@
+<ul class='nav nav-tabs subnav'>
+  <li<% if (/^\/admin\/users/i.test(req.originalUrl)) { %> class='active'<% } %>>
+    <a href='/admin/users'>Users</a>
+  </li>
+  <li<% if (/^\/admin\/orders/i.test(req.originalUrl)) { %> class='active'<% } %>>
+    <a href='/admin/orders'>Orders</a>
+  </li>
+  <li<% if (/^\/admin\/categories/i.test(req.originalUrl)) { %> class='active'<% } %>>
+    <a href='/admin/categories'>Categories</a>
+  </li>
+  <li<% if (/^\/admin\/products\/oversold/i.test(req.originalUrl)) { %> class='active'<% } %>>
+    <a href='/admin/products/oversold'>Oversold</a>
+  </li>
+</ul>

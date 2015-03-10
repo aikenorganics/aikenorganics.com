@@ -12,7 +12,7 @@
   <% include ../subnav %>
 
   <h1>Current Order</h1>
-  <% if (locals.productOrders) { %>
+  <% if (locals.order) { %>
     <table class='table'>
       <thead>
         <tr>
@@ -23,12 +23,12 @@
         </tr>
       </thead>
       <tbody>
-        <% productOrders.forEach(function(po) { %>
+        <% order.productOrders.forEach(function(po) { %>
           <tr>
             <td><a href='/products/<%= po.product.id %>'><%= po.product.name %></a></td>
             <td>$<%= po.product.cost %></td>
             <td><%= po.quantity %></td>
-            <td><%= (+po.product.cost * po.quantity).toFixed(2) %></td>
+            <td><%= po.cost().toFixed(2) %></td>
           </tr>
         <% }); %>
       </tbody>
@@ -36,7 +36,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td><strong>$<%= productOrders.reduce(function(total, po){ return total + +po.product.cost * po.quantity; }, 0).toFixed(2); %></strong></td>
+        <td><strong>$<%= order.cost().toFixed(2) %></strong></td>
       </tfoot>
     </table>
     <form method='POST' action='/orders/<%= order.id %>/cancel' enctype='multipart/form-data'>

@@ -1,6 +1,7 @@
 var express = require('express');
 var find = require('../mid/find');
 var upload = require('../mid/image-upload');
+var models = require('../models');
 var Grower = require('../models').Grower;
 var Product = require('../models').Product;
 var Category = require('../models').Category;
@@ -80,6 +81,12 @@ router.post('/:grower_id/products', authorize, function(req, res) {
   }).then(function(product) {
     res.flash('success', 'Saved');
     res.redirect('/products/' + product.id);
+  });
+});
+
+router.get('/:grower_id/orders', authorize, function(req, res) {
+  req.grower.getProducts({where: {reserved: {gt: 0}}}).then(function(products) {
+    res.render('growers/orders', {products: products});
   });
 });
 

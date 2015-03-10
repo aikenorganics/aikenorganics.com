@@ -1,6 +1,6 @@
 var express = require('express');
-var find = require('../mid/find');
-var models = require('../models');
+var find = require('../../mid/find');
+var models = require('../../models');
 var Category = models.Category;
 var router = module.exports = express.Router();
 
@@ -13,18 +13,18 @@ router.param('category_id', find('category', Category));
 
 router.get('/', function(req, res) {
   Category.findAll({order: [['position', 'ASC']]}).then(function(categories) {
-    res.render('categories/index', {
+    res.render('admin/categories/index', {
       categories: categories
     });
   });
 });
 
 router.get('/new', function(req, res) {
-  res.render('categories/new');
+  res.render('admin/categories/new');
 });
 
 router.get('/:category_id/edit', function(req, res) {
-  res.render('categories/edit');
+  res.render('admin/categories/edit');
 });
 
 router.post('/', function(req, res) {
@@ -33,7 +33,7 @@ router.post('/', function(req, res) {
     position: req.body.position
   }).then(function() {
     res.flash('success', 'Created');
-    res.redirect('/categories');
+    res.redirect('/admin/categories');
   });
 });
 
@@ -42,6 +42,6 @@ router.post('/:category_id', function(req, res) {
     fields: ['name', 'position']
   }).then(function() {
     res.flash('success', 'Saved');
-    res.redirect('/categories');
+    res.redirect('/admin/categories');
   });
 });

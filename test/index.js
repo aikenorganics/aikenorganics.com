@@ -6,10 +6,12 @@ require('./cart');
 require('./growers');
 require('./home');
 require('./posts');
-require('./users');
 require('./products');
 require('./settings');
-require('./categories');
+require('./admin');
+require('./orders');
+
+require('./models');
 
 test('teardown', function(t) {
   models.sequelize.close();

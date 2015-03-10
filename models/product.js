@@ -67,13 +67,9 @@ module.exports = sql.define('products', {
       return Math.max(this.supply - this.reserved, 0);
     },
 
-    updateReserved: function(options) {
-      return this.update({
-        reserved: Sql.literal(`
-          COALESCE((select SUM(quantity) from product_orders
-          where product_id = products.id), 0)
-        `)
-      }, options);
+    isOversold: function() {
+      return this.supply < this.reserved;
     }
+
   }
 });

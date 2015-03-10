@@ -55,5 +55,10 @@ module.exports = sql.define('users', {
 }, {
   tableName: 'users',
   createdAt: 'created_at',
-  updatedAt: 'updated_at'
+  updatedAt: 'updated_at',
+  instanceMethods: {
+    name: function() {
+      return `${this.first} ${this.last}`;
+    }
+  }
 });

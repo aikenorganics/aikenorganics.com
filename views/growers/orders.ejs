@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <% include ../head %>
+</head>
+<body>
+
+<% include ../nav %>
+
+<main class='container'>
+  <% include ../subnav %>
+  <div class='row'>
+    <div class='col-md-3'>
+      <p>
+        <img class='img-rounded' src='<%= imageUrl(grower, 'medium') %>'>
+      </p>
+      <% include nav %>
+    </div>
+    <div class='col-md-9'>
+      <h1><%= grower.name %></h1>
+      <h2>Orders</h2>
+      <hr>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% products.forEach(function(product) { %>
+            <tr>
+              <td>
+                <a href='/products/<%= product.id %>'>
+                  <%= product.name %>
+                </a>
+              </td>
+              <td><%= product.reserved %></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<% include ../footer %>
+
+<script src='/js/app.js'></script>
+
+</body>
+</html>
+

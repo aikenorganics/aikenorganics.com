@@ -67,7 +67,7 @@ Order.belongsTo(User, {
 });
 
 Product.hasMany(ProductOrder, {
-  as: 'product_orders',
+  as: 'productOrders',
   foreignKey: 'product_id'
 });
 
@@ -76,22 +76,12 @@ ProductOrder.belongsTo(Product, {
   foreignKey: 'product_id'
 });
 
-Product.belongsToMany(Order, {
-  through: ProductOrder,
-  foreignKey: 'product_id'
-});
-
 Order.hasMany(ProductOrder, {
-  as: 'product_orders',
+  as: 'productOrders',
   foreignKey: 'order_id'
 });
 
 ProductOrder.belongsTo(Order, {
   as: 'order',
-  foreignKey: 'order_id'
-});
-
-Order.belongsToMany(Product, {
-  through: ProductOrder,
   foreignKey: 'order_id'
 });

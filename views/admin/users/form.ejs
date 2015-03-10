@@ -10,14 +10,12 @@
   <label for='phone'>Phone Number</label>
   <input type='text' id='phone' name='phone' class='form-control' <% if (locals._user) { %>value='<%= _user.phone %>'<% } %>>
 </div>
-<% if (locals.showAdmin) { %>
-  <div class='form-group'>
-    <label for='is_admin'>
-      <input type='checkbox' id='is_admin' name='is_admin' <% if (locals._user && _user.is_admin) { %>checked<% } %>>
-      Admin
-    </label>
-  </div>
-<% } %>
+<div class='form-group'>
+  <label for='is_admin'>
+    <input type='checkbox' id='is_admin' name='is_admin' <% if (locals._user && _user.is_admin) { %>checked<% } %>>
+    Admin
+  </label>
+</div>
 <div class='form-group'>
   <button type='submit' class='btn btn-primary'>
     Save

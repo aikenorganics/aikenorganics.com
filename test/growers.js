@@ -100,6 +100,16 @@ test('GET /growers/:id/edit is a 200 for admins', function(t) {
   });
 });
 
+test('GET /growers/:id/orders is a 200 for admins', function(t) {
+  Grower.findOne({}).then(function(grower) {
+    var agent = request(app).signIn('admin@example.com', function(e) {
+      agent.get('/growers/' + grower.id + '/orders')
+      .expect(200)
+      .end(t.end);
+    });
+  });
+});
+
 test('POST /growers/:id is a 401 for non-admins', function(t) {
   Grower.findAll({limit: 1}).then(function(growers) {
     var agent = request(app).signIn('user@example.com', function(e) {

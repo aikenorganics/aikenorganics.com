@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <% include ../../head %>
+</head>
+<body>
+
+<% include ../../nav %>
+
+<main class='container'>
+
+  <% include ../subnav %>
+
+  <h1>Oversold Products</h1>
+  <hr>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Grower</th>
+        <th>Supply</th>
+        <th>Reserved</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% products.forEach(function(product) { %>
+        <tr>
+          <td><a href='/products/<%= product.id %>'><%= product.name %></a></td>
+          <td><a href='/growers/<%= product.grower.id %>'><%= product.grower.name %></a></td>
+          <td><%= product.supply %></td>
+          <td><%= product.reserved %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</main>
+
+<% include ../../footer %>
+
+<script src='/js/app.js'></script>
+
+</body>
+</html>
+

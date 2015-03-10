@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+  <% include ../../head %>
+</head>
+<body>
+
+<% include ../../nav %>
+
+<main class='container'>
+
+  <% include ../subnav %>
+
+  <h1>Order #<%= order.id %></h1>
+  <h2>
+    <a href='/admin/users/<%= order.user.id %>/edit'>
+      <%= order.user.name() %>
+    </a>
+  </h2>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Cost</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% order.productOrders.forEach(function(productOrder) { %>
+        <tr>
+          <td>
+            <a href='/products/<%= productOrder.product.id %>'>
+              <%= productOrder.product.name %>
+            </a>
+            <% if (productOrder.product.isOversold()) { %>
+              <span class='label label-danger'>Oversold</span>
+            <% } %>
+          </td>
+          <td>$<%= productOrder.product.cost %></td>
+          <td><%= productOrder.quantity %></td>
+          <td><%= productOrder.cost().toFixed(2) %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+    <tfoot>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><strong>$<%= order.cost().toFixed(2) %></strong></td>
+    </tfoot>
+  </table>
+
+</main>
+
+<% include ../../footer %>
+
+<script src='/js/app.js'></script>
+
+</body>
+</html>

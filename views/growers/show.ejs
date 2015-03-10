@@ -13,7 +13,10 @@
 
   <div class='row'>
     <div class='col-md-3'>
-      <img class='img-rounded' src='<%= imageUrl(grower, 'medium') %>'>
+      <p>
+        <img class='img-rounded' src='<%= imageUrl(grower, 'medium') %>'>
+      </p>
+      <% include nav %>
     </div>
     <div class='col-md-9'>
       <h1><%= grower.name %></h1>

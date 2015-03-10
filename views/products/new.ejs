@@ -7,13 +7,16 @@
 
 <% include ../nav %>
 
-<div class='container'>
+<main class='container'>
+
+  <% include ../subnav %>
+
   <h1>New Product</h1>
   <h4><%= locals.grower.name %></h4>
   <form method='POST' action='/growers/<%= locals.grower.id %>/products' enctype='multipart/form-data'>
     <% include form %>
   </form>
-</div>
+</main>
 
 <% include ../footer %>
 
