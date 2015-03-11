@@ -1,5 +1,5 @@
 <% if (locals.admin) { %>
-  <ul class='nav nav-pills nav-stacked'>
+  <ul class='nav nav-pills nav-stacked hidden-print'>
     <li<% if (/^\/growers\/\d+\/edit/.test(req.originalUrl)) { %> class='active'<% } %>>
       <a href='/growers/<%= grower.id %>/edit'>
         Edit
