@@ -1,27 +1,7 @@
-<!doctype html>
-<html>
-<head>
-  <% include ../../head %>
-</head>
-<body>
-
-<% include ../../nav %>
-
 <main class='container'>
-
   <% include ../subnav %>
-
   <h1>Edit Category</h1>
   <form method='POST' action='/admin/categories/<%= category.id %>' enctype='multipart/form-data'>
     <% include form %>
   </form>
 </main>
-
-<% include ../../footer %>
-
-<script src='/js/app.js'></script>
-
-</body>
-</html>
-
-

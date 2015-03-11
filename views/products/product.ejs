@@ -12,11 +12,15 @@
       <a href='/products/<%= product.id %>'><%= product.name %></a>
     </h3>
     <strong>
-      $<%= product.cost %> per <%= product.unit %>
-      &bull;
-      <%= product.available() %> Available
-      <% if (product.grower) { %>
+      <% if (locals.open) { %>
+        $<%= product.cost %> per <%= product.unit %>
         &bull;
+        <%= product.available() %> Available
+      <% } %>
+      <% if (locals.open && product.grower) { %>
+        &bull;
+      <% } %>
+      <% if (product.grower) { %>
         <a href='/growers/<%= product.grower.id %>'>
           <%= product.grower.name %>
         </a>

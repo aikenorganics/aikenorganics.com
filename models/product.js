@@ -1,5 +1,5 @@
-var Sql = require('sequelize');
-var sql = require('./sequelize');
+var Sql = require('sequelize')
+var sql = require('./sequelize')
 
 module.exports = sql.define('products', {
   id: {
@@ -10,40 +10,40 @@ module.exports = sql.define('products', {
     type: Sql.STRING,
     allowNull: false,
     defaultValue: '',
-    set: function(value) {
-      this.setDataValue('name', value || '');
+    set: function (value) {
+      this.setDataValue('name', value || '')
     }
   },
   cost: {
     type: Sql.DECIMAL(10, 2),
     allowNull: false,
     defaultValue: 0,
-    set: function(value) {
-      this.setDataValue('cost', value || '0');
+    set: function (value) {
+      this.setDataValue('cost', value || '0')
     }
   },
   supply: {
     type: Sql.INTEGER,
     allowNull: false,
     defaultValue: 0,
-    set: function(value) {
-      this.setDataValue('supply', Math.abs(value));
+    set: function (value) {
+      this.setDataValue('supply', Math.abs(value))
     }
   },
   unit: {
     type: Sql.STRING,
     allowNull: false,
     defaultValue: '',
-    set: function(value) {
-      this.setDataValue('unit', value || '');
+    set: function (value) {
+      this.setDataValue('unit', value || '')
     }
   },
   description: {
     type: Sql.TEXT,
     allowNull: false,
     defaultValue: '',
-    set: function(value) {
-      this.setDataValue('description', value || '');
+    set: function (value) {
+      this.setDataValue('description', value || '')
     }
   },
   imaged_at: {
@@ -53,8 +53,8 @@ module.exports = sql.define('products', {
     type: Sql.INTEGER,
     allowNull: false,
     defaultValue: 0,
-    set: function(value) {
-      this.setDataValue('reserved', value || 0);
+    set: function (value) {
+      this.setDataValue('reserved', value || 0)
     }
   }
 }, {
@@ -63,13 +63,17 @@ module.exports = sql.define('products', {
   updatedAt: 'updated_at',
   instanceMethods: {
 
-    available: function() {
-      return Math.max(this.supply - this.reserved, 0);
+    available: function () {
+      return Math.max(this.supply - this.reserved, 0)
     },
 
-    isOversold: function() {
-      return this.supply < this.reserved;
+    isOversold: function () {
+      return this.supply < this.reserved
+    },
+
+    reservedCost: function () {
+      return +this.cost * this.reserved
     }
 
   }
-});
+})

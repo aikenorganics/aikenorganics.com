@@ -1,7 +1,5 @@
-"use strict";
-
 module.exports = {
-  up: function(migration, DataTypes, done) {
+  up: function (migration, DataTypes, done) {
     migration.createTable('orders', {
       id: {
         type: DataTypes.INTEGER,
@@ -22,6 +20,6 @@ module.exports = {
         references: 'users',
         referencesKey: 'id'
       }
-    }).complete(done);
+    }).complete(done)
   }
-};
+}

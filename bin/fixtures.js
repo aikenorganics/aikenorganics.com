@@ -1,17 +1,16 @@
 #!/usr/bin/env node
 
-var bcrypt = require('bcrypt');
-var models = require('../models');
+var models = require('../models')
 
-var User = models.User;
-var Order = models.Order;
-var Grower = models.Grower;
-var Product = models.Product;
-var Category = models.Category;
-var ProductOrder = models.ProductOrder;
+var User = models.User
+var Order = models.Order
+var Grower = models.Grower
+var Product = models.Product
+var Category = models.Category
+var ProductOrder = models.ProductOrder
 
 // password
-var password = '$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW';
+var password = '$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW'
 
 Promise.all([
   User.findOrCreate({
@@ -73,10 +72,10 @@ Promise.all([
   Category.findOrCreate({where: {name: 'Beauty'}}),
   Category.findOrCreate({where: {name: 'Dairy & Eggs'}}),
   Category.findOrCreate({where: {name: 'Meat'}})
-]).then(function(results) {
-  var user = results[1][0];
-  var watsonia = results[4][0];
-  var category = results[5][0];
+]).then(function (results) {
+  var user = results[1][0]
+  var watsonia = results[4][0]
+  var category = results[5][0]
 
   return Promise.all([
     Product.findOrCreate({
@@ -92,9 +91,9 @@ Promise.all([
     Order.findOrCreate({
       where: {user_id: user.id}
     })
-  ]).then(function(results) {
-    var peaches = results[0][0];
-    var order = results[1][0];
+  ]).then(function (results) {
+    var peaches = results[0][0]
+    var order = results[1][0]
 
     return Promise.all([
       ProductOrder.findOrCreate({
@@ -104,10 +103,10 @@ Promise.all([
         },
         defaults: {quantity: 3}
       })
-    ]).then(function(results) {
-      models.sequelize.close();
-    });
-  });
-}).catch(function(e) {
-  console.log(e);
-});
+    ]).then(function (results) {
+      models.sequelize.close()
+    })
+  })
+}).catch(function (e) {
+  console.log(e)
+})

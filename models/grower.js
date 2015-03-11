@@ -1,5 +1,5 @@
-var Sql = require('sequelize');
-var sql = require('./sequelize');
+var Sql = require('sequelize')
+var sql = require('./sequelize')
 
 module.exports = sql.define('growers', {
   id: {
@@ -15,32 +15,32 @@ module.exports = sql.define('growers', {
     type: Sql.STRING,
     allowNull: false,
     defaultValue: '',
-    set: function(value) {
-      this.setDataValue('email', value || '');
+    set: function (value) {
+      this.setDataValue('email', value || '')
     }
   },
   url: {
     type: Sql.STRING,
     allowNull: false,
     defaultValue: '',
-    set: function(value) {
-      this.setDataValue('url', value || '');
+    set: function (value) {
+      this.setDataValue('url', value || '')
     }
   },
   location: {
     type: Sql.STRING,
     allowNull: false,
     defaultValue: '',
-    set: function(value) {
-      this.setDataValue('location', value || '');
+    set: function (value) {
+      this.setDataValue('location', value || '')
     }
   },
   description: {
     type: Sql.TEXT,
     allowNull: false,
     defaultValue: '',
-    set: function(value) {
-      this.setDataValue('description', value || '');
+    set: function (value) {
+      this.setDataValue('description', value || '')
     }
   },
   imaged_at: {
@@ -50,5 +50,4 @@ module.exports = sql.define('growers', {
   tableName: 'growers',
   createdAt: 'created_at',
   updatedAt: 'updated_at'
-});
-
+})

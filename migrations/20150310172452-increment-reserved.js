@@ -1,7 +1,5 @@
-"use strict";
-
 module.exports = {
-  up: function(migration, DataTypes, done) {
+  up: function (migration, DataTypes, done) {
     migration.sequelize.query(`
       create function increment_reserved()
       returns trigger
@@ -19,8 +17,8 @@ module.exports = {
       after insert or update of quantity on product_orders
       for each row
       execute procedure increment_reserved();
-    `).then(function(){
-      done();
-    });
+    `).then(function () {
+      done()
+    })
   }
-};
+}

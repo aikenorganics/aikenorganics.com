@@ -1,5 +1,5 @@
-var Sql = require('sequelize');
-var sql = require('./sequelize');
+var Sql = require('sequelize')
+var sql = require('./sequelize')
 
 module.exports = sql.define('tokens', {
   id: {
@@ -14,4 +14,4 @@ module.exports = sql.define('tokens', {
   tableName: 'tokens',
   createdAt: false,
   updatedAt: false
-});
+})

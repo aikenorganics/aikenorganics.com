@@ -1,30 +1,21 @@
-<!doctype html>
-<html>
-<head>
-  <% include ../head %>
-</head>
-<body>
-
-<% include ../nav %>
-
 <main class='container'>
   <% include ../subnav %>
   <div class='row'>
     <div class='col-md-3'>
-      <p>
+      <p class='text-center'>
         <img class='img-rounded' src='<%= imageUrl(grower, 'medium') %>'>
-        <form method='POST' action='<%= growerImageUrl(grower) %>' enctype='multipart/form-data'>
-          <input type='hidden' name='return_to' value='<%= req.originalUrl %>'>
-          <div class='input-group'>
-            <input type='file' name='image' class='form-control'>
-            <span class='input-group-btn'>
-              <button type='submit' class='btn btn-primary'>
-                Upload
-              </button>
-            </span>
-          </div>
-        </form>
       </p>
+      <form method='POST' action='/growers/<%= grower.id %>/image' enctype='multipart/form-data'>
+        <input type='hidden' name='return_to' value='<%= req.originalUrl %>'>
+        <div class='input-group'>
+          <input type='file' name='image' class='form-control' required>
+          <span class='input-group-btn'>
+            <button type='submit' class='btn btn-primary'>
+              Upload
+            </button>
+          </span>
+        </div>
+      </form>
       <% include nav %>
     </div>
     <div class='col-md-9'>
@@ -36,10 +27,3 @@
     </div>
   </div>
 </main>
-
-<% include ../footer %>
-
-<script src='/js/app.js'></script>
-
-</body>
-</html>

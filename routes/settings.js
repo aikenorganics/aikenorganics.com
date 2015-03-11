@@ -1,22 +1,20 @@
-var express = require('express');
-var User = require('../models').User;
+var express = require('express')
+var router = module.exports = express.Router()
 
-var router = module.exports = express.Router();
+router.use(function (req, res, next) {
+  if (req.user) return next()
+  res.status(404).render('404')
+})
 
-router.use(function(req, res, next) {
-  if (req.user) return next();
-  res.status(404).render('404');
-});
+router.get('/account', function (req, res) {
+  res.render('settings/account', {_user: req.user})
+})
 
-router.get('/account', function(req, res) {
-  res.render('settings/account', {_user: req.user});
-});
-
-router.post('/account', function(req, res) {
+router.post('/account', function (req, res) {
   req.user.update(req.body, {
     fields: ['first', 'last', 'phone']
-  }).then(function() {
-    res.flash('success', 'Saved - thanks for being awesome!');
-    res.redirect('/settings/account');
-  });
-});
+  }).then(function () {
+    res.flash('success', 'Saved - thanks for being awesome!')
+    res.redirect('/settings/account')
+  })
+})

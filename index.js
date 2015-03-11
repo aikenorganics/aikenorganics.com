@@ -1,1 +1,1 @@
-require('./app').listen(process.env.PORT);
+require('./app').listen(process.env.PORT)

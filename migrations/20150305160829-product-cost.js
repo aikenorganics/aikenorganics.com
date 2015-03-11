@@ -1,11 +1,9 @@
-"use strict";
-
 module.exports = {
-  up: function(migration, DataTypes, done) {
+  up: function (migration, DataTypes, done) {
     migration.addColumn('products', 'cost', {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
       defaultValue: 0
-    }).complete(done);
+    }).complete(done)
   }
-};
+}

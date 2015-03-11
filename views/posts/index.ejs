@@ -1,13 +1,4 @@
-<!doctype html>
-<html>
-<head>
-  <% include ../head %>
-</head>
-<body>
-
-<% include ../nav %>
-
-<div class='container'>
+<main class='container'>
   <h1>Posts</h1>
   <% posts.forEach(function(post) { %>
     <h3>
@@ -15,12 +6,4 @@
       <small><a href='/posts/<%= post.id %>/edit'>Edit</a></small>
     </h3>
   <% }); %>
-</div>
-
-<% include ../footer %>
-
-<script src='/js/app.js'></script>
-
-</body>
-</html>
-
+</main>

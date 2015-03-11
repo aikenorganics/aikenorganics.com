@@ -1,7 +1,5 @@
-"use strict";
-
 module.exports = {
-  up: function(migration, DataTypes, done) {
+  up: function (migration, DataTypes, done) {
     migration.sequelize.query(`
       create function decrement_reserved()
       returns trigger
@@ -19,8 +17,8 @@ module.exports = {
       after delete on product_orders
       for each row
       execute procedure decrement_reserved();
-    `).then(function(){
-      done();
-    });
+    `).then(function () {
+      done()
+    })
   }
-};
+}

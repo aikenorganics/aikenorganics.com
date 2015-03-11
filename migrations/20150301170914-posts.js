@@ -1,7 +1,5 @@
-"use strict";
-
 module.exports = {
-  up: function(migration, DataTypes, done) {
+  up: function (migration, DataTypes, done) {
     migration.createTable('posts', {
       id: {
         type: DataTypes.INTEGER,
@@ -20,6 +18,6 @@ module.exports = {
         type: DataTypes.TEXT,
         allowNull: false
       }
-    }).complete(done);
+    }).complete(done)
   }
-};
+}

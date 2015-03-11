@@ -1,3 +1,4 @@
 PORT=3333
 DATABASE_URL=postgres://brad@localhost/aikenorganics_test
 SECRET=test
+OPEN=1

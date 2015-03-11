@@ -1,7 +1,5 @@
-"use strict";
-
 module.exports = {
-  up: function(migration, DataTypes, done) {
+  up: function (migration, DataTypes, done) {
     migration.createTable('suppliers', {
       id: {
         type: DataTypes.INTEGER,
@@ -16,6 +14,6 @@ module.exports = {
         type: DataTypes.DATE,
         allowNull: false
       }
-    }).complete(done);
+    }).complete(done)
   }
-};
+}

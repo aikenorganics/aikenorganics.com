@@ -1,5 +1,16 @@
 #!/bin/sh -e
 
+standard \
+  app.js \
+  index.js \
+  bin/**/*.js \
+  mid/**/*.js \
+  test/**/*.js \
+  routes/**/*.js \
+  models/**/*.js \
+  helpers/**/*.js \
+  migrations/**/*.js
+
 # Migrate the test database.
 foreman run --env=.testenv sequelize db:migrate
 

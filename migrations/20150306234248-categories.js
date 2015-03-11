@@ -1,7 +1,5 @@
-"use strict";
-
 module.exports = {
-  up: function(migration, DataTypes, done) {
+  up: function (migration, DataTypes, done) {
     migration.createTable('categories', {
       id: {
         type: DataTypes.INTEGER,
@@ -21,6 +19,6 @@ module.exports = {
         allowNull: false,
         defaultValue: ''
       }
-    }).complete(done);
+    }).complete(done)
   }
-};
+}

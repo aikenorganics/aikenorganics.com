@@ -1,7 +1,5 @@
-"use strict";
-
 module.exports = {
-  up: function(migration, DataTypes, done) {
+  up: function (migration, DataTypes, done) {
     migration.createTable('tokens', {
       id: {
         type: DataTypes.STRING,
@@ -17,6 +15,6 @@ module.exports = {
         references: 'users',
         referencesKey: 'id'
       }
-    }).complete(done);
+    }).complete(done)
   }
-};
+}
