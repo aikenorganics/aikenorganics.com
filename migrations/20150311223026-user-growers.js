@@ -1,5 +1,5 @@
 module.exports = {
-  up: function(migration, DataTypes, done) {
+  up: function (migration, DataTypes, done) {
     migration.createTable('user_growers', {
       id: {
         type: DataTypes.INTEGER,
