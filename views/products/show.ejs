@@ -5,19 +5,15 @@
   <div class='row'>
     <div class='col-md-3 text-center'>
       <p>
-        <img class='img-rounded' src='<%= imageUrl(product, 'medium') %>'>
-      </p>
-      <p>
         <% include ../cart/form %>
       </p>
+      <p>
+        <img class='img-rounded' src='<%= imageUrl(product, 'medium') %>'>
+      </p>
+      <% include nav %>
     </div>
     <div class='col-md-9'>
       <h1><%= product.name %></h1>
-      <% if (locals.admin) { %>
-        <span class='pull-right'>
-          <a href='/products/<%= product.id %>/edit'>Edit</a>
-        </span>
-      <% } %>
       <% if (locals.open) { %>
         $<%= product.cost %>
         per

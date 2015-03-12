@@ -1,0 +1,15 @@
+<% if (locals.admin) { %>
+  <ul class='nav nav-pills nav-stacked hidden-print'>
+    <li<% if (/^\/products\/\d+\/?$/.test(req.originalUrl)) { %> class='active'<% } %>>
+      <a href='/products/<%= product.id %>'>
+        Info
+      </a>
+    </li>
+    <li<% if (/^\/products\/\d+\/edit/.test(req.originalUrl)) { %> class='active'<% } %>>
+      <a href='/products/<%= product.id %>/edit'>
+        Edit
+      </a>
+    </li>
+  </ul>
+<% } %>
+
