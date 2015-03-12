@@ -144,3 +144,51 @@ test('POST /auth/signup handles first, last, and phone', function (t) {
   .expect(302)
   .end(t.end)
 })
+
+test('Full signup flow', function (t) {
+  var agent = request()
+
+  agent
+  .post('/auth/signup')
+  .field('first', 'Jake')
+  .field('last', 'The Dog')
+  .field('phone', '803.123.4321')
+  .field('email', 'jake@ooo.net')
+  .field('password', 'sandwich')
+  .expect(302)
+  .end(function (e) {
+    if (e) return t.end(e)
+
+    agent
+    .get('/auth/signout')
+    .expect(302)
+    .end(function (e) {
+      if (e) return t.end(e)
+
+      agent
+      .post('/auth/signin')
+      .field('email', 'jake@ooo.net')
+      .field('password', 'sandwiches')
+      .expect(422)
+      .end(function (e) {
+        if (e) return t.end(e)
+
+        agent
+        .post('/auth/signin')
+        .field('email', 'jake@oooo.net')
+        .field('password', 'sandwich')
+        .expect(404)
+        .end(function (e) {
+          if (e) return t.end(e)
+
+          agent
+          .post('/auth/signin')
+          .field('email', 'jake@ooo.net')
+          .field('password', 'sandwich')
+          .expect(302)
+          .end(t.end)
+        })
+      })
+    })
+  })
+})

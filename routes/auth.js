@@ -116,7 +116,7 @@ router.post('/signin', function (req, res) {
 
       // Is the password correct?
       if (!match) {
-        res.render('auth/signin', {
+        res.status(422).render('auth/signin', {
           email: email,
           flash: 'Sorry! That password is incorrect.'
         })
