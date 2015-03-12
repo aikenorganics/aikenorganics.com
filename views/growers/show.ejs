@@ -24,6 +24,12 @@
           <%= grower.url %>
         </a>
       <% } %>
+      <% if (grower.location && (grower.email || grower.url)) { %>
+        &bull;
+      <% } %>
+      <% if (grower.location) { %>
+        <%= grower.location %>
+      <% } %>
       <div class='clearfix'>
         <hr>
       </div>
