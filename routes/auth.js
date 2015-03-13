@@ -1,18 +1,11 @@
 var bcrypt = require('bcrypt')
 var crypto = require('crypto')
 var express = require('express')
-var postmark = require('postmark')
+var mailer = require('../lib/mailer')
 var find = require('../mid/find')
 var models = require('../models')
 
 var router = module.exports = express.Router()
-
-// Mock the postmark API for testing.
-if (process.env.POSTMARK_API_TOKEN) {
-  var mailer = new postmark.Client(process.env.POSTMARK_API_TOKEN)
-} else {
-  var mailer = {sendEmail: function (options, next) { next() }}
-}
 
 router.param('token_id', find(models.Token))
 
@@ -41,7 +34,7 @@ router.post('/forgot', function (req, res) {
         To: user.email,
         From: 'support@aikenorganics.com',
         Subject: 'Aiken Organics: Password Reset',
-        TextBody: 'http://' + process.env.DOMAIN + '/auth/reset/' + token.id
+        TextBody: `http://${req.get('host')}/auth/reset/${token.id}`
       }, function (e) {
         if (e) return res.status(500).render('500')
         res.flash('success', 'Thanks! We sent you an email to reset your password.')
