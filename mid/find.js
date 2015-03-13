@@ -1,4 +1,5 @@
-module.exports = function (name, Model) {
+module.exports = function (Model, name) {
+  if (!name) name = Model.options.name.singular
   return function (req, res, next, id) {
     if (!id) return next()
     Model.find(id).then(function (model) {

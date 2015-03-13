@@ -1,9 +1,6 @@
 var express = require('express')
 var find = require('../mid/find')
 var models = require('../models')
-var Order = models.Order
-var Product = models.Product
-var ProductOrder = models.ProductOrder
 var router = module.exports = express.Router()
 
 router.use(function (req, res, next) {
@@ -11,16 +8,16 @@ router.use(function (req, res, next) {
   res.status(401).render('401')
 })
 
-router.param('order_id', find('order', Order))
+router.param('order_id', find(models.Order))
 
 router.get('/current', function (req, res) {
-  Order.findAll({
+  models.Order.findAll({
     limit: 1,
     where: {user_id: req.user.id},
     include: [{
-      model: ProductOrder,
+      model: models.ProductOrder,
       as: 'productOrders',
-      include: [{model: Product, as: 'product'}]
+      include: [{model: models.Product, as: 'product'}]
     }]
   }).then(function (orders) {
     res.render('orders/current', {order: orders[0]})

@@ -1,13 +1,13 @@
 var express = require('express')
-var User = require('../../models').User
+var models = require('../../models')
 var find = require('../../mid/find')
 var upload = require('../../mid/image-upload')
 var router = module.exports = express.Router()
 
-router.param('user_id', find('_user', User))
+router.param('user_id', find(models.User, '_user'))
 
 router.get('/', function (req, res) {
-  User.findAll({order: [['email', 'ASC']]}).then(function (users) {
+  models.User.findAll({order: [['email', 'ASC']]}).then(function (users) {
     res.render('admin/users/index', {users: users})
   })
 })

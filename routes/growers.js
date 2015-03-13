@@ -9,7 +9,7 @@ function authorize (req, res, next) {
   res.status(401).render('401')
 }
 
-router.param('grower_id', find('grower', models.Grower))
+router.param('grower_id', find(models.Grower))
 
 router.get('/', function (req, res) {
   models.Grower.findAll({

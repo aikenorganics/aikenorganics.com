@@ -1,7 +1,6 @@
 var express = require('express')
 var find = require('../../mid/find')
 var models = require('../../models')
-var Category = models.Category
 var router = module.exports = express.Router()
 
 router.use(function (req, res, next) {
@@ -9,10 +8,10 @@ router.use(function (req, res, next) {
   res.status(401).render('401')
 })
 
-router.param('category_id', find('category', Category))
+router.param('category_id', find(models.Category))
 
 router.get('/', function (req, res) {
-  Category.findAll({order: [['position', 'ASC']]}).then(function (categories) {
+  models.Category.findAll({order: [['position', 'ASC']]}).then(function (categories) {
     res.render('admin/categories/index', {
       categories: categories
     })
@@ -28,7 +27,7 @@ router.get('/:category_id/edit', function (req, res) {
 })
 
 router.post('/', function (req, res) {
-  Category.create({
+  models.Category.create({
     name: req.body.name,
     position: req.body.position
   }).then(function () {

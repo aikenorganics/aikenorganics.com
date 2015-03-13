@@ -3,8 +3,7 @@ var crypto = require('crypto')
 var express = require('express')
 var postmark = require('postmark')
 var find = require('../mid/find')
-var User = require('../models').User
-var Token = require('../models').Token
+var models = require('../models')
 
 var router = module.exports = express.Router()
 
@@ -15,14 +14,16 @@ if (process.env.POSTMARK_API_TOKEN) {
   var mailer = {sendEmail: function (options, next) { next() }}
 }
 
-router.param('token_id', find('token', Token))
+router.param('token_id', find(models.Token))
 
 router.get('/forgot', function (req, res) {
   res.render('auth/forgot')
 })
 
 router.post('/forgot', function (req, res) {
-  User.find({where: ['lower(email) = lower(?)', req.body.email]}).then(function (user) {
+  models.User.find({
+    where: ['lower(email) = lower(?)', req.body.email]
+  }).then(function (user) {
     if (!user) {
       return res.status(404).render('auth/forgot', {
         error: 'Sorry! We don’t recognize that email.'
@@ -102,7 +103,9 @@ router.post('/signin', function (req, res) {
   var email = (req.body.email || '').trim()
   var password = (req.body.password || '').trim()
 
-  User.find({where: ['lower(email) = lower(?)', email]}).then(function (user) {
+  models.User.find({
+    where: ['lower(email) = lower(?)', email]
+  }).then(function (user) {
     // Does the user exist?
     if (!user) {
       res.status(404).render('auth/signin', {
@@ -156,7 +159,9 @@ router.post('/signup', function (req, res) {
     return
   }
 
-  User.find({where: ['lower(email) = lower(?)', email]}).then(function (user) {
+  models.User.find({
+    where: ['lower(email) = lower(?)', email]
+  }).then(function (user) {
     // Does this user already exist?
     if (user) {
       res.status(422).render('auth/signup', {
@@ -172,7 +177,7 @@ router.post('/signup', function (req, res) {
         console.log(e)
         return res.status(500).render('500')
       }
-      User.create({
+      models.User.create({
         email: email,
         password: hash,
         first: req.body.first,

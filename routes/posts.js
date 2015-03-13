@@ -1,14 +1,14 @@
 var express = require('express')
 var find = require('../mid/find')
 var adminOnly = require('../mid/admin-only')
-var Post = require('../models').Post
+var models = require('../models')
 var router = module.exports = express.Router()
 
 router.use(adminOnly)
-router.param('post_id', find('post', Post))
+router.param('post_id', find(models.Post))
 
 router.get('/', function (req, res) {
-  Post.findAll().then(function (posts) {
+  models.Post.findAll().then(function (posts) {
     res.render('posts/index', {
       posts: posts
     })
@@ -20,7 +20,7 @@ router.get('/new', function (req, res) {
 })
 
 router.post('/', function (req, res) {
-  Post.create({
+  models.Post.create({
     title: req.body.title,
     content: req.body.content,
     author_id: req.user.id

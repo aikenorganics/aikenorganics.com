@@ -1,40 +1,37 @@
 var express = require('express')
 var find = require('../mid/find')
 var upload = require('../mid/image-upload')
-var Grower = require('../models').Grower
-var Product = require('../models').Product
-var Category = require('../models').Category
+var models = require('../models')
 var router = module.exports = express.Router()
-var findProduct = find('product', Product)
 
 function authorize (req, res, next) {
   if (req.admin) return next()
   res.status(401).render('401')
 }
 
-router.param('product_id', function (req, res, next, id) {
-  findProduct(req, res, function () {
-    if (!req.product) return next()
-    Promise.all([
-      req.product.getGrower(),
-      req.product.getCategory()
-    ]).then(function (results) {
-      req.grower = res.locals.grower = results[0]
-      req.category = res.locals.category = results[1]
-      next()
-    })
-  }, id)
+router.param('product_id', find(models.Product));
+
+router.param('product_id', function (req, res, next) {
+  if (!req.product) return next()
+  Promise.all([
+    req.product.getGrower(),
+    req.product.getCategory()
+  ]).then(function (results) {
+    req.grower = res.locals.grower = results[0]
+    req.category = res.locals.category = results[1]
+    next()
+  })
 })
 
 router.get('/', function (req, res) {
   var category_id = req.query.category_id
 
   Promise.all([
-    Category.findAll({order: [['position', 'ASC']]}),
-    Product.findAll({
+    models.Category.findAll({order: [['position', 'ASC']]}),
+    models.Product.findAll({
       order: [['name', 'ASC']],
       where: category_id ? {category_id: category_id} : {},
-      include: [{model: Grower, as: 'grower'}]
+      include: [{model: models.Grower, as: 'grower'}]
     })
   ]).then(function (results) {
     res.render('products/index', {
@@ -49,7 +46,7 @@ router.get('/:product_id', function (req, res) {
 })
 
 router.get('/:product_id/edit', authorize, function (req, res) {
-  Category.findAll({order: [['position', 'ASC']]}).then(function (categories) {
+  models.Category.findAll({order: [['position', 'ASC']]}).then(function (categories) {
     res.render('products/edit', {categories: categories})
   })
 })
