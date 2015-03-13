@@ -33,10 +33,10 @@ test('GET /admin/orders?product_id=:id is a 200', function (t) {
   })
 })
 
-test('GET /admin/orders/list is a 200', function (t) {
+test('GET /admin/orders?full=1 is a 200', function (t) {
   var agent = request().signIn('admin@example.com', function () {
     agent
-    .get('/admin/orders/list')
+    .get('/admin/orders?full=1')
     .expect(200)
     .end(t.end)
   })

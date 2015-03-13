@@ -20,8 +20,11 @@ router.get('/', function (req, res) {
   // Filter by product
   if (req.product) {
     where = [
-      `orders.id in (select order_id from product_orders where product_id = ?)`
-    , req.product.id]
+      `orders.id in (
+        select order_id from product_orders where product_id = ?
+      )`,
+      req.product.id
+    ]
   }
 
   // Include models for full view
