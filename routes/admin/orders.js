@@ -13,16 +13,33 @@ router.get('/', function (req, res, next) {
 })
 
 router.get('/', function (req, res) {
+  var full = req.query.full
+  var where = {}
+  var include = [{as: 'user', model: models.User}]
+
+  // Filter by product
+  if (req.product) {
+    where = [
+      `orders.id in (select order_id from product_orders where product_id = ?)`
+    , req.product.id]
+  }
+
+  // Include models for full view
+  if (full) {
+    include.push({
+      model: models.ProductOrder,
+      as: 'productOrders',
+      include: [{model: models.Product, as: 'product'}]
+    })
+  }
+
+  // Get the orders!
   models.Order.findAll({
-    where: req.product ? models.sequelize.literal(
-      `orders.id in (
-        select order_id from product_orders
-        where product_id = ${req.product.id}
-      )`
-    ) : {},
-    include: [{as: 'user', model: models.User}]
+    where: where,
+    include: include
   }).then(function (orders) {
-    res.render('admin/orders/index', {orders: orders})
+    var view = full ? 'admin/orders/full' : 'admin/orders/index'
+    res.render(view, {orders: orders})
   })
 })
 

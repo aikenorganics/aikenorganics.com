@@ -2,11 +2,10 @@
 
   <% include ../subnav %>
 
-  <h1>Order #<%= order.id %></h1>
+  <h1><a href='/admin/orders/<%= order.id %>'>Order #<%= order.id %></a></h1>
   <h2>
-    <a href='/admin/users/<%= order.user.id %>/edit'>
-      <%= order.user.name() %>
-    </a>
+    <a href='/admin/users/<%= order.user.id %>/edit'><%= order.user.name() %></a>
+    <small><%= order.user.email %></small>
   </h2>
   <table class='table'>
     <thead>

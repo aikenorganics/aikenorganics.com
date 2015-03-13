@@ -32,3 +32,12 @@ test('GET /admin/orders?product_id=:id is a 200', function (t) {
     })
   })
 })
+
+test('GET /admin/orders/list is a 200', function (t) {
+  var agent = request().signIn('admin@example.com', function () {
+    agent
+    .get('/admin/orders/list')
+    .expect(200)
+    .end(t.end)
+  })
+})

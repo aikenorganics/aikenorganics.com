@@ -11,14 +11,14 @@
       </a>
     <% } %>
   </h1>
+  <% include full-toggle %>
   <hr>
   <table class='table'>
     <thead>
       <tr>
         <th></th>
+        <th>Name</th>
         <th>Email</th>
-        <th>First</th>
-        <th>Last</th>
         <th>Phone</th>
       </tr>
     </thead>
@@ -26,9 +26,8 @@
       <% orders.forEach(function(order) { %>
         <tr>
           <td><a href='/admin/orders/<%= order.id %>'>#<%= order.id %></a></td>
+          <td><%= order.user.name() %></td>
           <td><%= order.user.email %></td>
-          <td><%= order.user.first || '-' %></td>
-          <td><%= order.user.last || '-' %></td>
           <td><%= order.user.phone || '-' %></td>
         </tr>
       <% }); %>
