@@ -9,3 +9,9 @@ test('User#name combines first and last', function (t) {
   t.equal(user.name(), 'Steven Tyler')
   t.end()
 })
+
+test('User#name is trimmed', function (t) {
+  var user = models.User.build({})
+  t.equal(user.name(), '')
+  t.end()
+})

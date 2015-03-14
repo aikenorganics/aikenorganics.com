@@ -1,0 +1,21 @@
+<main class='container'>
+  <% include ../subnav %>
+  <h1>Growers</h1>
+  <hr>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% growers.forEach(function(grower) { %>
+        <tr>
+          <td><a class='btn btn-default btn-xs' href='/admin/growers/<%= grower.id %>/edit'>Edit</a></td>
+          <td><%= grower.name %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</main>

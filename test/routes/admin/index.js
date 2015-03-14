@@ -1,5 +1,6 @@
 require('./users')
 require('./orders')
+require('./growers')
 require('./products')
 require('./categories')
 

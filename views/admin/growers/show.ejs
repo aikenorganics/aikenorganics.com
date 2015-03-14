@@ -1,0 +1,45 @@
+<main class='container'>
+  <% include ../subnav %>
+  <h1><%= grower.name %></h1>
+  <h2>Users</h2>
+  <hr>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% grower.userGrowers.forEach(function (userGrower) { %>
+        <tr>
+          <td><a href='/admin/users/<%= userGrower.user.id %>/edit'><%= userGrower.user.name() || '-' %></a></td>
+          <td><a href='/admin/users/<%= userGrower.user.id %>/edit'><%= userGrower.user.email %></a></td>
+          <td><%= userGrower.user.phone || '-' %></td>
+          <td>
+            <form method='POST' action='/admin/growers/<%= grower.id %>/removeuser' enctype='multipart/form-data'>
+              <input type='hidden' name='user_id' value='<%= userGrower.user.id %>'>
+              <button type='submit' class='btn btn-danger btn-xs'>Remove</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <form method='POST' action='/admin/growers/<%= grower.id %>/adduser' enctype='multipart/form-data' class='form-inline text-center'>
+    <div class='form-group'>
+      <label for='user_id'>Add a User</label>
+      <select id='user_id' name='user_id' class='form-control' required>
+        <option value=''>Select a User</option>
+        <% users.forEach(function (user) { %>
+          <option value='<%= user.id %>'>
+            <%= user.email %> - <%= user.name() %>
+          </option>
+        <% }) %>
+      </select>
+      <button type='submit' class='btn btn-primary'>Add</button>
+    </div>
+  </form>
+</main>

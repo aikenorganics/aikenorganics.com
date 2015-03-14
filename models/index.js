@@ -9,6 +9,7 @@ var Token = exports.Token = require('./token')
 var Grower = exports.Grower = require('./grower')
 var Product = exports.Product = require('./product')
 var Category = exports.Category = require('./category')
+var UserGrower = exports.UserGrower = require('./user-grower')
 var ProductOrder = exports.ProductOrder = require('./product-order')
 
 // Relations
@@ -80,4 +81,24 @@ Order.hasMany(ProductOrder, {
 ProductOrder.belongsTo(Order, {
   as: 'order',
   foreignKey: 'order_id'
+})
+
+User.hasMany(UserGrower, {
+  as: 'userGrowers',
+  foreignKey: 'user_id'
+})
+
+UserGrower.belongsTo(User, {
+  as: 'user',
+  foreignKey: 'user_id'
+})
+
+Grower.hasMany(UserGrower, {
+  as: 'userGrowers',
+  foreignKey: 'grower_id'
+})
+
+UserGrower.belongsTo(Grower, {
+  as: 'grower',
+  foreignKey: 'grower_id'
 })

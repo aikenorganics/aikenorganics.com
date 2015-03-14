@@ -58,7 +58,7 @@ module.exports = sql.define('users', {
   updatedAt: 'updated_at',
   instanceMethods: {
     name: function () {
-      return `${this.first} ${this.last}`
+      return `${this.first} ${this.last}`.trim()
     }
   }
 })
