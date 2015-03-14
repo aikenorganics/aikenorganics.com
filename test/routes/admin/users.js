@@ -13,7 +13,7 @@ test('POST /admin/users/:id is a 302', function (t) {
   })
 })
 
-test('/admin/users is a 200 as an admin', function (t) {
+test('GET /admin/users is a 200 as an admin', function (t) {
   var agent = request().signIn('admin@example.com', function (e) {
     if (e) return t.end(e)
     agent.get('/admin/users')
@@ -22,15 +22,13 @@ test('/admin/users is a 200 as an admin', function (t) {
   })
 })
 
-test('/admin/users/show is a 200 as an admin', function (t) {
+test('GET /admin/users/show is a 200 as an admin', function (t) {
   var agent = request().signIn('admin@example.com', function (e) {
     if (e) return t.end(e)
-    request.getAdmin().then(function (user) {
-      agent.get('/admin/users/' + user.id + '/edit')
-      .expect(200)
-      .expect(/is_admin/)
-      .end(t.end)
-    })
+    agent.get('/admin/users/1/edit')
+    .expect(200)
+    .expect(/is_admin/)
+    .end(t.end)
   })
 })
 
@@ -43,7 +41,7 @@ test('missing users are a 404 as an admin', function (t) {
   })
 })
 
-test('/admin/users is a 401 as a regular user', function (t) {
+test('GET /admin/users is a 401 as a regular user', function (t) {
   var agent = request().signIn('user@example.com', function (e) {
     if (e) return t.end(e)
     agent.get('/admin/users')
@@ -52,13 +50,20 @@ test('/admin/users is a 401 as a regular user', function (t) {
   })
 })
 
-test('/admin/users/show is a 401 as a regular user', function (t) {
+test('GET /admin/users/show is a 401 as a regular user', function (t) {
   var agent = request().signIn('user@example.com', function (e) {
     if (e) return t.end(e)
-    request.getAdmin().then(function (user) {
-      agent.get('/admin/users/' + user.id + '/edit')
-      .expect(401)
-      .end(t.end)
-    })
+    agent.get('/admin/users/1/edit')
+    .expect(401)
+    .end(t.end)
+  })
+})
+
+test('GET /admin/users/emails is a 200', function (t) {
+  var agent = request().signIn('admin@example.com', function (e) {
+    if (e) return t.end(e)
+    agent.get('/admin/users/emails')
+    .expect(200)
+    .end(t.end)
   })
 })

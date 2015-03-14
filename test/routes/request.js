@@ -1,6 +1,5 @@
 var request = require('supertest')
 var app = require('../../app')
-var models = require('../../models')
 
 exports = module.exports = function () {
   var agent = request.agent(app)
@@ -14,8 +13,4 @@ exports = module.exports = function () {
   }
 
   return agent
-}
-
-exports.getAdmin = function () {
-  return models.User.find({where: {email: 'admin@example.com'}})
 }
