@@ -1,8 +1,8 @@
 var test = require('tape')
 var models = require('../../../models')
-var authorize = require('../../../mid/growers/authorize')
+var authorize = require('../../../mid/products/authorize')
 
-test('growers/authorize: missing user and grower', function (t) {
+test('products/authorize: missing user and product', function (t) {
   var req = {}
   var res = {locals: {}}
   authorize(req, res, function () {
@@ -12,8 +12,8 @@ test('growers/authorize: missing user and grower', function (t) {
   })
 })
 
-test('growers/authorize: missing user', function (t) {
-  var req = {grower: {id: 1}}
+test('products/authorize: missing user', function (t) {
+  var req = {product: {grower_id: 1}}
   var res = {locals: {}}
   authorize(req, res, function () {
     t.ok(!req.canEdit)
@@ -22,7 +22,7 @@ test('growers/authorize: missing user', function (t) {
   })
 })
 
-test('growers/authorize: missing grower', function (t) {
+test('products/authorize: missing product', function (t) {
   var req = {user: {id: 2}}
   var res = {locals: {}}
   authorize(req, res, function () {
@@ -32,8 +32,8 @@ test('growers/authorize: missing grower', function (t) {
   })
 })
 
-test('growers/authorize: admin', function (t) {
-  var req = {user: {id: 5}, grower: {id: 2}, admin: 1}
+test('products/authorize: admin', function (t) {
+  var req = {user: {id: 5}, product: {grower_id: 2}, admin: 1}
   var res = {locals: {}}
   authorize(req, res, function () {
     t.ok(req.canEdit)
@@ -42,8 +42,8 @@ test('growers/authorize: admin', function (t) {
   })
 })
 
-test('growers/authorize: regular user', function (t) {
-  var req = {user: {id: 2}, grower: {id: 1}}
+test('products/authorize: regular user', function (t) {
+  var req = {user: {id: 2}, product: {grower_id: 1}}
   var res = {locals: {}}
   authorize(req, res, function () {
     t.ok(!req.canEdit)
@@ -52,8 +52,8 @@ test('growers/authorize: regular user', function (t) {
   })
 })
 
-test('growers/authorize: authorized user', function (t) {
-  var req = {user: {id: 5}, grower: {id: 1}}
+test('products/authorize: authorized user', function (t) {
+  var req = {user: {id: 5}, product: {grower_id: 1}}
   var res = {locals: {}}
   authorize(req, res, function () {
     t.ok(req.canEdit)
@@ -62,8 +62,8 @@ test('growers/authorize: authorized user', function (t) {
   })
 })
 
-test('growers/authorize: authorized user for different grower', function (t) {
-  var req = {user: {id: 5}, grower: {id: 2}}
+test('products/authorize: authorized user for different grower', function (t) {
+  var req = {user: {id: 5}, product: {grower_id: 2}}
   var res = {locals: {}}
   authorize(req, res, function () {
     t.ok(!req.canEdit)

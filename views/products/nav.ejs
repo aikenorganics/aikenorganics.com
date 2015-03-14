@@ -1,4 +1,4 @@
-<% if (locals.admin) { %>
+<% if (locals.canEdit) { %>
   <ul class='nav nav-pills nav-stacked hidden-print'>
     <li<% if (/^\/products\/\d+\/?$/.test(req.originalUrl)) { %> class='active'<% } %>>
       <a href='/products/<%= product.id %>'>

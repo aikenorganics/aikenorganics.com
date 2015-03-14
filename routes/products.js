@@ -9,6 +9,7 @@ function authorize (req, res, next) {
   res.status(401).render('401')
 }
 
+// Find
 router.param('product_id', find(models.Product, {
   include: [
     {model: models.Grower, as: 'grower'},
@@ -16,6 +17,10 @@ router.param('product_id', find(models.Product, {
   ]
 }))
 
+// Authorize
+router.param('product_id', require('../mid/products/authorize'))
+
+// Index
 router.get('/', function (req, res) {
   var category_id = req.query.category_id
 
@@ -34,11 +39,15 @@ router.get('/', function (req, res) {
   })
 })
 
+// Show
 router.get('/:product_id', function (req, res) {
   res.render('products/show')
 })
 
-router.get('/:product_id/edit', authorize, function (req, res) {
+// Edit
+router.get('/:product_id/edit', function (req, res) {
+  if (!req.canEdit) return res.status(401).render('401')
+
   models.Category.findAll({
     order: [['position', 'ASC']]
   }).then(function (categories) {
@@ -46,7 +55,10 @@ router.get('/:product_id/edit', authorize, function (req, res) {
   })
 })
 
-router.post('/:product_id', authorize, function (req, res) {
+// Update
+router.post('/:product_id', function (req, res) {
+  if (!req.canEdit) return res.status(401).render('401')
+
   req.product.update(req.body, {
     fields: ['name', 'cost', 'supply', 'unit', 'description', 'category_id']
   }).then(function () {
