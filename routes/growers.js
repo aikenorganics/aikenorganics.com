@@ -106,3 +106,8 @@ router.get('/:grower_id/orders', function (req, res) {
 })
 
 router.post('/:grower_id/image', upload('grower'))
+
+router.post('/:grower_id/image', function (req, res, next) {
+  if (!req.canEdit) return res.status(401).render('401')
+  next()
+}, require('../mid/image-upload')('grower'))

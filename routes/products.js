@@ -1,13 +1,7 @@
 var express = require('express')
 var find = require('../mid/find')
-var upload = require('../mid/image-upload')
 var models = require('../models')
 var router = module.exports = express.Router()
-
-function authorize (req, res, next) {
-  if (req.admin) return next()
-  res.status(401).render('401')
-}
 
 // Find
 router.param('product_id', find(models.Product, {
@@ -67,4 +61,9 @@ router.post('/:product_id', function (req, res) {
   })
 })
 
-router.post('/:product_id/image', authorize, upload('product'))
+// Image
+
+router.post('/:product_id/image', function (req, res, next) {
+  if (!req.canEdit) return res.status(401).render('401')
+  next()
+}, require('../mid/image-upload')('product'))
