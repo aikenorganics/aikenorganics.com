@@ -2,111 +2,50 @@
 
 var models = require('../models')
 
-var User = models.User
-var Order = models.Order
-var Grower = models.Grower
-var Product = models.Product
-var Category = models.Category
-var ProductOrder = models.ProductOrder
-
-// password
-var password = '$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW'
+// Fixtures
+var users = require('../fixtures/users')
+var orders = require('../fixtures/orders')
+var growers = require('../fixtures/growers')
+var products = require('../fixtures/products')
+var categories = require('../fixtures/categories')
+var productOrders = require('../fixtures/product-orders')
 
 Promise.all([
-  User.findOrCreate({
-    where: {email: 'admin@example.com'},
-    defaults: {
-      is_admin: true,
-      password: password,
-      first: 'Admin',
-      last: 'User',
-      phone: '803.555.5555'
-    }
-  }),
-  User.findOrCreate({
-    where: {email: 'user@example.com'},
-    defaults: {
-      is_admin: false,
-      password: password,
-      first: 'Regular',
-      last: 'User',
-      phone: '803.532.5859'
-    }
-  }),
-  User.findOrCreate({
-    where: {email: 'jake@example.com'},
-    defaults: {
-      is_admin: false,
-      password: password,
-      first: 'Jake',
-      last: 'TheDog',
-      phone: '803.532.5859'
-    }
-  }),
-  User.findOrCreate({
-    where: {email: 'finn@example.com'},
-    defaults: {
-      is_admin: false,
-      password: password,
-      first: 'Finn',
-      last: 'TheHuman',
-      phone: '803.532.5859'
-    }
-  }),
-  Grower.findOrCreate({
-    where: {name: 'Watsonia Farms'},
-    defaults: {
-      url: 'http://watsoniafarms.com/',
-      email: 'wfsales@watsoniafarms.com',
-      description: `
-        For four generations, from 1918 to the present, the Watson family has
-        been bringing the best in fruit and produce to the people of South
-        Carolina. And now, you can enjoy the same farm-fresh goodness in your
-        own home.
-      `
-    }
-  }),
-  Category.findOrCreate({where: {name: 'Fruits & Veggies'}}),
-  Category.findOrCreate({where: {name: 'Prepared Food'}}),
-  Category.findOrCreate({where: {name: 'Herbs'}}),
-  Category.findOrCreate({where: {name: 'Beauty'}}),
-  Category.findOrCreate({where: {name: 'Dairy & Eggs'}}),
-  Category.findOrCreate({where: {name: 'Meat'}})
-]).then(function (results) {
-  var user = results[1][0]
-  var watsonia = results[4][0]
-  var category = results[5][0]
 
+  // Users
+  Promise.all(users.map(function (user) {
+    return models.User.create(user)
+  })),
+
+  // Growers
+  Promise.all(growers.map(function (grower) {
+    return models.Grower.create(grower)
+  })),
+
+  // Categories
+  Promise.all(categories.map(function (category) {
+    return models.Category.create(category)
+  }))
+
+]).then(function () {
   return Promise.all([
-    Product.findOrCreate({
-      where: {grower_id: watsonia.id, name: 'Peaches'},
-      defaults: {
-        cost: '14',
-        unit: 'Box',
-        supply: 22,
-        category_id: category.id,
-        description: 'A box of peaches.'
-      }
-    }),
-    Order.findOrCreate({
-      where: {user_id: user.id}
-    })
-  ]).then(function (results) {
-    var peaches = results[0][0]
-    var order = results[1][0]
 
-    return Promise.all([
-      ProductOrder.findOrCreate({
-        where: {
-          order_id: order.id,
-          product_id: peaches.id
-        },
-        defaults: {quantity: 3}
-      })
-    ]).then(function (results) {
-      models.sequelize.close()
-    })
+    // Products
+    Promise.all(products.map(function (product) {
+      return models.Product.create(product)
+    })),
+
+    // Orders
+    Promise.all(orders.map(function (order) {
+      return models.Order.create(order)
+    }))
+
+  ]).then(function () {
+    // Product Orders
+    return Promise.all(productOrders.map(function (productOrder) {
+      return models.ProductOrder.create(productOrder)
+    }))
   })
-}).catch(function (e) {
-  console.log(e)
 })
+.then(function () { models.sequelize.close() })
+.catch(function (e) { console.log(e.stack) })

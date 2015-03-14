@@ -9,6 +9,7 @@ standard \
   routes/**/*.js \
   models/**/*.js \
   helpers/**/*.js \
+  fixtures/**/*.js \
   migrations/**/*.js
 
 # Migrate the test database.
