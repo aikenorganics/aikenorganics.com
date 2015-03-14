@@ -48,20 +48,15 @@
                 <% } %>
                 <%= user.email %>
               </li>
+              <% if (locals.admin) { %>
+                <li><a href='/admin/users'>Admin</a></li>
+              <% } %>
               <li>
                 <a href='/settings/account'>Settings</a>
               </li>
               <li>
                 <a href='/auth/signout'>Sign Out</a>
               </li>
-              <% if (locals.admin) { %>
-                <li class='divider'></li>
-                <li class='dropdown-header'>Admin Links</li>
-                <li><a href='/admin/users'>Users</a></li>
-                <li><a href='/admin/orders'>Orders</a></li>
-                <li><a href='/admin/categories'>Categories</a></li>
-                <li><a href='/admin/products/oversold'>Oversold</a></li>
-              <% } %>
             </ul>
           </li>
         <% } else { %>
