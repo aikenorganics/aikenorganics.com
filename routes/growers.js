@@ -1,16 +1,15 @@
 var express = require('express')
-var find = require('../mid/find')
 var upload = require('../mid/image-upload')
 var models = require('../models')
 var router = module.exports = express.Router()
 
-function authorize (req, res, next) {
-  if (req.admin) return next()
-  res.status(401).render('401')
-}
+// Find
+router.param('grower_id', require('../mid/find')(models.Grower))
 
-router.param('grower_id', find(models.Grower))
+// Authorize
+router.param('grower_id', require('../mid/growers/authorize'))
 
+// Index
 router.get('/', function (req, res) {
   models.Grower.findAll({
     order: [['name', 'ASC']]
@@ -21,34 +20,15 @@ router.get('/', function (req, res) {
   })
 })
 
-router.get('/new', authorize, function (req, res) {
+// New Grower
+router.get('/new', function (req, res) {
+  if (!req.admin) return res.status(401).render('401')
   res.render('growers/new')
 })
 
-router.get('/:grower_id', function (req, res) {
-  req.grower.getProducts({
-    order: [['name', 'ASC']]
-  }).then(function (products) {
-    res.render('growers/show', {
-      products: products
-    })
-  })
-})
+router.post('/', function (req, res) {
+  if (!req.admin) return res.status(401).render('401')
 
-router.get('/:grower_id/edit', authorize, function (req, res) {
-  res.render('growers/edit')
-})
-
-router.post('/:grower_id', authorize, function (req, res) {
-  req.grower.update(req.body, {
-    fields: ['name', 'email', 'url', 'location', 'description']
-  }).then(function () {
-    res.flash('success', 'Saved')
-    res.redirect('/growers/' + req.grower.id)
-  })
-})
-
-router.post('/', authorize, function (req, res) {
   models.Grower.create({
     url: req.body.url,
     name: req.body.name,
@@ -61,13 +41,46 @@ router.post('/', authorize, function (req, res) {
   })
 })
 
-router.get('/:grower_id/products/new', authorize, function (req, res) {
+// Show
+router.get('/:grower_id', function (req, res) {
+  req.grower.getProducts({
+    order: [['name', 'ASC']]
+  }).then(function (products) {
+    res.render('growers/show', {
+      products: products
+    })
+  })
+})
+
+// Edit Grower
+router.get('/:grower_id/edit', function (req, res) {
+  if (!req.canEdit) return res.status(401).render('401')
+  res.render('growers/edit')
+})
+
+router.post('/:grower_id', function (req, res) {
+  if (!req.canEdit) return res.status(401).render('401')
+
+  req.grower.update(req.body, {
+    fields: ['name', 'email', 'url', 'location', 'description']
+  }).then(function () {
+    res.flash('success', 'Saved')
+    res.redirect('/growers/' + req.grower.id)
+  })
+})
+
+// New Product
+router.get('/:grower_id/products/new', function (req, res) {
+  if (!req.canEdit) return res.status(401).render('401')
+
   models.Category.findAll().then(function (categories) {
     res.render('products/new', {categories: categories})
   })
 })
 
-router.post('/:grower_id/products', authorize, function (req, res) {
+router.post('/:grower_id/products', function (req, res) {
+  if (!req.canEdit) return res.status(401).render('401')
+
   req.grower.createProduct({
     name: req.body.name,
     cost: req.body.cost,
@@ -81,8 +94,13 @@ router.post('/:grower_id/products', authorize, function (req, res) {
   })
 })
 
-router.get('/:grower_id/orders', authorize, function (req, res) {
-  req.grower.getProducts({where: {reserved: {gt: 0}}}).then(function (products) {
+// Orders
+router.get('/:grower_id/orders', function (req, res) {
+  if (!req.canEdit) return res.status(401).render('401')
+
+  req.grower.getProducts({
+    where: {reserved: {gt: 0}}
+  }).then(function (products) {
     res.render('growers/orders', {products: products})
   })
 })

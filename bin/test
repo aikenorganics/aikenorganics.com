@@ -1,5 +1,9 @@
 #!/bin/sh -e
 
+if [ -z "$TEST" ]; then
+  TEST=test
+fi
+
 standard \
   app.js \
   index.js \
@@ -22,4 +26,4 @@ foreman run --env=.testenv ./bin/truncate
 foreman run --env=.testenv ./bin/fixtures.js
 
 # App Tests
-foreman run --env=.testenv tape test/index.js
+foreman run --env=.testenv tape $TEST
