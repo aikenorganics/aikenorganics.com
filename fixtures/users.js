@@ -30,4 +30,20 @@ module.exports = [{
   first: 'Finn',
   last: 'The Human',
   phone: '803.532.5859'
+}, {
+  id: 5,
+  email: 'grower@example.com',
+  is_admin: false,
+  password: '$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW',
+  first: 'Grower',
+  last: 'Montgomery',
+  phone: '803.532.5859'
+}, {
+  id: 6,
+  email: 'info@planitfoods.com',
+  is_admin: false,
+  password: '$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW',
+  first: 'PlanIt',
+  last: 'Foods',
+  phone: '803.532.5859'
 }]

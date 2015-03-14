@@ -33,7 +33,6 @@ test('Adding and removing users', function (t) {
   ]).then(function (results) {
     grower = results[0]
     user = results[1]
-    t.ok(!grower.userGrowers.length)
     signIn()
   })
 

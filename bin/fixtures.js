@@ -8,6 +8,7 @@ var orders = require('../fixtures/orders')
 var growers = require('../fixtures/growers')
 var products = require('../fixtures/products')
 var categories = require('../fixtures/categories')
+var userGrowers = require('../fixtures/user-growers')
 var productOrders = require('../fixtures/product-orders')
 
 Promise.all([
@@ -38,6 +39,11 @@ Promise.all([
     // Orders
     Promise.all(orders.map(function (order) {
       return models.Order.create(order)
+    })),
+
+    // User Growers
+    Promise.all(userGrowers.map(function (userGrower) {
+      return models.UserGrower.create(userGrower)
     }))
 
   ]).then(function () {
