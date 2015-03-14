@@ -1,8 +1,8 @@
 <main class='container'>
   <% include ../subnav %>
   <div class='row'>
-    <div class='col-md-3'>
-      <p class='text-center'>
+    <div class='col-md-3 text-center'>
+      <p>
         <img class='img-rounded' src='<%= imageUrl(grower, 'medium') %>'>
       </p>
       <form method='POST' action='/growers/<%= grower.id %>/image' enctype='multipart/form-data'>
