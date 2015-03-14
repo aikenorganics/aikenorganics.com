@@ -4,7 +4,7 @@ var find = require('../../mid/find')
 var upload = require('../../mid/image-upload')
 var router = module.exports = express.Router()
 
-router.param('user_id', find(models.User, '_user'))
+router.param('user_id', find(models.User, {name: '_user'}))
 
 router.get('/', function (req, res) {
   models.User.findAll({order: [['email', 'ASC']]}).then(function (users) {

@@ -22,7 +22,7 @@
     </div>
     <div class='col-md-9'>
       <h1>Edit Product</h1>
-      <h4><%= locals.grower.name %></h4>
+      <h4><%= product.grower.name %></h4>
       <hr>
       <form method='POST' action='/products/<%= locals.product.id %>' enctype='multipart/form-data'>
         <% include form %>

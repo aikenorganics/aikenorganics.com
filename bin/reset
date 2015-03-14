@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-DB=aikenorganics_test
+DB=aikenorganics_development
 
 # Drop the test database.
 dropdb --if-exists $DB
@@ -9,7 +9,7 @@ dropdb --if-exists $DB
 createdb $DB
 
 # Migrate the test database.
-foreman run --env=.testenv sequelize db:migrate
+foreman run sequelize db:migrate
 
 # Fill it with fixtures.
-foreman run --env=.testenv ./bin/fixtures.js
+foreman run ./bin/fixtures.js

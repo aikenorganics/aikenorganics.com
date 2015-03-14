@@ -3,7 +3,13 @@ var router = module.exports = express.Router()
 var find = require('../../mid/find')
 var models = require('../../models')
 
-router.param('grower_id', find(models.Grower))
+router.param('grower_id', find(models.Grower, {
+  include: [{
+    model: models.UserGrower,
+    as: 'userGrowers',
+    include: [{model: models.User, as: 'user'}]
+  }]
+}))
 
 router.get('/', function (req, res) {
   models.Grower.findAll({}).then(function (growers) {
@@ -12,14 +18,16 @@ router.get('/', function (req, res) {
 })
 
 router.get('/:grower_id/edit', function (req, res) {
-  Promise.all([
-    req.grower.getUserGrowers({
-      include: {model: models.User, as: 'user'}
-    }),
-    models.User.findAll({})
-  ]).then(function (results) {
-    req.grower.userGrowers = results[0]
-    res.render('admin/growers/show', {users: results[1]})
+  models.User.findAll({
+    where: {
+      id: {
+        $notIn: req.grower.userGrowers.map(function (userGrower) {
+          return userGrower.user_id
+        })
+      }
+    }
+  }).then(function (users) {
+    res.render('admin/growers/show', {users: users})
   })
 })
 
