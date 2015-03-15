@@ -46,12 +46,16 @@ Promise.all([
       return models.UserGrower.create(userGrower)
     }))
 
-  ]).then(function () {
-    // Product Orders
-    return Promise.all(productOrders.map(function (productOrder) {
-      return models.ProductOrder.create(productOrder)
-    }))
-  })
+  ])
+}).then(function () {
+  // Product Orders
+  return Promise.all(productOrders.map(function (productOrder) {
+    return models.ProductOrder.create(productOrder)
+  }))
 })
-.then(function () { models.sequelize.close() })
-.catch(function (e) { console.log(e.stack) })
+.then(function () {
+  models.sequelize.close()
+})
+.catch(function (e) {
+  console.log(e.stack)
+})
