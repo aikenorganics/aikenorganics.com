@@ -19,6 +19,9 @@ router.get('/', function (req, res) {
 
 router.get('/:grower_id/edit', function (req, res) {
   models.User.findAll({
+    where: [`users.id not in (
+      select user_id from user_growers where grower_id = ?
+    )`, req.grower.id]
   }).then(function (users) {
     res.render('admin/growers/show', {users: users})
   })
