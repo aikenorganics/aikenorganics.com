@@ -19,13 +19,6 @@ router.get('/', function (req, res) {
 
 router.get('/:grower_id/edit', function (req, res) {
   models.User.findAll({
-    where: {
-      id: {
-        $notIn: req.grower.userGrowers.map(function (userGrower) {
-          return userGrower.user_id
-        })
-      }
-    }
   }).then(function (users) {
     res.render('admin/growers/show', {users: users})
   })
