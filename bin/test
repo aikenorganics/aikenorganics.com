@@ -4,17 +4,8 @@ if [ -z "$TEST" ]; then
   TEST=test
 fi
 
-standard \
-  app.js \
-  index.js \
-  bin/**/*.js \
-  mid/**/*.js \
-  test/**/*.js \
-  routes/**/*.js \
-  models/**/*.js \
-  helpers/**/*.js \
-  fixtures/**/*.js \
-  migrations/**/*.js
+# Clean up some lint
+./bin/lint
 
 # Migrate the test database.
 foreman run --env=.testenv sequelize db:migrate

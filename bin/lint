@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+standard \
+  app.js \
+  index.js \
+  bin/**/*.js \
+  mid/**/*.js \
+  test/**/*.js \
+  routes/**/*.js \
+  models/**/*.js \
+  helpers/**/*.js \
+  fixtures/**/*.js \
+  migrations/**/*.js
