@@ -5,6 +5,11 @@ module.exports = sql.define('orders', {
   id: {
     type: Sql.INTEGER,
     primaryKey: true
+  },
+  status: {
+    type: Sql.ENUM('open', 'complete', 'canceled'),
+    allowNull: false,
+    defaultValue: 'open'
   }
 }, {
   tableName: 'orders',
