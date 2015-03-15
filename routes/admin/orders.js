@@ -2,7 +2,7 @@ var express = require('express')
 var router = module.exports = express.Router()
 var models = require('../../models')
 
-// Filter by Product
+// Find a Product
 router.get('/', function (req, res, next) {
   var id = req.query.product_id
   if (!id) return next()
@@ -12,15 +12,16 @@ router.get('/', function (req, res, next) {
   })
 })
 
+// Index
 router.get('/', function (req, res) {
   var full = req.query.full
-  var where = {}
+  var where = [`orders.status = 'open'`]
   var include = [{as: 'user', model: models.User}]
 
   // Filter by product
   if (req.product) {
     where = [
-      `orders.id in (
+      `orders.status = 'open' and orders.id in (
         select order_id from product_orders where product_id = ?
       )`,
       req.product.id
@@ -46,6 +47,7 @@ router.get('/', function (req, res) {
   })
 })
 
+// Show
 router.get('/:order_id', function (req, res) {
   models.Order.findOne({
     where: {id: req.params.order_id},
