@@ -14,7 +14,7 @@ foreman run --env=.testenv sequelize db:migrate
 foreman run --env=.testenv ./bin/truncate
 
 # Fill it with fixtures.
-foreman run --env=.testenv ./bin/fixtures.js
+foreman run --env=.testenv ./bin/fixtures
 
 # App Tests
 foreman run --env=.testenv tape $TEST

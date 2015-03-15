@@ -12,7 +12,7 @@ createdb $DB
 foreman run sequelize db:migrate
 
 # Fill it with fixtures.
-foreman run ./bin/fixtures.js
+foreman run ./bin/fixtures
 
 # Reset the sequences.
 psql -XAtq -f ./bin/resequence.sql $DB | psql $DB
