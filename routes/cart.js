@@ -68,7 +68,10 @@ Checkout.prototype = {
 
   createOrder: function () {
     return Order.findOrCreate({
-      where: {user_id: this.user.id}
+      where: {
+        status: 'open',
+        user_id: this.user.id
+      }
     }, {transaction: this.t}).then(function (results) {
       this.order = results[0]
       return this.createProductOrders()

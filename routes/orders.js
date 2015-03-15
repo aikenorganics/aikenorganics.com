@@ -10,17 +10,20 @@ router.use(function (req, res, next) {
 
 router.param('order_id', find(models.Order))
 
+// Current
 router.get('/current', function (req, res) {
-  models.Order.findAll({
-    limit: 1,
-    where: {user_id: req.user.id},
+  models.Order.findOne({
+    where: {
+      status: 'open',
+      user_id: req.user.id
+    },
     include: [{
       model: models.ProductOrder,
       as: 'productOrders',
       include: [{model: models.Product, as: 'product'}]
     }]
-  }).then(function (orders) {
-    res.render('orders/current', {order: orders[0]})
+  }).then(function (order) {
+    res.render('orders/current', {order: order})
   })
 })
 
