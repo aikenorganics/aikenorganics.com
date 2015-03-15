@@ -13,3 +13,6 @@ foreman run sequelize db:migrate
 
 # Fill it with fixtures.
 foreman run ./bin/fixtures.js
+
+# Reset the sequences.
+psql -XAtq -f ./bin/resequence.sql $DB | psql $DB
