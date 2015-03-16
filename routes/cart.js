@@ -1,8 +1,5 @@
 var express = require('express')
 var models = require('../models')
-var Order = models.Order
-var Product = models.Product
-var ProductOrder = models.ProductOrder
 var router = module.exports = express.Router()
 
 router.use(function (req, res, next) {
@@ -11,7 +8,7 @@ router.use(function (req, res, next) {
 })
 
 router.get('/', function (req, res) {
-  Product.findAll({
+  models.Product.findAll({
     where: {id: {in: req.cart.ids()}},
     order: [['name', 'ASC']]
   }).then(function (products) {
@@ -26,7 +23,7 @@ router.post('/', function (req, res) {
   var quantity = +req.body.quantity
   var return_to = req.body.return_to
 
-  Product.find(id).then(function (product) {
+  models.Product.find(id).then(function (product) {
     if (!product) return res.status(404).render('404')
     req.cart.update(product, quantity)
     res.flash('success', 'Updated.')
@@ -56,7 +53,7 @@ Checkout.prototype = {
   },
 
   findProducts: function () {
-    return Product.findAll({
+    return models.Product.findAll({
       where: {id: {in: this.cart.ids()}}
     }, {transaction: this.t}).then(function (products) {
       this.products = products.filter(function (product) {
@@ -67,7 +64,7 @@ Checkout.prototype = {
   },
 
   createOrder: function () {
-    return Order.findOrCreate({
+    return models.Order.findOrCreate({
       where: {
         status: 'open',
         user_id: this.user.id
@@ -80,7 +77,7 @@ Checkout.prototype = {
 
   createProductOrders: function () {
     return Promise.all(this.products.map(function (product) {
-      return ProductOrder.findOrCreate({
+      return models.ProductOrder.findOrCreate({
         where: {order_id: this.order.id, product_id: product.id}
       }, {transaction: this.t})
     }.bind(this))).then(function (productOrders) {
