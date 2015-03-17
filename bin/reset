@@ -1,18 +1,13 @@
 #!/bin/sh -e
 
-DB=aikenorganics_development
-
-# Drop the test database.
-dropdb --if-exists $DB
-
-# Recreate it.
-createdb $DB
+# Truncate all tables
+./bin/truncate
 
 # Migrate the test database.
-foreman run sequelize db:migrate
+sequelize db:migrate
 
 # Fill it with fixtures.
-foreman run ./bin/fixtures
+./bin/fixtures
 
-# Reset the sequences.
-psql -XAtq -f ./bin/resequence.sql $DB | psql $DB
+# Reset sequences.
+./bin/resequence
