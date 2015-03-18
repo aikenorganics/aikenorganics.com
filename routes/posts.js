@@ -1,10 +1,13 @@
 var express = require('express')
 var find = require('../mid/find')
-var adminOnly = require('../mid/admin-only')
 var models = require('../models')
 var router = module.exports = express.Router()
 
-router.use(adminOnly)
+router.use(function(req, res, next) {
+  if (req.admin) return next()
+  res.status(401).render('401')
+})
+
 router.param('post_id', find(models.Post))
 
 router.get('/', function (req, res) {

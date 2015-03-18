@@ -27,11 +27,20 @@ router.get('/current', function (req, res) {
   })
 })
 
+// Cancel
 router.post('/:order_id/cancel', function (req, res) {
   if (!process.env.OPEN) return res.status(401).render('401')
   if (!req.order) return res.status(404).render('404')
-  req.order.destroy().then(function () {
-    res.flash('success', 'Order cancelled.')
-    res.redirect('/products')
+
+  // You can only cancel your own order.
+  if (req.user.id !== req.order.user_id) {
+    return res.status(401).render('401')
+  }
+
+  req.transaction(function (t) {
+    return req.order.destroy({transaction: t}).then(function () {
+      res.flash('success', 'Order cancelled.')
+      res.redirect('/products')
+    })
   })
 })
