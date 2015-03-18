@@ -11,7 +11,9 @@ router.use(function (req, res, next) {
 router.param('category_id', find(models.Category))
 
 router.get('/', function (req, res) {
-  models.Category.findAll({order: [['position', 'ASC']]}).then(function (categories) {
+  models.Category.findAll({
+    order: [['position', 'ASC']]
+  }).then(function (categories) {
     res.render('admin/categories/index', {
       categories: categories
     })
@@ -27,20 +29,25 @@ router.get('/:category_id/edit', function (req, res) {
 })
 
 router.post('/', function (req, res) {
-  models.Category.create({
-    name: req.body.name,
-    position: req.body.position
-  }).then(function () {
-    res.flash('success', 'Created')
-    res.redirect('/admin/categories')
+  req.transaction(function (t) {
+    return models.Category.create(req.body, {
+      transaction: t,
+      fields: ['name', 'position']
+    }).then(function () {
+      res.flash('success', 'Created')
+      res.redirect('/admin/categories')
+    })
   })
 })
 
 router.post('/:category_id', function (req, res) {
-  req.category.update(req.body, {
-    fields: ['name', 'position']
-  }).then(function () {
-    res.flash('success', 'Saved')
-    res.redirect('/admin/categories')
+  req.transaction(function (t) {
+    return req.category.update(req.body, {
+      transaction: t,
+      fields: ['name', 'position']
+    }).then(function () {
+      res.flash('success', 'Saved')
+      res.redirect('/admin/categories')
+    })
   })
 })

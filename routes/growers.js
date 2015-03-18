@@ -70,27 +70,38 @@ router.post('/:grower_id', function (req, res) {
 })
 
 // New Product
-router.get('/:grower_id/products/new', function (req, res) {
+router.get('/:grower_id/products/new', newProduct)
+
+function newProduct (req, res) {
   if (!req.canEdit) return res.status(401).render('401')
 
   models.Category.findAll().then(function (categories) {
     res.render('products/new', {categories: categories})
   })
-})
+}
 
 router.post('/:grower_id/products', function (req, res) {
   if (!req.canEdit) return res.status(401).render('401')
 
-  req.grower.createProduct({
-    name: req.body.name,
-    cost: req.body.cost,
-    unit: req.body.unit,
-    supply: req.body.supply,
-    category_id: req.body.category_id,
-    description: req.body.description
-  }).then(function (product) {
-    res.flash('success', 'Saved')
-    res.redirect('/products/' + product.id)
+  var product = models.Product.build(req.body, {
+    attributes: [
+      'name', 'cost', 'unit', 'supply', 'category_id', 'description'
+    ]
+  })
+  product.grower_id = req.grower.id
+
+  req.transaction(function (transaction) {
+    return product.save({
+      transaction: transaction
+    }).then(function () {
+      res.flash('success', 'Saved')
+      res.redirect(`/products/${product.id}`)
+    }).catch(function (error) {
+      res.status(422)
+      res.locals.error = error
+      res.locals.product = product
+      newProduct(req, res)
+    })
   })
 })
 

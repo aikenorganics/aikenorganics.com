@@ -36,7 +36,7 @@
       <%- marked(grower.description) %>
       <h2>
         Products
-        <% if (locals.admin) { %>
+        <% if (locals.canEdit) { %>
           <a class='btn btn-default btn-xs' href='/growers/<%= grower.id %>/products/new'>
             New Product
           </a>

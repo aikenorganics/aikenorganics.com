@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-cat <<CMD | psql -XAtq $DATABASE_URL | psql $DATABASE_URL
+cat <<CMD | psql -XAtq $DATABASE_URL | psql $DATABASE_URL > /dev/null
   select
     'select setval(' ||
     quote_literal(

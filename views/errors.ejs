@@ -1,0 +1,12 @@
+<% if (locals.error) { %>
+  <div class='alert alert-danger'>
+    <p>
+      <strong>Whoops!</strong> We had some trouble saving your data.
+    </p>
+    <ul>
+      <% error.errors.forEach(function (error) { %>
+        <li><%= error.message %></li>
+      <% }) %>
+    </ul>
+  </div>
+<% } %>

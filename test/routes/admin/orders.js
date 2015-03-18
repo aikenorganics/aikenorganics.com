@@ -1,9 +1,8 @@
-var test = require('tape')
-var request = require('../request')
+var test = require('../../test')
 var models = require('../../../models')
 
 test('GET /admin/orders is a 200', function (t) {
-  var agent = request().signIn('admin@example.com', function () {
+  t.signIn('admin@example.com').then(function (agent) {
     agent
     .get('/admin/orders')
     .expect(200)
@@ -13,7 +12,7 @@ test('GET /admin/orders is a 200', function (t) {
 
 test('GET /admin/orders/:id is a 200', function (t) {
   models.Order.findOne({}).then(function (order) {
-    var agent = request().signIn('admin@example.com', function () {
+    t.signIn('admin@example.com').then(function (agent) {
       agent
       .get(`/admin/orders/${order.id}`)
       .expect(200)
@@ -24,7 +23,7 @@ test('GET /admin/orders/:id is a 200', function (t) {
 
 test('GET /admin/orders?product_id=:id is a 200', function (t) {
   models.Product.findOne({}).then(function (product) {
-    var agent = request().signIn('admin@example.com', function () {
+    t.signIn('admin@example.com').then(function (agent) {
       agent
       .get(`/admin/orders?product_id=${product.id}`)
       .expect(200)
@@ -34,7 +33,7 @@ test('GET /admin/orders?product_id=:id is a 200', function (t) {
 })
 
 test('GET /admin/orders?full=1 is a 200', function (t) {
-  var agent = request().signIn('admin@example.com', function () {
+  t.signIn('admin@example.com').then(function (agent) {
     agent
     .get('/admin/orders?full=1')
     .expect(200)

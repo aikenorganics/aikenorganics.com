@@ -29,13 +29,16 @@ router.get('/:user_id/edit', function (req, res) {
   res.render('admin/users/edit')
 })
 
-// Show
+// Update
 router.post('/:user_id', function (req, res) {
-  req._user.update(req.body, {
-    fields: ['first', 'last', 'phone', 'is_admin']
-  }).then(function () {
-    res.flash('success', 'Saved')
-    res.redirect('/admin/users')
+  req.transaction(function (t) {
+    return req._user.update(req.body, {
+      transaction: t,
+      fields: ['first', 'last', 'phone', 'is_admin']
+    }).then(function () {
+      res.flash('success', 'Saved')
+      res.redirect('/admin/users')
+    })
   })
 })
 

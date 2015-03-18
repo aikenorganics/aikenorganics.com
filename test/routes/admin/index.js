@@ -4,18 +4,17 @@ require('./growers')
 require('./products')
 require('./categories')
 
-var test = require('tape')
-var request = require('../request')
+var test = require('../../test')
 
 test('/admin is a 401 signed out', function (t) {
-  request()
+  t.request()
   .get('/admin')
   .expect(401)
   .end(t.end)
 })
 
 test('/admin is a 401 as a regular user', function (t) {
-  var agent = request().signIn('user@example.com', function () {
+  t.signIn('user@example.com').then(function (agent) {
     agent
     .get('/admin')
     .expect(401)
@@ -24,7 +23,7 @@ test('/admin is a 401 as a regular user', function (t) {
 })
 
 test('/admin is a 404 as an admin', function (t) {
-  var agent = request().signIn('admin@example.com', function () {
+  t.signIn('admin@example.com').then(function (agent) {
     agent
     .get('/admin')
     .expect(404)

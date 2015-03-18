@@ -1,10 +1,8 @@
-var test = require('tape')
-var request = require('./request')
+var test = require('../test')
 var models = require('../../models')
 
 test('/settings/account is a 200 as an admin', function (t) {
-  var agent = request().signIn('admin@example.com', function (e) {
-    if (e) return t.end(e)
+  t.signIn('admin@example.com').then(function (agent) {
     agent.get('/settings/account')
     .expect(200)
     .end(t.end)
@@ -12,8 +10,7 @@ test('/settings/account is a 200 as an admin', function (t) {
 })
 
 test('/settings/account is a 200 as a regular user', function (t) {
-  var agent = request().signIn('user@example.com', function (e) {
-    if (e) return t.end(e)
+  t.signIn('user@example.com').then(function (agent) {
     agent.get('/settings/account')
     .expect(200)
     .end(t.end)
@@ -22,8 +19,7 @@ test('/settings/account is a 200 as a regular user', function (t) {
 
 test('POST /settings/account is a 302 as a regular user', function (t) {
   models.User.findAll({where: {email: 'user@example.com'}}).then(function (users) {
-    var agent = request().signIn('user@example.com', function (e) {
-      if (e) return t.end(e)
+    t.signIn('user@example.com').then(function (agent) {
       agent
       .post('/settings/account')
       .field('first', users[0].first)

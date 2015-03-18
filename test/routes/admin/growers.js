@@ -1,9 +1,8 @@
-var test = require('tape')
-var request = require('../request')
+var test = require('../../test')
 var models = require('../../../models')
 
 test('GET /admin/growers is a 200', function (t) {
-  var agent = request().signIn('admin@example.com', function (e) {
+  t.signIn('admin@example.com').then(function (agent) {
     agent.get('/admin/growers')
     .expect(200)
     .end(t.end)
@@ -12,7 +11,7 @@ test('GET /admin/growers is a 200', function (t) {
 
 test('GET /admin/growers/:id/edit is a 200', function (t) {
   models.Grower.findOne({}).then(function (grower) {
-    var agent = request().signIn('admin@example.com', function (e) {
+    t.signIn('admin@example.com').then(function (agent) {
       agent.get(`/admin/growers/${grower.id}/edit`)
       .expect(200)
       .end(t.end)
@@ -20,57 +19,46 @@ test('GET /admin/growers/:id/edit is a 200', function (t) {
   })
 })
 
-test('Adding and removing users', function (t) {
-  var agent
-  var grower
-  var user
-
-  Promise.all([
-    models.Grower.findOne({
-      include: {model: models.UserGrower, as: 'userGrowers'}
-    }),
-    models.User.findOne({})
-  ]).then(function (results) {
-    grower = results[0]
-    user = results[1]
-    signIn()
-  })
-
-  function signIn () {
-    agent = request().signIn('admin@example.com', function (e) {
-      if (e) return t.end(e)
-      addUser()
-    })
-  }
-
-  function addUser () {
-    agent.post(`/admin/growers/${grower.id}/adduser`)
-    .field('user_id', user.id)
+test('POST /admin/growers/:id/adduser is a 302', function (t) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent
+    .post('/admin/growers/1/adduser')
+    .field('user_id', 2)
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
       models.UserGrower.findOne({
-        where: {user_id: user.id, grower_id: grower.id}
+        where: {
+          user_id: 2,
+          grower_id: 1
+        },
+        transaction: t.transaction
       }).then(function (userGrower) {
-        t.ok(!!userGrower)
-        removeUser()
-      })
-    })
-  }
-
-  function removeUser () {
-    agent.post(`/admin/growers/${grower.id}/removeuser`)
-    .field('user_id', user.id)
-    .expect(302)
-    .end(function (e) {
-      if (e) return t.end(e)
-      models.UserGrower.findOne({
-        where: {user_id: user.id, grower_id: grower.id}
-      }).then(function (userGrower) {
-        t.ok(!userGrower)
+        t.ok(userGrower != null)
         t.end()
       })
     })
-  }
+  })
+})
 
+test('POST /admin/growers/:id/removeuser is a 302', function (t) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent
+    .post('/admin/growers/1/removeuser')
+    .field('user_id', 5)
+    .expect(302)
+    .end(function (e) {
+      if (e) return t.end(e)
+      models.UserGrower.findOne({
+        where: {
+          user_id: 5,
+          grower_id: 1
+        },
+        transaction: t.transaction
+      }).then(function (userGrower) {
+        t.ok(userGrower == null)
+        t.end()
+      })
+    })
+  })
 })

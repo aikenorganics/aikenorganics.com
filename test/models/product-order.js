@@ -1,4 +1,4 @@
-var test = require('tape')
+var test = require('../test')
 var models = require('../../models')
 
 test('ProductOrder reports the correct cost', function (t) {

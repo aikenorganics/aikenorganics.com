@@ -1,4 +1,4 @@
-var test = require('tape')
+var test = require('../test')
 var models = require('../../models')
 
 test('User#name combines first and last', function (t) {

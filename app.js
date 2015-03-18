@@ -18,7 +18,7 @@ app.use(function (req, res, next) {
   next()
 })
 app.use(session({
-  signed: true,
+  signed: app.get('env') === 'production',
   // secure: true,
   name: 'aikenorganics',
   secret: process.env.SECRET,

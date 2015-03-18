@@ -12,6 +12,9 @@ module.exports = sql.define('products', {
     defaultValue: '',
     set: function (value) {
       this.setDataValue('name', value || '')
+    },
+    validate: {
+      notEmpty: {msg: 'Name must not be empty.'}
     }
   },
   cost: {
@@ -19,15 +22,25 @@ module.exports = sql.define('products', {
     allowNull: false,
     defaultValue: 0,
     set: function (value) {
-      this.setDataValue('cost', value || '0')
+      this.setDataValue('cost', (value || '0').trim().replace(/^\$/, ''))
+    },
+    validate: {
+      isDecimal: function (value) {
+        if (!/^\d*(\.\d\d)?$/.test((value || '').trim())) {
+          throw new Error('Cost must be a valid dollar amount.')
+        }
+      }
     }
   },
   supply: {
     type: Sql.INTEGER,
     allowNull: false,
     defaultValue: 0,
-    set: function (value) {
-      this.setDataValue('supply', Math.abs(value))
+    validate: {
+      isInt: {msg: 'Supply must be an integer.'},
+      notNegative: function (value) {
+        if (value < 0) throw new Error('Supply must not be negative.')
+      }
     }
   },
   unit: {
@@ -55,6 +68,12 @@ module.exports = sql.define('products', {
     defaultValue: 0,
     set: function (value) {
       this.setDataValue('reserved', value || 0)
+    },
+    validate: {
+      isInt: {msg: 'Supply must be an integer.'},
+      notNegative: function (value) {
+        if (value < 0) throw new Error('Supply must not be negative.')
+      }
     }
   }
 }, {

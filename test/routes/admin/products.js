@@ -1,8 +1,7 @@
-var test = require('tape')
-var request = require('../request')
+var test = require('../../test')
 
 test('/admin/products/oversold is a 200', function (t) {
-  var agent = request().signIn('admin@example.com', function () {
+  t.signIn('admin@example.com').then(function (agent) {
     agent
     .get('/admin/products/oversold')
     .expect(200)

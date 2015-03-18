@@ -1,4 +1,4 @@
-var test = require('tape')
+var test = require('../test')
 var models = require('../../models')
 
 test('Product#available subtracts reserved from supply', function (t) {
@@ -31,4 +31,64 @@ test('Product#reservedCost', function (t) {
   })
   t.equal(product.reservedCost(), 10)
   t.end()
+})
+
+test('validate cost', function (t) {
+  models.Product.build({cost: 'asdf'})
+  .validate({
+    fields: ['cost']
+  }).then(function (e) {
+    if (e) return t.end()
+    t.end('Should be invalid')
+  })
+})
+
+test('validate cost', function (t) {
+  models.Product.build({cost: '.53'}).validate({
+    fields: ['cost']
+  }).then(t.end)
+})
+
+test('validate cost', function (t) {
+  models.Product.build({cost: '.53'}).validate({
+    fields: ['cost']
+  }).then(t.end)
+})
+
+test('validate cost', function (t) {
+  models.Product.build({cost: '32'}).validate({
+    fields: ['cost']
+  }).then(t.end)
+})
+
+test('validate cost', function (t) {
+  models.Product.build({cost: '32.25'}).validate({
+    fields: ['cost']
+  }).then(t.end)
+})
+
+test('validate cost', function (t) {
+  models.Product.build({cost: '$32.25'}).validate({
+    fields: ['cost']
+  }).then(t.end)
+})
+
+test('validate name', function (t) {
+  models.Product.build({name: ''})
+  .validate({
+    fields: ['name']
+  }).then(function (e) {
+    if (e) return t.end()
+    t.end('Should be invalid')
+  })
+})
+
+test('validate supply', function (t) {
+  models.Product.build({supply: -2})
+  .validate({
+    fields: ['supply']
+  }).then(function (e) {
+    if (e) return t.end()
+    t.end('Should be invalid')
+  })
 })

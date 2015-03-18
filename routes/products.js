@@ -39,7 +39,9 @@ router.get('/:product_id', function (req, res) {
 })
 
 // Edit
-router.get('/:product_id/edit', function (req, res) {
+router.get('/:product_id/edit', editProduct)
+
+function editProduct (req, res) {
   if (!req.canEdit) return res.status(401).render('401')
 
   models.Category.findAll({
@@ -47,17 +49,25 @@ router.get('/:product_id/edit', function (req, res) {
   }).then(function (categories) {
     res.render('products/edit', {categories: categories})
   })
-})
+}
 
 // Update
+
 router.post('/:product_id', function (req, res) {
   if (!req.canEdit) return res.status(401).render('401')
 
-  req.product.update(req.body, {
-    fields: ['name', 'cost', 'supply', 'unit', 'description', 'category_id']
-  }).then(function () {
-    res.flash('success', 'Saved')
-    res.redirect('/products/' + req.product.id)
+  req.transaction(function (transaction) {
+    return req.product.update(req.body, {
+      transaction: transaction,
+      fields: ['name', 'cost', 'supply', 'unit', 'description', 'category_id']
+    }).then(function () {
+      res.flash('success', 'Saved')
+      res.redirect('/products/' + req.product.id)
+    }).catch(function (error) {
+      res.status(422)
+      res.locals.error = error
+      editProduct(req, res)
+    })
   })
 })
 

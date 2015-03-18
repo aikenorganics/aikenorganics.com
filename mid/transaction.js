@@ -5,7 +5,7 @@ module.exports = function(req, res, next) {
   req.transaction = function(next) {
     var transaction = app.get('transaction')
 
-    // If this isn't a test, delegate to sequelize
+    // If no transaction is set delegate to sequelize.
     if (!transaction) return models.sequelize.transaction(next)
 
     // Ensure a promise is returned.

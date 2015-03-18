@@ -28,25 +28,30 @@ router.get('/:grower_id/edit', function (req, res) {
 })
 
 router.post('/:grower_id/adduser', function (req, res) {
-  models.UserGrower.findOrCreate({
-    where: {
-      user_id: req.body.user_id,
-      grower_id: req.grower.id
-    }
-  }).then(function (results) {
-    res.flash('success', 'User Added')
-    res.redirect(`/admin/growers/${req.grower.id}/edit`)
+  req.transaction(function (t) {
+    return models.UserGrower.findOrCreate({
+      where: {
+        user_id: req.body.user_id,
+        grower_id: req.grower.id
+      }
+    }, {transaction: t}).then(function (results) {
+      res.flash('success', 'User Added')
+      res.redirect(`/admin/growers/${req.grower.id}/edit`)
+    })
   })
 })
 
 router.post('/:grower_id/removeuser', function (req, res) {
-  models.UserGrower.destroy({
-    where: {
-      user_id: req.body.user_id,
-      grower_id: req.grower.id
-    }
-  }).then(function () {
-    res.flash('success', 'User Removed')
-    res.redirect(`/admin/growers/${req.grower.id}/edit`)
+  req.transaction(function (t) {
+    return models.UserGrower.destroy({
+      where: {
+        user_id: req.body.user_id,
+        grower_id: req.grower.id
+      },
+      transaction: t
+    }).then(function () {
+      res.flash('success', 'User Removed')
+      res.redirect(`/admin/growers/${req.grower.id}/edit`)
+    })
   })
 })

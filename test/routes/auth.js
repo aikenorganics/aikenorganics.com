@@ -1,16 +1,15 @@
-var test = require('tape')
-var request = require('./request')
+var test = require('../test')
 var models = require('../../models')
 
 test('signup page is a 200', function (t) {
-  request()
+  t.request()
   .get('/auth/signup')
   .expect(200)
   .end(t.end)
 })
 
 test('Can sign in with password', function (t) {
-  request()
+  t.request()
   .post('/auth/signin')
   .field('email', 'admin@example.com')
   .field('password', 'password')
@@ -19,14 +18,14 @@ test('Can sign in with password', function (t) {
 })
 
 test('GET /auth/forgot is a 200', function (t) {
-  request()
+  t.request()
   .get('/auth/forgot')
   .expect(200)
   .end(t.end)
 })
 
 test('POST /auth/forgot is a 404 for missing emails', function (t) {
-  request()
+  t.request()
   .post('/auth/forgot')
   .field('email', 'does@not.exist')
   .expect(404)
@@ -34,7 +33,7 @@ test('POST /auth/forgot is a 404 for missing emails', function (t) {
 })
 
 test('POST /auth/forgot is a 302 for existing emails', function (t) {
-  request()
+  t.request()
   .post('/auth/forgot')
   .field('email', 'admin@example.com')
   .expect(302)
@@ -42,14 +41,14 @@ test('POST /auth/forgot is a 302 for existing emails', function (t) {
 })
 
 test('GET /auth/reset is a 404 for missing tokens', function (t) {
-  request()
+  t.request()
   .get('/auth/reset/doesnotexist')
   .expect(404)
   .end(t.end)
 })
 
 test('GET /auth/reset is a 200 for valid tokens', function (t) {
-  var agent = request()
+  var agent = t.request()
   agent.post('/auth/forgot')
   .field('email', 'admin@example.com')
   .expect(302)
@@ -65,7 +64,7 @@ test('GET /auth/reset is a 200 for valid tokens', function (t) {
 })
 
 test('POST /auth/reset is a 302 for valid tokens', function (t) {
-  var agent = request()
+  var agent = t.request()
   agent.post('/auth/forgot')
   .field('email', 'admin@example.com')
   .expect(302)
@@ -82,7 +81,7 @@ test('POST /auth/reset is a 302 for valid tokens', function (t) {
 })
 
 test('POST /auth/reset is a 404 for missing tokens', function (t) {
-  request()
+  t.request()
   .post('/auth/reset')
   .field('token', 'does not exist')
   .field('password', 'password')
@@ -91,7 +90,7 @@ test('POST /auth/reset is a 404 for missing tokens', function (t) {
 })
 
 test('POST /auth/reset enforces password length of 8', function (t) {
-  var agent = request()
+  var agent = t.request()
   agent.post('/auth/forgot')
   .field('email', 'admin@example.com')
   .expect(302)
@@ -108,7 +107,7 @@ test('POST /auth/reset enforces password length of 8', function (t) {
 })
 
 test('POST /auth/signin handles mixed case emails', function (t) {
-  request()
+  t.request()
   .post('/auth/signin')
   .field('email', 'AdMiN@eXaMpLe.CoM')
   .field('password', 'password')
@@ -117,7 +116,7 @@ test('POST /auth/signin handles mixed case emails', function (t) {
 })
 
 test('POST /auth/forgot handles mixed case emails', function (t) {
-  request()
+  t.request()
   .post('/auth/forgot')
   .field('email', 'AdMiN@eXaMpLe.CoM')
   .expect(302)
@@ -125,7 +124,7 @@ test('POST /auth/forgot handles mixed case emails', function (t) {
 })
 
 test('POST /auth/signup handles mixed case emails', function (t) {
-  request()
+  t.request()
   .post('/auth/signup')
   .field('email', 'AdMiN@eXaMpLe.CoM')
   .field('password', 'password')
@@ -134,7 +133,7 @@ test('POST /auth/signup handles mixed case emails', function (t) {
 })
 
 test('POST /auth/signup handles first, last, and phone', function (t) {
-  request()
+  t.request()
   .post('/auth/signup')
   .field('first', 'Finn')
   .field('last', 'Mertens')
@@ -146,7 +145,7 @@ test('POST /auth/signup handles first, last, and phone', function (t) {
 })
 
 test('Full signup flow', function (t) {
-  var agent = request()
+  var agent = t.request()
 
   agent
   .post('/auth/signup')
