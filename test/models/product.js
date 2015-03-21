@@ -73,6 +73,18 @@ test('validate cost', function (t) {
   }).then(t.end)
 })
 
+test('validate cost', function (t) {
+  models.Product.build({cost: '  10  '}).validate({
+    fields: ['cost']
+  }).then(t.end)
+})
+
+test('validate cost', function (t) {
+  models.Product.build({cost: '  $32.25  '}).validate({
+    fields: ['cost']
+  }).then(t.end)
+})
+
 test('validate name', function (t) {
   models.Product.build({name: ''})
   .validate({
