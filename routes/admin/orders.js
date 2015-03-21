@@ -1,6 +1,21 @@
+var qs = require('qs')
+var url = require('url')
 var express = require('express')
 var router = module.exports = express.Router()
 var models = require('../../models')
+var find = require('../../mid/find')
+
+// Find the Order
+router.param('order_id', find(models.Order, {
+  include: [{
+    as: 'user',
+    model: models.User
+  }, {
+    model: models.ProductOrder,
+    as: 'productOrders',
+    include: [{model: models.Product, as: 'product'}]
+  }]
+}))
 
 // Find a Product
 router.get('/', function (req, res, next) {
@@ -14,18 +29,23 @@ router.get('/', function (req, res, next) {
 
 // Index
 router.get('/', function (req, res) {
-  var full = req.query.full
-  var where = [`orders.status = 'open'`]
+  var full = req.query.full === '1'
   var include = [{as: 'user', model: models.User}]
+
+  // Default status
+  if (!Array.isArray(req.query.status)) req.query.status = ['open']
+
+  // Default conditions
+  var where = {status: {$in: req.query.status}}
 
   // Filter by product
   if (req.product) {
-    where = [
-      `orders.status = 'open' and orders.id in (
-        select order_id from product_orders where product_id = ?
-      )`,
-      req.product.id
-    ]
+    where.id = {
+      $in: models.sequelize.literal(
+        `(select order_id from product_orders
+        where product_id = ${models.sequelize.escape(req.product.id)})`
+      )
+    }
   }
 
   // Include models for full view
@@ -34,6 +54,27 @@ router.get('/', function (req, res) {
       model: models.ProductOrder,
       as: 'productOrders',
       include: [{model: models.Product, as: 'product'}]
+    })
+  }
+
+  // Generate control urls
+  res.locals.controlUrl = function (name, value) {
+    var query = {}
+    for (var key in req.query) query[key] = req.query[key]
+
+    if (value == null) {
+      delete query[name]
+    } else {
+      query[name] = value
+    }
+
+    if (query.status.length === 1 && query.status[0] === 'open') {
+      delete query.status
+    }
+
+    return url.format({
+      pathname: '/admin/orders',
+      search: qs.stringify(query, {arrayFormat: 'brackets'})
     })
   }
 
@@ -49,18 +90,20 @@ router.get('/', function (req, res) {
 
 // Show
 router.get('/:order_id', function (req, res) {
-  models.Order.findOne({
-    where: {id: req.params.order_id},
-    include: [{
-      as: 'user',
-      model: models.User
-    }, {
-      model: models.ProductOrder,
-      as: 'productOrders',
-      include: [{model: models.Product, as: 'product'}]
-    }]
-  }).then(function (order) {
-    if (!order) return res.status(404).render('404')
-    res.render('admin/orders/show', {order: order})
+  if (!req.order) return res.status(404).render('404')
+  res.render('admin/orders/show')
+})
+
+// Update
+router.post('/:order_id', function (req, res) {
+  if (!req.order) return res.status(404).render('404')
+
+  req.transaction(function (transaction) {
+    return req.order.update(req.body, {
+      fields: ['status']
+    }).then(function () {
+      res.flash('success', 'Status Changed')
+      res.redirect(`/admin/orders/${req.order.id}`)
+    })
   })
 })

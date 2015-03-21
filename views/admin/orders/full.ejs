@@ -11,47 +11,10 @@
       </a>
     <% } %>
   </h1>
-  <% include full-toggle %>
+  <% include controls %>
   <hr>
   <% orders.forEach(function (order) { %>
-    <h2><a href='/admin/orders/<%= order.id %>'>Order #<%= order.id %></a></h2>
-    <h3>
-      <a href='/admin/users/<%= order.user.id %>/edit'><%= order.user.name() %></a>
-      <small><%= order.user.email %></small>
-    </h3>
-    <table class='table'>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Cost</th>
-          <th>Quantity</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% order.productOrders.forEach(function(productOrder) { %>
-          <tr>
-            <td>
-              <a href='/products/<%= productOrder.product.id %>'>
-                <%= productOrder.product.name %>
-              </a>
-              <% if (productOrder.product.isOversold()) { %>
-                <span class='label label-danger'>Oversold</span>
-              <% } %>
-            </td>
-            <td>$<%= productOrder.product.cost %></td>
-            <td><%= productOrder.quantity %></td>
-            <td><%= productOrder.cost().toFixed(2) %></td>
-          </tr>
-        <% }); %>
-      </tbody>
-      <tfoot>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><strong>$<%= order.cost().toFixed(2) %></strong></td>
-      </tfoot>
-    </table>
+    <% include ./order %>
   <% }) %>
 
 </main>

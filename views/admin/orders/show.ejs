@@ -1,44 +1,29 @@
 <main class='container'>
 
   <% include ../subnav %>
+  <% include ./order %>
 
-  <h1><a href='/admin/orders/<%= order.id %>'>Order #<%= order.id %></a></h1>
-  <h2>
-    <a href='/admin/users/<%= order.user.id %>/edit'><%= order.user.name() %></a>
-    <small><%= order.user.email %></small>
-  </h2>
-  <table class='table'>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Cost</th>
-        <th>Quantity</th>
-        <th>Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% order.productOrders.forEach(function(productOrder) { %>
-        <tr>
-          <td>
-            <a href='/products/<%= productOrder.product.id %>'>
-              <%= productOrder.product.name %>
-            </a>
-            <% if (productOrder.product.isOversold()) { %>
-              <span class='label label-danger'>Oversold</span>
-            <% } %>
-          </td>
-          <td>$<%= productOrder.product.cost %></td>
-          <td><%= productOrder.quantity %></td>
-          <td><%= productOrder.cost().toFixed(2) %></td>
-        </tr>
-      <% }); %>
-    </tbody>
-    <tfoot>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><strong>$<%= order.cost().toFixed(2) %></strong></td>
-    </tfoot>
-  </table>
+  <div class='pull-right hidden-print'>
+    <% if (order.status !== 'complete') { %>
+      <form class='form-inline' method='POST' action='/admin/orders/<%= order.id %>' style='display: inline'>
+        <input type='hidden' name='status' value='complete'>
+        <button type='submit' class='btn btn-primary'>Complete</button>
+      </form>
+    <% } %>
+
+    <% if (order.status !== 'canceled') { %>
+      <form class='form-inline' method='POST' action='/admin/orders/<%= order.id %>' style='display: inline'>
+        <input type='hidden' name='status' value='canceled'>
+        <button type='submit' class='btn btn-danger'>Cancel</button>
+      </form>
+    <% } %>
+
+    <% if (order.status !== 'open') { %>
+      <form class='form-inline' method='POST' action='/admin/orders/<%= order.id %>' style='display: inline'>
+        <input type='hidden' name='status' value='open'>
+        <button type='submit' class='btn btn-primary'>Reopen</button>
+      </form>
+    <% } %>
+  </div>
 
 </main>

@@ -1,0 +1,32 @@
+<div class='hidden-print'>
+  <div class='btn-group'>
+    <% if (req.query.full) { %>
+      <a class='btn btn-default' href='<%= controlUrl('full', null) %>'>
+        List
+      </a>
+      <a class='btn btn-primary'>
+        Full
+      </a>
+    <% } else { %>
+      <a class='btn btn-primary'>
+        List
+      </a>
+      <a class='btn btn-default' href='<%= controlUrl('full', 1) %>'>
+        Full
+      </a>
+    <% } %>
+  </div>
+  <div class='btn-group'>
+    <% ['open', 'complete', 'canceled'].forEach(function (status) { %>
+      <% if (!~req.query.status.indexOf(status)) { %>
+        <a class='btn btn-default' href='<%= controlUrl('status', req.query.status.concat([status])) %>'>
+          <%= status.slice(0, 1).toUpperCase() + status.slice(1) %>
+        </a>
+      <% } else { %>
+        <a class='btn btn-primary' href='<%= controlUrl('status', req.query.status.filter(function (s) { return s !== status })) %>'>
+          <%= status.slice(0, 1).toUpperCase() + status.slice(1) %>
+        </a>
+      <% } %>
+    <% }) %>
+  </div>
+</div>
