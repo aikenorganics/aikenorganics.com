@@ -23,6 +23,11 @@ module.exports = sql.define('growers', {
     type: Sql.STRING,
     allowNull: false,
     defaultValue: '',
+    get: function () {
+      var url = this.getDataValue('url')
+      if (!/^http:\/\//.test(url)) url = 'http://' + url
+      return url
+    },
     set: function (value) {
       this.setDataValue('url', value || '')
     }
