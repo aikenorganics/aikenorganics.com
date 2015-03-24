@@ -84,7 +84,7 @@ router.post('/reset/:token_id', function (req, res) {
 })
 
 router.get('/signout', function (req, res) {
-  req.session = {}
+  req.session = null
   res.redirect('/')
 })
 
