@@ -13,17 +13,17 @@
             </div>
             <div class='col-md-6'>
               <label for='last'>Last Name</label>
-              <input type='text' id='last' name='last' class='form-control' <% if (locals.last) { %>value='<%= locals.last%>'<% } %> autofocus required>
+              <input type='text' id='last' name='last' class='form-control' <% if (locals.last) { %>value='<%= locals.last%>'<% } %> required>
             </div>
           </div>
         </div>
         <div class='form-group'>
-          <label for='phone'>Phone (optional)</label>
-          <input type='text' id='phone' name='phone' class='form-control' <% if (locals.phone) { %>value='<%= locals.phone%>'<% } %> autofocus>
+          <label for='phone'>Phone</label>
+          <input type='text' id='phone' name='phone' class='form-control' <% if (locals.phone) { %>value='<%= locals.phone%>'<% } %> required>
         </div>
         <div class='form-group'>
           <label for='email'>Email</label>
-          <input type='text' id='email' name='email' class='form-control' placeholder='you@example.com' <% if (locals.email) { %>value='<%= locals.email%>'<% } %> autofocus required>
+          <input type='text' id='email' name='email' class='form-control' placeholder='you@example.com' <% if (locals.email) { %>value='<%= locals.email%>'<% } %> required>
         </div>
         <div class='form-group'>
           <label for='password'>Password</label>
