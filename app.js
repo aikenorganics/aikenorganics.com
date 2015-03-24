@@ -10,6 +10,7 @@ var app = module.exports = express()
 app.set('view engine', 'ejs')
 app.engine('ejs', require('ejs').renderFile)
 app.locals = require('./helpers')
+app.disable('x-powered-by')
 
 // Middleware
 if (app.get('env') === 'production') app.use(require('./mid/secure'))
