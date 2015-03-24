@@ -12,7 +12,7 @@ app.engine('ejs', require('ejs').renderFile)
 app.locals = require('./helpers')
 
 // Middleware
-app.use(require('./mid/layout'))
+if (app.get('env') === 'production') app.use(require('./mid/secure'))
 app.use(function (req, res, next) {
   res.locals.req = req
   next()
@@ -24,6 +24,7 @@ app.use(session({
   secret: process.env.SECRET,
   maxAge: 1000 * 60 * 60 * 24 * 7
 }))
+app.use(require('./mid/layout'))
 app.use(body.urlencoded({extended: false}))
 app.use(multer({dest: './tmp/uploads/', putSingleFilesInArray: true}))
 app.use(compression())
