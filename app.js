@@ -19,7 +19,7 @@ app.use(function (req, res, next) {
 })
 app.use(session({
   signed: app.get('env') === 'production',
-  // secure: true,
+  secure: app.get('env') === 'production',
   name: 'aikenorganics',
   secret: process.env.SECRET,
   maxAge: 1000 * 60 * 60 * 24 * 7
