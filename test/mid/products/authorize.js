@@ -1,5 +1,4 @@
 var test = require('../../test')
-var models = require('../../../models')
 var authorize = require('../../../mid/products/authorize')
 
 test('products/authorize: missing user and product', function (t) {

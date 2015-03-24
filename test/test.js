@@ -19,7 +19,7 @@ exports = module.exports = function (name, options, callback) {
     options = {}
   }
 
-  tape(name, options, function(t) {
+  tape(name, options, function (t) {
     // Start a manual transaction.
     models.sequelize.transaction().then(function (transaction) {
       // Expose the transaction to the test and the app.
@@ -32,12 +32,12 @@ exports = module.exports = function (name, options, callback) {
       }
 
       // Sign in, with error handling.
-      t.signIn = function(email) {
+      t.signIn = function (email) {
         return signIn(request.agent(app), email).catch(t.end)
       }
 
       // Rollback the transaction before ending the test.
-      end = t.end
+      var end = t.end
       t.end = function () {
         transaction.rollback()
         end.apply(t, arguments)

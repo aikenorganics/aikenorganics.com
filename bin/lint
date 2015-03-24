@@ -1,13 +1,8 @@
 #!/bin/sh -e
 
-standard \
-  app.js \
-  index.js \
-  bin/**/*.js \
-  mid/**/*.js \
-  test/**/*.js \
-  routes/**/*.js \
-  models/**/*.js \
-  helpers/**/*.js \
-  fixtures/**/*.js \
-  migrations/**/*.js
+find . \
+  -not -path ./node_modules/\* \
+  -not -path ./public/\* \
+  -not -path ./js/\* \
+  -iname \*.js |
+xargs standard

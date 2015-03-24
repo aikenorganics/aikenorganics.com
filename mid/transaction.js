@@ -1,8 +1,8 @@
 var app = require('../app')
 var models = require('../models')
 
-module.exports = function(req, res, next) {
-  req.transaction = function(next) {
+module.exports = function (req, res, next) {
+  req.transaction = function (next) {
     var transaction = app.get('transaction')
 
     // If no transaction is set delegate to sequelize.

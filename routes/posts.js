@@ -3,7 +3,7 @@ var find = require('../mid/find')
 var models = require('../models')
 var router = module.exports = express.Router()
 
-router.use(function(req, res, next) {
+router.use(function (req, res, next) {
   if (req.admin) return next()
   res.status(401).render('401')
 })

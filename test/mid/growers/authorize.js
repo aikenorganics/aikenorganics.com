@@ -1,5 +1,4 @@
 var test = require('../../test')
-var models = require('../../../models')
 var authorize = require('../../../mid/growers/authorize')
 
 test('growers/authorize: missing user and grower', function (t) {
