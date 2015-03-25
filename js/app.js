@@ -1,5 +1,5 @@
 var $ = window.jQuery = require('jquery')
-require('./bootstrap')
+require('bootstrap')
 
 setTimeout(function() {
   $('#message').removeClass('active')
