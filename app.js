@@ -24,11 +24,11 @@ app.use(session({
   secret: process.env.SECRET,
   maxAge: 1000 * 60 * 60 * 24 * 7
 }))
-app.use(require('./mid/layout'))
 app.use(body.urlencoded({extended: false}))
 app.use(multer({dest: './tmp/uploads/', putSingleFilesInArray: true}))
 app.use(compression())
 app.use(express.static('public'))
+app.use(require('./mid/layout'))
 app.use(require('./mid/cart'))
 app.use(require('./mid/user'))
 app.use(require('./mid/flash'))
