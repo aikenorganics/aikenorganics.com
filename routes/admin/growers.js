@@ -55,3 +55,15 @@ router.post('/:grower_id/removeuser', function (req, res) {
     })
   })
 })
+
+router.post('/:grower_id', function (req, res) {
+  req.transaction(function (transaction) {
+    return req.grower.update(req.body, {
+      fields: ['active'],
+      transaction: transaction
+    }).then(function () {
+      res.flash('success', 'Saved')
+      res.redirect(`/admin/growers/${req.grower.id}/edit`)
+    })
+  })
+})

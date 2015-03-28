@@ -161,3 +161,15 @@ test('POST /products/:id/image is a 401 as a non-admin', function (t) {
     .end(t.end)
   })
 })
+
+test('GET /products has no products from inactive growers', function (t) {
+  t.request()
+  .get('/products')
+  .expect(200)
+  .expect(function (res) {
+    if (~res.text.indexOf('/products/6')) {
+      return 'should not see inactive growers'
+    }
+  })
+  .end(t.end)
+})

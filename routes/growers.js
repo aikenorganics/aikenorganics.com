@@ -12,6 +12,7 @@ router.param('grower_id', require('../mid/growers/authorize'))
 // Index
 router.get('/', function (req, res) {
   models.Grower.findAll({
+    where: {active: true},
     order: [['name', 'ASC']]
   }).then(function (growers) {
     res.render('growers/index', {
@@ -29,15 +30,14 @@ router.get('/new', function (req, res) {
 router.post('/', function (req, res) {
   if (!req.admin) return res.status(401).render('401')
 
-  models.Grower.create({
-    url: req.body.url,
-    name: req.body.name,
-    email: req.body.email,
-    location: req.body.location,
-    description: req.body.description
-  }).then(function (grower) {
-    res.flash('success', 'Saved')
-    res.redirect('/growers/' + grower.id)
+  req.transaction(function (transaction) {
+    return models.Grower.create(req.body, {
+      fields: ['url', 'name', 'email', 'location', 'description'],
+      transaction: transaction
+    }).then(function (grower) {
+      res.flash('success', 'Saved')
+      res.redirect(`/growers/${grower.id}`)
+    })
   })
 })
 
@@ -46,6 +46,8 @@ router.get('/:grower_id', function (req, res) {
   req.grower.getProducts({
     order: [['name', 'ASC']]
   }).then(function (products) {
+    // Stupid, but necessary.
+    products.forEach(function (product) { product.grower = req.grower })
     res.render('growers/show', {
       products: products
     })
@@ -61,11 +63,14 @@ router.get('/:grower_id/edit', function (req, res) {
 router.post('/:grower_id', function (req, res) {
   if (!req.canEdit) return res.status(401).render('401')
 
-  req.grower.update(req.body, {
-    fields: ['name', 'email', 'url', 'location', 'description']
-  }).then(function () {
-    res.flash('success', 'Saved')
-    res.redirect('/growers/' + req.grower.id)
+  req.transaction(function (transaction) {
+    return req.grower.update(req.body, {
+      fields: ['name', 'email', 'url', 'location', 'description'],
+      transaction: transaction
+    }).then(function () {
+      res.flash('success', 'Saved')
+      res.redirect('/growers/' + req.grower.id)
+    })
   })
 })
 

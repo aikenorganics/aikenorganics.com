@@ -60,3 +60,14 @@ test('POST /cart/checkout', function (t) {
     })
   })
 })
+
+test('POST /cart is a 302 for inactive products/growers', function (t) {
+  t.signIn('user@example.com').then(function (agent) {
+    agent
+    .post('/cart')
+    .field('product_id', 6)
+    .field('quantity', 1)
+    .expect(302)
+    .end(t.end)
+  })
+})

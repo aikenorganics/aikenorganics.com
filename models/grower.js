@@ -50,6 +50,11 @@ module.exports = sql.define('growers', {
   },
   imaged_at: {
     type: Sql.DATE
+  },
+  active: {
+    type: Sql.BOOLEAN,
+    allowNull: false,
+    defaultValue: true
   }
 }, {
   tableName: 'growers',

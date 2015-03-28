@@ -23,10 +23,20 @@ router.post('/', function (req, res) {
   var quantity = +req.body.quantity
   var return_to = req.body.return_to
 
-  models.Product.find(id).then(function (product) {
+  models.Product.findOne({
+    where: {id: id},
+    include: [{
+      as: 'grower',
+      model: models.Grower
+    }]
+  }).then(function (product) {
     if (!product) return res.status(404).render('404')
-    req.cart.update(product, quantity)
-    res.flash('success', 'Updated.')
+    if (product.grower.active) {
+      req.cart.update(product, quantity)
+      res.flash('success', 'Updated.')
+    } else {
+      res.flash('error', 'That product is unavailable.')
+    }
     res.redirect(return_to || '/products/' + id)
   })
 })

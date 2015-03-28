@@ -62,3 +62,41 @@ test('POST /admin/growers/:id/removeuser is a 302', function (t) {
     })
   })
 })
+
+test('POST /admin/growers/:id is a 302 when activating', function (t) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent
+    .post('/admin/growers/3')
+    .field('active', 1)
+    .expect(302)
+    .end(function (e) {
+      if (e) return t.end(e)
+      models.Grower.findOne({
+        where: {id: 3},
+        transaction: t.transaction
+      }).then(function (grower) {
+        t.ok(grower.active)
+        t.end()
+      })
+    })
+  })
+})
+
+test('POST /admin/growers/:id is a 302 when deactivating', function (t) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent
+    .post('/admin/growers/1')
+    .field('active', 0)
+    .expect(302)
+    .end(function (e) {
+      if (e) return t.end(e)
+      models.Grower.findOne({
+        where: {id: 1},
+        transaction: t.transaction
+      }).then(function (grower) {
+        t.ok(!grower.active)
+        t.end()
+      })
+    })
+  })
+})

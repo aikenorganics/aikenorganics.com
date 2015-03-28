@@ -266,3 +266,15 @@ test('GET /growers/:id authorized users see new product link', function (t) {
     .end(t.end)
   })
 })
+
+test('GET /growers does not return inactive growers', function (t) {
+  t.request()
+  .get('/growers')
+  .expect(200)
+  .expect(function (res) {
+    if (~res.text.indexOf('/growers/3')) {
+      return 'should not see inactive growers'
+    }
+  })
+  .end(t.end)
+})

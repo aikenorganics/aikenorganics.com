@@ -51,4 +51,18 @@ of all natural brown rice.`
 frozen in season), fresh herbs and bay leaves simmered in organic vegetable
 stock and dark porter beer from the Aiken Brewing Company and comes with a side
 of all natural brown rice.`
+}, {
+  id: 6,
+  name: 'Happy Pesto Sauce [Inactive Grower]',
+  grower_id: 3,
+  cost: '5.50',
+  unit: '4 oz.',
+  supply: 23,
+  category_id: 2,
+  description:
+`It starts with our own organically grown basil and ends with a finished
+product full of rich flavor.  Our Happy Pesto is the perfect pasta sauce, but
+is also delicious on fish, chicken, eggs or any other recipe calling for pesto.
+Our pesto is made super concentrated so cutting it with additional olive oil
+will make this sauce go twice as far.`
 }]

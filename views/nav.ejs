@@ -1,10 +1,11 @@
 <nav class='navbar navbar-inverse navbar-fixed-top'>
-  <% if (locals.flash && flash.success) { %>
+  <% if (locals.flash) { %>
     <div id='message' class='active'>
-      <span class='alert alert-success'>
-        <span class='octicon octicon-check'></span>
-        <%= flash.success %>
-      </span>
+      <% if (flash.success) { %>
+        <span class='alert alert-success'><%= flash.success %></span>
+      <% } else if (flash.error) { %>
+        <span class='alert alert-danger'><%= flash.error %></span>
+      <% } %>
     </div>
   <% } %>
   <div class='container'>

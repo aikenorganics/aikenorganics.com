@@ -16,14 +16,21 @@ router.param('product_id', require('../mid/products/authorize'))
 
 // Index
 router.get('/', function (req, res) {
+  var where = {}
   var category_id = req.query.category_id
+
+  if (category_id) where.category_id = category_id
 
   Promise.all([
     models.Category.findAll({order: [['position', 'ASC']]}),
     models.Product.findAll({
+      where: where,
       order: [['name', 'ASC']],
-      where: category_id ? {category_id: category_id} : {},
-      include: [{model: models.Grower, as: 'grower'}]
+      include: [{
+        model: models.Grower,
+        as: 'grower',
+        where: {active: true}
+      }]
     })
   ]).then(function (results) {
     res.render('products/index', {
