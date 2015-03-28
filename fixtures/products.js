@@ -1,5 +1,6 @@
 module.exports = [{
   id: 1,
+  active: true,
   name: 'Peaches',
   grower_id: 1,
   cost: '14',
@@ -9,6 +10,7 @@ module.exports = [{
   description: 'A box of peaches.'
 }, {
   id: 2,
+  active: true,
   name: 'Strawberries',
   grower_id: 1,
   cost: '8',
@@ -18,6 +20,7 @@ module.exports = [{
   description: 'Some strawberries.'
 }, {
   id: 3,
+  active: true,
   name: 'Kale',
   grower_id: 1,
   cost: '4.50',
@@ -27,6 +30,7 @@ module.exports = [{
   description: 'A buncha kale.'
 }, {
   id: 4,
+  active: true,
   name: 'Vegan Gumbo - Small',
   grower_id: 2,
   cost: '7',
@@ -40,6 +44,7 @@ stock and dark porter beer from the Aiken Brewing Company and comes with a side
 of all natural brown rice.`
 }, {
   id: 5,
+  active: true,
   name: 'Vegan Gumbo - Medium',
   grower_id: 2,
   cost: '14',
@@ -53,6 +58,7 @@ stock and dark porter beer from the Aiken Brewing Company and comes with a side
 of all natural brown rice.`
 }, {
   id: 6,
+  active: true,
   name: 'Happy Pesto Sauce [Inactive Grower]',
   grower_id: 3,
   cost: '5.50',
@@ -65,4 +71,17 @@ product full of rich flavor.  Our Happy Pesto is the perfect pasta sauce, but
 is also delicious on fish, chicken, eggs or any other recipe calling for pesto.
 Our pesto is made super concentrated so cutting it with additional olive oil
 will make this sauce go twice as far.`
+}, {
+  id: 7,
+  active: false,
+  name: 'Spanish Rice [Inactive]',
+  grower_id: 2,
+  cost: '4.32',
+  unit: 'medium side item - (2 cups)',
+  supply: 3,
+  category_id: 2,
+  description:
+`Made with all natural brown rice and organic tomatoes, corn and sweet peas,
+this rice packs a lot of flavor and is the perfect side for our enchiladas or
+great on its own! (vegetarian and gluten free)`
 }]

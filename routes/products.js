@@ -16,7 +16,7 @@ router.param('product_id', require('../mid/products/authorize'))
 
 // Index
 router.get('/', function (req, res) {
-  var where = {}
+  var where = {active: true}
   var category_id = req.query.category_id
 
   if (category_id) where.category_id = category_id
@@ -66,10 +66,18 @@ router.post('/:product_id', function (req, res) {
   req.transaction(function (transaction) {
     return req.product.update(req.body, {
       transaction: transaction,
-      fields: ['name', 'cost', 'supply', 'unit', 'description', 'category_id']
+      fields: [
+        'active',
+        'category_id',
+        'cost',
+        'description',
+        'name',
+        'supply',
+        'unit'
+      ]
     }).then(function () {
       res.flash('success', 'Saved')
-      res.redirect('/products/' + req.product.id)
+      res.redirect(req.body.return_to || `/products/${req.product.id}`)
     }).catch(function (error) {
       res.status(422)
       res.locals.error = error

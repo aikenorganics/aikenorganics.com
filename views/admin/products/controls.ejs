@@ -1,0 +1,19 @@
+<div class='hidden-print'>
+  <div class='btn-group'>
+    <% if (req.query.oversold) { %>
+      <a class='btn btn-default' href='/admin/products'>
+        All
+      </a>
+      <a class='btn btn-primary' href='/admin/products?oversold=1'>
+        Oversold
+      </a>
+    <% } else { %>
+      <a class='btn btn-primary' href='/admin/products'>
+        All
+      </a>
+      <a class='btn btn-default' href='/admin/products?oversold=1'>
+        Oversold
+      </a>
+    <% } %>
+  </div>
+</div>

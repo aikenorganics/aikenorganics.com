@@ -75,6 +75,11 @@ module.exports = sql.define('products', {
         if (value < 0) throw new Error('Supply must not be negative.')
       }
     }
+  },
+  active: {
+    type: Sql.BOOLEAN,
+    allowNull: false,
+    defaultValue: true
   }
 }, {
   tableName: 'products',

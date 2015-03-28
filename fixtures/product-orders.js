@@ -33,4 +33,9 @@ module.exports = [{
   order_id: 3,
   product_id: 4,
   quantity: 2
+}, {
+  id: 8,
+  order_id: 4,
+  product_id: 5,
+  quantity: 3
 }]

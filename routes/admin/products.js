@@ -3,11 +3,19 @@ var express = require('express')
 var router = module.exports = express.Router()
 var models = require('../../models')
 
-router.get('/oversold', function (req, res) {
+router.get('/', function (req, res) {
+  var where = {}
+  var oversold = req.query.oversold
+
+  if (oversold === '1') where.reserved = {gt: Sql.literal('supply')}
+
   models.Product.findAll({
-    where: {reserved: {gt: Sql.literal('supply')}},
-    include: [{model: models.Grower, as: 'grower'}]
+    where: where,
+    include: [{
+      as: 'grower',
+      model: models.Grower
+    }]
   }).then(function (products) {
-    res.render('admin/products/oversold', {products: products})
+    res.render('admin/products/index', {products: products})
   })
 })

@@ -1,4 +1,5 @@
 var test = require('../test')
+var models = require('../../models')
 
 // Index
 
@@ -162,7 +163,7 @@ test('POST /products/:id/image is a 401 as a non-admin', function (t) {
   })
 })
 
-test('GET /products has no products from inactive growers', function (t) {
+test('GET /products has no inactive products', function (t) {
   t.request()
   .get('/products')
   .expect(200)
@@ -170,6 +171,45 @@ test('GET /products has no products from inactive growers', function (t) {
     if (~res.text.indexOf('/products/6')) {
       return 'should not see inactive growers'
     }
+    if (~res.text.indexOf('/products/7')) {
+      return 'should not see inactive products'
+    }
   })
   .end(t.end)
+})
+
+test('POST /products/:id activates products', function (t) {
+  t.signIn('grower@example.com').then(function (agent) {
+    agent.post('/products/1')
+    .field('active', '0')
+    .expect(302)
+    .end(function (e) {
+      if (e) return t.end()
+      models.Product.findOne({
+        where: {id: 1},
+        transaction: t.transaction
+      }).then(function (product) {
+        t.equal(product.active, false)
+        t.end()
+      })
+    })
+  })
+})
+
+test('POST /products/:id deactivates products', function (t) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent.post('/products/7')
+    .field('active', '1')
+    .expect(302)
+    .end(function (e) {
+      if (e) return t.end()
+      models.Product.findOne({
+        where: {id: 7},
+        transaction: t.transaction
+      }).then(function (product) {
+        t.equal(product.active, true)
+        t.end()
+      })
+    })
+  })
 })

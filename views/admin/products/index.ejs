@@ -1,8 +1,7 @@
 <main class='container'>
-
   <% include ../subnav %>
-
-  <h1>Oversold Products</h1>
+  <h1>Products</h1>
+  <% include controls %>
   <hr>
   <table class='table'>
     <thead>
@@ -11,6 +10,8 @@
         <th>Grower</th>
         <th>Supply</th>
         <th>Reserved</th>
+        <th></th>
+        <th></th>
         <th></th>
       </tr>
     </thead>
@@ -22,8 +23,14 @@
           <td><%= product.supply %></td>
           <td><%= product.reserved %></td>
           <td><a class='btn btn-primary btn-xs' href='/admin/orders?product_id=<%= product.id %>'>View Orders</a></td>
+          <td><% include ../../products/active %></td>
+          <td>
+            <% if (product.isOversold()) { %>
+              <span class='label label-danger'>Oversold</span>
+            <% } %>
+          </td>
         </tr>
-      <% }); %>
+      <% }) %>
     </tbody>
   </table>
 </main>

@@ -10,4 +10,8 @@ module.exports = [{
   id: 3,
   user_id: 2,
   status: 'complete'
+}, {
+  id: 4,
+  user_id: 3,
+  status: 'open'
 }]
