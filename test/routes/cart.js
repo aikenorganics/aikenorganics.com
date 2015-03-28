@@ -36,25 +36,25 @@ test('GET /cart is a 200 logged in', function (t) {
 })
 
 test('POST /cart/checkout', function (t) {
-  models.Product.findOne({}).then(function (product) {
-    var reserved = product.reserved
-    t.signIn('admin@example.com').then(function (agent) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent
+    .post('/cart')
+    .field('product_id', 1)
+    .field('quantity', 2)
+    .expect(302)
+    .end(function (e) {
+      if (e) return t.end(e)
       agent
-      .post('/cart')
-      .field('product_id', product.id)
-      .field('quantity', 2)
+      .post('/cart/checkout')
       .expect(302)
       .end(function (e) {
         if (e) return t.end(e)
-        agent
-        .post('/cart/checkout')
-        .expect(302)
-        .end(function (e) {
-          if (e) return t.end(e)
-          product.reload().then(function () {
-            t.equal(product.reserved, reserved + 2)
-            t.end()
-          })
+        models.Product.findOne({
+          where: {id: 1},
+          transaction: t.transaction
+        }).then(function (product) {
+          t.equal(product.reserved, 4)
+          t.end()
         })
       })
     })

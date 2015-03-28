@@ -32,30 +32,26 @@ router.post('/', function (req, res) {
 })
 
 router.post('/checkout', function (req, res) {
-  new Checkout(req.user, req.cart).process().then(function () {
-    req.cart.clear()
-    res.redirect('/orders/current')
+  req.transaction(function (transaction) {
+    return new Checkout(req.user, req.cart, transaction).process().then(function () {
+      req.cart.clear()
+      res.redirect('/orders/current')
+    })
   })
 })
 
-var Checkout = function (user, cart) {
+var Checkout = function (user, cart, transaction) {
   this.user = user
   this.cart = cart
+  this.transaction = transaction
 }
 
 Checkout.prototype = {
 
   process: function () {
-    return models.sequelize.transaction(function (t) {
-      this.t = t
-      return this.findProducts()
-    }.bind(this))
-  },
-
-  findProducts: function () {
     return models.Product.findAll({
       where: {id: {in: this.cart.ids()}}
-    }, {transaction: this.t}).then(function (products) {
+    }, {transaction: this.transaction}).then(function (products) {
       this.products = products.filter(function (product) {
         return product.available() > 0
       })
@@ -69,7 +65,7 @@ Checkout.prototype = {
         status: 'open',
         user_id: this.user.id
       }
-    }, {transaction: this.t}).then(function (results) {
+    }, {transaction: this.transaction}).then(function (results) {
       this.order = results[0]
       return this.createProductOrders()
     }.bind(this))
@@ -79,7 +75,7 @@ Checkout.prototype = {
     return Promise.all(this.products.map(function (product) {
       return models.ProductOrder.findOrCreate({
         where: {order_id: this.order.id, product_id: product.id}
-      }, {transaction: this.t})
+      }, {transaction: this.transaction})
     }.bind(this))).then(function (productOrders) {
       this.productOrders = productOrders.map(function (a) { return a[0] })
       return this.updateProductOrders()
@@ -93,7 +89,7 @@ Checkout.prototype = {
       })[0]
       return productOrder.increment(
         {quantity: this.cart.quantity(product)},
-        {transaction: this.t}
+        {transaction: this.transaction}
       )
     }.bind(this)))
   }
