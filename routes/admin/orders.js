@@ -7,6 +7,7 @@ var find = require('../../mid/find')
 
 // Find the Order
 router.param('order_id', find(models.Order, {
+  order: '"productOrders.product"."name" asc',
   include: [{
     as: 'user',
     model: models.User

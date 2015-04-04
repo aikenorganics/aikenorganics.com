@@ -1,7 +1,67 @@
 <main class='container'>
 
   <% include ../subnav %>
-  <% include ./order %>
+
+  <h2>
+    <a href='/admin/orders/<%= order.id %>'>Order #<%= order.id %></a>
+    <small><% include status %></small>
+  </h2>
+  <h3>
+    <a href='/admin/users/<%= order.user.id %>/edit'><%= order.user.name() %></a>
+    <small><%= order.user.email %></small>
+  </h3>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Cost</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% order.productOrders.forEach(function(productOrder) { %>
+        <tr>
+          <td>
+            <a href='/products/<%= productOrder.product.id %>'>
+              <%= productOrder.product.name %>
+            </a>
+            <% if (productOrder.product.isOversold()) { %>
+              <span class='label label-danger'>Oversold</span>
+            <% } %>
+          </td>
+          <td>$<%= productOrder.product.cost %></td>
+          <td>
+            <form method='POST' action='/admin/product-orders/<%= productOrder.id %>' enctype='multipart/form-data'>
+              <select class='form-control' name='quantity' onchange='this.form.submit()'>
+                <% for (var i = 1; i <= productOrder.quantity + productOrder.product.available(); i++) { %>
+                  <option value='<%= i %>' <% if (productOrder.quantity === i) { %>selected<% } %>>
+                    <%= i %>
+                  </option>
+                <% } %>
+              </select>
+            </form>
+          </td>
+          <td><%= productOrder.cost().toFixed(2) %></td>
+          <td>
+            <form method='POST' action='/admin/product-orders/<%= productOrder.id %>/remove' enctype='multipart/form-data'>
+              <input type='hidden' name='return_to' value='<%= req.originalUrl %>'>
+              <input type='hidden' name='product_order_id' value='<%= productOrder.id %>'>
+              <button type='submit' class='btn btn-danger btn-xs' data-confirm='Are you sure?'>Remove</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+    <tfoot>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><strong>$<%= order.cost().toFixed(2) %></strong></td>
+      <td></td>
+    </tfoot>
+  </table>
 
   <h4>Notes</h4>
   <form method='POST' action='/admin/orders/<%= order.id %>' enctype='multipart/form-data'>

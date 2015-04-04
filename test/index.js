@@ -1,6 +1,7 @@
 var test = require('tape')
 var models = require('../models')
 
+require('./lib')
 require('./mid')
 require('./models')
 require('./routes')

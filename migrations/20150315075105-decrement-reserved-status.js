@@ -2,7 +2,7 @@ exports.up = function (migration, DataTypes, done) {
   migration.sequelize.query(`
     create or replace function decrement_reserved()
     returns trigger
-    as $body$
+    as $$
     begin
       update products set reserved = coalesce((
         select sum(product_orders.quantity)
@@ -14,7 +14,7 @@ exports.up = function (migration, DataTypes, done) {
       where id = OLD.product_id;
       return null;
     end;
-    $body$ language plpgsql;
+    $$ language plpgsql;
   `).then(function () {
     done()
   })
