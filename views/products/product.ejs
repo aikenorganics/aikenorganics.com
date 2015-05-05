@@ -15,7 +15,11 @@
       <% if (locals.open) { %>
         $<%= product.cost %> per <%= product.unit %>
         &bull;
-        <%= product.available() %> Available
+        <% if (product.active && grower.active) { %>
+          <%= product.available() %> Available
+        <% } else { %>
+          <span>Unavailable</span>
+        <% } %>
       <% } %>
       <% if (locals.open && product.grower) { %>
         &bull;
