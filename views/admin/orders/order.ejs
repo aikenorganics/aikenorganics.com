@@ -13,6 +13,7 @@
       <th>Cost</th>
       <th>Quantity</th>
       <th>Total</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -29,6 +30,13 @@
         <td>$<%= productOrder.product.cost %></td>
         <td><%= productOrder.quantity %></td>
         <td><%= productOrder.cost().toFixed(2) %></td>
+        <td>
+          <form method='POST' action='/admin/product-orders/<%= productOrder.id %>/remove' enctype='multipart/form-data'>
+            <input type='hidden' name='return_to' value='<%= req.originalUrl %>'>
+            <input type='hidden' name='product_order_id' value='<%= productOrder.id %>'>
+            <button type='submit' class='btn btn-danger btn-xs' data-confirm='Are you sure?'>Remove</button>
+          </form>
+        </td>
       </tr>
     <% }) %>
   </tbody>
@@ -37,5 +45,6 @@
     <td></td>
     <td></td>
     <td><strong>$<%= order.cost().toFixed(2) %></strong></td>
+    <td></td>
   </tfoot>
 </table>

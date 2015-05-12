@@ -3,6 +3,7 @@ require('./orders')
 require('./growers')
 require('./products')
 require('./categories')
+require('./product-orders')
 
 var test = require('../../test')
 

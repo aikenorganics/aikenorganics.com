@@ -18,6 +18,10 @@ module.exports = sql.define('product_orders', {
   tableName: 'product_orders',
   createdAt: 'created_at',
   updatedAt: 'updated_at',
+  name: {
+    singular: 'productOrder',
+    plural: 'productOrders'
+  },
   instanceMethods: {
     cost: function () {
       return +this.product.cost * this.quantity
