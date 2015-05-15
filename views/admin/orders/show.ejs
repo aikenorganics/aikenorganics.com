@@ -3,6 +3,16 @@
   <% include ../subnav %>
   <% include ./order %>
 
+  <h4>Notes</h4>
+  <form method='POST' action='/admin/orders/<%= order.id %>' enctype='multipart/form-data'>
+    <div class='form-group'>
+      <textarea class='form-control' name='notes' rows='10'><%= order.notes %></textarea>
+    </div>
+    <button type='submit' class='btn btn-primary'>Save</button>
+  </form>
+
+  <hr>
+
   <div class='pull-right hidden-print'>
     <% if (order.status !== 'complete') { %>
       <form class='form-inline' method='POST' action='/admin/orders/<%= order.id %>' style='display: inline'>

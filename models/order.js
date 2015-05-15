@@ -10,6 +10,11 @@ module.exports = sql.define('orders', {
     type: Sql.ENUM('open', 'complete', 'canceled'),
     allowNull: false,
     defaultValue: 'open'
+  },
+  notes: {
+    type: Sql.TEXT,
+    allowNull: false,
+    defaultValue: ''
   }
 }, {
   tableName: 'orders',

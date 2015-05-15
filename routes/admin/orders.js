@@ -100,9 +100,9 @@ router.post('/:order_id', function (req, res) {
 
   req.transaction(function (transaction) {
     return req.order.update(req.body, {
-      fields: ['status']
+      fields: ['status', 'notes']
     }).then(function () {
-      res.flash('success', 'Status Changed')
+      res.flash('success', 'Order Updated')
       res.redirect(`/admin/orders/${req.order.id}`)
     })
   })

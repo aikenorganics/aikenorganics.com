@@ -54,6 +54,7 @@ test('POST /admin/orders/:id is a 302', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent
     .post('/admin/orders/1')
+    .field('notes', 'test')
     .field('status', 'complete')
     .expect(302)
     .end(function (e) {
@@ -63,6 +64,7 @@ test('POST /admin/orders/:id is a 302', function (t) {
         transaction: t.transaction
       }).then(function (order) {
         t.equal(order.status, 'complete')
+        t.equal(order.notes, 'test')
         t.end()
       })
     })
