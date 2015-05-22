@@ -82,7 +82,8 @@ router.get('/', function (req, res) {
   // Get the orders!
   models.Order.findAll({
     where: where,
-    include: include
+    include: include,
+    order: [['created_at', 'desc']]
   }).then(function (orders) {
     var view = full ? 'admin/orders/full' : 'admin/orders/index'
     res.render(view, {orders: orders})

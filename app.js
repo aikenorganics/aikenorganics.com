@@ -46,8 +46,14 @@ app.use('/growers', require('./routes/growers'))
 app.use('/products', require('./routes/products'))
 app.use('/settings', require('./routes/settings'))
 
+// Home
 app.get('/', function (req, res) {
   res.render('index')
+})
+
+// Learn
+app.get('/learn', function (req, res) {
+  res.render('learn/index')
 })
 
 // 404
