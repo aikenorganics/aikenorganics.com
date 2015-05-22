@@ -3,7 +3,7 @@ var models = require('../models')
 var router = module.exports = express.Router()
 
 router.use(function (req, res, next) {
-  if (req.user && process.env.OPEN) return next()
+  if (req.user && req.market.open) return next()
   res.status(401).render('401')
 })
 

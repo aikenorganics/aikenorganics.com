@@ -8,6 +8,7 @@ router.use(function (req, res, next) {
 
 router.use('/users', require('./users'))
 router.use('/orders', require('./orders'))
+router.use('/market', require('./market'))
 router.use('/growers', require('./growers'))
 router.use('/products', require('./products'))
 router.use('/categories', require('./categories'))

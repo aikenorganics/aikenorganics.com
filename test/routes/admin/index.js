@@ -1,4 +1,5 @@
 require('./users')
+require('./market')
 require('./orders')
 require('./growers')
 require('./products')

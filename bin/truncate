@@ -2,6 +2,7 @@
 
 cat <<CMD | psql $DATABASE_URL
   truncate
+    markets,
     users,
     categories,
     growers,

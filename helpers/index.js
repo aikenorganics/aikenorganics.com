@@ -1,9 +1,7 @@
 var marked = require('marked')
 
-// Settings
-exports.open = !!process.env.OPEN
-
 // Markdown
+
 marked.setOptions({sanitize: true})
 exports.marked = marked
 

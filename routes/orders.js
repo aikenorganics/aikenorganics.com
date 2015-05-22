@@ -29,7 +29,7 @@ router.get('/current', function (req, res) {
 
 // Cancel
 router.post('/:order_id/cancel', function (req, res) {
-  if (!process.env.OPEN) return res.status(401).render('401')
+  if (!req.market.open) return res.status(401).render('401')
   if (!req.order) return res.status(404).render('404')
 
   // You can only cancel your own order.

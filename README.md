@@ -32,4 +32,3 @@ Aiken Organics
 * `BUCKET` - The S3 bucket to store files in.
 * `POSTMARK_API_TOKEN` - The Postmark API token.
 * `DOMAIN` - App domain.
-* `OPEN` - Is the market open?

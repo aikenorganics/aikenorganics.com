@@ -26,6 +26,12 @@ exports = module.exports = function (name, options, callback) {
       t.transaction = transaction
       app.set('transaction', transaction)
 
+      // Set a fake hostname
+      app.set('hostname', 'open.localhost')
+      t.hostname = function (hostname) {
+        app.set('hostname', hostname)
+      }
+
       // Request without the app requirement.
       t.request = function () {
         return request(app)

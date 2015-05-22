@@ -6,29 +6,37 @@ var models = require('../models')
 var users = require('../fixtures/users')
 var orders = require('../fixtures/orders')
 var growers = require('../fixtures/growers')
+var markets = require('../fixtures/markets')
 var products = require('../fixtures/products')
 var categories = require('../fixtures/categories')
 var userGrowers = require('../fixtures/user-growers')
 var productOrders = require('../fixtures/product-orders')
 
-Promise.all([
+// Markets
+Promise.all(markets.map(function (market) {
+  return models.Market.create(market)
+}))
 
-  // Users
-  Promise.all(users.map(function (user) {
-    return models.User.create(user)
-  })),
+.then(function () {
+  return Promise.all([
 
-  // Growers
-  Promise.all(growers.map(function (grower) {
-    return models.Grower.create(grower)
-  })),
+    // Users
+    Promise.all(users.map(function (user) {
+      return models.User.create(user)
+    })),
 
-  // Categories
-  Promise.all(categories.map(function (category) {
-    return models.Category.create(category)
-  }))
+    // Growers
+    Promise.all(growers.map(function (grower) {
+      return models.Grower.create(grower)
+    })),
 
-]).then(function () {
+    // Categories
+    Promise.all(categories.map(function (category) {
+      return models.Category.create(category)
+    }))
+
+  ])
+}).then(function () {
   return Promise.all([
 
     // Products
