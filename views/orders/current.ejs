@@ -17,9 +17,9 @@
         <% order.productOrders.forEach(function(po) { %>
           <tr>
             <td><a href='/products/<%= po.product.id %>'><%= po.product.name %></a></td>
-            <td>$<%= po.product.cost %></td>
+            <td>$<%= po.cost %></td>
             <td><%= po.quantity %></td>
-            <td><%= po.cost().toFixed(2) %></td>
+            <td><%= po.total().toFixed(2) %></td>
           </tr>
         <% }); %>
       </tbody>
@@ -27,7 +27,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td><strong>$<%= order.cost().toFixed(2) %></strong></td>
+        <td><strong>$<%= order.total().toFixed(2) %></strong></td>
       </tfoot>
     </table>
     <% if (locals.open) { %>

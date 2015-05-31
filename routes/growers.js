@@ -114,7 +114,12 @@ router.post('/:grower_id/products', function (req, res) {
 router.get('/:grower_id/orders', function (req, res) {
   if (!req.canEdit) return res.status(401).render('401')
 
+  var attrs = []
+  for (var attr in models.Product.attributes) attrs.push(attr)
+  attrs.push(['(select sum(quantity * cost) from product_orders where product_id = products.id)', 'total'])
+
   req.grower.getProducts({
+    attributes: attrs,
     where: {reserved: {gt: 0}}
   }).then(function (products) {
     res.render('growers/orders', {products: products})

@@ -21,9 +21,9 @@ module.exports = sql.define('orders', {
   createdAt: 'created_at',
   updatedAt: 'updated_at',
   instanceMethods: {
-    cost: function () {
+    total: function () {
       return this.productOrders.reduce(function (total, productOrder) {
-        return total + productOrder.cost()
+        return total + productOrder.total()
       }, 0)
     }
   }

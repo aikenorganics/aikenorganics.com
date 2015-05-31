@@ -6,6 +6,7 @@ test('Order reports the correct cost', function (t) {
   order.productOrders = []
 
   order.productOrders.push(models.ProductOrder.build({
+    cost: '5.75',
     quantity: 2
   }))
   order.productOrders[0].product = models.Product.build({
@@ -15,6 +16,7 @@ test('Order reports the correct cost', function (t) {
   })
 
   order.productOrders.push(models.ProductOrder.build({
+    cost: '2.50',
     quantity: 3
   }))
   order.productOrders[1].product = models.Product.build({
@@ -23,6 +25,6 @@ test('Order reports the correct cost', function (t) {
     supply: 10
   })
 
-  t.equal(order.cost(), 19)
+  t.equal(order.total(), 19)
   t.end()
 })

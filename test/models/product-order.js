@@ -3,14 +3,10 @@ var models = require('../../models')
 
 test('ProductOrder reports the correct cost', function (t) {
   var productOrder = models.ProductOrder.build({
+    cost: '5.75',
     quantity: 2
   })
-  productOrder.product = models.Product.build({
-    name: 'Peaches',
-    cost: '5.75',
-    supply: 15
-  })
-  t.equal(productOrder.cost(), 11.50)
+  t.equal(productOrder.total(), 11.50)
   t.end()
 })
 
@@ -164,4 +160,67 @@ test('Update: completed orders don\'t affect product.reserved', function (t) {
       })
     })
   })
+})
+
+test('Inserting a new product order sets cost', function (t) {
+  models.ProductOrder.create({
+    order_id: 2,
+    product_id: 1,
+    quantity: 3
+  }, {transaction: t.transaction}).then(function (productOrder) {
+    t.equal(productOrder.cost, '14.00')
+    t.end()
+  })
+})
+
+test('validate cost', function (t) {
+  models.ProductOrder.build({cost: 'asdf'})
+  .validate({
+    fields: ['cost']
+  }).then(function (e) {
+    if (e) return t.end()
+    t.end('Should be invalid')
+  })
+})
+
+test('validate cost', function (t) {
+  models.ProductOrder.build({cost: '.53'}).validate({
+    fields: ['cost']
+  }).then(t.end)
+})
+
+test('validate cost', function (t) {
+  models.ProductOrder.build({cost: '.53'}).validate({
+    fields: ['cost']
+  }).then(t.end)
+})
+
+test('validate cost', function (t) {
+  models.ProductOrder.build({cost: '32'}).validate({
+    fields: ['cost']
+  }).then(t.end)
+})
+
+test('validate cost', function (t) {
+  models.ProductOrder.build({cost: '32.25'}).validate({
+    fields: ['cost']
+  }).then(t.end)
+})
+
+test('validate cost', function (t) {
+  models.ProductOrder.build({cost: '$32.25'}).validate({
+    fields: ['cost']
+  }).then(t.end)
+})
+
+test('validate cost', function (t) {
+  models.ProductOrder.build({cost: '  10  '}).validate({
+    fields: ['cost']
+  }).then(t.end)
+})
+
+test('validate cost', function (t) {
+  models.ProductOrder.build({cost: '  $32.25  '}).validate({
+    fields: ['cost']
+  }).then(t.end)
 })

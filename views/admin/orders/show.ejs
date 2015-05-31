@@ -31,7 +31,7 @@
               <span class='label label-danger'>Oversold</span>
             <% } %>
           </td>
-          <td>$<%= productOrder.product.cost %></td>
+          <td>$<%= productOrder.cost %></td>
           <td>
             <form method='POST' action='/admin/product-orders/<%= productOrder.id %>' enctype='multipart/form-data'>
               <select class='form-control' name='quantity' onchange='this.form.submit()'>
@@ -43,7 +43,7 @@
               </select>
             </form>
           </td>
-          <td><%= productOrder.cost().toFixed(2) %></td>
+          <td><%= productOrder.total().toFixed(2) %></td>
           <td>
             <form method='POST' action='/admin/product-orders/<%= productOrder.id %>/remove' enctype='multipart/form-data'>
               <input type='hidden' name='return_to' value='<%= req.originalUrl %>'>
@@ -58,7 +58,7 @@
       <td></td>
       <td></td>
       <td></td>
-      <td><strong>$<%= order.cost().toFixed(2) %></strong></td>
+      <td><strong>$<%= order.total().toFixed(2) %></strong></td>
       <td></td>
     </tfoot>
   </table>
