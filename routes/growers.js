@@ -116,7 +116,11 @@ router.get('/:grower_id/orders', function (req, res) {
 
   var attrs = []
   for (var attr in models.Product.attributes) attrs.push(attr)
-  attrs.push(['(select sum(quantity * cost) from product_orders where product_id = products.id)', 'total'])
+  attrs.push([`(
+    select sum(quantity * cost) from product_orders
+    inner join orders on orders.id = product_orders.order_id
+    where product_id = products.id and orders.status = 'open'
+  )`, 'total'])
 
   req.grower.getProducts({
     attributes: attrs,
