@@ -173,6 +173,20 @@ test('Inserting a new product order sets cost', function (t) {
   })
 })
 
+test('Deleting an order updates reserved values', function (t) {
+  models.Order.findOne({where: {id: 1}}).then(function (order) {
+    order.destroy({transaction: t.transaction}).then(function () {
+      models.Product.findOne({
+        where: {id: 1},
+        transaction: t.transaction
+      }).then(function (product) {
+        t.equal(product.reserved, 0)
+        t.end()
+      })
+    })
+  })
+})
+
 test('validate cost', function (t) {
   models.ProductOrder.build({cost: 'asdf'})
   .validate({

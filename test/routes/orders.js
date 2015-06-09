@@ -21,7 +21,7 @@ test('POST /orders/:id/cancel is a 302', function (t) {
         where: {id: 2},
         transaction: t.transaction
       }).then(function (order) {
-        t.ok(order == null)
+        t.ok(order == null, 'the order was deleted')
         t.end()
       })
     })

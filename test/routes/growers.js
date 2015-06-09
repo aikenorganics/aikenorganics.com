@@ -278,3 +278,54 @@ test('GET /growers does not return inactive growers', function (t) {
   })
   .end(t.end)
 })
+
+test('GET /growers/:id as admin includes inactive products', function (t) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent
+    .get('/growers/2')
+    .expect(200)
+    .expect(function (res) {
+      if (!~res.text.indexOf('/products/7')) {
+        return 'should see inactive products'
+      }
+      if (!~res.text.indexOf('/products/4')) {
+        return 'should see active products'
+      }
+    })
+    .end(t.end)
+  })
+})
+
+test('GET /growers/:id as grower includes inactive products', function (t) {
+  t.signIn('info@planitfoods.com').then(function (agent) {
+    agent
+    .get('/growers/2')
+    .expect(200)
+    .expect(function (res) {
+      if (!~res.text.indexOf('/products/7')) {
+        return 'should see inactive products'
+      }
+      if (!~res.text.indexOf('/products/4')) {
+        return 'should see active products'
+      }
+    })
+    .end(t.end)
+  })
+})
+
+test('GET /growers/:id as non-grower does not include inactive products', function (t) {
+  t.signIn('info@planitfoods.com').then(function (agent) {
+    agent
+    .get('/growers/1')
+    .expect(200)
+    .expect(function (res) {
+      if (~res.text.indexOf('/products/8')) {
+        return 'should not see inactive products'
+      }
+      if (!~res.text.indexOf('/products/1')) {
+        return 'should see active products'
+      }
+    })
+    .end(t.end)
+  })
+})

@@ -84,4 +84,17 @@ will make this sauce go twice as far.`
 `Made with all natural brown rice and organic tomatoes, corn and sweet peas,
 this rice packs a lot of flavor and is the perfect side for our enchiladas or
 great on its own! (vegetarian and gluten free)`
+}, {
+  id: 8,
+  active: false,
+  name: 'Mild Chow Chow [Inactive]',
+  grower_id: 1,
+  cost: '5.00',
+  unit: 'Pint Jar',
+  supply: 7,
+  category_id: 2,
+  description:
+`Ingredients: Cabbage, onions, sugar, red bell pepper, vinegar, ground mustard,
+celery seed, salt, citric acid, turmeric, erythorbric acid to promote color
+retention.`
 }]

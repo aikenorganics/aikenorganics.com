@@ -43,7 +43,11 @@ router.post('/', function (req, res) {
 
 // Show
 router.get('/:grower_id', function (req, res) {
+  var where = {}
+  if (!req.canEdit) where.active = true
+
   req.grower.getProducts({
+    where: where,
     order: [['name', 'ASC']]
   }).then(function (products) {
     // Stupid, but necessary.
