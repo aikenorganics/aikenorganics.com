@@ -40,7 +40,7 @@
     "marked": "0.3.3",
     "mkdirp": "0.5.0",
     "multer": "0.1.8",
-    "ozymandias": "git://github.com/braddunbar/ozymandias.git#1cf4d2ee5b8570fd4bdce6f943c50b40115ba965",
+    "ozymandias": "git://github.com/braddunbar/ozymandias.git#bfc6540dc3db3ea37914c846a8f812943572d10e",
     "pg": "4.3.0",
     "pg-hstore": "2.3.1",
     "postmark": "1.0.0",
