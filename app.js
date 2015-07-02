@@ -14,10 +14,6 @@ app.disable('x-powered-by')
 
 // Middleware
 if (app.get('env') === 'production') app.use(require('./mid/secure'))
-app.use(function (req, res, next) {
-  res.locals.req = req
-  next()
-})
 app.use(session({
   signed: app.get('env') === 'production',
   name: 'aikenorganics',
