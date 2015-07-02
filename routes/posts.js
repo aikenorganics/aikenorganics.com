@@ -1,7 +1,7 @@
-var express = require('express')
+var ozymandias = require('ozymandias')
 var find = require('../mid/find')
 var models = require('../models')
-var router = module.exports = express.Router()
+var router = module.exports = ozymandias.Router()
 
 router.use(function (req, res, next) {
   if (req.admin) return next()

@@ -33,7 +33,7 @@
     "cookie-session": "1.1.0",
     "cookies": "0.5.0",
     "ejs": "2.3.1",
-    "express": "4.12.3",
+    "ozymandias": "braddunbar/ozymandias#360f8ba333fe27494e4c1ff1a53aa5162876f8c8",
     "gm": "1.17.0",
     "jquery": "2.1.3",
     "keygrip": "1.0.1",

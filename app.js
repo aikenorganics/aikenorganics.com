@@ -1,12 +1,12 @@
 // Vendor
-var express = require('express')
+var ozymandias = require('ozymandias')
 var compression = require('compression')
 var body = require('body-parser')
 var multer = require('multer')
 var session = require('cookie-session')
 
 // The App!
-var app = module.exports = express()
+var app = module.exports = ozymandias()
 app.set('view engine', 'ejs')
 app.engine('ejs', require('ejs').renderFile)
 app.locals = require('./helpers')
@@ -27,7 +27,7 @@ app.use(session({
 app.use(body.urlencoded({extended: false}))
 app.use(multer({dest: './tmp/uploads/', putSingleFilesInArray: true}))
 app.use(compression())
-app.use(express.static('public'))
+app.use(ozymandias.static('public'))
 app.use(require('./mid/layout'))
 app.use(require('./mid/market'))
 app.use(require('./mid/cart'))

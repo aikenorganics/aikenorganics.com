@@ -1,6 +1,6 @@
-var express = require('express')
+var ozymandias = require('ozymandias')
 var request = require('request')
-var router = module.exports = express.Router()
+var router = module.exports = ozymandias.Router()
 
 var BUCKET = process.env.BUCKET
 

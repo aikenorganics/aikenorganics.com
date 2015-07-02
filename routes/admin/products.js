@@ -1,6 +1,6 @@
 var Sql = require('sequelize')
-var express = require('express')
-var router = module.exports = express.Router()
+var ozymandias = require('ozymandias')
+var router = module.exports = ozymandias.Router()
 var models = require('../../models')
 
 router.get('/', function (req, res) {

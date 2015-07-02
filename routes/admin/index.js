@@ -1,5 +1,5 @@
-var express = require('express')
-var router = module.exports = express.Router()
+var ozymandias = require('ozymandias')
+var router = module.exports = ozymandias.Router()
 
 router.use(function (req, res, next) {
   if (!req.admin) return res.status(401).render('401')

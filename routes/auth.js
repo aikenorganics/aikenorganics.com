@@ -1,11 +1,11 @@
 var bcrypt = require('bcrypt')
 var crypto = require('crypto')
-var express = require('express')
+var ozymandias = require('ozymandias')
 var mailer = require('../lib/mailer')
 var find = require('../mid/find')
 var models = require('../models')
 
-var router = module.exports = express.Router()
+var router = module.exports = ozymandias.Router()
 
 router.param('token_id', find(models.Token))
 

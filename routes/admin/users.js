@@ -1,8 +1,8 @@
-var express = require('express')
+var ozymandias = require('ozymandias')
 var models = require('../../models')
 var find = require('../../mid/find')
 var upload = require('../../mid/image-upload')
-var router = module.exports = express.Router()
+var router = module.exports = ozymandias.Router()
 
 router.param('user_id', find(models.User, {name: '_user'}))
 

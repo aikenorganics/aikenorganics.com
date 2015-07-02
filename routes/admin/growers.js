@@ -1,5 +1,5 @@
-var express = require('express')
-var router = module.exports = express.Router()
+var ozymandias = require('ozymandias')
+var router = module.exports = ozymandias.Router()
 var find = require('../../mid/find')
 var models = require('../../models')
 
