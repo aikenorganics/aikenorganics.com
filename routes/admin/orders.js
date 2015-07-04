@@ -15,6 +15,9 @@ router.param('order_id', find(models.Order, {
     model: models.ProductOrder,
     as: 'productOrders',
     include: [{model: models.Product, as: 'product'}]
+  }, {
+    as: 'location',
+    model: models.Location
   }]
 }))
 
@@ -93,7 +96,11 @@ router.get('/', function (req, res) {
 // Show
 router.get('/:order_id', function (req, res) {
   if (!req.order) return res.status(404).render('404')
-  res.render('admin/orders/show')
+  models.Location.findAll().then(function (locations) {
+    res.render('admin/orders/show', {
+      locations: locations
+    })
+  })
 })
 
 // Update
@@ -102,7 +109,7 @@ router.post('/:order_id', function (req, res) {
 
   req.transaction(function (transaction) {
     return req.order.update(req.body, {
-      fields: ['status', 'notes']
+      fields: ['status', 'notes', 'location_id']
     }).then(function () {
       res.flash('success', 'Order Updated')
       res.redirect(`/admin/orders/${req.order.id}`)

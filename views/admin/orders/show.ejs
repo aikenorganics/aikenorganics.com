@@ -63,10 +63,20 @@
     </tfoot>
   </table>
 
-  <h4>Notes</h4>
   <form method='POST' action='/admin/orders/<%= order.id %>' enctype='multipart/form-data'>
     <div class='form-group'>
+      <label>Notes</label>
       <textarea class='form-control' name='notes' rows='10'><%= order.notes %></textarea>
+    </div>
+    <div class='form-group'>
+      <label>Location</label>
+      <select class='form-control' name='location_id'>
+        <% locations.forEach(function (location) { %>
+          <option value='<%= location.id %>' <% if (location.id === order.location_id) { %>selected<% } %>>
+            <%= location.name %>
+          </option>
+        <% }) %>
+      </select>
     </div>
     <button type='submit' class='btn btn-primary'>Save</button>
   </form>
