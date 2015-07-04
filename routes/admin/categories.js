@@ -3,11 +3,6 @@ var find = require('../../mid/find')
 var models = require('../../models')
 var router = module.exports = ozymandias.Router()
 
-router.use(function (req, res, next) {
-  if (req.admin) return next()
-  res.status(401).render('401')
-})
-
 router.param('category_id', find(models.Category))
 
 router.get('/', function (req, res) {
