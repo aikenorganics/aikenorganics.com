@@ -8,6 +8,7 @@ var orders = require('../fixtures/orders')
 var growers = require('../fixtures/growers')
 var markets = require('../fixtures/markets')
 var products = require('../fixtures/products')
+var locations = require('../fixtures/locations')
 var categories = require('../fixtures/categories')
 var userGrowers = require('../fixtures/user-growers')
 var productOrders = require('../fixtures/product-orders')
@@ -33,6 +34,11 @@ Promise.all(markets.map(function (market) {
     // Categories
     Promise.all(categories.map(function (category) {
       return models.Category.create(category)
+    })),
+
+    // Locations
+    Promise.all(locations.map(function (location) {
+      return models.Location.create(location)
     }))
 
   ])

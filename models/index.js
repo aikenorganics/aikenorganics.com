@@ -104,3 +104,13 @@ UserGrower.belongsTo(Grower, {
   as: 'grower',
   foreignKey: 'grower_id'
 })
+
+Location.hasMany(Order, {
+  as: 'orders',
+  foreignKey: 'location_id'
+})
+
+Order.belongsTo(Location, {
+  as: 'location',
+  foreignKey: 'location_id'
+})

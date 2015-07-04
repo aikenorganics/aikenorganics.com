@@ -12,5 +12,6 @@ cat <<CMD | psql $DATABASE_URL
     tokens,
     users,
     orders,
-    user_growers;
+    user_growers,
+    locations;
 CMD
