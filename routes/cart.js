@@ -8,11 +8,29 @@ router.use(function (req, res, next) {
 })
 
 router.get('/', function (req, res) {
-  models.Product.findAll({
-    where: {id: {in: req.cart.ids()}},
-    order: [['name', 'ASC']]
-  }).then(function (products) {
-    res.render('cart/index', {products: products})
+  Promise.all([
+    models.Product.findAll({
+      where: {id: {in: req.cart.ids()}},
+      order: [['name', 'ASC']]
+    }),
+    models.Location.findAll(),
+    models.Order.findOne({
+      where: {
+        status: 'open',
+        user_id: req.user.id
+      },
+      include: [{
+        model: models.ProductOrder,
+        as: 'productOrders',
+        include: [{model: models.Product, as: 'product'}]
+      }]
+    })
+  ]).then(function (results) {
+    res.render('cart/index', {
+      products: results[0],
+      locations: results[1],
+      order: results[2]
+    })
   })
 })
 
@@ -43,16 +61,17 @@ router.post('/', function (req, res) {
 
 router.post('/checkout', function (req, res) {
   req.transaction(function (transaction) {
-    return new Checkout(req.user, req.cart, transaction).process().then(function () {
+    return new Checkout(req, transaction).process().then(function () {
       req.cart.clear()
       res.redirect('/orders/current')
     })
   })
 })
 
-var Checkout = function (user, cart, transaction) {
-  this.user = user
-  this.cart = cart
+var Checkout = function (req, transaction) {
+  this.req = req
+  this.user = req.user
+  this.cart = req.cart
   this.transaction = transaction
 }
 
@@ -73,7 +92,8 @@ Checkout.prototype = {
     return models.Order.findOrCreate({
       where: {
         status: 'open',
-        user_id: this.user.id
+        user_id: this.user.id,
+        location_id: this.req.body.location_id
       }
     }, {transaction: this.transaction}).then(function (results) {
       this.order = results[0]

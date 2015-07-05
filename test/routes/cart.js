@@ -46,6 +46,7 @@ test('POST /cart/checkout', function (t) {
       if (e) return t.end(e)
       agent
       .post('/cart/checkout')
+      .field('location_id', 1)
       .expect(302)
       .end(function (e) {
         if (e) return t.end(e)
