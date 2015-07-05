@@ -34,7 +34,10 @@ router.get('/', function (req, res, next) {
 // Index
 router.get('/', function (req, res) {
   var full = req.query.full === '1'
-  var include = [{as: 'user', model: models.User}]
+  var include = [
+    {as: 'user', model: models.User},
+    {as: 'location', model: models.Location}
+  ]
 
   // Default status
   if (!Array.isArray(req.query.status)) req.query.status = ['open']

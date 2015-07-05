@@ -46,14 +46,23 @@ test('POST /cart/checkout', function (t) {
       if (e) return t.end(e)
       agent
       .post('/cart/checkout')
-      .field('location_id', 1)
+      .field('location_id', 2)
       .expect(302)
       .end(function (e) {
         if (e) return t.end(e)
-        models.Product.findOne({
-          where: {id: 1},
-          transaction: t.transaction
-        }).then(function (product) {
+        Promise.all([
+          models.Product.findOne({
+            where: {id: 1},
+            transaction: t.transaction
+          }),
+          models.Order.findOne({
+            where: {id: 1},
+            transaction: t.transaction
+          })
+        ]).then(function (results) {
+          var product = results[0]
+          var order = results[1]
+          t.equal(order.location_id, 2)
           t.equal(product.reserved, 4)
           t.end()
         })

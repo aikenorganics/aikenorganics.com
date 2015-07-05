@@ -92,11 +92,21 @@ Checkout.prototype = {
     return models.Order.findOrCreate({
       where: {
         status: 'open',
-        user_id: this.user.id,
+        user_id: this.user.id
+      },
+      defaults: {
         location_id: this.req.body.location_id
       }
     }, {transaction: this.transaction}).then(function (results) {
       this.order = results[0]
+      return this.updateOrder()
+    }.bind(this))
+  },
+
+  updateOrder: function () {
+    return this.order.update({
+      location_id: this.req.body.location_id
+    }, {transaction: this.transaction}).then(function () {
       return this.createProductOrders()
     }.bind(this))
   },

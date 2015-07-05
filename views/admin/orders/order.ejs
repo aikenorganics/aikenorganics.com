@@ -5,6 +5,8 @@
 <h3>
   <a href='/admin/users/<%= order.user.id %>/edit'><%= order.user.name() %></a>
   <small><%= order.user.email %></small>
+  -
+  <%= order.location.name %>
 </h3>
 <table class='table'>
   <thead>
