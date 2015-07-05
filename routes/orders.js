@@ -27,7 +27,9 @@ router.get('/current', function (req, res) {
         model: models.Location
       }]
     }),
-    models.Location.findAll()
+    models.Location.findAll({
+      order: [['name', 'ASC']]
+    })
   ]).then(function (results) {
     res.render('orders/current', {
       order: results[0],

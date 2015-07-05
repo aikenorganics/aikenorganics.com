@@ -99,7 +99,9 @@ router.get('/', function (req, res) {
 // Show
 router.get('/:order_id', function (req, res) {
   if (!req.order) return res.status(404).render('404')
-  models.Location.findAll().then(function (locations) {
+  models.Location.findAll({
+    order: [['name', 'ASC']]
+  }).then(function (locations) {
     res.render('admin/orders/show', {
       locations: locations
     })

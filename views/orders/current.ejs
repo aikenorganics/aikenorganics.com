@@ -41,7 +41,7 @@
     <% if (locals.open) { %>
       <form method='POST' action='/orders/<%= order.id %>' enctype='multipart/form-data'>
         <div class='form-group'>
-          <label>Location</label>
+          <label>Pickup Location</label>
           <select class='form-control' name='location_id'>
             <% locations.forEach(function (location) { %>
               <option value='<%= location.id %>' <% if (location.id === order.location_id) { %>selected<% } %>>

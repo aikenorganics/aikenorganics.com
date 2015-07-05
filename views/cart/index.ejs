@@ -36,7 +36,7 @@
   <% if (cart.size()) { %>
     <form method='POST' action='/cart/checkout' enctype='multipart/form-data'>
       <div class='form-group'>
-        <label>Location</label>
+        <label>Pickup Location</label>
         <select class='form-control' name='location_id'>
           <% locations.forEach(function (location) { %>
             <option value='<%= location.id %>' <% if (locals.order && location.id === order.location_id) { %>selected<% } %>>

@@ -13,7 +13,9 @@ router.get('/', function (req, res) {
       where: {id: {in: req.cart.ids()}},
       order: [['name', 'ASC']]
     }),
-    models.Location.findAll(),
+    models.Location.findAll({
+      order: [['name', 'ASC']]
+    }),
     models.Order.findOne({
       where: {
         status: 'open',
