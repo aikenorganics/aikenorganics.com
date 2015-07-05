@@ -12,18 +12,40 @@ router.param('order_id', find(models.Order))
 
 // Current
 router.get('/current', function (req, res) {
-  models.Order.findOne({
-    where: {
-      status: 'open',
-      user_id: req.user.id
-    },
-    include: [{
-      model: models.ProductOrder,
-      as: 'productOrders',
-      include: [{model: models.Product, as: 'product'}]
-    }]
-  }).then(function (order) {
-    res.render('orders/current', {order: order})
+  Promise.all([
+    models.Order.findOne({
+      where: {
+        status: 'open',
+        user_id: req.user.id
+      },
+      include: [{
+        model: models.ProductOrder,
+        as: 'productOrders',
+        include: [{model: models.Product, as: 'product'}]
+      }, {
+        as: 'location',
+        model: models.Location
+      }]
+    }),
+    models.Location.findAll()
+  ]).then(function (results) {
+    res.render('orders/current', {
+      order: results[0],
+      locations: results[1]
+    })
+  })
+})
+
+// Update
+router.post('/:order_id', function (req, res) {
+  req.transaction(function (transaction) {
+    return req.order.update(req.body, {
+      transaction: transaction,
+      fields: ['location_id']
+    }).then(function () {
+      res.flash('success', 'Saved')
+      res.redirect('/orders/current')
+    })
   })
 })
 

@@ -2,8 +2,16 @@
 
   <% include ../subnav %>
 
+  <% if (locals.open) { %>
+    <form method='POST' action='/orders/<%= order.id %>/cancel' enctype='multipart/form-data' class='pull-right'>
+      <button type='submit' class='btn btn-danger' data-confirm='Are you sure?'>
+        Cancel Order
+      </button>
+    </form>
+  <% } %>
   <h1>Current Order</h1>
   <% if (locals.order) { %>
+    <h3>Pickup Location: <%= order.location.name %></h3>
     <table class='table'>
       <thead>
         <tr>
@@ -31,10 +39,20 @@
       </tfoot>
     </table>
     <% if (locals.open) { %>
-      <form method='POST' action='/orders/<%= order.id %>/cancel' enctype='multipart/form-data'>
+      <form method='POST' action='/orders/<%= order.id %>' enctype='multipart/form-data'>
+        <div class='form-group'>
+          <label>Location</label>
+          <select class='form-control' name='location_id'>
+            <% locations.forEach(function (location) { %>
+              <option value='<%= location.id %>' <% if (location.id === order.location_id) { %>selected<% } %>>
+                <%= location.name %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
         <div class='text-right'>
-          <button type='submit' class='btn btn-danger'>
-            Cancel Order
+          <button type='submit' class='btn btn-primary'>
+            Update Order
           </button>
         </div>
       </form>
