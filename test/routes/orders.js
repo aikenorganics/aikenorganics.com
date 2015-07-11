@@ -65,3 +65,22 @@ test('Cannout update someone else\'s order', function (t) {
     .end(t.end)
   })
 })
+
+test('Canceling a missing order returns a 404', function (t) {
+  t.signIn('user@example.com').then(function (agent) {
+    agent
+    .post('/orders/123456789/cancel')
+    .expect(404)
+    .end(t.end)
+  })
+})
+
+test('Updating a missing order returns a 404', function (t) {
+  t.signIn('user@example.com').then(function (agent) {
+    agent
+    .post('/orders/123456789')
+    .field('location_id', 2)
+    .expect(404)
+    .end(t.end)
+  })
+})
