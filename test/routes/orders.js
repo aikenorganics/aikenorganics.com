@@ -28,6 +28,25 @@ test('POST /orders/:id/cancel is a 302', function (t) {
   })
 })
 
+test('POST /orders/:id is a 302', function (t) {
+  t.signIn('user@example.com').then(function (agent) {
+    agent
+    .post('/orders/2')
+    .field('location_id', 2)
+    .expect(302)
+    .end(function (e) {
+      if (e) return t.end(e)
+      models.Order.findOne({
+        where: {id: 2},
+        transaction: t.transaction
+      }).then(function (order) {
+        t.is(order.location_id, 2)
+        t.end()
+      })
+    })
+  })
+})
+
 test('Cannot cancel someone else\'s order', function (t) {
   t.signIn('user@example.com').then(function (agent) {
     agent
