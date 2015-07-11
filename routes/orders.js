@@ -40,6 +40,8 @@ router.get('/current', function (req, res) {
 
 // Update
 router.post('/:order_id', function (req, res) {
+  if (!req.market.open) return res.status(401).render('401')
+
   // You can only update your own order.
   if (req.user.id !== req.order.user_id) {
     return res.status(401).render('401')
