@@ -40,6 +40,11 @@ router.get('/current', function (req, res) {
 
 // Update
 router.post('/:order_id', function (req, res) {
+  // You can only update your own order.
+  if (req.user.id !== req.order.user_id) {
+    return res.status(401).render('401')
+  }
+
   req.transaction(function (transaction) {
     return req.order.update(req.body, {
       transaction: transaction,
