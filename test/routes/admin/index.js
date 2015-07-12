@@ -3,6 +3,7 @@ require('./market')
 require('./orders')
 require('./growers')
 require('./products')
+require('./locations')
 require('./categories')
 require('./product-orders')
 
