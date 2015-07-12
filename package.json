@@ -43,11 +43,11 @@
     "pg-hstore": "2.3.2",
     "postmark": "1.0.0",
     "qs": "2.4.1",
-    "request": "2.54.0",
+    "request": "2.58.0",
     "sequelize": "2.0.5",
     "sequelize-cli": "1.5.0",
     "standard": "3.2.1",
-    "supertest": "0.15.0",
+    "supertest": "1.0.1",
     "tape": "4.0.0",
     "uglify-js": "2.4.23"
   }
