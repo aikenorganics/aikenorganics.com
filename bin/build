@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-lessc --compress css/app.less | autoprefixer > public/css/app.css
+lessc css/app.less | autoprefixer > public/css/app.css
 
 browserify js/app.js | uglifyjs > public/js/app.js
 
