@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+pg_dump \
+  --schema-only \
+  --clean \
+  --no-owner \
+  --no-privileges \
+  $DATABASE_URL > schema.sql
