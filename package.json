@@ -36,7 +36,7 @@
     "keygrip": "1.0.1",
     "less": "2.5.1",
     "marked": "0.3.3",
-    "mkdirp": "0.5.0",
+    "mkdirp": "0.5.1",
     "multer": "0.1.8",
     "ozymandias": "git://github.com/braddunbar/ozymandias.git#0de97321b944166cccf8259b232a359ef5d68d33",
     "pg": "4.4.0",
