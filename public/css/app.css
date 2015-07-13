@@ -6664,8 +6664,8 @@ button.close {
 #message.active {
   opacity: 1;
   visibility: visible;
-  -webkit-transition-delay: 0;
-          transition-delay: 0;
+  -webkit-transition-delay: 0s;
+          transition-delay: 0s;
 }
 #message .alert {
   padding: 5px;

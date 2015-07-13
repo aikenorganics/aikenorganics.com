@@ -1,13 +1,13 @@
 <nav class='navbar navbar-inverse navbar-fixed-top'>
-  <% if (locals.flash) { %>
-    <div id='message' class='active'>
+  <div id='message' <% if (locals.flash) { %>class='active'<% } %>>
+    <% if (locals.flash) { %>
       <% if (flash.success) { %>
         <span class='alert alert-success'><%= flash.success %></span>
       <% } else if (flash.error) { %>
         <span class='alert alert-danger'><%= flash.error %></span>
       <% } %>
-    </div>
-  <% } %>
+    <% } %>
+  </div>
   <div class='container'>
     <div class="navbar-header">
       <button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar-collapse'>
