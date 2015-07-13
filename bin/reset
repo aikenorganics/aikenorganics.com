@@ -3,9 +3,6 @@
 # Load the schema.
 psql $DATABASE_URL < schema.sql
 
-# Migrate the test database.
-sequelize db:migrate
-
 # Fill it with fixtures.
 ./bin/fixtures
 

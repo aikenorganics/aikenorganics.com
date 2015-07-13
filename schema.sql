@@ -326,8 +326,8 @@ SET default_with_oids = false;
 
 CREATE TABLE categories (
     id integer NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
     name character varying(255) DEFAULT ''::character varying NOT NULL,
     "position" double precision DEFAULT 0 NOT NULL
 );
@@ -358,8 +358,8 @@ ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 
 CREATE TABLE growers (
     id integer NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
     name character varying(255) DEFAULT ''::character varying NOT NULL,
     email character varying(255) DEFAULT ''::character varying NOT NULL,
     url character varying(255) DEFAULT ''::character varying NOT NULL,
@@ -376,8 +376,8 @@ CREATE TABLE growers (
 
 CREATE TABLE locations (
     id integer NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
     name character varying(255) DEFAULT ''::character varying NOT NULL
 );
 
@@ -407,8 +407,8 @@ ALTER SEQUENCE locations_id_seq OWNED BY locations.id;
 
 CREATE TABLE markets (
     id integer NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
     open boolean DEFAULT false NOT NULL,
     domain character varying(255) DEFAULT ''::character varying NOT NULL
 );
@@ -439,8 +439,8 @@ ALTER SEQUENCE markets_id_seq OWNED BY markets.id;
 
 CREATE TABLE orders (
     id integer NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
     user_id integer NOT NULL,
     status order_status DEFAULT 'open'::order_status NOT NULL,
     notes text DEFAULT ''::text NOT NULL,
@@ -473,8 +473,8 @@ ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
 
 CREATE TABLE posts (
     id integer NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
     content text NOT NULL,
     author_id integer NOT NULL,
     title character varying(255) DEFAULT ''::character varying NOT NULL
@@ -506,8 +506,8 @@ ALTER SEQUENCE posts_id_seq OWNED BY posts.id;
 
 CREATE TABLE product_orders (
     id integer NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
     order_id integer NOT NULL,
     product_id integer NOT NULL,
     quantity integer DEFAULT 0 NOT NULL,
@@ -540,8 +540,8 @@ ALTER SEQUENCE product_orders_id_seq OWNED BY product_orders.id;
 
 CREATE TABLE products (
     id integer NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
     name character varying(255) DEFAULT ''::character varying NOT NULL,
     grower_id integer NOT NULL,
     cost numeric(10,2) DEFAULT 0 NOT NULL,
@@ -611,8 +611,8 @@ CREATE TABLE tokens (
 
 CREATE TABLE user_growers (
     id integer NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
     user_id integer NOT NULL,
     grower_id integer NOT NULL
 );
@@ -643,8 +643,8 @@ ALTER SEQUENCE user_growers_id_seq OWNED BY user_growers.id;
 
 CREATE TABLE users (
     id integer NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
     email character varying(255) NOT NULL,
     password character varying(255) NOT NULL,
     is_admin boolean DEFAULT false NOT NULL,
