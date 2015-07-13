@@ -1,75 +1,13 @@
-#!/usr/bin/env node
+#!/bin/sh -e
 
-var models = require('../models')
-
-// Fixtures
-var users = require('../fixtures/users')
-var orders = require('../fixtures/orders')
-var growers = require('../fixtures/growers')
-var markets = require('../fixtures/markets')
-var products = require('../fixtures/products')
-var locations = require('../fixtures/locations')
-var categories = require('../fixtures/categories')
-var userGrowers = require('../fixtures/user-growers')
-var productOrders = require('../fixtures/product-orders')
-
-// Markets
-Promise.all(markets.map(function (market) {
-  return models.Market.create(market)
-}))
-
-.then(function () {
-  return Promise.all([
-
-    // Users
-    Promise.all(users.map(function (user) {
-      return models.User.create(user)
-    })),
-
-    // Growers
-    Promise.all(growers.map(function (grower) {
-      return models.Grower.create(grower)
-    })),
-
-    // Categories
-    Promise.all(categories.map(function (category) {
-      return models.Category.create(category)
-    })),
-
-    // Locations
-    Promise.all(locations.map(function (location) {
-      return models.Location.create(location)
-    }))
-
-  ])
-}).then(function () {
-  return Promise.all([
-
-    // Products
-    Promise.all(products.map(function (product) {
-      return models.Product.create(product)
-    })),
-
-    // Orders
-    Promise.all(orders.map(function (order) {
-      return models.Order.create(order)
-    })),
-
-    // User Growers
-    Promise.all(userGrowers.map(function (userGrower) {
-      return models.UserGrower.create(userGrower)
-    }))
-
-  ])
-}).then(function () {
-  // Product Orders
-  return Promise.all(productOrders.map(function (productOrder) {
-    return models.ProductOrder.create(productOrder)
-  }))
-})
-.then(function () {
-  models.sequelize.close()
-})
-.catch(function (e) {
-  console.log(e.stack)
-})
+cat \
+  fixtures/markets.sql \
+  fixtures/users.sql \
+  fixtures/growers.sql \
+  fixtures/categories.sql \
+  fixtures/locations.sql \
+  fixtures/products.sql \
+  fixtures/orders.sql \
+  fixtures/user-growers.sql \
+  fixtures/product-orders.sql \
+  | psql $DATABASE_URL
