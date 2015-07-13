@@ -50,7 +50,6 @@ ALTER TABLE ONLY public.orders DROP CONSTRAINT orders_pkey;
 ALTER TABLE ONLY public.markets DROP CONSTRAINT markets_pkey;
 ALTER TABLE ONLY public.locations DROP CONSTRAINT locations_pkey;
 ALTER TABLE ONLY public.categories DROP CONSTRAINT categories_pkey;
-ALTER TABLE ONLY public."SequelizeMeta" DROP CONSTRAINT "SequelizeMeta_pkey";
 ALTER TABLE public.users ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE public.user_growers ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE public.products ALTER COLUMN id DROP DEFAULT;
@@ -82,7 +81,6 @@ DROP TABLE public.locations;
 DROP TABLE public.growers;
 DROP SEQUENCE public.categories_id_seq;
 DROP TABLE public.categories;
-DROP TABLE public."SequelizeMeta";
 DROP FUNCTION public.update_status();
 DROP FUNCTION public.update_reserved();
 DROP FUNCTION public.set_product_order_cost();
@@ -321,15 +319,6 @@ CREATE FUNCTION update_status() RETURNS trigger
 SET default_tablespace = '';
 
 SET default_with_oids = false;
-
---
--- Name: SequelizeMeta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE "SequelizeMeta" (
-    name character varying(255) NOT NULL
-);
-
 
 --
 -- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
@@ -753,14 +742,6 @@ ALTER TABLE ONLY user_growers ALTER COLUMN id SET DEFAULT nextval('user_growers_
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
-
-
---
--- Name: SequelizeMeta_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY "SequelizeMeta"
-    ADD CONSTRAINT "SequelizeMeta_pkey" PRIMARY KEY (name);
 
 
 --
