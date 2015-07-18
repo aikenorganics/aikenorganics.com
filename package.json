@@ -45,9 +45,11 @@
     "qs": "4.0.0",
     "request": "2.58.0",
     "sequelize": "2.0.5",
+    "uglify-js": "2.4.23"
+  },
+  "devDependencies": {
     "standard": "3.2.1",
     "supertest": "1.0.1",
-    "tape": "4.0.0",
-    "uglify-js": "2.4.23"
+    "tape": "4.0.0"
   }
 }
