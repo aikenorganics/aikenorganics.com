@@ -30,13 +30,15 @@ router.post('/forgot', function (req, res) {
       id: crypto.randomBytes(20).toString('hex'),
       expires_at: expires_at
     }).then(function (token) {
-      mailer.sendEmail({
-        To: user.email,
-        From: 'support@aikenorganics.com',
-        Subject: 'Aiken Organics: Password Reset',
-        TextBody: `http://${req.get('host')}/auth/reset/${token.id}`
-      }, function (e) {
-        if (e) return res.status(500).render('500')
+      mailer({
+        to: user.email,
+        subject: 'Aiken Organics: Password Reset',
+        body: `http://${req.get('host')}/auth/reset/${token.id}`
+      }, function (e, data) {
+        if (e) {
+          console.error(e)
+          return res.status(500).render('500')
+        }
         res.flash('success', 'Thanks! We sent you an email to reset your password.')
         res.redirect('/')
       })

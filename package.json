@@ -41,7 +41,6 @@
     "ozymandias": "git://github.com/braddunbar/ozymandias.git#baa1e972160851b87a5953db28bb3d37904bb1d2",
     "pg": "4.4.0",
     "pg-hstore": "2.3.2",
-    "postmark": "1.0.0",
     "qs": "4.0.0",
     "request": "2.58.0",
     "sequelize": "2.0.5",
