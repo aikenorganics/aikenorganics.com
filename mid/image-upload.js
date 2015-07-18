@@ -7,7 +7,7 @@ var mkdirp = require('mkdirp')
 var TMP = './tmp/uploads/'
 var ASSETS = './public/assets/'
 
-var s3 = new aws.S3()
+var s3 = new aws.S3({apiVersion: '2006-03-01'})
 var BUCKET = process.env.BUCKET
 
 module.exports = function (name) {
