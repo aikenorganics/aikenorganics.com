@@ -4,7 +4,7 @@
   "description": "aikenorganics.com",
   "main": "index.js",
   "engines": {
-    "iojs": "2.3.3"
+    "iojs": "2.4.0"
   },
   "scripts": {
     "build": "./bin/build",
