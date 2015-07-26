@@ -37,7 +37,12 @@ router.get('/', function (req, res) {
 })
 
 router.post('/', function (req, res) {
-  if (!req.user) return res.status(401).render('401')
+  if (!req.user) {
+    return res.status(401).format({
+      html: function () { res.render('401') },
+      json: function () { res.json({message: 'Access Denied'}) }
+    })
+  }
 
   var id = req.body.product_id
   var quantity = +req.body.quantity
@@ -50,14 +55,33 @@ router.post('/', function (req, res) {
       model: models.Grower
     }]
   }).then(function (product) {
-    if (!product) return res.status(404).render('404')
-    if (product.grower.active) {
-      req.cart.update(product, quantity)
-      res.flash('success', 'Updated.')
-    } else {
-      res.flash('error', 'That product is unavailable.')
+    if (!product || !product.grower.active) {
+      return res.format({
+        html: function () {
+          res.flash('error', 'That product is unavailable')
+          res.redirect(return_to || '/products/' + id)
+        },
+        json: function () {
+          res.json({message: 'That product is unavailable'})
+        }
+      })
     }
-    res.redirect(return_to || '/products/' + id)
+
+    req.cart.update(product, quantity)
+
+    res.format({
+      html: function () {
+        res.redirect(return_to || '/products/' + id)
+      },
+      json: function () {
+        res.json({
+          product_id: id,
+          quantity: quantity,
+          available: product.available(),
+          message: 'Cart updated.'
+        })
+      }
+    })
   })
 })
 
