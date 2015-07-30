@@ -99,11 +99,31 @@ router.get('/', function (req, res) {
 // Show
 router.get('/:order_id', function (req, res) {
   if (!req.order) return res.status(404).render('404')
-  models.Location.findAll({
-    order: [['name', 'ASC']]
-  }).then(function (locations) {
+  Promise.all([
+    models.Location.findAll({
+      order: [['name', 'ASC']]
+    }),
+    models.Product.findAll({
+      where: {
+        id: {
+          $notIn: req.order.productOrders.map(function (productOrder) {
+            return productOrder.product_id
+          })
+        },
+        supply: {$gt: models.sequelize.literal('reserved')},
+        active: true
+      },
+      order: [['name', 'ASC']],
+      include: [{
+        model: models.Grower,
+        as: 'grower',
+        where: {active: true}
+      }]
+    })
+  ]).then(function (results) {
     res.render('admin/orders/show', {
-      locations: locations
+      locations: results[0],
+      products: results[1]
     })
   })
 })

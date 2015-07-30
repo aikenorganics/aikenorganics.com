@@ -55,7 +55,23 @@
       <% }) %>
     </tbody>
     <tfoot>
-      <td></td>
+      <td>
+        <form method='post' action='/admin/product-orders' enctype='multipart/form-data' class='form-inline'>
+          <input type='hidden' name='order_id' value='<%= order.id %>'>
+          <input type='hidden' name='quantity' value='1'>
+          <div class='input-group'>
+            <select name='product_id' class='form-control'>
+              <option>Add to Order…</option>
+              <% products.forEach(function (product) { %>
+                <option value='<%= product.id %>'><%= product.name %></option>
+              <% }) %>
+            </select>
+            <div class='input-group-btn'>
+              <button type='submit' class='btn btn-default'>Add</button>
+            </div>
+          </div>
+        </form>
+      </td>
       <td></td>
       <td></td>
       <td><strong>$<%= order.total().toFixed(2) %></strong></td>

@@ -37,3 +37,27 @@ test('POST /product-orders/:id is a 302', function (t) {
     })
   })
 })
+
+test('POST /product-orders is a 302', function (t) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent
+    .post('/admin/product-orders')
+    .field('quantity', 1)
+    .field('order_id', 1)
+    .field('product_id', 3)
+    .expect(302)
+    .end(function (e) {
+      if (e) return t.end(e)
+      models.ProductOrder.findOne({
+        where: {
+          order_id: 1,
+          product_id: 3
+        },
+        transaction: t.transaction
+      }).then(function (productOrder) {
+        t.equal(productOrder.quantity, 1)
+        t.end()
+      })
+    })
+  })
+})
