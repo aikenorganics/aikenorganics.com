@@ -11,7 +11,7 @@
           </div>
         <% } else { %>
           <div class='form-group'>
-            <label for='password'>New Password</label>
+            <label for='password'>New Password for <%= token.user.email %></label>
             <input type='password' id='password' name='password' class='form-control' required autofocus>
           </div>
         <% } %>

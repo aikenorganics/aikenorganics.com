@@ -7,7 +7,9 @@ var models = require('../models')
 
 var router = module.exports = ozymandias.Router()
 
-router.param('token_id', find(models.Token))
+router.param('token_id', find(models.Token, {
+  include: [{model: models.User, as: 'user'}]
+}))
 
 router.get('/forgot', function (req, res) {
   res.render('auth/forgot')
@@ -75,12 +77,10 @@ router.post('/reset/:token_id', function (req, res) {
       console.log(e)
       return res.status(500).render('500')
     }
-    req.token.getUser().then(function (user) {
-      user.update({password: hash}).then(function () {
-        res.flash('success', 'Password Changed')
-        req.session.userId = user.id
-        res.redirect('/')
-      })
+    req.token.user.update({password: hash}).then(function () {
+      res.flash('success', 'Password Changed')
+      req.session.userId = req.token.user.id
+      res.redirect('/')
     })
   })
 })
