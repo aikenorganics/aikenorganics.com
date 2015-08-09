@@ -88,6 +88,12 @@ router.post('/', function (req, res) {
 router.post('/checkout', function (req, res) {
   req.transaction(function (transaction) {
     return new Checkout(req, transaction).process().then(function () {
+      return req.mail('mail/orders/update', {
+        to: [req.user.email],
+        subject: 'Aiken Organics: Order Updated',
+        url: `http://${req.get('host')}/orders/current`
+      })
+    }).then(function () {
       req.cart.clear()
       res.redirect('/orders/current')
     })
