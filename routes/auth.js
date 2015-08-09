@@ -1,7 +1,6 @@
 var bcrypt = require('bcrypt')
 var crypto = require('crypto')
 var ozymandias = require('ozymandias')
-var mailer = require('../lib/mailer')
 var find = require('../mid/find')
 var models = require('../models')
 
@@ -28,23 +27,22 @@ router.post('/forgot', function (req, res) {
     var expires_at = new Date()
     expires_at.setDate(expires_at.getDate() + 7)
 
-    user.createToken({
+    return user.createToken({
       id: crypto.randomBytes(20).toString('hex'),
       expires_at: expires_at
     }).then(function (token) {
-      mailer({
-        to: user.email,
+      return req.mail('mail/forgot', {
+        to: [user.email],
         subject: 'Aiken Organics: Password Reset',
-        body: `http://${req.get('host')}/auth/reset/${token.id}`
-      }, function (e, data) {
-        if (e) {
-          console.error(e)
-          return res.status(500).render('500')
-        }
-        res.flash('success', 'Thanks! We sent you an email to reset your password.')
+        url: `http://${req.get('host')}/auth/reset/${token.id}`
+      }).then(function () {
+        res.flash('success', 'Thanks! We sent ou an email to reset your password.')
         res.redirect('/')
       })
     })
+  }).catch(function (e) {
+    console.error(e)
+    res.status(500).render('500')
   })
 })
 
