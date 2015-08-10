@@ -11,4 +11,4 @@ fi
 foreman run --env=.testenv ./bin/reset
 
 # App Tests
-foreman run --env=.testenv tape $TEST
+NODE_ENV=test foreman run --env=.testenv tape $TEST
