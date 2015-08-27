@@ -5,21 +5,8 @@ var models = require('../models')
 var signIn = require('./signin')
 
 // Export a function with the tape API.
-exports = module.exports = function (name, options, callback) {
-  // Is the first argument the callback?
-  if (typeof name === 'function') {
-    callback = name
-    name = ''
-    options = {}
-  }
-
-  // Is the second argument the callback?
-  if (typeof options === 'function') {
-    callback = options
-    options = {}
-  }
-
-  tape(name, options, function (t) {
+exports = module.exports = function (name, callback) {
+  tape(name, function (t) {
     // Start a manual transaction.
     models.sequelize.transaction().then(function (transaction) {
       // Expose the transaction to the test and the app.
