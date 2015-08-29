@@ -26,7 +26,7 @@ class Location extends db.Model {
   }
 
   update (values) {
-    values.updatedAt = new Date
+    values.updatedAt = new Date()
     return super.update(values)
   }
 
