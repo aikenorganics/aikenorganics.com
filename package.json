@@ -24,7 +24,7 @@
   "dependencies": {
     "async": "0.9.0",
     "aws-sdk": "2.1.39",
-    "bcrypt": "0.8.4",
+    "bcrypt": "0.8.5",
     "body-parser": "1.13.2",
     "bootstrap": "3.3.5",
     "browserify": "11.0.0",
