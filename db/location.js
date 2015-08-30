@@ -1,8 +1,8 @@
 'use strict'
 
-let db = require('./db')
+let Model = require('./model')
 
-class Location extends db.Model {
+class Location extends Model {
 
   static get tableName () {
     return 'locations'
@@ -23,11 +23,6 @@ class Location extends db.Model {
 
   set name (value) {
     this.data.set('name', value || '')
-  }
-
-  update (values) {
-    values.updatedAt = new Date()
-    return super.update(values)
   }
 
 }
