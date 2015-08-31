@@ -2,6 +2,7 @@ var ozymandias = require('ozymandias')
 var router = module.exports = ozymandias.Router()
 var db = require('../../db')
 
+// Find the location
 router.param('location_id', function (req, res, next, id) {
   if (!id) return next()
   db.Location.find(id).then(function (location) {
@@ -11,6 +12,7 @@ router.param('location_id', function (req, res, next, id) {
   }).catch(next)
 })
 
+// Index
 router.get('/', function (req, res) {
   db.Location.order('name').all().then(function (locations) {
     res.render('admin/locations/index', {
@@ -19,14 +21,17 @@ router.get('/', function (req, res) {
   })
 })
 
+// New
 router.get('/new', function (req, res) {
   res.render('admin/locations/new')
 })
 
+// Edit
 router.get('/:location_id/edit', function (req, res) {
   res.render('admin/locations/edit')
 })
 
+// Create
 router.post('/', function (req, res) {
   db.transaction(function () {
     return db.Location.create(req.permit('name'))
@@ -36,6 +41,7 @@ router.post('/', function (req, res) {
   })
 })
 
+// Update
 router.post('/:location_id', function (req, res) {
   db.transaction(function () {
     return req.location.update(req.permit('name'))
@@ -45,6 +51,7 @@ router.post('/:location_id', function (req, res) {
   })
 })
 
+// Destroy
 router.post('/:location_id/delete', function (req, res) {
   db.transaction(function () {
     return req.location.destroy()
