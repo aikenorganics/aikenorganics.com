@@ -1,5 +1,7 @@
-var test = require('../../test')
-var models = require('../../../models')
+'use strict'
+
+let db = require('../../../db')
+let test = require('../../test')
 
 test('POST /admin/users/:id is a 302', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
@@ -11,14 +13,13 @@ test('POST /admin/users/:id is a 302', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      models.User.findOne({
-        where: {id: 2},
-        transaction: t.transaction
-      }).then(function (user) {
-        t.equal(user.first, 'first')
-        t.equal(user.last, 'last')
-        t.equal(user.phone, '555-555-5555')
-        t.end()
+      db.transaction(function () {
+        db.User.find(2).then(function (user) {
+          t.is(user.first, 'first')
+          t.is(user.last, 'last')
+          t.is(user.phone, '555-555-5555')
+          t.end()
+        })
       })
     })
   })

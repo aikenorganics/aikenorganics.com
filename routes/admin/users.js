@@ -1,25 +1,24 @@
-var ozymandias = require('ozymandias')
-var models = require('../../models')
-var find = require('../../mid/find')
-var upload = require('../../mid/image-upload')
-var router = module.exports = ozymandias.Router()
+'use strict'
 
-router.param('user_id', find(models.User, {name: '_user'}))
+let ozymandias = require('ozymandias')
+let db = require('../../db')
+let find = require('../../mid/_find')
+let upload = require('../../mid/image-upload')
+let router = module.exports = ozymandias.Router()
+
+// Find
+router.param('user_id', find('_user', db.User))
 
 // Index
 router.get('/', function (req, res) {
-  models.User.findAll({
-    order: [['email', 'ASC']]
-  }).then(function (users) {
+  db.User.order('email').all().then(function (users) {
     res.render('admin/users/index', {users: users})
   })
 })
 
 // Emails
 router.get('/emails', function (req, res) {
-  models.User.findAll({
-    order: [['email', 'ASC']]
-  }).then(function (users) {
+  db.User.order('email').all().then(function (users) {
     res.render('admin/users/emails', {users: users})
   })
 })
@@ -31,14 +30,12 @@ router.get('/:user_id/edit', function (req, res) {
 
 // Update
 router.post('/:user_id', function (req, res) {
-  req.transaction(function (t) {
-    return req._user.update(req.body, {
-      transaction: t,
-      fields: ['first', 'last', 'phone', 'is_admin']
-    }).then(function () {
-      res.flash('success', 'Saved')
-      res.redirect('/admin/users')
-    })
+  db.transaction(function () {
+    let params = req.permit('first', 'last', 'phone', 'is_admin')
+    req._user.update(params)
+  }).then(function () {
+    res.flash('success', 'Saved')
+    res.redirect('/admin/users')
   })
 })
 

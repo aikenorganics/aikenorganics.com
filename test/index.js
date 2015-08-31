@@ -2,6 +2,7 @@ var test = require('tape')
 var models = require('../models')
 var db = require('../db')
 
+require('./db')
 require('./lib')
 require('./mid')
 require('./models')

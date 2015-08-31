@@ -1,4 +1,6 @@
-var marked = require('marked')
+'use strict'
+
+let marked = require('marked')
 
 // Markdown
 
@@ -7,7 +9,7 @@ exports.marked = marked
 
 // Images
 
-var IMAGES = [
+const IMAGES = [
   '/img/vegetables-square.jpg',
   '/img/veggies-in-boxes-square.jpg',
   '/img/food-basket-square.jpg',
@@ -17,12 +19,8 @@ var IMAGES = [
 exports.imageUrl = function (model, size) {
   if (!model.imaged_at) return IMAGES[model.id % IMAGES.length]
 
-  var tableName = model.Model.tableName
+  // TODO: Remove old style
+  let tableName = model.tableName || model.Model.tableName
 
-  return [
-    '/assets',
-    tableName,
-    model.id,
-    size + '.jpg?' + +model.imaged_at
-  ].join('/')
+  return `/assets/${tableName}/${model.id}/${size}.jpg?${+model.imaged_at}`
 }
