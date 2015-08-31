@@ -1,48 +1,56 @@
-var ozymandias = require('ozymandias')
-var find = require('../../mid/find')
-var models = require('../../models')
-var router = module.exports = ozymandias.Router()
+'use strict'
 
-router.param('category_id', find(models.Category))
+let ozymandias = require('ozymandias')
+let find = require('../../mid/_find')
+let db = require('../../db')
+let router = module.exports = ozymandias.Router()
 
+// Find
+router.param('category_id', find('category', db.Category))
+
+// Index
 router.get('/', function (req, res) {
-  models.Category.findAll({
-    order: [['position', 'ASC']]
-  }).then(function (categories) {
-    res.render('admin/categories/index', {
-      categories: categories
-    })
+  db.Category.order('position').all().then(function (categories) {
+    res.render('admin/categories/index', {categories: categories})
   })
 })
 
+// New
 router.get('/new', function (req, res) {
   res.render('admin/categories/new')
 })
 
+// Edit
 router.get('/:category_id/edit', function (req, res) {
   res.render('admin/categories/edit')
 })
 
+// Create
 router.post('/', function (req, res) {
-  req.transaction(function (t) {
-    return models.Category.create(req.body, {
-      transaction: t,
-      fields: ['name', 'position']
-    }).then(function () {
-      res.flash('success', 'Created')
-      res.redirect('/admin/categories')
-    })
+  db.transaction(function () {
+    db.Category.create(req.permit('name', 'position'))
+  }).then(function () {
+    res.flash('success', 'Created')
+    res.redirect('/admin/categories')
   })
 })
 
+// Update
 router.post('/:category_id', function (req, res) {
-  req.transaction(function (t) {
-    return req.category.update(req.body, {
-      transaction: t,
-      fields: ['name', 'position']
-    }).then(function () {
-      res.flash('success', 'Saved')
-      res.redirect('/admin/categories')
-    })
+  db.transaction(function () {
+    req.category.update(req.permit('name', 'position'))
+  }).then(function () {
+    res.flash('success', 'Saved')
+    res.redirect('/admin/categories')
+  })
+})
+
+// Delete
+router.post('/:category_id/delete', function (req, res) {
+  db.transaction(function () {
+    req.category.destroy()
+  }).then(function () {
+    res.flash('success', 'Deleted')
+    res.redirect('/admin/categories')
   })
 })

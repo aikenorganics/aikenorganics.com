@@ -1,5 +1,7 @@
-var test = require('../../test')
-var models = require('../../../models')
+'use strict'
+
+let db = require('../../../db')
+let test = require('../../test')
 
 test('GET /admin/categories/show is a 404 for missing ids', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
@@ -18,12 +20,10 @@ test('GET /admin/categories/new is a 200', function (t) {
 })
 
 test('GET /admin/categories/:id/edit is a 200', function (t) {
-  models.Category.findAll({limit: 1}).then(function (categories) {
-    t.signIn('admin@example.com').then(function (agent) {
-      agent.get('/admin/categories/' + categories[0].id + '/edit')
-      .expect(200)
-      .end(t.end)
-    })
+  t.signIn('admin@example.com').then(function (agent) {
+    agent.get('/admin/categories/1/edit')
+    .expect(200)
+    .end(t.end)
   })
 })
 
@@ -38,13 +38,27 @@ test('POST /admin/categories is a 302', function (t) {
 })
 
 test('POST /admin/categories/:id is a 302', function (t) {
-  models.Category.findAll({limit: 1}).then(function (categories) {
-    t.signIn('admin@example.com').then(function (agent) {
-      agent.post('/admin/categories/' + categories[0].id)
-      .field('name', categories[0].name)
-      .field('position', categories[0].position)
-      .expect(302)
-      .end(t.end)
+  t.signIn('admin@example.com').then(function (agent) {
+    agent.post('/admin/categories/1')
+    .field('name', 'test')
+    .field('position', 106)
+    .expect(302)
+    .end(t.end)
+  })
+})
+
+test('POST /admin/categories/:id/delete is a 302', function (t) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent.post('/admin/categories/6/delete')
+    .expect(302)
+    .end(function (e) {
+      if (e) return t.end(e)
+      db.transaction(function () {
+        db.Category.find(6).then(function (category) {
+          t.is(category, null)
+          t.end()
+        })
+      }).catch(t.end)
     })
   })
 })

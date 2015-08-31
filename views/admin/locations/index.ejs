@@ -23,8 +23,6 @@
           <td>
             <form method='POST' class='form-inline' action='/admin/locations/<%= location.id %>/delete' enctype='multipart/form-data'>
               <input type='hidden' name='return_to' value='<%= req.originalUrl %>'>
-              <input type='hidden' name='location_id' value='<%= location.id %>'>
-              <input type='hidden' name='quantity' value='0'>
               <button type='submit' class='btn btn-danger btn-xs' data-confirm='Are you sure?'>Delete</button>
             </form>
           </td>
