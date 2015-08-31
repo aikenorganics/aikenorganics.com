@@ -1,6 +1,8 @@
-var ozymandias = require('ozymandias')
-var router = module.exports = ozymandias.Router()
-var db = require('../../db')
+'use strict'
+
+let ozymandias = require('ozymandias')
+let router = module.exports = ozymandias.Router()
+let db = require('../../db')
 
 // Find the location
 router.param('location_id', function (req, res, next, id) {
