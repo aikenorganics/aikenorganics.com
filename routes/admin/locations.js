@@ -29,7 +29,7 @@ router.get('/:location_id/edit', function (req, res) {
 
 router.post('/', function (req, res) {
   db.transaction(function () {
-    return db.Location.create({name: req.body.name})
+    return db.Location.create(req.permit('name'))
   }).then(function () {
     res.flash('success', 'Created')
     res.redirect('/admin/locations')
@@ -38,7 +38,7 @@ router.post('/', function (req, res) {
 
 router.post('/:location_id', function (req, res) {
   db.transaction(function () {
-    return req.location.update({name: req.body.name})
+    return req.location.update(req.permit('name'))
   }).then(function () {
     res.flash('success', 'Saved')
     res.redirect('/admin/locations')
