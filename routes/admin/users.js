@@ -7,7 +7,9 @@ let upload = require('../../mid/image-upload')
 let router = module.exports = ozymandias.Router()
 
 // Find
-router.param('user_id', find('_user', db.User))
+router.param('user_id', find('_user', function () {
+  return db.User
+}))
 
 // Index
 router.get('/', function (req, res) {

@@ -6,7 +6,9 @@ let find = require('../../mid/_find')
 let db = require('../../db')
 
 // Find the location
-router.param('location_id', find('location', db.Location))
+router.param('location_id', find('location', function () {
+  return db.Location
+}))
 
 // Index
 router.get('/', function (req, res) {

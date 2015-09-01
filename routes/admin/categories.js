@@ -6,7 +6,9 @@ let db = require('../../db')
 let router = module.exports = ozymandias.Router()
 
 // Find
-router.param('category_id', find('category', db.Category))
+router.param('category_id', find('category', function () {
+  return db.Category
+}))
 
 // Index
 router.get('/', function (req, res) {
