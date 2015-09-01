@@ -1,69 +1,62 @@
-var ozymandias = require('ozymandias')
-var router = module.exports = ozymandias.Router()
-var find = require('../../mid/find')
-var models = require('../../models')
+'use strict'
 
-router.param('grower_id', find(models.Grower, {
-  include: [{
-    model: models.UserGrower,
-    as: 'userGrowers',
-    include: [{model: models.User, as: 'user'}]
-  }]
+let ozymandias = require('ozymandias')
+let router = module.exports = ozymandias.Router()
+let find = require('../../mid/_find')
+let db = require('../../db')
+
+// Find
+router.param('grower_id', find('grower', function () {
+  return db.Grower.include({userGrowers: 'user'})
 }))
 
+// Index
 router.get('/', function (req, res) {
-  models.Grower.findAll({}).then(function (growers) {
+  db.Grower.order('name').all().then(function (growers) {
     res.render('admin/growers/index', {growers: growers})
-  })
+  }).catch(res.error)
 })
 
+// Edit
 router.get('/:grower_id/edit', function (req, res) {
-  models.User.findAll({
-    where: [`users.id not in (
-      select user_id from user_growers where grower_id = ?
-    )`, req.grower.id]
-  }).then(function (users) {
+  let ids = db.UserGrower.select('user_id').where({grower_id: req.grower.id})
+  db.User.not({id: ids}).all().then(function (users) {
     res.render('admin/growers/show', {users: users})
-  })
+  }).catch(res.error)
 })
 
+// Add User
 router.post('/:grower_id/adduser', function (req, res) {
-  req.transaction(function (t) {
-    return models.UserGrower.findOrCreate({
-      where: {
-        user_id: req.body.user_id,
-        grower_id: req.grower.id
-      }
-    }, {transaction: t}).then(function (results) {
-      res.flash('success', 'User Added')
-      res.redirect(`/admin/growers/${req.grower.id}/edit`)
+  db.transaction(function () {
+    db.UserGrower.create({
+      user_id: req.body.user_id,
+      grower_id: req.grower.id
     })
-  })
+  }).then(function () {
+    res.flash('success', 'User Added')
+    res.redirect(`/admin/growers/${req.grower.id}/edit`)
+  }).catch(res.error)
 })
 
+// Remove User
 router.post('/:grower_id/removeuser', function (req, res) {
-  req.transaction(function (t) {
-    return models.UserGrower.destroy({
-      where: {
-        user_id: req.body.user_id,
-        grower_id: req.grower.id
-      },
-      transaction: t
-    }).then(function () {
-      res.flash('success', 'User Removed')
-      res.redirect(`/admin/growers/${req.grower.id}/edit`)
-    })
-  })
+  db.transaction(function () {
+    db.UserGrower.where({
+      user_id: req.body.user_id,
+      grower_id: req.grower.id
+    }).delete()
+  }).then(function () {
+    res.flash('success', 'User Removed')
+    res.redirect(`/admin/growers/${req.grower.id}/edit`)
+  }).catch(res.error)
 })
 
+// Update
 router.post('/:grower_id', function (req, res) {
-  req.transaction(function (transaction) {
-    return req.grower.update(req.body, {
-      fields: ['active'],
-      transaction: transaction
-    }).then(function () {
-      res.flash('success', 'Saved')
-      res.redirect(`/admin/growers/${req.grower.id}/edit`)
-    })
-  })
+  db.transaction(function () {
+    req.grower.update(req.permit('active'))
+  }).then(function () {
+    res.flash('success', 'Saved')
+    res.redirect(`/admin/growers/${req.grower.id}/edit`)
+  }).catch(res.error)
 })
