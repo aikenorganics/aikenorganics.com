@@ -1340,9 +1340,9 @@
       }
     },
     "ozymandias": {
-      "version": "0.0.14",
-      "from": "git://github.com/braddunbar/ozymandias.git#c7d5e2313247514c51bad7c85e45d8cdefe7c21f",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#c7d5e2313247514c51bad7c85e45d8cdefe7c21f",
+      "version": "0.0.17",
+      "from": "git://github.com/braddunbar/ozymandias.git#c9fcd022aec830fc7069a764cde52948ed51ae58",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#c9fcd022aec830fc7069a764cde52948ed51ae58",
       "dependencies": {
         "compression": {
           "version": "1.5.1",
@@ -1431,7 +1431,7 @@
               "dependencies": {
                 "mime-types": {
                   "version": "2.1.5",
-                  "from": "mime-types@>=2.1.4 <2.2.0",
+                  "from": "mime-types@>=2.1.5 <2.2.0",
                   "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.5.tgz",
                   "dependencies": {
                     "mime-db": {
@@ -1627,7 +1627,7 @@
                 },
                 "mime-types": {
                   "version": "2.1.5",
-                  "from": "mime-types@>=2.1.4 <2.2.0",
+                  "from": "mime-types@>=2.1.5 <2.2.0",
                   "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.5.tgz",
                   "dependencies": {
                     "mime-db": {
