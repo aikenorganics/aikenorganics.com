@@ -1,5 +1,13 @@
-var test = require('../../test')
-var models = require('../../../models')
+'use strict'
+
+let db = require('../../../db')
+let test = require('../../test')
+
+test('GET /admin/market is a 200', function (t) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent.get('/admin/market').expect(200).end(t.end)
+  })
+})
 
 test('POST /admin/market is a 302', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
@@ -10,12 +18,11 @@ test('POST /admin/market is a 302', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      models.Market.findOne({
-        where: {id: 1},
-        transaction: t.transaction
-      }).then(function (market) {
-        t.ok(market.open)
-        t.end()
+      db.transaction(function () {
+        db.Market.find(1).then(function (market) {
+          t.ok(market.open)
+          t.end()
+        })
       })
     })
   })
@@ -31,12 +38,11 @@ test('POST /admin/market is a 302', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      models.Market.findOne({
-        where: {id: 2},
-        transaction: t.transaction
-      }).then(function (market) {
-        t.ok(!market.open)
-        t.end()
+      db.transaction(function () {
+        db.Market.find(2).then(function (market) {
+          t.ok(!market.open)
+          t.end()
+        })
       })
     })
   })
