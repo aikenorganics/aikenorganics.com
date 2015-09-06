@@ -5,6 +5,7 @@ let db = module.exports = require('./db')
 db.User = require('./user')
 db.Grower = require('./grower')
 db.Market = require('./market')
+db.Product = require('./product')
 db.Category = require('./category')
 db.Location = require('./location')
 db.UserGrower = require('./user-grower')
@@ -27,4 +28,24 @@ db.Grower.hasMany('userGrowers', {
 db.UserGrower.belongsTo('grower', {
   key: 'grower_id',
   model: db.Grower
+})
+
+db.Product.belongsTo('grower', {
+  key: 'grower_id',
+  model: db.Grower
+})
+
+db.Grower.hasMany('products', {
+  key: 'grower_id',
+  model: db.Product
+})
+
+db.Product.belongsTo('category', {
+  key: 'category_id',
+  model: db.Category
+})
+
+db.Category.hasMany('products', {
+  key: 'category_id',
+  model: db.Product
 })

@@ -1340,9 +1340,9 @@
       }
     },
     "ozymandias": {
-      "version": "0.0.17",
-      "from": "git://github.com/braddunbar/ozymandias.git#c9fcd022aec830fc7069a764cde52948ed51ae58",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#c9fcd022aec830fc7069a764cde52948ed51ae58",
+      "version": "0.1.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#31fb032323708a78eba0a7d49882e19b4e3d056d",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#31fb032323708a78eba0a7d49882e19b4e3d056d",
       "dependencies": {
         "compression": {
           "version": "1.5.1",
@@ -1355,14 +1355,14 @@
               "resolved": "https://registry.npmjs.org/accepts/-/accepts-1.2.12.tgz",
               "dependencies": {
                 "mime-types": {
-                  "version": "2.1.5",
+                  "version": "2.1.6",
                   "from": "mime-types@>=2.1.4 <2.2.0",
-                  "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.5.tgz",
+                  "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.6.tgz",
                   "dependencies": {
                     "mime-db": {
-                      "version": "1.17.0",
-                      "from": "mime-db@>=1.17.0 <1.18.0",
-                      "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.17.0.tgz"
+                      "version": "1.18.0",
+                      "from": "mime-db@>=1.18.0 <1.19.0",
+                      "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.18.0.tgz"
                     }
                   }
                 },
@@ -1384,9 +1384,9 @@
               "resolved": "https://registry.npmjs.org/compressible/-/compressible-2.0.5.tgz",
               "dependencies": {
                 "mime-db": {
-                  "version": "1.17.0",
+                  "version": "1.18.0",
                   "from": "mime-db@>=1.16.0 <2.0.0",
-                  "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.17.0.tgz"
+                  "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.18.0.tgz"
                 }
               }
             },
@@ -1430,14 +1430,14 @@
               "resolved": "https://registry.npmjs.org/accepts/-/accepts-1.2.12.tgz",
               "dependencies": {
                 "mime-types": {
-                  "version": "2.1.5",
-                  "from": "mime-types@>=2.1.5 <2.2.0",
-                  "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.5.tgz",
+                  "version": "2.1.6",
+                  "from": "mime-types@>=2.1.4 <2.2.0",
+                  "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.6.tgz",
                   "dependencies": {
                     "mime-db": {
-                      "version": "1.17.0",
-                      "from": "mime-db@>=1.17.0 <1.18.0",
-                      "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.17.0.tgz"
+                      "version": "1.18.0",
+                      "from": "mime-db@>=1.18.0 <1.19.0",
+                      "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.18.0.tgz"
                     }
                   }
                 },
@@ -1616,9 +1616,9 @@
               "resolved": "https://registry.npmjs.org/serve-static/-/serve-static-1.10.0.tgz"
             },
             "type-is": {
-              "version": "1.6.7",
+              "version": "1.6.8",
               "from": "type-is@>=1.6.4 <1.7.0",
-              "resolved": "https://registry.npmjs.org/type-is/-/type-is-1.6.7.tgz",
+              "resolved": "https://registry.npmjs.org/type-is/-/type-is-1.6.8.tgz",
               "dependencies": {
                 "media-typer": {
                   "version": "0.3.0",
@@ -1626,14 +1626,14 @@
                   "resolved": "https://registry.npmjs.org/media-typer/-/media-typer-0.3.0.tgz"
                 },
                 "mime-types": {
-                  "version": "2.1.5",
-                  "from": "mime-types@>=2.1.5 <2.2.0",
-                  "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.5.tgz",
+                  "version": "2.1.6",
+                  "from": "mime-types@>=2.1.4 <2.2.0",
+                  "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.6.tgz",
                   "dependencies": {
                     "mime-db": {
-                      "version": "1.17.0",
-                      "from": "mime-db@>=1.17.0 <1.18.0",
-                      "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.17.0.tgz"
+                      "version": "1.18.0",
+                      "from": "mime-db@>=1.18.0 <1.19.0",
+                      "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.18.0.tgz"
                     }
                   }
                 }

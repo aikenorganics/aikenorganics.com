@@ -1,14 +1,13 @@
-var ozymandias = require('ozymandias')
-var find = require('../mid/find')
-var models = require('../models')
-var router = module.exports = ozymandias.Router()
+'use strict'
+
+let db = require('../db')
+let find = require('../mid/_find')
+let ozymandias = require('ozymandias')
+let router = module.exports = ozymandias.Router()
 
 // Find
-router.param('product_id', find(models.Product, {
-  include: [
-    {model: models.Grower, as: 'grower'},
-    {model: models.Category, as: 'category'}
-  ]
+router.param('product_id', find('product', function () {
+  return db.Product.include('grower', 'category')
 }))
 
 // Authorize
@@ -16,28 +15,23 @@ router.param('product_id', require('../mid/products/authorize'))
 
 // Index
 router.get('/', function (req, res) {
-  var where = {active: true}
-  var category_id = req.query.category_id
+  let products = db.Product
+    .include('grower').join('grower')
+    .where({active: true, grower: {active: true}})
 
-  if (category_id) where.category_id = category_id
+  if (req.query.category_id) {
+    products.where({category_id: req.query.category_id})
+  }
 
   Promise.all([
-    models.Category.findAll({order: [['position', 'ASC']]}),
-    models.Product.findAll({
-      where: where,
-      order: [['name', 'ASC']],
-      include: [{
-        model: models.Grower,
-        as: 'grower',
-        where: {active: true}
-      }]
-    })
+    products.order('name').all(),
+    db.Category.order('position').all()
   ]).then(function (results) {
     res.render('products/index', {
-      categories: results[0],
-      products: results[1]
+      products: results[0],
+      categories: results[1]
     })
-  })
+  }).catch(res.error)
 })
 
 // Show
@@ -51,43 +45,31 @@ router.get('/:product_id/edit', editProduct)
 function editProduct (req, res) {
   if (!req.canEdit) return res.status(401).render('401')
 
-  models.Category.findAll({
-    order: [['position', 'ASC']]
-  }).then(function (categories) {
+  db.Category.order('position').all().then(function (categories) {
     res.render('products/edit', {categories: categories})
-  })
+  }).catch(res.error)
 }
 
 // Update
-
 router.post('/:product_id', function (req, res) {
   if (!req.canEdit) return res.status(401).render('401')
 
-  req.transaction(function (transaction) {
-    return req.product.update(req.body, {
-      transaction: transaction,
-      fields: [
-        'active',
-        'category_id',
-        'cost',
-        'description',
-        'name',
-        'supply',
-        'unit'
-      ]
-    }).then(function () {
-      res.flash('success', 'Saved')
-      res.redirect(req.body.return_to || `/products/${req.product.id}`)
-    }).catch(function (error) {
-      res.status(422)
-      res.locals.error = error
-      editProduct(req, res)
-    })
-  })
+  db.transaction(function () {
+    req.product.update(req.permit(
+      'active', 'category_id', 'cost', 'description', 'name', 'supply', 'unit'
+    ))
+  }).then(function () {
+    res.flash('success', 'Saved')
+    res.redirect(req.body.return_to || `/products/${req.product.id}`)
+  }).catch(function (e) {
+    if (e.message !== 'invalid') throw e
+    res.status(422)
+    res.locals.errors = req.product.errors
+    editProduct(req, res)
+  }).catch(res.error)
 })
 
 // Image
-
 router.post('/:product_id/image', function (req, res, next) {
   if (!req.canEdit) return res.status(401).render('401')
   next()

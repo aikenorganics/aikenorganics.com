@@ -12,8 +12,9 @@ exports = module.exports = function (name, callback) {
   tape(name, function (t) {
     var tx = t.tx = getTransaction()
     db.transaction = function (body) {
-      tx.run(body)
-      return Promise.all(tx.promises)
+      return tx.run(body).then(function () {
+        return Promise.all(tx.promises)
+      })
     }
 
     // Start a manual transaction.

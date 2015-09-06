@@ -1,5 +1,7 @@
-var test = require('../test')
-var models = require('../../models')
+'use strict'
+
+let db = require('../../db')
+let test = require('../test')
 
 // Index
 
@@ -185,12 +187,11 @@ test('POST /products/:id activates products', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end()
-      models.Product.findOne({
-        where: {id: 1},
-        transaction: t.transaction
-      }).then(function (product) {
-        t.equal(product.active, false)
-        t.end()
+      db.transaction(function () {
+        db.Product.find(1).then(function (product) {
+          t.equal(product.active, false)
+          t.end()
+        })
       })
     })
   })
@@ -203,12 +204,11 @@ test('POST /products/:id deactivates products', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end()
-      models.Product.findOne({
-        where: {id: 7},
-        transaction: t.transaction
-      }).then(function (product) {
-        t.equal(product.active, true)
-        t.end()
+      db.transaction(function () {
+        db.Product.find(7).then(function (product) {
+          t.equal(product.active, true)
+          t.end()
+        })
       })
     })
   })
