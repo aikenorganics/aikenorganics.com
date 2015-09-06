@@ -1,22 +1,41 @@
 begin;
-  alter table categories alter created_at set default now();
-  alter table categories alter updated_at set default now();
-  alter table growers alter created_at set default now();
-  alter table growers alter updated_at set default now();
-  alter table locations alter created_at set default now();
-  alter table locations alter updated_at set default now();
-  alter table markets alter created_at set default now();
-  alter table markets alter updated_at set default now();
-  alter table orders alter created_at set default now();
-  alter table orders alter updated_at set default now();
-  alter table posts alter created_at set default now();
-  alter table posts alter updated_at set default now();
-  alter table product_orders alter created_at set default now();
-  alter table product_orders alter updated_at set default now();
-  alter table products alter created_at set default now();
-  alter table products alter updated_at set default now();
-  alter table user_growers alter created_at set default now();
-  alter table user_growers alter updated_at set default now();
-  alter table users alter created_at set default now();
-  alter table users alter updated_at set default now();
+CREATE OR REPLACE FUNCTION check_product_order() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+    declare
+      is_open boolean;
+      unavailable boolean;
+      old_quantity integer;
+    begin
+
+      if not (select active from products where id = NEW.product_id) then
+        raise 'product must be active';
+      end if;
+
+      if not (select active from growers where id = (
+        select grower_id from products where id = NEW.product_id
+      )) then
+        raise 'grower must be active';
+      end if;
+
+      is_open := (
+        select status = 'open' from orders where id = NEW.order_id
+      );
+
+      old_quantity := (
+        select case tg_op when 'UPDATE' then OLD.quantity else 0 end
+      );
+
+      unavailable := (
+        select supply - reserved < NEW.quantity - old_quantity
+        from products where id = NEW.product_id
+      );
+
+      if is_open and unavailable then
+        raise 'not enough supply';
+      end if;
+
+      return NEW;
+    end;
+    $$;
 end;

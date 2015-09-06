@@ -3,12 +3,14 @@
 let db = module.exports = require('./db')
 
 db.User = require('./user')
+db.Order = require('./order')
 db.Grower = require('./grower')
 db.Market = require('./market')
 db.Product = require('./product')
 db.Category = require('./category')
 db.Location = require('./location')
 db.UserGrower = require('./user-grower')
+db.ProductOrder = require('./product-order')
 
 db.User.hasMany('userGrowers', {
   key: 'user_id',
@@ -48,4 +50,44 @@ db.Product.belongsTo('category', {
 db.Category.hasMany('products', {
   key: 'category_id',
   model: db.Product
+})
+
+db.Order.belongsTo('location', {
+  key: 'location_id',
+  model: db.Location
+})
+
+db.Location.hasMany('orders', {
+  key: 'location_id',
+  model: db.Order
+})
+
+db.Order.belongsTo('user', {
+  key: 'user_id',
+  model: db.User
+})
+
+db.User.hasMany('orders', {
+  key: 'user_id',
+  model: db.Order
+})
+
+db.ProductOrder.belongsTo('order', {
+  key: 'order_id',
+  model: db.Order
+})
+
+db.Order.hasMany('productOrders', {
+  key: 'order_id',
+  model: db.ProductOrder
+})
+
+db.ProductOrder.belongsTo('product', {
+  key: 'product_id',
+  model: db.Product
+})
+
+db.Product.hasMany('productOrders', {
+  key: 'product_id',
+  model: db.ProductOrder
 })
