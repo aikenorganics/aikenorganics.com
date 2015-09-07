@@ -1,11 +1,13 @@
-var ozymandias = require('ozymandias')
-var request = require('request')
-var router = module.exports = ozymandias.Router()
+'use strict'
 
-var BUCKET = process.env.BUCKET
+let ozymandias = require('ozymandias')
+let request = require('request')
+let router = module.exports = ozymandias.Router()
+
+let BUCKET = process.env.BUCKET
 
 if (BUCKET) {
   router.get('*', function (req, res) {
-    request('https://s3.amazonaws.com/' + BUCKET + req.url).pipe(res)
+    request(`https://s3.amazonaws.com/${BUCKET}${req.url}`).pipe(res)
   })
 }
