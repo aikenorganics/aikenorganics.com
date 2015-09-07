@@ -1,5 +1,7 @@
-var test = require('../../test')
-var models = require('../../../models')
+'use strict'
+
+let db = require('../../../db')
+let test = require('../../test')
 
 test('GET /admin/orders is a 200', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
@@ -11,24 +13,20 @@ test('GET /admin/orders is a 200', function (t) {
 })
 
 test('GET /admin/orders/:id is a 200', function (t) {
-  models.Order.findOne({}).then(function (order) {
-    t.signIn('admin@example.com').then(function (agent) {
-      agent
-      .get(`/admin/orders/${order.id}`)
-      .expect(200)
-      .end(t.end)
-    })
+  t.signIn('admin@example.com').then(function (agent) {
+    agent
+    .get('/admin/orders/1')
+    .expect(200)
+    .end(t.end)
   })
 })
 
 test('GET /admin/orders?product_id=:id is a 200', function (t) {
-  models.Product.findOne({}).then(function (product) {
-    t.signIn('admin@example.com').then(function (agent) {
-      agent
-      .get(`/admin/orders?product_id=${product.id}`)
-      .expect(200)
-      .end(t.end)
-    })
+  t.signIn('admin@example.com').then(function (agent) {
+    agent
+    .get(`/admin/orders?product_id=1`)
+    .expect(200)
+    .end(t.end)
   })
 })
 
@@ -59,14 +57,13 @@ test('POST /admin/orders/:id is a 302', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      models.Order.findOne({
-        where: {id: 1},
-        transaction: t.transaction
-      }).then(function (order) {
-        t.equal(order.status, 'complete')
-        t.equal(order.notes, 'test')
-        t.end()
-      })
+      db.transaction(function () {
+        db.Order.find(1).then(function (order) {
+          t.is(order.status, 'complete')
+          t.is(order.notes, 'test')
+          t.end()
+        })
+      }).catch(t.end)
     })
   })
 })

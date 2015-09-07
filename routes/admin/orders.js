@@ -1,73 +1,50 @@
-var qs = require('qs')
-var url = require('url')
-var ozymandias = require('ozymandias')
-var router = module.exports = ozymandias.Router()
-var models = require('../../models')
-var find = require('../../mid/find')
+'use strict'
 
-// Find the Order
-router.param('order_id', find(models.Order, {
-  order: '"productOrders.product"."name" asc',
-  include: [{
-    as: 'user',
-    model: models.User
-  }, {
-    model: models.ProductOrder,
-    as: 'productOrders',
-    include: [{model: models.Product, as: 'product'}]
-  }, {
-    as: 'location',
-    model: models.Location
-  }]
+let qs = require('qs')
+let url = require('url')
+let db = require('../../db')
+let find = require('../../mid/_find')
+let ozymandias = require('ozymandias')
+let router = module.exports = ozymandias.Router()
+
+// Find
+// TODO: Order by product name.
+router.param('order_id', find('order', function () {
+  return db.Order.include('user', 'location', {productOrders: 'product'})
 }))
 
 // Find a Product
 router.get('/', function (req, res, next) {
-  var id = req.query.product_id
+  let id = req.query.product_id
   if (!id) return next()
-  models.Product.find(id).then(function (product) {
+  db.Product.find(id).then(function (product) {
     req.product = res.locals.product = product
     next()
-  })
+  }).catch(next)
 })
 
 // Index
 router.get('/', function (req, res) {
-  var full = req.query.full === '1'
-  var include = [
-    {as: 'user', model: models.User},
-    {as: 'location', model: models.Location}
-  ]
+  let full = req.query.full === '1'
+  let status = req.query.status =
+    Array.isArray(req.query.status) ? req.query.status : ['open']
+  let orders = db.Order.include('user', 'location').where({status: status})
 
-  // Default status
-  if (!Array.isArray(req.query.status)) req.query.status = ['open']
-
-  // Default conditions
-  var where = {status: {$in: req.query.status}}
-
-  // Filter by product
   if (req.product) {
-    where.id = {
-      $in: models.sequelize.literal(
-        `(select order_id from product_orders
-        where product_id = ${models.sequelize.escape(req.product.id)})`
-      )
-    }
-  }
-
-  // Include models for full view
-  if (full) {
-    include.push({
-      model: models.ProductOrder,
-      as: 'productOrders',
-      include: [{model: models.Product, as: 'product'}]
+    orders.where({
+      id: db.ProductOrder.select('order_id').where({
+        product_id: req.product.id
+      })
     })
   }
 
+  // Include models for full view
+  if (full) orders.include({productOrders: 'product'})
+
   // Generate control urls
   res.locals.controlUrl = function (name, value) {
-    var query = {}
-    for (var key in req.query) query[key] = req.query[key]
+    let query = {}
+    for (let key in req.query) query[key] = req.query[key]
 
     if (value == null) {
       delete query[name]
@@ -86,58 +63,39 @@ router.get('/', function (req, res) {
   }
 
   // Get the orders!
-  models.Order.findAll({
-    where: where,
-    include: include,
-    order: [['created_at', 'desc']]
-  }).then(function (orders) {
-    var view = full ? 'admin/orders/full' : 'admin/orders/index'
+  orders.order(['createdAt', 'descending']).all().then(function (orders) {
+    let view = full ? 'admin/orders/full' : 'admin/orders/index'
     res.render(view, {orders: orders})
-  })
+  }).catch(res.error)
 })
 
 // Show
 router.get('/:order_id', function (req, res) {
-  if (!req.order) return res.status(404).render('404')
-  Promise.all([
-    models.Location.findAll({
-      order: [['name', 'ASC']]
-    }),
-    models.Product.findAll({
-      where: {
-        id: {
-          $notIn: req.order.productOrders.map(function (productOrder) {
-            return productOrder.product_id
-          })
-        },
-        supply: {$gt: models.sequelize.literal('reserved')},
-        active: true
-      },
-      order: [['name', 'ASC']],
-      include: [{
-        model: models.Grower,
-        as: 'grower',
-        where: {active: true}
-      }]
+  let products = db.Product.join('grower')
+    .where({active: true, grower: {active: true}})
+    .where('supply > reserved').not({
+      id: req.order.productOrders.map(function (productOrder) {
+        return productOrder.product_id
+      })
     })
+
+  Promise.all([
+    products.order('name').all(),
+    db.Location.order('name').all()
   ]).then(function (results) {
     res.render('admin/orders/show', {
-      locations: results[0],
-      products: results[1]
+      products: results[0],
+      locations: results[1]
     })
-  })
+  }).catch(res.error)
 })
 
 // Update
 router.post('/:order_id', function (req, res) {
-  if (!req.order) return res.status(404).render('404')
-
-  req.transaction(function (transaction) {
-    return req.order.update(req.body, {
-      fields: ['status', 'notes', 'location_id']
-    }).then(function () {
-      res.flash('success', 'Order Updated')
-      res.redirect(`/admin/orders/${req.order.id}`)
-    })
-  })
+  db.transaction(function () {
+    req.order.update(req.permit('status', 'notes', 'location_id'))
+  }).then(function () {
+    res.flash('success', 'Order Updated')
+    res.redirect(`/admin/orders/${req.order.id}`)
+  }).catch(res.error)
 })
