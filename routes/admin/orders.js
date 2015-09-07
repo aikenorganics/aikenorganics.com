@@ -1,7 +1,5 @@
 'use strict'
 
-let qs = require('qs')
-let url = require('url')
 let db = require('../../db')
 let find = require('../../mid/_find')
 let ozymandias = require('ozymandias')
@@ -30,6 +28,7 @@ router.get('/', function (req, res) {
     Array.isArray(req.query.status) ? req.query.status : ['open']
   let orders = db.Order.include('user', 'location').where({status: status})
 
+  // Product
   if (req.product) {
     orders.where({
       id: db.ProductOrder.select('order_id').where({
@@ -38,34 +37,23 @@ router.get('/', function (req, res) {
     })
   }
 
+  // Location
+  if (req.query.location_id) {
+    orders.where({location_id: req.query.location_id})
+  }
+
   // Include models for full view
   if (full) orders.include({productOrders: 'product'})
 
-  // Generate control urls
-  res.locals.controlUrl = function (name, value) {
-    let query = {}
-    for (let key in req.query) query[key] = req.query[key]
-
-    if (value == null) {
-      delete query[name]
-    } else {
-      query[name] = value
-    }
-
-    if (query.status.length === 1 && query.status[0] === 'open') {
-      delete query.status
-    }
-
-    return url.format({
-      pathname: '/admin/orders',
-      search: qs.stringify(query, {arrayFormat: 'brackets'})
-    })
-  }
-
-  // Get the orders!
-  orders.order(['createdAt', 'descending']).all().then(function (orders) {
+  Promise.all([
+    orders.order(['createdAt', 'descending']).all(),
+    db.Location.order('name').all()
+  ]).then(function (results) {
     let view = full ? 'admin/orders/full' : 'admin/orders/index'
-    res.render(view, {orders: orders})
+    res.render(view, {
+      orders: results[0],
+      locations: results[1]
+    })
   }).catch(res.error)
 })
 

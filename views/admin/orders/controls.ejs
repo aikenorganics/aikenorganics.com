@@ -1,32 +1,26 @@
-<div class='hidden-print'>
+<form class='form-inline hidden-print' method='get' action='/admin/orders'>
   <div class='btn-group'>
-    <% if (req.query.full) { %>
-      <a class='btn btn-default' href='<%= controlUrl('full', null) %>'>
-        List
-      </a>
-      <a class='btn btn-primary'>
-        Full
-      </a>
-    <% } else { %>
-      <a class='btn btn-primary'>
-        List
-      </a>
-      <a class='btn btn-default' href='<%= controlUrl('full', 1) %>'>
-        Full
-      </a>
-    <% } %>
+    <label class='btn <% if (req.query.full === '1') { %>btn-primary<% } else { %>btn-default<% } %>'>
+      <input type='checkbox' name='full' onclick='this.form.submit()' value='1' <% if (req.query.full === '1') { %>checked<% } %>>
+      Full
+    </label>
   </div>
   <div class='btn-group'>
     <% ['open', 'complete', 'canceled'].forEach(function (status) { %>
-      <% if (!~req.query.status.indexOf(status)) { %>
-        <a class='btn btn-default' href='<%= controlUrl('status', req.query.status.concat([status])) %>'>
-          <%= status.slice(0, 1).toUpperCase() + status.slice(1) %>
-        </a>
-      <% } else { %>
-        <a class='btn btn-primary' href='<%= controlUrl('status', req.query.status.filter(function (s) { return s !== status })) %>'>
-          <%= status.slice(0, 1).toUpperCase() + status.slice(1) %>
-        </a>
-      <% } %>
+      <label class='btn <% if (~req.query.status.indexOf(status)) { %>btn-primary<% } else { %>btn-default<% } %>'>
+        <input type='checkbox' name='status[]' onclick='this.form.submit()' value='<%= status %>' <% if (~req.query.status.indexOf(status)) { %>checked<% } %>>
+        <%= status.slice(0, 1).toUpperCase() + status.slice(1) %>
+      </label>
     <% }) %>
   </div>
-</div>
+  <div class='form-group'>
+    <select class='form-control' name='location_id' onchange='this.form.submit()'>
+      <option value=''>All Locations</option>
+      <% locations.forEach(function (location) { %>
+        <option value='<%= location.id %>' <% if (location.id === +req.query.location_id) { %>selected<% } %>>
+          <%= location.name %>
+        </option>
+      <% }) %>
+    </select>
+  </div>
+</form>
