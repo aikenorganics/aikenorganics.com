@@ -30,6 +30,15 @@ test('GET /admin/orders?product_id=:id is a 200', function (t) {
   })
 })
 
+test('GET /admin/orders?location_id=:id is a 200', function (t) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent
+    .get(`/admin/orders?location_id=1`)
+    .expect(200)
+    .end(t.end)
+  })
+})
+
 test('GET /admin/orders?full=1 is a 200', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent
