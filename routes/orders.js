@@ -1,35 +1,25 @@
-var ozymandias = require('ozymandias')
-var find = require('../mid/find')
-var models = require('../models')
-var router = module.exports = ozymandias.Router()
+'use strict'
+
+let db = require('../db')
+let find = require('../mid/_find')
+let ozymandias = require('ozymandias')
+let router = module.exports = ozymandias.Router()
 
 router.use(function (req, res, next) {
   if (req.user) return next()
   res.status(401).render('401')
 })
 
-router.param('order_id', find(models.Order))
+router.param('order_id', find('order', function () { return db.Order }))
 
 // Current
 router.get('/current', function (req, res) {
   Promise.all([
-    models.Order.findOne({
-      where: {
-        status: 'open',
-        user_id: req.user.id
-      },
-      include: [{
-        model: models.ProductOrder,
-        as: 'productOrders',
-        include: [{model: models.Product, as: 'product'}]
-      }, {
-        as: 'location',
-        model: models.Location
-      }]
-    }),
-    models.Location.findAll({
-      order: [['name', 'ASC']]
-    })
+    db.Order
+      .include('location', {productOrders: 'product'})
+      .where({status: 'open', user_id: req.user.id})
+      .find(),
+    db.Location.order('name').all()
   ]).then(function (results) {
     res.render('orders/current', {
       order: results[0],
@@ -47,14 +37,11 @@ router.post('/:order_id', function (req, res) {
     return res.status(401).render('401')
   }
 
-  req.transaction(function (transaction) {
-    return req.order.update(req.body, {
-      transaction: transaction,
-      fields: ['location_id']
-    }).then(function () {
-      res.flash('success', 'Saved')
-      res.redirect('/orders/current')
-    })
+  db.transaction(function () {
+    req.order.update(req.permit('location_id'))
+  }).then(function () {
+    res.flash('success', 'Saved')
+    res.redirect('/orders/current')
   })
 })
 
@@ -67,10 +54,10 @@ router.post('/:order_id/cancel', function (req, res) {
     return res.status(401).render('401')
   }
 
-  req.transaction(function (t) {
-    return req.order.destroy({transaction: t}).then(function () {
-      res.flash('success', 'Order cancelled.')
-      res.redirect('/products')
-    })
+  db.transaction(function () {
+    req.order.destroy()
+  }).then(function () {
+    res.flash('success', 'Order cancelled.')
+    res.redirect('/products')
   })
 })

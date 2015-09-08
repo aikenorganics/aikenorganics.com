@@ -1,5 +1,7 @@
+'use strict'
+
+var db = require('../../db')
 var test = require('../test')
-var models = require('../../models')
 
 test('GET /orders/current is a 200', function (t) {
   t.signIn('user@example.com').then(function (agent) {
@@ -17,13 +19,12 @@ test('POST /orders/:id/cancel is a 302', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      models.Order.findOne({
-        where: {id: 2},
-        transaction: t.transaction
-      }).then(function (order) {
-        t.ok(order == null, 'the order was deleted')
-        t.end()
-      })
+      db.transaction(function () {
+        db.Order.find(2).then(function (order) {
+          t.ok(order == null, 'the order was deleted')
+          t.end()
+        })
+      }).catch(t.end)
     })
   })
 })
@@ -36,13 +37,12 @@ test('POST /orders/:id is a 302', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      models.Order.findOne({
-        where: {id: 2},
-        transaction: t.transaction
-      }).then(function (order) {
-        t.is(order.location_id, 2)
-        t.end()
-      })
+      db.transaction(function () {
+        db.Order.find(2).then(function (order) {
+          t.is(order.location_id, 2)
+          t.end()
+        })
+      }).catch(t.end)
     })
   })
 })
