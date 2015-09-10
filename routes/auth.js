@@ -1,10 +1,12 @@
-var bcrypt = require('bcrypt')
-var crypto = require('crypto')
-var ozymandias = require('ozymandias')
-var find = require('../mid/find')
-var models = require('../models')
+'use strict'
 
-var router = module.exports = ozymandias.Router()
+let bcrypt = require('bcrypt')
+let crypto = require('crypto')
+let ozymandias = require('ozymandias')
+let find = require('../mid/find')
+let models = require('../models')
+
+let router = module.exports = ozymandias.Router()
 
 router.param('token_id', find(models.Token, {
   include: [{model: models.User, as: 'user'}]
@@ -24,7 +26,7 @@ router.post('/forgot', function (req, res) {
       })
     }
 
-    var expires_at = new Date()
+    let expires_at = new Date()
     expires_at.setDate(expires_at.getDate() + 7)
 
     return user.createToken({
@@ -93,8 +95,8 @@ router.get('/signin', function (req, res) {
 })
 
 router.post('/signin', function (req, res) {
-  var email = (req.body.email || '').trim()
-  var password = (req.body.password || '').trim()
+  let email = (req.body.email || '').trim()
+  let password = (req.body.password || '').trim()
 
   models.User.find({
     where: ['lower(email) = lower(?)', email]
@@ -132,8 +134,8 @@ router.get('/signup', function (req, res) {
 })
 
 router.post('/signup', function (req, res) {
-  var email = (req.body.email || '').trim()
-  var password = (req.body.password || '').trim()
+  let email = (req.body.email || '').trim()
+  let password = (req.body.password || '').trim()
 
   // Validate the password.
   if (password.length < 8) {

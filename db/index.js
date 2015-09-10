@@ -4,6 +4,7 @@ let db = module.exports = require('./db')
 
 db.User = require('./user')
 db.Order = require('./order')
+db.Token = require('./token')
 db.Grower = require('./grower')
 db.Market = require('./market')
 db.Product = require('./product')
@@ -90,4 +91,14 @@ db.ProductOrder.belongsTo('product', {
 db.Product.hasMany('productOrders', {
   key: 'product_id',
   model: db.ProductOrder
+})
+
+db.Token.belongsTo('user', {
+  key: 'user_id',
+  model: db.User
+})
+
+db.User.hasMany('tokens', {
+  key: 'user_id',
+  model: db.Token
 })
