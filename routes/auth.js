@@ -3,13 +3,14 @@
 let bcrypt = require('bcrypt')
 let crypto = require('crypto')
 let ozymandias = require('ozymandias')
-let find = require('../mid/find')
+let find = require('../mid/_find')
 let models = require('../models')
+let db = require('../db')
 
 let router = module.exports = ozymandias.Router()
 
-router.param('token_id', find(models.Token, {
-  include: [{model: models.User, as: 'user'}]
+router.param('token_id', find('token', function () {
+  return db.Token.include('user')
 }))
 
 router.get('/forgot', function (req, res) {
@@ -38,7 +39,7 @@ router.post('/forgot', function (req, res) {
         subject: 'Aiken Organics: Password Reset',
         url: `http://${req.get('host')}/auth/reset/${token.id}`
       }).then(function () {
-        res.flash('success', 'Thanks! We sent ou an email to reset your password.')
+        res.flash('success', 'Thanks! We sent you an email to reset your password.')
         res.redirect('/')
       })
     })
