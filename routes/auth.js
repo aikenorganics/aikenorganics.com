@@ -4,51 +4,58 @@ let bcrypt = require('bcrypt')
 let crypto = require('crypto')
 let ozymandias = require('ozymandias')
 let find = require('../mid/_find')
-let models = require('../models')
 let db = require('../db')
 
 let router = module.exports = ozymandias.Router()
 
+// Find Token
 router.param('token_id', find('token', function () {
   return db.Token.include('user')
 }))
 
+// Find User
+function findUser (req, res, next) {
+  db.User.where('lower(email) = lower(?)', req.body.email).find()
+  .then(function (user) {
+    if (user) {
+      req.user = res.locals.user = user
+      return next()
+    }
+    res.status(404).render('auth/forgot', {
+      error: 'Sorry! We don’t recognize that email.'
+    })
+  }).catch(res.error)
+}
+
+// Forgot
 router.get('/forgot', function (req, res) {
   res.render('auth/forgot')
 })
 
+router.post('/forgot', findUser)
 router.post('/forgot', function (req, res) {
-  models.User.find({
-    where: ['lower(email) = lower(?)', req.body.email]
-  }).then(function (user) {
-    if (!user) {
-      return res.status(404).render('auth/forgot', {
-        error: 'Sorry! We don’t recognize that email.'
-      })
-    }
+  let expires_at = new Date()
+  expires_at.setDate(expires_at.getDate() + 7)
 
-    let expires_at = new Date()
-    expires_at.setDate(expires_at.getDate() + 7)
-
-    return user.createToken({
-      id: crypto.randomBytes(20).toString('hex'),
-      expires_at: expires_at
+  db.transaction(function () {
+    db.Token.create({
+      user_id: req.user.id,
+      expires_at: expires_at,
+      id: crypto.randomBytes(20).toString('hex')
     }).then(function (token) {
       return req.mail('mail/forgot', {
-        to: [user.email],
+        to: [req.user.email],
         subject: 'Aiken Organics: Password Reset',
         url: `http://${req.get('host')}/auth/reset/${token.id}`
-      }).then(function () {
-        res.flash('success', 'Thanks! We sent you an email to reset your password.')
-        res.redirect('/')
       })
-    })
-  }).catch(function (e) {
-    console.error(e)
-    res.status(500).render('500')
+    }).then(function () {
+      res.flash('success', 'Thanks! We sent you an email to reset your password.')
+      res.redirect('/')
+    }).catch(res.error)
   })
 })
 
+// Reset
 router.get('/reset/:token_id', function (req, res) {
   if (!req.token || req.token.expires_at < new Date()) {
     return res.status(404).render('auth/reset', {
@@ -86,50 +93,42 @@ router.post('/reset/:token_id', function (req, res) {
   })
 })
 
+// Sign Out
 router.get('/signout', function (req, res) {
   req.session = null
   res.redirect('/')
 })
 
+// Sign In
 router.get('/signin', function (req, res) {
   res.render('auth/signin')
 })
 
+router.post('/signin', findUser)
 router.post('/signin', function (req, res) {
-  let email = (req.body.email || '').trim()
   let password = (req.body.password || '').trim()
 
-  models.User.find({
-    where: ['lower(email) = lower(?)', email]
-  }).then(function (user) {
-    // Does the user exist?
-    if (!user) {
-      res.status(404).render('auth/signin', {
-        flash: 'Sorry! We can’t find a user with that email. Have you already registered?'
+  bcrypt.compare(password, req.user.password, function (e, match) {
+    if (e) {
+      console.log(e)
+      return res.status(500).render('500')
+    }
+
+    // Is the password correct?
+    if (!match) {
+      res.status(422).render('auth/signin', {
+        email: req.body.email,
+        flash: 'Sorry! That password is incorrect.'
       })
       return
     }
 
-    bcrypt.compare(password, user.password, function (e, match) {
-      if (e) throw e
-
-      // Is the password correct?
-      if (!match) {
-        res.status(422).render('auth/signin', {
-          email: email,
-          flash: 'Sorry! That password is incorrect.'
-        })
-        return
-      }
-
-      req.session.userId = user.id
-      res.redirect('/')
-
-    })
-
+    req.session.userId = req.user.id
+    res.redirect('/')
   })
 })
 
+// Sign Up
 router.get('/signup', function (req, res) {
   res.render('auth/signup')
 })
@@ -155,9 +154,7 @@ router.post('/signup', function (req, res) {
     return
   }
 
-  models.User.find({
-    where: ['lower(email) = lower(?)', email]
-  }).then(function (user) {
+  db.User.where('lower(email) = lower(?)', email).find().then(function (user) {
     // Does this user already exist?
     if (user) {
       res.status(422).render('auth/signup', {
@@ -173,17 +170,15 @@ router.post('/signup', function (req, res) {
         console.log(e)
         return res.status(500).render('500')
       }
-      models.User.create({
-        email: email,
-        password: hash,
-        first: req.body.first,
-        last: req.body.last,
-        phone: req.body.phone
-      }).then(function (user) {
+
+      let params = req.permit('first', 'last', 'phone')
+      params.email = email
+      params.password = hash
+
+      db.User.create(params).then(function (user) {
         req.session.userId = user.id
         res.redirect('/')
       })
     })
-
   })
 })

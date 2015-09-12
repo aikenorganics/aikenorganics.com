@@ -1,5 +1,7 @@
-var test = require('../test')
-var models = require('../../models')
+'use strict'
+
+let db = require('../../db')
+let test = require('../test')
 
 test('signup page is a 200', function (t) {
   t.request()
@@ -48,35 +50,37 @@ test('GET /auth/reset is a 404 for missing tokens', function (t) {
 })
 
 test('GET /auth/reset is a 200 for valid tokens', function (t) {
-  var agent = t.request()
+  let agent = t.request()
   agent.post('/auth/forgot')
   .field('email', 'admin@example.com')
   .expect(302)
-  .end(function () {
-    models.Token.findAll({
-      order: [['expires_at', 'DESC']]
-    }).then(function (tokens) {
-      agent.get('/auth/reset/' + tokens[0].id)
-      .expect(200)
-      .end(t.end)
-    })
+  .end(function (e) {
+    if (e) return t.end(e)
+    db.transaction(function () {
+      db.Token.where({user_id: 1}).find().then(function (token) {
+        agent.get(`/auth/reset/${token.id}`)
+        .expect(200)
+        .end(t.end)
+      })
+    }).catch(t.end)
   })
 })
 
 test('POST /auth/reset is a 302 for valid tokens', function (t) {
-  var agent = t.request()
+  let agent = t.request()
   agent.post('/auth/forgot')
   .field('email', 'admin@example.com')
   .expect(302)
-  .end(function () {
-    models.Token.findAll({
-      order: [['expires_at', 'DESC']]
-    }).then(function (tokens) {
-      agent.post('/auth/reset/' + tokens[0].id)
-      .field('password', 'password')
-      .expect(302)
-      .end(t.end)
-    })
+  .end(function (e) {
+    if (e) return t.end(e)
+    db.transaction(function () {
+      db.Token.where({user_id: 1}).find().then(function (token) {
+        agent.post(`/auth/reset/${token.id}`)
+        .field('password', 'password')
+        .expect(302)
+        .end(t.end)
+      })
+    }).catch(t.end)
   })
 })
 
@@ -90,19 +94,20 @@ test('POST /auth/reset is a 404 for missing tokens', function (t) {
 })
 
 test('POST /auth/reset enforces password length of 8', function (t) {
-  var agent = t.request()
+  let agent = t.request()
   agent.post('/auth/forgot')
   .field('email', 'admin@example.com')
   .expect(302)
-  .end(function () {
-    models.Token.findAll({
-      order: [['expires_at', 'DESC']]
-    }).then(function (tokens) {
-      agent.post('/auth/reset/' + tokens[0].id)
-      .field('password', 'secret')
-      .expect(422)
-      .end(t.end)
-    })
+  .end(function (e) {
+    if (e) return t.end(e)
+    db.transaction(function () {
+      db.Token.where({user_id: 1}).find().then(function (token) {
+        agent.post(`/auth/reset/${token.id}`)
+        .field('password', 'secret')
+        .expect(422)
+        .end(t.end)
+      })
+    }).catch(t.end)
   })
 })
 
@@ -145,7 +150,7 @@ test('POST /auth/signup handles first, last, and phone', function (t) {
 })
 
 test('Full signup flow', function (t) {
-  var agent = t.request()
+  let agent = t.request()
 
   agent
   .post('/auth/signup')
