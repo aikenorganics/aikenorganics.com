@@ -1,4 +1,6 @@
-var models = require('../../models')
+'use strict'
+
+let db = require('../../db')
 
 module.exports = function (req, res, next) {
   if (!req.user || !req.product) return next()
@@ -8,13 +10,11 @@ module.exports = function (req, res, next) {
     return next()
   }
 
-  models.UserGrower.findOne({
-    where: {
-      user_id: req.user.id,
-      grower_id: req.product.grower_id
-    }
-  }).then(function (userGrower) {
+  db.UserGrower.where({
+    user_id: req.user.id,
+    grower_id: req.product.grower_id
+  }).find().then(function (userGrower) {
     req.canEdit = res.locals.canEdit = !!userGrower
     next()
-  })
+  }).catch(res.error)
 }
