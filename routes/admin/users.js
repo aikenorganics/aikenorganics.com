@@ -15,14 +15,14 @@ router.param('user_id', find('_user', function () {
 router.get('/', function (req, res) {
   db.User.order('email').all().then(function (users) {
     res.render('admin/users/index', {users: users})
-  })
+  }).catch(res.error)
 })
 
 // Emails
 router.get('/emails', function (req, res) {
   db.User.order('email').all().then(function (users) {
     res.render('admin/users/emails', {users: users})
-  })
+  }).catch(res.error)
 })
 
 // Edit
@@ -38,7 +38,7 @@ router.post('/:user_id', function (req, res) {
   }).then(function () {
     res.flash('success', 'Saved')
     res.redirect('/admin/users')
-  })
+  }).catch(res.error)
 })
 
 // Image
