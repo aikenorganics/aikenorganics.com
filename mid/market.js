@@ -1,7 +1,7 @@
 'use strict'
 
-var db = require('../db')
-var app = require('../app')
+let db = require('../db')
+let app = require('../app')
 
 module.exports = function (req, res, next) {
   let domain = app.get('hostname') || req.hostname
