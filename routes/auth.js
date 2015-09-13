@@ -42,17 +42,17 @@ router.post('/forgot', function (req, res) {
       user_id: req.user.id,
       expires_at: expires_at,
       id: crypto.randomBytes(20).toString('hex')
-    }).then(function (token) {
-      return req.mail('mail/forgot', {
-        to: [req.user.email],
-        subject: 'Aiken Organics: Password Reset',
-        url: `http://${req.get('host')}/auth/reset/${token.id}`
-      })
-    }).then(function () {
-      res.flash('success', 'Thanks! We sent you an email to reset your password.')
-      res.redirect('/')
-    }).catch(res.error)
-  })
+    })
+  }).then(function (token) {
+    return req.mail('mail/forgot', {
+      to: [req.user.email],
+      subject: 'Aiken Organics: Password Reset',
+      url: `http://${req.get('host')}/auth/reset/${token.id}`
+    })
+  }).then(function () {
+    res.flash('success', 'Thanks! We sent you an email to reset your password.')
+    res.redirect('/')
+  }).catch(res.error)
 })
 
 // Reset
