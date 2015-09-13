@@ -27,7 +27,6 @@
     "bcrypt": "0.8.5",
     "body-parser": "1.13.2",
     "bootstrap": "3.3.5",
-    "browserify": "11.0.0",
     "cookie-session": "^1.2.0",
     "cookies": "0.5.0",
     "gm": "1.18.1",
@@ -41,15 +40,16 @@
     "pg": "4.4.0",
     "pg-hstore": "2.3.2",
     "request": "2.58.0",
-    "sequelize": "2.0.5",
-    "uglify-js": "2.4.23"
+    "sequelize": "2.0.5"
   },
   "devDependencies": {
-    "autoprefixer": "5.2.0",
-    "cssnano": "2.1.1",
-    "postcss-cli": "1.5.0",
+    "autoprefixer": "6.0.2",
+    "browserify": "11.1.0",
+    "cssnano": "3.0.1",
+    "postcss-cli": "2.1.0",
     "standard": "5.2.2",
     "supertest": "1.1.0",
-    "tape": "4.2.0"
+    "tape": "4.2.0",
+    "uglify-js": "2.4.24"
   }
 }
