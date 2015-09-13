@@ -1340,9 +1340,9 @@
       }
     },
     "ozymandias": {
-      "version": "0.2.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#0727f43b33c7d4010cbb695b1b88cdf84cb2e186",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#0727f43b33c7d4010cbb695b1b88cdf84cb2e186",
+      "version": "0.2.1",
+      "from": "git://github.com/braddunbar/ozymandias.git#2793a2a901e0b60ef17fc880dfc4b6821945ce49",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#2793a2a901e0b60ef17fc880dfc4b6821945ce49",
       "dependencies": {
         "aws-sdk": {
           "version": "2.2.0",
