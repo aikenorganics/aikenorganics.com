@@ -48,7 +48,7 @@
     "autoprefixer": "5.2.0",
     "cssnano": "2.1.1",
     "postcss-cli": "1.5.0",
-    "standard": "3.2.1",
+    "standard": "5.2.2",
     "supertest": "1.0.1",
     "tape": "4.0.0"
   }
