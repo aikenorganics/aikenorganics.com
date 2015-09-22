@@ -28,9 +28,9 @@
                 </a>
               </td>
               <td><%= product.reserved %></td>
-              <td>$<%= (+product.getDataValue('total')).toFixed(2) %></td>
+              <td>$<%= (+product.total).toFixed(2) %></td>
             </tr>
-          <% }); %>
+          <% }) %>
         </tbody>
         <tfoot>
           <tr>
@@ -38,7 +38,7 @@
             <td></td>
             <td>$<%=
               products.reduce(function(total, product) {
-                return total + +product.getDataValue('total');
+                return total + +product.total
               }, 0).toFixed(2)
             %></td>
           </tr>
