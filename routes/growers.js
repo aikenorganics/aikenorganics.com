@@ -110,7 +110,7 @@ router.get('/:grower_id/orders', function (req, res) {
     select sum(quantity * cost) from product_orders
     inner join orders on orders.id = product_orders.order_id
     where product_id = products.id and orders.status = 'open'
-  )::int as total`
+  ) as total`
 
   db.Product
   .select('*', total)
