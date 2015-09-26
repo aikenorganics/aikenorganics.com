@@ -23,7 +23,6 @@ app.use(require('./mid/market'))
 app.use(require('./mid/cart'))
 app.use(require('./mid/user'))
 app.use(require('./mid/flash'))
-app.use(require('./mid/transaction'))
 
 // Routes
 app.use('/auth', require('./routes/auth'))
