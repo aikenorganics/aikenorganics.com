@@ -42,7 +42,6 @@ router.get('/', function (req, res) {
     orders.where({location_id: req.query.location_id})
   }
 
-  // Include models for full view
   if (full) orders.include({productOrders: 'product'})
 
   Promise.all([
