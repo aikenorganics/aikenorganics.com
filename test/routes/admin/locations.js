@@ -1,5 +1,7 @@
-var test = require('../../test')
-var db = require('../../../db')
+'use strict'
+
+let db = require('../../../db')
+let test = require('../../test')
 
 test('GET /admin/locations is a 200', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
@@ -46,7 +48,7 @@ test('POST /admin/locations/:id is a 302', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      t.tx.run(function () {
+      db.transaction(function () {
         db.Location.find(1).then(function (location) {
           t.is(location.name, 'Test')
           t.end()
