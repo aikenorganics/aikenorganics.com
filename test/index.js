@@ -5,7 +5,6 @@ var db = require('../db')
 require('./db')
 require('./lib')
 require('./mid')
-require('./models')
 require('./routes')
 
 test('teardown', function (t) {
