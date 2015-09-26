@@ -1,5 +1,7 @@
-var test = require('../test')
-var models = require('../../models')
+'use strict'
+
+let db = require('../../db')
+let test = require('../test')
 
 test('/settings/account is a 200 as an admin', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
@@ -18,13 +20,12 @@ test('/settings/account is a 200 as a regular user', function (t) {
 })
 
 test('POST /settings/account is a 302 as a regular user', function (t) {
-  models.User.findAll({where: {email: 'user@example.com'}}).then(function (users) {
+  db.User.where({email: 'user@example.com'}).find().then(function (user) {
     t.signIn('user@example.com').then(function (agent) {
-      agent
-      .post('/settings/account')
-      .field('first', users[0].first)
-      .field('last', users[0].last)
-      .field('phone', users[0].phone)
+      agent.post('/settings/account')
+      .field('first', user.first)
+      .field('last', user.last)
+      .field('phone', user.phone)
       .expect(302)
       .end(t.end)
     })
