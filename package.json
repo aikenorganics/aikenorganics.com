@@ -38,8 +38,7 @@
     "ozymandias": "git://github.com/braddunbar/ozymandias.git#0ae27d92bd6815b34da1d522b4fdab4550594dbc",
     "pg": "4.4.0",
     "pg-hstore": "2.3.2",
-    "request": "2.58.0",
-    "sequelize": "2.0.5"
+    "request": "2.58.0"
   },
   "devDependencies": {
     "autoprefixer": "6.0.2",
