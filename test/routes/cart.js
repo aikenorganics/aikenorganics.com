@@ -1,5 +1,7 @@
-var test = require('../test')
-var models = require('../../models')
+'use strict'
+
+let db = require('../../db')
+let test = require('../test')
 
 test('POST /cart is a 401 logged out', function (t) {
   t.request()
@@ -44,31 +46,59 @@ test('POST /cart/checkout', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      agent
-      .post('/cart/checkout')
-      .field('location_id', 2)
+      agent.post('/cart')
+      .field('product_id', 3)
+      .field('quantity', 4)
       .expect(302)
       .end(function (e) {
         if (e) return t.end(e)
-        Promise.all([
-          models.Product.findOne({
-            where: {id: 1},
-            transaction: t.transaction
-          }),
-          models.Order.findOne({
-            where: {id: 1},
-            transaction: t.transaction
+        agent.post('/cart')
+        .field('product_id', 4)
+        .field('quantity', 20)
+        .expect(302)
+        .end(function (e) {
+          if (e) return t.end(e)
+          agent
+          .post('/cart/checkout')
+          .field('location_id', 2)
+          .expect(302)
+          .end(function (e) {
+            if (e) return t.end(e)
+            verify()
           })
-        ]).then(function (results) {
-          var product = results[0]
-          var order = results[1]
-          t.equal(order.location_id, 2)
-          t.equal(product.reserved, 4)
-          t.end()
         })
       })
     })
   })
+
+  function verify () {
+    db.transaction(function () {
+      Promise.all([
+        db.Order.find(1),
+        db.ProductOrder.where({order_id: 1}).order('product_id').all(),
+        db.Product.where({id: [1, 2, 3, 4]}).order('id').all()
+      ]).then(function (results) {
+        t.is(results[0].location_id, 2)
+        t.deepEqual(results[1].map(function (productOrder) {
+          return productOrder.slice('product_id', 'quantity')
+        }), [
+          {product_id: 1, quantity: 4},
+          {product_id: 2, quantity: 3},
+          {product_id: 3, quantity: 4},
+          {product_id: 4, quantity: 14}
+        ])
+        t.deepEqual(results[2].map(function (product) {
+          return product.slice('id', 'reserved')
+        }), [
+          {id: 1, reserved: 4},
+          {id: 2, reserved: 3},
+          {id: 3, reserved: 5},
+          {id: 4, reserved: 15}
+        ])
+        t.end()
+      })
+    }).catch(t.end)
+  }
 })
 
 test('POST /cart is a 302 for inactive products/growers', function (t) {

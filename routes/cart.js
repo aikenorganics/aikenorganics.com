@@ -1,169 +1,90 @@
-var ozymandias = require('ozymandias')
-var models = require('../models')
-var router = module.exports = ozymandias.Router()
+'use strict'
+
+let db = require('../db')
+let ozymandias = require('ozymandias')
+let router = module.exports = ozymandias.Router()
 
 router.use(function (req, res, next) {
   if (req.user && req.market.open) return next()
-  res.status(401).render('401')
+  res.status(401).format({
+    html: function () { res.render('401') },
+    json: function () { res.json({message: 'Access Denied'}) }
+  })
 })
 
+// Index
 router.get('/', function (req, res) {
   Promise.all([
-    models.Product.findAll({
-      where: {id: {in: req.cart.ids()}},
-      order: [['name', 'ASC']]
-    }),
-    models.Location.findAll({
-      order: [['name', 'ASC']]
-    }),
-    models.Order.findOne({
-      where: {
-        status: 'open',
-        user_id: req.user.id
-      },
-      include: [{
-        model: models.ProductOrder,
-        as: 'productOrders',
-        include: [{model: models.Product, as: 'product'}]
-      }]
-    })
+    db.Product.where({id: req.cart.ids()}).order('name').all(),
+    db.Location.order('name').all(),
+    db.Order.where({status: 'open', user_id: req.user.id}).find()
   ]).then(function (results) {
     res.render('cart/index', {
       products: results[0],
       locations: results[1],
       order: results[2]
     })
-  })
+  }).catch(res.error)
+})
+
+// Update
+router.post('/', function (req, res, next) {
+  let id = req.body.product_id
+
+  db.Product.include('grower').find(id).then(function (product) {
+    if (product && product.grower.active) {
+      req.product = res.locals.product = product
+      return next()
+    }
+    res.format({
+      html: function () {
+        res.flash('error', 'That product is unavailable')
+        res.redirect(req.body.return_to || `/products/${id}`)
+      },
+      json: function () {
+        res.json({message: 'That product is unavailable'})
+      }
+    })
+  }).catch(res.error)
 })
 
 router.post('/', function (req, res) {
-  if (!req.user) {
-    return res.status(401).format({
-      html: function () { res.render('401') },
-      json: function () { res.json({message: 'Access Denied'}) }
-    })
-  }
+  let quantity = +req.body.quantity
+  req.cart.update(req.product, quantity)
 
-  var id = req.body.product_id
-  var quantity = +req.body.quantity
-  var return_to = req.body.return_to
-
-  models.Product.findOne({
-    where: {id: id},
-    include: [{
-      as: 'grower',
-      model: models.Grower
-    }]
-  }).then(function (product) {
-    if (!product || !product.grower.active) {
-      return res.format({
-        html: function () {
-          res.flash('error', 'That product is unavailable')
-          res.redirect(return_to || '/products/' + id)
-        },
-        json: function () {
-          res.json({message: 'That product is unavailable'})
-        }
+  res.format({
+    html: function () {
+      res.redirect(req.body.return_to || `/products/${req.product.id}`)
+    },
+    json: function () {
+      res.json({
+        product_id: req.product.id,
+        quantity: quantity,
+        available: req.product.available(),
+        message: 'Cart updated.'
       })
     }
-
-    req.cart.update(product, quantity)
-
-    res.format({
-      html: function () {
-        res.redirect(return_to || '/products/' + id)
-      },
-      json: function () {
-        res.json({
-          product_id: id,
-          quantity: quantity,
-          available: product.available(),
-          message: 'Cart updated.'
-        })
-      }
-    })
   })
 })
 
+// Checkout
 router.post('/checkout', function (req, res) {
-  req.transaction(function (transaction) {
-    return new Checkout(req, transaction).process().then(function () {
-      return req.mail('mail/orders/update', {
-        to: [req.user.email],
-        subject: 'Aiken Organics: Order Updated',
-        url: `http://${req.get('host')}/orders/current`
+  db.transaction(function () {
+    db.query('select checkout($1, $2, $3)', [
+      req.user.id,
+      req.body.location_id,
+      req.cart.ids().map(function (id) {
+        return [id, req.cart.cart[id]]
       })
-    }).then(function () {
-      req.cart.clear()
-      res.redirect('/orders/current')
+    ])
+  }).then(function () {
+    return req.mail('mail/orders/update', {
+      to: [req.user.email],
+      subject: 'Aiken Organics: Order Updated',
+      url: `http://${req.get('host')}/orders/current`
     })
-  })
+  }).then(function () {
+    req.cart.clear()
+    res.redirect('/orders/current')
+  }).catch(res.error)
 })
-
-var Checkout = function (req, transaction) {
-  this.req = req
-  this.user = req.user
-  this.cart = req.cart
-  this.transaction = transaction
-}
-
-Checkout.prototype = {
-
-  process: function () {
-    return models.Product.findAll({
-      where: {id: {in: this.cart.ids()}}
-    }, {transaction: this.transaction}).then(function (products) {
-      this.products = products.filter(function (product) {
-        return product.available() > 0
-      })
-      return this.createOrder()
-    }.bind(this))
-  },
-
-  createOrder: function () {
-    return models.Order.findOrCreate({
-      where: {
-        status: 'open',
-        user_id: this.user.id
-      },
-      defaults: {
-        location_id: this.req.body.location_id
-      }
-    }, {transaction: this.transaction}).then(function (results) {
-      this.order = results[0]
-      return this.updateOrder()
-    }.bind(this))
-  },
-
-  updateOrder: function () {
-    return this.order.update({
-      location_id: this.req.body.location_id
-    }, {transaction: this.transaction}).then(function () {
-      return this.createProductOrders()
-    }.bind(this))
-  },
-
-  createProductOrders: function () {
-    return Promise.all(this.products.map(function (product) {
-      return models.ProductOrder.findOrCreate({
-        where: {order_id: this.order.id, product_id: product.id}
-      }, {transaction: this.transaction})
-    }.bind(this))).then(function (productOrders) {
-      this.productOrders = productOrders.map(function (a) { return a[0] })
-      return this.updateProductOrders()
-    }.bind(this))
-  },
-
-  updateProductOrders: function () {
-    return Promise.all(this.productOrders.map(function (productOrder) {
-      var product = this.products.filter(function (product) {
-        return product.id === productOrder.product_id
-      })[0]
-      return productOrder.increment(
-        {quantity: this.cart.quantity(product)},
-        {transaction: this.transaction}
-      )
-    }.bind(this)))
-  }
-
-}

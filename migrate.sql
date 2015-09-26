@@ -1,41 +1,42 @@
-begin;
-CREATE OR REPLACE FUNCTION check_product_order() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-    declare
-      is_open boolean;
-      unavailable boolean;
-      old_quantity integer;
-    begin
+create or replace function checkout(int, int, int[][]) returns boolean
+language plpgsql as $$
+declare
+  oid int;
+  poid int;
+  available int;
+  product int[];
+begin
 
-      if not (select active from products where id = NEW.product_id) then
-        raise 'product must be active';
-      end if;
+  update orders set location_id = $2
+  where user_id = $1 and status = 'open'
+  returning id into oid;
 
-      if not (select active from growers where id = (
-        select grower_id from products where id = NEW.product_id
-      )) then
-        raise 'grower must be active';
-      end if;
+  if oid is null then
+    insert into orders (user_id, location_id)
+    values ($1, $2) returning id into oid;
+  end if;
 
-      is_open := (
-        select status = 'open' from orders where id = NEW.order_id
-      );
+  foreach product slice 1 in array $3 loop
 
-      old_quantity := (
-        select case tg_op when 'UPDATE' then OLD.quantity else 0 end
-      );
+    poid := null;
+    available := (
+      select supply - reserved from products
+      where id = product[1]
+    );
 
-      unavailable := (
-        select supply - reserved < NEW.quantity - old_quantity
-        from products where id = NEW.product_id
-      );
+    update product_orders set
+    quantity = quantity + least(available, product[2])
+    where order_id = oid and product_id = product[1]
+    returning id into poid;
 
-      if is_open and unavailable then
-        raise 'not enough supply';
-      end if;
+    if poid is null then
+      insert into product_orders (order_id, product_id, quantity)
+      values (oid, product[1], least(available, product[2]));
+    end if;
 
-      return NEW;
-    end;
-    $$;
+  end loop;
+
+  return true;
+
 end;
+$$;
