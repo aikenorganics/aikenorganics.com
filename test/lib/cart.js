@@ -1,8 +1,8 @@
 'use strict'
 
+let db = require('../../db')
 let test = require('../test')
 let Cart = require('../../lib/cart')
-let models = require('../../models')
 
 test('get the correct keys', function (t) {
   t.deepEqual(new Cart({cart: {1: 2, 3: 4}}).ids(), [1, 3])
@@ -23,27 +23,27 @@ test('cart size', function (t) {
 
 test('update with positive key', function (t) {
   let session = {}
-  new Cart(session).update(models.Product.build({id: 5}), 2)
+  new Cart(session).update(new db.Product({id: 5}), 2)
   t.deepEqual(session.cart, {5: 2})
   t.end()
 })
 
 test('update with zero key', function (t) {
   let session = {cart: {5: 2}}
-  new Cart(session).update(models.Product.build({id: 5}), 0)
+  new Cart(session).update(new db.Product({id: 5}), 0)
   t.deepEqual(session.cart, {})
   t.end()
 })
 
 test('checkout quantity', function (t) {
-  let product = models.Product.build({id: 1, supply: 5, reserved: 3})
+  let product = new db.Product({id: 1, supply: 5, reserved: 3})
   let cart = new Cart({cart: {1: 3}})
   t.equal(cart.quantity(product), 2)
   t.end()
 })
 
 test('checkout total', function (t) {
-  let product = models.Product.build({
+  let product = new db.Product({
     id: 1,
     supply: 5,
     reserved: 3,
@@ -56,13 +56,13 @@ test('checkout total', function (t) {
 
 test('checkout total for multiple products', function (t) {
   let products = [
-    models.Product.build({
+    new db.Product({
       id: 1,
       supply: 5,
       reserved: 3,
       cost: '1.15'
     }),
-    models.Product.build({
+    new db.Product({
       id: 2,
       supply: 6,
       reserved: 2,
