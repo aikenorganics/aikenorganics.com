@@ -337,7 +337,7 @@
                 },
                 "string_decoder": {
                   "version": "0.10.31",
-                  "from": "string_decoder@>=0.10.0 <0.11.0",
+                  "from": "https://registry.npmjs.org/string_decoder/-/string_decoder-0.10.31.tgz",
                   "resolved": "https://registry.npmjs.org/string_decoder/-/string_decoder-0.10.31.tgz"
                 },
                 "inherits": {
@@ -386,9 +386,9 @@
       }
     },
     "ozymandias": {
-      "version": "0.4.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#0ae27d92bd6815b34da1d522b4fdab4550594dbc",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#0ae27d92bd6815b34da1d522b4fdab4550594dbc",
+      "version": "0.5.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#f3c472e028ead8c7971b8e04b5eb2806ad0301bb",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#f3c472e028ead8c7971b8e04b5eb2806ad0301bb",
       "dependencies": {
         "aws-sdk": {
           "version": "2.2.0",
@@ -453,7 +453,7 @@
               "dependencies": {
                 "mime-db": {
                   "version": "1.19.0",
-                  "from": "mime-db@>=1.19.0 <1.20.0",
+                  "from": "mime-db@>=1.16.0 <2.0.0",
                   "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.19.0.tgz"
                 }
               }
