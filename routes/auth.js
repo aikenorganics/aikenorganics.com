@@ -38,16 +38,16 @@ router.post('/forgot', function (req, res) {
   expires_at.setDate(expires_at.getDate() + 7)
 
   db.transaction(function () {
-    db.Token.create({
+    return db.Token.create({
       user_id: req.user.id,
       expires_at: expires_at,
       id: crypto.randomBytes(20).toString('hex')
-    }).then(function (token) {
-      return req.mail('mail/forgot', {
-        to: [req.user.email],
-        subject: 'Aiken Organics: Password Reset',
-        url: `http://${req.get('host')}/auth/reset/${token.id}`
-      })
+    })
+  }).then(function (token) {
+    return req.mail('mail/forgot', {
+      to: [req.user.email],
+      subject: 'Aiken Organics: Password Reset',
+      url: `http://${req.get('host')}/auth/reset/${token.id}`
     })
   }).then(function () {
     res.flash('success', 'Thanks! We sent you an email to reset your password.')
