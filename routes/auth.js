@@ -51,7 +51,7 @@ router.post('/forgot', function (req, res) {
     })
   }).then(function () {
     res.flash('success', 'Thanks! We sent you an email to reset your password.')
-    res.redirect('/')
+    res.redirect('/auth/signin')
   }).catch(res.error)
 })
 
