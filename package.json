@@ -35,7 +35,7 @@
     "marked": "0.3.3",
     "mkdirp": "0.5.1",
     "multer": "0.1.8",
-    "ozymandias": "git://github.com/braddunbar/ozymandias.git#f3c472e028ead8c7971b8e04b5eb2806ad0301bb",
+    "ozymandias": "git://github.com/braddunbar/ozymandias.git#795b1d6a33a95b4421d227d145dbd6ca7485af28",
     "request": "2.58.0"
   },
   "devDependencies": {
