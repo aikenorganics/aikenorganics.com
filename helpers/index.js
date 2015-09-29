@@ -18,9 +18,7 @@ const IMAGES = [
 
 exports.imageUrl = function (model, size) {
   if (!model.imaged_at) return IMAGES[model.id % IMAGES.length]
-
-  // TODO: Remove old style
-  let tableName = model.tableName || model.Model.tableName
+  let tableName = model.tableName
 
   return `/assets/${tableName}/${model.id}/${size}.jpg?${+model.imaged_at}`
 }

@@ -25,9 +25,7 @@ class Upload {
     this.res = res
     this.file = req.files.image[0]
     this.model = model
-    // TODO: Remove old style
-    this.tableName = model.tableName || model.Model.tableName
-    this.path = `${this.tableName}/${model.id}`
+    this.path = `${model.tableName}/${model.id}`
   }
 
   s3Key (size) {
