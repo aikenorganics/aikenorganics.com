@@ -46,7 +46,7 @@ router.post('/forgot', function (req, res) {
   }).then(function (token) {
     return req.mail('mail/forgot', {
       to: [req.user.email],
-      subject: 'Aiken Organics: Password Reset',
+      subject: `${process.env.NAME}: Password Reset`,
       url: `http://${req.get('host')}/auth/reset/${token.id}`
     })
   }).then(function () {
