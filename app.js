@@ -1,11 +1,13 @@
+'use strict'
+
 // Vendor
-var ozymandias = require('ozymandias')
-var body = require('body-parser')
-var multer = require('multer')
-var session = require('cookie-session')
+let ozymandias = require('ozymandias')
+let body = require('body-parser')
+let multer = require('multer')
+let session = require('cookie-session')
 
 // The App!
-var app = module.exports = ozymandias()
+let app = module.exports = ozymandias()
 app.locals = require('./helpers')
 
 // Ensure requests are secure.
