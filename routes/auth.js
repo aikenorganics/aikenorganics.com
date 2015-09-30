@@ -3,7 +3,7 @@
 let bcrypt = require('bcrypt')
 let crypto = require('crypto')
 let ozymandias = require('ozymandias')
-let find = require('../mid/_find')
+let find = require('../mid/find')
 let db = require('../db')
 
 let router = module.exports = ozymandias.Router()

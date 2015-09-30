@@ -1,7 +1,7 @@
 'use strict'
 
 let db = require('../db')
-let find = require('../mid/_find')
+let find = require('../mid/find')
 let upload = require('../mid/image-upload')
 let ozymandias = require('ozymandias')
 let router = module.exports = ozymandias.Router()

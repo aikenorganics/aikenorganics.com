@@ -2,7 +2,7 @@
 
 let ozymandias = require('ozymandias')
 let router = module.exports = ozymandias.Router()
-let find = require('../../mid/_find')
+let find = require('../../mid/find')
 let db = require('../../db')
 
 // Find the location

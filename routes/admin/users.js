@@ -2,7 +2,7 @@
 
 let ozymandias = require('ozymandias')
 let db = require('../../db')
-let find = require('../../mid/_find')
+let find = require('../../mid/find')
 let upload = require('../../mid/image-upload')
 let router = module.exports = ozymandias.Router()
 

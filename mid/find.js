@@ -1,18 +1,16 @@
-module.exports = function (Model, options) {
-  if (!options) options = {}
+'use strict'
 
-  var name = options.name || Model.options.name.singular
+let db = require('../db')
 
+module.exports = function (property, scope) {
   return function (req, res, next, id) {
     if (!id) return next()
-    Model.find({
-      where: {id: id},
-      order: options.order,
-      include: options.include
-    }).then(function (model) {
-      if (!model) return res.status(404).render('404')
-      req[name] = res.locals[name] = model
-      next()
-    })
+    db.transaction(function () {
+      scope().find(id).then(function (model) {
+        if (!model) return res.status(404).render('404')
+        req[property] = res.locals[property] = model
+        next()
+      })
+    }).catch(next)
   }
 }
