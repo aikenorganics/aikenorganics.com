@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "./bin/build",
-    "start": "foreman start",
+    "start": "heroku local",
     "test": "./bin/test"
   },
   "repository": {

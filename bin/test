@@ -8,7 +8,7 @@ fi
 ./bin/lint
 
 # Reset
-foreman run --env=.testenv ./bin/reset
+heroku local:run --env=.testenv ./bin/reset
 
 # App Tests
-NODE_ENV=test foreman run --env=.testenv tape $TEST
+NODE_ENV=test heroku local:run --env=.testenv tape $TEST
