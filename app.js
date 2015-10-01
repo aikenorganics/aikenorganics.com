@@ -14,6 +14,7 @@ app.locals = require('./helpers')
 if (app.get('env') === 'production') app.use(require('./mid/secure'))
 
 // Proxy assets from S3
+app.use(ozymandias.static('public'))
 app.use('/assets', require('./routes/assets'))
 
 // Middleware
@@ -25,7 +26,6 @@ app.use(session({
 }))
 app.use(body.urlencoded({extended: false}))
 app.use(multer({dest: './tmp/uploads/', putSingleFilesInArray: true}))
-app.use(ozymandias.static('public'))
 app.use(require('./mid/market'))
 app.use(require('./mid/cart'))
 app.use(require('./mid/user'))
