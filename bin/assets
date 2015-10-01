@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+rm -fr public/assets
+printf '{\n' > assets.json
+
+for path in $(find public -type f -not -path 'public/assets/*'); do
+  hash=$(md5 < $path)
+  ext=${path##*.}
+  file=${path%.*}
+  file=${file##public/}
+  out="public/assets/$file-$hash.$ext"
+
+  printf '  "%s": "%s",\n' ${path##public/} ${out##public} >> assets.json
+  mkdir -p $(dirname $out)
+  cp $path $out
+done;
+
+printf '  "": ""}' >> assets.json

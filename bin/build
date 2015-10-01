@@ -8,3 +8,5 @@ lessc css/app.less | postcss \
 browserify js/app.js | uglifyjs > public/js/app.js
 
 convert public/img/emblem.png -resize 48x48 public/favicon.ico
+
+./bin/assets

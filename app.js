@@ -14,7 +14,11 @@ app.locals = require('./helpers')
 if (app.get('env') === 'production') app.use(require('./mid/secure'))
 
 // Proxy assets from S3
-app.use(ozymandias.static('public'))
+app.use(ozymandias.static('public', {
+  etag: false,
+  lastModified: false,
+  maxAge: '2h'
+}))
 app.use('/assets', require('./routes/assets'))
 
 // Middleware
