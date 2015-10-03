@@ -1,12 +1,12 @@
 'use strict'
 
 let marked = require('marked')
-let assets = require('../assets.json')
 
 // Assets
 
 let assetPath = exports.assetPath = function (path) {
-  return assets[path]
+  if (process.env.NODE_ENV !== 'production') return `/${path}`
+  return require('../assets.json')[path]
 }
 
 // Markdown
