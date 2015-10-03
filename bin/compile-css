@@ -1,0 +1,8 @@
+#!/bin/bash -e
+
+mkdir -p public/css
+
+lessc css/app.less | postcss \
+--use autoprefixer \
+--use cssnano \
+> public/css/app.css
