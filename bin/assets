@@ -21,7 +21,7 @@ for (let file of glob.sync('public/**', {nodir: true})) {
   let dir = path.dirname(file).replace(/^public\//, '')
   let base = path.basename(file, ext)
 
-  assets[`${dir}/${base}${ext}`] = `/${dir}/${base}-${hash}${ext}`
+  assets[`${dir}/${base}${ext}`] = `/assets/${dir}/${base}-${hash}${ext}`
   mkdirp.sync(`public/assets/${dir}`)
   fs.createReadStream(file).pipe(
     fs.createWriteStream(`public/assets/${dir}/${base}-${hash}${ext}`)
