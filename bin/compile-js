@@ -1,3 +1,4 @@
 #!/bin/bash -e
 
+mkdir -p public/js
 browserify js/app.js | uglifyjs > public/js/app.js
