@@ -2,7 +2,9 @@
 
 mkdir -p public/css
 
-lessc css/app.less | postcss \
+postcss css/app.css \
+--use postcss-import \
+--use postcss-nested \
 --use autoprefixer \
 --use cssnano \
-> public/css/app.css
+--output public/css/app.css

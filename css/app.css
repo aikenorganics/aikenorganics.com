@@ -1,7 +1,7 @@
-// Vendor
+/* Vendor */
 @import 'bootstrap';
 
-// Modules
+/* Modules */
 @import 'anchor';
 @import 'animation';
 @import 'covered';
@@ -22,7 +22,7 @@ p {
   font-size: 18px;
 }
 
-h1, h2, h3, h4, h5, h6, {
+h1, h2, h3, h4, h5, h6 {
   font-family: Georgia, serif;
   a, a:hover, a:visited, a:active { color: inherit; }
 }
@@ -31,7 +31,7 @@ hr {
   border-color: #666;
 }
 
-// For large form fields in tables.
+/* For large form fields in tables. */
 .table tbody tr td {
   vertical-align: middle;
 }

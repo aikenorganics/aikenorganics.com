@@ -42,6 +42,8 @@
     "multer": "0.1.8",
     "ozymandias": "git://github.com/braddunbar/ozymandias.git#795b1d6a33a95b4421d227d145dbd6ca7485af28",
     "postcss-cli": "2.1.0",
+    "postcss-import": "7.0.0",
+    "postcss-nested": "1.0.0",
     "request": "2.58.0",
     "rimraf": "2.4.3",
     "uglify-js": "2.4.24"
