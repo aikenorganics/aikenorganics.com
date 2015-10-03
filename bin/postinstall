@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/bin/bash -e
 
 if [ "$NODE_ENV" = "production" ]; then
   ./bin/assets
