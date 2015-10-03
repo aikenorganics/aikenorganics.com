@@ -9,7 +9,8 @@
   "scripts": {
     "build": "./bin/build",
     "start": "heroku local",
-    "test": "./bin/test"
+    "test": "./bin/test",
+    "postinstall": "./bin/postinstall"
   },
   "repository": {
     "type": "git",
