@@ -42,7 +42,7 @@
     "rimraf": "2.4.3"
   },
   "devDependencies": {
-    "autoprefixer": "6.0.2",
+    "autoprefixer": "6.0.3",
     "browserify": "11.2.0",
     "cssnano": "3.0.1",
     "postcss-cli": "2.1.0",
