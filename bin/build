@@ -5,6 +5,6 @@ lessc css/app.less | postcss \
 --use cssnano \
 > public/css/app.css
 
-browserify js/app.js | uglifyjs > public/js/app.js
+./bin/compile-js
 
 convert public/img/emblem.png -resize 48x48 public/favicon.ico

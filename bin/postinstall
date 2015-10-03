@@ -1,5 +1,6 @@
 #!/bin/bash -e
 
 if [ "$NODE_ENV" = "production" ]; then
+  ./bin/compile-js
   ./bin/fingerprint
 fi

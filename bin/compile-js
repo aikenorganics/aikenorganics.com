@@ -1,0 +1,3 @@
+#!/bin/bash -e
+
+browserify js/app.js | uglifyjs > public/js/app.js
