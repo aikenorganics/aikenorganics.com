@@ -59,7 +59,7 @@ router.post('/', function (req, res) {
     json: function () {
       res.json({
         product_id: req.product.id,
-        quantity: quantity,
+        quantity: Math.min(quantity, req.product.available()),
         available: req.product.available(),
         message: 'Cart updated.'
       })

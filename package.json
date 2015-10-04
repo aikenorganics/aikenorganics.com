@@ -45,9 +45,12 @@
     "postcss-cli": "2.1.0",
     "postcss-import": "7.0.0",
     "postcss-nested": "1.0.0",
+    "react": "0.13.3",
+    "reactify": "1.1.1",
     "request": "2.58.0",
     "rimraf": "2.4.3",
-    "uglify-js": "2.4.24"
+    "uglify-js": "2.4.24",
+    "whatwg-fetch": "0.9.0"
   },
   "devDependencies": {
     "standard": "5.2.2",

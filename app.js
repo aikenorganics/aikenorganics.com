@@ -34,6 +34,7 @@ app.use(session({
   secret: process.env.SECRET,
   maxAge: 1000 * 60 * 60 * 24 * 7
 }))
+app.use(body.json())
 app.use(body.urlencoded({extended: false}))
 app.use(multer({dest: './tmp/uploads/', putSingleFilesInArray: true}))
 app.use(require('./mid/market'))

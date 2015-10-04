@@ -1,4 +1,4 @@
-#message {
+.message {
   opacity: 0;
   visibility: hidden;
   text-align: center;
@@ -10,12 +10,12 @@
   transition: opacity 0.25s, visibility 0s 0.25s;
 }
 
-#message.active {
+.message.active {
   opacity: 1;
   visibility: visible;
   transition-delay: 0s;
 }
 
-#message .alert {
+.message .alert {
   padding: 5px;
 }

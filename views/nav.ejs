@@ -1,13 +1,5 @@
 <nav class='navbar navbar-inverse navbar-fixed-top'>
-  <div id='message' <% if (locals.flash) { %>class='active'<% } %>>
-    <% if (locals.flash) { %>
-      <% if (flash.success) { %>
-        <span class='alert alert-success'><%= flash.success %></span>
-      <% } else if (flash.error) { %>
-        <span class='alert alert-danger'><%= flash.error %></span>
-      <% } %>
-    <% } %>
-  </div>
+  <div id='message' data-flash='<%= JSON.stringify(locals.flash) %>'></div>
   <div class='container'>
     <div class="navbar-header">
       <button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar-collapse'>
