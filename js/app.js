@@ -1,12 +1,12 @@
-var $ = window.jQuery = require('jquery')
+let $ = window.jQuery = require('jquery')
 require('bootstrap')
 
-var $message = $('#message')
-var messageTimeout = setTimeout(function () {
+let $message = $('#message')
+let messageTimeout = setTimeout(function () {
   $message.removeClass('active')
 }, 10000)
 
-var message = function (type, message) {
+let message = function (type, message) {
   clearTimeout(messageTimeout)
   $message.html(
     "<span class='alert alert-" + type + "'>" + message + "</span>"
@@ -26,12 +26,12 @@ $(document).on('submit', 'form', function (e) {
 })
 
 $('script[data-cart]').each(function (i, el) {
-  var data = JSON.parse(el.innerHTML)
-  var $form = $("<form class='form-inline'></form>").replaceAll(el)
+  let data = JSON.parse(el.innerHTML)
+  let $form = $("<form class='form-inline'></form>").replaceAll(el)
 
   $form.on('submit', function (e) {
     e.preventDefault()
-    var $input = $form.find('input')
+    let $input = $form.find('input')
     $.ajax({
       url: '/cart',
       method: 'post',

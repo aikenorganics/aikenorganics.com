@@ -2,4 +2,4 @@
 
 mkdir -p public/js
 
-browserify js/app.js | uglifyjs > public/js/app.js
+browserify -t babelify js/app.js | uglifyjs > public/js/app.js
