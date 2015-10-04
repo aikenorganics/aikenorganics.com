@@ -46,6 +46,22 @@ test('GET /products?category_id=:id is a 200', function (t) {
   .end(t.end)
 })
 
+test('GET /products?search=query is a 200 logged in', function (t) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent
+    .get('/products?search=peach')
+    .expect(200)
+    .end(t.end)
+  })
+})
+
+test('GET /products?search=query is a 200 logged out', function (t) {
+  t.request()
+  .get('/products?search=peach')
+  .expect(200)
+  .end(t.end)
+})
+
 // Show
 
 test('GET /products/:id is a 200 as an admin', function (t) {

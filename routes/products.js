@@ -19,6 +19,10 @@ router.get('/', function (req, res) {
     .include('grower').join('grower')
     .where({active: true, grower: {active: true}})
 
+  if (req.query.search) {
+    products.where('to_tsquery(?) @@ search', `${req.query.search}:*`)
+  }
+
   if (req.query.category_id) {
     products.where({category_id: req.query.category_id})
   }

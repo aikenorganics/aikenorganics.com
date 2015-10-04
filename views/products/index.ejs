@@ -5,6 +5,9 @@
   <div class='row'>
     <div class='col-md-3'>
       <h3>Products</h3>
+      <form>
+        <input class='form-control' type='search' name='search' placeholder='Search…' value='<%= req.query.search || '' %>'>
+      </form>
       <% include ../categories/nav %>
     </div>
     <div class='col-md-9'>
