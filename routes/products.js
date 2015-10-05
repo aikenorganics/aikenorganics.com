@@ -19,16 +19,21 @@ router.get('/', function (req, res) {
     .include('grower').join('grower')
     .where({active: true, grower: {active: true}})
 
+  // Search
   if (req.query.search) {
     products.where('to_tsquery(?) @@ search', `${req.query.search}:*`)
   }
 
+  // Category
   if (req.query.category_id) {
     products.where({category_id: req.query.category_id})
   }
 
+  // Pagination
+  let page = res.locals.page = +(req.query.page || 1)
+
   Promise.all([
-    products.order('name').all(),
+    products.order('name').paginate(page, 30),
     db.Category.order('position').all()
   ]).then(function (results) {
     res.render('products/index', {

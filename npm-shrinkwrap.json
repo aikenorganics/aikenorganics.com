@@ -2713,9 +2713,9 @@
       }
     },
     "ozymandias": {
-      "version": "0.5.1",
-      "from": "git://github.com/braddunbar/ozymandias.git#795b1d6a33a95b4421d227d145dbd6ca7485af28",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#795b1d6a33a95b4421d227d145dbd6ca7485af28",
+      "version": "0.7.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#89c4f2169e153d8c1b104cbe2d430dd9a2254405",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#89c4f2169e153d8c1b104cbe2d430dd9a2254405",
       "dependencies": {
         "aws-sdk": {
           "version": "2.2.0",
@@ -2774,13 +2774,13 @@
               "resolved": "https://registry.npmjs.org/bytes/-/bytes-2.1.0.tgz"
             },
             "compressible": {
-              "version": "2.0.5",
+              "version": "2.0.6",
               "from": "compressible@>=2.0.5 <2.1.0",
-              "resolved": "https://registry.npmjs.org/compressible/-/compressible-2.0.5.tgz",
+              "resolved": "https://registry.npmjs.org/compressible/-/compressible-2.0.6.tgz",
               "dependencies": {
                 "mime-db": {
                   "version": "1.19.0",
-                  "from": "mime-db@>=1.16.0 <2.0.0",
+                  "from": "mime-db@>=1.19.0 <2.0.0",
                   "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.19.0.tgz"
                 }
               }
@@ -2798,9 +2798,9 @@
               }
             },
             "on-headers": {
-              "version": "1.0.0",
+              "version": "1.0.1",
               "from": "on-headers@>=1.0.0 <1.1.0",
-              "resolved": "https://registry.npmjs.org/on-headers/-/on-headers-1.0.0.tgz"
+              "resolved": "https://registry.npmjs.org/on-headers/-/on-headers-1.0.1.tgz"
             },
             "vary": {
               "version": "1.0.1",
@@ -2826,7 +2826,7 @@
               "dependencies": {
                 "mime-types": {
                   "version": "2.1.7",
-                  "from": "mime-types@>=2.1.6 <2.2.0",
+                  "from": "mime-types@>=2.1.7 <2.2.0",
                   "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.7.tgz",
                   "dependencies": {
                     "mime-db": {
