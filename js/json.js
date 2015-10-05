@@ -21,12 +21,10 @@ module.exports = (url, options) => {
 
   message('info', 'Working…')
 
-  // TODO: Send message on error. Catch network failures.
   return fetch(url, options).then((res) => {
-    if (res.status < 200 || res.status >= 300) {
-      throw new Error(res.statusText)
-    }
-    return res.json()
+    if (res.ok) return res.json()
+    message('error', res.statusText)
+    throw new Error(res.statusText)
   }).then((data) => {
     if (data && data.message) message('success', data.message)
     return data
