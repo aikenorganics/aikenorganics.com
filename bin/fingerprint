@@ -12,19 +12,23 @@ let rimraf = require('rimraf')
 
 rimraf.sync('public/assets')
 
-for (let file of glob.sync('public/**', {nodir: true})) {
+for (let file of glob.sync('public/{*,**}', {nodir: true})) {
   let hash = crypto
     .createHash('md5')
     .update(fs.readFileSync(file))
     .digest('hex')
+
   let ext = path.extname(file)
-  let dir = path.dirname(file).replace(/^public\//, '')
+  let dir = path.dirname(file).replace(/^public\/?/, '')
   let base = path.basename(file, ext)
 
-  assets[`${dir}/${base}${ext}`] = `/assets/${dir}/${base}-${hash}${ext}`
+  let key = path.join(dir, `${base}${ext}`)
+  let fingerprint = path.join(dir, `${base}-${hash}${ext}`)
+
+  assets[key] = `/assets/${fingerprint}`
   mkdirp.sync(`public/assets/${dir}`)
   fs.createReadStream(file).pipe(
-    fs.createWriteStream(`public/assets/${dir}/${base}-${hash}${ext}`)
+    fs.createWriteStream(`public/assets/${fingerprint}`)
   )
 }
 
