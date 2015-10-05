@@ -1,3 +1,4 @@
+let $ = require('jquery')
 let json = require('../../json')
 let React = require('react')
 
@@ -39,6 +40,8 @@ module.exports = class CartForm extends React.Component {
       }
     }).then((data) => {
       this.setState({quantity: data.quantity})
+      // TODO: Do this better?
+      $('#cart-size').text(data.cartSize)
     })
   }
 

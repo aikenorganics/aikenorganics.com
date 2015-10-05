@@ -58,6 +58,7 @@ router.post('/', function (req, res) {
     },
     json: function () {
       res.json({
+        cartSize: req.cart.size(),
         product_id: req.product.id,
         quantity: Math.min(quantity, req.product.available()),
         available: req.product.available(),

@@ -28,7 +28,7 @@
       <li<% if (/^\/cart/i.test(req.originalUrl)) { %> class='active'<% } %>>
         <a href='/cart'>
           Cart
-          <span class='badge'>
+          <span id='cart-size' class='badge'>
             <%= cart.size() %>
           </span>
         </a>
