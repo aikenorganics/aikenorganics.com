@@ -1,4 +1,5 @@
 let message = require('./message')
+require('es6-promise')
 require('whatwg-fetch')
 
 module.exports = (url, options) => {
