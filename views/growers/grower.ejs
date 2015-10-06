@@ -1,4 +1,9 @@
 <div class='panel panel-default product'>
+  <div class='panel-heading'>
+    <h3 class='panel-title'>
+      <a href='/growers/<%= grower.id %>'><%= grower.name %></a>
+    </h3>
+  </div>
   <div class='panel-body'>
     <div class='media'>
       <div class='media-left'>
@@ -7,9 +12,6 @@
         </a>
       </div>
       <div class='media-body'>
-        <h3 class='media-heading'>
-          <a href='/growers/<%= grower.id %>'><%= grower.name %></a>
-        </h3>
         <% if (grower.email) { %>
           <a href='mailto:<%= grower.email %>' target='_blank'>
             <%= grower.email %>

@@ -2,7 +2,14 @@
   margin-bottom: 20px;
 }
 
+.product .panel-heading {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .product .image-wrapper {
+  height: 100px;
   text-align: center;
   width: 100px;
 }

@@ -1,4 +1,9 @@
 <div class='panel panel-default product'>
+  <div class='panel-heading'>
+    <h3 class='panel-title'>
+      <a href='/products/<%= product.id %>'><%= product.name %></a>
+    </h3>
+  </div>
   <div class='panel-body'>
     <div class='media'>
       <div class='media-left media-middle'>
@@ -9,9 +14,6 @@
         </div>
       </div>
       <div class='media-body'>
-        <h3 class='media-heading'>
-          <a href='/products/<%= product.id %>'><%= product.name %></a>
-        </h3>
         <div class='pull-right'>
           <% include ../cart/form %>
         </div>
