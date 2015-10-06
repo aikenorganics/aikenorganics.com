@@ -6,10 +6,12 @@
   </div>
   <div class='panel-body'>
     <div class='media'>
-      <div class='media-left'>
-        <a href='/growers/<%= grower.id %>'>
-          <img class='img-rounded' src='<%= imageUrl(grower, 'small') %>' style='max-width: 100px; max-height: 100px;'>
-        </a>
+      <div class='media-left media-middle'>
+        <div class='image-wrapper'>
+          <a href='/growers/<%= grower.id %>'>
+            <img class='img-rounded' src='<%= imageUrl(grower, 'small') %>' style='max-width: 100px; max-height: 100px;'>
+          </a>
+        </div>
       </div>
       <div class='media-body'>
         <% if (grower.email) { %>
