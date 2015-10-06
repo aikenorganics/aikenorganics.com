@@ -3,20 +3,27 @@
   <% include ../subnav %>
 
   <div class='row'>
-    <div class='col-md-3'>
+    <div class='col-md-2'>
       <h3>
         Growers
-        <% if (locals.admin) { %>
+      </h3>
+      <hr>
+      <% if (locals.admin) { %>
+        <div class='text-center'>
           <a class='btn btn-default btn-xs' href='/growers/new'>
             New Grower
           </a>
-        <% } %>
-      </h3>
+        </div>
+      <% } %>
     </div>
-    <div class='col-md-9'>
-      <% growers.forEach(function(grower) { %>
-        <% include grower %>
-      <% }); %>
+    <div class='col-md-10'>
+      <div class='row'>
+        <% growers.forEach(function(grower) { %>
+          <div class='col-md-6'>
+            <% include grower %>
+          </div>
+        <% }) %>
+      </div>
     </div>
   </div>
 

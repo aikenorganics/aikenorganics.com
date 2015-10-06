@@ -1,13 +1,35 @@
-<div class='media'>
-  <div class='media-left'>
-    <a href='/growers/<%= grower.id %>'>
-      <img class='img-rounded' src='<%= imageUrl(grower, 'small') %>' style='max-width: 100px; max-height: 100px;'>
-    </a>
-  </div>
-  <div class='media-body'>
-    <h3 class='media-heading'>
-      <a href='/growers/<%= grower.id %>'><%= grower.name %></a>
-    </h3>
-    <%- marked(grower.description) %>
+<div class='panel panel-default product'>
+  <div class='panel-body'>
+    <div class='media'>
+      <div class='media-left'>
+        <a href='/growers/<%= grower.id %>'>
+          <img class='img-rounded' src='<%= imageUrl(grower, 'small') %>' style='max-width: 100px; max-height: 100px;'>
+        </a>
+      </div>
+      <div class='media-body'>
+        <h3 class='media-heading'>
+          <a href='/growers/<%= grower.id %>'><%= grower.name %></a>
+        </h3>
+        <% if (grower.email) { %>
+          <a href='mailto:<%= grower.email %>' target='_blank'>
+            <%= grower.email %>
+          </a>
+        <% } %>
+        <% if (grower.email && grower.url) { %>
+          <br>
+        <% } %>
+        <% if (grower.url) { %>
+          <a href='<%= grower.url %>' target='_blank'>
+            <%= grower.url %>
+          </a>
+        <% } %>
+        <% if (grower.location && (grower.email || grower.url)) { %>
+          <br>
+        <% } %>
+        <% if (grower.location) { %>
+          <%= grower.location %>
+        <% } %>
+      </div>
+    </div>
   </div>
 </div>
