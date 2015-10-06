@@ -1,35 +1,38 @@
-<div class='media'>
-  <div class='pull-right'>
-    <% include ../cart/form %>
-  </div>
-  <div class='media-left'>
-    <a href='/products/<%= product.id %>'>
-      <img class='img-rounded' src='<%= imageUrl(product, 'small') %>' style='max-width: 100px; max-height: 100px;'>
-    </a>
-  </div>
-  <div class='media-body'>
-    <h3 class='media-heading'>
-      <a href='/products/<%= product.id %>'><%= product.name %></a>
-    </h3>
-    <strong>
-      <% if (locals.open) { %>
-        $<%= product.cost %> per <%= product.unit %>
-        &bull;
-        <% if (product.active) { %>
-          <%= product.available() %> Available
-        <% } else { %>
-          <span>Unavailable</span>
-        <% } %>
-      <% } %>
-      <% if (locals.open && product.grower) { %>
-        &bull;
-      <% } %>
-      <% if (product.grower) { %>
-        <a href='/growers/<%= product.grower.id %>'>
-          <%= product.grower.name %>
-        </a>
-      <% } %>
-    </strong>
-    <%- marked(product.description) %>
+<div class='panel panel-default product'>
+  <div class='panel-body'>
+    <div class='media'>
+      <div class='media-left media-middle'>
+        <div class='image-wrapper'>
+          <a href='/products/<%= product.id %>'>
+            <img class='img-rounded' src='<%= imageUrl(product, 'small') %>' style='max-width: 100px; max-height: 100px;'>
+          </a>
+        </div>
+      </div>
+      <div class='media-body'>
+        <h3 class='media-heading'>
+          <a href='/products/<%= product.id %>'><%= product.name %></a>
+        </h3>
+        <div class='pull-right'>
+          <% include ../cart/form %>
+        </div>
+        <strong>
+          <% if (product.grower) { %>
+            <a href='/growers/<%= product.grower.id %>'>
+              <%= product.grower.name %>
+            </a>
+            <br>
+          <% } %>
+          <% if (locals.open) { %>
+            <% if (product.active) { %>
+              <%= product.available() %> Available
+            <% } else { %>
+              <span>Unavailable</span>
+            <% } %>
+            <br>
+            $<%= product.cost %> per <%= product.unit %>
+          <% } %>
+        </strong>
+      </div>
+    </div>
   </div>
 </div>

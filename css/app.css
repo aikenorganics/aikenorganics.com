@@ -7,6 +7,7 @@
 @import 'covered';
 @import 'messages';
 @import 'print';
+@import 'product';
 @import 'util';
 
 html, body {

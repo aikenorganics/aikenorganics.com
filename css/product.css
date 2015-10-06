@@ -1,0 +1,8 @@
+.product {
+  margin-bottom: 20px;
+}
+
+.product .image-wrapper {
+  text-align: center;
+  width: 100px;
+}

@@ -3,17 +3,21 @@
   <% include ../subnav %>
 
   <div class='row'>
-    <div class='col-md-3'>
+    <div class='col-md-2'>
       <form>
         <input class='form-control' type='search' name='search' placeholder='Search…' value='<%= req.query.search || '' %>'>
       </form>
       <hr>
       <% include ../categories/nav %>
     </div>
-    <div class='col-md-9'>
-      <% products.forEach(function(product) { %>
-        <% include ../products/product %>
-      <% }) %>
+    <div class='col-md-10'>
+      <div class='row'>
+        <% products.forEach(function(product) { %>
+          <div class='col-md-6'>
+            <% include ../products/product %>
+          </div>
+        <% }) %>
+      </div>
       <hr>
       <% if (products.more) { %>
         <a class='pull-right' href='<%= urlWith({page: page + 1}) %>'>

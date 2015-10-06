@@ -3,13 +3,10 @@
   <% include ../subnav %>
 
   <div class='row'>
-    <div class='col-md-3 text-center'>
-      <p>
-        <img class='img-rounded' src='<%= imageUrl(grower, 'medium') %>'>
-      </p>
+    <div class='col-md-2 text-center'>
       <% include nav %>
     </div>
-    <div class='col-md-9'>
+    <div class='col-md-10'>
       <h1><%= grower.name %></h1>
       <% if (grower.email) { %>
         <a href='mailto:<%= grower.email %>' target='_blank'>
@@ -30,11 +27,10 @@
       <% if (grower.location) { %>
         <%= grower.location %>
       <% } %>
-      <div class='clearfix'>
-        <hr>
-      </div>
+      <hr style='clear: both'>
+      <img class='img-rounded pull-right' src='<%= imageUrl(grower, 'medium') %>'>
       <%- marked(grower.description) %>
-      <h2>
+      <h2 style='clear: both'>
         Products
         <% if (locals.canEdit) { %>
           <a class='btn btn-default btn-xs' href='/growers/<%= grower.id %>/products/new'>
@@ -43,9 +39,13 @@
         <% } %>
       </h2>
       <hr>
-      <% locals.products.forEach(function(product) { %>
-        <% include ../products/product %>
-      <% }); %>
+      <div class='row'>
+        <% products.forEach(function(product) { %>
+          <div class='col-md-6'>
+            <% include ../products/product %>
+          </div>
+        <% }) %>
+      </div>
     </div>
   </div>
 
