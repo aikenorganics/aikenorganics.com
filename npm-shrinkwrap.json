@@ -3428,18 +3428,6 @@
       "from": "react-dom@*",
       "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-0.14.0.tgz"
     },
-    "reactify": {
-      "version": "1.1.1",
-      "from": "https://registry.npmjs.org/reactify/-/reactify-1.1.1.tgz",
-      "resolved": "https://registry.npmjs.org/reactify/-/reactify-1.1.1.tgz",
-      "dependencies": {
-        "react-tools": {
-          "version": "0.13.3",
-          "from": "https://registry.npmjs.org/react-tools/-/react-tools-0.13.3.tgz",
-          "resolved": "https://registry.npmjs.org/react-tools/-/react-tools-0.13.3.tgz"
-        }
-      }
-    },
     "recast": {
       "version": "0.10.24",
       "from": "recast@0.10.24",
