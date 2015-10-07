@@ -41,7 +41,7 @@
     "marked": "0.3.3",
     "mkdirp": "0.5.1",
     "multer": "0.1.8",
-    "ozymandias": "git://github.com/braddunbar/ozymandias.git#89c4f2169e153d8c1b104cbe2d430dd9a2254405",
+    "ozymandias": "git://github.com/braddunbar/ozymandias.git#573d1ad8f302268cba2a6cac31e0e77a4a386149",
     "postcss-cli": "2.1.0",
     "postcss-import": "7.0.0",
     "postcss-nested": "1.0.0",
