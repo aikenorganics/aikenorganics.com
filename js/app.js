@@ -1,4 +1,5 @@
 let React = require('react')
+let ReactDOM = require('react-dom')
 let $ = window.jQuery = require('jquery')
 let CartForm = require('./views/cart/form')
 let message = require('./message')
@@ -22,5 +23,5 @@ $(document).on('submit', 'form', (e) => {
 // Render cart forms.
 $('[data-cart]').each((i, el) => {
   let data = $(el).data('cart')
-  React.render(<CartForm {...data}/>, el)
+  ReactDOM.render(<CartForm {...data}/>, el)
 })

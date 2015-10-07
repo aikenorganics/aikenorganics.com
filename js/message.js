@@ -1,5 +1,6 @@
 let $ = require('jquery')
 let React = require('react')
+let ReactDOM = require('react-dom')
 let Message = require('./views/message')
 let $message = $('#message')
 
@@ -8,7 +9,7 @@ let timer = null
 
 // Render with props!
 let render = (props) => {
-  React.render(<Message {...props}/>, $message[0])
+  ReactDOM.render(<Message {...props}/>, $message[0])
 }
 
 module.exports = (type, message) => {

@@ -148,11 +148,6 @@
               "from": "https://registry.npmjs.org/babylon/-/babylon-5.8.23.tgz",
               "resolved": "https://registry.npmjs.org/babylon/-/babylon-5.8.23.tgz"
             },
-            "core-js": {
-              "version": "1.2.1",
-              "from": "https://registry.npmjs.org/core-js/-/core-js-1.2.1.tgz",
-              "resolved": "https://registry.npmjs.org/core-js/-/core-js-1.2.1.tgz"
-            },
             "debug": {
               "version": "2.2.0",
               "from": "https://registry.npmjs.org/debug/-/debug-2.2.0.tgz",
@@ -776,18 +771,6 @@
                 }
               }
             },
-            "parse-asn1": {
-              "version": "3.0.2",
-              "from": "parse-asn1@3.0.2",
-              "resolved": "https://registry.npmjs.org/parse-asn1/-/parse-asn1-3.0.2.tgz",
-              "dependencies": {
-                "asn1.js": {
-                  "version": "2.2.1",
-                  "from": "asn1.js@>=2.0.0 <3.0.0",
-                  "resolved": "https://registry.npmjs.org/asn1.js/-/asn1.js-2.2.1.tgz"
-                }
-              }
-            },
             "elliptic": {
               "version": "3.1.0",
               "from": "elliptic@3.1.0",
@@ -797,6 +780,18 @@
                   "version": "1.0.3",
                   "from": "hash.js@>=1.0.0 <2.0.0",
                   "resolved": "https://registry.npmjs.org/hash.js/-/hash.js-1.0.3.tgz"
+                }
+              }
+            },
+            "parse-asn1": {
+              "version": "3.0.2",
+              "from": "parse-asn1@3.0.2",
+              "resolved": "https://registry.npmjs.org/parse-asn1/-/parse-asn1-3.0.2.tgz",
+              "dependencies": {
+                "asn1.js": {
+                  "version": "2.2.1",
+                  "from": "asn1.js@>=2.0.0 <3.0.0",
+                  "resolved": "https://registry.npmjs.org/asn1.js/-/asn1.js-2.2.1.tgz"
                 }
               }
             }
@@ -1497,6 +1492,11 @@
       "from": "https://registry.npmjs.org/cookies/-/cookies-0.5.0.tgz",
       "resolved": "https://registry.npmjs.org/cookies/-/cookies-0.5.0.tgz"
     },
+    "core-js": {
+      "version": "1.2.1",
+      "from": "core-js@1.2.1",
+      "resolved": "https://registry.npmjs.org/core-js/-/core-js-1.2.1.tgz"
+    },
     "cssnano": {
       "version": "3.0.1",
       "from": "https://registry.npmjs.org/cssnano/-/cssnano-3.0.1.tgz",
@@ -2170,28 +2170,6 @@
       "from": "git://github.com/braddunbar/ozymandias.git#573d1ad8f302268cba2a6cac31e0e77a4a386149",
       "resolved": "git://github.com/braddunbar/ozymandias.git#573d1ad8f302268cba2a6cac31e0e77a4a386149",
       "dependencies": {
-        "aws-sdk": {
-          "version": "2.2.7",
-          "from": "aws-sdk@2.2.7",
-          "resolved": "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.2.7.tgz",
-          "dependencies": {
-            "sax": {
-              "version": "0.5.3",
-              "from": "sax@0.5.3",
-              "resolved": "https://registry.npmjs.org/sax/-/sax-0.5.3.tgz"
-            },
-            "xml2js": {
-              "version": "0.2.8",
-              "from": "xml2js@0.2.8",
-              "resolved": "https://registry.npmjs.org/xml2js/-/xml2js-0.2.8.tgz"
-            },
-            "xmlbuilder": {
-              "version": "0.4.2",
-              "from": "xmlbuilder@0.4.2",
-              "resolved": "https://registry.npmjs.org/xmlbuilder/-/xmlbuilder-0.4.2.tgz"
-            }
-          }
-        },
         "compression": {
           "version": "1.6.0",
           "from": "compression@1.6.0",
@@ -3410,16 +3388,45 @@
       "resolved": "https://registry.npmjs.org/qs/-/qs-4.0.0.tgz"
     },
     "react": {
-      "version": "0.13.3",
-      "from": "https://registry.npmjs.org/react/-/react-0.13.3.tgz",
-      "resolved": "https://registry.npmjs.org/react/-/react-0.13.3.tgz",
+      "version": "0.14.0",
+      "from": "react@latest",
+      "resolved": "https://registry.npmjs.org/react/-/react-0.14.0.tgz",
       "dependencies": {
         "envify": {
           "version": "3.4.0",
-          "from": "https://registry.npmjs.org/envify/-/envify-3.4.0.tgz",
+          "from": "envify@>=3.0.0 <4.0.0",
           "resolved": "https://registry.npmjs.org/envify/-/envify-3.4.0.tgz"
+        },
+        "fbjs": {
+          "version": "0.3.1",
+          "from": "fbjs@>=0.3.1 <0.4.0",
+          "resolved": "https://registry.npmjs.org/fbjs/-/fbjs-0.3.1.tgz",
+          "dependencies": {
+            "promise": {
+              "version": "7.0.4",
+              "from": "promise@>=7.0.3 <8.0.0",
+              "resolved": "https://registry.npmjs.org/promise/-/promise-7.0.4.tgz",
+              "dependencies": {
+                "asap": {
+                  "version": "2.0.3",
+                  "from": "asap@>=2.0.3 <2.1.0",
+                  "resolved": "https://registry.npmjs.org/asap/-/asap-2.0.3.tgz"
+                }
+              }
+            },
+            "ua-parser-js": {
+              "version": "0.7.9",
+              "from": "ua-parser-js@>=0.7.9 <0.8.0",
+              "resolved": "https://registry.npmjs.org/ua-parser-js/-/ua-parser-js-0.7.9.tgz"
+            }
+          }
         }
       }
+    },
+    "react-dom": {
+      "version": "0.14.0",
+      "from": "react-dom@*",
+      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-0.14.0.tgz"
     },
     "reactify": {
       "version": "1.1.1",
