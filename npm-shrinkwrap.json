@@ -2029,59 +2029,6 @@
       "from": "https://registry.npmjs.org/keygrip/-/keygrip-1.0.1.tgz",
       "resolved": "https://registry.npmjs.org/keygrip/-/keygrip-1.0.1.tgz"
     },
-    "less": {
-      "version": "2.5.1",
-      "from": "https://registry.npmjs.org/less/-/less-2.5.1.tgz",
-      "resolved": "https://registry.npmjs.org/less/-/less-2.5.1.tgz",
-      "dependencies": {
-        "errno": {
-          "version": "0.1.4",
-          "from": "https://registry.npmjs.org/errno/-/errno-0.1.4.tgz",
-          "resolved": "https://registry.npmjs.org/errno/-/errno-0.1.4.tgz",
-          "dependencies": {
-            "prr": {
-              "version": "0.0.0",
-              "from": "https://registry.npmjs.org/prr/-/prr-0.0.0.tgz",
-              "resolved": "https://registry.npmjs.org/prr/-/prr-0.0.0.tgz"
-            }
-          }
-        },
-        "graceful-fs": {
-          "version": "3.0.8",
-          "from": "https://registry.npmjs.org/graceful-fs/-/graceful-fs-3.0.8.tgz",
-          "resolved": "https://registry.npmjs.org/graceful-fs/-/graceful-fs-3.0.8.tgz"
-        },
-        "image-size": {
-          "version": "0.3.5",
-          "from": "https://registry.npmjs.org/image-size/-/image-size-0.3.5.tgz",
-          "resolved": "https://registry.npmjs.org/image-size/-/image-size-0.3.5.tgz"
-        },
-        "promise": {
-          "version": "6.1.0",
-          "from": "https://registry.npmjs.org/promise/-/promise-6.1.0.tgz",
-          "resolved": "https://registry.npmjs.org/promise/-/promise-6.1.0.tgz",
-          "dependencies": {
-            "asap": {
-              "version": "1.0.0",
-              "from": "https://registry.npmjs.org/asap/-/asap-1.0.0.tgz",
-              "resolved": "https://registry.npmjs.org/asap/-/asap-1.0.0.tgz"
-            }
-          }
-        },
-        "source-map": {
-          "version": "0.4.4",
-          "from": "https://registry.npmjs.org/source-map/-/source-map-0.4.4.tgz",
-          "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.4.4.tgz",
-          "dependencies": {
-            "amdefine": {
-              "version": "1.0.0",
-              "from": "https://registry.npmjs.org/amdefine/-/amdefine-1.0.0.tgz",
-              "resolved": "https://registry.npmjs.org/amdefine/-/amdefine-1.0.0.tgz"
-            }
-          }
-        }
-      }
-    },
     "marked": {
       "version": "0.3.3",
       "from": "https://registry.npmjs.org/marked/-/marked-0.3.3.tgz",
