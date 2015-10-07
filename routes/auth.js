@@ -17,13 +17,8 @@ router.param('token_id', find('token', function () {
 function findUser (req, res, next) {
   db.User.where('lower(email) = lower(?)', req.body.email).find()
   .then(function (user) {
-    if (user) {
-      req.user = res.locals.user = user
-      return next()
-    }
-    res.status(404).render('auth/forgot', {
-      error: 'Sorry! We don’t recognize that email.'
-    })
+    req.user = res.locals.user = user
+    next()
   }).catch(res.error)
 }
 
@@ -36,6 +31,12 @@ router.post('/forgot', findUser)
 router.post('/forgot', function (req, res) {
   let expires_at = new Date()
   expires_at.setDate(expires_at.getDate() + 7)
+
+  if (!req.user) {
+    return res.status(404).render('auth/forgot', {
+      error: 'Sorry! We don’t recognize that email.'
+    })
+  }
 
   db.transaction(function () {
     return db.Token.create({
@@ -108,6 +109,12 @@ router.post('/signin', findUser)
 router.post('/signin', function (req, res) {
   let password = (req.body.password || '').trim()
 
+  if (!req.user) {
+    return res.status(404).render('auth/signin', {
+      error: 'Sorry! We don’t recognize that email.'
+    })
+  }
+
   bcrypt.compare(password, req.user.password, function (e, match) {
     if (e) {
       console.log(e)
@@ -118,7 +125,7 @@ router.post('/signin', function (req, res) {
     if (!match) {
       res.status(422).render('auth/signin', {
         email: req.body.email,
-        flash: 'Sorry! That password is incorrect.'
+        error: 'Sorry! That password is incorrect.'
       })
       return
     }
@@ -141,7 +148,7 @@ router.post('/signup', function (req, res) {
   if (password.length < 8) {
     res.status(422).render('auth/signup', {
       email: email,
-      flash: 'Password must be at least eight characters long.'
+      error: 'Password must be at least eight characters long.'
     })
     return
   }
@@ -149,7 +156,7 @@ router.post('/signup', function (req, res) {
   // Validate the email.
   if (!/\S+@\S+\.\S+/.test(email)) {
     res.status(422).render('auth/signup', {
-      flash: 'Please enter a valid email address.'
+      error: 'Please enter a valid email address.'
     })
     return
   }
@@ -159,7 +166,7 @@ router.post('/signup', function (req, res) {
     if (user) {
       res.status(422).render('auth/signup', {
         email: email,
-        flash: 'That user already exists! Is it you?'
+        error: 'That user already exists! Is it you?'
       })
       return
     }
