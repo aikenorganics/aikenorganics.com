@@ -2118,9 +2118,9 @@
       "resolved": "https://registry.npmjs.org/on-headers/-/on-headers-1.0.1.tgz"
     },
     "ozymandias": {
-      "version": "0.11.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#8197ea4f0b8bb225be1392ee38e5c98440b380af",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#8197ea4f0b8bb225be1392ee38e5c98440b380af",
+      "version": "0.12.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#1aabf653d6eac2169ffc6b83a614bc87963c4091",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#1aabf653d6eac2169ffc6b83a614bc87963c4091",
       "dependencies": {
         "body-parser": {
           "version": "1.14.1",
@@ -2156,7 +2156,7 @@
             },
             "type-is": {
               "version": "1.6.9",
-              "from": "type-is@>=1.6.6 <1.7.0",
+              "from": "type-is@>=1.6.9 <1.7.0",
               "resolved": "https://registry.npmjs.org/type-is/-/type-is-1.6.9.tgz",
               "dependencies": {
                 "media-typer": {
@@ -2192,7 +2192,7 @@
               "dependencies": {
                 "mime-types": {
                   "version": "2.1.7",
-                  "from": "mime-types@>=2.1.6 <2.2.0",
+                  "from": "mime-types@>=2.1.7 <2.2.0",
                   "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.7.tgz",
                   "dependencies": {
                     "mime-db": {
@@ -2216,7 +2216,7 @@
               "dependencies": {
                 "mime-db": {
                   "version": "1.19.0",
-                  "from": "mime-db@>=1.19.0 <1.20.0",
+                  "from": "mime-db@>=1.19.0 <2.0.0",
                   "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.19.0.tgz"
                 }
               }
@@ -2392,7 +2392,7 @@
             },
             "type-is": {
               "version": "1.6.9",
-              "from": "type-is@>=1.6.6 <1.7.0",
+              "from": "type-is@>=1.6.9 <1.7.0",
               "resolved": "https://registry.npmjs.org/type-is/-/type-is-1.6.9.tgz",
               "dependencies": {
                 "media-typer": {
