@@ -723,18 +723,6 @@
                 }
               }
             },
-            "elliptic": {
-              "version": "3.1.0",
-              "from": "elliptic@3.1.0",
-              "resolved": "https://registry.npmjs.org/elliptic/-/elliptic-3.1.0.tgz",
-              "dependencies": {
-                "hash.js": {
-                  "version": "1.0.3",
-                  "from": "hash.js@>=1.0.0 <2.0.0",
-                  "resolved": "https://registry.npmjs.org/hash.js/-/hash.js-1.0.3.tgz"
-                }
-              }
-            },
             "parse-asn1": {
               "version": "3.0.2",
               "from": "parse-asn1@3.0.2",
@@ -744,6 +732,18 @@
                   "version": "2.2.1",
                   "from": "asn1.js@>=2.0.0 <3.0.0",
                   "resolved": "https://registry.npmjs.org/asn1.js/-/asn1.js-2.2.1.tgz"
+                }
+              }
+            },
+            "elliptic": {
+              "version": "3.1.0",
+              "from": "elliptic@3.1.0",
+              "resolved": "https://registry.npmjs.org/elliptic/-/elliptic-3.1.0.tgz",
+              "dependencies": {
+                "hash.js": {
+                  "version": "1.0.3",
+                  "from": "hash.js@>=1.0.0 <2.0.0",
+                  "resolved": "https://registry.npmjs.org/hash.js/-/hash.js-1.0.3.tgz"
                 }
               }
             }
@@ -2118,9 +2118,9 @@
       "resolved": "https://registry.npmjs.org/on-headers/-/on-headers-1.0.1.tgz"
     },
     "ozymandias": {
-      "version": "0.10.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#6586852bafd94722ab0fe2e58f2872dd286bfaae",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#6586852bafd94722ab0fe2e58f2872dd286bfaae",
+      "version": "0.11.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#8197ea4f0b8bb225be1392ee38e5c98440b380af",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#8197ea4f0b8bb225be1392ee38e5c98440b380af",
       "dependencies": {
         "body-parser": {
           "version": "1.14.1",
@@ -2192,7 +2192,7 @@
               "dependencies": {
                 "mime-types": {
                   "version": "2.1.7",
-                  "from": "mime-types@>=2.1.7 <2.2.0",
+                  "from": "mime-types@>=2.1.6 <2.2.0",
                   "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.7.tgz",
                   "dependencies": {
                     "mime-db": {
@@ -2216,7 +2216,7 @@
               "dependencies": {
                 "mime-db": {
                   "version": "1.19.0",
-                  "from": "mime-db@>=1.19.0 <2.0.0",
+                  "from": "mime-db@>=1.19.0 <1.20.0",
                   "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.19.0.tgz"
                 }
               }
@@ -2257,7 +2257,7 @@
               "dependencies": {
                 "mime-types": {
                   "version": "2.1.7",
-                  "from": "mime-types@>=2.1.7 <2.2.0",
+                  "from": "mime-types@>=2.1.6 <2.2.0",
                   "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.7.tgz",
                   "dependencies": {
                     "mime-db": {
@@ -2402,7 +2402,7 @@
                 },
                 "mime-types": {
                   "version": "2.1.7",
-                  "from": "mime-types@>=2.1.7 <2.2.0",
+                  "from": "mime-types@>=2.1.6 <2.2.0",
                   "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.7.tgz",
                   "dependencies": {
                     "mime-db": {

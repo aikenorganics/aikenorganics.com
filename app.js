@@ -9,9 +9,6 @@ let session = require('cookie-session')
 let app = module.exports = ozymandias()
 app.locals = require('./helpers')
 
-// Ensure requests are secure.
-if (app.get('env') === 'production') app.use(require('./mid/secure'))
-
 // Middleware
 app.use(session({
   signed: app.get('env') === 'production',
