@@ -35,7 +35,7 @@ router.post('/:product_order_id/remove', function (req, res) {
 // Update
 router.post('/:product_order_id', function (req, res) {
   db.transaction(function (t) {
-    req.productOrder.update(req.permit('quantity'))
+    req.productOrder.update(req.permit('quantity', 'cost'))
   }).then(function () {
     res.flash('success', 'Updated')
     res.redirect(`/admin/orders/${req.productOrder.order_id}`)

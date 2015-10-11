@@ -31,7 +31,14 @@
               <span class='label label-danger'>Oversold</span>
             <% } %>
           </td>
-          <td>$<%= productOrder.cost %></td>
+          <td>
+            <form class='form-inline' method='POST' action='/admin/product-orders/<%= productOrder.id %>' enctype='multipart/form-data'>
+              <div class='input-group'>
+                <span class='input-group-addon'>$</span>
+                <input type='number' class='form-control' name='cost' value='<%= productOrder.cost %>' onchange='this.form.submit()'>
+              </div>
+            </form>
+          </td>
           <td>
             <form method='POST' action='/admin/product-orders/<%= productOrder.id %>' enctype='multipart/form-data'>
               <select class='form-control' name='quantity' onchange='this.form.submit()'>

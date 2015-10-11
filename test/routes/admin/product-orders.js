@@ -25,11 +25,13 @@ test('POST /product-orders/:id is a 302', function (t) {
     agent
     .post('/admin/product-orders/1')
     .field('quantity', 1)
+    .field('cost', '1.23')
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
       db.transaction(function () {
         db.ProductOrder.find(1).then(function (productOrder) {
+          t.equal(productOrder.cost, '1.23')
           t.equal(productOrder.quantity, 1)
           t.end()
         })
