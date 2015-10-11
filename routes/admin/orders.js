@@ -60,9 +60,8 @@ router.get('/', function (req, res) {
 router.get('/:order_id', function (req, res) {
   let products = db.Product.join('grower')
     .where({active: true, grower: {active: true}})
-    .where('supply > reserved').not({
-      id: req.order.productOrders.map(po => po.product_id)
-    })
+    .where('supply > reserved')
+    .not({id: req.order.productOrders.map(po => po.product_id)})
 
   Promise.all([
     products.order('name').all(),
