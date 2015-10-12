@@ -12,7 +12,14 @@ router.param('grower_id', find('grower', function () {
 
 // Index
 router.get('/', function (req, res) {
-  db.Grower.order('name').all().then(function (growers) {
+  db.Grower
+  .select(`(
+    select sum(quantity * product_orders.cost) from product_orders
+    inner join products on products.id = product_orders.product_id
+    inner join orders on orders.id = product_orders.order_id
+    where products.grower_id = growers.id and orders.status = 'complete'
+  ) as total`)
+  .order('name').all().then(function (growers) {
     res.render('admin/growers/index', {growers: growers})
   }).catch(res.error)
 })

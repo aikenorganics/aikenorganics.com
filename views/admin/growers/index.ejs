@@ -7,6 +7,7 @@
       <tr>
         <th>Name</th>
         <th>Active</th>
+        <th>Total</th>
       </tr>
     </thead>
     <tbody>
@@ -14,8 +15,16 @@
         <tr>
           <td><a href='/admin/growers/<%= grower.id %>'><%= grower.name %></a></td>
           <td><% include active %></td>
+          <td>$<%= grower.total || 0 %></td>
         </tr>
       <% }) %>
     </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>$<%= growers.reduce((total, grower) => { return total + +grower.total }, 0).toFixed(2) %></td>
+      </tr>
+    </tfoot>
   </table>
 </main>

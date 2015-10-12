@@ -28,7 +28,7 @@
         <tfoot>
           <td></td>
           <td></td>
-          <td>$<%= products.reduce((total, product) => { return total + +product.total }, 0) %></td>
+          <td>$<%= products.reduce((total, product) => { return total + +product.total }, 0).toFixed(2) %></td>
         </tfoot>
       </table>
     </div>
