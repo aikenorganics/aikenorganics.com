@@ -2118,9 +2118,9 @@
       "resolved": "https://registry.npmjs.org/on-headers/-/on-headers-1.0.1.tgz"
     },
     "ozymandias": {
-      "version": "0.12.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#1aabf653d6eac2169ffc6b83a614bc87963c4091",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#1aabf653d6eac2169ffc6b83a614bc87963c4091",
+      "version": "0.13.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#9231063b164f539223c6fd5d33ac9a87ea4bf98b",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#9231063b164f539223c6fd5d33ac9a87ea4bf98b",
       "dependencies": {
         "body-parser": {
           "version": "1.14.1",

@@ -5,7 +5,6 @@
   <table class='table'>
     <thead>
       <tr>
-        <th></th>
         <th>Name</th>
         <th>Active</th>
       </tr>
@@ -13,11 +12,10 @@
     <tbody>
       <% growers.forEach(function(grower) { %>
         <tr>
-          <td><a class='btn btn-default btn-xs' href='/admin/growers/<%= grower.id %>/edit'>Edit</a></td>
-          <td><%= grower.name %></td>
+          <td><a href='/admin/growers/<%= grower.id %>'><%= grower.name %></a></td>
           <td><% include active %></td>
         </tr>
-      <% }); %>
+      <% }) %>
     </tbody>
   </table>
 </main>

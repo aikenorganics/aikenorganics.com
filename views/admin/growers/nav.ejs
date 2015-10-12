@@ -1,0 +1,12 @@
+<ul class='nav nav-pills nav-stacked hidden-print'>
+  <li<% if (/^\/admin\/growers\/\d+\/?$/.test(req.originalUrl)) { %> class='active'<% } %>>
+    <a href='/admin/growers/<%= grower.id %>'>
+      Info
+    </a>
+  </li>
+  <li<% if (/^\/admin\/growers\/\d+\/users\/?$/.test(req.originalUrl)) { %> class='active'<% } %>>
+    <a href='/admin/growers/<%= grower.id %>/users'>
+      Users
+    </a>
+  </li>
+</ul>

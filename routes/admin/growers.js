@@ -17,11 +17,25 @@ router.get('/', function (req, res) {
   }).catch(res.error)
 })
 
+// Show
+router.get('/:grower_id', function (req, res) {
+  db.Product
+  .join({productOrders: 'order'})
+  .select('sum(quantity) as quantity')
+  .select('sum(quantity * product_orders.cost) as total')
+  .where({grower_id: req.grower.id})
+  .where({productOrders: {order: {status: 'complete'}}})
+  .groupBy('products.id')
+  .all().then(function (products) {
+    res.render('admin/growers/show', {products: products})
+  }).catch(res.error)
+})
+
 // Edit
-router.get('/:grower_id/edit', function (req, res) {
+router.get('/:grower_id/users', function (req, res) {
   let ids = db.UserGrower.select('user_id').where({grower_id: req.grower.id})
   db.User.not({id: ids}).all().then(function (users) {
-    res.render('admin/growers/show', {users: users})
+    res.render('admin/growers/users', {users: users})
   }).catch(res.error)
 })
 
@@ -34,7 +48,7 @@ router.post('/:grower_id/adduser', function (req, res) {
     })
   }).then(function () {
     res.flash('success', 'User Added')
-    res.redirect(`/admin/growers/${req.grower.id}/edit`)
+    res.redirect(`/admin/growers/${req.grower.id}/users`)
   }).catch(res.error)
 })
 
@@ -47,7 +61,7 @@ router.post('/:grower_id/removeuser', function (req, res) {
     }).delete()
   }).then(function () {
     res.flash('success', 'User Removed')
-    res.redirect(`/admin/growers/${req.grower.id}/edit`)
+    res.redirect(`/admin/growers/${req.grower.id}/users`)
   }).catch(res.error)
 })
 
@@ -57,6 +71,6 @@ router.post('/:grower_id', function (req, res) {
     req.grower.update(req.permit('active'))
   }).then(function () {
     res.flash('success', 'Saved')
-    res.redirect(`/admin/growers/${req.grower.id}/edit`)
+    res.redirect(req.body.return_to)
   }).catch(res.error)
 })
