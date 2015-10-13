@@ -11,9 +11,17 @@ test('GET /admin/growers is a 200', function (t) {
   })
 })
 
-test('GET /admin/growers/:id/edit is a 200', function (t) {
+test('GET /admin/growers/:id is a 200', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
-    agent.get(`/admin/growers/1/edit`)
+    agent.get(`/admin/growers/1`)
+    .expect(200)
+    .end(t.end)
+  })
+})
+
+test('GET /admin/growers/:id/users is a 200', function (t) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent.get(`/admin/growers/1/users`)
     .expect(200)
     .end(t.end)
   })
