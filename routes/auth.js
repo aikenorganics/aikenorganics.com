@@ -82,15 +82,12 @@ router.post('/reset/:token_id', function (req, res) {
 
   // Hash the password and store the user.
   bcrypt.hash(req.body.password, 12, function (e, hash) {
-    if (e) {
-      console.log(e)
-      return res.status(500).render('500')
-    }
+    if (e) return res.error(e)
     req.token.user.update({password: hash}).then(function () {
       res.flash('success', 'Password Changed')
       req.session.userId = req.token.user.id
       res.redirect('/')
-    })
+    }).catch(res.error)
   })
 })
 
@@ -116,10 +113,7 @@ router.post('/signin', function (req, res) {
   }
 
   bcrypt.compare(password, req.user.password, function (e, match) {
-    if (e) {
-      console.log(e)
-      return res.status(500).render('500')
-    }
+    if (e) return res.error(e)
 
     // Is the password correct?
     if (!match) {
@@ -140,6 +134,7 @@ router.get('/signup', function (req, res) {
   res.render('auth/signup')
 })
 
+router.post('/signup', findUser)
 router.post('/signup', function (req, res) {
   let email = (req.body.email || '').trim()
   let password = (req.body.password || '').trim()
@@ -161,31 +156,26 @@ router.post('/signup', function (req, res) {
     return
   }
 
-  db.User.where('lower(email) = lower(?)', email).find().then(function (user) {
-    // Does this user already exist?
-    if (user) {
-      res.status(422).render('auth/signup', {
-        email: email,
-        error: 'That user already exists! Is it you?'
-      })
-      return
-    }
-
-    // Hash the password and store the user.
-    bcrypt.hash(password, 12, function (e, hash) {
-      if (e) {
-        console.log(e)
-        return res.status(500).render('500')
-      }
-
-      let params = req.permit('first', 'last', 'phone')
-      params.email = email
-      params.password = hash
-
-      db.User.create(params).then(function (user) {
-        req.session.userId = user.id
-        res.redirect('/')
-      })
+  // Does this user already exist?
+  if (req.user) {
+    res.status(422).render('auth/signup', {
+      email: email,
+      error: 'That user already exists! Is it you?'
     })
+    return
+  }
+
+  // Hash the password and store the user.
+  bcrypt.hash(password, 12, function (e, hash) {
+    if (e) return res.error(e)
+
+    let params = req.permit('first', 'last', 'phone')
+    params.email = email
+    params.password = hash
+
+    db.User.create(params).then(function (user) {
+      req.session.userId = user.id
+      res.redirect('/')
+    }).catch(res.error)
   })
 })
