@@ -3,8 +3,5 @@
 # Load the schema.
 psql $DATABASE_URL < schema.sql
 
-# Fill it with fixtures.
-./bin/fixtures
-
 # Reset sequences.
 ./bin/resequence
