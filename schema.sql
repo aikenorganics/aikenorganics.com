@@ -706,7 +706,8 @@ CREATE TABLE users (
     first character varying(255) DEFAULT ''::character varying NOT NULL,
     last character varying(255) DEFAULT ''::character varying NOT NULL,
     phone character varying(255) DEFAULT ''::character varying NOT NULL,
-    imaged_at timestamp with time zone
+    imaged_at timestamp with time zone,
+    member_until date
 );
 
 
@@ -981,13 +982,13 @@ SELECT pg_catalog.setval('user_growers_id_seq', 2, true);
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY users (id, created_at, updated_at, email, password, is_admin, first, last, phone, imaged_at) FROM stdin;
-1	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	admin@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	t	Admin	User	803.555.5555	\N
-2	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	user@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Regular	User	803.532.5859	\N
-3	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	jake@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Jake	The Dog	803.532.5859	\N
-4	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	finn@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Finn	The Human	803.532.5859	\N
-5	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	grower@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Grower	Montgomery	803.532.5859	\N
-6	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	info@planitfoods.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	PlanIt	Foods	803.532.5859	\N
+COPY users (id, created_at, updated_at, email, password, is_admin, first, last, phone, imaged_at, member_until) FROM stdin;
+1	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	admin@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	t	Admin	User	803.555.5555	\N	\N
+2	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	user@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Regular	User	803.532.5859	\N	\N
+3	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	jake@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Jake	The Dog	803.532.5859	\N	\N
+4	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	finn@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Finn	The Human	803.532.5859	\N	\N
+5	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	grower@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Grower	Montgomery	803.532.5859	\N	\N
+6	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	info@planitfoods.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	PlanIt	Foods	803.532.5859	\N	\N
 \.
 
 

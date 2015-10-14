@@ -723,18 +723,6 @@
                 }
               }
             },
-            "parse-asn1": {
-              "version": "3.0.2",
-              "from": "parse-asn1@3.0.2",
-              "resolved": "https://registry.npmjs.org/parse-asn1/-/parse-asn1-3.0.2.tgz",
-              "dependencies": {
-                "asn1.js": {
-                  "version": "2.2.1",
-                  "from": "asn1.js@>=2.0.0 <3.0.0",
-                  "resolved": "https://registry.npmjs.org/asn1.js/-/asn1.js-2.2.1.tgz"
-                }
-              }
-            },
             "elliptic": {
               "version": "3.1.0",
               "from": "elliptic@3.1.0",
@@ -744,6 +732,18 @@
                   "version": "1.0.3",
                   "from": "hash.js@>=1.0.0 <2.0.0",
                   "resolved": "https://registry.npmjs.org/hash.js/-/hash.js-1.0.3.tgz"
+                }
+              }
+            },
+            "parse-asn1": {
+              "version": "3.0.2",
+              "from": "parse-asn1@3.0.2",
+              "resolved": "https://registry.npmjs.org/parse-asn1/-/parse-asn1-3.0.2.tgz",
+              "dependencies": {
+                "asn1.js": {
+                  "version": "2.2.1",
+                  "from": "asn1.js@>=2.0.0 <3.0.0",
+                  "resolved": "https://registry.npmjs.org/asn1.js/-/asn1.js-2.2.1.tgz"
                 }
               }
             }
@@ -2007,6 +2007,11 @@
           "resolved": "https://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz"
         }
       }
+    },
+    "moment": {
+      "version": "2.10.6",
+      "from": "moment@*",
+      "resolved": "https://registry.npmjs.org/moment/-/moment-2.10.6.tgz"
     },
     "multer": {
       "version": "0.1.8",

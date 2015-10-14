@@ -18,6 +18,7 @@ class User extends Model {
       'is_admin',
       'password',
       'imaged_at',
+      'member_until',
       {name: 'created_at', property: 'createdAt'},
       {name: 'updated_at', property: 'updatedAt'}
     ]

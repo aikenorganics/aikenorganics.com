@@ -1,6 +1,7 @@
 'use strict'
 
 let marked = require('marked')
+let moment = require('moment')
 
 // Assets
 
@@ -13,6 +14,10 @@ let assetPath = exports.assetPath = function (path) {
 
 marked.setOptions({sanitize: true})
 exports.marked = marked
+
+// Moment
+
+exports.moment = moment
 
 // Images
 

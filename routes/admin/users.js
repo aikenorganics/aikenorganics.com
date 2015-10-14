@@ -33,8 +33,9 @@ router.get('/:user_id/edit', function (req, res) {
 // Update
 router.post('/:user_id', function (req, res) {
   db.transaction(function () {
-    let params = req.permit('first', 'last', 'phone', 'is_admin')
-    req._user.update(params)
+    req._user.update(req.permit(
+      'first', 'last', 'phone', 'is_admin', 'member_until'
+    ))
   }).then(function () {
     res.flash('success', 'Saved')
     res.redirect('/admin/users')

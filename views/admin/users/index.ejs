@@ -14,6 +14,7 @@
         <th>First</th>
         <th>Last</th>
         <th>Phone</th>
+        <th>Member</th>
         <th>Admin</th>
       </tr>
     </thead>
@@ -26,7 +27,16 @@
           <td><%= user.first || '-' %></td>
           <td><%= user.last || '-' %></td>
           <td><%= user.phone || '-' %></td>
-          <td><%= user.is_admin ? '✓' : '-' %></td>
+          <td>
+            <% if (user.member_until > new Date()) { %>
+              <span class='label label-info'>Member</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (user.is_admin) { %>
+              <span class='label label-primary'>Admin</span>
+            <% } %>
+          </td>
         </tr>
       <% }) %>
     </tbody>
