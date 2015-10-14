@@ -32,7 +32,7 @@
     "browserify": "11.2.0",
     "cookie-session": "1.2.0",
     "cookies": "0.5.0",
-    "cssnano": "3.0.1",
+    "cssnano": "3.3.1",
     "es6-promise": "3.0.2",
     "gm": "1.20.0",
     "jquery": "2.1.4",
