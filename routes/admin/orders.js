@@ -46,12 +46,14 @@ router.get('/', function (req, res) {
 
   Promise.all([
     orders.order(['createdAt', 'descending']).all(),
-    db.Location.order('name').all()
+    db.Location.order('name').all(),
+    db.Product.order('name').all()
   ]).then(function (results) {
     let view = full ? 'admin/orders/full' : 'admin/orders/index'
     res.render(view, {
       orders: results[0],
-      locations: results[1]
+      locations: results[1],
+      products: results[2]
     })
   }).catch(res.error)
 })
