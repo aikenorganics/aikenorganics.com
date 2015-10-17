@@ -21,7 +21,9 @@ router.get('/', function (req, res) {
 
   // Search
   if (req.query.search) {
-    products.where('to_tsquery(?) @@ search', `${req.query.search}:*`)
+    products.where(
+      "search @@ to_tsquery('simple', ?)", `${req.query.search}:*`
+    )
   }
 
   // Category
