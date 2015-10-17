@@ -21,6 +21,7 @@ ALTER TABLE ONLY public.product_orders DROP CONSTRAINT product_orders_order_id_f
 ALTER TABLE ONLY public.posts DROP CONSTRAINT posts_author_id_fkey;
 ALTER TABLE ONLY public.orders DROP CONSTRAINT orders_user_id_fkey;
 ALTER TABLE ONLY public.orders DROP CONSTRAINT orders_location_id_fkey;
+DROP TRIGGER update_user_search ON public.users;
 DROP TRIGGER update_reserved ON public.product_orders;
 DROP TRIGGER update_product_search ON public.products;
 DROP TRIGGER update_order_status ON public.orders;
@@ -707,7 +708,8 @@ CREATE TABLE users (
     last character varying(255) DEFAULT ''::character varying NOT NULL,
     phone character varying(255) DEFAULT ''::character varying NOT NULL,
     imaged_at timestamp with time zone,
-    member_until date
+    member_until date,
+    search tsvector
 );
 
 
@@ -982,13 +984,13 @@ SELECT pg_catalog.setval('user_growers_id_seq', 2, true);
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY users (id, created_at, updated_at, email, password, is_admin, first, last, phone, imaged_at, member_until) FROM stdin;
-1	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	admin@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	t	Admin	User	803.555.5555	\N	\N
-2	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	user@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Regular	User	803.532.5859	\N	\N
-3	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	jake@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Jake	The Dog	803.532.5859	\N	\N
-4	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	finn@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Finn	The Human	803.532.5859	\N	\N
-5	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	grower@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Grower	Montgomery	803.532.5859	\N	\N
-6	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	info@planitfoods.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	PlanIt	Foods	803.532.5859	\N	\N
+COPY users (id, created_at, updated_at, email, password, is_admin, first, last, phone, imaged_at, member_until, search) FROM stdin;
+1	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	admin@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	t	Admin	User	803.555.5555	\N	\N	'admin':1 'admin@example.com':3 'user':2
+2	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	user@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Regular	User	803.532.5859	\N	\N	'regular':1 'user':2 'user@example.com':3
+3	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	jake@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Jake	The Dog	803.532.5859	\N	\N	'dog':3 'jake':1 'jake@example.com':4
+4	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	finn@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Finn	The Human	803.532.5859	\N	\N	'finn':1 'finn@example.com':4 'human':3
+5	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	grower@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Grower	Montgomery	803.532.5859	\N	\N	'grower':1 'grower@example.com':3 'montgomeri':2
+6	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	info@planitfoods.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	PlanIt	Foods	803.532.5859	\N	\N	'food':2 'info@planitfoods.com':3 'planit':1
 \.
 
 
@@ -1211,6 +1213,13 @@ CREATE TRIGGER update_product_search BEFORE INSERT OR UPDATE ON products FOR EAC
 --
 
 CREATE TRIGGER update_reserved AFTER UPDATE ON product_orders FOR EACH ROW EXECUTE PROCEDURE update_reserved();
+
+
+--
+-- Name: update_user_search; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER update_user_search BEFORE INSERT OR UPDATE ON users FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('search', 'pg_catalog.english', 'first', 'last', 'email');
 
 
 --
