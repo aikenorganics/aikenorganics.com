@@ -1,9 +1,12 @@
 <main class='container'>
   <% include ../subnav %>
   <h1>Users</h1>
-  <a href='/admin/users/emails'>
-    Email List
-  </a>
+  <form class='form-inline' action='/admin/users'>
+    <input type='search' class='form-control' name='search' value='<%= req.query.search %>' placeholder='Search…'>
+    <a href='/admin/users/emails'>
+      Email List
+    </a>
+  </form>
   <hr>
   <table class='table'>
     <thead>

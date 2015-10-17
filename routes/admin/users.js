@@ -13,7 +13,13 @@ router.param('user_id', find('_user', function () {
 
 // Index
 router.get('/', function (req, res) {
-  db.User.order('email').all().then(function (users) {
+  let users = db.User
+
+  if (req.query.search) {
+    users = users.where('search @@ to_tsquery(?)', `${req.query.search}:*`)
+  }
+
+  users.order('email').all().then(function (users) {
     res.render('admin/users/index', {users: users})
   }).catch(res.error)
 })

@@ -33,6 +33,14 @@ test('GET /admin/users is a 200 as an admin', function (t) {
   })
 })
 
+test('GET /admin/users is a 200 as an admin with a search', function (t) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent.get('/admin/users?search=admin')
+    .expect(200)
+    .end(t.end)
+  })
+})
+
 test('GET /admin/users/show is a 200 as an admin', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent.get('/admin/users/1/edit')
