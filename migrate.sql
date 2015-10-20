@@ -1,7 +1,7 @@
-drop trigger update_user_search on users;
+drop trigger update_product_search on products;
 
-create trigger update_user_search
-before insert or update on users for each row
-execute procedure tsvector_update_trigger(search, 'pg_catalog.simple', first, last, email);
+create trigger update_product_search
+before insert or update on products for each row
+execute procedure tsvector_update_trigger(search, 'pg_catalog.simple', name);
 
-update users set first = first;
+update products set name = name;
