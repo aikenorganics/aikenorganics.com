@@ -1,7 +1,7 @@
-alter table users add column search tsvector;
+drop trigger update_user_search on users;
 
-CREATE TRIGGER update_user_search
-BEFORE INSERT OR UPDATE ON users FOR EACH ROW
-EXECUTE PROCEDURE tsvector_update_trigger(search, 'pg_catalog.english', first, last, email);
+create trigger update_user_search
+before insert or update on users for each row
+execute procedure tsvector_update_trigger(search, 'pg_catalog.simple', first, last, email);
 
 update users set first = first;

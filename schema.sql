@@ -987,10 +987,11 @@ SELECT pg_catalog.setval('user_growers_id_seq', 2, true);
 COPY users (id, created_at, updated_at, email, password, is_admin, first, last, phone, imaged_at, member_until, search) FROM stdin;
 1	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	admin@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	t	Admin	User	803.555.5555	\N	\N	'admin':1 'admin@example.com':3 'user':2
 2	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	user@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Regular	User	803.532.5859	\N	\N	'regular':1 'user':2 'user@example.com':3
-3	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	jake@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Jake	The Dog	803.532.5859	\N	\N	'dog':3 'jake':1 'jake@example.com':4
-4	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	finn@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Finn	The Human	803.532.5859	\N	\N	'finn':1 'finn@example.com':4 'human':3
-5	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	grower@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Grower	Montgomery	803.532.5859	\N	\N	'grower':1 'grower@example.com':3 'montgomeri':2
-6	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	info@planitfoods.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	PlanIt	Foods	803.532.5859	\N	\N	'food':2 'info@planitfoods.com':3 'planit':1
+3	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	jake@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Jake	The Dog	803.532.5859	\N	\N	'dog':3 'jake':1 'jake@example.com':4 'the':2
+4	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	finn@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Finn	The Human	803.532.5859	\N	\N	'finn':1 'finn@example.com':4 'human':3 'the':2
+5	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	grower@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Grower	Montgomery	803.532.5859	\N	\N	'grower':1 'grower@example.com':3 'montgomery':2
+6	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	info@planitfoods.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	PlanIt	Foods	803.532.5859	\N	\N	'foods':2 'info@planitfoods.com':3 'planit':1
+7	2015-10-20 15:49:18.595797-04	2015-10-20 15:49:18.595797-04	jwitherow@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Joanne	Witherow	803.555.5555	\N	\N	'joanne':1 'jwitherow@example.com':3 'witherow':2
 \.
 
 
@@ -998,7 +999,7 @@ COPY users (id, created_at, updated_at, email, password, is_admin, first, last, 
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('users_id_seq', 6, true);
+SELECT pg_catalog.setval('users_id_seq', 7, true);
 
 
 --
@@ -1219,7 +1220,7 @@ CREATE TRIGGER update_reserved AFTER UPDATE ON product_orders FOR EACH ROW EXECU
 -- Name: update_user_search; Type: TRIGGER; Schema: public; Owner: -
 --
 
-CREATE TRIGGER update_user_search BEFORE INSERT OR UPDATE ON users FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('search', 'pg_catalog.english', 'first', 'last', 'email');
+CREATE TRIGGER update_user_search BEFORE INSERT OR UPDATE ON users FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('search', 'pg_catalog.simple', 'first', 'last', 'email');
 
 
 --

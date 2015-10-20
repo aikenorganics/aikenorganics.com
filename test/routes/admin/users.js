@@ -81,3 +81,21 @@ test('GET /admin/users/emails is a 200', function (t) {
     .end(t.end)
   })
 })
+
+test('Search for stop word', function (t) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent.get('/admin/users?search=with')
+    .expect(200)
+    .expect(/jwitherow@example\.com/i)
+    .end(t.end)
+  })
+})
+
+test('Search for joanne', function (t) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent.get('/admin/users?search=joanne')
+    .expect(200)
+    .expect(/jwitherow@example\.com/i)
+    .end(t.end)
+  })
+})
