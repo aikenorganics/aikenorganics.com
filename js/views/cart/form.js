@@ -46,43 +46,36 @@ module.exports = class CartForm extends React.Component {
   }
 
   add () {
-    return (
-      <button type='submit' className='btn btn-primary'
-        onClick={this.increment.bind(this)}>
-        Add to Cart
-      </button>
-    )
+    return <button type='submit' className='btn btn-primary' onClick={this.increment.bind(this)}>
+      Add to Cart
+    </button>
   }
 
   update () {
-    return (
-      <div className='form-group'>
-        <div className='input-group'>
-          <div className='input-group-btn'>
-            <button className='btn btn-primary'
-              onClick={this.decrement.bind(this)}>
-              -
-            </button>
-          </div>
-          <span className='form-control'>{this.state.quantity}</span>
-          <div className='input-group-btn'>
-            <button className='btn btn-primary'
-              disabled={!this.canIncrement()}
-              onClick={this.increment.bind(this)}>
-              +
-            </button>
-          </div>
+    return <div className='form-group'>
+      <div className='input-group'>
+        <div className='input-group-btn'>
+          <button className='btn btn-primary'
+            onClick={this.decrement.bind(this)}>
+            -
+          </button>
+        </div>
+        <span className='form-control'>{this.state.quantity}</span>
+        <div className='input-group-btn'>
+          <button className='btn btn-primary'
+            disabled={!this.canIncrement()}
+            onClick={this.increment.bind(this)}>
+            +
+          </button>
         </div>
       </div>
-    )
+    </div>
   }
 
   render () {
-    return (
-      <form className='form-inline' onSubmit={this.submit.bind(this)}>
-        {this.state.quantity > 0 ? this.update() : this.add()}
-      </form>
-    )
+    return <form className='form-inline' onSubmit={this.submit.bind(this)}>
+      {this.state.quantity > 0 ? this.update() : this.add()}
+    </form>
   }
 
 }

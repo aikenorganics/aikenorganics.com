@@ -12,13 +12,11 @@ module.exports = class Message extends React.Component {
   }
 
   render () {
-    return (
-      <div className={`message ${this.props.active ? 'active' : ''}`}>
-        <span className={`alert alert-${this.alertClass()}`}>
-          {this.props.message}
-        </span>
-      </div>
-    )
+    return <div className={`message ${this.props.active ? 'active' : ''}`}>
+      <span className={`alert alert-${this.alertClass()}`}>
+        {this.props.message}
+      </span>
+    </div>
   }
 
 }
