@@ -70,8 +70,15 @@ router.post('/:product_id', function (req, res) {
       'active', 'category_id', 'cost', 'description', 'name', 'supply', 'unit'
     ))
   }).then(function () {
-    res.flash('success', 'Saved')
-    res.redirect(req.body.return_to || `/products/${req.product.id}`)
+    res.format({
+      html: () => {
+        res.flash('success', 'Saved')
+        res.redirect(req.body.return_to || `/products/${req.product.id}`)
+      },
+      json: () => {
+        res.json({})
+      }
+    })
   }).catch(function (e) {
     if (e.message !== 'invalid') throw e
     res.status(422)

@@ -171,6 +171,17 @@ test('POST /products/:id is a 422 for invalid data', function (t) {
   })
 })
 
+test('POST /products/:id accepts JSON', function (t) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent.post('/products/1')
+    .set('Accept', 'application/json')
+    .send({supply: 20})
+    .expect('Content-Type', /application\/json/)
+    .expect(200)
+    .end(t.end)
+  })
+})
+
 // Image
 
 test('POST /products/:id/image is a 401 as a non-admin', function (t) {
