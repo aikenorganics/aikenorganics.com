@@ -2069,9 +2069,9 @@
       "resolved": "https://registry.npmjs.org/on-headers/-/on-headers-1.0.1.tgz"
     },
     "ozymandias": {
-      "version": "0.15.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#6c82c220e89415e753da45715ef1871b9266de1b",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#6c82c220e89415e753da45715ef1871b9266de1b",
+      "version": "0.16.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#64f71fa89551bf40cf0044da102b3ea0414eb4e4",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#64f71fa89551bf40cf0044da102b3ea0414eb4e4",
       "dependencies": {
         "body-parser": {
           "version": "1.14.1",
@@ -2107,7 +2107,7 @@
             },
             "type-is": {
               "version": "1.6.9",
-              "from": "type-is@>=1.6.6 <1.7.0",
+              "from": "type-is@>=1.6.9 <1.7.0",
               "resolved": "https://registry.npmjs.org/type-is/-/type-is-1.6.9.tgz",
               "dependencies": {
                 "media-typer": {
@@ -2343,7 +2343,7 @@
             },
             "type-is": {
               "version": "1.6.9",
-              "from": "type-is@>=1.6.6 <1.7.0",
+              "from": "type-is@>=1.6.9 <1.7.0",
               "resolved": "https://registry.npmjs.org/type-is/-/type-is-1.6.9.tgz",
               "dependencies": {
                 "media-typer": {
