@@ -34,15 +34,24 @@ router.get('/', function (req, res) {
   // Pagination
   let page = res.locals.page = +(req.query.page || 1)
 
-  Promise.all([
-    products.order('name').paginate(page, 30),
-    db.Category.order('position').all()
-  ]).then(function (results) {
-    res.render('products/index', {
-      products: results[0],
-      categories: results[1]
-    })
-  }).catch(res.error)
+  res.format({
+    html: () => {
+      Promise.all([
+        products.order('name').paginate(page, 30),
+        db.Category.order('position').all()
+      ]).then(function (results) {
+        res.render('products/index', {
+          products: results[0],
+          categories: results[1]
+        })
+      }).catch(res.error)
+    },
+    json: () => {
+      products.order('name').all().then((products) => {
+        res.json(products)
+      })
+    }
+  })
 })
 
 // Show

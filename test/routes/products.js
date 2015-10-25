@@ -62,6 +62,19 @@ test('GET /products?search=query is a 200 logged out', function (t) {
   .end(t.end)
 })
 
+test('GET /products?search=query returns JSON', function (t) {
+  t.request().get('/products?search=peach')
+  .set('Accept', 'application/json')
+  .expect('Content-Type', /application\/json/)
+  .expect(200)
+  .end((e, res) => {
+    if (e) return t.end(e)
+    t.is(res.body.length, 1)
+    t.is(res.body[0].id, 1)
+    t.end()
+  })
+})
+
 // Show
 
 test('GET /products/:id is a 200 as an admin', function (t) {
