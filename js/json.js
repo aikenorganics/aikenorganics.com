@@ -20,14 +20,9 @@ module.exports = (url, options) => {
     options.body = JSON.stringify(options.body)
   }
 
-  message('info', 'Working…')
-
   return fetch(url, options).then((res) => {
     if (res.ok) return res.json()
     message('error', res.statusText)
     throw new Error(res.statusText)
-  }).then((data) => {
-    if (data && data.message) message('success', data.message)
-    return data
   })
 }

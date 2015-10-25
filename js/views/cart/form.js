@@ -1,5 +1,6 @@
 let $ = require('jquery')
 let json = require('../../json')
+let message = require('../../message')
 let React = require('react')
 
 module.exports = class CartForm extends React.Component {
@@ -32,6 +33,7 @@ module.exports = class CartForm extends React.Component {
   }
 
   save (quantity) {
+    message('info', 'Updating Cart…')
     json('/cart', {
       method: 'post',
       body: {
@@ -39,6 +41,7 @@ module.exports = class CartForm extends React.Component {
         product_id: this.props.product_id
       }
     }).then((data) => {
+      message('success', 'Cart Updated')
       this.setState({quantity: data.quantity})
       // TODO: Do this better?
       $('#cart-size').text(data.cartSize)
