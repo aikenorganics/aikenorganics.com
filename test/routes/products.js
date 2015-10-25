@@ -75,6 +75,18 @@ test('GET /products?search=query returns JSON', function (t) {
   })
 })
 
+test('GET /products?grower_id=grower_id', function (t) {
+  t.request().get('/products?grower_id=2')
+  .set('Accept', 'application/json')
+  .expect('Content-Type', /application\/json/)
+  .expect(200)
+  .end((e, res) => {
+    if (e) return t.end(e)
+    t.deepEqual(res.body.map(product => product.id), [5, 4])
+    t.end()
+  })
+})
+
 // Show
 
 test('GET /products/:id is a 200 as an admin', function (t) {

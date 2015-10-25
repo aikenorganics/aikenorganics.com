@@ -28,7 +28,12 @@ router.get('/', function (req, res) {
 
   // Category
   if (req.query.category_id) {
-    products.where({category_id: req.query.category_id})
+    products = products.where({category_id: req.query.category_id})
+  }
+
+  // Grower
+  if (req.query.grower_id) {
+    products = products.where({grower_id: req.query.grower_id})
   }
 
   // Pagination
