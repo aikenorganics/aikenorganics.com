@@ -121,6 +121,16 @@ router.get('/:grower_id/orders', function (req, res) {
   }).catch(res.error)
 })
 
+// Supply
+router.get('/:grower_id/supply', function (req, res) {
+  if (!req.canEdit) return res.status(401).render('401')
+
+  db.Product.where({grower_id: req.grower.id}).order('name').all()
+  .then(function (products) {
+    res.render('growers/supply', {products: products})
+  }).catch(res.error)
+})
+
 router.post('/:grower_id/image', upload('grower'))
 
 router.post('/:grower_id/image', function (req, res, next) {

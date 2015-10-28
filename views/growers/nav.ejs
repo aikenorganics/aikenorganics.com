@@ -15,5 +15,10 @@
         Orders
       </a>
     </li>
+    <li<% if (/^\/growers\/\d+\/supply/.test(req.originalUrl)) { %> class='active'<% } %>>
+      <a href='/growers/<%= grower.id %>/supply'>
+        Supply
+      </a>
+    </li>
   </ul>
 <% } %>

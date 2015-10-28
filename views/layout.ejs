@@ -5,7 +5,9 @@
 </head>
 <body>
   <% include nav %>
-  <%- content %>
+  <div id='content'>
+    <%- content %>
+  </div>
   <% include footer %>
   <script src='<%= assetPath('js/app.js') %>'></script>
 </body>
