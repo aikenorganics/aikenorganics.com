@@ -25,3 +25,5 @@ $('[data-cart]').each((i, el) => {
   let data = $(el).data('cart')
   ReactDOM.render(<CartForm {...data}/>, el)
 })
+
+require('./pages')
