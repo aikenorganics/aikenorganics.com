@@ -211,6 +211,10 @@ begin
       where id = product[1]
     );
 
+    if available = 0 then
+      continue;
+    end if;
+
     update product_orders set
     quantity = quantity + least(available, product[2])
     where order_id = oid and product_id = product[1]

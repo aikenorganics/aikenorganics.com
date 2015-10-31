@@ -39,32 +39,23 @@ test('GET /cart is a 200 logged in', function (t) {
 
 test('POST /cart/checkout', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
-    agent
-    .post('/cart')
-    .field('product_id', 1)
-    .field('quantity', 2)
-    .expect(302)
-    .end(function (e) {
+    agent.post('/cart').field('product_id', 1).field('quantity', 2)
+    .expect(302).end(function (e) {
       if (e) return t.end(e)
-      agent.post('/cart')
-      .field('product_id', 3)
-      .field('quantity', 4)
-      .expect(302)
-      .end(function (e) {
+      agent.post('/cart').field('product_id', 3).field('quantity', 4)
+      .expect(302).end(function (e) {
         if (e) return t.end(e)
-        agent.post('/cart')
-        .field('product_id', 4)
-        .field('quantity', 20)
-        .expect(302)
-        .end(function (e) {
+        agent.post('/cart').field('product_id', 4).field('quantity', 20)
+        .expect(302).end(function (e) {
           if (e) return t.end(e)
-          agent
-          .post('/cart/checkout')
-          .field('location_id', 2)
-          .expect(302)
-          .end(function (e) {
+          agent.post('/cart').field('product_id', 5).field('quantity', 1)
+          .expect(302).end(function (e) {
             if (e) return t.end(e)
-            verify()
+            agent.post('/cart/checkout').field('location_id', 2).expect(302)
+            .end(function (e) {
+              if (e) return t.end(e)
+              verify()
+            })
           })
         })
       })

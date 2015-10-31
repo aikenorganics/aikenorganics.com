@@ -1,7 +1,47 @@
-drop trigger update_product_search on products;
+CREATE or REPLACE FUNCTION checkout(integer, integer, integer[]) RETURNS boolean
+LANGUAGE plpgsql
+AS $_$
+declare
+  oid int;
+  poid int;
+  available int;
+  product int[];
+begin
 
-create trigger update_product_search
-before insert or update on products for each row
-execute procedure tsvector_update_trigger(search, 'pg_catalog.simple', name);
+  update orders set location_id = $2
+  where user_id = $1 and status = 'open'
+  returning id into oid;
 
-update products set name = name;
+  if oid is null then
+    insert into orders (user_id, location_id)
+    values ($1, $2) returning id into oid;
+  end if;
+
+  foreach product slice 1 in array $3 loop
+
+    poid := null;
+    available := (
+      select supply - reserved from products
+      where id = product[1]
+    );
+
+    if available = 0 then
+      continue;
+    end if;
+
+    update product_orders set
+    quantity = quantity + least(available, product[2])
+    where order_id = oid and product_id = product[1]
+    returning id into poid;
+
+    if poid is null then
+      insert into product_orders (order_id, product_id, quantity)
+      values (oid, product[1], least(available, product[2]));
+    end if;
+
+  end loop;
+
+  return true;
+
+end;
+$_$;
