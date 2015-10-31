@@ -22,7 +22,10 @@ router.get('/', function (req, res) {
     res.render('cart/index', {
       products: results[0],
       locations: results[1],
-      order: results[2]
+      order: results[2],
+      unavailable: results[0].filter((product) => {
+        return product.available() < req.cart.cart[product.id]
+      })
     })
   }).catch(res.error)
 })

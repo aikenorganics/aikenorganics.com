@@ -3,6 +3,33 @@
   <% include ../subnav %>
 
   <h1>Shopping Cart</h1>
+
+  <% if (unavailable.length) { %>
+    <div class='alert alert-warning'>
+      <p>
+        <strong>Whoops!</strong>
+        Some of the items in your cart are no longer available. Sorry about that!
+      </p>
+      <ul>
+        <% unavailable.forEach(function (product) { %>
+          <li>
+            <a href='/products/<%= product.id %>'><%= product.name %></a> -
+            There <% if (cart.cart[product.id] > 1) { %>are<% } else { %>is<% } %>
+            <%= cart.cart[product.id] %> in your cart, but
+            <% if (product.available() === 0) { %>
+              none are
+            <% } else if (product.available() === 1) { %>
+              only one is
+            <% } else { %>
+              only <%= product.available() %> are
+            <% } %>
+            available.
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+  <% } %>
+
   <table class='table'>
     <thead>
       <tr>
@@ -15,13 +42,15 @@
     </thead>
     <tbody>
       <% products.forEach(function(product) { %>
-        <tr>
-          <td><a href='/products/<%= product.id %>'><%= product.name %></a></td>
-          <td>$<%= product.cost %> per <%= product.unit %></td>
-          <td><%= cart.quantity(product) %></td>
-          <td>$<%= cart.total(product).toFixed(2) %></td>
-          <td><% include remove %></td>
-        </tr>
+        <% if (cart.quantity(product) > 0) { %>
+          <tr>
+            <td><a href='/products/<%= product.id %>'><%= product.name %></a></td>
+            <td>$<%= product.cost %> per <%= product.unit %></td>
+            <td><%= cart.quantity(product) %></td>
+            <td>$<%= cart.total(product).toFixed(2) %></td>
+            <td><% include remove %></td>
+          </tr>
+        <% } %>
       <% }) %>
     </tbody>
     <tfoot>
