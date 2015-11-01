@@ -1,8 +1,8 @@
 let React = require('react')
 let SubNav = require('../subnav')
-let Row = require('./supply-row')
+let Row = require('./product-row')
 
-module.exports = class Supply extends React.Component {
+module.exports = class Products extends React.Component {
 
   render () {
     return <main className='container'>
@@ -26,21 +26,22 @@ module.exports = class Supply extends React.Component {
               </a>
             </li>
             <li className='active'>
-              <a href={`/growers/${this.props.grower.id}/supply`}>
-                Supply
+              <a href={`/growers/${this.props.grower.id}/products`}>
+                Products
               </a>
             </li>
           </ul>
         </div>
         <div className='col-md-10'>
           <h1>{this.props.grower.name}</h1>
-          <h2>Supply</h2>
+          <h2>Products</h2>
           <hr/>
           <table className='table'>
             <thead>
               <tr>
                 <th>Product</th>
                 <th>Supply</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>

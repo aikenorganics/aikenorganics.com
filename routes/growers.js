@@ -121,13 +121,13 @@ router.get('/:grower_id/orders', function (req, res) {
   }).catch(res.error)
 })
 
-// Supply
-router.get('/:grower_id/supply', function (req, res) {
+// Products
+router.get('/:grower_id/products', function (req, res) {
   if (!req.canEdit) return res.status(401).render('401')
 
   db.Product.where({grower_id: req.grower.id}).order('name').all()
   .then(function (products) {
-    res.render('growers/supply', {products: products})
+    res.render('growers/products', {products: products})
   }).catch(res.error)
 })
 

@@ -329,3 +329,19 @@ test('GET /growers/:id as non-grower does not include inactive products', functi
     .end(t.end)
   })
 })
+
+test('GET /growers/:id/products', function (t) {
+  t.signIn('grower@example.com').then(function (agent) {
+    agent.get('/growers/1/products')
+    .expect(200)
+    .end(t.end)
+  })
+})
+
+test('GET /growers/:id/products is a 401 for non-growers', function (t) {
+  t.signIn('info@planitfoods.com').then(function (agent) {
+    agent.get('/growers/1/products')
+    .expect(401)
+    .end(t.end)
+  })
+})
