@@ -3,6 +3,7 @@
 const fs = require('fs')
 const gm = require('gm').subClass({imageMagick: true})
 const aws = require('aws-sdk')
+const mime = require('mime')
 const BUCKET = process.env.BUCKET
 const s3 = new aws.S3({apiVersion: '2006-03-01'})
 
@@ -28,7 +29,7 @@ class Upload {
   }
 
   get ext () {
-    return this.file.extension
+    return mime.extension(this.mimetype)
   }
 
   get path () {
