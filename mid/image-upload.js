@@ -1,7 +1,7 @@
 'use strict'
 
 const fs = require('fs')
-const gm = require('gm')
+const gm = require('gm').subClass({imageMagick: true})
 const aws = require('aws-sdk')
 const BUCKET = process.env.BUCKET
 const s3 = new aws.S3({apiVersion: '2006-03-01'})
@@ -50,7 +50,6 @@ class Upload {
     let width = this.sizes[size]
     return new Promise((resolve, reject) => {
       gm(this.file.path)
-      .options({imageMagick: true})
       .resize(width, width)
       .noProfile()
       .write(this.tmpPath(size), e => e ? reject(e) : resolve())
