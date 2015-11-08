@@ -27,43 +27,52 @@ class Upload {
     }
   }
 
-  s3Key (size) {
-    return `${this.model.tableName}/${this.model.id}/${size}.jpg`
+  get ext () {
+    return this.file.extension
   }
 
-  tmpPath (size) {
-    if (size === 'original') return this.file.path
-    return `tmp/uploads/${this.file.name}-${size}.jpg`
+  get path () {
+    return this.file.path
+  }
+
+  get mimetype () {
+    return this.file.mimetype
+  }
+
+  s3Key (size) {
+    return `${this.model.tableName}/${this.model.id}/${size}.${this.ext}`
+  }
+
+  cleanup () {
+    fs.unlink(this.path)
   }
 
   process () {
     return Promise.all(
-      Object.keys(this.sizes).map(this.resize.bind(this))
+      Object.keys(this.sizes).map(this.put.bind(this))
     ).then(() => {
-      for (let size in this.sizes) fs.unlink(this.tmpPath(size))
+      this.cleanup()
       return this.model.update({imaged_at: new Date()})
+    }).catch((e) => {
+      this.cleanup()
+      throw e
     })
   }
 
-  resize (size) {
-    if (size === 'original') return this.put(size)
+  stream (size) {
+    if (size === 'original') return fs.createReadStream(this.path)
     let width = this.sizes[size]
-    return new Promise((resolve, reject) => {
-      gm(this.file.path)
-      .resize(width, width)
-      .noProfile()
-      .write(this.tmpPath(size), e => e ? reject(e) : resolve())
-    }).then(this.put.bind(this, size))
+    return gm(this.path).resize(width, width).noProfile().stream(this.ext)
   }
 
   put (size) {
     return new Promise((resolve, reject) => {
-      s3.putObject({
+      s3.upload({
         ACL: 'public-read',
-        Body: fs.createReadStream(this.tmpPath(size)),
+        Body: this.stream(size),
         Bucket: BUCKET,
         CacheControl: `max-age=${60 * 60 * 24}, public`,
-        ContentType: 'image/jpeg',
+        ContentType: this.mimetype,
         Key: this.s3Key(size)
       }, e => e ? reject(e) : resolve())
     })
