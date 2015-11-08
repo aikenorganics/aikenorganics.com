@@ -17,6 +17,7 @@ class Product extends Model {
       'unit',
       'description',
       'imaged_at',
+      'image_ext',
       'reserved',
       'active',
       'grower_id',

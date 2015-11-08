@@ -32,5 +32,5 @@ exports.imageUrl = function (model, size) {
   if (!model.imaged_at) return IMAGES[model.id % IMAGES.length]
   let tableName = model.tableName
 
-  return `/assets/${tableName}/${model.id}/${size}.jpg?${+model.imaged_at}`
+  return `/assets/${tableName}/${model.id}/${size}.${model.image_ext}?${+model.imaged_at}`
 }

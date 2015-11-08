@@ -17,6 +17,7 @@ class Grower extends Model {
       'active',
       'location',
       'imaged_at',
+      'image_ext',
       'description',
       {name: 'created_at', property: 'createdAt'},
       {name: 'updated_at', property: 'updatedAt'}

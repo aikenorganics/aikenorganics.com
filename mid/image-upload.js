@@ -52,7 +52,7 @@ class Upload {
       Object.keys(this.sizes).map(this.put.bind(this))
     ).then(() => {
       this.cleanup()
-      return this.model.update({imaged_at: new Date()})
+      return this.model.update({imaged_at: new Date(), image_ext: this.ext})
     }).catch((e) => {
       this.cleanup()
       throw e
