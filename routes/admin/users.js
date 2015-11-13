@@ -42,7 +42,7 @@ router.get('/:user_id/edit', function (req, res) {
 router.post('/:user_id', function (req, res) {
   db.transaction(function () {
     req._user.update(req.permit(
-      'first', 'last', 'phone', 'is_admin', 'member_until'
+      'email', 'first', 'last', 'phone', 'is_admin', 'member_until'
     ))
   }).then(function () {
     res.flash('success', 'Saved')
