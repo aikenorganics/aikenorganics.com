@@ -18,7 +18,6 @@ ALTER TABLE ONLY public.products DROP CONSTRAINT products_grower_id_fkey;
 ALTER TABLE ONLY public.products DROP CONSTRAINT products_category_id_fkey;
 ALTER TABLE ONLY public.product_orders DROP CONSTRAINT product_orders_product_id_fkey;
 ALTER TABLE ONLY public.product_orders DROP CONSTRAINT product_orders_order_id_fkey;
-ALTER TABLE ONLY public.posts DROP CONSTRAINT posts_author_id_fkey;
 ALTER TABLE ONLY public.orders DROP CONSTRAINT orders_user_id_fkey;
 ALTER TABLE ONLY public.orders DROP CONSTRAINT orders_location_id_fkey;
 DROP TRIGGER update_user_search ON public.users;
@@ -46,7 +45,6 @@ ALTER TABLE ONLY public.tokens DROP CONSTRAINT tokens_pkey;
 ALTER TABLE ONLY public.growers DROP CONSTRAINT suppliers_pkey;
 ALTER TABLE ONLY public.products DROP CONSTRAINT products_pkey;
 ALTER TABLE ONLY public.product_orders DROP CONSTRAINT product_orders_pkey;
-ALTER TABLE ONLY public.posts DROP CONSTRAINT posts_pkey;
 ALTER TABLE ONLY public.orders DROP CONSTRAINT orders_pkey;
 ALTER TABLE ONLY public.markets DROP CONSTRAINT markets_pkey;
 ALTER TABLE ONLY public.locations DROP CONSTRAINT locations_pkey;
@@ -55,7 +53,6 @@ ALTER TABLE public.users ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE public.user_growers ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE public.products ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE public.product_orders ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.posts ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE public.orders ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE public.markets ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE public.locations ALTER COLUMN id DROP DEFAULT;
@@ -71,8 +68,6 @@ DROP SEQUENCE public.products_id_seq;
 DROP TABLE public.products;
 DROP SEQUENCE public.product_orders_id_seq;
 DROP TABLE public.product_orders;
-DROP SEQUENCE public.posts_id_seq;
-DROP TABLE public.posts;
 DROP SEQUENCE public.orders_id_seq;
 DROP TABLE public.orders;
 DROP SEQUENCE public.markets_id_seq;
@@ -529,39 +524,6 @@ ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
 
 
 --
--- Name: posts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE posts (
-    id integer NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    content text NOT NULL,
-    author_id integer NOT NULL,
-    title character varying(255) DEFAULT ''::character varying NOT NULL
-);
-
-
---
--- Name: posts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE posts_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE posts_id_seq OWNED BY posts.id;
-
-
---
 -- Name: product_orders; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -778,13 +740,6 @@ ALTER TABLE ONLY orders ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY product_orders ALTER COLUMN id SET DEFAULT nextval('product_orders_id_seq'::regclass);
 
 
@@ -892,21 +847,6 @@ COPY orders (id, created_at, updated_at, user_id, status, notes, location_id) FR
 --
 
 SELECT pg_catalog.setval('orders_id_seq', 4, true);
-
-
---
--- Data for Name: posts; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY posts (id, created_at, updated_at, content, author_id, title) FROM stdin;
-\.
-
-
---
--- Name: posts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('posts_id_seq', 1, true);
 
 
 --
@@ -1039,14 +979,6 @@ ALTER TABLE ONLY markets
 
 ALTER TABLE ONLY orders
     ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
-
-
---
--- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY posts
-    ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
 
 
 --
@@ -1244,14 +1176,6 @@ ALTER TABLE ONLY orders
 
 ALTER TABLE ONLY orders
     ADD CONSTRAINT orders_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id);
-
-
---
--- Name: posts_author_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY posts
-    ADD CONSTRAINT posts_author_id_fkey FOREIGN KEY (author_id) REFERENCES users(id);
 
 
 --
