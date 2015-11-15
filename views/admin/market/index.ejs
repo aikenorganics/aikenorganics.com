@@ -4,7 +4,7 @@
   <% if (market.open) { %>
     <p>
       <strong>The market is open.</strong>
-      <form method='POST' action='/admin/market' enctype='multipart/form-data'>
+      <form method='POST' action='/admin/market'>
         <input type='hidden' name='open' value='0'>
         <button type='submit' class='btn btn-danger'>Close It</button>
       </form>
@@ -12,7 +12,7 @@
   <% } else { %>
     <p>
       <strong>The market is closed.</strong>
-      <form method='POST' action='/admin/market' enctype='multipart/form-data'>
+      <form method='POST' action='/admin/market'>
         <input type='hidden' name='open' value='1'>
         <button type='submit' class='btn btn-success'>Open It</button>
       </form>
