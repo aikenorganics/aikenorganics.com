@@ -17,3 +17,13 @@ test('User#name is trimmed', function (t) {
   t.is(user.name(), '')
   t.end()
 })
+
+test('User#member_until is null for empty values', function (t) {
+  let user = new db.User({member_until: ''})
+  t.is(user.member_until, null)
+  user.member_until = 0
+  t.is(user.member_until, null)
+  user.member_until = undefined
+  t.is(user.member_until, null)
+  t.end()
+})

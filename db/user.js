@@ -70,6 +70,14 @@ class User extends Model {
     return `${this.first} ${this.last}`.trim()
   }
 
+  get member_until () {
+    return this.data.get('member_until') || null
+  }
+
+  set member_until (value) {
+    this.data.set('member_until', value || null)
+  }
+
 }
 
 images.hasImage(User, {
