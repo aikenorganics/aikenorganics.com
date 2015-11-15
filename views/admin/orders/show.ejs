@@ -32,7 +32,7 @@
             <% } %>
           </td>
           <td>
-            <form class='form-inline' method='POST' action='/admin/product-orders/<%= productOrder.id %>' enctype='multipart/form-data'>
+            <form class='form-inline' method='POST' action='/admin/product-orders/<%= productOrder.id %>'>
               <div class='input-group'>
                 <span class='input-group-addon'>$</span>
                 <input type='number' class='form-control' name='cost' value='<%= productOrder.cost %>' onchange='this.form.submit()'>
@@ -40,7 +40,7 @@
             </form>
           </td>
           <td>
-            <form method='POST' action='/admin/product-orders/<%= productOrder.id %>' enctype='multipart/form-data'>
+            <form method='POST' action='/admin/product-orders/<%= productOrder.id %>'>
               <select class='form-control' name='quantity' onchange='this.form.submit()'>
                 <% for (var i = 1; i <= productOrder.quantity + productOrder.product.available(); i++) { %>
                   <option value='<%= i %>' <% if (productOrder.quantity === i) { %>selected<% } %>>
@@ -52,7 +52,7 @@
           </td>
           <td><%= productOrder.total().toFixed(2) %></td>
           <td>
-            <form method='POST' action='/admin/product-orders/<%= productOrder.id %>/remove' enctype='multipart/form-data'>
+            <form method='POST' action='/admin/product-orders/<%= productOrder.id %>/remove'>
               <input type='hidden' name='return_to' value='<%= req.originalUrl %>'>
               <input type='hidden' name='product_order_id' value='<%= productOrder.id %>'>
               <button type='submit' class='btn btn-danger btn-xs' data-confirm='Are you sure?'>Remove</button>
@@ -63,7 +63,7 @@
     </tbody>
     <tfoot>
       <td>
-        <form method='post' action='/admin/product-orders' enctype='multipart/form-data' class='form-inline'>
+        <form method='post' action='/admin/product-orders' class='form-inline'>
           <input type='hidden' name='order_id' value='<%= order.id %>'>
           <input type='hidden' name='quantity' value='1'>
           <div class='input-group'>
@@ -86,7 +86,7 @@
     </tfoot>
   </table>
 
-  <form method='POST' action='/admin/orders/<%= order.id %>' enctype='multipart/form-data'>
+  <form method='POST' action='/admin/orders/<%= order.id %>'>
     <div class='form-group'>
       <label>Location</label>
       <select class='form-control' name='location_id'>
