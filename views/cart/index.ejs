@@ -63,7 +63,7 @@
   </table>
 
   <% if (cart.size()) { %>
-    <form method='POST' action='/cart/checkout' enctype='multipart/form-data'>
+    <form method='POST' action='/cart/checkout'>
       <div class='form-group'>
         <label>Pickup Location</label>
         <select class='form-control' name='location_id'>

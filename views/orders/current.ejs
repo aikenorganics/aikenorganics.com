@@ -3,7 +3,7 @@
   <% include ../subnav %>
 
   <% if (locals.open && locals.order) { %>
-    <form method='POST' action='/orders/<%= order.id %>/cancel' enctype='multipart/form-data' class='pull-right'>
+    <form method='POST' action='/orders/<%= order.id %>/cancel' class='pull-right'>
       <button type='submit' class='btn btn-danger' data-confirm='Are you sure?'>
         Cancel Order
       </button>
@@ -39,7 +39,7 @@
       </tfoot>
     </table>
     <% if (locals.open) { %>
-      <form method='POST' action='/orders/<%= order.id %>' enctype='multipart/form-data'>
+      <form method='POST' action='/orders/<%= order.id %>'>
         <div class='form-group'>
           <label>Pickup Location</label>
           <select class='form-control' name='location_id'>
