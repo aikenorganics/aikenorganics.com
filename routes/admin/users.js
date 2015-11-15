@@ -3,7 +3,6 @@
 let ozymandias = require('ozymandias')
 let db = require('../../db')
 let find = require('../../mid/find')
-let upload = require('../../mid/image-upload')
 let router = module.exports = ozymandias.Router()
 
 // Find
@@ -51,4 +50,9 @@ router.post('/:user_id', function (req, res) {
 })
 
 // Image
-router.post('/:user_id/image', upload('_user'))
+router.post('/:user_id/image', function (req, res) {
+  req._user.uploadImage(req.files.image[0]).then(() => {
+    res.flash('Image Uploaded.')
+    res.redirect(req.body.return_to)
+  }).catch(res.error)
+})

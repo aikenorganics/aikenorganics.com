@@ -102,7 +102,10 @@ router.post('/:product_id', function (req, res) {
 })
 
 // Image
-router.post('/:product_id/image', function (req, res, next) {
+router.post('/:product_id/image', function (req, res) {
   if (!req.canEdit) return res.status(401).render('401')
-  next()
-}, require('../mid/image-upload')('product'))
+  req.product.uploadImage(req.files.image[0]).then(() => {
+    res.flash('Image Uploaded.')
+    res.redirect(req.body.return_to)
+  }).catch(res.error)
+})
