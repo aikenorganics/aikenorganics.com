@@ -35,11 +35,11 @@ class User extends Model {
   }
 
   get is_admin () {
-    return this.data.get('is_admin') || false
+    return !!+this.data.get('is_admin') || false
   }
 
   set is_admin (value) {
-    this.data.set('is_admin', value || false)
+    this.data.set('is_admin', !!+value || false)
   }
 
   get first () {
