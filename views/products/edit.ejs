@@ -22,7 +22,7 @@
     </div>
     <div class='col-md-9'>
       <h1>Edit Product</h1>
-      <form method='post' action='/products/<%= product.id %>' enctype='multipart/form-data' class='pull-right'>
+      <form method='post' action='/products/<%= product.id %>' class='pull-right'>
         <input type='hidden' name='return_to' value='/products/<%= product.id %>/edit'>
         <% if (product.active) { %>
           <input type='hidden' name='active' value='0'>
@@ -37,7 +37,7 @@
         <% include active %>
       </h4>
       <hr>
-      <form method='POST' action='/products/<%= product.id %>' enctype='multipart/form-data'>
+      <form method='POST' action='/products/<%= product.id %>'>
         <% include form %>
       </form>
     </div>
