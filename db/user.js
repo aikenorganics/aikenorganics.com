@@ -17,7 +17,7 @@ class User extends Model {
       'phone',
       'is_admin',
       'password',
-      'imaged_at',
+      'image_updated_at',
       'image_ext',
       'member_until',
       {name: 'created_at', property: 'createdAt'},

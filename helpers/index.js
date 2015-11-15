@@ -29,8 +29,8 @@ const IMAGES = [
 ].map(assetPath)
 
 exports.imageUrl = function (model, size) {
-  if (!model.imaged_at) return IMAGES[model.id % IMAGES.length]
+  if (!model.image_updated_at) return IMAGES[model.id % IMAGES.length]
   let tableName = model.tableName
 
-  return `/assets/${tableName}/${model.id}/${size}.${model.image_ext}?${+model.imaged_at}`
+  return `/assets/${tableName}/${model.id}/${size}.${model.image_ext}?${+model.image_updated_at}`
 }

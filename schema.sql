@@ -427,7 +427,8 @@ CREATE TABLE growers (
     location character varying(255) DEFAULT ''::character varying NOT NULL,
     imaged_at timestamp with time zone,
     active boolean DEFAULT true NOT NULL,
-    image_ext character varying(255)
+    image_ext character varying(255),
+    image_updated_at timestamp with time zone
 );
 
 
@@ -614,7 +615,8 @@ CREATE TABLE products (
     reserved integer DEFAULT 0 NOT NULL,
     active boolean DEFAULT true NOT NULL,
     search tsvector,
-    image_ext character varying(255)
+    image_ext character varying(255),
+    image_updated_at timestamp with time zone
 );
 
 
@@ -716,7 +718,8 @@ CREATE TABLE users (
     imaged_at timestamp with time zone,
     member_until date,
     search tsvector,
-    image_ext character varying(255)
+    image_ext character varying(255),
+    image_updated_at timestamp with time zone
 );
 
 
@@ -834,10 +837,10 @@ SELECT pg_catalog.setval('categories_id_seq', 6, true);
 -- Data for Name: growers; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY growers (id, created_at, updated_at, name, email, url, description, location, imaged_at, active, image_ext) FROM stdin;
-1	2015-10-13 21:21:45.683542-04	2015-10-13 21:21:45.683542-04	Watsonia Farms	wfsales@watsoniafarms.com	http://watsoniafarms.com/	For four generations, from 1918 to the present, the Watson family has been bringing the best in fruit and produce to the people of South Carolina. And now, you can enjoy the same farm-fresh goodness in your own home.		\N	t	\N
-2	2015-10-13 21:21:45.683542-04	2015-10-13 21:21:45.683542-04	Plan It Foods	info@planitfoods.com	http://planitfoods.com/	Plan It Foods offers homemade “heat and serve” meals that focus on local, all natural ingredients. Our frozen meals come in single serving or family sizes and are fully cooked and ready to heat in your oven. We use only chemical-free, hormone-free, antibiotic-free meats, milk and eggs from local farmers using sustainable & humane practices in the raising and butchering of their animals.  We also offer gluten free, vegetarian and vegan menu options and use as much local produce as possible from local farmers who are following organic growing practices. We are fully licensed and insured and all of our prepared foods are made in a DHEC approved kitchen. We strive to use the freshest, healthiest, best tasting local products available so that you do not have to sacrifice taste or nutrition for convenience!		\N	t	\N
-3	2015-10-13 21:21:45.683542-04	2015-10-13 21:21:45.683542-04	Happy Earth Farm [Inactive]	steve@happyearthfarm.com	http://happyearthfarm.com	Happy Earth Farm is your local Aiken family farm, where we’re dedicated to providing you with the freshest products in the purest fashion. We don’t use pesticides, herbicides or any other “cides”! We grow our crops using our own organic compost and other organic supplements and soil enhancers; we practice extensive crop rotation and companion planting; our flock of guineas provides natural pest control; and we never, ever use genetically modified seeds! We raise our chickens the old fashioned way: providing unadulterated, soy-free organic feed and offering up plenty of fresh air and sunshine. We’re passionate about “clean” healthy eating, and we offer to you what we feed our family: fresh and natural alternatives to store-bought fare.		\N	f	\N
+COPY growers (id, created_at, updated_at, name, email, url, description, location, imaged_at, active, image_ext, image_updated_at) FROM stdin;
+1	2015-10-13 21:21:45.683542-04	2015-10-13 21:21:45.683542-04	Watsonia Farms	wfsales@watsoniafarms.com	http://watsoniafarms.com/	For four generations, from 1918 to the present, the Watson family has been bringing the best in fruit and produce to the people of South Carolina. And now, you can enjoy the same farm-fresh goodness in your own home.		\N	t	\N	\N
+2	2015-10-13 21:21:45.683542-04	2015-10-13 21:21:45.683542-04	Plan It Foods	info@planitfoods.com	http://planitfoods.com/	Plan It Foods offers homemade “heat and serve” meals that focus on local, all natural ingredients. Our frozen meals come in single serving or family sizes and are fully cooked and ready to heat in your oven. We use only chemical-free, hormone-free, antibiotic-free meats, milk and eggs from local farmers using sustainable & humane practices in the raising and butchering of their animals.  We also offer gluten free, vegetarian and vegan menu options and use as much local produce as possible from local farmers who are following organic growing practices. We are fully licensed and insured and all of our prepared foods are made in a DHEC approved kitchen. We strive to use the freshest, healthiest, best tasting local products available so that you do not have to sacrifice taste or nutrition for convenience!		\N	t	\N	\N
+3	2015-10-13 21:21:45.683542-04	2015-10-13 21:21:45.683542-04	Happy Earth Farm [Inactive]	steve@happyearthfarm.com	http://happyearthfarm.com	Happy Earth Farm is your local Aiken family farm, where we’re dedicated to providing you with the freshest products in the purest fashion. We don’t use pesticides, herbicides or any other “cides”! We grow our crops using our own organic compost and other organic supplements and soil enhancers; we practice extensive crop rotation and companion planting; our flock of guineas provides natural pest control; and we never, ever use genetically modified seeds! We raise our chickens the old fashioned way: providing unadulterated, soy-free organic feed and offering up plenty of fresh air and sunshine. We’re passionate about “clean” healthy eating, and we offer to you what we feed our family: fresh and natural alternatives to store-bought fare.		\N	f	\N	\N
 \.
 
 
@@ -936,15 +939,15 @@ SELECT pg_catalog.setval('product_orders_id_seq', 8, true);
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY products (id, created_at, updated_at, name, grower_id, cost, supply, unit, description, category_id, imaged_at, reserved, active, search, image_ext) FROM stdin;
-6	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Happy Pesto Sauce [Inactive Grower]	3	5.50	23	4 oz.	It starts with our own organically grown basil and ends with a finished product full of rich flavor.  Our Happy Pesto is the perfect pasta sauce, but is also delicious on fish, chicken, eggs or any other recipe calling for pesto.  Our pesto is made super concentrated so cutting it with additional olive oil will make this sauce go twice as far.	2	\N	0	t	'grower':5 'happy':1 'inactive':4 'pesto':2 'sauce':3	\N
-7	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Spanish Rice [Inactive]	2	4.32	3	medium side item - (2 cups)	Made with all natural brown rice and organic tomatoes, corn and sweet peas, this rice packs a lot of flavor and is the perfect side for our enchiladas or great on its own! (vegetarian and gluten free)	2	\N	0	f	'inactive':3 'rice':2 'spanish':1	\N
-8	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Mild Chow Chow [Inactive]	1	5.00	7	Pint Jar	Cabbage, onions, sugar, red bell pepper, vinegar, ground mustard, celery seed, salt, citric acid, turmeric, erythorbric acid to promote color retention.	2	\N	0	f	'chow':2,3 'inactive':4 'mild':1	\N
-1	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Peaches	1	14.00	22	box	A box of peaches.	1	\N	2	t	'peaches':1	\N
-2	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Strawberries	1	8.00	15	box	Some strawberries.	1	\N	3	t	'strawberries':1	\N
-3	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Kale	1	4.50	15	bunch	A buncha kale.	1	\N	1	t	'kale':1	\N
-4	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Vegan Gumbo - Small	2	7.00	15	small container (serves 1-2)	This hearty gumbo features local okra, tomatoes, peppers and corn (cut and frozen in season), fresh herbs and bay leaves simmered in organic vegetable stock and dark porter beer from the Aiken Brewing Company and comes with a side of all natural brown rice.	2	\N	1	t	'gumbo':2 'small':3 'vegan':1	\N
-5	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Vegan Gumbo - Medium	2	14.00	3	Medium container (serves 2-4)	This hearty gumbo features local okra, tomatoes, peppers and corn (cut and frozen in season), fresh herbs and bay leaves simmered in organic vegetable stock and dark porter beer from the Aiken Brewing Company and comes with a side of all natural brown rice.	2	\N	3	t	'gumbo':2 'medium':3 'vegan':1	\N
+COPY products (id, created_at, updated_at, name, grower_id, cost, supply, unit, description, category_id, imaged_at, reserved, active, search, image_ext, image_updated_at) FROM stdin;
+6	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Happy Pesto Sauce [Inactive Grower]	3	5.50	23	4 oz.	It starts with our own organically grown basil and ends with a finished product full of rich flavor.  Our Happy Pesto is the perfect pasta sauce, but is also delicious on fish, chicken, eggs or any other recipe calling for pesto.  Our pesto is made super concentrated so cutting it with additional olive oil will make this sauce go twice as far.	2	\N	0	t	'grower':5 'happy':1 'inactive':4 'pesto':2 'sauce':3	\N	\N
+7	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Spanish Rice [Inactive]	2	4.32	3	medium side item - (2 cups)	Made with all natural brown rice and organic tomatoes, corn and sweet peas, this rice packs a lot of flavor and is the perfect side for our enchiladas or great on its own! (vegetarian and gluten free)	2	\N	0	f	'inactive':3 'rice':2 'spanish':1	\N	\N
+8	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Mild Chow Chow [Inactive]	1	5.00	7	Pint Jar	Cabbage, onions, sugar, red bell pepper, vinegar, ground mustard, celery seed, salt, citric acid, turmeric, erythorbric acid to promote color retention.	2	\N	0	f	'chow':2,3 'inactive':4 'mild':1	\N	\N
+1	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Peaches	1	14.00	22	box	A box of peaches.	1	\N	2	t	'peaches':1	\N	\N
+2	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Strawberries	1	8.00	15	box	Some strawberries.	1	\N	3	t	'strawberries':1	\N	\N
+3	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Kale	1	4.50	15	bunch	A buncha kale.	1	\N	1	t	'kale':1	\N	\N
+4	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Vegan Gumbo - Small	2	7.00	15	small container (serves 1-2)	This hearty gumbo features local okra, tomatoes, peppers and corn (cut and frozen in season), fresh herbs and bay leaves simmered in organic vegetable stock and dark porter beer from the Aiken Brewing Company and comes with a side of all natural brown rice.	2	\N	1	t	'gumbo':2 'small':3 'vegan':1	\N	\N
+5	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Vegan Gumbo - Medium	2	14.00	3	Medium container (serves 2-4)	This hearty gumbo features local okra, tomatoes, peppers and corn (cut and frozen in season), fresh herbs and bay leaves simmered in organic vegetable stock and dark porter beer from the Aiken Brewing Company and comes with a side of all natural brown rice.	2	\N	3	t	'gumbo':2 'medium':3 'vegan':1	\N	\N
 \.
 
 
@@ -991,14 +994,14 @@ SELECT pg_catalog.setval('user_growers_id_seq', 2, true);
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY users (id, created_at, updated_at, email, password, is_admin, first, last, phone, imaged_at, member_until, search, image_ext) FROM stdin;
-1	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	admin@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	t	Admin	User	803.555.5555	\N	\N	'admin':1 'admin@example.com':3 'user':2	\N
-2	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	user@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Regular	User	803.532.5859	\N	\N	'regular':1 'user':2 'user@example.com':3	\N
-3	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	jake@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Jake	The Dog	803.532.5859	\N	\N	'dog':3 'jake':1 'jake@example.com':4 'the':2	\N
-4	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	finn@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Finn	The Human	803.532.5859	\N	\N	'finn':1 'finn@example.com':4 'human':3 'the':2	\N
-5	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	grower@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Grower	Montgomery	803.532.5859	\N	\N	'grower':1 'grower@example.com':3 'montgomery':2	\N
-6	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	info@planitfoods.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	PlanIt	Foods	803.532.5859	\N	\N	'foods':2 'info@planitfoods.com':3 'planit':1	\N
-7	2015-10-20 15:49:18.595797-04	2015-10-20 15:49:18.595797-04	jwitherow@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Joanne	Witherow	803.555.5555	\N	\N	'joanne':1 'jwitherow@example.com':3 'witherow':2	\N
+COPY users (id, created_at, updated_at, email, password, is_admin, first, last, phone, imaged_at, member_until, search, image_ext, image_updated_at) FROM stdin;
+1	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	admin@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	t	Admin	User	803.555.5555	\N	\N	'admin':1 'admin@example.com':3 'user':2	\N	\N
+2	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	user@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Regular	User	803.532.5859	\N	\N	'regular':1 'user':2 'user@example.com':3	\N	\N
+3	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	jake@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Jake	The Dog	803.532.5859	\N	\N	'dog':3 'jake':1 'jake@example.com':4 'the':2	\N	\N
+4	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	finn@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Finn	The Human	803.532.5859	\N	\N	'finn':1 'finn@example.com':4 'human':3 'the':2	\N	\N
+5	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	grower@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Grower	Montgomery	803.532.5859	\N	\N	'grower':1 'grower@example.com':3 'montgomery':2	\N	\N
+6	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	info@planitfoods.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	PlanIt	Foods	803.532.5859	\N	\N	'foods':2 'info@planitfoods.com':3 'planit':1	\N	\N
+7	2015-10-20 15:49:18.595797-04	2015-10-20 15:49:18.595797-04	jwitherow@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Joanne	Witherow	803.555.5555	\N	\N	'joanne':1 'jwitherow@example.com':3 'witherow':2	\N	\N
 \.
 
 

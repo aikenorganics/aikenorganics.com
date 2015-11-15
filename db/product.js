@@ -16,7 +16,7 @@ class Product extends Model {
       'supply',
       'unit',
       'description',
-      'imaged_at',
+      'image_updated_at',
       'image_ext',
       'reserved',
       'active',
