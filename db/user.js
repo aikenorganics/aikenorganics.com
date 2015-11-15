@@ -1,6 +1,7 @@
 'use strict'
 
 let Model = require('./model')
+let images = require('ozymandias/images')
 
 class User extends Model {
 
@@ -70,5 +71,13 @@ class User extends Model {
   }
 
 }
+
+images.hasImage(User, {
+  name: 'image',
+  sizes: {
+    small: 100,
+    medium: 250
+  }
+})
 
 module.exports = User
