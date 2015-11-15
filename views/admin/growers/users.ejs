@@ -26,7 +26,7 @@
                 <td><a href='/admin/users/<%= userGrower.user.id %>/edit'><%= userGrower.user.email %></a></td>
                 <td><%= userGrower.user.phone || '-' %></td>
                 <td>
-                  <form method='POST' action='/admin/growers/<%= grower.id %>/removeuser' enctype='multipart/form-data'>
+                  <form method='POST' action='/admin/growers/<%= grower.id %>/removeuser'>
                     <input type='hidden' name='user_id' value='<%= userGrower.user.id %>'>
                     <button type='submit' class='btn btn-danger btn-xs'>Remove</button>
                   </form>
@@ -36,7 +36,7 @@
           </tbody>
         </table>
         <div class='panel-footer'>
-          <form method='POST' action='/admin/growers/<%= grower.id %>/adduser' enctype='multipart/form-data' class='form-inline'>
+          <form method='POST' action='/admin/growers/<%= grower.id %>/adduser' class='form-inline'>
             <div class='form-group'>
               <select id='user_id' name='user_id' class='form-control' required>
                 <option value=''>Select a User</option>

@@ -1,4 +1,4 @@
-<form method='POST' action='/admin/growers/<%= grower.id %>' enctype='multipart/form-data' class='form-inline pull-right'>
+<form method='POST' action='/admin/growers/<%= grower.id %>' class='form-inline pull-right'>
   <input type='hidden' name='return_to' value='<%= req.originalUrl %>'>
   <div class='form-group'>
     <% if (grower.active) { %>
