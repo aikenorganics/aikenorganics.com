@@ -23,7 +23,7 @@
           <td><%= category.name %></td>
           <td><%= category.position %></td>
           <td>
-            <form method='POST' class='form-inline' action='/admin/categories/<%= category.id %>/delete' enctype='multipart/form-data'>
+            <form method='POST' class='form-inline' action='/admin/categories/<%= category.id %>/delete'>
               <input type='hidden' name='return_to' value='<%= req.originalUrl %>'>
               <button type='submit' class='btn btn-danger btn-xs' data-confirm='Are you sure?'>Delete</button>
             </form>
