@@ -1,6 +1,6 @@
 <main class='container'>
   <h1>Account Settings</h1>
-  <form method='POST' action='/settings/account' enctype='multipart/form-data'>
+  <form method='POST' action='/settings/account'>
     <div class='form-group'>
       <label for='first'>First Name</label>
       <input autofocus type='text' id='first' name='first' class='form-control' <% if (locals._user) { %>value='<%= _user.first %>'<% } %>>
