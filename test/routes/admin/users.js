@@ -7,9 +7,9 @@ test('POST /admin/users/:id is a 302', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent
     .post('/admin/users/2')
-    .field('first', 'first')
-    .field('last', 'last')
-    .field('phone', '555-555-5555')
+    .send('first=first')
+    .send('last=last')
+    .send('phone=555-555-5555')
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)

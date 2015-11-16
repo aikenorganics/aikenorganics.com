@@ -61,8 +61,8 @@ test('POST /admin/orders/:id is a 302', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent
     .post('/admin/orders/1')
-    .field('notes', 'test')
-    .field('status', 'complete')
+    .send('notes=test')
+    .send('status=complete')
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)

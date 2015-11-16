@@ -136,7 +136,7 @@ test('POST /growers/:id is a 401 for non-admins', function (t) {
 test('POST /growers/:id is a 302 for admins', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent.post('/growers/1')
-    .field('name', 'Watsonia')
+    .send('name=Watsonia')
     .expect(302)
     .end(t.end)
   })
@@ -145,7 +145,7 @@ test('POST /growers/:id is a 302 for admins', function (t) {
 test('POST /growers/:id is a 302 for allowed users', function (t) {
   t.signIn('grower@example.com').then(function (agent) {
     agent.post('/growers/1')
-    .field('name', 'Watsonia')
+    .send('name=Watsonia')
     .expect(302)
     .end(t.end)
   })
@@ -154,7 +154,7 @@ test('POST /growers/:id is a 302 for allowed users', function (t) {
 test('POST /growers is a 401 for non-admins', function (t) {
   t.signIn('user@example.com').then(function (agent) {
     agent.post('/growers')
-    .field('name', 'New Grower')
+    .send('name=New Grower')
     .expect(401)
     .end(t.end)
   })
@@ -163,7 +163,7 @@ test('POST /growers is a 401 for non-admins', function (t) {
 test('POST /growers is a 302 for admins', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent.post('/growers')
-    .field('name', 'New Grower')
+    .send('name=New Grower')
     .expect(302)
     .end(t.end)
   })
@@ -172,10 +172,10 @@ test('POST /growers is a 302 for admins', function (t) {
 test('POST /growers/:id/products is a 302 for admins', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent.post('/growers/1/products')
-    .field('name', 'New Grower')
-    .field('cost', '2.45')
-    .field('supply', 32)
-    .field('category_id', 1)
+    .send('name=New Grower')
+    .send('cost=2.45')
+    .send('supply=32')
+    .send('category_id=1')
     .expect(302)
     .end(t.end)
   })
@@ -184,10 +184,10 @@ test('POST /growers/:id/products is a 302 for admins', function (t) {
 test('POST /growers/:id/products is a 401 for non-admins', function (t) {
   t.signIn('user@example.com').then(function (agent) {
     agent.post('/growers/1/products')
-    .field('name', 'New Product')
-    .field('cost', '2.45')
-    .field('supply', 32)
-    .field('category_id', 1)
+    .send('name=New Product')
+    .send('cost=2.45')
+    .send('supply=32')
+    .send('category_id=1')
     .expect(401)
     .end(t.end)
   })
@@ -196,10 +196,10 @@ test('POST /growers/:id/products is a 401 for non-admins', function (t) {
 test('POST /growers/:id/products is a 302 if allowed', function (t) {
   t.signIn('grower@example.com').then(function (agent) {
     agent.post('/growers/1/products')
-    .field('name', 'New Product')
-    .field('cost', '2.50')
-    .field('supply', 23)
-    .field('category_id', 1)
+    .send('name=New Product')
+    .send('cost=2.50')
+    .send('supply=23')
+    .send('category_id=1')
     .expect(302)
     .end(t.end)
   })
@@ -208,10 +208,10 @@ test('POST /growers/:id/products is a 302 if allowed', function (t) {
 test('POST /growers/:id/products is a 302 for admins', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent.post('/growers/1/products')
-    .field('name', 'New Product')
-    .field('cost', '2.50')
-    .field('supply', 23)
-    .field('category_id', 1)
+    .send('name=New Product')
+    .send('cost=2.50')
+    .send('supply=23')
+    .send('category_id=1')
     .expect(302)
     .end(t.end)
   })
@@ -220,10 +220,10 @@ test('POST /growers/:id/products is a 302 for admins', function (t) {
 test('POST /growers/:id/products is a 422 for invalid data', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent.post('/growers/1/products')
-    .field('name', 'New Product')
-    .field('cost', 'asdf')
-    .field('supply', 23)
-    .field('category_id', 1)
+    .send('name=New Product')
+    .send('cost=asdf')
+    .send('supply=23')
+    .send('category_id=1')
     .expect(422)
     .end(t.end)
   })

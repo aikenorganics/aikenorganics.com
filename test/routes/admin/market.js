@@ -13,8 +13,8 @@ test('POST /admin/market is a 302', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent
     .post('/admin/market')
-    .field('open', '1')
-    .field('return_to', '/')
+    .send('open=1')
+    .send('return_to=/')
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
@@ -33,8 +33,8 @@ test('POST /admin/market is a 302', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent
     .post('/admin/market')
-    .field('open', '0')
-    .field('return_to', '/')
+    .send('open=0')
+    .send('return_to=/')
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)

@@ -14,8 +14,8 @@ test('POST /cart is a 302 logged in', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent
     .post('/cart')
-    .field('product_id', 1)
-    .field('quantity', 2)
+    .send('product_id=1')
+    .send('quantity=2')
     .expect(302)
     .end(t.end)
   })
@@ -25,8 +25,8 @@ test('GET /cart is a 200 logged in', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent
     .post('/cart')
-    .field('product_id', 1)
-    .field('quantity', 2)
+    .send('product_id=1')
+    .send('quantity=2')
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
@@ -39,19 +39,19 @@ test('GET /cart is a 200 logged in', function (t) {
 
 test('POST /cart/checkout', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
-    agent.post('/cart').field('product_id', 1).field('quantity', 2)
+    agent.post('/cart').send('product_id=1').send('quantity=2')
     .expect(302).end(function (e) {
       if (e) return t.end(e)
-      agent.post('/cart').field('product_id', 3).field('quantity', 4)
+      agent.post('/cart').send('product_id=3').send('quantity=4')
       .expect(302).end(function (e) {
         if (e) return t.end(e)
-        agent.post('/cart').field('product_id', 4).field('quantity', 20)
+        agent.post('/cart').send('product_id=4').send('quantity=20')
         .expect(302).end(function (e) {
           if (e) return t.end(e)
-          agent.post('/cart').field('product_id', 5).field('quantity', 1)
+          agent.post('/cart').send('product_id=5').send('quantity=1')
           .expect(302).end(function (e) {
             if (e) return t.end(e)
-            agent.post('/cart/checkout').field('location_id', 2).expect(302)
+            agent.post('/cart/checkout').send('location_id=2').expect(302)
             .end(function (e) {
               if (e) return t.end(e)
               verify()
@@ -96,8 +96,8 @@ test('POST /cart is a 302 for inactive products/growers', function (t) {
   t.signIn('user@example.com').then(function (agent) {
     agent
     .post('/cart')
-    .field('product_id', 6)
-    .field('quantity', 1)
+    .send('product_id=6')
+    .send('quantity=1')
     .expect(302)
     .end(t.end)
   })

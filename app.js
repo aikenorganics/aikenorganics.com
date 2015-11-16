@@ -2,7 +2,6 @@
 
 // Vendor
 let ozymandias = require('ozymandias')
-let multer = require('multer')
 let session = require('cookie-session')
 
 // The App!
@@ -16,7 +15,6 @@ app.use(session({
   secret: process.env.SECRET,
   maxAge: 1000 * 60 * 60 * 24 * 7
 }))
-app.use(multer({dest: './tmp/uploads/', putSingleFilesInArray: true}))
 app.use(require('./mid/market'))
 app.use(require('./mid/cart'))
 app.use(require('./mid/user'))

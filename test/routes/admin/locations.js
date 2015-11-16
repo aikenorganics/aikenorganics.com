@@ -34,7 +34,7 @@ test('POST /admin/locations is a 302', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent
     .post('/admin/locations')
-    .field('name', 'Test')
+    .send('name=Test')
     .expect(302)
     .end(t.end)
   })
@@ -44,7 +44,7 @@ test('POST /admin/locations/:id is a 302', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent
     .post('/admin/locations/1')
-    .field('name', 'Test')
+    .send('name=Test')
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)

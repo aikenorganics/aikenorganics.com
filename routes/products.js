@@ -2,6 +2,7 @@
 
 let db = require('../db')
 let find = require('../mid/find')
+let upload = require('multer')({dest: 'tmp/uploads'})
 let ozymandias = require('ozymandias')
 let router = module.exports = ozymandias.Router()
 
@@ -102,9 +103,9 @@ router.post('/:product_id', function (req, res) {
 })
 
 // Image
-router.post('/:product_id/image', function (req, res) {
+router.post('/:product_id/image', upload.single('image'), function (req, res) {
   if (!req.canEdit) return res.status(401).render('401')
-  req.product.uploadImage(req.files.image[0]).then(() => {
+  req.product.uploadImage(req.file).then(() => {
     res.flash('Image Uploaded.')
     res.redirect(req.body.return_to)
   }).catch(res.error)

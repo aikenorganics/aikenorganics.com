@@ -24,8 +24,8 @@ test('POST /product-orders/:id is a 302', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent
     .post('/admin/product-orders/1')
-    .field('quantity', 1)
-    .field('cost', '1.23')
+    .send('quantity=1')
+    .send('cost=1.23')
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
@@ -44,9 +44,9 @@ test('POST /product-orders is a 302', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent
     .post('/admin/product-orders')
-    .field('quantity', 1)
-    .field('order_id', 1)
-    .field('product_id', 3)
+    .send('quantity=1')
+    .send('order_id=1')
+    .send('product_id=3')
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)

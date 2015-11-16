@@ -31,7 +31,7 @@ test('POST /admin/growers/:id/adduser is a 302', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent
     .post('/admin/growers/1/adduser')
-    .field('user_id', 2)
+    .send('user_id=2')
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
@@ -50,7 +50,7 @@ test('POST /admin/growers/:id/removeuser is a 302', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent
     .post('/admin/growers/1/removeuser')
-    .field('user_id', 5)
+    .send('user_id=5')
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
@@ -69,7 +69,7 @@ test('POST /admin/growers/:id is a 302 when activating', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent
     .post('/admin/growers/3')
-    .field('active', 1)
+    .send('active=1')
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
@@ -87,7 +87,7 @@ test('POST /admin/growers/:id is a 302 when deactivating', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent
     .post('/admin/growers/1')
-    .field('active', 0)
+    .send('active=0')
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)

@@ -30,8 +30,8 @@ test('GET /admin/categories/:id/edit is a 200', function (t) {
 test('POST /admin/categories is a 302', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent.post('/admin/categories')
-    .field('name', 'Test')
-    .field('position', '2')
+    .send('name=Test')
+    .send('position=2')
     .expect(302)
     .end(t.end)
   })
@@ -40,8 +40,8 @@ test('POST /admin/categories is a 302', function (t) {
 test('POST /admin/categories/:id is a 302', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent.post('/admin/categories/1')
-    .field('name', 'test')
-    .field('position', 106)
+    .send('name=test')
+    .send('position=106')
     .expect(302)
     .end(t.end)
   })

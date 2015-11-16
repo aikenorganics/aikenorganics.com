@@ -160,7 +160,7 @@ test('GET /products/edit is a 200 as an admin', function (t) {
 test('POST /products/:id is a 302 as an admin', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent.post('/products/1')
-    .field('name', 'Peaches')
+    .send('name=Peaches')
     .expect(302)
     .end(t.end)
   })
@@ -169,7 +169,7 @@ test('POST /products/:id is a 302 as an admin', function (t) {
 test('POST /products/:id is a 302 as an authorized user', function (t) {
   t.signIn('grower@example.com').then(function (agent) {
     agent.post('/products/1')
-    .field('name', 'Peaches')
+    .send('name=Peaches')
     .expect(302)
     .end(t.end)
   })
@@ -178,7 +178,7 @@ test('POST /products/:id is a 302 as an authorized user', function (t) {
 test('POST /products/:id is a 401 as a non-admin', function (t) {
   t.signIn('user@example.com').then(function (agent) {
     agent.post('/products/1')
-    .field('name', 'Peaches')
+    .send('name=Peaches')
     .expect(401)
     .end(t.end)
   })
@@ -187,10 +187,10 @@ test('POST /products/:id is a 401 as a non-admin', function (t) {
 test('POST /products/:id is a 422 for invalid data', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent.post('/products/1')
-    .field('name', '')
-    .field('cost', 'asdf')
-    .field('supply', -23)
-    .field('category_id', 1)
+    .send('name=')
+    .send('cost=asdf')
+    .send('supply=-23')
+    .send('category_id=1')
     .expect(422)
     .end(t.end)
   })
@@ -235,7 +235,7 @@ test('GET /products has no inactive products', function (t) {
 test('POST /products/:id activates products', function (t) {
   t.signIn('grower@example.com').then(function (agent) {
     agent.post('/products/1')
-    .field('active', '0')
+    .send('active=0')
     .expect(302)
     .end(function (e) {
       if (e) return t.end()
@@ -252,7 +252,7 @@ test('POST /products/:id activates products', function (t) {
 test('POST /products/:id deactivates products', function (t) {
   t.signIn('admin@example.com').then(function (agent) {
     agent.post('/products/7')
-    .field('active', '1')
+    .send('active=1')
     .expect(302)
     .end(function (e) {
       if (e) return t.end()
