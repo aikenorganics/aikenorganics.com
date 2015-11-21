@@ -36,7 +36,7 @@
     "marked": "0.3.5",
     "moment": "2.10.6",
     "multer": "1.1.0",
-    "ozymandias": "git://github.com/braddunbar/ozymandias.git#e67fbd13b639b0c803b80c4be4965a02ea29fd4e",
+    "ozymandias": "git://github.com/braddunbar/ozymandias.git#aa2da54330f72ece5f2f33aba3ce4c688ac26de8",
     "page": "1.6.4",
     "postcss-cli": "2.1.0",
     "postcss-import": "7.0.0",
