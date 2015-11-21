@@ -4,7 +4,8 @@
   "description": "aikenorganics.com",
   "main": "index.js",
   "engines": {
-    "node": "4.2.2"
+    "node": "5.1.0",
+    "npm": "3.4.1"
   },
   "scripts": {
     "build": "./bin/build",
