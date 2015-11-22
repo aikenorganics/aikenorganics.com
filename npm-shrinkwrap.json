@@ -3342,14 +3342,14 @@
       }
     },
     "react": {
-      "version": "0.14.0",
-      "from": "react@0.14.0",
-      "resolved": "https://registry.npmjs.org/react/-/react-0.14.0.tgz"
+      "version": "0.14.3",
+      "from": "react@latest",
+      "resolved": "https://registry.npmjs.org/react/-/react-0.14.3.tgz"
     },
     "react-dom": {
-      "version": "0.14.0",
-      "from": "react-dom@0.14.0",
-      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-0.14.0.tgz"
+      "version": "0.14.3",
+      "from": "react-dom@latest",
+      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-0.14.3.tgz"
     },
     "read-file-stdin": {
       "version": "0.2.0",
