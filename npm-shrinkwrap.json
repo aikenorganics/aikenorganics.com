@@ -660,7 +660,14 @@
     "cookie-session": {
       "version": "1.2.0",
       "from": "cookie-session@1.2.0",
-      "resolved": "https://registry.npmjs.org/cookie-session/-/cookie-session-1.2.0.tgz"
+      "resolved": "https://registry.npmjs.org/cookie-session/-/cookie-session-1.2.0.tgz",
+      "dependencies": {
+        "cookies": {
+          "version": "0.5.0",
+          "from": "cookies@0.5.0",
+          "resolved": "https://registry.npmjs.org/cookies/-/cookies-0.5.0.tgz"
+        }
+      }
     },
     "cookie-signature": {
       "version": "1.0.6",
@@ -673,9 +680,9 @@
       "resolved": "https://registry.npmjs.org/cookiejar/-/cookiejar-2.0.1.tgz"
     },
     "cookies": {
-      "version": "0.5.0",
-      "from": "cookies@0.5.0",
-      "resolved": "https://registry.npmjs.org/cookies/-/cookies-0.5.0.tgz"
+      "version": "0.5.1",
+      "from": "cookies@latest",
+      "resolved": "https://registry.npmjs.org/cookies/-/cookies-0.5.1.tgz"
     },
     "core-js": {
       "version": "1.2.6",
