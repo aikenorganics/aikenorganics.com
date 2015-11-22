@@ -25,7 +25,9 @@
   "homepage": "https://github.com/aikenorganics/aikenorganics",
   "dependencies": {
     "autoprefixer": "6.1.0",
-    "babelify": "6.3.0",
+    "babel-preset-es2015": "6.1.18",
+    "babel-preset-react": "6.1.18",
+    "babelify": "7.2.0",
     "bcrypt": "0.8.5",
     "bootstrap": "3.3.5",
     "browserify": "12.0.1",
