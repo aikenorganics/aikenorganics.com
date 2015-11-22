@@ -1274,7 +1274,14 @@
     "fbjs": {
       "version": "0.3.2",
       "from": "fbjs@>=0.3.1 <0.4.0",
-      "resolved": "https://registry.npmjs.org/fbjs/-/fbjs-0.3.2.tgz"
+      "resolved": "https://registry.npmjs.org/fbjs/-/fbjs-0.3.2.tgz",
+      "dependencies": {
+        "whatwg-fetch": {
+          "version": "0.9.0",
+          "from": "whatwg-fetch@>=0.9.0 <0.10.0",
+          "resolved": "https://registry.npmjs.org/whatwg-fetch/-/whatwg-fetch-0.9.0.tgz"
+        }
+      }
     },
     "figures": {
       "version": "1.4.0",
@@ -4237,9 +4244,9 @@
       "resolved": "https://registry.npmjs.org/vm-browserify/-/vm-browserify-0.0.4.tgz"
     },
     "whatwg-fetch": {
-      "version": "0.9.0",
-      "from": "whatwg-fetch@0.9.0",
-      "resolved": "https://registry.npmjs.org/whatwg-fetch/-/whatwg-fetch-0.9.0.tgz"
+      "version": "0.10.1",
+      "from": "whatwg-fetch@latest",
+      "resolved": "https://registry.npmjs.org/whatwg-fetch/-/whatwg-fetch-0.10.1.tgz"
     },
     "whet.extend": {
       "version": "0.9.9",
