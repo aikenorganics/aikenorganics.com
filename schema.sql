@@ -137,42 +137,46 @@ CREATE TYPE order_status AS ENUM (
 CREATE FUNCTION check_product_order() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
-    declare
-      is_open boolean;
-      unavailable boolean;
-      old_quantity integer;
-    begin
+declare
+  is_open boolean;
+  unavailable boolean;
+  old_quantity integer;
+begin
 
-      if not (select active from products where id = NEW.product_id) then
-        raise 'product must be active';
-      end if;
+  if tg_op = 'INSERT' then
 
-      if not (select active from growers where id = (
-        select grower_id from products where id = NEW.product_id
-      )) then
-        raise 'grower must be active';
-      end if;
+    if not (select active from products where id = NEW.product_id) then
+      raise 'product must be active';
+    end if;
 
-      is_open := (
-        select status = 'open' from orders where id = NEW.order_id
-      );
+    if not (select active from growers where id = (
+      select grower_id from products where id = NEW.product_id
+    )) then
+      raise 'grower must be active';
+    end if;
 
-      old_quantity := (
-        select case tg_op when 'UPDATE' then OLD.quantity else 0 end
-      );
+  end if;
 
-      unavailable := (
-        select supply - reserved < NEW.quantity - old_quantity
-        from products where id = NEW.product_id
-      );
+  is_open := (
+    select status = 'open' from orders where id = NEW.order_id
+  );
 
-      if is_open and unavailable then
-        raise 'not enough supply';
-      end if;
+  old_quantity := (
+    select case tg_op when 'UPDATE' then OLD.quantity else 0 end
+  );
 
-      return NEW;
-    end;
-    $$;
+  unavailable := (
+    select supply - reserved < NEW.quantity - old_quantity
+    from products where id = NEW.product_id
+  );
+
+  if is_open and unavailable then
+    raise 'not enough supply';
+  end if;
+
+  return NEW;
+end;
+$$;
 
 
 --
@@ -862,6 +866,7 @@ COPY product_orders (id, created_at, updated_at, order_id, product_id, quantity,
 6	2015-10-13 21:21:45.691084-04	2015-10-13 21:21:45.691084-04	3	5	1	14.00
 7	2015-10-13 21:21:45.691084-04	2015-10-13 21:21:45.691084-04	3	4	2	7.00
 8	2015-10-13 21:21:45.691084-04	2015-10-13 21:21:45.691084-04	4	5	2	14.00
+9	2015-11-26 08:00:53.203478-05	2015-11-26 08:00:53.203478-05	1	8	1	5.00
 \.
 
 
@@ -869,7 +874,7 @@ COPY product_orders (id, created_at, updated_at, order_id, product_id, quantity,
 -- Name: product_orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('product_orders_id_seq', 8, true);
+SELECT pg_catalog.setval('product_orders_id_seq', 9, true);
 
 
 --

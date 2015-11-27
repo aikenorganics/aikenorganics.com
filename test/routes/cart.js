@@ -76,7 +76,8 @@ test('POST /cart/checkout', function (t) {
           {product_id: 1, quantity: 4},
           {product_id: 2, quantity: 3},
           {product_id: 3, quantity: 4},
-          {product_id: 4, quantity: 14}
+          {product_id: 4, quantity: 14},
+          {product_id: 8, quantity: 1}
         ])
         t.deepEqual(results[2].map(function (product) {
           return product.slice('id', 'reserved')

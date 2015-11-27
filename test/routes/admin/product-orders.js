@@ -60,3 +60,22 @@ test('POST /product-orders is a 302', function (t) {
     })
   })
 })
+
+test('editing an inactive product order', function (t) {
+  t.signIn('admin@example.com').then(function (agent) {
+    agent.post('/admin/product-orders/9')
+    .send('quantity=2')
+    .send('cost=6')
+    .expect(302)
+    .end(function (e) {
+      if (e) return t.end(e)
+      db.transaction(function () {
+        db.ProductOrder.find(9).then(function (productOrder) {
+          t.is(productOrder.quantity, 2)
+          t.is(productOrder.cost, '6.00')
+          t.end()
+        })
+      })
+    })
+  })
+})
