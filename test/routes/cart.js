@@ -51,10 +51,13 @@ test('POST /cart/checkout', function (t) {
           agent.post('/cart').send('product_id=5').send('quantity=1')
           .expect(302).end(function (e) {
             if (e) return t.end(e)
-            agent.post('/cart/checkout').send('location_id=2').expect(302)
-            .end(function (e) {
-              if (e) return t.end(e)
-              verify()
+            agent.post('/cart').send('product_id=8').send('quantity=1')
+            .expect(302).end(function (e) {
+              agent.post('/cart/checkout').send('location_id=2').expect(302)
+              .end(function (e) {
+                if (e) return t.end(e)
+                verify()
+              })
             })
           })
         })

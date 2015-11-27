@@ -201,7 +201,7 @@ begin
       where id = product[1]
     );
 
-    if available = 0 then
+    if available = 0 or not (select is_product_active(product[1])) then
       continue;
     end if;
 
