@@ -81,6 +81,7 @@ DROP FUNCTION public.update_status();
 DROP FUNCTION public.update_reserved();
 DROP FUNCTION public.set_product_order_cost();
 DROP FUNCTION public.reset_reserved();
+DROP FUNCTION public.is_product_active(integer);
 DROP FUNCTION public.increment_reserved();
 DROP FUNCTION public.delete_product_orders();
 DROP FUNCTION public.decrement_reserved();
@@ -143,18 +144,8 @@ declare
   old_quantity integer;
 begin
 
-  if tg_op = 'INSERT' then
-
-    if not (select active from products where id = NEW.product_id) then
-      raise 'product must be active';
-    end if;
-
-    if not (select active from growers where id = (
-      select grower_id from products where id = NEW.product_id
-    )) then
-      raise 'grower must be active';
-    end if;
-
+  if tg_op = 'INSERT' and not (select is_product_active(NEW.product_id)) then
+    raise 'product and grower must be active';
   end if;
 
   is_open := (
@@ -285,6 +276,24 @@ CREATE FUNCTION increment_reserved() RETURNS trigger
       return null;
     end;
     $$;
+
+
+--
+-- Name: is_product_active(integer); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION is_product_active(integer) RETURNS boolean
+    LANGUAGE plpgsql
+    AS $_$
+begin
+  return (
+    select products.active and growers.active
+    from products
+    inner join growers on products.grower_id = growers.id
+    where products.id = $1
+  );
+end;
+$_$;
 
 
 --

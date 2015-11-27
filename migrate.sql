@@ -1,3 +1,16 @@
+create or replace function is_product_active(int) returns boolean
+language plpgsql
+as $$
+begin
+  return (
+    select products.active and growers.active
+    from products
+    inner join growers on products.grower_id = growers.id
+    where products.id = $1
+  );
+end;
+$$;
+
 create or replace function check_product_order() returns trigger
 language plpgsql
 AS $$
@@ -7,18 +20,8 @@ declare
   old_quantity integer;
 begin
 
-  if tg_op = 'INSERT' then
-
-    if not (select active from products where id = NEW.product_id) then
-      raise 'product must be active';
-    end if;
-
-    if not (select active from growers where id = (
-      select grower_id from products where id = NEW.product_id
-    )) then
-      raise 'grower must be active';
-    end if;
-
+  if tg_op = 'INSERT' and not (select is_product_active(NEW.product_id)) then
+    raise 'product and grower must be active';
   end if;
 
   is_open := (
