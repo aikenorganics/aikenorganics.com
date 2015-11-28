@@ -15,7 +15,7 @@ router.use(function (req, res, next) {
 // Index
 router.get('/', function (req, res) {
   Promise.all([
-    db.Product.where({id: req.cart.ids()}).order('name').all(),
+    db.Product.include('grower').where({id: req.cart.ids()}).order('name').all(),
     db.Location.order('name').all(),
     db.Order.where({status: 'open', user_id: req.user.id}).find()
   ]).then(function (results) {
@@ -24,7 +24,8 @@ router.get('/', function (req, res) {
       locations: results[1],
       order: results[2],
       unavailable: results[0].filter((product) => {
-        return product.available() < req.cart.cart[product.id]
+        return !product.active || !product.grower.active ||
+          product.available() < req.cart.cart[product.id]
       })
     })
   }).catch(res.error)

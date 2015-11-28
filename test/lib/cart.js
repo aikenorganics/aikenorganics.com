@@ -43,33 +43,34 @@ test('checkout quantity', function (t) {
 })
 
 test('checkout total', function (t) {
-  let product = new db.Product({
-    id: 1,
-    supply: 5,
-    reserved: 3,
-    cost: '1.15'
-  })
-  let cart = new Cart({cart: {1: 3}})
-  t.equal(cart.total(product), 2.30)
-  t.end()
+  db.Product.include('grower').find(1).then((product) => {
+    let cart = new Cart({cart: {1: 3}})
+    t.equal(cart.total(product), 42)
+    t.end()
+  }).catch(t.end)
+})
+
+test('checkout total for inactive product', function (t) {
+  db.Product.include('grower').find(8).then((product) => {
+    let cart = new Cart({cart: {8: 3}})
+    t.equal(cart.total(product), 0)
+    t.end()
+  }).catch(t.end)
+})
+
+test('checkout total for inactive grower', function (t) {
+  db.Product.include('grower').find(6).then((product) => {
+    let cart = new Cart({cart: {6: 3}})
+    t.equal(cart.total(product), 0)
+    t.end()
+  }).catch(t.end)
 })
 
 test('checkout total for multiple products', function (t) {
-  let products = [
-    new db.Product({
-      id: 1,
-      supply: 5,
-      reserved: 3,
-      cost: '1.15'
-    }),
-    new db.Product({
-      id: 2,
-      supply: 6,
-      reserved: 2,
-      cost: '2.50'
-    })
-  ]
-  let cart = new Cart({cart: {1: 3, 2: 2}})
-  t.equal(cart.total(products), 7.30)
-  t.end()
+  db.Product.include('grower').where({id: [1, 2, 8]}).all()
+  .then((products) => {
+    let cart = new Cart({cart: {1: 3, 2: 2, 8: 1}})
+    t.equal(cart.total(products), 58)
+    t.end()
+  }).catch(t.end)
 })

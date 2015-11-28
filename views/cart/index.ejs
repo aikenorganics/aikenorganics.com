@@ -16,14 +16,15 @@
             <a href='/products/<%= product.id %>'><%= product.name %></a> -
             There <% if (cart.cart[product.id] > 1) { %>are<% } else { %>is<% } %>
             <%= cart.cart[product.id] %> in your cart, but
-            <% if (product.available() === 0) { %>
-              none are
+            <% if (!product.active || !product.grower.active) { %>
+              it is not currently offered by the grower.
+            <% } else if (product.available() === 0) { %>
+              none are available.
             <% } else if (product.available() === 1) { %>
-              only one is
+              only one is available.
             <% } else { %>
-              only <%= product.available() %> are
+              only <%= product.available() %> are available.
             <% } %>
-            available.
           </li>
         <% }) %>
       </ul>
@@ -42,7 +43,7 @@
     </thead>
     <tbody>
       <% products.forEach(function(product) { %>
-        <% if (cart.quantity(product) > 0) { %>
+        <% if (cart.quantity(product) > 0 && product.active && product.grower.active) { %>
           <tr>
             <td><a href='/products/<%= product.id %>'><%= product.name %></a></td>
             <td>$<%= product.cost %> per <%= product.unit %></td>
