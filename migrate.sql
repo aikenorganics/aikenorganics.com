@@ -2,12 +2,12 @@ create or replace function is_product_active(int) returns boolean
 language plpgsql
 as $$
 begin
-  return (
+  return coalesce((
     select products.active and growers.active
     from products
     inner join growers on products.grower_id = growers.id
     where products.id = $1
-  );
+  ), false);
 end;
 $$;
 

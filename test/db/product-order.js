@@ -239,3 +239,8 @@ test('validate cost', function (t) {
   t.ok(new db.ProductOrder({cost: '  $32.25  '}).valid)
   t.end()
 })
+
+test('checkout() with non-existent product does not throw', function (t) {
+  db.query('select checkout($1, $2, $3)', [1, 1, [[12345, 1]]])
+  .then(() => { t.end() }).catch(t.end)
+})
