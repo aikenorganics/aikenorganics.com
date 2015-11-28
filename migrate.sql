@@ -20,7 +20,7 @@ declare
   old_quantity integer;
 begin
 
-  if tg_op = 'INSERT' and not (select is_product_active(NEW.product_id)) then
+  if tg_op = 'INSERT' and not is_product_active(NEW.product_id) then
     raise 'product and grower must be active';
   end if;
 
@@ -72,7 +72,7 @@ begin
       where id = product[1]
     );
 
-    if available = 0 or not (select is_product_active(product[1])) then
+    if available = 0 or not is_product_active(product[1]) then
       continue;
     end if;
 
