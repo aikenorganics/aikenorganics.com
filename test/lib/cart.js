@@ -5,7 +5,7 @@ let test = require('../test')
 let Cart = require('../../lib/cart')
 
 test('get the correct keys', function (t) {
-  t.deepEqual(new Cart({cart: {1: 2, 3: 4}}).ids(), [1, 3])
+  t.deepEqual(new Cart({cart: {1: 2, 3: 4}}).ids, [1, 3])
   t.end()
 })
 
@@ -17,7 +17,7 @@ test('clear the cart', function (t) {
 })
 
 test('cart size', function (t) {
-  t.equal(new Cart({cart: {1: 2, 3: 4}}).size(), 6)
+  t.equal(new Cart({cart: {1: 2, 3: 4}}).size, 6)
   t.end()
 })
 

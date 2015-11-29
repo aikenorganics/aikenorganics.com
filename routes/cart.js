@@ -15,7 +15,7 @@ router.use(function (req, res, next) {
 // Index
 router.get('/', function (req, res) {
   Promise.all([
-    db.Product.include('grower').where({id: req.cart.ids()}).order('name').all(),
+    db.Product.include('grower').where({id: req.cart.ids}).order('name').all(),
     db.Location.order('name').all(),
     db.Order.where({status: 'open', user_id: req.user.id}).find()
   ]).then(function (results) {
@@ -62,7 +62,7 @@ router.post('/', function (req, res) {
     },
     json: function () {
       res.json({
-        cartSize: req.cart.size(),
+        cartSize: req.cart.size,
         product_id: req.product.id,
         quantity: Math.min(quantity, req.product.available()),
         available: req.product.available(),
@@ -78,7 +78,7 @@ router.post('/checkout', function (req, res) {
     db.query('select checkout($1, $2, $3)', [
       req.user.id,
       req.body.location_id,
-      req.cart.ids().map(function (id) {
+      req.cart.ids.map(function (id) {
         return [id, req.cart.cart[id]]
       })
     ])
