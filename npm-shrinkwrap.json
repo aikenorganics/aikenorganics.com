@@ -1209,16 +1209,9 @@
       "resolved": "https://registry.npmjs.org/duplexer2/-/duplexer2-0.1.4.tgz"
     },
     "ecc-jsbn": {
-      "version": "0.0.1",
+      "version": "0.1.1",
       "from": "ecc-jsbn@>=0.0.1 <1.0.0",
-      "resolved": "https://registry.npmjs.org/ecc-jsbn/-/ecc-jsbn-0.0.1.tgz",
-      "dependencies": {
-        "jsbn": {
-          "version": "0.0.0",
-          "from": "git+https://github.com/rynomad/jsbn.git",
-          "resolved": "git+https://github.com/rynomad/jsbn.git#bb522b0124f75424f89d49446c40a87111942c7b"
-        }
-      }
+      "resolved": "https://registry.npmjs.org/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz"
     },
     "ee-first": {
       "version": "1.1.1",
@@ -1771,9 +1764,21 @@
       }
     },
     "har-validator": {
-      "version": "2.0.2",
+      "version": "2.0.3",
       "from": "har-validator@>=2.0.2 <2.1.0",
-      "resolved": "https://registry.npmjs.org/har-validator/-/har-validator-2.0.2.tgz"
+      "resolved": "https://registry.npmjs.org/har-validator/-/har-validator-2.0.3.tgz",
+      "dependencies": {
+        "pinkie": {
+          "version": "2.0.1",
+          "from": "pinkie@>=2.0.0 <3.0.0",
+          "resolved": "https://registry.npmjs.org/pinkie/-/pinkie-2.0.1.tgz"
+        },
+        "pinkie-promise": {
+          "version": "2.0.0",
+          "from": "pinkie-promise@>=2.0.0 <3.0.0",
+          "resolved": "https://registry.npmjs.org/pinkie-promise/-/pinkie-promise-2.0.0.tgz"
+        }
+      }
     },
     "has": {
       "version": "1.0.1",
@@ -3366,9 +3371,9 @@
       "resolved": "https://registry.npmjs.org/output-file-sync/-/output-file-sync-1.1.1.tgz"
     },
     "ozymandias": {
-      "version": "0.18.0",
-      "from": "ozymandias",
-      "resolved": "file:ozymandias",
+      "version": "0.19.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#4f1ec951822e2e76c10fcba8b38a24554a0e032b",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#4f1ec951822e2e76c10fcba8b38a24554a0e032b",
       "dependencies": {
         "glob": {
           "version": "6.0.1",
