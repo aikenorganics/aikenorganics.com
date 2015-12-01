@@ -13,8 +13,8 @@ class UserGrower extends Model {
       'id',
       'user_id',
       'grower_id',
-      {name: 'created_at', property: 'createdAt'},
-      {name: 'updated_at', property: 'updatedAt'}
+      'created_at',
+      'updated_at'
     ]
   }
 

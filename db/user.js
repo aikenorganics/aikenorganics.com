@@ -21,8 +21,8 @@ class User extends Model {
       'image_updated_at',
       'image_ext',
       'member_until',
-      {name: 'created_at', property: 'createdAt'},
-      {name: 'updated_at', property: 'updatedAt'}
+      'created_at',
+      'updated_at'
     ]
   }
 

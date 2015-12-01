@@ -45,7 +45,7 @@ router.get('/', function (req, res) {
   if (full) orders.include({productOrders: 'product'})
 
   Promise.all([
-    orders.order(['createdAt', 'descending']).all(),
+    orders.order(['created_at', 'descending']).all(),
     db.Location.order('name').all(),
     db.Product.order('name').all()
   ]).then(function (results) {

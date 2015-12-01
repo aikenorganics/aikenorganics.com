@@ -15,8 +15,8 @@ class Order extends Model {
       'notes',
       'status',
       'user_id',
-      {name: 'created_at', property: 'createdAt'},
-      {name: 'updated_at', property: 'updatedAt'}
+      'created_at',
+      'updated_at'
     ]
   }
 

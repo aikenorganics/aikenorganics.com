@@ -23,8 +23,8 @@ class Product extends Model {
       'active',
       'grower_id',
       'category_id',
-      {name: 'created_at', property: 'createdAt'},
-      {name: 'updated_at', property: 'updatedAt'}
+      'created_at',
+      'updated_at'
     ]
   }
 

@@ -10,10 +10,10 @@ class Location extends Model {
 
   static get columns () {
     return [
-      {name: 'id'},
-      {name: 'name'},
-      {name: 'created_at', property: 'createdAt'},
-      {name: 'updated_at', property: 'updatedAt'}
+      'id',
+      'name',
+      'created_at',
+      'updated_at'
     ]
   }
 

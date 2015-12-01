@@ -13,8 +13,8 @@ class Market extends Model {
       'id',
       'open',
       'domain',
-      {name: 'created_at', property: 'createdAt'},
-      {name: 'updated_at', property: 'updatedAt'}
+      'created_at',
+      'updated_at'
     ]
   }
 }
