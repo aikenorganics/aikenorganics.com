@@ -4,7 +4,7 @@ let db = module.exports = require('./db')
 
 db.User = require('./user')
 db.Order = require('./order')
-db.Token = require('./token')
+db.Token = require('ozymandias/token')
 db.Grower = require('./grower')
 db.Market = require('./market')
 db.Product = require('./product')

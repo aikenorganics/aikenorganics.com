@@ -1,37 +1,23 @@
 'use strict'
 
-let Model = require('./model')
-let images = require('ozymandias/images')
+const images = require('ozymandias/images')
 
-class User extends Model {
+class User extends require('ozymandias/user') {
 
   static get tableName () {
     return 'users'
   }
 
   static get columns () {
-    return [
-      'id',
+    return super.columns.concat([
       'last',
-      'email',
       'first',
       'phone',
       'is_admin',
-      'password',
       'image_updated_at',
       'image_ext',
-      'member_until',
-      'created_at',
-      'updated_at'
-    ]
-  }
-
-  get email () {
-    return this.data.get('email') || ''
-  }
-
-  set email (value) {
-    this.data.set('email', value || '')
+      'member_until'
+    ])
   }
 
   get is_admin () {
