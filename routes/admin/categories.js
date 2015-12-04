@@ -1,14 +1,11 @@
 'use strict'
 
 let ozymandias = require('ozymandias')
-let find = require('../../mid/find')
 let db = require('../../db')
 let router = module.exports = ozymandias.Router()
 
 // Find
-router.param('category_id', find('category', function () {
-  return db.Category
-}))
+router.find('category', () => db.Category)
 
 // Index
 router.get('/', function (req, res) {

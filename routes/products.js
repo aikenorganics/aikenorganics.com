@@ -1,15 +1,12 @@
 'use strict'
 
 let db = require('../db')
-let find = require('../mid/find')
 let upload = require('multer')({dest: 'tmp/uploads'})
 let ozymandias = require('ozymandias')
 let router = module.exports = ozymandias.Router()
 
 // Find
-router.param('product_id', find('product', function () {
-  return db.Product.include('grower', 'category')
-}))
+router.find('product', () => db.Product.include('grower', 'category'))
 
 // Authorize
 router.param('product_id', require('../mid/products/authorize'))

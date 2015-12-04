@@ -3,15 +3,12 @@
 let bcrypt = require('bcrypt')
 let crypto = require('crypto')
 let ozymandias = require('ozymandias')
-let find = require('../mid/find')
 let db = require('../db')
 
 let router = module.exports = ozymandias.Router()
 
 // Find Token
-router.param('token_id', find('token', function () {
-  return db.Token.include('user')
-}))
+router.find('token', () => db.Token.include('user'))
 
 // Find User
 function findUser (req, res, next) {

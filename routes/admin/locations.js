@@ -2,13 +2,10 @@
 
 let ozymandias = require('ozymandias')
 let router = module.exports = ozymandias.Router()
-let find = require('../../mid/find')
 let db = require('../../db')
 
 // Find the location
-router.param('location_id', find('location', function () {
-  return db.Location
-}))
+router.find('location', () => db.Location)
 
 // Index
 router.get('/', function (req, res) {

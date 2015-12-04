@@ -1,7 +1,6 @@
 'use strict'
 
 let db = require('../db')
-let find = require('../mid/find')
 let ozymandias = require('ozymandias')
 let router = module.exports = ozymandias.Router()
 
@@ -10,7 +9,7 @@ router.use(function (req, res, next) {
   res.status(401).render('401')
 })
 
-router.param('order_id', find('order', function () { return db.Order }))
+router.find('order', () => db.Order)
 
 // Current
 router.get('/current', function (req, res) {

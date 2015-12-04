@@ -1,14 +1,11 @@
 'use strict'
 
 let db = require('../../db')
-let find = require('../../mid/find')
 let ozymandias = require('ozymandias')
 let router = module.exports = ozymandias.Router()
 
 // Find the ProductOrder
-router.param('product_order_id', find('productOrder', function () {
-  return db.ProductOrder
-}))
+router.find('product_order_id', 'productOrder', () => db.ProductOrder)
 
 // Create
 router.post('/', function (req, res) {

@@ -3371,9 +3371,9 @@
       "resolved": "https://registry.npmjs.org/output-file-sync/-/output-file-sync-1.1.1.tgz"
     },
     "ozymandias": {
-      "version": "0.20.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#9e7a6e96c69b51b4de8526a6e5cd6871d365457c",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#9e7a6e96c69b51b4de8526a6e5cd6871d365457c",
+      "version": "0.21.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#ba62bfa6885ff34b4247fb875863f4d745615b24",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#ba62bfa6885ff34b4247fb875863f4d745615b24",
       "dependencies": {
         "glob": {
           "version": "6.0.1",
@@ -3681,9 +3681,9 @@
       "resolved": "https://registry.npmjs.org/postgres-date/-/postgres-date-1.0.0.tgz"
     },
     "postgres-interval": {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "from": "postgres-interval@>=1.0.0 <1.1.0",
-      "resolved": "https://registry.npmjs.org/postgres-interval/-/postgres-interval-1.0.0.tgz"
+      "resolved": "https://registry.npmjs.org/postgres-interval/-/postgres-interval-1.0.1.tgz"
     },
     "prelude-ls": {
       "version": "1.1.2",

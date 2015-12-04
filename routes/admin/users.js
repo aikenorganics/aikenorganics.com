@@ -2,14 +2,11 @@
 
 let ozymandias = require('ozymandias')
 let db = require('../../db')
-let find = require('../../mid/find')
 let upload = require('multer')({dest: 'tmp/uploads'})
 let router = module.exports = ozymandias.Router()
 
 // Find
-router.param('user_id', find('_user', function () {
-  return db.User
-}))
+router.find('user_id', '_user', () => db.User)
 
 // Index
 router.get('/', function (req, res) {

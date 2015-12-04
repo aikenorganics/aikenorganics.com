@@ -1,3 +1,3 @@
 'use strict'
 
-module.exports = require('ozymandias').db
+module.exports = require('ozymandias/db/instance')

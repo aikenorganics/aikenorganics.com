@@ -1,15 +1,14 @@
 'use strict'
 
 let db = require('../../db')
-let find = require('../../mid/find')
 let ozymandias = require('ozymandias')
 let router = module.exports = ozymandias.Router()
 
 // Find
 // TODO: Order by product name.
-router.param('order_id', find('order', function () {
-  return db.Order.include('user', 'location', {productOrders: 'product'})
-}))
+router.find('order', () =>
+  db.Order.include('user', 'location', {productOrders: 'product'})
+)
 
 // Find a Product
 router.get('/', function (req, res, next) {

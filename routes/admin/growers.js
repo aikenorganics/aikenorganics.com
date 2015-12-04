@@ -2,13 +2,10 @@
 
 let ozymandias = require('ozymandias')
 let router = module.exports = ozymandias.Router()
-let find = require('../../mid/find')
 let db = require('../../db')
 
 // Find
-router.param('grower_id', find('grower', function () {
-  return db.Grower.include({userGrowers: 'user'})
-}))
+router.find('grower', () => db.Grower.include({userGrowers: 'user'}))
 
 // Index
 router.get('/', function (req, res) {
