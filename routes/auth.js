@@ -1,6 +1,5 @@
 'use strict'
 
-let bcrypt = require('bcrypt')
 let crypto = require('crypto')
 let ozymandias = require('ozymandias')
 let db = require('../db')
@@ -77,15 +76,11 @@ router.post('/reset/:token_id', function (req, res) {
     })
   }
 
-  // Hash the password and store the user.
-  bcrypt.hash(req.body.password, 12, function (e, hash) {
-    if (e) return res.error(e)
-    req.token.user.update({password: hash}).then(function () {
-      res.flash('success', 'Password Changed')
-      req.session.userId = req.token.user.id
-      res.redirect('/')
-    }).catch(res.error)
-  })
+  req.token.user.update(req.permit('password')).then(function () {
+    res.flash('success', 'Password Changed')
+    req.session.userId = req.token.user.id
+    res.redirect('/')
+  }).catch(res.error)
 })
 
 // Sign Out
@@ -109,21 +104,19 @@ router.post('/signin', function (req, res) {
     })
   }
 
-  bcrypt.compare(password, req.user.password, function (e, match) {
-    if (e) return res.error(e)
-
-    // Is the password correct?
-    if (!match) {
-      res.status(422).render('auth/signin', {
-        email: req.body.email,
-        error: 'Sorry! That password is incorrect.'
-      })
+  // Is the password correct?
+  req.user.authenticate(password).then((match) => {
+    if (match) {
+      req.session.userId = req.user.id
+      res.redirect('/')
       return
     }
 
-    req.session.userId = req.user.id
-    res.redirect('/')
-  })
+    res.status(422).render('auth/signin', {
+      email: req.body.email,
+      error: 'Sorry! That password is incorrect.'
+    })
+  }).catch(res.error)
 })
 
 // Sign Up
@@ -133,7 +126,9 @@ router.get('/signup', function (req, res) {
 
 router.post('/signup', findUser)
 router.post('/signup', function (req, res) {
+  // TODO: Trim this in the model.
   let email = (req.body.email || '').trim()
+  // TODO: Don't trim at all.
   let password = (req.body.password || '').trim()
 
   // Validate the password.
@@ -162,17 +157,11 @@ router.post('/signup', function (req, res) {
     return
   }
 
-  // Hash the password and store the user.
-  bcrypt.hash(password, 12, function (e, hash) {
-    if (e) return res.error(e)
+  let params = req.permit('first', 'last', 'phone', 'password')
+  params.email = email
 
-    let params = req.permit('first', 'last', 'phone')
-    params.email = email
-    params.password = hash
-
-    db.User.create(params).then(function (user) {
-      req.session.userId = user.id
-      res.redirect('/')
-    }).catch(res.error)
-  })
+  db.User.create(params).then(function (user) {
+    req.session.userId = user.id
+    res.redirect('/')
+  }).catch(res.error)
 })
