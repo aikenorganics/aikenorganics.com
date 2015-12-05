@@ -1,6 +1,5 @@
 'use strict'
 
-let crypto = require('crypto')
 let ozymandias = require('ozymandias')
 let db = require('../db')
 
@@ -37,8 +36,7 @@ router.post('/forgot', function (req, res) {
   db.transaction(function () {
     return db.Token.create({
       user_id: req.user.id,
-      expires_at: expires_at,
-      id: crypto.randomBytes(20).toString('hex')
+      expires_at: expires_at
     })
   }).then(function (token) {
     return req.mail('mail/forgot', {
