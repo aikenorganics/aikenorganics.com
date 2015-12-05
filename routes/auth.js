@@ -18,9 +18,7 @@ function findUser (req, res, next) {
 }
 
 // Forgot
-router.get('/forgot', function (req, res) {
-  res.render('auth/forgot')
-})
+router.get('/forgot', (req, res) => res.render('auth/forgot'))
 
 router.post('/forgot', findUser)
 router.post('/forgot', function (req, res) {
@@ -88,9 +86,7 @@ router.get('/signout', function (req, res) {
 })
 
 // Sign In
-router.get('/signin', function (req, res) {
-  res.render('auth/signin')
-})
+router.get('/signin', (req, res) => res.render('auth/signin'))
 
 router.post('/signin', findUser)
 router.post('/signin', function (req, res) {
@@ -118,9 +114,7 @@ router.post('/signin', function (req, res) {
 })
 
 // Sign Up
-router.get('/signup', function (req, res) {
-  res.render('auth/signup')
-})
+router.get('/signup', (req, res) => res.render('auth/signup'))
 
 router.post('/signup', findUser)
 router.post('/signup', function (req, res) {
