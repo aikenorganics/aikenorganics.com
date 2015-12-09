@@ -6,7 +6,9 @@ let upload = require('multer')({dest: 'tmp/uploads'})
 let router = module.exports = ozymandias.Router()
 
 // Find
-router.find('user_id', '_user', () => db.User)
+router.find('user_id', '_user', () => db.User.select(`exists(
+  select id from orders where user_id = users.id
+) as has_order`))
 
 // Index
 router.get('/', function (req, res) {
@@ -52,5 +54,15 @@ router.post('/:user_id/image', upload.single('image'), function (req, res) {
   req._user.uploadImage(req.file).then(() => {
     res.flash('Image Uploaded.')
     res.redirect(req.body.return_to)
+  }).catch(res.error)
+})
+
+// Delete
+router.post('/:user_id/delete', function (req, res) {
+  db.transaction(() => {
+    req._user.destroy()
+  }).then(() => {
+    res.flash('User Deleted')
+    res.redirect('/admin/users')
   }).catch(res.error)
 })

@@ -952,7 +952,7 @@ COPY users (id, created_at, updated_at, email, password, is_admin, first, last, 
 5	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	grower@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Grower	Montgomery	803.532.5859	\N	'grower':1 'grower@example.com':3 'montgomery':2	\N	\N
 6	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	info@planitfoods.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	PlanIt	Foods	803.532.5859	\N	'foods':2 'info@planitfoods.com':3 'planit':1	\N	\N
 7	2015-10-20 15:49:18.595797-04	2015-10-20 15:49:18.595797-04	jwitherow@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Joanne	Witherow	803.555.5555	\N	'joanne':1 'jwitherow@example.com':3 'witherow':2	\N	\N
-4	2015-10-13 21:21:45.681861-04	2015-11-15 08:22:41.492-05	finn@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Finn	The Human	803.532.5859	\N	'finn':1 'finn@example.com':4 'human':3 'the':2	jpeg	2015-11-15 08:22:41.492-05
+4	2015-10-13 21:21:45.681861-04	2015-11-15 08:22:41.492-05	finn@example.com	$2a$12$2FHxoTbYsrn5/Hi4CFbc6.yB2TXaVx8u2p8EwQ2uhJ1Ghrxtzn0QW	f	Finn	The Human	803.532.5859	\N	'finn':1 'finn@example.com':4 'human':3 'the':2	\N	\N
 \.
 
 

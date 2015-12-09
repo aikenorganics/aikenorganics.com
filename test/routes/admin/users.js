@@ -99,3 +99,19 @@ test('Search for joanne', function (t) {
     .end(t.end)
   })
 })
+
+test('Delete a user', function (t) {
+  t.signIn('admin@example.com').then((agent) => {
+    agent.post('/admin/users/7/delete')
+    .expect(302)
+    .end((e) => {
+      if (e) return t.end(e)
+      db.transaction(() => {
+        db.User.find(7).then((user) => {
+          t.ok(user == null)
+          t.end()
+        })
+      })
+    })
+  })
+})
