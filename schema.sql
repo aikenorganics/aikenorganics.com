@@ -1229,7 +1229,7 @@ ALTER TABLE ONLY products
 --
 
 ALTER TABLE ONLY tokens
-    ADD CONSTRAINT tokens_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id);
+    ADD CONSTRAINT tokens_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
 
 
 --
@@ -1245,7 +1245,7 @@ ALTER TABLE ONLY user_growers
 --
 
 ALTER TABLE ONLY user_growers
-    ADD CONSTRAINT user_growers_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id);
+    ADD CONSTRAINT user_growers_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
 
 
 --
