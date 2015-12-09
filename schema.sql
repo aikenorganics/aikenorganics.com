@@ -36,6 +36,9 @@ DROP INDEX public.products_category_id_index;
 DROP INDEX public.products_active_index;
 DROP INDEX public.product_search_index;
 DROP INDEX public.product_orders_unique_index;
+DROP INDEX public.orders_user_id_index;
+DROP INDEX public.orders_status_location_id_index;
+DROP INDEX public.orders_location_id_status_index;
 DROP INDEX public.markets_domain_unique_index;
 DROP INDEX public.growers_active_index;
 DROP INDEX public.categories_name_uniq_index;
@@ -1062,6 +1065,27 @@ CREATE INDEX growers_active_index ON growers USING btree (active);
 --
 
 CREATE UNIQUE INDEX markets_domain_unique_index ON markets USING btree (domain);
+
+
+--
+-- Name: orders_location_id_status_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX orders_location_id_status_index ON orders USING btree (location_id, status);
+
+
+--
+-- Name: orders_status_location_id_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX orders_status_location_id_index ON orders USING btree (status, location_id);
+
+
+--
+-- Name: orders_user_id_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX orders_user_id_index ON orders USING btree (user_id);
 
 
 --
