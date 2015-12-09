@@ -1,13 +1,6 @@
-alter table tokens
-drop constraint tokens_user_id_fkey,
-add constraint tokens_user_id_fkey
-foreign key (user_id)
-references users(id)
-on delete cascade;
-
-alter table user_growers
-drop constraint user_growers_user_id_fkey,
-add constraint user_growers_user_id_fkey
-foreign key (user_id)
-references users(id)
-on delete cascade;
+ALTER TABLE ONLY user_growers
+DROP CONSTRAINT user_growers_grower_id_fkey,
+ADD CONSTRAINT user_growers_grower_id_fkey
+FOREIGN KEY (grower_id)
+REFERENCES growers(id)
+ON DELETE CASCADE;

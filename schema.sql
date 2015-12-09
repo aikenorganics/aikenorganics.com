@@ -1237,7 +1237,7 @@ ALTER TABLE ONLY tokens
 --
 
 ALTER TABLE ONLY user_growers
-    ADD CONSTRAINT user_growers_grower_id_fkey FOREIGN KEY (grower_id) REFERENCES growers(id);
+    ADD CONSTRAINT user_growers_grower_id_fkey FOREIGN KEY (grower_id) REFERENCES growers(id) ON DELETE CASCADE;
 
 
 --
