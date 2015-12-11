@@ -2,19 +2,12 @@
 
 // Vendor
 let ozymandias = require('ozymandias')
-let session = require('cookie-session')
 
 // The App!
 let app = module.exports = ozymandias()
 app.locals = require('./helpers')
 
 // Middleware
-app.use(session({
-  signed: app.get('env') === 'production',
-  name: 'aikenorganics',
-  secret: process.env.SECRET,
-  maxAge: 1000 * 60 * 60 * 24 * 7
-}))
 app.use(require('./mid/market'))
 app.use(require('./mid/cart'))
 app.use(require('./mid/user'))
