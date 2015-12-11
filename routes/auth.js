@@ -1,9 +1,7 @@
 'use strict'
 
-let ozymandias = require('ozymandias')
-let db = require('../db')
-
-let router = module.exports = ozymandias.Router()
+const router = module.exports = require('ozymandias').Router()
+const db = require('../db')
 
 // Find Token
 router.find('token', () => db.Token.include('user'))
@@ -11,7 +9,7 @@ router.find('token', () => db.Token.include('user'))
 // Find User
 function findUser (req, res, next) {
   db.User.where('lower(email) = lower(?)', req.body.email).find()
-  .then(function (user) {
+  .then((user) => {
     req.user = res.locals.user = user
     next()
   }).catch(res.error)
@@ -21,7 +19,7 @@ function findUser (req, res, next) {
 router.get('/forgot', (req, res) => res.render('auth/forgot'))
 
 router.post('/forgot', findUser)
-router.post('/forgot', function (req, res) {
+router.post('/forgot', (req, res) => {
   let expires_at = new Date()
   expires_at.setDate(expires_at.getDate() + 7)
 
@@ -31,25 +29,25 @@ router.post('/forgot', function (req, res) {
     })
   }
 
-  db.transaction(function () {
+  db.transaction(() => {
     return db.Token.create({
       user_id: req.user.id,
       expires_at: expires_at
     })
-  }).then(function (token) {
+  }).then((token) => {
     return req.mail('mail/forgot', {
       to: [req.user.email],
       subject: `${process.env.NAME}: Password Reset`,
       url: `http://${req.get('host')}/auth/reset/${token.id}`
     })
-  }).then(function () {
+  }).then(() => {
     res.flash('success', 'Thanks! We sent you an email to reset your password.')
     res.redirect('/auth/signin')
   }).catch(res.error)
 })
 
 // Reset
-router.get('/reset/:token_id', function (req, res) {
+router.get('/reset/:token_id', (req, res) => {
   if (!req.token || req.token.expires_at < new Date()) {
     return res.status(404).render('auth/reset', {
       error: 'Sorry! That token is expired.'
@@ -59,7 +57,7 @@ router.get('/reset/:token_id', function (req, res) {
   res.render('auth/reset')
 })
 
-router.post('/reset/:token_id', function (req, res) {
+router.post('/reset/:token_id', (req, res) => {
   if ((req.body.password || '').length < 8) {
     return res.status(422).render('auth/reset', {
       error: 'Sorry! Passwords must be at least eight characters long.'
@@ -72,7 +70,7 @@ router.post('/reset/:token_id', function (req, res) {
     })
   }
 
-  req.token.user.update(req.permit('password')).then(function () {
+  req.token.user.update(req.permit('password')).then(() => {
     res.flash('success', 'Password Changed')
     req.session.userId = req.token.user.id
     res.redirect('/')
@@ -80,7 +78,7 @@ router.post('/reset/:token_id', function (req, res) {
 })
 
 // Sign Out
-router.get('/signout', function (req, res) {
+router.get('/signout', (req, res) => {
   req.session = null
   res.redirect('/')
 })
@@ -89,9 +87,7 @@ router.get('/signout', function (req, res) {
 router.get('/signin', (req, res) => res.render('auth/signin'))
 
 router.post('/signin', findUser)
-router.post('/signin', function (req, res) {
-  let password = (req.body.password || '').trim()
-
+router.post('/signin', (req, res) => {
   if (!req.user) {
     return res.status(404).render('auth/signin', {
       error: 'Sorry! We don’t recognize that email.'
@@ -99,7 +95,7 @@ router.post('/signin', function (req, res) {
   }
 
   // Is the password correct?
-  req.user.authenticate(password).then((match) => {
+  req.user.authenticate(req.body.password).then((match) => {
     if (match) {
       req.session.userId = req.user.id
       res.redirect('/')
