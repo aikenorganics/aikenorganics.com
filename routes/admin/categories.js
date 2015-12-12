@@ -26,9 +26,7 @@ router.get('/:category_id/edit', function (req, res) {
 
 // Create
 router.post('/', function (req, res) {
-  db.transaction(function () {
-    db.Category.create(req.permit('name', 'position'))
-  }).then(function () {
+  db.Category.create(req.permit('name', 'position')).then(function () {
     res.flash('success', 'Created')
     res.redirect('/admin/categories')
   })
@@ -36,9 +34,7 @@ router.post('/', function (req, res) {
 
 // Update
 router.post('/:category_id', function (req, res) {
-  db.transaction(function () {
-    req.category.update(req.permit('name', 'position'))
-  }).then(function () {
+  req.category.update(req.permit('name', 'position')).then(function () {
     res.flash('success', 'Saved')
     res.redirect('/admin/categories')
   })
@@ -46,9 +42,7 @@ router.post('/:category_id', function (req, res) {
 
 // Delete
 router.post('/:category_id/delete', function (req, res) {
-  db.transaction(function () {
-    req.category.destroy()
-  }).then(function () {
+  req.category.destroy().then(function () {
     res.flash('success', 'Deleted')
     res.redirect('/admin/categories')
   })

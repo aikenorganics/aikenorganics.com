@@ -39,11 +39,9 @@ router.get('/:user_id/edit', function (req, res) {
 
 // Update
 router.post('/:user_id', function (req, res) {
-  db.transaction(function () {
-    req._user.update(req.permit(
-      'email', 'first', 'last', 'phone', 'is_admin', 'member_until'
-    ))
-  }).then(function () {
+  req._user.update(req.permit(
+    'email', 'first', 'last', 'phone', 'is_admin', 'member_until'
+  )).then(function () {
     res.flash('success', 'Saved')
     res.redirect('/admin/users')
   }).catch(res.error)
@@ -59,9 +57,7 @@ router.post('/:user_id/image', upload.single('image'), function (req, res) {
 
 // Delete
 router.post('/:user_id/delete', function (req, res) {
-  db.transaction(() => {
-    req._user.destroy()
-  }).then(() => {
+  req._user.destroy().then(() => {
     res.flash('User Deleted')
     res.redirect('/admin/users')
   }).catch(res.error)

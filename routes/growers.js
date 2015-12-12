@@ -27,13 +27,11 @@ router.get('/new', function (req, res) {
 router.post('/', function (req, res) {
   if (!req.admin) return res.status(401).render('401')
 
-  db.transaction(function () {
-    db.Grower.create(req.permit(
-      'url', 'name', 'email', 'location', 'description'
-    )).then(function (grower) {
-      res.flash('success', 'Saved')
-      res.redirect(`/growers/${grower.id}`)
-    })
+  db.Grower.create(req.permit(
+    'url', 'name', 'email', 'location', 'description'
+  )).then(function (grower) {
+    res.flash('success', 'Saved')
+    res.redirect(`/growers/${grower.id}`)
   }).catch(res.error)
 })
 
@@ -58,11 +56,9 @@ router.get('/:grower_id/edit', function (req, res) {
 router.post('/:grower_id', function (req, res) {
   if (!req.canEdit) return res.status(401).render('401')
 
-  db.transaction(function () {
-    req.grower.update(req.permit(
-      'name', 'email', 'url', 'location', 'description'
-    ))
-  }).then(function () {
+  req.grower.update(req.permit(
+    'name', 'email', 'url', 'location', 'description'
+  )).then(function () {
     res.flash('success', 'Saved')
     res.redirect(`/growers/${req.grower.id}`)
   }).catch(res.error)
@@ -87,11 +83,9 @@ router.post('/:grower_id/products', function (req, res) {
   )
   props.grower_id = req.grower.id
 
-  db.transaction(function () {
-    db.Product.create(props).then(function (product) {
-      res.flash('success', 'Saved')
-      res.redirect(`/products/${product.id}`)
-    })
+  db.Product.create(props).then(function (product) {
+    res.flash('success', 'Saved')
+    res.redirect(`/products/${product.id}`)
   }).catch(function (e) {
     if (e.message !== 'invalid') throw e
     res.status(422)

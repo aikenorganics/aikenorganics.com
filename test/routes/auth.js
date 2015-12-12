@@ -49,12 +49,10 @@ test('GET /auth/reset is a 200 for valid tokens', function (t) {
   .expect(302)
   .end(function (e) {
     if (e) return t.end(e)
-    db.transaction(function () {
-      db.Token.where({user_id: 1}).find().then(function (token) {
-        agent.get(`/auth/reset/${token.id}`)
-        .expect(200)
-        .end(t.end)
-      })
+    db.Token.where({user_id: 1}).find().then(function (token) {
+      agent.get(`/auth/reset/${token.id}`)
+      .expect(200)
+      .end(t.end)
     }).catch(t.end)
   })
 })
@@ -66,13 +64,11 @@ test('POST /auth/reset is a 302 for valid tokens', function (t) {
   .expect(302)
   .end(function (e) {
     if (e) return t.end(e)
-    db.transaction(function () {
-      db.Token.where({user_id: 1}).find().then(function (token) {
-        agent.post(`/auth/reset/${token.id}`)
-        .send('password=password')
-        .expect(302)
-        .end(t.end)
-      })
+    db.Token.where({user_id: 1}).find().then(function (token) {
+      agent.post(`/auth/reset/${token.id}`)
+      .send('password=password')
+      .expect(302)
+      .end(t.end)
     }).catch(t.end)
   })
 })
@@ -93,13 +89,11 @@ test('POST /auth/reset enforces password length of 8', function (t) {
   .expect(302)
   .end(function (e) {
     if (e) return t.end(e)
-    db.transaction(function () {
-      db.Token.where({user_id: 1}).find().then(function (token) {
-        agent.post(`/auth/reset/${token.id}`)
-        .send('password=secret')
-        .expect(422)
-        .end(t.end)
-      })
+    db.Token.where({user_id: 1}).find().then(function (token) {
+      agent.post(`/auth/reset/${token.id}`)
+      .send('password=secret')
+      .expect(422)
+      .end(t.end)
     }).catch(t.end)
   })
 })

@@ -19,11 +19,9 @@ test('POST /orders/:id/cancel is a 302', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      db.transaction(function () {
-        db.Order.find(2).then(function (order) {
-          t.ok(order == null, 'the order was deleted')
-          t.end()
-        })
+      db.Order.find(2).then(function (order) {
+        t.ok(order == null, 'the order was deleted')
+        t.end()
       }).catch(t.end)
     })
   })
@@ -37,11 +35,9 @@ test('POST /orders/:id is a 302', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      db.transaction(function () {
-        db.Order.find(2).then(function (order) {
-          t.is(order.location_id, 2)
-          t.end()
-        })
+      db.Order.find(2).then(function (order) {
+        t.is(order.location_id, 2)
+        t.end()
       }).catch(t.end)
     })
   })

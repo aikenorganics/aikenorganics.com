@@ -36,12 +36,10 @@ router.post('/:order_id', function (req, res) {
     return res.status(401).render('401')
   }
 
-  db.transaction(function () {
-    req.order.update(req.permit('location_id'))
-  }).then(function () {
+  req.order.update(req.permit('location_id')).then(function () {
     res.flash('success', 'Saved')
     res.redirect('/orders/current')
-  })
+  }).catch(res.error)
 })
 
 // Cancel
@@ -53,10 +51,8 @@ router.post('/:order_id/cancel', function (req, res) {
     return res.status(401).render('401')
   }
 
-  db.transaction(function () {
-    req.order.destroy()
-  }).then(function () {
+  req.order.destroy().then(function () {
     res.flash('success', 'Order cancelled.')
     res.redirect('/products')
-  })
+  }).catch(res.error)
 })

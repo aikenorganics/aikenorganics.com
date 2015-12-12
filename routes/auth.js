@@ -29,11 +29,9 @@ router.post('/forgot', (req, res) => {
     })
   }
 
-  db.transaction(() => {
-    return db.Token.create({
-      user_id: req.user.id,
-      expires_at: expires_at
-    })
+  db.Token.create({
+    user_id: req.user.id,
+    expires_at: expires_at
   }).then((token) => {
     return req.mail('mail/forgot', {
       to: [req.user.email],

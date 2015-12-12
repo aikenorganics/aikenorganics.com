@@ -53,11 +53,9 @@ test('POST /admin/categories/:id/delete is a 302', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      db.transaction(function () {
-        db.Category.find(6).then(function (category) {
-          t.is(category, null)
-          t.end()
-        })
+      db.Category.find(6).then(function (category) {
+        t.is(category, null)
+        t.end()
       }).catch(t.end)
     })
   })

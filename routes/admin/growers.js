@@ -45,11 +45,9 @@ router.get('/:grower_id/users', function (req, res) {
 
 // Add User
 router.post('/:grower_id/adduser', function (req, res) {
-  db.transaction(function () {
-    db.UserGrower.create({
-      user_id: req.body.user_id,
-      grower_id: req.grower.id
-    })
+  db.UserGrower.create({
+    user_id: req.body.user_id,
+    grower_id: req.grower.id
   }).then(function () {
     res.flash('success', 'User Added')
     res.redirect(`/admin/growers/${req.grower.id}/users`)
@@ -58,12 +56,10 @@ router.post('/:grower_id/adduser', function (req, res) {
 
 // Remove User
 router.post('/:grower_id/removeuser', function (req, res) {
-  db.transaction(function () {
-    db.UserGrower.where({
-      user_id: req.body.user_id,
-      grower_id: req.grower.id
-    }).delete()
-  }).then(function () {
+  db.UserGrower.where({
+    user_id: req.body.user_id,
+    grower_id: req.grower.id
+  }).delete().then(function () {
     res.flash('success', 'User Removed')
     res.redirect(`/admin/growers/${req.grower.id}/users`)
   }).catch(res.error)
@@ -71,9 +67,7 @@ router.post('/:grower_id/removeuser', function (req, res) {
 
 // Update
 router.post('/:grower_id', function (req, res) {
-  db.transaction(function () {
-    req.grower.update(req.permit('active'))
-  }).then(function () {
+  req.grower.update(req.permit('active')).then(function () {
     res.flash('success', 'Saved')
     res.redirect(req.body.return_to)
   }).catch(res.error)

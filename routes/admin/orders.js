@@ -77,9 +77,7 @@ router.get('/:order_id', function (req, res) {
 
 // Update
 router.post('/:order_id', function (req, res) {
-  db.transaction(function () {
-    req.order.update(req.permit('status', 'notes', 'location_id'))
-  }).then(function () {
+  req.order.update(req.permit('status', 'notes', 'location_id')).then(() => {
     res.flash('success', 'Order Updated')
     res.redirect(`/admin/orders/${req.order.id}`)
   }).catch(res.error)

@@ -66,12 +66,10 @@ test('POST /admin/orders/:id is a 302', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      db.transaction(function () {
-        db.Order.find(1).then(function (order) {
-          t.is(order.status, 'complete')
-          t.is(order.notes, 'test')
-          t.end()
-        })
+      db.Order.find(1).then(function (order) {
+        t.is(order.status, 'complete')
+        t.is(order.notes, 'test')
+        t.end()
       }).catch(t.end)
     })
   })

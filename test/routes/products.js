@@ -239,11 +239,9 @@ test('POST /products/:id activates products', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end()
-      db.transaction(function () {
-        db.Product.find(1).then(function (product) {
-          t.equal(product.active, false)
-          t.end()
-        })
+      db.Product.find(1).then(function (product) {
+        t.equal(product.active, false)
+        t.end()
       })
     })
   })
@@ -256,11 +254,9 @@ test('POST /products/:id deactivates products', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end()
-      db.transaction(function () {
-        db.Product.find(7).then(function (product) {
-          t.equal(product.active, true)
-          t.end()
-        })
+      db.Product.find(7).then(function (product) {
+        t.equal(product.active, true)
+        t.end()
       })
     })
   })

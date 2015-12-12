@@ -60,143 +60,111 @@ test('Cannot update product order with none available', function (t) {
 
 test('Updating quantity updates product.reserved', function (t) {
   db.ProductOrder.find(1).then(function (productOrder) {
-    return db.transaction(function () {
-      productOrder.update({quantity: 5}).then(verify)
-    })
+    return productOrder.update({quantity: 5}).then(verify)
   }).catch(t.end)
 
   function verify () {
-    return db.transaction(function () {
-      db.Product.find(1).then(function (product) {
-        t.is(product.reserved, 5)
-        t.end()
-      })
+    return db.Product.find(1).then(function (product) {
+      t.is(product.reserved, 5)
+      t.end()
     })
   }
 })
 
 test('Inserting a new product order updates product.reserved', function (t) {
-  db.transaction(function () {
-    db.ProductOrder.create({
-      order_id: 2,
-      product_id: 1,
-      quantity: 3
-    }).then(verify)
-  }).catch(t.end)
+  db.ProductOrder.create({
+    order_id: 2,
+    product_id: 1,
+    quantity: 3
+  }).then(verify).catch(t.end)
 
   function verify () {
-    return db.transaction(function () {
-      db.Product.find(1).then(function (product) {
-        t.is(product.reserved, 5)
-        t.end()
-      })
+    return db.Product.find(1).then(function (product) {
+      t.is(product.reserved, 5)
+      t.end()
     })
   }
 })
 
 test('Deleting a product order updates product.reserved', function (t) {
   db.ProductOrder.find(1).then(function (productOrder) {
-    db.transaction(function () {
-      productOrder.destroy().then(verify)
-    })
+    return productOrder.destroy().then(verify)
   }).catch(t.end)
 
   function verify () {
-    return db.transaction(function () {
-      db.Product.find(1).then(function (product) {
-        t.is(product.reserved, 0)
-        t.end()
-      })
+    return db.Product.find(1).then(function (product) {
+      t.is(product.reserved, 0)
+      t.end()
     })
   }
 })
 
 test('insert: completed orders don\'t affect product.reserved', function (t) {
-  db.transaction(function () {
-    db.ProductOrder.create({
-      order_id: 3,
-      product_id: 1,
-      quantity: 3
-    }).then(verify)
-  }).catch(t.end)
+  db.ProductOrder.create({
+    order_id: 3,
+    product_id: 1,
+    quantity: 3
+  }).then(verify).catch(t.end)
 
   function verify () {
-    return db.transaction(function () {
-      db.Product.find(1).then(function (product) {
-        t.is(product.reserved, 2)
-        t.end()
-      })
+    return db.Product.find(1).then(function (product) {
+      t.is(product.reserved, 2)
+      t.end()
     })
   }
 })
 
 test('delete: completed orders don\'t affect product.reserved', function (t) {
   db.ProductOrder.find(6).then(function (productOrder) {
-    db.transaction(function () {
-      productOrder.destroy().then(verify)
-    })
+    return productOrder.destroy().then(verify)
   }).catch(t.end)
 
   function verify () {
-    return db.transaction(function () {
-      db.Product.find(5).then(function (product) {
-        t.is(product.reserved, 3)
-        t.end()
-      })
+    return db.Product.find(5).then(function (product) {
+      t.is(product.reserved, 3)
+      t.end()
     })
   }
 })
 
 test('Update: completed orders don\'t affect product.reserved', function (t) {
   db.ProductOrder.find(6).then(function (productOrder) {
-    db.transaction(function () {
-      productOrder.update({quantity: 5}).then(verify)
-    })
+    return productOrder.update({quantity: 5}).then(verify)
   }).catch(t.end)
 
   function verify () {
-    return db.transaction(function () {
-      db.Product.find(5).then(function (product) {
-        t.is(product.reserved, 3)
-        t.end()
-      })
+    return db.Product.find(5).then(function (product) {
+      t.is(product.reserved, 3)
+      t.end()
     })
   }
 })
 
 test('Inserting a new product order sets cost', function (t) {
-  db.transaction(function () {
-    db.ProductOrder.create({order_id: 2, product_id: 1, quantity: 3})
-    .then(function (productOrder) {
-      t.is(productOrder.cost, '14.00')
-      t.end()
-    })
+  db.ProductOrder.create({order_id: 2, product_id: 1, quantity: 3})
+  .then(function (productOrder) {
+    t.is(productOrder.cost, '14.00')
+    t.end()
   }).catch(t.end)
 })
 
 test('Deleting an order updates reserved values', function (t) {
   db.Order.find(1).then(function (order) {
-    db.transaction(function () {
-      order.destroy().then(verify)
-    })
+    return order.destroy().then(verify)
   }).catch(t.end)
 
   function verify () {
-    return db.transaction(function () {
-      db.Product.find(1).then(function (product) {
-        t.is(product.reserved, 0)
-        t.end()
-      })
+    return db.Product.find(1).then(function (product) {
+      t.is(product.reserved, 0)
+      t.end()
     })
   }
 })
 
 test('Updating takes the previous quantity into account', function (t) {
   db.ProductOrder.find(8).then(function (productOrder) {
-    return db.transaction(function () {
-      productOrder.update({quantity: 1}).then(function () {
-        t.end()
-      })
+    return productOrder.update({quantity: 1}).then(function () {
+      t.end()
     })
   }).catch(t.end)
 })

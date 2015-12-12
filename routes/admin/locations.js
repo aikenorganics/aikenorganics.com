@@ -28,9 +28,7 @@ router.get('/:location_id/edit', function (req, res) {
 
 // Create
 router.post('/', function (req, res) {
-  db.transaction(function () {
-    return db.Location.create(req.permit('name'))
-  }).then(function () {
+  db.Location.create(req.permit('name')).then(function () {
     res.flash('success', 'Created')
     res.redirect('/admin/locations')
   })
@@ -38,9 +36,7 @@ router.post('/', function (req, res) {
 
 // Update
 router.post('/:location_id', function (req, res) {
-  db.transaction(function () {
-    return req.location.update(req.permit('name'))
-  }).then(function () {
+  req.location.update(req.permit('name')).then(function () {
     res.flash('success', 'Saved')
     res.redirect('/admin/locations')
   })
@@ -48,9 +44,7 @@ router.post('/:location_id', function (req, res) {
 
 // Destroy
 router.post('/:location_id/delete', function (req, res) {
-  db.transaction(function () {
-    return req.location.destroy()
-  }).then(function () {
+  req.location.destroy().then(function () {
     res.flash('success', 'Deleted.')
     res.redirect(req.body.return_to)
   })

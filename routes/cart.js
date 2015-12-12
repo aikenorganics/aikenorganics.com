@@ -74,15 +74,13 @@ router.post('/', function (req, res) {
 
 // Checkout
 router.post('/checkout', function (req, res) {
-  db.transaction(function () {
-    db.query('select checkout($1, $2, $3)', [
-      req.user.id,
-      req.body.location_id,
-      req.cart.ids.map(function (id) {
-        return [id, req.cart.cart[id]]
-      })
-    ])
-  }).then(function () {
+  db.query('select checkout($1, $2, $3)', [
+    req.user.id,
+    req.body.location_id,
+    req.cart.ids.map(function (id) {
+      return [id, req.cart.cart[id]]
+    })
+  ]).then(function () {
     return req.mail('mail/orders/update', {
       to: [req.user.email],
       subject: 'Aiken Organics: Order Updated',

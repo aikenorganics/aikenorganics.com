@@ -77,11 +77,9 @@ function editProduct (req, res) {
 router.post('/:product_id', function (req, res) {
   if (!req.canEdit) return res.status(401).render('401')
 
-  db.transaction(function () {
-    req.product.update(req.permit(
-      'active', 'category_id', 'cost', 'description', 'name', 'supply', 'unit'
-    ))
-  }).then(function () {
+  req.product.update(req.permit(
+    'active', 'category_id', 'cost', 'description', 'name', 'supply', 'unit'
+  )).then(function () {
     res.format({
       html: () => {
         res.flash('success', 'Saved')

@@ -13,13 +13,11 @@ test('POST /admin/users/:id is a 302', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      db.transaction(function () {
-        db.User.find(2).then(function (user) {
-          t.is(user.first, 'first')
-          t.is(user.last, 'last')
-          t.is(user.phone, '555-555-5555')
-          t.end()
-        })
+      db.User.find(2).then(function (user) {
+        t.is(user.first, 'first')
+        t.is(user.last, 'last')
+        t.is(user.phone, '555-555-5555')
+        t.end()
       })
     })
   })
@@ -106,11 +104,9 @@ test('Delete a user', function (t) {
     .expect(302)
     .end((e) => {
       if (e) return t.end(e)
-      db.transaction(() => {
-        db.User.find(7).then((user) => {
-          t.ok(user == null)
-          t.end()
-        })
+      db.User.find(7).then((user) => {
+        t.ok(user == null)
+        t.end()
       })
     })
   })

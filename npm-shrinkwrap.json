@@ -3168,9 +3168,9 @@
       "resolved": "https://registry.npmjs.org/output-file-sync/-/output-file-sync-1.1.1.tgz"
     },
     "ozymandias": {
-      "version": "0.25.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#70a5bf0c8c31819d7121be9b13d894dee9207970",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#70a5bf0c8c31819d7121be9b13d894dee9207970",
+      "version": "0.26.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#7dee57a52d636d375b6155043f68a165c0fd84f4",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#7dee57a52d636d375b6155043f68a165c0fd84f4",
       "dependencies": {
         "glob": {
           "version": "6.0.1",

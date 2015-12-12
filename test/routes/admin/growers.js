@@ -35,12 +35,10 @@ test('POST /admin/growers/:id/adduser is a 302', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      db.transaction(function () {
-        db.UserGrower.where({user_id: 2, grower_id: 1}).find()
-        .then(function (userGrower) {
-          t.ok(userGrower != null)
-          t.end()
-        })
+      db.UserGrower.where({user_id: 2, grower_id: 1}).find()
+      .then(function (userGrower) {
+        t.ok(userGrower != null)
+        t.end()
       })
     })
   })
@@ -54,12 +52,10 @@ test('POST /admin/growers/:id/removeuser is a 302', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      db.transaction(function () {
-        db.UserGrower.where({user_id: 5, grower_id: 1}).find()
-        .then(function (userGrower) {
-          t.ok(userGrower == null)
-          t.end()
-        })
+      db.UserGrower.where({user_id: 5, grower_id: 1}).find()
+      .then(function (userGrower) {
+        t.ok(userGrower == null)
+        t.end()
       })
     })
   })
@@ -73,11 +69,9 @@ test('POST /admin/growers/:id is a 302 when activating', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      db.transaction(function () {
-        db.Grower.find(3).then(function (grower) {
-          t.ok(grower.active)
-          t.end()
-        })
+      db.Grower.find(3).then(function (grower) {
+        t.ok(grower.active)
+        t.end()
       })
     })
   })
@@ -91,11 +85,9 @@ test('POST /admin/growers/:id is a 302 when deactivating', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      db.transaction(function () {
-        db.Grower.find(1).then(function (grower) {
-          t.ok(!grower.active)
-          t.end()
-        })
+      db.Grower.find(1).then(function (grower) {
+        t.ok(!grower.active)
+        t.end()
       })
     })
   })

@@ -48,11 +48,9 @@ test('POST /admin/locations/:id is a 302', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      db.transaction(function () {
-        db.Location.find(1).then(function (location) {
-          t.is(location.name, 'Test')
-          t.end()
-        })
+      db.Location.find(1).then(function (location) {
+        t.is(location.name, 'Test')
+        t.end()
       })
     })
   })

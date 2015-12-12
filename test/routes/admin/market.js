@@ -18,11 +18,9 @@ test('POST /admin/market is a 302', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      db.transaction(function () {
-        db.Market.find(1).then(function (market) {
-          t.ok(market.open)
-          t.end()
-        })
+      db.Market.find(1).then(function (market) {
+        t.ok(market.open)
+        t.end()
       })
     })
   })
@@ -38,11 +36,9 @@ test('POST /admin/market is a 302', function (t) {
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
-      db.transaction(function () {
-        db.Market.find(2).then(function (market) {
-          t.ok(!market.open)
-          t.end()
-        })
+      db.Market.find(2).then(function (market) {
+        t.ok(!market.open)
+        t.end()
       })
     })
   })
