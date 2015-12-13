@@ -41,7 +41,7 @@ exports = module.exports = function (name, callback) {
         .post('/signin')
         .send(`email=${email}`)
         .expect(200)
-        .end((e) => e ? reject(e) : resolve(t.agent))
+        .end((e) => e ? reject(e) : resolve())
       }).catch(t.end)
     }
 

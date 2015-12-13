@@ -4,14 +4,14 @@ let db = require('../../../db')
 let test = require('../../test')
 
 test('GET /admin/market is a 200', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent.get('/admin/market').expect(200).end(t.end)
+  t.signIn('admin@example.com').then(() => {
+    t.agent.get('/admin/market').expect(200).end(t.end)
   })
 })
 
 test('POST /admin/market is a 302', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent
+  t.signIn('admin@example.com').then(() => {
+    t.agent
     .post('/admin/market')
     .send('open=1')
     .send('return_to=/')
@@ -28,8 +28,8 @@ test('POST /admin/market is a 302', function (t) {
 
 test('POST /admin/market is a 302', function (t) {
   t.hostname('closed.localhost')
-  t.signIn('admin@example.com').then(function (agent) {
-    agent
+  t.signIn('admin@example.com').then(() => {
+    t.agent
     .post('/admin/market')
     .send('open=0')
     .send('return_to=/')

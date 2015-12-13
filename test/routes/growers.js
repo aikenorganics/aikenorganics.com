@@ -22,120 +22,120 @@ test('GET /growers/:id is a 404 for missing ids', function (t) {
 })
 
 test('GET /growers/:id is a 404 for missing ids', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent.get('/growers/123456789')
+  t.signIn('admin@example.com').then(() => {
+    t.agent.get('/growers/123456789')
     .expect(404)
     .end(t.end)
   })
 })
 
 test('GET /growers/new is a 200', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent.get('/growers/new')
+  t.signIn('admin@example.com').then(() => {
+    t.agent.get('/growers/new')
     .expect(200)
     .end(t.end)
   })
 })
 
 test('GET /growers/:id/products/new is a 401 as a non-admin', function (t) {
-  t.signIn('user@example.com').then(function (agent) {
-    agent.get('/growers/1/products/new')
+  t.signIn('user@example.com').then(() => {
+    t.agent.get('/growers/1/products/new')
     .expect(401)
     .end(t.end)
   })
 })
 
 test('GET /growers/:id/products/new is a 200 as an admin', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent.get('/growers/1/products/new')
+  t.signIn('admin@example.com').then(() => {
+    t.agent.get('/growers/1/products/new')
     .expect(200)
     .end(t.end)
   })
 })
 
 test('GET /growers/new is a 401 as a non-admin', function (t) {
-  t.signIn('user@example.com').then(function (agent) {
-    agent.get('/growers/new')
+  t.signIn('user@example.com').then(() => {
+    t.agent.get('/growers/new')
     .expect(401)
     .end(t.end)
   })
 })
 
 test('GET /growers/new is a 200 as an admin', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent.get('/growers/new')
+  t.signIn('admin@example.com').then(() => {
+    t.agent.get('/growers/new')
     .expect(200)
     .end(t.end)
   })
 })
 
 test('GET /growers/:id/edit is a 401 for non-admins', function (t) {
-  t.signIn('user@example.com').then(function (agent) {
-    agent.get('/growers/1/edit')
+  t.signIn('user@example.com').then(() => {
+    t.agent.get('/growers/1/edit')
     .expect(401)
     .end(t.end)
   })
 })
 
 test('GET /growers/:id/edit is a 200 for admins', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent.get('/growers/1/edit')
+  t.signIn('admin@example.com').then(() => {
+    t.agent.get('/growers/1/edit')
     .expect(200)
     .end(t.end)
   })
 })
 
 test('GET /growers/:id/edit is a 200 for allowed users', function (t) {
-  t.signIn('grower@example.com').then(function (agent) {
-    agent.get('/growers/1/edit')
+  t.signIn('grower@example.com').then(() => {
+    t.agent.get('/growers/1/edit')
     .expect(200)
     .end(t.end)
   })
 })
 
 test('GET /growers/:id/orders is a 200 for admins', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent.get('/growers/1/orders')
+  t.signIn('admin@example.com').then(() => {
+    t.agent.get('/growers/1/orders')
     .expect(200)
     .end(t.end)
   })
 })
 
 test('GET /growers/:id/orders is a 200 for allowed users', function (t) {
-  t.signIn('grower@example.com').then(function (agent) {
-    agent.get('/growers/1/orders')
+  t.signIn('grower@example.com').then(() => {
+    t.agent.get('/growers/1/orders')
     .expect(200)
     .end(t.end)
   })
 })
 
 test('GET /growers/:id/orders is a 401 for non-admins', function (t) {
-  t.signIn('grower@example.com').then(function (agent) {
-    agent.get('/growers/2/orders')
+  t.signIn('grower@example.com').then(() => {
+    t.agent.get('/growers/2/orders')
     .expect(401)
     .end(t.end)
   })
 })
 
 test('GET /growers/:id/orders is a 401 for non-admins', function (t) {
-  t.signIn('user@example.com').then(function (agent) {
-    agent.get('/growers/1/orders')
+  t.signIn('user@example.com').then(() => {
+    t.agent.get('/growers/1/orders')
     .expect(401)
     .end(t.end)
   })
 })
 
 test('POST /growers/:id is a 401 for non-admins', function (t) {
-  t.signIn('user@example.com').then(function (agent) {
-    agent.post('/growers/1')
+  t.signIn('user@example.com').then(() => {
+    t.agent.post('/growers/1')
     .expect(401)
     .end(t.end)
   })
 })
 
 test('POST /growers/:id is a 302 for admins', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent.post('/growers/1')
+  t.signIn('admin@example.com').then(() => {
+    t.agent.post('/growers/1')
     .send('name=Watsonia')
     .expect(302)
     .end(t.end)
@@ -143,8 +143,8 @@ test('POST /growers/:id is a 302 for admins', function (t) {
 })
 
 test('POST /growers/:id is a 302 for allowed users', function (t) {
-  t.signIn('grower@example.com').then(function (agent) {
-    agent.post('/growers/1')
+  t.signIn('grower@example.com').then(() => {
+    t.agent.post('/growers/1')
     .send('name=Watsonia')
     .expect(302)
     .end(t.end)
@@ -152,8 +152,8 @@ test('POST /growers/:id is a 302 for allowed users', function (t) {
 })
 
 test('POST /growers is a 401 for non-admins', function (t) {
-  t.signIn('user@example.com').then(function (agent) {
-    agent.post('/growers')
+  t.signIn('user@example.com').then(() => {
+    t.agent.post('/growers')
     .send('name=New Grower')
     .expect(401)
     .end(t.end)
@@ -161,8 +161,8 @@ test('POST /growers is a 401 for non-admins', function (t) {
 })
 
 test('POST /growers is a 302 for admins', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent.post('/growers')
+  t.signIn('admin@example.com').then(() => {
+    t.agent.post('/growers')
     .send('name=New Grower')
     .expect(302)
     .end(t.end)
@@ -170,8 +170,8 @@ test('POST /growers is a 302 for admins', function (t) {
 })
 
 test('POST /growers/:id/products is a 302 for admins', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent.post('/growers/1/products')
+  t.signIn('admin@example.com').then(() => {
+    t.agent.post('/growers/1/products')
     .send('name=New Grower')
     .send('cost=2.45')
     .send('supply=32')
@@ -182,8 +182,8 @@ test('POST /growers/:id/products is a 302 for admins', function (t) {
 })
 
 test('POST /growers/:id/products is a 401 for non-admins', function (t) {
-  t.signIn('user@example.com').then(function (agent) {
-    agent.post('/growers/1/products')
+  t.signIn('user@example.com').then(() => {
+    t.agent.post('/growers/1/products')
     .send('name=New Product')
     .send('cost=2.45')
     .send('supply=32')
@@ -194,8 +194,8 @@ test('POST /growers/:id/products is a 401 for non-admins', function (t) {
 })
 
 test('POST /growers/:id/products is a 302 if allowed', function (t) {
-  t.signIn('grower@example.com').then(function (agent) {
-    agent.post('/growers/1/products')
+  t.signIn('grower@example.com').then(() => {
+    t.agent.post('/growers/1/products')
     .send('name=New Product')
     .send('cost=2.50')
     .send('supply=23')
@@ -206,8 +206,8 @@ test('POST /growers/:id/products is a 302 if allowed', function (t) {
 })
 
 test('POST /growers/:id/products is a 302 for admins', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent.post('/growers/1/products')
+  t.signIn('admin@example.com').then(() => {
+    t.agent.post('/growers/1/products')
     .send('name=New Product')
     .send('cost=2.50')
     .send('supply=23')
@@ -218,8 +218,8 @@ test('POST /growers/:id/products is a 302 for admins', function (t) {
 })
 
 test('POST /growers/:id/products is a 422 for invalid data', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent.post('/growers/1/products')
+  t.signIn('admin@example.com').then(() => {
+    t.agent.post('/growers/1/products')
     .send('name=New Product')
     .send('cost=asdf')
     .send('supply=23')
@@ -230,32 +230,32 @@ test('POST /growers/:id/products is a 422 for invalid data', function (t) {
 })
 
 test('GET /growers/:id/products/new is a 200 for admins', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent.get('/growers/1/products/new')
+  t.signIn('admin@example.com').then(() => {
+    t.agent.get('/growers/1/products/new')
     .expect(200)
     .end(t.end)
   })
 })
 
 test('GET /growers/:id/products/new is a 200 for allowed users', function (t) {
-  t.signIn('grower@example.com').then(function (agent) {
-    agent.get('/growers/1/products/new')
+  t.signIn('grower@example.com').then(() => {
+    t.agent.get('/growers/1/products/new')
     .expect(200)
     .end(t.end)
   })
 })
 
 test('GET /growers/:id/products/new is a 401 for non-admins', function (t) {
-  t.signIn('user@example.com').then(function (agent) {
-    agent.get('/growers/1/products/new')
+  t.signIn('user@example.com').then(() => {
+    t.agent.get('/growers/1/products/new')
     .expect(401)
     .end(t.end)
   })
 })
 
 test('GET /growers/:id authorized users see new product link', function (t) {
-  t.signIn('grower@example.com').then(function (agent) {
-    agent
+  t.signIn('grower@example.com').then(() => {
+    t.agent
     .get('/growers/1')
     .expect(200)
     .expect(function (res) {
@@ -280,8 +280,8 @@ test('GET /growers does not return inactive growers', function (t) {
 })
 
 test('GET /growers/:id as admin includes inactive products', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent
+  t.signIn('admin@example.com').then(() => {
+    t.agent
     .get('/growers/2')
     .expect(200)
     .expect(function (res) {
@@ -297,8 +297,8 @@ test('GET /growers/:id as admin includes inactive products', function (t) {
 })
 
 test('GET /growers/:id as grower includes inactive products', function (t) {
-  t.signIn('info@planitfoods.com').then(function (agent) {
-    agent
+  t.signIn('info@planitfoods.com').then(() => {
+    t.agent
     .get('/growers/2')
     .expect(200)
     .expect(function (res) {
@@ -314,8 +314,8 @@ test('GET /growers/:id as grower includes inactive products', function (t) {
 })
 
 test('GET /growers/:id as non-grower does not include inactive products', function (t) {
-  t.signIn('info@planitfoods.com').then(function (agent) {
-    agent
+  t.signIn('info@planitfoods.com').then(() => {
+    t.agent
     .get('/growers/1')
     .expect(200)
     .expect(function (res) {
@@ -331,16 +331,16 @@ test('GET /growers/:id as non-grower does not include inactive products', functi
 })
 
 test('GET /growers/:id/products', function (t) {
-  t.signIn('grower@example.com').then(function (agent) {
-    agent.get('/growers/1/products')
+  t.signIn('grower@example.com').then(() => {
+    t.agent.get('/growers/1/products')
     .expect(200)
     .end(t.end)
   })
 })
 
 test('GET /growers/:id/products is a 401 for non-growers', function (t) {
-  t.signIn('info@planitfoods.com').then(function (agent) {
-    agent.get('/growers/1/products')
+  t.signIn('info@planitfoods.com').then(() => {
+    t.agent.get('/growers/1/products')
     .expect(401)
     .end(t.end)
   })

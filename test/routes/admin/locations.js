@@ -4,8 +4,8 @@ let db = require('../../../db')
 let test = require('../../test')
 
 test('GET /admin/locations is a 200', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent
+  t.signIn('admin@example.com').then(() => {
+    t.agent
     .get('/admin/locations')
     .expect(200)
     .end(t.end)
@@ -13,8 +13,8 @@ test('GET /admin/locations is a 200', function (t) {
 })
 
 test('GET /admin/locations/new is a 200', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent
+  t.signIn('admin@example.com').then(() => {
+    t.agent
     .get('/admin/locations/new')
     .expect(200)
     .end(t.end)
@@ -22,8 +22,8 @@ test('GET /admin/locations/new is a 200', function (t) {
 })
 
 test('GET /admin/locations/:id/edit is a 200', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent
+  t.signIn('admin@example.com').then(() => {
+    t.agent
     .get('/admin/locations/1/edit')
     .expect(200)
     .end(t.end)
@@ -31,8 +31,8 @@ test('GET /admin/locations/:id/edit is a 200', function (t) {
 })
 
 test('POST /admin/locations is a 302', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent
+  t.signIn('admin@example.com').then(() => {
+    t.agent
     .post('/admin/locations')
     .send('name=Test')
     .expect(302)
@@ -41,8 +41,8 @@ test('POST /admin/locations is a 302', function (t) {
 })
 
 test('POST /admin/locations/:id is a 302', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent
+  t.signIn('admin@example.com').then(() => {
+    t.agent
     .post('/admin/locations/1')
     .send('name=Test')
     .expect(302)

@@ -4,16 +4,16 @@ let db = require('../../db')
 let test = require('../test')
 
 test('/settings/account is a 200 as an admin', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent.get('/settings/account')
+  t.signIn('admin@example.com').then(() => {
+    t.agent.get('/settings/account')
     .expect(200)
     .end(t.end)
   })
 })
 
 test('/settings/account is a 200 as a regular user', function (t) {
-  t.signIn('user@example.com').then(function (agent) {
-    agent.get('/settings/account')
+  t.signIn('user@example.com').then(() => {
+    t.agent.get('/settings/account')
     .expect(200)
     .end(t.end)
   })
@@ -21,8 +21,8 @@ test('/settings/account is a 200 as a regular user', function (t) {
 
 test('POST /settings/account is a 302 as a regular user', function (t) {
   db.User.where({email: 'user@example.com'}).find().then(function (user) {
-    t.signIn('user@example.com').then(function (agent) {
-      agent.post('/settings/account')
+    t.signIn('user@example.com').then(() => {
+      t.agent.post('/settings/account')
       .send(`first=${user.first}`)
       .send(`last=${user.last}`)
       .send(`phone=${user.phone}`)

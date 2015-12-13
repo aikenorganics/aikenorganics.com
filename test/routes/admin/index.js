@@ -17,8 +17,8 @@ test('/admin is a 401 signed out', function (t) {
 })
 
 test('/admin is a 401 as a regular user', function (t) {
-  t.signIn('user@example.com').then(function (agent) {
-    agent
+  t.signIn('user@example.com').then(() => {
+    t.agent
     .get('/admin')
     .expect(401)
     .end(t.end)
@@ -26,8 +26,8 @@ test('/admin is a 401 as a regular user', function (t) {
 })
 
 test('/admin is a 404 as an admin', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent
+  t.signIn('admin@example.com').then(() => {
+    t.agent
     .get('/admin')
     .expect(404)
     .end(t.end)

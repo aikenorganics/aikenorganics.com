@@ -31,9 +31,7 @@ test('POST /signup handles first, last, and phone', function (t) {
 })
 
 test('Full signup flow', function (t) {
-  let agent = t.request()
-
-  agent
+  t.agent
   .post('/signup')
   .send('first=Jake')
   .send('last=The Dog')
@@ -44,13 +42,13 @@ test('Full signup flow', function (t) {
   .end(function (e) {
     if (e) return t.end(e)
 
-    agent
+    t.agent
     .get('/auth/signout')
     .expect(302)
     .end(function (e) {
       if (e) return t.end(e)
 
-      agent
+      t.agent
       .post('/auth/signin')
       .send('email=jake@ooo.net')
       .send('password=sandwiches')
@@ -58,7 +56,7 @@ test('Full signup flow', function (t) {
       .end(function (e) {
         if (e) return t.end(e)
 
-        agent
+        t.agent
         .post('/auth/signin')
         .send('email=jake@oooo.net')
         .send('password=sandwich')
@@ -66,7 +64,7 @@ test('Full signup flow', function (t) {
         .end(function (e) {
           if (e) return t.end(e)
 
-          agent
+          t.agent
           .post('/auth/signin')
           .send('email=jake@ooo.net')
           .send('password=sandwich')

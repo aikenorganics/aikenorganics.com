@@ -4,8 +4,8 @@ let db = require('../../../db')
 let test = require('../../test')
 
 test('POST /product_orders/:id/remove is a 302', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent
+  t.signIn('admin@example.com').then(() => {
+    t.agent
     .post('/admin/product-orders/1/remove')
     .expect(302)
     .end(function (e) {
@@ -19,8 +19,8 @@ test('POST /product_orders/:id/remove is a 302', function (t) {
 })
 
 test('POST /product-orders/:id is a 302', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent
+  t.signIn('admin@example.com').then(() => {
+    t.agent
     .post('/admin/product-orders/1')
     .send('quantity=1')
     .send('cost=1.23')
@@ -37,8 +37,8 @@ test('POST /product-orders/:id is a 302', function (t) {
 })
 
 test('POST /product-orders is a 302', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent
+  t.signIn('admin@example.com').then(() => {
+    t.agent
     .post('/admin/product-orders')
     .send('quantity=1')
     .send('order_id=1')
@@ -56,8 +56,8 @@ test('POST /product-orders is a 302', function (t) {
 })
 
 test('editing an inactive product order', function (t) {
-  t.signIn('admin@example.com').then(function (agent) {
-    agent.post('/admin/product-orders/9')
+  t.signIn('admin@example.com').then(() => {
+    t.agent.post('/admin/product-orders/9')
     .send('quantity=2')
     .send('cost=6')
     .expect(302)
