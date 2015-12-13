@@ -70,7 +70,7 @@ router.post('/reset/:token_id', (req, res) => {
 
   req.token.user.update(req.permit('password')).then(() => {
     res.flash('success', 'Password Changed')
-    req.session.userId = req.token.user.id
+    req.signIn(req.token.user)
     res.redirect('/')
   }).catch(res.error)
 })
@@ -95,7 +95,7 @@ router.post('/signin', (req, res) => {
   // Is the password correct?
   req.user.authenticate(req.body.password).then((match) => {
     if (match) {
-      req.session.userId = req.user.id
+      req.signIn(req.user)
       res.redirect('/')
       return
     }

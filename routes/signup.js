@@ -37,7 +37,7 @@ router.post('/', (req, res) => {
   db.User.create(req.permit(
     'first', 'last', 'phone', 'password', 'email'
   )).then((user) => {
-    req.session.userId = user.id
+    req.signIn(user)
     res.redirect('/')
   }).catch(res.error)
 })

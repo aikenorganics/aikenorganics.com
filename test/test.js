@@ -1,11 +1,17 @@
 'use strict'
 
 const db = require('../db')
+const app = require('../app')
 const tape = require('tape')
 const request = require('supertest')
-const app = require('../app')
-const signIn = require('./signin')
 const query = db.query
+
+app.post('/signin', (req, res) => {
+  db.User.where({email: req.body.email}).find().then((user) => {
+    req.signIn(user)
+    res.end()
+  }).catch(res.error)
+})
 
 // Export a function with the tape API.
 exports = module.exports = function (name, callback) {
@@ -25,9 +31,18 @@ exports = module.exports = function (name, callback) {
       return request(app)
     }
 
+    // Convenient agent reference.
+    t.agent = request.agent(app)
+
     // Sign in, with error handling.
     t.signIn = function (email) {
-      return signIn(request.agent(app), email).catch(t.end)
+      return new Promise((resolve, reject) => {
+        t.agent
+        .post('/signin')
+        .send(`email=${email}`)
+        .expect(200)
+        .end((e) => e ? reject(e) : resolve(t.agent))
+      }).catch(t.end)
     }
 
     // Rollback the transaction before ending the test.
