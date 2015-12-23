@@ -1,7 +1,7 @@
-let page = require('page')
-let React = require('react')
-let ReactDOM = require('react-dom')
-let Products = require('../views/growers/products')
+import page from 'page'
+import React from 'react'
+import {render} from 'react-dom'
+import Products from '../views/growers/products'
 
 function data (id) {
   let el = document.getElementById(id)
@@ -21,7 +21,7 @@ page('/growers/:id/products', (c) => {
     grower: data('grower'),
     products: data('products')
   }
-  ReactDOM.render(<Products {...props}/>, content)
+  render(<Products {...props}/>, content)
 })
 
 page({click: false, popstate: false})
