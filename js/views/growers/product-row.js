@@ -1,8 +1,8 @@
-let React = require('react')
-let json = require('../../json')
-let message = require('../../message')
+import React from 'react'
+import json from '../../json'
+import message from '../../message'
 
-module.exports = class ProductRow extends React.Component {
+export default class ProductRow extends React.Component {
 
   constructor (props) {
     super(props)
@@ -34,7 +34,7 @@ module.exports = class ProductRow extends React.Component {
     if (this.timer) clearTimeout(this.timer)
     if (!this.state.pending) return
     this.setState({pending: false})
-    this.save({supply: this.state.supply})
+    this.save({supply: this.state.supply || 0})
   }
 
   toggleActive (active) {

@@ -1,6 +1,8 @@
 import page from 'page'
 import React from 'react'
 import {render} from 'react-dom'
+
+import App from '../views/app'
 import Products from '../views/growers/products'
 
 function data (id) {
@@ -8,20 +10,15 @@ function data (id) {
   return el ? JSON.parse(el.innerHTML) : null
 }
 
-let cart = data('cart')
-let user = data('user')
-let market = data('market')
-let content = document.getElementById('content')
+const cart = data('cart')
+const user = data('user')
+const market = data('market')
+const content = document.getElementById('content')
 
 page('/growers/:id/products', (c) => {
-  let props = {
-    cart: cart,
-    user: user,
-    open: market.open,
-    grower: data('grower'),
-    products: data('products')
-  }
-  render(<Products {...props}/>, content)
+  render(<App cart={cart} market={market} user={user}>
+    <Products grower={data('grower')} products={data('products')}/>
+  </App>, content)
 })
 
 page({click: false, popstate: false})
