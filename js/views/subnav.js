@@ -1,6 +1,6 @@
-let React = require('react')
+import React from 'react'
 
-module.exports = class SubNav extends React.Component {
+export default class SubNav extends React.Component {
 
   cartSize () {
     return Object.keys(this.props.cart).reduce((total, id) => {
@@ -31,7 +31,7 @@ module.exports = class SubNav extends React.Component {
 
   cart () {
     if (!this.props.user || !this.props.open) return ''
-    return <li>
+    return <li className={/^\/cart/.test(this.props.path) ? 'active' : ''}>
       <a href='/cart'>
         Cart <span id='cart-size' className='badge'>{this.cartSize()}</span>
       </a>
@@ -40,7 +40,7 @@ module.exports = class SubNav extends React.Component {
 
   orders () {
     if (!this.props.user) return ''
-    return <li>
+    return <li className={/^\/orders/.test(this.props.path) ? 'active' : ''}>
       <a href='/orders/current'>
         Orders
       </a>
@@ -51,10 +51,10 @@ module.exports = class SubNav extends React.Component {
     return <div className='hidden-print'>
       {this.props.open ? this.open() : this.closed()}
       <ul className='nav nav-tabs subnav'>
-        <li>
+        <li className={/^\/products/.test(this.props.path) ? 'active' : ''}>
           <a href='/products'>Products</a>
         </li>
-        <li className='active'>
+        <li className={/^\/growers/.test(this.props.path) ? 'active' : ''}>
           <a href='/growers'>Growers</a>
         </li>
         {this.cart()}

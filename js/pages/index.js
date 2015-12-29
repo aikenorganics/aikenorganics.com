@@ -16,7 +16,7 @@ const market = data('market')
 const content = document.getElementById('content')
 
 page('/growers/:id/products', (c) => {
-  render(<App cart={cart} market={market} user={user}>
+  render(<App cart={cart} market={market} user={user} path={c.path}>
     <Products grower={data('grower')} products={data('products')}/>
   </App>, content)
 })
