@@ -1,3 +1,4 @@
+import './pages'
 import React from 'react'
 import {render} from 'react-dom'
 import message from './message'
@@ -27,5 +28,3 @@ $('[data-cart]').each((i, el) => {
   let data = $(el).data('cart')
   render(<CartForm {...data}/>, el)
 })
-
-require('./pages')
