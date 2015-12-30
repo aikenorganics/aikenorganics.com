@@ -14,7 +14,7 @@ if (flash) message(flash.type, flash.message)
 
 // Handle submit confirmations.
 $(document).on('click', '[data-confirm]', (e) => {
-  if (!confirm($(e.target).data('confirm'))) e.preventDefault()
+  if (!window.confirm($(e.target).data('confirm'))) e.preventDefault()
 })
 
 // Handle form submission.

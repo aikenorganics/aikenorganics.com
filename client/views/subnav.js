@@ -2,6 +2,15 @@ import React from 'react'
 
 export default class SubNav extends React.Component {
 
+  static propTypes () {
+    return {
+      cart: React.PropTypes.object,
+      open: React.PropTypes.bool,
+      path: React.PropTypes.string,
+      user: React.PropTypes.object
+    }
+  }
+
   cartSize () {
     return Object.keys(this.props.cart).reduce((total, id) => {
       return total + this.props.cart[id]

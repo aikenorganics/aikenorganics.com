@@ -13,7 +13,7 @@
   "scripts": {
     "build": "./bin/build",
     "start": "heroku local",
-    "test": "./bin/test",
+    "test": "NODE_ENV=test heroku local:run --env=.testenv ./bin/test",
     "postinstall": "./bin/postinstall"
   },
   "repository": {
@@ -30,6 +30,7 @@
     "autoprefixer": "6.1.0",
     "babel-preset-es2015": "6.3.13",
     "babel-preset-react": "6.3.13",
+    "babel-register": "6.3.13",
     "babelify": "7.2.0",
     "bootstrap": "3.3.5",
     "browserify": "12.0.1",

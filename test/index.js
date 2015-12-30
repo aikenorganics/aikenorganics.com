@@ -1,7 +1,12 @@
 'use strict'
 
-let test = require('tape')
-let db = require('../db')
+require('babel-register')({
+  only: /client/,
+  presets: ['es2015', 'react']
+})
+
+const test = require('tape')
+const db = require('../db')
 
 require('./db')
 require('./lib')

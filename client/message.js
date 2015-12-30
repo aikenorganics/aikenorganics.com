@@ -9,8 +9,8 @@ let timer = null
 
 module.exports = (type, message) => {
   if (timer) clearTimeout(timer)
-  render(<Message type={type} message={message} active={true}/>, el)
+  render(<Message type={type} message={message} active/>, el)
   timer = setTimeout(() => {
-    render(<Message type={type} message={message} active={false}/>, el)
+    render(<Message type={type} message={message}/>, el)
   }, 10000)
 }

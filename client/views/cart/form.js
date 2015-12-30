@@ -5,6 +5,14 @@ import message from '../../message'
 
 export default class CartForm extends React.Component {
 
+  static propTypes () {
+    return {
+      available: React.PropTypes.number,
+      product_id: React.PropTypes.number,
+      quantity: React.PropTypes.number
+    }
+  }
+
   constructor (props) {
     super(props)
     this.state = {

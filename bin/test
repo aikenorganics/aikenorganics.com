@@ -1,14 +1,10 @@
 #!/bin/sh -e
 
-if [ -z "$TEST" ]; then
-  TEST=test
-fi
-
 # Clean up some lint
 ./bin/lint
 
 # Reset
-heroku local:run --env=.testenv ./bin/reset
+./bin/reset
 
 # App Tests
-NODE_ENV=test heroku local:run --env=.testenv tape $TEST
+tape test/index.js

@@ -4,6 +4,12 @@ import message from '../../message'
 
 export default class ProductRow extends React.Component {
 
+  static propTypes () {
+    return {
+      product: React.PropTypes.object
+    }
+  }
+
   constructor (props) {
     super(props)
     this.state = {

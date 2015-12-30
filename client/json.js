@@ -19,7 +19,7 @@ export default (url, options) => {
     options.body = JSON.stringify(options.body)
   }
 
-  return fetch(url, options).then((res) => {
+  return window.fetch(url, options).then((res) => {
     if (res.ok) return res.json()
     message('error', res.statusText)
     throw new Error(res.statusText)
