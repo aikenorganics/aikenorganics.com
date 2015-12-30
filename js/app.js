@@ -1,8 +1,10 @@
-let React = require('react')
-let ReactDOM = require('react-dom')
-let $ = window.jQuery = require('jquery')
-let CartForm = require('./views/cart/form')
-let message = require('./message')
+import React from 'react'
+import {render} from 'react-dom'
+import message from './message'
+import CartForm from './views/cart/form'
+
+// Bootstrap relies on window.jQuery
+const $ = window.jQuery = require('jquery')
 require('bootstrap')
 
 // Show the flash message.
@@ -23,7 +25,7 @@ $(document).on('submit', 'form', (e) => {
 // Render cart forms.
 $('[data-cart]').each((i, el) => {
   let data = $(el).data('cart')
-  ReactDOM.render(<CartForm {...data}/>, el)
+  render(<CartForm {...data}/>, el)
 })
 
 require('./pages')

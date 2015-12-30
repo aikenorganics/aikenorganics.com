@@ -1,9 +1,9 @@
-let $ = require('jquery')
-let json = require('../../json')
-let message = require('../../message')
-let React = require('react')
+import $ from 'jquery'
+import React from 'react'
+import json from '../../json'
+import message from '../../message'
 
-module.exports = class CartForm extends React.Component {
+export default class CartForm extends React.Component {
 
   constructor (props) {
     super(props)

@@ -1,19 +1,18 @@
-let message = require('./message')
-require('es6-promise')
-require('whatwg-fetch')
+import 'es6-promise'
+import 'whatwg-fetch'
+import message from './message'
 
-module.exports = (url, options) => {
+export default (url, options) => {
   if (!options) options = {}
 
   // Include credentials.
   options.credentials = 'include'
 
   // Grab the headers
-  let headers = options.headers
-  if (!headers) headers = options.headers = {}
+  const headers = options.headers || (options.headers = {})
 
   // Set Accept and Content-Type
-  headers['Accept'] = headers['Content-Type'] = 'application/json'
+  headers.Accept = headers['Content-Type'] = 'application/json'
 
   // Stringify the body if necessary
   if (typeof options.body !== 'string') {

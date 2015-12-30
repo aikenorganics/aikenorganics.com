@@ -1,23 +1,16 @@
-let $ = require('jquery')
-let React = require('react')
-let ReactDOM = require('react-dom')
-let Message = require('./views/message')
-let $message = $('#message')
+import React from 'react'
+import {render} from 'react-dom'
+import Message from './views/message'
+
+const el = document.getElementById('message')
 
 // Hide message after some time.
 let timer = null
 
-// Render with props!
-let render = (props) => {
-  ReactDOM.render(<Message {...props}/>, $message[0])
-}
-
 module.exports = (type, message) => {
   if (timer) clearTimeout(timer)
-  let props = {type: type, message: message, active: true}
-  render(props)
+  render(<Message type={type} message={message} active={true}/>, el)
   timer = setTimeout(() => {
-    props.active = false
-    render(props)
+    render(<Message type={type} message={message} active={false}/>, el)
   }, 10000)
 }
