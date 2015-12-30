@@ -169,9 +169,9 @@ test('POST /growers is a 302 for admins', function (t) {
   })
 })
 
-test('POST /growers/:id/products is a 302 for admins', function (t) {
+test('POST /growers/:id/products/new is a 302 for admins', function (t) {
   t.signIn('admin@example.com').then(() => {
-    t.agent.post('/growers/1/products')
+    t.agent.post('/growers/1/products/new')
     .send('name=New Grower')
     .send('cost=2.45')
     .send('supply=32')
@@ -181,9 +181,9 @@ test('POST /growers/:id/products is a 302 for admins', function (t) {
   })
 })
 
-test('POST /growers/:id/products is a 401 for non-admins', function (t) {
+test('POST /growers/:id/products/new is a 401 for non-admins', function (t) {
   t.signIn('user@example.com').then(() => {
-    t.agent.post('/growers/1/products')
+    t.agent.post('/growers/1/products/new')
     .send('name=New Product')
     .send('cost=2.45')
     .send('supply=32')
@@ -193,9 +193,9 @@ test('POST /growers/:id/products is a 401 for non-admins', function (t) {
   })
 })
 
-test('POST /growers/:id/products is a 302 if allowed', function (t) {
+test('POST /growers/:id/products/new is a 302 if allowed', function (t) {
   t.signIn('grower@example.com').then(() => {
-    t.agent.post('/growers/1/products')
+    t.agent.post('/growers/1/products/new')
     .send('name=New Product')
     .send('cost=2.50')
     .send('supply=23')
@@ -205,9 +205,9 @@ test('POST /growers/:id/products is a 302 if allowed', function (t) {
   })
 })
 
-test('POST /growers/:id/products is a 302 for admins', function (t) {
+test('POST /growers/:id/products/new is a 302 for admins', function (t) {
   t.signIn('admin@example.com').then(() => {
-    t.agent.post('/growers/1/products')
+    t.agent.post('/growers/1/products/new')
     .send('name=New Product')
     .send('cost=2.50')
     .send('supply=23')
@@ -217,9 +217,9 @@ test('POST /growers/:id/products is a 302 for admins', function (t) {
   })
 })
 
-test('POST /growers/:id/products is a 422 for invalid data', function (t) {
+test('POST /growers/:id/products/new is a 422 for invalid data', function (t) {
   t.signIn('admin@example.com').then(() => {
-    t.agent.post('/growers/1/products')
+    t.agent.post('/growers/1/products/new')
     .send('name=New Product')
     .send('cost=asdf')
     .send('supply=23')

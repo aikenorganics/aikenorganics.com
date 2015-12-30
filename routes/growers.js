@@ -65,8 +65,6 @@ router.post('/:grower_id', (req, res) => {
 })
 
 // New Product
-router.get('/:grower_id/products/new', newProduct)
-
 const newProduct = (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
 
@@ -75,7 +73,9 @@ const newProduct = (req, res) => {
   })
 }
 
-router.post('/:grower_id/products', (req, res) => {
+router.get('/:grower_id/products/new', newProduct)
+
+router.post('/:grower_id/products/new', (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
 
   let props = req.permit(
