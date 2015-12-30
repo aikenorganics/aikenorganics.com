@@ -1,9 +1,9 @@
 'use strict'
 
-let db = require('../db')
-let upload = require('multer')({dest: 'tmp/uploads'})
-let ozymandias = require('ozymandias')
-let router = module.exports = ozymandias.Router()
+const db = require('../db')
+const upload = require('multer')({dest: 'tmp/uploads'})
+const ozymandias = require('ozymandias')
+const router = module.exports = ozymandias.Router()
 
 // Find
 router.find('grower', () => db.Grower)
@@ -12,35 +12,35 @@ router.find('grower', () => db.Grower)
 router.param('grower_id', require('../mid/growers/authorize'))
 
 // Index
-router.get('/', function (req, res) {
-  db.Grower.where({active: true}).order('name').all().then(function (growers) {
+router.get('/', (req, res) => {
+  db.Grower.where({active: true}).order('name').all().then((growers) => {
     res.render('growers/index', {growers: growers})
   })
 })
 
 // New Grower
-router.get('/new', function (req, res) {
+router.get('/new', (req, res) => {
   if (!req.admin) return res.status(401).render('401')
   res.render('growers/new')
 })
 
-router.post('/', function (req, res) {
+router.post('/', (req, res) => {
   if (!req.admin) return res.status(401).render('401')
 
   db.Grower.create(req.permit(
     'url', 'name', 'email', 'location', 'description'
-  )).then(function (grower) {
+  )).then((grower) => {
     res.flash('success', 'Saved')
     res.redirect(`/growers/${grower.id}`)
   }).catch(res.error)
 })
 
 // Show
-router.get('/:grower_id', function (req, res) {
+router.get('/:grower_id', (req, res) => {
   let products = db.Product.where({grower_id: req.grower.id})
   if (!req.canEdit) products.where({active: true})
 
-  products.order('name').all().then(function (products) {
+  products.order('name').all().then((products) => {
     // Stupid, but necessary.
     for (let product of products) product.grower = req.grower
     res.render('growers/show', {products: products})
@@ -48,17 +48,17 @@ router.get('/:grower_id', function (req, res) {
 })
 
 // Edit Grower
-router.get('/:grower_id/edit', function (req, res) {
+router.get('/:grower_id/edit', (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
   res.render('growers/edit')
 })
 
-router.post('/:grower_id', function (req, res) {
+router.post('/:grower_id', (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
 
   req.grower.update(req.permit(
     'name', 'email', 'url', 'location', 'description'
-  )).then(function () {
+  )).then(() => {
     res.flash('success', 'Saved')
     res.redirect(`/growers/${req.grower.id}`)
   }).catch(res.error)
@@ -67,15 +67,15 @@ router.post('/:grower_id', function (req, res) {
 // New Product
 router.get('/:grower_id/products/new', newProduct)
 
-function newProduct (req, res) {
+const newProduct = (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
 
-  db.Category.all().then(function (categories) {
+  db.Category.all().then((categories) => {
     res.render('products/new', {categories: categories})
   })
 }
 
-router.post('/:grower_id/products', function (req, res) {
+router.post('/:grower_id/products', (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
 
   let props = req.permit(
@@ -83,10 +83,10 @@ router.post('/:grower_id/products', function (req, res) {
   )
   props.grower_id = req.grower.id
 
-  db.Product.create(props).then(function (product) {
+  db.Product.create(props).then((product) => {
     res.flash('success', 'Saved')
     res.redirect(`/products/${product.id}`)
-  }).catch(function (e) {
+  }).catch((e) => {
     if (e.message !== 'invalid') throw e
     res.status(422)
     res.locals.errors = e.model.errors
@@ -96,7 +96,7 @@ router.post('/:grower_id/products', function (req, res) {
 })
 
 // Orders
-router.get('/:grower_id/orders', function (req, res) {
+router.get('/:grower_id/orders', (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
 
   let total = `(
@@ -109,22 +109,22 @@ router.get('/:grower_id/orders', function (req, res) {
   .select('*', total)
   .where({grower_id: req.grower.id})
   .where('reserved > 0')
-  .all().then(function (products) {
+  .all().then((products) => {
     res.render('growers/orders', {products: products})
   }).catch(res.error)
 })
 
 // Products
-router.get('/:grower_id/products', function (req, res) {
+router.get('/:grower_id/products', (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
 
   db.Product.where({grower_id: req.grower.id}).order('name').all()
-  .then(function (products) {
+  .then((products) => {
     res.render('growers/products', {products: products})
   }).catch(res.error)
 })
 
-router.post('/:grower_id/image', upload.single('image'), function (req, res) {
+router.post('/:grower_id/image', upload.single('image'), (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
   req.grower.uploadImage(req.file).then(() => {
     res.flash('Image Uploaded.')
