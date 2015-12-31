@@ -5,6 +5,4 @@
 <link rel='stylesheet' href='<%= assetPath('css/app.css') %>'>
 <link rel='shortcut icon' href='<%= assetPath('favicon.ico') %>'>
 <% include analytics %>
-<%- json('user', req.user) %>
-<%- json('market', req.market) %>
-<%- json('cart', req.cart) %>
+<%- json('state', req.state) %>

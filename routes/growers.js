@@ -120,7 +120,11 @@ router.get('/:grower_id/products', (req, res) => {
 
   db.Product.where({grower_id: req.grower.id}).order('name').all()
   .then((products) => {
-    res.render('growers/products', {products: products})
+    Object.assign(req.state, {
+      grower: req.grower,
+      products: products
+    })
+    res.render('growers/products')
   }).catch(res.error)
 })
 

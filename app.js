@@ -11,6 +11,7 @@ app.locals = require('./helpers')
 app.use(require('./mid/market'))
 app.use(require('./mid/cart'))
 app.use(require('./mid/url'))
+app.use(require('./mid/state'))
 
 // Routes
 app.use('/auth', require('./routes/auth'))
