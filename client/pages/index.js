@@ -14,16 +14,25 @@ function data (id) {
 const cart = data('cart')
 const user = data('user')
 const market = data('market')
-const content = document.getElementById('content')
+const root = document.getElementById('root')
 
-const updateProduct = (product, values) => {
+page((c, next) => {
+  c.render = (view) => {
+    render(<App cart={cart} market={market} user={user} path={c.path}>
+      {view}
+    </App>, root)
+  }
+  next()
+})
+
+const update = (product, values) => {
   return json(`/products/${product.id}`, {method: 'POST', body: values})
 }
 
 page('/growers/:id/products', (c) => {
-  render(<App cart={cart} market={market} user={user} path={c.path}>
-    <Products grower={data('grower')} products={data('products')} update={updateProduct}/>
-  </App>, content)
+  c.render(
+    <Products grower={data('grower')} products={data('products')} update={update}/>
+  )
 })
 
 page({click: false, popstate: false})
