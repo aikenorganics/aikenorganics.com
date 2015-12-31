@@ -1,7 +1,6 @@
 import $ from 'jquery'
 import React from 'react'
 import json from '../../json'
-import message from '../../message'
 
 export default class CartForm extends React.Component {
 
@@ -41,7 +40,6 @@ export default class CartForm extends React.Component {
   }
 
   save (quantity) {
-    message('info', 'Updating Cart…')
     json('/cart', {
       method: 'post',
       body: {
@@ -49,7 +47,6 @@ export default class CartForm extends React.Component {
         product_id: this.props.product_id
       }
     }).then((data) => {
-      message('success', 'Cart Updated')
       this.setState({quantity: data.quantity})
       // TODO: Do this better?
       $('#cart-size').text(data.cartSize)

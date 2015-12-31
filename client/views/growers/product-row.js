@@ -1,12 +1,11 @@
 import React from 'react'
-import json from '../../json'
-import message from '../../message'
 
 export default class ProductRow extends React.Component {
 
   static propTypes () {
     return {
-      product: React.PropTypes.object
+      product: React.PropTypes.object,
+      update: React.PropTypes.func
     }
   }
 
@@ -49,11 +48,7 @@ export default class ProductRow extends React.Component {
   }
 
   save (values) {
-    message('info', 'Saving…')
-    json(`/products/${this.props.product.id}`, {
-      method: 'POST',
-      body: values
-    }).then(() => { message('success', 'Saved.') })
+    this.props.update(this.props.product, values)
   }
 
   render () {

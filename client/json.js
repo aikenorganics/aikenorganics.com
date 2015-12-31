@@ -19,8 +19,14 @@ export default (url, options) => {
     options.body = JSON.stringify(options.body)
   }
 
+  // Let the user know we're doing something.
+  message('info', 'Working…')
+
   return window.fetch(url, options).then((res) => {
-    if (res.ok) return res.json()
+    if (res.ok) {
+      message('success', 'Done.')
+      return res.json()
+    }
     message('error', res.statusText)
     throw new Error(res.statusText)
   })

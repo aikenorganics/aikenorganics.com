@@ -1,7 +1,7 @@
 import React from 'react'
 import Row from './product-row'
 
-export default function ({grower, products}) {
+export default function ({grower, products, update}) {
   return <div className='row'>
     <div className='col-md-2 text-center'>
       <ul className='nav nav-pills nav-stacked hidden-print'>
@@ -41,7 +41,7 @@ export default function ({grower, products}) {
         </thead>
         <tbody>
           {products.map(product => (
-            <Row product={product} key={product.id}/>
+            <Row product={product} key={product.id} update={update}/>
           ))}
         </tbody>
       </table>
