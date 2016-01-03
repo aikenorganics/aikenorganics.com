@@ -187,6 +187,10 @@ declare
   product int[];
 begin
 
+  if not exists(select id from locations where id = $2 and active = true) then
+    raise 'location must be active';
+  end if;
+
   update orders set location_id = $2
   where user_id = $1 and status = 'open'
   returning id into oid;
@@ -820,6 +824,7 @@ COPY growers (id, created_at, updated_at, name, email, url, description, locatio
 COPY locations (id, created_at, updated_at, name, active) FROM stdin;
 1	2015-10-13 21:21:45.685592-04	2015-10-13 21:21:45.685592-04	Aiken Organics	t
 2	2015-10-13 21:21:45.685592-04	2015-10-13 21:21:45.685592-04	Three Runs Plantation	t
+3	2016-01-03 07:40:56.827752-05	2016-01-03 07:40:56.827752-05	Four Runs Plantation [Inactive]	f
 \.
 
 
@@ -827,7 +832,7 @@ COPY locations (id, created_at, updated_at, name, active) FROM stdin;
 -- Name: locations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('locations_id_seq', 2, true);
+SELECT pg_catalog.setval('locations_id_seq', 3, true);
 
 
 --
