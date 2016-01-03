@@ -36,9 +36,9 @@ router.post('/', function (req, res) {
 
 // Update
 router.post('/:location_id', function (req, res) {
-  req.location.update(req.permit('name')).then(function () {
+  req.location.update(req.permit('name', 'active')).then(function () {
     res.flash('success', 'Saved')
-    res.redirect('/admin/locations')
+    res.redirect(req.body.return_to || '/admin/locations')
   })
 })
 

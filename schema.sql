@@ -450,7 +450,8 @@ CREATE TABLE locations (
     id integer NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    name character varying(255) DEFAULT ''::character varying NOT NULL
+    name character varying(255) DEFAULT ''::character varying NOT NULL,
+    active boolean DEFAULT true NOT NULL
 );
 
 
@@ -816,9 +817,9 @@ COPY growers (id, created_at, updated_at, name, email, url, description, locatio
 -- Data for Name: locations; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY locations (id, created_at, updated_at, name) FROM stdin;
-1	2015-10-13 21:21:45.685592-04	2015-10-13 21:21:45.685592-04	Aiken Organics
-2	2015-10-13 21:21:45.685592-04	2015-10-13 21:21:45.685592-04	Three Runs Plantation
+COPY locations (id, created_at, updated_at, name, active) FROM stdin;
+1	2015-10-13 21:21:45.685592-04	2015-10-13 21:21:45.685592-04	Aiken Organics	t
+2	2015-10-13 21:21:45.685592-04	2015-10-13 21:21:45.685592-04	Three Runs Plantation	t
 \.
 
 

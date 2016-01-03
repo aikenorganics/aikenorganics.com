@@ -12,6 +12,7 @@ class Location extends Model {
     return [
       'id',
       'name',
+      'active',
       'created_at',
       'updated_at'
     ]
@@ -23,6 +24,14 @@ class Location extends Model {
 
   set name (value) {
     this.data.set('name', value || '')
+  }
+
+  get active () {
+    return this.data.get('active') || false
+  }
+
+  set active (value) {
+    this.data.set('active', value || false)
   }
 
 }

@@ -13,6 +13,7 @@
         <th></th>
         <th>Name</th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -20,6 +21,21 @@
         <tr>
           <td><a class='btn btn-default btn-xs' href='/admin/locations/<%= location.id %>/edit'>Edit</a></td>
           <td><%= location.name %></td>
+          <td>
+            <form class='form-inline' method='POST' action='/admin/locations/<%= location.id %>'>
+              <input type='hidden' name='return_to' value='<%= req.originalUrl %>'>
+              <div class='btn-group'>
+                <label class='btn btn-xs <%= location.active ? 'btn-primary' : 'btn-default' %>'>
+                  <input type='radio' name='active' value='1' <% if (location.active) { %>checked<% } %> onclick='this.form.submit()'>
+                  Active
+                </label>
+                <label class='btn btn-xs <%= !location.active ? 'btn-danger' : 'btn-default' %>'>
+                  <input type='radio' name='active' value='0' <% if (!location.active) { %>checked<% } %> onclick='this.form.submit()'>
+                  Inactive
+                </label>
+              </div>
+            </form>
+          </td>
           <td>
             <form method='POST' class='form-inline' action='/admin/locations/<%= location.id %>/delete'>
               <input type='hidden' name='return_to' value='<%= req.originalUrl %>'>

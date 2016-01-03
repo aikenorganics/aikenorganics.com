@@ -18,7 +18,7 @@ router.get('/current', function (req, res) {
       .include('location', {productOrders: 'product'})
       .where({status: 'open', user_id: req.user.id})
       .find(),
-    db.Location.order('name').all()
+    db.Location.where({active: true}).order('name').all()
   ]).then(function (results) {
     res.render('orders/current', {
       order: results[0],

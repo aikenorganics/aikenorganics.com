@@ -16,7 +16,7 @@ router.use(function (req, res, next) {
 router.get('/', function (req, res) {
   Promise.all([
     db.Product.include('grower').where({id: req.cart.ids}).order('name').all(),
-    db.Location.order('name').all(),
+    db.Location.where({active: true}).order('name').all(),
     db.Order.where({status: 'open', user_id: req.user.id}).find()
   ]).then(function (results) {
     res.render('cart/index', {
