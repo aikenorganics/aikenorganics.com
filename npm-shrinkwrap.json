@@ -4345,6 +4345,11 @@
         }
       }
     },
+    "redux": {
+      "version": "3.0.5",
+      "from": "redux@latest",
+      "resolved": "https://registry.npmjs.org/redux/-/redux-3.0.5.tgz"
+    },
     "regenerate": {
       "version": "1.2.1",
       "from": "regenerate@>=1.2.1 <2.0.0",
