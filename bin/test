@@ -6,5 +6,10 @@
 # Reset
 ./bin/reset
 
-# App Tests
+# Server Tests
 tape test/index.js
+
+# Client Tests
+mkdir -p public/js
+browserify -t babelify test/client/index.js > public/js/test.js
+karma start

@@ -3,12 +3,12 @@ import React from 'react'
 import {render} from 'react-dom'
 import {createStore} from 'redux'
 import json from '../json'
-import reducers from '../reducers'
+import reducer from '../reducers'
 
 import Products from '../views/growers/products'
 
 const state = JSON.parse(document.getElementById('state').innerHTML)
-const store = createStore(reducers, state)
+const store = createStore(reducer, state)
 
 const update = (product, values) => {
   return json(`/products/${product.id}`, {method: 'POST', body: values})
