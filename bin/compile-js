@@ -2,6 +2,4 @@
 
 mkdir -p public/js
 
-browserify \
-  -t [ babelify --presets [ es2015 react ] ] \
-  client/index.js | uglifyjs > public/js/app.js
+browserify -t [ babelify ] client/index.js | uglifyjs > public/js/app.js

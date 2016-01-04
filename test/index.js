@@ -1,9 +1,6 @@
 'use strict'
 
-require('babel-register')({
-  only: /client/,
-  presets: ['es2015', 'react']
-})
+require('babel-register')({only: /client/})
 
 const test = require('tape')
 const db = require('../db')

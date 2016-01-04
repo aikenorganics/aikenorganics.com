@@ -1,5 +1,2 @@
-require('babel-register')({
-  only: /client/,
-  presets: ['es2015', 'react']
-})
+require('babel-register')({only: /client/})
 require('./app').listen(process.env.PORT)
