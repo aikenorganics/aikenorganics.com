@@ -1,11 +1,11 @@
 import React from 'react'
+import {updateProduct} from '../../actions'
 
 export default class ProductRow extends React.Component {
 
   static propTypes () {
     return {
-      product: React.PropTypes.object,
-      update: React.PropTypes.func
+      product: React.PropTypes.object
     }
   }
 
@@ -13,14 +13,13 @@ export default class ProductRow extends React.Component {
     super(props)
     this.state = {
       pending: false,
-      supply: this.props.product.supply,
-      active: this.props.product.active
+      supply: this.props.product.supply
     }
   }
 
   handleChange (e) {
     if (this.timer) clearTimeout(this.timer)
-    this.timer = setTimeout(() => { this.saveSupply() }, 2000)
+    this.timer = setTimeout(() => this.saveSupply(), 2000)
     this.setState({
       pending: true,
       supply: e.target.value
@@ -43,19 +42,20 @@ export default class ProductRow extends React.Component {
   }
 
   toggleActive (active) {
-    this.setState({active})
     this.save({active})
   }
 
   save (values) {
-    this.props.update(this.props.product, values)
+    updateProduct(this.props.product.id, values)
   }
 
   render () {
+    const {id, active, name} = this.props.product
+
     return <tr>
       <td>
-        <a href={`/products/${this.props.product.id}`}>
-          {this.props.product.name}
+        <a href={`/products/${id}`}>
+          {name}
         </a>
       </td>
       <td>
@@ -68,12 +68,12 @@ export default class ProductRow extends React.Component {
       <td>
         <div className='btn-group'>
           <button type='button'
-            className={`btn ${this.state.active ? 'btn-primary' : 'btn-default'}`}
+            className={`btn ${active ? 'btn-primary' : 'btn-default'}`}
             onClick={this.toggleActive.bind(this, true)}>
             Active
           </button>
           <button type='button'
-            className={`btn ${this.state.active ? 'btn-default' : 'btn-danger'}`}
+            className={`btn ${active ? 'btn-default' : 'btn-danger'}`}
             onClick={this.toggleActive.bind(this, false)}>
             Inactive
           </button>
@@ -83,4 +83,3 @@ export default class ProductRow extends React.Component {
   }
 
 }
-

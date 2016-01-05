@@ -1,11 +1,16 @@
+import path from './path'
+import products from './products'
+import Component from './component'
+import {combineReducers} from 'redux'
 
-export default (state, action) => {
-  const {type, Component} = action
+const pass = (state = null) => state
 
-  switch (type) {
-    case 'NAVIGATE':
-      return Object.assign({}, state, {Component})
-    default:
-      return state
-  }
-}
+export default combineReducers({
+  cart: pass,
+  Component,
+  grower: pass,
+  market: pass,
+  path,
+  products,
+  user: pass
+})

@@ -1,35 +1,27 @@
 import page from 'page'
 import React from 'react'
 import {render} from 'react-dom'
-import {createStore} from 'redux'
-import json from '../json'
-import reducer from '../reducers'
+import store from '../store'
+import {changePath} from '../actions'
 
 import Products from '../views/growers/products'
 
-const state = JSON.parse(document.getElementById('state').innerHTML)
-const store = createStore(reducer, state)
+// The element to render components into.
+const root = document.getElementById('root')
 
-const update = (product, values) => {
-  return json(`/products/${product.id}`, {method: 'POST', body: values})
+// A component route.
+const route = (path, Component) => {
+  page(path, (c) => changePath(c.path, Component))
 }
 
-const root = document.getElementById('root')
+// Render the component when the store is updated.
 store.subscribe(() => {
   const state = store.getState()
   const {Component} = state
-  render(<Component state={state} actions={{update}}/>, root)
+  render(<Component state={state}/>, root)
 })
-
-const route = (path, Component) => {
-  page(path, () => {
-    store.dispatch({
-      type: 'NAVIGATE',
-      Component: Products
-    })
-  })
-}
 
 route('/growers/:id/products', Products)
 
+// Kick the tires.
 page({click: false, popstate: false})

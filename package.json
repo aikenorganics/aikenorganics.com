@@ -46,6 +46,7 @@
     "browserify": "12.0.1",
     "cssnano": "3.4.0",
     "es6-promise": "3.0.2",
+    "isomorphic-fetch": "2.2.0",
     "jquery": "2.1.4",
     "marked": "0.3.5",
     "moment": "2.10.6",
@@ -59,11 +60,11 @@
     "react": "0.14.5",
     "react-dom": "0.14.5",
     "redux": "3.0.5",
-    "uglify-js": "2.6.1",
-    "whatwg-fetch": "0.10.1"
+    "uglify-js": "2.6.1"
   },
   "devDependencies": {
-    "karma": "0.13.16",
+    "deep-freeze": "0.0.1",
+    "karma": "0.13.18",
     "karma-chrome-launcher": "0.2.2",
     "karma-tap": "1.0.3",
     "standard": "5.4.1",

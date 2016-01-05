@@ -1,5 +1,5 @@
 import 'es6-promise'
-import 'whatwg-fetch'
+import 'isomorphic-fetch'
 import message from './message'
 
 export default (url, options) => {

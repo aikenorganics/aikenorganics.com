@@ -11,7 +11,6 @@ module.exports = (req, res, next) => {
       return render.call(res, view, options, fn)
     }
     const html = renderToString(React.createElement(view, {
-      actions: {},
       state: Object.assign(req.state, options)
     }))
     return render.call(res, 'component', {html: html})

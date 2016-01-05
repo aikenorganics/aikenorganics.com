@@ -2,7 +2,7 @@ import React from 'react'
 import App from '../app'
 import Row from './product-row'
 
-export default ({state, actions: {update}}) => {
+export default ({state}) => {
   const {grower, products} = state
 
   return <App state={state}>
@@ -45,7 +45,7 @@ export default ({state, actions: {update}}) => {
           </thead>
           <tbody>
             {products.map(product => (
-              <Row product={product} key={product.id} update={update}/>
+              <Row product={product} key={product.id}/>
             ))}
           </tbody>
         </table>

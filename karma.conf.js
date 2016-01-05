@@ -5,6 +5,7 @@ module.exports = (config) => {
     browsers: ['Chrome'],
     files: ['public/js/test.js'],
     frameworks: ['tap'],
+    reporters: ['dots'],
     singleRun: true
   })
 }
