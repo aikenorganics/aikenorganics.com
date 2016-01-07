@@ -1,7 +1,7 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import reducer from '../../../client/reducers'
 import {UPDATE_PRODUCT} from '../../../client/actions'
+import reducer from '../../../client/reducers'
 
 test('update product - activate', (t) => {
   const state = freeze({

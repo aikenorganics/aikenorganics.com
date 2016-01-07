@@ -1,7 +1,7 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import reducer from '../../../client/reducers'
 import {CHANGE_PATH} from '../../../client/actions'
+import reducer from '../../../client/reducers'
 
 test('change path', (t) => {
   const state = freeze({path: null})
