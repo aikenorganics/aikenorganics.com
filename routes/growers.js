@@ -5,8 +5,6 @@ const upload = require('multer')({dest: 'tmp/uploads'})
 const ozymandias = require('ozymandias')
 const router = module.exports = ozymandias.Router()
 
-const Products = require('../client/views/growers/products').default
-
 // Find
 router.find('grower', () => db.Grower)
 
@@ -122,7 +120,7 @@ router.get('/:grower_id/products', (req, res) => {
 
   db.Product.where({grower_id: req.grower.id}).order('name').all()
   .then((products) => {
-    res.render(Products, {
+    res.react({
       grower: req.grower,
       products: products
     })
