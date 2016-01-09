@@ -2464,9 +2464,9 @@
       "resolved": "https://registry.npmjs.org/fast-levenshtein/-/fast-levenshtein-1.0.7.tgz"
     },
     "fbjs": {
-      "version": "0.6.0",
-      "from": "fbjs@>=0.6.0 <0.7.0",
-      "resolved": "https://registry.npmjs.org/fbjs/-/fbjs-0.6.0.tgz",
+      "version": "0.6.1",
+      "from": "fbjs@>=0.6.1 <0.7.0",
+      "resolved": "https://registry.npmjs.org/fbjs/-/fbjs-0.6.1.tgz",
       "dependencies": {
         "whatwg-fetch": {
           "version": "0.9.0",
@@ -3501,9 +3501,9 @@
       "resolved": "https://registry.npmjs.org/module-deps/-/module-deps-4.0.2.tgz"
     },
     "moment": {
-      "version": "2.10.6",
-      "from": "moment@2.10.6",
-      "resolved": "https://registry.npmjs.org/moment/-/moment-2.10.6.tgz"
+      "version": "2.11.1",
+      "from": "moment@latest",
+      "resolved": "https://registry.npmjs.org/moment/-/moment-2.11.1.tgz"
     },
     "mout": {
       "version": "0.11.1",
@@ -4650,14 +4650,14 @@
       }
     },
     "react": {
-      "version": "0.14.5",
+      "version": "0.14.6",
       "from": "react@latest",
-      "resolved": "https://registry.npmjs.org/react/-/react-0.14.5.tgz"
+      "resolved": "https://registry.npmjs.org/react/-/react-0.14.6.tgz"
     },
     "react-dom": {
-      "version": "0.14.5",
+      "version": "0.14.6",
       "from": "react-dom@latest",
-      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-0.14.5.tgz"
+      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-0.14.6.tgz"
     },
     "read-file-stdin": {
       "version": "0.2.0",
