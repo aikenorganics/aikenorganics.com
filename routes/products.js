@@ -12,7 +12,7 @@ router.find('product', () => db.Product.include('grower', 'category'))
 router.param('product_id', require('../mid/products/authorize'))
 
 // Index
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
   let products = db.Product
     .include('grower').join('grower')
     .where({active: true, grower: {active: true}})
@@ -42,7 +42,7 @@ router.get('/', function (req, res) {
       Promise.all([
         products.order('name').paginate(page, 30),
         db.Category.order('position').all()
-      ]).then(function (results) {
+      ]).then((results) => {
         res.render('products/index', {
           products: results[0],
           categories: results[1]
@@ -58,7 +58,7 @@ router.get('/', function (req, res) {
 })
 
 // Show
-router.get('/:product_id', function (req, res) {
+router.get('/:product_id', (req, res) => {
   res.render('products/show')
 })
 
@@ -68,18 +68,18 @@ router.get('/:product_id/edit', editProduct)
 function editProduct (req, res) {
   if (!req.canEdit) return res.status(401).render('401')
 
-  db.Category.order('position').all().then(function (categories) {
+  db.Category.order('position').all().then((categories) => {
     res.render('products/edit', {categories: categories})
   }).catch(res.error)
 }
 
 // Update
-router.post('/:product_id', function (req, res) {
+router.post('/:product_id', (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
 
   req.product.update(req.permit(
     'active', 'category_id', 'cost', 'description', 'name', 'supply', 'unit'
-  )).then(function () {
+  )).then(() => {
     res.format({
       html: () => {
         res.flash('success', 'Saved')
@@ -89,7 +89,7 @@ router.post('/:product_id', function (req, res) {
         res.json({})
       }
     })
-  }).catch(function (e) {
+  }).catch((e) => {
     if (e.message !== 'invalid') throw e
     res.status(422)
     res.locals.errors = req.product.errors
@@ -98,7 +98,7 @@ router.post('/:product_id', function (req, res) {
 })
 
 // Image
-router.post('/:product_id/image', upload.single('image'), function (req, res) {
+router.post('/:product_id/image', upload.single('image'), (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
   req.product.uploadImage(req.file).then(() => {
     res.flash('Image Uploaded.')
