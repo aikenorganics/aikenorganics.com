@@ -20,7 +20,7 @@
         <%= product.unit %>
         &bull;
         <% if (product.active && product.grower.active) { %>
-          <%= product.available() %> Available
+          <%= product.available %> Available
         <% } else { %>
           Unavailable
         <% } %>

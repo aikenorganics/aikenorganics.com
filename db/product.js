@@ -76,7 +76,7 @@ class Product extends Model {
     }
   }
 
-  available () {
+  get available () {
     return Math.max(this.supply - this.reserved, 0)
   }
 

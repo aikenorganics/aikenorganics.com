@@ -18,12 +18,12 @@
             <%= cart.cart[product.id] %> in your cart, but
             <% if (!product.active || !product.grower.active) { %>
               it is not currently offered by the grower.
-            <% } else if (product.available() === 0) { %>
+            <% } else if (product.available === 0) { %>
               none are available.
-            <% } else if (product.available() === 1) { %>
+            <% } else if (product.available === 1) { %>
               only one is available.
             <% } else { %>
-              only <%= product.available() %> are available.
+              only <%= product.available %> are available.
             <% } %>
           </li>
         <% }) %>

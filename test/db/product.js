@@ -8,9 +8,9 @@ test('Product#available subtracts reserved from supply', function (t) {
     supply: 100,
     reserved: 15
   })
-  t.equal(product.available(), 85)
+  t.equal(product.available, 85)
   product.reserved = 112
-  t.equal(product.available(), 0)
+  t.equal(product.available, 0)
   t.end()
 })
 

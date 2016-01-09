@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
       order: results[2],
       unavailable: results[0].filter((product) => {
         return !product.active || !product.grower.active ||
-          product.available() < req.cart.cart[product.id]
+          product.available < req.cart.cart[product.id]
       })
     })
   }).catch(res.error)
@@ -64,8 +64,8 @@ router.post('/', (req, res) => {
       res.json({
         cartSize: req.cart.size,
         product_id: req.product.id,
-        quantity: Math.min(quantity, req.product.available()),
-        available: req.product.available(),
+        quantity: Math.min(quantity, req.product.available),
+        available: req.product.available,
         message: 'Cart updated.'
       })
     }

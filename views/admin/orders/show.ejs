@@ -42,7 +42,7 @@
           <td>
             <form method='POST' action='/admin/product-orders/<%= productOrder.id %>'>
               <select class='form-control' name='quantity' onchange='this.form.submit()'>
-                <% for (var i = 1; i <= productOrder.quantity + productOrder.product.available(); i++) { %>
+                <% for (var i = 1; i <= productOrder.quantity + productOrder.product.available; i++) { %>
                   <option value='<%= i %>' <% if (productOrder.quantity === i) { %>selected<% } %>>
                     <%= i %>
                   </option>
