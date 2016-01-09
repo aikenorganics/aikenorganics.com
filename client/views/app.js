@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default ({state: {cart, market, user, path}, children}) => {
+export default ({cart, children, market, user, path}) => {
   const cartSize = Object.keys(cart).reduce((total, id) => total + cart[id], 0)
 
   return <main className='container'>

@@ -7,7 +7,7 @@ import Routes from '../routes'
 const root = document.getElementById('root')
 
 // Update the DOM
-const update = () => render(<Routes state={store.getState()}/>, root)
+const update = () => render(<Routes {...store.getState()}/>, root)
 
 // Render when the store is updated.
 store.subscribe(update)

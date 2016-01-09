@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default ({state: {path}, children}) => {
+export default ({path, children}) => {
   return <main className='container'>
     <ul className='nav nav-tabs subnav hidden-print'>
       <li className={/^\/admin\/users/.test(path) ? 'active' : ''}>

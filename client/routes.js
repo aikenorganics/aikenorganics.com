@@ -10,7 +10,7 @@ import Locations from './views/admin/locations/index'
 import EditLocation from './views/admin/locations/edit'
 import NewLocation from './views/admin/locations/new'
 
-export default ({state}) => {
+export default (state) => {
   return <Router state={state}>
     <Route path='/admin/' Component={Admin}>
       <Route path='locations' Component={Locations}/>

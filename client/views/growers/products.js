@@ -1,9 +1,7 @@
 import React from 'react'
 import Row from './product-row'
 
-export default ({state}) => {
-  const {grower, products} = state
-
+export default ({grower, products}) => {
   return <div className='row'>
     <div className='col-md-2 text-center'>
       <ul className='nav nav-pills nav-stacked hidden-print'>

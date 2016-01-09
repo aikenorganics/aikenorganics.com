@@ -1,7 +1,7 @@
 import React from 'react'
 import Row from './row'
 
-export default ({state: {locations}}) => {
+export default ({locations}) => {
   return <div>
     <h1>
       Locations

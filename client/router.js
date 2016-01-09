@@ -33,13 +33,13 @@ export default class Router extends Component {
     if (children) {
       for (let child of Children.toArray(children)) {
         const match = this.match(child, prefix)
-        if (match) return <Component state={state}>{match}</Component>
+        if (match) return <Component {...state}>{match}</Component>
       }
       return null
     }
 
     if (toRegExp(prefix).test(state.path)) {
-      return <Component state={state}/>
+      return <Component {...state}/>
     }
 
     return null

@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "./bin/build",
-    "start": "heroku local",
+    "start": "./bin/compile-js && env $(cat .env | xargs) node index.js",
     "test": "NODE_ENV=test heroku local:run --env=.testenv ./bin/test",
     "postinstall": "./bin/postinstall"
   },
