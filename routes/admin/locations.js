@@ -9,43 +9,34 @@ router.find('location', () => db.Location)
 
 // Index
 router.get('/', function (req, res) {
-  db.Location.order('name').all().then(function (locations) {
-    res.render('admin/locations/index', {
-      locations: locations
-    })
-  })
+  db.Location.order('name').all().then((locations) => {
+    res.react({locations: locations})
+  }).catch(res.error)
 })
 
 // New
-router.get('/new', function (req, res) {
-  res.render('admin/locations/new')
-})
+router.get('/new', (req, res) => res.react())
 
 // Edit
-router.get('/:location_id/edit', function (req, res) {
-  res.render('admin/locations/edit')
+router.get('/:location_id/edit', (req, res) => {
+  res.react({locations: [req.location]})
 })
 
 // Create
-router.post('/', function (req, res) {
-  db.Location.create(req.permit('name')).then(function () {
-    res.flash('success', 'Created')
-    res.redirect('/admin/locations')
-  })
+router.post('/', (req, res) => {
+  db.Location.create(req.permit('name')).then(() => {
+    res.json(true)
+  }).catch(res.error)
 })
 
 // Update
-router.post('/:location_id', function (req, res) {
-  req.location.update(req.permit('name', 'active')).then(function () {
-    res.flash('success', 'Saved')
-    res.redirect(req.body.return_to || '/admin/locations')
-  })
+router.post('/:location_id', (req, res) => {
+  req.location.update(req.permit('name', 'active')).then(() => {
+    res.json(true)
+  }).catch(res.error)
 })
 
 // Destroy
-router.post('/:location_id/delete', function (req, res) {
-  req.location.destroy().then(function () {
-    res.flash('success', 'Deleted.')
-    res.redirect(req.body.return_to)
-  })
+router.post('/:location_id/delete', (req, res) => {
+  req.location.destroy().then(() => res.json(true)).catch(res.error)
 })

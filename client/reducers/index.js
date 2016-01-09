@@ -1,3 +1,4 @@
+import locations from './locations'
 import path from './path'
 import products from './products'
 import Component from './component'
@@ -9,6 +10,7 @@ export default combineReducers({
   cart: pass,
   Component,
   grower: pass,
+  locations,
   market: pass,
   path,
   products,

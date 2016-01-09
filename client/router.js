@@ -1,4 +1,4 @@
-import React, {Children, Component} from 'react'
+import React, {Children, Component, PropTypes} from 'react'
 
 const optionalParam = /\((.*?)\)/g
 const namedParam = /(\(\?)?:\w+/g
@@ -16,15 +16,43 @@ const toRegExp = (path) => {
 
 export class Route extends Component { }
 
-export default ({state, children}) => {
-  const {path} = state
+export default class Router extends Component {
 
-  children = Children.toArray(children)
-
-  for (let i = 0; i < children.length; i++) {
-    let child = children[i]
-    if (toRegExp(child.props.path).test(path)) {
-      return <child.props.Component state={state}/>
+  static propTypes () {
+    return {
+      state: PropTypes.object,
+      children: PropTypes.object
     }
+  }
+
+  match (route, prefix = '') {
+    const {state} = this.props
+    const {children, Component, path} = route.props
+    prefix = prefix + path
+
+    if (children) {
+      for (let child of Children.toArray(children)) {
+        const match = this.match(child, prefix)
+        if (match) return <Component state={state}>{match}</Component>
+      }
+      return null
+    }
+
+    if (toRegExp(prefix).test(state.path)) {
+      return <Component state={state}/>
+    }
+
+    return null
+  }
+
+  render () {
+    const {children} = this.props
+
+    for (let child of Children.toArray(children)) {
+      const match = this.match(child)
+      if (match) return match
+    }
+
+    return ''
   }
 }
