@@ -2,16 +2,10 @@ import json from '../json'
 import store from '../store'
 
 // Action Constants
-export const CHANGE_PATH = 'CHANGE_PATH'
 export const CREATE_LOCATION = 'CREATE_LOCATION'
 export const REMOVE_LOCATION = 'REMOVE_LOCATION'
 export const UPDATE_LOCATION = 'UPDATE_LOCATION'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
-
-// Dispatchers
-export const changePath = (path, Component) => {
-  store.dispatch({type: CHANGE_PATH, path, Component})
-}
 
 // Products
 
