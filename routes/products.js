@@ -1,9 +1,8 @@
 'use strict'
 
-let db = require('../db')
-let upload = require('multer')({dest: 'tmp/uploads'})
-let ozymandias = require('ozymandias')
-let router = module.exports = ozymandias.Router()
+const db = require('../db')
+const upload = require('multer')({dest: 'tmp/uploads'})
+const router = module.exports = require('ozymandias').Router()
 
 // Find
 router.find('product', () => db.Product.include('grower', 'category'))
@@ -35,7 +34,7 @@ router.get('/', (req, res) => {
   }
 
   // Pagination
-  let page = res.locals.page = +(req.query.page || 1)
+  const page = res.locals.page = +(req.query.page || 1)
 
   res.format({
     html: () => {
