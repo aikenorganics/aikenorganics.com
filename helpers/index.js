@@ -1,14 +1,12 @@
 'use strict'
 
-let marked = require('marked')
-let moment = require('moment')
+const marked = require('marked')
+const moment = require('moment')
+const assets = require('ozymandias/assets')
 
 // Assets
 
-let assetPath = exports.assetPath = function (path) {
-  if (process.env.NODE_ENV !== 'production') return `/${path}`
-  return require('../assets.json')[path]
-}
+exports.assetPath = assets.path
 
 // Markdown
 
@@ -26,11 +24,10 @@ const IMAGES = [
   'img/veggies-in-boxes-square.jpg',
   'img/food-basket-square.jpg',
   'img/pen-and-pad-square.jpg'
-].map(assetPath)
+].map(assets.path)
 
 exports.imageUrl = function (model, size) {
   if (!model.image_updated_at) return IMAGES[model.id % IMAGES.length]
   let tableName = model.tableName
-
   return `/assets/${tableName}/${model.id}/image/${size}.${model.image_ext}?${+model.image_updated_at}`
 }
