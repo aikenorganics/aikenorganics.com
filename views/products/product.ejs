@@ -9,7 +9,7 @@
       <div class='media-left media-middle'>
         <div class='image-wrapper'>
           <a href='/products/<%= product.id %>'>
-            <img class='img-rounded' src='<%= imageUrl(product, 'small') %>' style='max-width: 100px; max-height: 100px;'>
+            <img class='img-rounded' src='<%= product.imagePath('small') %>' style='max-width: 100px; max-height: 100px;'>
           </a>
         </div>
       </div>

@@ -28,7 +28,7 @@
         <%= grower.location %>
       <% } %>
       <hr style='clear: both'>
-      <img class='img-rounded pull-right' src='<%= imageUrl(grower, 'medium') %>'>
+      <img class='img-rounded pull-right' src='<%= grower.imagePath('medium') %>'>
       <%- marked(grower.description) %>
       <h2 style='clear: both'>
         Products

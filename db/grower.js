@@ -74,7 +74,13 @@ images.hasImage(Grower, {
   sizes: {
     small: 100,
     medium: 250
-  }
+  },
+  defaults: [
+    'img/vegetables-square.jpg',
+    'img/veggies-in-boxes-square.jpg',
+    'img/food-basket-square.jpg',
+    'img/pen-and-pad-square.jpg'
+  ]
 })
 
 module.exports = Grower

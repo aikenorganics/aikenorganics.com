@@ -3,7 +3,7 @@
   <div class='row'>
     <div class='col-md-3'>
       <p class='text-center'>
-        <img class='img-rounded' src='<%= imageUrl(product, 'medium') %>'>
+        <img class='img-rounded' src='<%= product.imagePath('medium') %>'>
       </p>
       <p>
         <form method='POST' action='/products/<%= product.id %>/image' enctype='multipart/form-data'>
