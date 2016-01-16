@@ -21,7 +21,7 @@ router.get('/', function (req, res) {
   }
 
   users.order('email').all().then(function (users) {
-    res.render('admin/users/index', {users: users})
+    res.react({users: users})
   }).catch(res.error)
 })
 

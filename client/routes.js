@@ -14,12 +14,15 @@ import Locations from './views/admin/locations/index'
 import EditLocation from './views/admin/locations/edit'
 import NewLocation from './views/admin/locations/new'
 
+import Users from './views/admin/users/index'
+
 export default (state) => {
   return <Router state={state}>
     <Route path='/admin/' Component={Admin}>
       <Route path='locations' Component={Locations}/>
       <Route path='locations/:location_id/edit' Component={EditLocation}/>
       <Route path='locations/new' Component={NewLocation}/>
+      <Route path='users' Component={Users}/>
     </Route>
     <Route path='/' Component={App}>
       <Route path='growers/:grower_id' Component={Grower}/>

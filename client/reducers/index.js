@@ -20,5 +20,6 @@ export default combineReducers({
   products,
   search: pass,
   url: pass,
-  user: pass
+  user: pass,
+  users: pass
 })
