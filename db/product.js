@@ -88,6 +88,16 @@ class Product extends Model {
     return +this.cost * this.reserved
   }
 
+  toJSON () {
+    return Object.assign(super.toJSON(), {
+      available: this.available,
+      category: this.category,
+      grower: this.grower,
+      smallImage: this.smallImage,
+      mediumImage: this.mediumImage
+    })
+  }
+
 }
 
 images.hasImage(Product, {

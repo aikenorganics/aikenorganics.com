@@ -43,7 +43,10 @@ router.get('/:grower_id', (req, res) => {
   products.order('name').all().then((products) => {
     // Stupid, but necessary.
     for (let product of products) product.grower = req.grower
-    res.render('growers/show', {products: products})
+    res.react({
+      growers: [req.grower],
+      products: products
+    })
   }).catch(res.error)
 })
 

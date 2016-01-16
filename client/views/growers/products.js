@@ -1,31 +1,11 @@
 import React from 'react'
+import Nav from './nav'
 import Row from './product-row'
 
-export default ({grower, products}) => {
+export default ({canEdit, grower, path, products}) => {
   return <div className='row'>
     <div className='col-md-2 text-center'>
-      <ul className='nav nav-pills nav-stacked hidden-print'>
-        <li>
-          <a href={`/growers/${grower.id}`}>
-            Info
-          </a>
-        </li>
-        <li>
-          <a href={`/growers/${grower.id}/edit`}>
-            Edit
-          </a>
-        </li>
-        <li>
-          <a href={`/growers/${grower.id}/orders`}>
-            Orders
-          </a>
-        </li>
-        <li className='active'>
-          <a href={`/growers/${grower.id}/products`}>
-            Products
-          </a>
-        </li>
-      </ul>
+      <Nav grower={grower} path={path} canEdit={canEdit}/>
     </div>
     <div className='col-md-10'>
       <h1>{grower.name}</h1>

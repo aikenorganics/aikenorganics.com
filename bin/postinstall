@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 if [ "$NODE_ENV" = "production" ]; then
+  ozy fingerprint
   ./bin/compile-js
   ./bin/compile-css
-  ozy fingerprint
 fi

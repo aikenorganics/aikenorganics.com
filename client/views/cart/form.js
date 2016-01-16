@@ -1,89 +1,77 @@
-import $ from 'jquery'
-import React from 'react'
-import json from '../../json'
+import React, {Component, PropTypes} from 'react'
+import {updateCart} from '../../actions'
 
-export default class CartForm extends React.Component {
+export default class CartForm extends Component {
 
   static propTypes () {
     return {
-      available: React.PropTypes.number,
-      product_id: React.PropTypes.number,
-      quantity: React.PropTypes.number
+      cart: PropTypes.object,
+      product: PropTypes.object
     }
   }
 
   constructor (props) {
     super(props)
-    this.state = {
-      quantity: this.props.quantity
-    }
+    this.state = {working: false}
+  }
+
+  get quantity () {
+    const {product: {id}, cart} = this.props
+    return cart[id] || 0
   }
 
   canIncrement () {
-    return this.state.quantity < this.props.available
+    const {product: {available}} = this.props
+    return this.quantity < available
   }
 
   increment (e) {
-    e.preventDefault()
-    this.save(this.state.quantity + 1)
+    this.save(this.quantity + 1)
   }
 
   decrement (e) {
-    e.preventDefault()
-    this.save(this.state.quantity - 1)
-  }
-
-  submit (e) {
-    e.preventDefault()
-    e.stopPropagation()
-    this.save(this.state.quantity)
+    this.save(this.quantity - 1)
   }
 
   save (quantity) {
-    json('/cart', {
-      method: 'post',
-      body: {
-        quantity: quantity,
-        product_id: this.props.product_id
-      }
-    }).then((data) => {
-      this.setState({quantity: data.quantity})
-      // TODO: Do this better?
-      $('#cart-size').text(data.cartSize)
-    })
-  }
-
-  add () {
-    return <button type='submit' className='btn btn-primary' onClick={this.increment.bind(this)}>
-      Add to Cart
-    </button>
-  }
-
-  update () {
-    return <div className='form-group'>
-      <div className='input-group'>
-        <div className='input-group-btn'>
-          <button className='btn btn-primary'
-            onClick={this.decrement.bind(this)}>
-            -
-          </button>
-        </div>
-        <span className='form-control'>{this.state.quantity}</span>
-        <div className='input-group-btn'>
-          <button className='btn btn-primary'
-            disabled={!this.canIncrement()}
-            onClick={this.increment.bind(this)}>
-            +
-          </button>
-        </div>
-      </div>
-    </div>
+    const {product: {id}} = this.props
+    this.setState({working: true})
+    updateCart(id, quantity)
+    .then(() => this.setState({working: false}))
+    .catch(() => this.setState({working: false}))
   }
 
   render () {
-    return <form className='form-inline' onSubmit={this.submit.bind(this)}>
-      {this.state.quantity > 0 ? this.update() : this.add()}
-    </form>
+    const {working} = this.state
+
+    return <span className='form-inline'>
+      {this.quantity > 0
+        ? <span className='form-group'>
+          <span className='input-group'>
+            <span className='input-group-btn'>
+              <button type='button' className='btn btn-primary'
+                disabled={working}
+                onClick={() => this.decrement()}>
+                -
+              </button>
+            </span>
+            <span className='form-control'>{this.quantity}</span>
+            <span className='input-group-btn'>
+              <button type='button' className='btn btn-primary'
+                disabled={working || !this.canIncrement()}
+                onClick={() => this.increment()}>
+                +
+              </button>
+            </span>
+          </span>
+        </span>
+        : <button type='button' className='btn btn-primary'
+            disabled={working}
+            onClick={() => this.increment()}>
+          Add to Cart
+        </button>
+      }
+    </span>
   }
 
 }

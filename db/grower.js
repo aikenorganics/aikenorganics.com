@@ -67,6 +67,12 @@ class Grower extends Model {
     this.data.set('description', value || '')
   }
 
+  toJSON () {
+    return Object.assign(super.toJSON(), {
+      mediumImage: this.mediumImage
+    })
+  }
+
 }
 
 images.hasImage(Grower, {

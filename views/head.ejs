@@ -5,4 +5,4 @@
 <link rel='stylesheet' href='<%= assets.path('css/app.css') %>'>
 <link rel='shortcut icon' href='<%= assets.path('favicon.ico') %>'>
 <% include analytics %>
-<%- json('state', req.state) %>
+<%- json('state', locals.state || {}) %>

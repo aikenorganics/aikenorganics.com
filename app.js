@@ -10,8 +10,6 @@ app.locals = require('./helpers')
 // Middleware
 app.use(require('./mid/market'))
 app.use(require('./mid/cart'))
-app.use(require('./mid/url'))
-app.use(require('./mid/state'))
 app.use(require('./mid/react'))
 
 // Routes

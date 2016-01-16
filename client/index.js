@@ -1,8 +1,9 @@
 import './pages'
-import React from 'react'
-import {render} from 'react-dom'
 import message from './message'
-import CartForm from './views/cart/form'
+import marked from 'marked'
+
+// Sanitize markdown by default.
+marked.setOptions({sanitize: true})
 
 // Bootstrap relies on window.jQuery
 const $ = window.jQuery = require('jquery')
@@ -21,10 +22,4 @@ $(document).on('click', '[data-confirm]', (e) => {
 $(document).on('submit', 'form', (e) => {
   $(e.target).find(':button,:submit').prop('disabled', true)
   message('info', 'Working…')
-})
-
-// Render cart forms.
-$('[data-cart]').each((i, el) => {
-  let data = $(el).data('cart')
-  render(<CartForm {...data}/>, el)
 })

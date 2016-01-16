@@ -42,24 +42,26 @@ router.get('/', (req, res) => {
         products.order('name').paginate(page, 30),
         db.Category.order('position').all()
       ]).then((results) => {
-        res.render('products/index', {
-          products: results[0],
-          categories: results[1]
+        const products = results[0]
+        const categories = results[1]
+        res.react({
+          more: products.more,
+          page: page,
+          products: products,
+          categories: categories
         })
       }).catch(res.error)
     },
     json: () => {
       products.order('name').all().then((products) => {
         res.json(products)
-      })
+      }).catch(res.error)
     }
   })
 })
 
 // Show
-router.get('/:product_id', (req, res) => {
-  res.render('products/show')
-})
+router.get('/:product_id', (req, res) => res.react({products: [req.product]}))
 
 // Edit
 router.get('/:product_id/edit', editProduct)
