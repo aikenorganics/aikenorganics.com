@@ -215,9 +215,9 @@
       "resolved": "https://registry.npmjs.org/async-each/-/async-each-0.1.6.tgz"
     },
     "autoprefixer": {
-      "version": "6.2.3",
-      "from": "autoprefixer@6.2.3",
-      "resolved": "https://registry.npmjs.org/autoprefixer/-/autoprefixer-6.2.3.tgz"
+      "version": "6.3.1",
+      "from": "autoprefixer@latest",
+      "resolved": "https://registry.npmjs.org/autoprefixer/-/autoprefixer-6.3.1.tgz"
     },
     "aws-sdk": {
       "version": "2.2.28",
@@ -537,9 +537,9 @@
       "resolved": "https://registry.npmjs.org/babel-preset-react/-/babel-preset-react-6.3.13.tgz"
     },
     "babel-register": {
-      "version": "6.3.13",
-      "from": "babel-register@6.3.13",
-      "resolved": "https://registry.npmjs.org/babel-register/-/babel-register-6.3.13.tgz"
+      "version": "6.4.3",
+      "from": "babel-register@latest",
+      "resolved": "https://registry.npmjs.org/babel-register/-/babel-register-6.4.3.tgz"
     },
     "babel-runtime": {
       "version": "5.8.34",
@@ -592,9 +592,9 @@
       "resolved": "https://registry.npmjs.org/base64-arraybuffer/-/base64-arraybuffer-0.1.2.tgz"
     },
     "base64-js": {
-      "version": "0.0.8",
-      "from": "base64-js@0.0.8",
-      "resolved": "https://registry.npmjs.org/base64-js/-/base64-js-0.0.8.tgz"
+      "version": "1.0.2",
+      "from": "base64-js@>=1.0.2 <2.0.0",
+      "resolved": "https://registry.npmjs.org/base64-js/-/base64-js-1.0.2.tgz"
     },
     "base64id": {
       "version": "0.1.0",
@@ -704,9 +704,9 @@
       "resolved": "https://registry.npmjs.org/browser-resolve/-/browser-resolve-1.11.0.tgz"
     },
     "browserify": {
-      "version": "12.0.2",
-      "from": "browserify@12.0.2",
-      "resolved": "https://registry.npmjs.org/browserify/-/browserify-12.0.2.tgz"
+      "version": "13.0.0",
+      "from": "browserify@latest",
+      "resolved": "https://registry.npmjs.org/browserify/-/browserify-13.0.0.tgz"
     },
     "browserify-aes": {
       "version": "1.0.5",
@@ -739,14 +739,14 @@
       "resolved": "https://registry.npmjs.org/browserify-zlib/-/browserify-zlib-0.1.4.tgz"
     },
     "browserslist": {
-      "version": "1.0.1",
-      "from": "browserslist@>=1.0.1 <1.1.0",
-      "resolved": "https://registry.npmjs.org/browserslist/-/browserslist-1.0.1.tgz"
+      "version": "1.1.1",
+      "from": "browserslist@>=1.1.1 <1.2.0",
+      "resolved": "https://registry.npmjs.org/browserslist/-/browserslist-1.1.1.tgz"
     },
     "buffer": {
-      "version": "3.6.0",
-      "from": "buffer@>=3.4.3 <4.0.0",
-      "resolved": "https://registry.npmjs.org/buffer/-/buffer-3.6.0.tgz",
+      "version": "4.3.0",
+      "from": "buffer@>=4.1.0 <5.0.0",
+      "resolved": "https://registry.npmjs.org/buffer/-/buffer-4.3.0.tgz",
       "dependencies": {
         "isarray": {
           "version": "1.0.0",
@@ -2914,9 +2914,9 @@
       "resolved": "https://registry.npmjs.org/isobject/-/isobject-2.0.0.tgz"
     },
     "isomorphic-fetch": {
-      "version": "2.2.0",
-      "from": "isomorphic-fetch@2.2.0",
-      "resolved": "https://registry.npmjs.org/isomorphic-fetch/-/isomorphic-fetch-2.2.0.tgz"
+      "version": "2.2.1",
+      "from": "isomorphic-fetch@latest",
+      "resolved": "https://registry.npmjs.org/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz"
     },
     "isstream": {
       "version": "0.1.2",
@@ -3691,9 +3691,9 @@
       "resolved": "https://registry.npmjs.org/postcss-calc/-/postcss-calc-5.2.0.tgz"
     },
     "postcss-cli": {
-      "version": "2.3.3",
-      "from": "postcss-cli@2.3.3",
-      "resolved": "https://registry.npmjs.org/postcss-cli/-/postcss-cli-2.3.3.tgz"
+      "version": "2.4.0",
+      "from": "postcss-cli@latest",
+      "resolved": "https://registry.npmjs.org/postcss-cli/-/postcss-cli-2.4.0.tgz"
     },
     "postcss-colormin": {
       "version": "2.1.8",
