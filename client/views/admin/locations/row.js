@@ -1,7 +1,7 @@
 import React from 'react'
-import {updateLocation, removeLocation} from '../../../actions'
+import {updateLocation, destroyLocation} from '../../../actions'
 
-export default ({location}) => {
+export default ({busy, location}) => {
   const {active, id, name} = location
 
   return <tr>
@@ -13,12 +13,12 @@ export default ({location}) => {
     <td>{name}</td>
     <td>
       <div className='btn-group'>
-        <button type='button'
+        <button type='button' disabled={busy}
           className={`btn btn-xs ${active ? 'btn-primary' : 'btn-default'}`}
           onClick={() => updateLocation(id, {active: true})}>
           Active
         </button>
-        <button type='button'
+        <button type='button' disabled={busy}
           className={`btn btn-xs ${!active ? 'btn-danger' : 'btn-default'}`}
           onClick={() => updateLocation(id, {active: false})}>
           Inactive
@@ -26,9 +26,9 @@ export default ({location}) => {
       </div>
     </td>
     <td>
-      <button type='button'
+      <button type='button' disabled={busy}
         className='btn btn-danger btn-xs'
-        onClick={() => { if (window.confirm('Are you sure?')) removeLocation(id) }}>
+        onClick={() => { if (window.confirm('Are you sure?')) destroyLocation(id) }}>
         Delete
       </button>
     </td>

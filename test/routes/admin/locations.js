@@ -55,3 +55,17 @@ test('POST /admin/locations/:id is a 200', (t) => {
     })
   })
 })
+
+test('DELETE /admin/locations/:id is a 200', (t) => {
+  t.signIn('admin@example.com').then(() => {
+    t.agent.delete('/admin/locations/2')
+    .expect(200)
+    .end((e) => {
+      if (e) return t.end(e)
+      db.Location.find(2).then((location) => {
+        t.ok(!location)
+        t.end()
+      })
+    })
+  })
+})

@@ -37,6 +37,6 @@ router.post('/:location_id', (req, res) => {
 })
 
 // Destroy
-router.post('/:location_id/delete', (req, res) => {
+router.delete('/:location_id', (req, res) => {
   req.location.destroy().then(() => res.json(true)).catch(res.error)
 })

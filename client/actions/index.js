@@ -34,13 +34,19 @@ export const updateProduct = (id, values) => {
 // Locations
 
 export const updateLocation = (id, values) => {
-  store.dispatch({type: UPDATE_LOCATION, id, values})
-  return post(`/admin/locations/${id}`, {body: values})
+  busy()
+  return post(`/admin/locations/${id}`, {body: values}).then(() => {
+    store.dispatch({type: UPDATE_LOCATION, id, values})
+    done()
+  })
 }
 
-export const removeLocation = (id) => {
-  store.dispatch({type: REMOVE_LOCATION, id})
-  return post(`/admin/locations/${id}/delete`)
+export const destroyLocation = (id) => {
+  busy()
+  return _delete(`/admin/locations/${id}`).then(() => {
+    store.dispatch({type: REMOVE_LOCATION, id})
+    done()
+  })
 }
 
 export const createLocation = (values) => {

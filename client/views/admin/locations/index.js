@@ -1,10 +1,10 @@
 import React from 'react'
 import Row from './row'
 
-export default ({locations}) => {
+export default ({busy, locations}) => {
   return <div>
     <h1>
-      Locations
+      <span>Locations </span>
       <a className='btn btn-default btn-xs' href='/admin/locations/new'>
         New Location
       </a>
@@ -21,7 +21,7 @@ export default ({locations}) => {
       </thead>
       <tbody>
         {locations.map((location) => {
-          return <Row key={location.id} location={location}/>
+          return <Row busy={busy} key={location.id} location={location}/>
         })}
       </tbody>
     </table>
