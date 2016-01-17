@@ -1,9 +1,4 @@
 #!/bin/bash -e
 
 mkdir -p public/js
-
-if [ "$NODE_ENV" = "production" ]; then
-  browserify client/index.js | uglifyjs > public/js/app.js
-else
-  browserify client/index.js > public/js/app.js
-fi
+browserify client/index.js | uglifyjs > public/js/app.js

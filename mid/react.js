@@ -1,6 +1,6 @@
 'use strict'
 
-const qs = require('qs')
+const qs = require('querystring')
 const React = require('react')
 const parseUrl = require('url').parse
 const renderToString = require('react-dom/server').renderToString

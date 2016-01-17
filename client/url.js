@@ -1,4 +1,4 @@
-import qs from 'qs'
+import qs from 'querystring'
 
 export const withParams = (url, params) => {
   return url.replace(/(?:\?([\s\S]*))?$/, (match, search) => {

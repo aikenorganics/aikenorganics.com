@@ -3915,11 +3915,6 @@
       "from": "q@>=1.1.2 <2.0.0",
       "resolved": "https://registry.npmjs.org/q/-/q-1.4.1.tgz"
     },
-    "qs": {
-      "version": "6.0.1",
-      "from": "qs@6.0.1",
-      "resolved": "https://registry.npmjs.org/qs/-/qs-6.0.1.tgz"
-    },
     "query-string": {
       "version": "3.0.0",
       "from": "query-string@>=3.0.0 <4.0.0",
