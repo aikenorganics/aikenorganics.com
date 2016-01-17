@@ -5,6 +5,7 @@ const React = require('react')
 const parseUrl = require('url').parse
 const renderToString = require('react-dom/server').renderToString
 const Routes = require('../client/routes').default
+const toJSON = require('object-tojson')
 
 module.exports = (req, res, next) => {
   res.react = (state) => {
@@ -12,7 +13,7 @@ module.exports = (req, res, next) => {
     const path = url.pathname
     const params = qs.parse((url.search || '').slice(1))
 
-    state = Object.assign({
+    state = toJSON(Object.assign({
       busy: false,
       canEdit: req.canEdit,
       cart: req.cart.cart,
@@ -20,11 +21,15 @@ module.exports = (req, res, next) => {
       path: path,
       url: req.originalUrl,
       user: req.user
-    }, params, state)
+    }, params, state))
 
-    state = JSON.parse(JSON.stringify(state))
-    const html = renderToString(React.createElement(Routes, state))
-    res.render('component', {html: html, state: state})
+    res.format({
+      json: () => res.json(state),
+      html: () => res.render('component', {
+        state: state,
+        html: renderToString(React.createElement(Routes, state))
+      })
+    })
   }
   next()
 }
