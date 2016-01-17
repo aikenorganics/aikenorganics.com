@@ -1,3 +1,4 @@
+import busy from './busy'
 import cart from './cart'
 import locations from './locations'
 import products from './products'
@@ -7,6 +8,7 @@ import {combineReducers} from 'redux'
 const pass = (state = null) => state
 
 export default combineReducers({
+  busy,
   canEdit: pass,
   cart,
   categories: pass,

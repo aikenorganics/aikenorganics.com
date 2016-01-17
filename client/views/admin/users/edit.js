@@ -1,9 +1,15 @@
 import React from 'react'
 import Image from './image'
 import Form from './form'
+import {destroyUser} from '../../../actions'
 
-export default ({users: [user]}) => {
+export default ({busy, users: [user]}) => {
   const {id, has_order} = user
+
+  const destroy = () => {
+    if (!window.confirm('Are you sure?')) return
+    destroyUser(id).then(() => window.location = '/admin/users')
+  }
 
   return <div>
     <h1>Edit User</h1>
@@ -15,15 +21,12 @@ export default ({users: [user]}) => {
         <Image user={user}/>
       </div>
     </div>
-    {has_order
+    {!has_order
       ? <div>
         <hr/>
-        <form method='post' action={`/admin/users/${id}/delete`} className='pull-right'>
-          <button type='submit' className='btn btn-danger'
-            onClick={(e) => { if (!window.confirm('Are you sure?')) e.preventDefault() }}>
-            Delete
-          </button>
-        </form>
+        <button type='submit' className='btn btn-danger' onClick={destroy} disabled={busy}>
+          Delete
+        </button>
       </div>
       : ''
     }

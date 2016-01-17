@@ -100,8 +100,8 @@ test('Search for joanne', function (t) {
 
 test('Delete a user', function (t) {
   t.signIn('admin@example.com').then(() => {
-    t.agent.post('/admin/users/7/delete')
-    .expect(302)
+    t.agent.delete('/admin/users/7')
+    .expect(200)
     .end((e) => {
       if (e) return t.end(e)
       db.User.find(7).then((user) => {

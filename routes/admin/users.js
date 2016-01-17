@@ -1,9 +1,8 @@
 'use strict'
 
-let ozymandias = require('ozymandias')
-let db = require('../../db')
-let upload = require('multer')({dest: 'tmp/uploads'})
-let router = module.exports = ozymandias.Router()
+const db = require('../../db')
+const upload = require('multer')({dest: 'tmp/uploads'})
+const router = module.exports = require('ozymandias').Router()
 
 // Find
 router.find('user_id', '_user', () => db.User.select(`exists(
@@ -54,9 +53,6 @@ router.post('/:user_id/image', upload.single('image'), (req, res) => {
 })
 
 // Delete
-router.post('/:user_id/delete', (req, res) => {
-  req._user.destroy().then(() => {
-    res.flash('User Deleted')
-    res.redirect('/admin/users')
-  }).catch(res.error)
+router.delete('/:user_id', (req, res) => {
+  req._user.destroy().then(() => res.json(true)).catch(res.error)
 })

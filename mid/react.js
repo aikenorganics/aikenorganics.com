@@ -13,6 +13,7 @@ module.exports = (req, res, next) => {
     const params = qs.parse((url.search || '').slice(1))
 
     state = Object.assign({
+      busy: false,
       canEdit: req.canEdit,
       cart: req.cart.cart,
       market: req.market,

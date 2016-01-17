@@ -46,4 +46,4 @@ const withMethod = (method) => (url, options) => {
 export const get = json
 export const post = withMethod('post')
 export const put = withMethod('put')
-export const destroy = withMethod('delete')
+export const _delete = withMethod('delete')
