@@ -8,7 +8,7 @@ router.find('token', () => db.Token.include('user'))
 
 // Find User
 function findUser (req, res, next) {
-  db.User.where('lower(email) = lower(?)', req.body.email).find()
+  db.User.where('trim(lower(email)) = trim(lower(?))', req.body.email).find()
   .then((user) => {
     req.user = res.locals.user = user
     next()

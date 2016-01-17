@@ -104,6 +104,15 @@ test('POST /auth/signin handles mixed case emails', function (t) {
   .end(t.end)
 })
 
+test('POST /auth/signin handles leading/trailing spaces', function (t) {
+  t.request()
+  .post('/auth/signin')
+  .send('email= AdMiN@eXaMpLe.CoM ')
+  .send('password=password')
+  .expect(302)
+  .end(t.end)
+})
+
 test('POST /auth/forgot handles mixed case emails', function (t) {
   t.request()
   .post('/auth/forgot')
