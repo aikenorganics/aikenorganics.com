@@ -1,6 +1,7 @@
 import cart from './cart'
 import locations from './locations'
 import products from './products'
+import users from './users'
 import {combineReducers} from 'redux'
 
 const pass = (state = null) => state
@@ -21,5 +22,5 @@ export default combineReducers({
   search: pass,
   url: pass,
   user: pass,
-  users: pass
+  users
 })

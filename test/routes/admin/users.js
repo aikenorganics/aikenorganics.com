@@ -10,7 +10,7 @@ test('POST /admin/users/:id is a 302', function (t) {
     .send('first=first')
     .send('last=last')
     .send('phone=555-555-5555')
-    .expect(302)
+    .expect(200)
     .end(function (e) {
       if (e) return t.end(e)
       db.User.find(2).then(function (user) {

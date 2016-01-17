@@ -64,6 +64,13 @@ class User extends require('ozymandias/user') {
     this.data.set('member_until', value || null)
   }
 
+  toJSON () {
+    return Object.assign(super.toJSON(), {
+      has_order: this.has_order,
+      mediumImage: this.mediumImage
+    })
+  }
+
 }
 
 images.hasImage(User, {

@@ -36,9 +36,8 @@ export default class CartForm extends Component {
   save (quantity) {
     const {product: {id}} = this.props
     this.setState({working: true})
-    updateCart(id, quantity)
-    .then(() => this.setState({working: false}))
-    .catch(() => this.setState({working: false}))
+    const done = () => this.setState({working: false})
+    updateCart(id, quantity).then(done, done)
   }
 
   render () {

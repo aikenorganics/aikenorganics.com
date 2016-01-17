@@ -21,6 +21,7 @@ module.exports = (req, res, next) => {
       user: req.user
     }, params, state)
 
+    state = JSON.parse(JSON.stringify(state))
     const html = renderToString(React.createElement(Routes, state))
     res.render('component', {html: html, state: state})
   }

@@ -20,6 +20,7 @@ $(document).on('click', '[data-confirm]', (e) => {
 
 // Handle form submission.
 $(document).on('submit', 'form', (e) => {
+  if ($(e.target).closest('#root').length) return
   $(e.target).find(':button,:submit').prop('disabled', true)
   message('info', 'Working…')
 })
