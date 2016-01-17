@@ -36,28 +36,19 @@ router.get('/', (req, res) => {
   // Pagination
   const page = res.locals.page = +(req.query.page || 1)
 
-  res.format({
-    html: () => {
-      Promise.all([
-        products.order('name').paginate(page, 30),
-        db.Category.order('position').all()
-      ]).then((results) => {
-        const products = results[0]
-        const categories = results[1]
-        res.react({
-          more: products.more,
-          page: page,
-          products: products,
-          categories: categories
-        })
-      }).catch(res.error)
-    },
-    json: () => {
-      products.order('name').all().then((products) => {
-        res.json(products)
-      }).catch(res.error)
-    }
-  })
+  Promise.all([
+    products.order('name').paginate(page, 30),
+    db.Category.order('position').all()
+  ]).then((results) => {
+    const products = results[0]
+    const categories = results[1]
+    res.react({
+      more: products.more,
+      page: page,
+      products: products,
+      categories: categories
+    })
+  }).catch(res.error)
 })
 
 // Show
