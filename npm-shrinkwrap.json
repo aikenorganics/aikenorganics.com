@@ -3549,9 +3549,9 @@
       "resolved": "https://registry.npmjs.org/output-file-sync/-/output-file-sync-1.1.1.tgz"
     },
     "ozymandias": {
-      "version": "0.40.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#2c2e3f849a8645211314d8776a17249c93b2f476",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#2c2e3f849a8645211314d8776a17249c93b2f476",
+      "version": "0.41.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#76107dac2363f0c00764873af4a5f289457623f2",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#76107dac2363f0c00764873af4a5f289457623f2",
       "dependencies": {
         "glob": {
           "version": "6.0.4",
@@ -4225,9 +4225,26 @@
       "resolved": "https://registry.npmjs.org/serializerr/-/serializerr-1.0.2.tgz"
     },
     "serve-static": {
-      "version": "1.10.0",
+      "version": "1.10.1",
       "from": "serve-static@>=1.10.0 <1.11.0",
-      "resolved": "https://registry.npmjs.org/serve-static/-/serve-static-1.10.0.tgz"
+      "resolved": "https://registry.npmjs.org/serve-static/-/serve-static-1.10.1.tgz",
+      "dependencies": {
+        "destroy": {
+          "version": "1.0.4",
+          "from": "destroy@>=1.0.4 <1.1.0",
+          "resolved": "https://registry.npmjs.org/destroy/-/destroy-1.0.4.tgz"
+        },
+        "escape-html": {
+          "version": "1.0.3",
+          "from": "escape-html@>=1.0.3 <1.1.0",
+          "resolved": "https://registry.npmjs.org/escape-html/-/escape-html-1.0.3.tgz"
+        },
+        "send": {
+          "version": "0.13.1",
+          "from": "send@0.13.1",
+          "resolved": "https://registry.npmjs.org/send/-/send-0.13.1.tgz"
+        }
+      }
     },
     "sha.js": {
       "version": "2.4.4",
