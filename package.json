@@ -35,6 +35,9 @@
       "react"
     ]
   },
+  "browserify": {
+    "transform": ["babelify"]
+  },
   "dependencies": {
     "autoprefixer": "6.3.1",
     "babel-plugin-transform-object-assign": "6.3.13",
