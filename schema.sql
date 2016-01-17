@@ -24,6 +24,7 @@ DROP TRIGGER update_user_search ON public.users;
 DROP TRIGGER update_reserved ON public.product_orders;
 DROP TRIGGER update_product_search ON public.products;
 DROP TRIGGER update_order_status ON public.orders;
+DROP TRIGGER tidy_user ON public.users;
 DROP TRIGGER set_product_order_cost ON public.product_orders;
 DROP TRIGGER increment_reserved ON public.product_orders;
 DROP TRIGGER delete_product_orders ON public.orders;
@@ -82,6 +83,7 @@ DROP SEQUENCE public.categories_id_seq;
 DROP TABLE public.categories;
 DROP FUNCTION public.update_status();
 DROP FUNCTION public.update_reserved();
+DROP FUNCTION public.tidy_user();
 DROP FUNCTION public.set_product_order_cost();
 DROP FUNCTION public.reset_reserved();
 DROP FUNCTION public.is_product_active(integer);
@@ -335,6 +337,20 @@ CREATE FUNCTION set_product_order_cost() RETURNS trigger
       return NEW;
     end;
     $$;
+
+
+--
+-- Name: tidy_user(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION tidy_user() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+begin
+  NEW.email := trim(lower(NEW.email));
+  return NEW;
+end;
+$$;
 
 
 --
@@ -1176,6 +1192,13 @@ CREATE TRIGGER increment_reserved AFTER INSERT ON product_orders FOR EACH ROW EX
 --
 
 CREATE TRIGGER set_product_order_cost BEFORE INSERT ON product_orders FOR EACH ROW EXECUTE PROCEDURE set_product_order_cost();
+
+
+--
+-- Name: tidy_user; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER tidy_user BEFORE INSERT OR UPDATE ON users FOR EACH ROW EXECUTE PROCEDURE tidy_user();
 
 
 --
