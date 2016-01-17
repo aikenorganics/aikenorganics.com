@@ -5,6 +5,7 @@ export default class Form extends Component {
 
   static get propTypes () {
     return {
+      busy: PropTypes.bool,
       user: PropTypes.object
     }
   }
@@ -29,6 +30,7 @@ export default class Form extends Component {
   }
 
   render () {
+    const {busy} = this.props
     const {email, first, is_admin, last, member_until, phone} = this.state
 
     return <form onSubmit={(e) => this.save(e)}>
@@ -59,7 +61,7 @@ export default class Form extends Component {
         </label>
       </div>
       <div className='form-group'>
-        <button type='submit' className='btn btn-primary'>
+        <button type='submit' className='btn btn-primary' disabled={busy}>
           Save
         </button>
       </div>

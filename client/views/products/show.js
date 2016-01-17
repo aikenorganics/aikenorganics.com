@@ -3,13 +3,13 @@ import marked from 'marked'
 import CartForm from '../cart/form'
 import Nav from './nav'
 
-export default ({canEdit, cart, path, products: [product], market: {open}, user}) => {
+export default ({busy, canEdit, cart, path, products: [product], market: {open}, user}) => {
   const {active, available, category, cost, description, grower, name, mediumImage, unit} = product
   return <div className='row'>
     <div className='col-md-3 text-center'>
       {user
         ? <p>
-          <CartForm product={product} cart={cart}/>
+          <CartForm busy={busy} product={product} cart={cart}/>
         </p>
         : ''
       }

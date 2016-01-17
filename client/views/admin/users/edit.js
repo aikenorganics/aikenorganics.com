@@ -15,10 +15,10 @@ export default ({busy, users: [user]}) => {
     <h1>Edit User</h1>
     <div className='row'>
       <div className='col-md-8'>
-        <Form user={user}/>
+        <Form busy={busy} user={user}/>
       </div>
       <div className='col-md-4'>
-        <Image user={user}/>
+        <Image busy={busy} user={user}/>
       </div>
     </div>
     {!has_order

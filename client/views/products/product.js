@@ -1,7 +1,7 @@
 import React from 'react'
 import CartForm from '../cart/form'
 
-export default ({cart, open, product, user}) => {
+export default ({busy, cart, open, product, user}) => {
   const {active, available, cost, id, grower, name, smallImage, unit} = product
 
   return <div className='panel panel-default product'>
@@ -22,7 +22,7 @@ export default ({cart, open, product, user}) => {
         <div className='media-body'>
           {user
             ? <div className='pull-right'>
-              <CartForm product={product} cart={cart}/>
+              <CartForm busy={busy} product={product} cart={cart}/>
             </div>
             : ''
           }

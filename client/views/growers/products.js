@@ -2,7 +2,7 @@ import React from 'react'
 import Nav from './nav'
 import Row from './product-row'
 
-export default ({canEdit, grower, path, products}) => {
+export default ({busy, canEdit, grower, path, products}) => {
   return <div className='row'>
     <div className='col-md-2 text-center'>
       <Nav grower={grower} path={path} canEdit={canEdit}/>
@@ -21,7 +21,7 @@ export default ({canEdit, grower, path, products}) => {
         </thead>
         <tbody>
           {products.map(product => (
-            <Row product={product} key={product.id}/>
+            <Row busy={busy} product={product} key={product.id}/>
           ))}
         </tbody>
       </table>

@@ -2,7 +2,7 @@ import React from 'react'
 import Product from './product'
 import {withParams} from '../../url'
 
-export default ({cart, category_id, categories, page, products, market: {open}, more, search, url, user}) => {
+export default ({busy, cart, category_id, categories, page, products, market: {open}, more, search, url, user}) => {
   return <div className='row'>
     <div className='col-md-2'>
       <form>
@@ -23,7 +23,7 @@ export default ({cart, category_id, categories, page, products, market: {open}, 
       <div className='row'>
         {products.map((product) => {
           return <div key={product.id} className='col-md-6'>
-            <Product cart={cart} open={open} product={product} user={user}/>
+            <Product busy={busy} cart={cart} open={open} product={product} user={user}/>
           </div>
         })}
       </div>

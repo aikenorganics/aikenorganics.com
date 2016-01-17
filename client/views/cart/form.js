@@ -1,76 +1,41 @@
-import React, {Component, PropTypes} from 'react'
+import React from 'react'
 import {updateCart} from '../../actions'
 
-export default class CartForm extends Component {
+export default ({busy, cart, product: {active, available, id}}) => {
+  const quantity = cart[id] || 0
+  const canIncrement = quantity < available
+  const save = (quantity) => updateCart(id, quantity)
+  const decrement = () => save(quantity - 1)
+  const increment = () => save(quantity + 1)
 
-  static propTypes () {
-    return {
-      cart: PropTypes.object,
-      product: PropTypes.object
-    }
+  if (!available) {
+    return <button className='btn btn-default' disabled>Sold Out</button>
   }
 
-  constructor (props) {
-    super(props)
-    this.state = {working: false}
+  if (!active) {
+    return <button className='btn btn-default' disabled>Unavailable</button>
   }
 
-  get quantity () {
-    const {product: {id}, cart} = this.props
-    return cart[id] || 0
-  }
-
-  canIncrement () {
-    const {product: {available}} = this.props
-    return this.quantity < available
-  }
-
-  increment (e) {
-    this.save(this.quantity + 1)
-  }
-
-  decrement (e) {
-    this.save(this.quantity - 1)
-  }
-
-  save (quantity) {
-    const {product: {id}} = this.props
-    this.setState({working: true})
-    const done = () => this.setState({working: false})
-    updateCart(id, quantity).then(done, done)
-  }
-
-  render () {
-    const {working} = this.state
-
-    return <span className='form-inline'>
-      {this.quantity > 0
-        ? <span className='form-group'>
-          <span className='input-group'>
-            <span className='input-group-btn'>
-              <button type='button' className='btn btn-primary'
-                disabled={working}
-                onClick={() => this.decrement()}>
-                -
-              </button>
-            </span>
-            <span className='form-control'>{this.quantity}</span>
-            <span className='input-group-btn'>
-              <button type='button' className='btn btn-primary'
-                disabled={working || !this.canIncrement()}
-                onClick={() => this.increment()}>
-                +
-              </button>
-            </span>
+  return <span className='form-inline'>
+    {quantity > 0
+      ? <span className='form-group'>
+        <span className='input-group'>
+          <span className='input-group-btn'>
+            <button type='button' className='btn btn-primary' disabled={busy} onClick={decrement}>
+              -
+            </button>
+          </span>
+          <span className='form-control'>{quantity}</span>
+          <span className='input-group-btn'>
+            <button type='button' className='btn btn-primary' disabled={busy || !canIncrement} onClick={increment}>
+              +
+            </button>
           </span>
         </span>
-        : <button type='button' className='btn btn-primary'
-            disabled={working}
-            onClick={() => this.increment()}>
-          Add to Cart
-        </button>
-      }
-    </span>
-  }
-
+      </span>
+      : <button type='button' className='btn btn-primary' disabled={busy} onClick={increment}>
+        Add to Cart
+      </button>
+    }
+  </span>
 }

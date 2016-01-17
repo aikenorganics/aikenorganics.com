@@ -1,11 +1,12 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import {updateProduct} from '../../actions'
 
-export default class ProductRow extends React.Component {
+export default class ProductRow extends Component {
 
   static propTypes () {
     return {
-      product: React.PropTypes.object
+      busy: PropTypes.bool,
+      product: PropTypes.object
     }
   }
 
@@ -26,12 +27,12 @@ export default class ProductRow extends React.Component {
     })
   }
 
-  handleBlur (e) {
+  handleBlur () {
     this.saveSupply()
   }
 
   handleKeyDown (e) {
-    if (e.keyCode === 13) this.saveSupply()
+    if (e.which === 13) this.saveSupply()
   }
 
   saveSupply () {
@@ -50,7 +51,7 @@ export default class ProductRow extends React.Component {
   }
 
   render () {
-    const {id, active, name} = this.props.product
+    const {busy, product: {id, active, name}} = this.props
 
     return <tr>
       <td>
@@ -60,21 +61,21 @@ export default class ProductRow extends React.Component {
       </td>
       <td>
         <input className='form-control' type='number' value={this.state.supply}
-          onChange={this.handleChange.bind(this)}
-          onBlur={this.handleBlur.bind(this)}
-          onKeyDown={this.handleKeyDown.bind(this)}
+          onChange={(e) => this.handleChange(e)}
+          onBlur={() => this.handleBlur()}
+          onKeyDown={(e) => this.handleKeyDown(e)}
         />
       </td>
       <td>
         <div className='btn-group'>
-          <button type='button'
+          <button type='button' disabled={busy}
             className={`btn ${active ? 'btn-primary' : 'btn-default'}`}
-            onClick={this.toggleActive.bind(this, true)}>
+            onClick={() => this.toggleActive(true)}>
             Active
           </button>
-          <button type='button'
+          <button type='button' disabled={busy}
             className={`btn ${active ? 'btn-default' : 'btn-danger'}`}
-            onClick={this.toggleActive.bind(this, false)}>
+            onClick={() => this.toggleActive(false)}>
             Inactive
           </button>
         </div>

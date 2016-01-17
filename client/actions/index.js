@@ -19,16 +19,21 @@ export const done = () => store.dispatch({type: DONE})
 // Cart
 
 export const updateCart = (product_id, quantity) => {
+  busy()
   return post(`/cart`, {body: {product_id, quantity}}).then(() => {
     store.dispatch({type: UPDATE_CART, product_id, quantity})
+    done()
   })
 }
 
 // Products
 
 export const updateProduct = (id, values) => {
-  store.dispatch({type: UPDATE_PRODUCT, id, values})
-  return post(`/products/${id}`, {body: values})
+  busy()
+  return post(`/products/${id}`, {body: values}).then(() => {
+    store.dispatch({type: UPDATE_PRODUCT, id, values})
+    done()
+  })
 }
 
 // Locations
@@ -50,14 +55,17 @@ export const destroyLocation = (id) => {
 }
 
 export const createLocation = (values) => {
-  return post(`/admin/locations`, {body: values})
+  busy()
+  return post(`/admin/locations`, {body: values}).then(done)
 }
 
 // Users
 
 export const updateUser = (id, values) => {
+  busy()
   return post(`/admin/users/${id}`, {body: values}).then(() => {
     store.dispatch({type: UPDATE_USER, id, values})
+    done()
   })
 }
 
@@ -69,7 +77,9 @@ export const destroyUser = (id) => {
 export const uploadImage = (id, file) => {
   const data = new window.FormData()
   data.append('image', file)
+  busy()
   return post(`/admin/users/${id}/image`, {body: data}).then((values) => {
     store.dispatch({type: UPDATE_USER, id, values})
+    done()
   })
 }
