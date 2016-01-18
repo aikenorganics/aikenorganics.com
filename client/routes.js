@@ -15,6 +15,7 @@ import Locations from './views/admin/locations/index'
 import EditLocation from './views/admin/locations/edit'
 import NewLocation from './views/admin/locations/new'
 
+import Emails from './views/admin/users/emails'
 import Users from './views/admin/users/index'
 import EditUser from './views/admin/users/edit'
 
@@ -25,6 +26,7 @@ export default (state) => {
       <Route path='locations/:location_id/edit' Component={EditLocation}/>
       <Route path='locations/new' Component={NewLocation}/>
       <Route path='users' Component={Users}/>
+      <Route path='users/emails' Component={Emails}/>
       <Route path='users/:user_id/edit' Component={EditUser}/>
     </Route>
     <Route path='/' Component={App}>

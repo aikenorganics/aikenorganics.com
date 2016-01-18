@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
 // Emails
 router.get('/emails', (req, res) => {
   db.User.order('email').all().then((users) => {
-    res.render('admin/users/emails', {users: users})
+    res.react({emails: users.map((user) => user.email)})
   }).catch(res.error)
 })
 

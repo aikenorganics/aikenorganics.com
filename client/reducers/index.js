@@ -14,6 +14,7 @@ export default combineReducers({
   cart,
   categories: pass,
   category_id: pass,
+  emails: pass,
   errors,
   grower: pass,
   growers: pass,
