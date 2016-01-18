@@ -1,8 +1,7 @@
 'use strict'
 
-let db = require('../../db')
-let ozymandias = require('ozymandias')
-let router = module.exports = ozymandias.Router()
+const db = require('../../db')
+const router = module.exports = require('ozymandias').Router()
 
 // Find
 // TODO: Order by product name.
@@ -11,17 +10,17 @@ router.find('order', () =>
 )
 
 // Find a Product
-router.get('/', function (req, res, next) {
+router.get('/', (req, res, next) => {
   let id = req.query.product_id
   if (!id) return next()
-  db.Product.find(id).then(function (product) {
+  db.Product.find(id).then((product) => {
     req.product = res.locals.product = product
     next()
   }).catch(next)
 })
 
 // Index
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
   let full = req.query.full === '1'
   let status = req.query.status =
     Array.isArray(req.query.status) ? req.query.status : ['open']
@@ -47,7 +46,7 @@ router.get('/', function (req, res) {
     orders.order(['created_at', 'descending']).all(),
     db.Location.order('name').all(),
     db.Product.order('name').all()
-  ]).then(function (results) {
+  ]).then((results) => {
     let view = full ? 'admin/orders/full' : 'admin/orders/index'
     res.render(view, {
       orders: results[0],
@@ -58,7 +57,7 @@ router.get('/', function (req, res) {
 })
 
 // Show
-router.get('/:order_id', function (req, res) {
+router.get('/:order_id', (req, res) => {
   let products = db.Product.join('grower')
     .where({active: true, grower: {active: true}})
     .where('supply > reserved')
@@ -67,7 +66,7 @@ router.get('/:order_id', function (req, res) {
   Promise.all([
     products.order('name').all(),
     db.Location.order('name').all()
-  ]).then(function (results) {
+  ]).then((results) => {
     res.render('admin/orders/show', {
       products: results[0],
       locations: results[1]
@@ -76,7 +75,7 @@ router.get('/:order_id', function (req, res) {
 })
 
 // Update
-router.post('/:order_id', function (req, res) {
+router.post('/:order_id', (req, res) => {
   req.order.update(req.permit('status', 'notes', 'location_id')).then(() => {
     res.flash('success', 'Order Updated')
     res.redirect(`/admin/orders/${req.order.id}`)
