@@ -132,20 +132,20 @@ test('GET /products/edit is a 200 as an admin', function (t) {
 
 // Update
 
-test('POST /products/:id is a 302 as an admin', function (t) {
+test('POST /products/:id is a 200 as an admin', function (t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/products/1')
     .send('name=Peaches')
-    .expect(302)
+    .expect(200)
     .end(t.end)
   })
 })
 
-test('POST /products/:id is a 302 as an authorized user', function (t) {
+test('POST /products/:id is a 200 as an authorized user', function (t) {
   t.signIn('grower@example.com').then(() => {
     t.agent.post('/products/1')
     .send('name=Peaches')
-    .expect(302)
+    .expect(200)
     .end(t.end)
   })
 })

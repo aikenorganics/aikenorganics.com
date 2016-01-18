@@ -4,8 +4,9 @@ import Router, {Route} from './router'
 import App from './views/app'
 import Admin from './views/admin/app'
 
-import Products from './views/products/index'
 import Product from './views/products/show'
+import Products from './views/products/index'
+import EditProduct from './views/products/edit'
 
 import Grower from './views/growers/show'
 import GrowerProducts from './views/growers/products'
@@ -31,6 +32,7 @@ export default (state) => {
       <Route path='growers/:grower_id/products' Component={GrowerProducts}/>
       <Route path='products' Component={Products}/>
       <Route path='products/:product_id' Component={Product}/>
+      <Route path='products/:product_id/edit' Component={EditProduct}/>
     </Route>
   </Router>
 }

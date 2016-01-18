@@ -1,6 +1,7 @@
 import 'es6-promise'
 import fetch from 'isomorphic-fetch'
 import message from './message'
+import {setErrors} from './actions'
 
 const json = (url, options) => {
   if (!options) options = {}
@@ -18,7 +19,14 @@ const json = (url, options) => {
   return fetch(url, options).then((res) => {
     if (res.ok) {
       message('success', 'Done.')
+      setErrors(null)
       return res.json()
+    } else if (res.status === 422) {
+      return res.json().then((errors) => {
+        setErrors(errors)
+        message('error', 'There was a problem saving your data…')
+        throw new Error(res.statusText)
+      })
     }
     message('error', res.statusText)
     throw new Error(res.statusText)

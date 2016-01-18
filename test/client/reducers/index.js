@@ -1,5 +1,6 @@
 import './busy'
 import './cart'
+import './errors'
 import './locations'
 import './products'
 import './users'

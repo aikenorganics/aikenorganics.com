@@ -55,15 +55,16 @@ router.get('/', (req, res) => {
 router.get('/:product_id', (req, res) => res.react({products: [req.product]}))
 
 // Edit
-router.get('/:product_id/edit', editProduct)
-
-function editProduct (req, res) {
+router.get('/:product_id/edit', (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
 
   db.Category.order('position').all().then((categories) => {
-    res.render('products/edit', {categories: categories})
+    res.react({
+      categories: categories,
+      products: [req.product]
+    })
   }).catch(res.error)
-}
+})
 
 // Update
 router.post('/:product_id', (req, res) => {
@@ -72,20 +73,11 @@ router.post('/:product_id', (req, res) => {
   req.product.update(req.permit(
     'active', 'category_id', 'cost', 'description', 'name', 'supply', 'unit'
   )).then(() => {
-    res.format({
-      html: () => {
-        res.flash('success', 'Saved')
-        res.redirect(req.body.return_to || `/products/${req.product.id}`)
-      },
-      json: () => {
-        res.json({})
-      }
-    })
+    res.json(req.product)
   }).catch((e) => {
     if (e.message !== 'invalid') throw e
     res.status(422)
-    res.locals.errors = req.product.errors
-    editProduct(req, res)
+    res.json(e.model.errors)
   }).catch(res.error)
 })
 
@@ -93,7 +85,6 @@ router.post('/:product_id', (req, res) => {
 router.post('/:product_id/image', upload.single('image'), (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
   req.product.uploadImage(req.file).then(() => {
-    res.flash('Image Uploaded.')
-    res.redirect(req.body.return_to)
+    res.json(req.product)
   }).catch(res.error)
 })
