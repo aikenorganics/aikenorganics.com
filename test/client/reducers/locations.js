@@ -50,3 +50,10 @@ test('remove location', (t) => {
   t.deepEqual(next.locations, [{id: 1}])
   t.end()
 })
+
+test('no location to remove', (t) => {
+  const state = freeze({})
+  const next = reducer(state, {type: REMOVE_LOCATION, id: 2})
+  t.deepEqual(next.locations, null)
+  t.end()
+})

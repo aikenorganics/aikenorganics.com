@@ -13,6 +13,7 @@ export default (state = null, action) => {
       })
 
     case REMOVE_LOCATION:
+      if (!state) return state
       return state.filter((location) => location.id !== action.id)
 
     default:
