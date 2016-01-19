@@ -5,6 +5,7 @@ import grower from './grower'
 import growers from './growers'
 import location from './location'
 import locations from './locations'
+import product from './product'
 import products from './products'
 import users from './users'
 import {combineReducers} from 'redux'
@@ -27,6 +28,7 @@ export default combineReducers({
   more: pass,
   page: pass,
   path: pass,
+  product,
   products,
   search: pass,
   url: pass,

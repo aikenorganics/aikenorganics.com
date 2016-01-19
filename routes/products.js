@@ -52,7 +52,7 @@ router.get('/', (req, res) => {
 })
 
 // Show
-router.get('/:product_id', (req, res) => res.react({products: [req.product]}))
+router.get('/:product_id', (req, res) => res.react({product: req.product}))
 
 // Edit
 router.get('/:product_id/edit', (req, res) => {
@@ -61,7 +61,7 @@ router.get('/:product_id/edit', (req, res) => {
   db.Category.order('position').all().then((categories) => {
     res.react({
       categories: categories,
-      products: [req.product]
+      product: req.product
     })
   }).catch(res.error)
 })

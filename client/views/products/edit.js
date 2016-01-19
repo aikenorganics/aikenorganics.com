@@ -3,7 +3,7 @@ import Nav from './nav'
 import Form from './form'
 import {imageProduct, updateProduct} from '../../actions'
 
-export default ({busy, categories, canEdit, errors, path, products: [product]}) => {
+export default ({busy, categories, canEdit, errors, path, product}) => {
   const {active, id, grower, mediumImage} = product
 
   const upload = (e) => {
