@@ -5,13 +5,13 @@ export default class Edit extends Component {
 
   static propTypes () {
     return {
-      locations: PropTypes.array
+      location: PropTypes.array
     }
   }
 
   constructor (props) {
     super(props)
-    const {name} = props.locations[0]
+    const {name} = props.location
     this.state = {name}
   }
 
@@ -23,7 +23,7 @@ export default class Edit extends Component {
     e.preventDefault()
 
     const {name} = this.state
-    const {id} = this.props.locations[0]
+    const {id} = this.props.location
 
     updateLocation(id, {name}).then(() => {
       window.location = '/admin/locations'

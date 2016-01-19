@@ -19,7 +19,7 @@ router.get('/new', (req, res) => res.react())
 
 // Edit
 router.get('/:location_id/edit', (req, res) => {
-  res.react({locations: [req.location]})
+  res.react({location: req.location})
 })
 
 // Create
