@@ -33,7 +33,7 @@ router.get('/emails', (req, res) => {
 
 // Edit
 router.get('/:user_id/edit', (req, res) => {
-  res.react({users: [req._user]})
+  res.react({user: req._user})
 })
 
 // Update

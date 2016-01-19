@@ -3,7 +3,7 @@ import Image from './image'
 import Form from './form'
 import {destroyUser} from '../../../actions'
 
-export default ({busy, users: [user]}) => {
+export default ({busy, user}) => {
   const {id, has_order} = user
 
   const destroy = () => {

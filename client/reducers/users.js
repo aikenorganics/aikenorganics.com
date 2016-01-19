@@ -3,6 +3,7 @@ import {UPDATE_USER} from '../actions'
 export default (state = null, action) => {
   switch (action.type) {
     case UPDATE_USER:
+      if (!state) return state
       return state.map((user) => {
         if (user.id !== action.id) return user
         return Object.assign({}, user, action.values)
@@ -12,4 +13,3 @@ export default (state = null, action) => {
       return state
   }
 }
-
