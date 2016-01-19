@@ -2,8 +2,7 @@
 
 const db = require('../db')
 const upload = require('multer')({dest: 'tmp/uploads'})
-const ozymandias = require('ozymandias')
-const router = module.exports = ozymandias.Router()
+const router = module.exports = require('ozymandias').Router()
 
 // Find
 router.find('grower', () => db.Grower)
@@ -53,7 +52,7 @@ router.get('/:grower_id', (req, res) => {
 // Edit Grower
 router.get('/:grower_id/edit', (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
-  res.render('growers/edit')
+  res.react({growers: [req.grower]})
 })
 
 router.post('/:grower_id', (req, res) => {
@@ -62,8 +61,7 @@ router.post('/:grower_id', (req, res) => {
   req.grower.update(req.permit(
     'name', 'email', 'url', 'location', 'description'
   )).then(() => {
-    res.flash('success', 'Saved')
-    res.redirect(`/growers/${req.grower.id}`)
+    res.json(true)
   }).catch(res.error)
 })
 
@@ -133,7 +131,6 @@ router.get('/:grower_id/products', (req, res) => {
 router.post('/:grower_id/image', upload.single('image'), (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
   req.grower.uploadImage(req.file).then(() => {
-    res.flash('Image Uploaded.')
-    res.redirect(req.body.return_to)
+    res.json(req.grower)
   }).catch(res.error)
 })

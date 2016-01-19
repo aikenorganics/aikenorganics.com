@@ -3,6 +3,7 @@ import store from '../store'
 
 // Action Constants
 export const UPDATE_CART = 'UPDATE_CART'
+export const UPDATE_GROWER = 'UPDATE_GROWER'
 export const CREATE_LOCATION = 'CREATE_LOCATION'
 export const REMOVE_LOCATION = 'REMOVE_LOCATION'
 export const UPDATE_LOCATION = 'UPDATE_LOCATION'
@@ -27,6 +28,26 @@ export const updateCart = (product_id, quantity) => {
   busy()
   return post(`/cart`, {body: {product_id, quantity}}).then(() => {
     store.dispatch({type: UPDATE_CART, product_id, quantity})
+    done()
+  }).catch(done)
+}
+
+// Growers
+
+export const updateGrower = (id, values) => {
+  busy()
+  return post(`/growers/${id}`, {body: values}).then(() => {
+    store.dispatch({type: UPDATE_GROWER, id, values})
+    done()
+  }).catch(done)
+}
+
+export const imageGrower = (id, file) => {
+  const data = new window.FormData()
+  data.append('image', file)
+  busy()
+  return post(`/growers/${id}/image`, {body: data}).then((values) => {
+    store.dispatch({type: UPDATE_GROWER, id, values})
     done()
   }).catch(done)
 }

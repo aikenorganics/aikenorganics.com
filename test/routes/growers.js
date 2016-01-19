@@ -137,7 +137,8 @@ test('POST /growers/:id is a 302 for admins', function (t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/growers/1')
     .send('name=Watsonia')
-    .expect(302)
+    .expect('Content-Type', /json/)
+    .expect(200)
     .end(t.end)
   })
 })
@@ -146,7 +147,8 @@ test('POST /growers/:id is a 302 for allowed users', function (t) {
   t.signIn('grower@example.com').then(() => {
     t.agent.post('/growers/1')
     .send('name=Watsonia')
-    .expect(302)
+    .expect('Content-Type', /json/)
+    .expect(200)
     .end(t.end)
   })
 })
