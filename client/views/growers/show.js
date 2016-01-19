@@ -3,7 +3,7 @@ import marked from 'marked'
 import Nav from './nav'
 import Product from '../products/product'
 
-export default ({busy, canEdit, cart, grower, market: {open}, path, products, user}) => {
+export default ({busy, canEdit, cart, grower, market: {open}, path, products, currentUser}) => {
   const {description, email, id, location, mediumImage, name, url} = grower
 
   return <div className='row'>
@@ -34,7 +34,7 @@ export default ({busy, canEdit, cart, grower, market: {open}, path, products, us
       <div className='row'>
         {products.map((product) => {
           return <div key={product.id} className='col-md-6'>
-            <Product busy={busy} cart={cart} open={open} product={product} user={user}/>
+            <Product busy={busy} cart={cart} open={open} product={product} currentUser={currentUser}/>
           </div>
         })}
       </div>

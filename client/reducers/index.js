@@ -18,6 +18,7 @@ export default combineReducers({
   cart,
   categories: pass,
   category_id: pass,
+  currentUser: pass,
   emails: pass,
   errors,
   grower,
@@ -32,6 +33,5 @@ export default combineReducers({
   products,
   search: pass,
   url: pass,
-  user: pass,
   users
 })

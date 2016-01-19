@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default ({cart, children, market, user, path}) => {
+export default ({cart, children, market, currentUser, path}) => {
   const cartSize = Object.keys(cart).reduce((total, id) => total + cart[id], 0)
 
   return <main className='container'>
@@ -29,14 +29,14 @@ export default ({cart, children, market, user, path}) => {
         <li className={/^\/growers/.test(path) ? 'active' : ''}>
           <a href='/growers'>Growers</a>
         </li>
-        {!user || !market.open ? ''
+        {!currentUser || !market.open ? ''
           : <li className={/^\/cart/.test(path) ? 'active' : ''}>
             <a href='/cart'>
               Cart <span id='cart-size' className='badge'>{cartSize}</span>
             </a>
           </li>
         }
-        {!user ? ''
+        {!currentUser ? ''
           : <li className={/^\/orders/.test(path) ? 'active' : ''}>
             <a href='/orders/current'>
               Orders

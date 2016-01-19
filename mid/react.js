@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
       market: req.market,
       path: path,
       url: req.originalUrl,
-      user: req.user
+      currentUser: req.user
     }, params, state))
 
     res.format({
