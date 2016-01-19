@@ -1,6 +1,7 @@
 import busy from './busy'
 import cart from './cart'
 import errors from './errors'
+import grower from './grower'
 import growers from './growers'
 import location from './location'
 import locations from './locations'
@@ -18,7 +19,7 @@ export default combineReducers({
   category_id: pass,
   emails: pass,
   errors,
-  grower: pass,
+  grower,
   growers,
   location,
   locations,

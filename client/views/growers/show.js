@@ -3,7 +3,7 @@ import marked from 'marked'
 import Nav from './nav'
 import Product from '../products/product'
 
-export default ({busy, canEdit, cart, growers: [grower], market: {open}, path, products, user}) => {
+export default ({busy, canEdit, cart, grower, market: {open}, path, products, user}) => {
   const {description, email, id, location, mediumImage, name, url} = grower
 
   return <div className='row'>

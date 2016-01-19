@@ -3,7 +3,7 @@ import Nav from './nav'
 import Form from './form'
 import {imageGrower} from '../../actions'
 
-export default ({busy, canEdit, errors, growers: [grower], path}) => {
+export default ({busy, canEdit, errors, grower, path}) => {
   const {id, mediumImage} = grower
 
   const upload = (e) => {

@@ -43,7 +43,7 @@ router.get('/:grower_id', (req, res) => {
     // Stupid, but necessary.
     for (let product of products) product.grower = req.grower
     res.react({
-      growers: [req.grower],
+      grower: req.grower,
       products: products
     })
   }).catch(res.error)
@@ -52,7 +52,7 @@ router.get('/:grower_id', (req, res) => {
 // Edit Grower
 router.get('/:grower_id/edit', (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
-  res.react({growers: [req.grower]})
+  res.react({grower: req.grower})
 })
 
 router.post('/:grower_id', (req, res) => {
