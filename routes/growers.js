@@ -13,7 +13,7 @@ router.param('grower_id', require('../mid/growers/authorize'))
 // Index
 router.get('/', (req, res) => {
   db.Grower.where({active: true}).order('name').all().then((growers) => {
-    res.render('growers/index', {growers: growers})
+    res.react({growers: growers})
   })
 })
 
