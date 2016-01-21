@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 // New Grower
 router.get('/new', (req, res) => {
   if (!req.admin) return res.status(401).render('401')
-  res.render('growers/new')
+  res.react()
 })
 
 router.post('/', (req, res) => {
@@ -29,8 +29,7 @@ router.post('/', (req, res) => {
   db.Grower.create(req.permit(
     'url', 'name', 'email', 'location', 'description'
   )).then((grower) => {
-    res.flash('success', 'Saved')
-    res.redirect(`/growers/${grower.id}`)
+    res.json(grower)
   }).catch(res.error)
 })
 

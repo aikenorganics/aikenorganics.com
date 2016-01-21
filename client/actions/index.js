@@ -15,8 +15,15 @@ export const SET_ERRORS = 'SET_ERRORS'
 
 // Busy
 
-export const busy = () => store.dispatch({type: BUSY})
-export const done = () => store.dispatch({type: DONE})
+export const busy = (value) => {
+  store.dispatch({type: BUSY})
+  return value
+}
+
+export const done = (value) => {
+  store.dispatch({type: DONE})
+  return value
+}
 
 // Errors
 
@@ -33,6 +40,11 @@ export const updateCart = (product_id, quantity) => {
 }
 
 // Growers
+
+export const createGrower = (values) => {
+  busy()
+  return post('/growers', {body: values}).then(done).catch(done)
+}
 
 export const updateGrower = (id, values) => {
   busy()

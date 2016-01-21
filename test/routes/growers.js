@@ -166,7 +166,8 @@ test('POST /growers is a 302 for admins', function (t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/growers')
     .send('name=New Grower')
-    .expect(302)
+    .expect(200)
+    .expect('Content-Type', /json/)
     .end(t.end)
   })
 })

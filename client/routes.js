@@ -10,6 +10,7 @@ import EditProduct from './views/products/edit'
 
 import Grower from './views/growers/show'
 import Growers from './views/growers/index'
+import NewGrower from './views/growers/new'
 import EditGrower from './views/growers/edit'
 import GrowerProducts from './views/growers/products'
 
@@ -33,6 +34,7 @@ export default (state) => {
     </Route>
     <Route path='/' Component={App}>
       <Route path='growers' Component={Growers}/>
+      <Route path='growers/new' Component={NewGrower}/>
       <Route path='growers/:grower_id' Component={Grower}/>
       <Route path='growers/:grower_id/edit' Component={EditGrower}/>
       <Route path='growers/:grower_id/products' Component={GrowerProducts}/>

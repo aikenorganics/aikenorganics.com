@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {updateGrower} from '../../actions'
+import {createGrower, updateGrower} from '../../actions'
 
 export default class Form extends Component {
 
@@ -13,14 +13,20 @@ export default class Form extends Component {
 
   constructor (props) {
     super(props)
-    const {description, email, location, name, url} = props.grower
+    const {description, email, location, name, url} = props.grower || {}
     this.state = {description, email, location, name, url}
   }
 
   save (e) {
     e.preventDefault()
-    const {id} = this.props.grower
-    updateGrower(id, this.state)
+    if (this.props.grower) {
+      const {id} = this.props.grower
+      updateGrower(id, this.state)
+    } else {
+      createGrower(this.state).then(({id}) => {
+        window.location = `/growers/${id}`
+      })
+    }
   }
 
   render () {
