@@ -6,6 +6,7 @@ import Admin from './views/admin/app'
 
 import Product from './views/products/show'
 import Products from './views/products/index'
+import NewProduct from './views/products/new'
 import EditProduct from './views/products/edit'
 
 import Grower from './views/growers/show'
@@ -38,6 +39,7 @@ export default (state) => {
       <Route path='growers/:grower_id' Component={Grower}/>
       <Route path='growers/:grower_id/edit' Component={EditGrower}/>
       <Route path='growers/:grower_id/products' Component={GrowerProducts}/>
+      <Route path='growers/:grower_id/products/new' Component={NewProduct}/>
       <Route path='products' Component={Products}/>
       <Route path='products/:product_id' Component={Product}/>
       <Route path='products/:product_id/edit' Component={EditProduct}/>

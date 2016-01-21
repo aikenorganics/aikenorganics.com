@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import Errors from '../errors'
-import {updateProduct} from '../../actions'
+import {createProduct, updateProduct} from '../../actions'
 
 export default class Form extends Component {
 
@@ -9,20 +9,42 @@ export default class Form extends Component {
       busy: PropTypes.bool,
       categories: PropTypes.array,
       errors: PropTypes.object,
+      grower: PropTypes.object,
       product: PropTypes.object
     }
   }
 
   constructor (props) {
     super(props)
-    const {category_id, cost, description, name, supply, unit} = props.product
-    this.state = {category_id, cost, description, name, supply, unit}
+    const {
+      category_id,
+      cost,
+      description,
+      name,
+      supply,
+      unit
+    } = props.product || {}
+    this.state = {
+      category_id: category_id || props.categories[0].id,
+      cost: cost || '',
+      description: description || '',
+      name: name || '',
+      supply: supply || '',
+      unit: unit || ''
+    }
   }
 
   save (e) {
     e.preventDefault()
-    const {id} = this.props.product
-    updateProduct(id, this.state)
+    if (this.props.product) {
+      const {id} = this.props.product
+      updateProduct(id, this.state).catch(e => {})
+    } else {
+      const {id} = this.props.grower
+      createProduct(id, this.state).then(({id}) => {
+        window.location = `/products/${id}`
+      }).catch(e => {})
+    }
   }
 
   render () {

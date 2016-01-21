@@ -162,31 +162,45 @@ test('POST /growers is a 401 for non-admins', function (t) {
   })
 })
 
-test('POST /growers is a 302 for admins', function (t) {
+test('POST /growers is a 200 for admins', function (t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/growers')
     .send('name=New Grower')
     .expect(200)
     .expect('Content-Type', /json/)
-    .end(t.end)
+    .end((e, res) => {
+      if (e) return t.end(e)
+      t.is(res.body.name, 'New Grower')
+      t.is(typeof res.body.id, 'number')
+      t.end()
+    })
   })
 })
 
-test('POST /growers/:id/products/new is a 302 for admins', function (t) {
+test('POST /growers/:id/products is a 200 for admins', function (t) {
   t.signIn('admin@example.com').then(() => {
-    t.agent.post('/growers/1/products/new')
+    t.agent.post('/growers/1/products')
     .send('name=New Grower')
     .send('cost=2.45')
     .send('supply=32')
     .send('category_id=1')
-    .expect(302)
-    .end(t.end)
+    .expect('Content-Type', /json/)
+    .expect(200)
+    .end((e, res) => {
+      if (e) return t.end(e)
+      t.is(res.body.cost, '2.45')
+      t.is(res.body.category_id, 1)
+      t.is(res.body.supply, 32)
+      t.is(res.body.name, 'New Grower')
+      t.is(typeof res.body.id, 'number')
+      t.end()
+    })
   })
 })
 
-test('POST /growers/:id/products/new is a 401 for non-admins', function (t) {
+test('POST /growers/:id/products is a 401 for non-admins', function (t) {
   t.signIn('user@example.com').then(() => {
-    t.agent.post('/growers/1/products/new')
+    t.agent.post('/growers/1/products')
     .send('name=New Product')
     .send('cost=2.45')
     .send('supply=32')
@@ -196,33 +210,35 @@ test('POST /growers/:id/products/new is a 401 for non-admins', function (t) {
   })
 })
 
-test('POST /growers/:id/products/new is a 302 if allowed', function (t) {
+test('POST /growers/:id/products is a 200 if allowed', function (t) {
   t.signIn('grower@example.com').then(() => {
-    t.agent.post('/growers/1/products/new')
+    t.agent.post('/growers/1/products')
     .send('name=New Product')
     .send('cost=2.50')
     .send('supply=23')
     .send('category_id=1')
-    .expect(302)
+    .expect('Content-Type', /json/)
+    .expect(200)
     .end(t.end)
   })
 })
 
-test('POST /growers/:id/products/new is a 302 for admins', function (t) {
+test('POST /growers/:id/products is a 200 for admins', function (t) {
   t.signIn('admin@example.com').then(() => {
-    t.agent.post('/growers/1/products/new')
+    t.agent.post('/growers/1/products')
     .send('name=New Product')
     .send('cost=2.50')
     .send('supply=23')
     .send('category_id=1')
-    .expect(302)
+    .expect('Content-Type', /json/)
+    .expect(200)
     .end(t.end)
   })
 })
 
-test('POST /growers/:id/products/new is a 422 for invalid data', function (t) {
+test('POST /growers/:id/products is a 422 for invalid data', function (t) {
   t.signIn('admin@example.com').then(() => {
-    t.agent.post('/growers/1/products/new')
+    t.agent.post('/growers/1/products')
     .send('name=New Product')
     .send('cost=asdf')
     .send('supply=23')

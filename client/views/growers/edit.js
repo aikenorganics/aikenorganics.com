@@ -7,7 +7,7 @@ export default ({busy, canEdit, errors, grower, path}) => {
   const {id, mediumImage} = grower
 
   const upload = (e) => {
-    imageGrower(id, e.target.files[0]).then(() => e.target.value = '')
+    imageGrower(id, e.target.files[0]).then(() => e.target.value = '').catch(e => {})
   }
 
   return <div className='row'>

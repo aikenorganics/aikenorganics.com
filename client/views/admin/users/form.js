@@ -26,7 +26,7 @@ export default class Form extends Component {
   save (e) {
     e.preventDefault()
     const {id} = this.props.user
-    updateUser(id, this.state)
+    updateUser(id, this.state).catch(e => {})
   }
 
   render () {

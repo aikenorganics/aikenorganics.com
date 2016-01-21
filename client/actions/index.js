@@ -22,6 +22,7 @@ export const busy = (value) => {
 
 export const done = (value) => {
   store.dispatch({type: DONE})
+  if (value instanceof Error) throw value
   return value
 }
 
@@ -65,6 +66,11 @@ export const imageGrower = (id, file) => {
 }
 
 // Products
+
+export const createProduct = (id, values) => {
+  busy()
+  return post(`/growers/${id}/products`, {body: values}).then(done).catch(done)
+}
 
 export const updateProduct = (id, values) => {
   busy()

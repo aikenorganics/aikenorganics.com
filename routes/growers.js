@@ -65,33 +65,30 @@ router.post('/:grower_id', (req, res) => {
 })
 
 // New Product
-const newProduct = (req, res) => {
+router.get('/:grower_id/products/new', (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
-
   db.Category.all().then((categories) => {
-    res.render('products/new', {categories: categories})
-  })
-}
+    res.react({
+      grower: req.grower,
+      categories: categories
+    })
+  }).catch(res.error)
+})
 
-router.get('/:grower_id/products/new', newProduct)
-
-router.post('/:grower_id/products/new', (req, res) => {
+router.post('/:grower_id/products', (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
 
-  let props = req.permit(
+  const props = req.permit(
     'name', 'cost', 'unit', 'supply', 'category_id', 'description'
   )
   props.grower_id = req.grower.id
 
   db.Product.create(props).then((product) => {
-    res.flash('success', 'Saved')
-    res.redirect(`/products/${product.id}`)
+    res.json(product)
   }).catch((e) => {
     if (e.message !== 'invalid') throw e
     res.status(422)
-    res.locals.errors = e.model.errors
-    res.locals.product = e.model
-    newProduct(req, res)
+    res.json(e.model.errors)
   }).catch(res.error)
 })
 

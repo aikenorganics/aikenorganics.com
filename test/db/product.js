@@ -97,3 +97,10 @@ test('validate supply', function (t) {
   t.deepEqual(product.errors.supply, ['Supply cannot be negative'])
   t.end()
 })
+
+test('non-numeric supply', function (t) {
+  const product = new db.Product({supply: 'asdf'})
+  product.validate()
+  t.deepEqual(product.errors.supply, ['Supply must be a number'])
+  t.end()
+})

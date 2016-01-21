@@ -71,7 +71,9 @@ class Product extends Model {
       this.errors.cost = ['Cost must be a valid dollar amount']
     }
 
-    if (this.supply < 0) {
+    if (isNaN(+this.supply)) {
+      this.errors.supply = ['Supply must be a number']
+    } else if (this.supply < 0) {
       this.errors.supply = ['Supply cannot be negative']
     }
   }
