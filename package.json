@@ -12,9 +12,11 @@
   },
   "scripts": {
     "build": "./bin/build",
+    "dump": "heroku local:run ./bin/dump",
+    "postinstall": "./bin/postinstall",
     "start": "./bin/compile-js && env $(cat .env | xargs) node index.js",
     "test": "NODE_ENV=test heroku local:run --env=.testenv ./bin/test",
-    "postinstall": "./bin/postinstall"
+    "reset": "heroku local:run ./bin/reset"
   },
   "repository": {
     "type": "git",
