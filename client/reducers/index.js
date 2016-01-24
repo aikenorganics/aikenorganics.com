@@ -5,6 +5,7 @@ import grower from './grower'
 import growers from './growers'
 import location from './location'
 import locations from './locations'
+import market from './market'
 import product from './product'
 import products from './products'
 import user from './user'
@@ -26,7 +27,7 @@ export default combineReducers({
   growers,
   location,
   locations,
-  market: pass,
+  market,
   more: pass,
   page: pass,
   path: pass,

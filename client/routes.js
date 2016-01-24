@@ -24,12 +24,15 @@ import Emails from './views/admin/users/emails'
 import Users from './views/admin/users/index'
 import EditUser from './views/admin/users/edit'
 
+import Market from './views/admin/market/index'
+
 export default (state) => {
   return <Router state={state}>
     <Route path='/admin/' Component={Admin}>
       <Route path='locations' Component={Locations}/>
       <Route path='locations/:location_id/edit' Component={EditLocation}/>
       <Route path='locations/new' Component={NewLocation}/>
+      <Route path='market' Component={Market}/>
       <Route path='users' Component={Users}/>
       <Route path='users/emails' Component={Emails}/>
       <Route path='users/:user_id/edit' Component={EditUser}/>

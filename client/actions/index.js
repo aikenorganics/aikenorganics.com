@@ -9,6 +9,7 @@ export const REMOVE_LOCATION = 'REMOVE_LOCATION'
 export const UPDATE_LOCATION = 'UPDATE_LOCATION'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const UPDATE_USER = 'UPDATE_USER'
+export const UPDATE_MARKET = 'UPDATE_MARKET'
 export const BUSY = 'BUSY'
 export const DONE = 'DONE'
 export const SET_ERRORS = 'SET_ERRORS'
@@ -29,6 +30,16 @@ export const done = (value) => {
 // Errors
 
 export const setErrors = (errors) => store.dispatch({type: SET_ERRORS, errors})
+
+// Market
+
+export const updateMarket = (values) => {
+  busy()
+  return post('/admin/market', {body: values}).then((values) => {
+    store.dispatch({type: UPDATE_MARKET, values})
+    done()
+  }).catch(done)
+}
 
 // Cart
 

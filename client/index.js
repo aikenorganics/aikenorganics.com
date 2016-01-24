@@ -1,9 +1,5 @@
 import './pages'
 import message from './message'
-import marked from 'marked'
-
-// Sanitize markdown by default.
-marked.setOptions({sanitize: true})
 
 // Bootstrap relies on window.jQuery
 const $ = window.jQuery = require('jquery')

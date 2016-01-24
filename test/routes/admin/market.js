@@ -9,15 +9,18 @@ test('GET /admin/market is a 200', function (t) {
   })
 })
 
-test('POST /admin/market is a 302', function (t) {
+test('POST /admin/market is a 200', function (t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/admin/market')
-    .send('open=1')
-    .send('return_to=/')
-    .expect(302)
-    .end(function (e) {
+    .send({open: true, message: 'test'})
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .end(function (e, res) {
       if (e) return t.end(e)
+      t.is(typeof res.body.id, 'number')
+      t.is(res.body.open, true)
+      t.is(res.body.message, 'test')
       db.Market.find(1).then(function (market) {
         t.ok(market.open)
         t.end()
@@ -26,16 +29,19 @@ test('POST /admin/market is a 302', function (t) {
   })
 })
 
-test('POST /admin/market is a 302', function (t) {
+test('POST /admin/market is a 200', function (t) {
   t.hostname('closed.localhost')
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/admin/market')
-    .send('open=0')
-    .send('return_to=/')
-    .expect(302)
-    .end(function (e) {
+    .send({open: false, message: 'test'})
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .end(function (e, res) {
       if (e) return t.end(e)
+      t.is(typeof res.body.id, 'number')
+      t.is(res.body.open, false)
+      t.is(res.body.message, 'test')
       db.Market.find(2).then(function (market) {
         t.ok(!market.open)
         t.end()
