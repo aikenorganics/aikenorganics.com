@@ -1,10 +1,10 @@
 'use strict'
 
 // Vendor
-let ozymandias = require('ozymandias')
+const ozymandias = require('ozymandias')
 
 // The App!
-let app = module.exports = ozymandias()
+const app = module.exports = ozymandias()
 app.locals = require('./helpers')
 
 // Middleware
