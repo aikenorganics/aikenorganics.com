@@ -65,7 +65,7 @@
     "postcss-nested": "1.0.0",
     "react": "0.14.6",
     "react-dom": "0.14.6",
-    "redux": "3.0.5",
+    "redux": "3.0.6",
     "uglify-js": "2.6.1"
   },
   "devDependencies": {
