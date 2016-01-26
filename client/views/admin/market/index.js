@@ -41,7 +41,7 @@ export default class Index extends Component {
       <form onSubmit={(e) => this.save(e)}>
         <div className='form-group'>
           <label htmlFor='message'>Message</label>
-          <textarea id='message' className='form-control' value={message}
+          <textarea id='message' className='form-control' value={message} rows='5'
           onChange={(e) => this.setState({message: e.target.value})}/>
         </div>
         <p>
