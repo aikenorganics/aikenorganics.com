@@ -96,14 +96,7 @@ router.post('/:grower_id/products', (req, res) => {
 router.get('/:grower_id/orders', (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
 
-  const total = `(
-    select sum(quantity * cost) from product_orders
-    inner join orders on orders.id = product_orders.order_id
-    where product_id = products.id and orders.status = 'open'
-  ) as total`
-
   db.Product
-  .select('*', total)
   .where({grower_id: req.grower.id})
   .where('reserved > 0')
   .all().then((products) => {

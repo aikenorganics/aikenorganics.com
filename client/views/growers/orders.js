@@ -3,7 +3,9 @@ import Nav from './nav'
 
 export default ({canEdit, grower, mediumImage, path, products}) => {
   const {name} = grower
-  const total = products.reduce((sum, {cost}) => sum + +cost, 0).toFixed(2)
+  const total = products.reduce((sum, {cost, reserved}) => {
+    return sum + +cost * reserved
+  }, 0).toFixed(2)
 
   return <div className='row'>
     <div className='col-md-3 text-center'>
@@ -31,7 +33,7 @@ export default ({canEdit, grower, mediumImage, path, products}) => {
                 <a href={`/products/${id}`}>{name}</a>
               </td>
               <td>{reserved}</td>
-              <td>${(+cost).toFixed(2)}</td>
+              <td>${(+cost * reserved).toFixed(2)}</td>
             </tr>
           })}
         </tbody>
