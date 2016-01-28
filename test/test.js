@@ -14,28 +14,24 @@ app.post('/signin', (req, res) => {
 })
 
 // Export a function with the tape API.
-exports = module.exports = function (name, callback) {
-  tape(name, function (t) {
+exports = module.exports = (name, callback) => {
+  tape(name, (t) => {
     // Set up transactions.
     const transaction = db.transaction()
     db.query = transaction.query.bind(transaction)
 
     // Set a fake hostname
     app.set('hostname', 'open.localhost')
-    t.hostname = function (hostname) {
-      app.set('hostname', hostname)
-    }
+    t.hostname = (hostname) => app.set('hostname', hostname)
 
     // Request without the app requirement.
-    t.request = function () {
-      return request(app)
-    }
+    t.request = () => request(app)
 
     // Convenient agent reference.
     t.agent = request.agent(app)
 
     // Sign in, with error handling.
-    t.signIn = function (email) {
+    t.signIn = (email) => {
       return new Promise((resolve, reject) => {
         t.agent
         .post('/signin')
