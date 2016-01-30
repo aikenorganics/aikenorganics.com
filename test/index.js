@@ -2,15 +2,21 @@
 
 require('babel-register')({only: /client/})
 
-const test = require('tape')
 const db = require('../db')
+const app = require('../app')
+const tape = require('tape')
+const test = require('./test')
+const server = app.listen(4444)
 
 require('./db')
 require('./lib')
 require('./mid')
 require('./routes')
+require('./integration')
 
-test('teardown', (t) => {
+tape('teardown', (t) => {
+  server.close()
   db.close()
+  test.driver.quit()
   t.end()
 })
