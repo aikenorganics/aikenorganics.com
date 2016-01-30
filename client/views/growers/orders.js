@@ -1,5 +1,6 @@
 import React from 'react'
 import Nav from './nav'
+import Row from './order-row'
 
 export default ({canEdit, grower, mediumImage, path, products}) => {
   const {name} = grower
@@ -27,15 +28,7 @@ export default ({canEdit, grower, mediumImage, path, products}) => {
           </tr>
         </thead>
         <tbody>
-          {products.map(({cost, id, name, reserved}) => {
-            return <tr key={id}>
-              <td>
-                <a href={`/products/${id}`}>{name}</a>
-              </td>
-              <td>{reserved}</td>
-              <td>${(+cost * reserved).toFixed(2)}</td>
-            </tr>
-          })}
+          {products.map((product) => <Row product={product}/>)}
         </tbody>
         <tfoot>
           <tr>
