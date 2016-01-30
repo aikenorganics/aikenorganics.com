@@ -22,7 +22,7 @@ export default ({busy, cart, open, product, currentUser}) => {
         <div className='media-body'>
           {currentUser
             ? <div className='pull-right'>
-              <CartForm busy={busy} product={product} cart={cart}/>
+              <CartForm busy={busy} product={product} cart={cart} open={open}/>
             </div>
             : ''
           }

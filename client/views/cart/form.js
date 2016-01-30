@@ -1,12 +1,16 @@
 import React from 'react'
 import {updateCart} from '../../actions'
 
-export default ({busy, cart, product: {active, available, id}}) => {
+export default ({busy, cart, open, product: {active, available, id}}) => {
   const quantity = cart[id] || 0
   const canIncrement = quantity < available
   const save = (quantity) => updateCart(id, quantity).catch(e => {})
   const decrement = () => save(quantity - 1)
   const increment = () => save(quantity + 1)
+
+  if (!open) {
+    return <button className='btn btn-default' disabled>Market Closed</button>
+  }
 
   if (!available) {
     return <button className='btn btn-default' disabled>Sold Out</button>

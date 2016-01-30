@@ -9,7 +9,7 @@ export default ({busy, canEdit, cart, path, product, market: {open}, currentUser
     <div className='col-md-3 text-center'>
       {currentUser
         ? <p>
-          <CartForm busy={busy} product={product} cart={cart}/>
+          <CartForm busy={busy} product={product} cart={cart} open={open}/>
         </p>
         : ''
       }
