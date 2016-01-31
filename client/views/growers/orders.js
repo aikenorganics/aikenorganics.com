@@ -6,7 +6,7 @@ export default ({canEdit, grower, mediumImage, path, products}) => {
   const {name} = grower
   const total = products.reduce((sum, {cost, reserved}) => {
     return sum + +cost * reserved
-  }, 0).toFixed(2)
+  }, 0)
 
   return <div className='row'>
     <div className='col-md-3 text-center'>
@@ -34,7 +34,7 @@ export default ({canEdit, grower, mediumImage, path, products}) => {
           <tr>
             <td></td>
             <td></td>
-            <td>${total}</td>
+            <td>${total.toFixed(2)}</td>
           </tr>
         </tfoot>
       </table>

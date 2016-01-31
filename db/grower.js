@@ -70,7 +70,8 @@ class Grower extends Model {
   toJSON () {
     return Object.assign(super.toJSON(), {
       smallImage: this.smallImage,
-      mediumImage: this.mediumImage
+      mediumImage: this.mediumImage,
+      total: this.total
     })
   }
 

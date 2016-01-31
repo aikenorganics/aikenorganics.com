@@ -1,8 +1,7 @@
 'use strict'
 
-let ozymandias = require('ozymandias')
-let router = module.exports = ozymandias.Router()
-let db = require('../../db')
+const db = require('../../db')
+const router = module.exports = require('ozymandias').Router()
 
 // Find
 router.find('grower', () => db.Grower.include({userGrowers: 'user'}))
@@ -17,7 +16,7 @@ router.get('/', function (req, res) {
     where products.grower_id = growers.id and orders.status = 'complete'
   ) as total`)
   .order('name').all().then(function (growers) {
-    res.render('admin/growers/index', {growers: growers})
+    res.react({growers: growers})
   }).catch(res.error)
 })
 
