@@ -7,7 +7,7 @@ const router = module.exports = require('ozymandias').Router()
 router.find('grower', () => db.Grower.include({userGrowers: 'user'}))
 
 // Index
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
   db.Grower
   .select(`(
     select sum(quantity * product_orders.cost) from product_orders
@@ -15,13 +15,13 @@ router.get('/', function (req, res) {
     inner join orders on orders.id = product_orders.order_id
     where products.grower_id = growers.id and orders.status = 'complete'
   ) as total`)
-  .order('name').all().then(function (growers) {
+  .order('name').all().then((growers) => {
     res.react({growers: growers})
   }).catch(res.error)
 })
 
 // Show
-router.get('/:grower_id', function (req, res) {
+router.get('/:grower_id', (req, res) => {
   db.Product
   .join({productOrders: 'order'})
   .select('sum(quantity) as quantity')
@@ -29,44 +29,44 @@ router.get('/:grower_id', function (req, res) {
   .where({grower_id: req.grower.id})
   .where({productOrders: {order: {status: 'complete'}}})
   .groupBy('products.id')
-  .all().then(function (products) {
+  .all().then((products) => {
     res.render('admin/growers/show', {products: products})
   }).catch(res.error)
 })
 
 // Edit
-router.get('/:grower_id/users', function (req, res) {
+router.get('/:grower_id/users', (req, res) => {
   let ids = db.UserGrower.select('user_id').where({grower_id: req.grower.id})
-  db.User.not({id: ids}).all().then(function (users) {
+  db.User.not({id: ids}).all().then((users) => {
     res.render('admin/growers/users', {users: users})
   }).catch(res.error)
 })
 
 // Add User
-router.post('/:grower_id/adduser', function (req, res) {
+router.post('/:grower_id/adduser', (req, res) => {
   db.UserGrower.create({
     user_id: req.body.user_id,
     grower_id: req.grower.id
-  }).then(function () {
+  }).then(() => {
     res.flash('success', 'User Added')
     res.redirect(`/admin/growers/${req.grower.id}/users`)
   }).catch(res.error)
 })
 
 // Remove User
-router.post('/:grower_id/removeuser', function (req, res) {
+router.post('/:grower_id/removeuser', (req, res) => {
   db.UserGrower.where({
     user_id: req.body.user_id,
     grower_id: req.grower.id
-  }).delete().then(function () {
+  }).delete().then(() => {
     res.flash('success', 'User Removed')
     res.redirect(`/admin/growers/${req.grower.id}/users`)
   }).catch(res.error)
 })
 
 // Update
-router.post('/:grower_id', function (req, res) {
-  req.grower.update(req.permit('active')).then(function () {
+router.post('/:grower_id', (req, res) => {
+  req.grower.update(req.permit('active')).then(() => {
     res.flash('success', 'Saved')
     res.redirect(req.body.return_to)
   }).catch(res.error)
