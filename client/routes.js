@@ -27,11 +27,13 @@ import EditUser from './views/admin/users/edit'
 import Market from './views/admin/market/index'
 
 import AdminGrowers from './views/admin/growers/index'
+import AdminGrowersOrders from './views/admin/growers/orders'
 
 export default (state) => {
   return <Router state={state}>
     <Route path='/admin/' Component={Admin}>
       <Route path='growers' Component={AdminGrowers}/>
+      <Route path='growers/orders' Component={AdminGrowersOrders}/>
       <Route path='locations' Component={Locations}/>
       <Route path='locations/:location_id/edit' Component={EditLocation}/>
       <Route path='locations/new' Component={NewLocation}/>

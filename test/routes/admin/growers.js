@@ -11,6 +11,14 @@ test('GET /admin/growers is a 200', function (t) {
   })
 })
 
+test('GET /admin/growers/orders is a 200', function (t) {
+  t.signIn('admin@example.com').then(() => {
+    t.agent.get('/admin/growers/orders')
+    .expect(200)
+    .end(t.end)
+  })
+})
+
 test('GET /admin/growers/:id is a 200', function (t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get(`/admin/growers/1`)

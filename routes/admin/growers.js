@@ -20,6 +20,15 @@ router.get('/', (req, res) => {
   }).catch(res.error)
 })
 
+// Orders
+router.get('/orders', (req, res) => {
+  db.Grower
+  .where('exists(select id from products where reserved > 0 and grower_id = growers.id)')
+  .include('products').all().then((growers) => {
+    res.react({growers: growers})
+  }).catch(res.error)
+})
+
 // Show
 router.get('/:grower_id', (req, res) => {
   db.Product

@@ -71,6 +71,7 @@ class Grower extends Model {
     return Object.assign(super.toJSON(), {
       smallImage: this.smallImage,
       mediumImage: this.mediumImage,
+      products: this.products,
       total: this.total
     })
   }
