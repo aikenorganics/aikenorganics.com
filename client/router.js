@@ -27,12 +27,13 @@ export default class Router extends Component {
 
   match (route, prefix = '') {
     const {state} = this.props
-    const {children, Component, path} = route.props
+    const {Component, path} = route.props
+    const children = Children.toArray(route.props.children)
     prefix = prefix + path
 
-    if (children) {
-      for (let child of Children.toArray(children)) {
-        const match = this.match(child, prefix)
+    if (children.length) {
+      for (let i = 0; i < children.length; i++) {
+        const match = this.match(children[i], prefix)
         if (match) return <Component {...state}>{match}</Component>
       }
       return null
@@ -46,10 +47,10 @@ export default class Router extends Component {
   }
 
   render () {
-    const {children} = this.props
+    const children = Children.toArray(this.props.children)
 
-    for (let child of Children.toArray(children)) {
-      const match = this.match(child)
+    for (let i = 0; i < children.length; i++) {
+      const match = this.match(children[i])
       if (match) return match
     }
 
