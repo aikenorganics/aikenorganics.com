@@ -2,12 +2,16 @@
 -- PostgreSQL database dump
 --
 
+-- Dumped from database version 9.5.0
+-- Dumped by pg_dump version 9.5.0
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 SET search_path = public, pg_catalog;
 
@@ -412,7 +416,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: categories; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE categories (
@@ -444,7 +448,7 @@ ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 
 
 --
--- Name: growers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: growers; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE growers (
@@ -463,7 +467,7 @@ CREATE TABLE growers (
 
 
 --
--- Name: locations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: locations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE locations (
@@ -495,7 +499,7 @@ ALTER SEQUENCE locations_id_seq OWNED BY locations.id;
 
 
 --
--- Name: markets; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: markets; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE markets (
@@ -528,7 +532,7 @@ ALTER SEQUENCE markets_id_seq OWNED BY markets.id;
 
 
 --
--- Name: orders; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: orders; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE orders (
@@ -562,7 +566,7 @@ ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
 
 
 --
--- Name: product_orders; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: product_orders; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE product_orders (
@@ -596,7 +600,7 @@ ALTER SEQUENCE product_orders_id_seq OWNED BY product_orders.id;
 
 
 --
--- Name: products; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: products; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE products (
@@ -657,7 +661,7 @@ ALTER SEQUENCE suppliers_id_seq OWNED BY growers.id;
 
 
 --
--- Name: tokens; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: tokens; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE tokens (
@@ -668,7 +672,7 @@ CREATE TABLE tokens (
 
 
 --
--- Name: user_growers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: user_growers; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE user_growers (
@@ -700,7 +704,7 @@ ALTER SEQUENCE user_growers_id_seq OWNED BY user_growers.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE users (
@@ -708,7 +712,7 @@ CREATE TABLE users (
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     email character varying(255) NOT NULL,
-    password character varying(255) NOT NULL,
+    password character varying(255),
     is_admin boolean DEFAULT false NOT NULL,
     first character varying(255) DEFAULT ''::character varying NOT NULL,
     last character varying(255) DEFAULT ''::character varying NOT NULL,
@@ -990,7 +994,7 @@ SELECT pg_catalog.setval('users_id_seq', 7, true);
 
 
 --
--- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY categories
@@ -998,7 +1002,7 @@ ALTER TABLE ONLY categories
 
 
 --
--- Name: locations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: locations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY locations
@@ -1006,7 +1010,7 @@ ALTER TABLE ONLY locations
 
 
 --
--- Name: markets_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: markets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY markets
@@ -1014,7 +1018,7 @@ ALTER TABLE ONLY markets
 
 
 --
--- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY orders
@@ -1022,7 +1026,7 @@ ALTER TABLE ONLY orders
 
 
 --
--- Name: product_orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: product_orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY product_orders
@@ -1030,7 +1034,7 @@ ALTER TABLE ONLY product_orders
 
 
 --
--- Name: products_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY products
@@ -1038,7 +1042,7 @@ ALTER TABLE ONLY products
 
 
 --
--- Name: suppliers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: suppliers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY growers
@@ -1046,7 +1050,7 @@ ALTER TABLE ONLY growers
 
 
 --
--- Name: tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tokens
@@ -1054,7 +1058,7 @@ ALTER TABLE ONLY tokens
 
 
 --
--- Name: user_growers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: user_growers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY user_growers
@@ -1062,7 +1066,7 @@ ALTER TABLE ONLY user_growers
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -1070,91 +1074,91 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: categories_name_uniq_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: categories_name_uniq_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX categories_name_uniq_index ON categories USING btree (name);
 
 
 --
--- Name: growers_active_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: growers_active_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX growers_active_index ON growers USING btree (active);
 
 
 --
--- Name: markets_domain_unique_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: markets_domain_unique_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX markets_domain_unique_index ON markets USING btree (domain);
 
 
 --
--- Name: orders_location_id_status_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: orders_location_id_status_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX orders_location_id_status_index ON orders USING btree (location_id, status);
 
 
 --
--- Name: orders_status_location_id_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: orders_status_location_id_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX orders_status_location_id_index ON orders USING btree (status, location_id);
 
 
 --
--- Name: orders_user_id_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: orders_user_id_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX orders_user_id_index ON orders USING btree (user_id);
 
 
 --
--- Name: product_orders_unique_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: product_orders_unique_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX product_orders_unique_index ON product_orders USING btree (order_id, product_id);
 
 
 --
--- Name: product_search_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: product_search_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX product_search_index ON products USING gin (search);
 
 
 --
--- Name: products_active_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: products_active_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX products_active_index ON products USING btree (active);
 
 
 --
--- Name: products_category_id_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: products_category_id_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX products_category_id_index ON products USING btree (category_id);
 
 
 --
--- Name: products_grower_id_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: products_grower_id_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX products_grower_id_index ON products USING btree (grower_id);
 
 
 --
--- Name: user_growers_unique_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: user_growers_unique_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX user_growers_unique_index ON user_growers USING btree (user_id, grower_id);
 
 
 --
--- Name: users_lower_case_email_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: users_lower_case_email_index; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX users_lower_case_email_index ON users USING btree (lower((email)::text));
