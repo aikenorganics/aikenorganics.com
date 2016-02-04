@@ -17,7 +17,6 @@ export default ({more, page, search, url, users}) => {
       <thead>
         <tr>
           <th></th>
-          <th></th>
           <th>Email</th>
           <th>First</th>
           <th>Last</th>
@@ -27,10 +26,9 @@ export default ({more, page, search, url, users}) => {
         </tr>
       </thead>
       <tbody>
-        {users.map(({id, email, is_admin, first, last, member_until, phone}, i) => {
+        {users.map(({id, email, is_admin, first, last, member_until, phone}) => {
           return <tr key={id}>
             <td><a className='btn btn-default btn-xs' href={`/admin/users/${id}/edit`}>Edit</a></td>
-            <td>{i + 1}</td>
             <td>{email}</td>
             <td>{first || '-'}</td>
             <td>{last || '-'}</td>
