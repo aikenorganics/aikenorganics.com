@@ -13,14 +13,22 @@ router.find('user_id', '_user', () => db.User.select(`exists(
 router.get('/', (req, res) => {
   let users = db.User
 
+  // Search
   if (req.query.search) {
     users = users.where(
       "search @@ to_tsquery('simple', ?)", `${req.query.search}:*`
     )
   }
 
-  users.order('email').all().then((users) => {
-    res.react({users: users})
+  // Pagination
+  const page = res.locals.page = +(req.query.page || 1)
+
+  users.order('email').paginate(page, 100).then((users) => {
+    res.react({
+      more: users.more,
+      page: page,
+      users: users
+    })
   }).catch(res.error)
 })
 

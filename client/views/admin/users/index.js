@@ -1,7 +1,8 @@
 import React from 'react'
 import moment from 'moment'
+import {withParams} from '../../../url'
 
-export default ({search, users}) => {
+export default ({more, page, search, url, users}) => {
   return <div>
     <a href='/admin/users/new' className='btn btn-sm btn-default pull-right'>
       New User
@@ -50,5 +51,18 @@ export default ({search, users}) => {
         })}
       </tbody>
     </table>
+    <hr/>
+    {more
+      ? <a href={withParams(url, {page: page + 1})} className='pull-right'>
+        Next Page →
+      </a>
+      : ''
+    }
+    {page > 1
+      ? <a href={withParams(url, {page: page - 1})}>
+        ← Previous Page
+      </a>
+      : ''
+    }
   </div>
 }
