@@ -637,9 +637,9 @@
       "resolved": "https://registry.npmjs.org/bindings/-/bindings-1.2.1.tgz"
     },
     "bl": {
-      "version": "1.0.1",
+      "version": "1.0.2",
       "from": "bl@>=1.0.0 <1.1.0",
-      "resolved": "https://registry.npmjs.org/bl/-/bl-1.0.1.tgz"
+      "resolved": "https://registry.npmjs.org/bl/-/bl-1.0.2.tgz"
     },
     "blob": {
       "version": "0.0.4",
@@ -3464,9 +3464,9 @@
       "resolved": "https://registry.npmjs.org/number-is-nan/-/number-is-nan-1.0.0.tgz"
     },
     "oauth-sign": {
-      "version": "0.8.0",
+      "version": "0.8.1",
       "from": "oauth-sign@>=0.8.0 <0.9.0",
-      "resolved": "https://registry.npmjs.org/oauth-sign/-/oauth-sign-0.8.0.tgz"
+      "resolved": "https://registry.npmjs.org/oauth-sign/-/oauth-sign-0.8.1.tgz"
     },
     "object-assign": {
       "version": "4.0.1",
@@ -3566,9 +3566,9 @@
       "resolved": "https://registry.npmjs.org/output-file-sync/-/output-file-sync-1.1.1.tgz"
     },
     "ozymandias": {
-      "version": "0.44.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#d2d99f382700d253d140b16f2991f45293590bba",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#d2d99f382700d253d140b16f2991f45293590bba",
+      "version": "0.45.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#e1721d1189d2cd48449ee23a9c3d35be2370f808",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#e1721d1189d2cd48449ee23a9c3d35be2370f808",
       "dependencies": {
         "glob": {
           "version": "6.0.4",
