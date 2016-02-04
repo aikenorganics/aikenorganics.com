@@ -3,10 +3,13 @@ import moment from 'moment'
 
 export default ({search, users}) => {
   return <div>
-    <h1>Users</h1>
+    <a href='/admin/users/new' className='btn btn-sm btn-default pull-right'>
+      New User
+    </a>
     <form className='form-inline' action='/admin/users'>
       <input type='search' className='form-control' name='search' defaultValue={search} placeholder='Search…'/>
-      <a href='/admin/users/emails'> Email List</a>
+      <span> </span>
+      <a href='/admin/users/emails'>Email List</a>
     </form>
     <hr/>
     <table className='table'>

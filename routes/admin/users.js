@@ -36,6 +36,18 @@ router.get('/:user_id/edit', (req, res) => {
   res.react({user: req._user})
 })
 
+// New
+router.get('/new', (req, res) => { res.react() })
+
+// Create
+router.post('/', (req, res) => {
+  db.User.create(req.permit(
+    'email', 'first', 'last', 'phone', 'member_until'
+  )).then((user) => {
+    res.json(user)
+  }).catch(res.error)
+})
+
 // Update
 router.post('/:user_id', (req, res) => {
   req._user.update(req.permit(

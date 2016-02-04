@@ -126,6 +126,11 @@ export const createLocation = (values) => {
 
 // Users
 
+export const createUser = (values) => {
+  busy()
+  return post('/admin/users', {body: values}).then(done).catch(done)
+}
+
 export const updateUser = (id, values) => {
   busy()
   return post(`/admin/users/${id}`, {body: values}).then(() => {

@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {updateUser} from '../../../actions'
+import {createUser, updateUser} from '../../../actions'
 
 export default class Form extends Component {
 
@@ -12,25 +12,31 @@ export default class Form extends Component {
 
   constructor (props) {
     super(props)
-    const {email, first, is_admin, last, phone, member_until} = props.user
+    const {email, first, is_admin, last, phone, member_until} = props.user || {}
     this.state = {
-      email,
-      first,
-      is_admin,
-      last,
-      phone,
-      member_until
+      email: email || '',
+      first: first || '',
+      is_admin: is_admin || false,
+      last: last || '',
+      phone: phone || '',
+      member_until: member_until || ''
     }
   }
 
   save (e) {
     e.preventDefault()
-    const {id} = this.props.user
-    updateUser(id, this.state).catch(e => {})
+    if (this.props.user) {
+      const {id} = this.props.user
+      updateUser(id, this.state).catch(e => {})
+    } else {
+      createUser(this.state).then((user) => {
+        window.location = `/admin/users/${user.id}/edit`
+      }).catch(e => {})
+    }
   }
 
   render () {
-    const {busy} = this.props
+    const {busy, user} = this.props
     const {email, first, is_admin, last, member_until, phone} = this.state
 
     return <form onSubmit={(e) => this.save(e)}>
@@ -54,12 +60,15 @@ export default class Form extends Component {
         <label htmlFor='member_until'>Member Until</label>
         <input type='date' id='member_until' className='form-control' value={(member_until || '').slice(0, 10)} onChange={(e) => this.setState({member_until: e.target.value})}/>
       </div>
-      <div className='form-group'>
-        <label>
-          <input type='checkbox' value='1' checked={is_admin} onChange={(e) => this.setState({is_admin: e.target.checked})}/>
-          <span> Admin</span>
-        </label>
-      </div>
+      {user
+        ? <div className='form-group'>
+          <label>
+            <input type='checkbox' value='1' checked={is_admin} onChange={(e) => this.setState({is_admin: e.target.checked})}/>
+            <span> Admin</span>
+          </label>
+        </div>
+        : ''
+      }
       <div className='form-group'>
         <button type='submit' className='btn btn-primary' disabled={busy}>
           Save

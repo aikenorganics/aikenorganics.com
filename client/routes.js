@@ -22,6 +22,7 @@ import NewLocation from './views/admin/locations/new'
 
 import Emails from './views/admin/users/emails'
 import Users from './views/admin/users/index'
+import NewUser from './views/admin/users/new'
 import EditUser from './views/admin/users/edit'
 
 import Market from './views/admin/market/index'
@@ -39,6 +40,7 @@ export default (state) => {
       <Route path='locations/new' Component={NewLocation}/>
       <Route path='market' Component={Market}/>
       <Route path='users' Component={Users}/>
+      <Route path='users/new' Component={NewUser}/>
       <Route path='users/emails' Component={Emails}/>
       <Route path='users/:user_id/edit' Component={EditUser}/>
     </Route>
