@@ -21,11 +21,11 @@ export default class Form extends Component {
     e.preventDefault()
     if (this.props.grower) {
       const {id} = this.props.grower
-      updateGrower(id, this.state).catch(e => {})
+      updateGrower(id, this.state).catch((e) => {})
     } else {
       createGrower(this.state).then(({id}) => {
         window.location = `/growers/${id}`
-      }).catch(e => {})
+      }).catch((e) => {})
     }
   }
 

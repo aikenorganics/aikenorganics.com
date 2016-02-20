@@ -27,7 +27,7 @@ export default class Edit extends Component {
 
     updateLocation(id, {name}).then(() => {
       window.location = '/admin/locations'
-    }).catch(e => {})
+    }).catch((e) => {})
   }
 
   render () {

@@ -38,12 +38,12 @@ export default class Form extends Component {
     e.preventDefault()
     if (this.props.product) {
       const {id} = this.props.product
-      updateProduct(id, this.state).catch(e => {})
+      updateProduct(id, this.state).catch((e) => {})
     } else {
       const {id} = this.props.grower
       createProduct(id, this.state).then(({id}) => {
         window.location = `/products/${id}`
-      }).catch(e => {})
+      }).catch((e) => {})
     }
   }
 

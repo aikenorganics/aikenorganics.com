@@ -20,7 +20,7 @@ export default ({busy, canEdit, grower, path, products}) => {
           </tr>
         </thead>
         <tbody>
-          {products.map(product => (
+          {products.map((product) => (
             <Row busy={busy} product={product} key={product.id}/>
           ))}
         </tbody>

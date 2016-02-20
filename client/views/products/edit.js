@@ -7,7 +7,9 @@ export default ({busy, categories, canEdit, errors, path, product}) => {
   const {active, id, grower, mediumImage} = product
 
   const upload = (e) => {
-    imageProduct(id, e.target.files[0]).then(() => e.target.value = '').catch(e => {})
+    imageProduct(id, e.target.files[0])
+    .then(() => { e.target.value = '' })
+    .catch((e) => {})
   }
 
   return <div className='row'>
@@ -25,11 +27,11 @@ export default ({busy, categories, canEdit, errors, path, product}) => {
       <div className='pull-right'>
         {active
           ? <button className='btn btn-default btn-sm' disabled={busy}
-            onClick={() => updateProduct(id, {active: false}).catch(e => {})}>
+            onClick={() => updateProduct(id, {active: false}).catch((e) => {})}>
             Deactivate
           </button>
           : <button className='btn btn-primary btn-sm' disabled={busy}
-            onClick={() => updateProduct(id, {active: true}).catch(e => {})}>
+            onClick={() => updateProduct(id, {active: true}).catch((e) => {})}>
             Activate
           </button>
         }

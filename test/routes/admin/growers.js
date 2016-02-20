@@ -21,7 +21,7 @@ test('GET /admin/growers/orders is a 200', function (t) {
 
 test('GET /admin/growers/:id is a 200', function (t) {
   t.signIn('admin@example.com').then(() => {
-    t.agent.get(`/admin/growers/1`)
+    t.agent.get('/admin/growers/1')
     .expect(200)
     .end(t.end)
   })
@@ -29,7 +29,7 @@ test('GET /admin/growers/:id is a 200', function (t) {
 
 test('GET /admin/growers/:id/users is a 200', function (t) {
   t.signIn('admin@example.com').then(() => {
-    t.agent.get(`/admin/growers/1/users`)
+    t.agent.get('/admin/growers/1/users')
     .expect(200)
     .end(t.end)
   })

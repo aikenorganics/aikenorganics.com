@@ -16,7 +16,7 @@ export default ({products}) => {
         </tr>
       </thead>
       <tbody>
-        {products.filter(product => product.reserved).map((product) => {
+        {products.filter((product) => product.reserved).map((product) => {
           return <Row product={product}/>
         })}
       </tbody>

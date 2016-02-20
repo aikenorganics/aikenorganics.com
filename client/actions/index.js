@@ -45,7 +45,7 @@ export const updateMarket = (values) => {
 
 export const updateCart = (product_id, quantity) => {
   busy()
-  return post(`/cart`, {body: {product_id, quantity}}).then(() => {
+  return post('/cart', {body: {product_id, quantity}}).then(() => {
     store.dispatch({type: UPDATE_CART, product_id, quantity})
     done()
   }).catch(done)
@@ -121,7 +121,7 @@ export const destroyLocation = (id) => {
 
 export const createLocation = (values) => {
   busy()
-  return post(`/admin/locations`, {body: values}).then(done).catch(done)
+  return post('/admin/locations', {body: values}).then(done).catch(done)
 }
 
 // Users

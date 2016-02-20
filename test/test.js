@@ -43,7 +43,7 @@ exports = module.exports = (name, callback) => {
     }
 
     // Find an element with a CSS selector.
-    t.$ = selector => driver.findElement(By.css(selector))
+    t.$ = (selector) => driver.findElement(By.css(selector))
 
     // Get the current path.
     t.getPath = () => {
@@ -73,7 +73,7 @@ exports = module.exports = (name, callback) => {
         .post('/signin')
         .send(`email=${email}`)
         .expect(200)
-        .end(e => e ? reject(e) : resolve())
+        .end((e) => e ? reject(e) : resolve())
       }).catch(t.end)
     }
 

@@ -8,7 +8,9 @@ export default ({busy, user}) => {
 
   const destroy = () => {
     if (!window.confirm('Are you sure?')) return
-    destroyUser(id).then(() => window.location = '/admin/users').catch(e => {})
+    destroyUser(id).then(() => {
+      window.location = '/admin/users'
+    }).catch((e) => {})
   }
 
   return <div>

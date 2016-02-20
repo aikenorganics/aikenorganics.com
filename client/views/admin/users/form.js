@@ -27,11 +27,11 @@ export default class Form extends Component {
     e.preventDefault()
     if (this.props.user) {
       const {id} = this.props.user
-      updateUser(id, this.state).catch(e => {})
+      updateUser(id, this.state).catch((e) => {})
     } else {
       createUser(this.state).then((user) => {
         window.location = `/admin/users/${user.id}/edit`
-      }).catch(e => {})
+      }).catch((e) => {})
     }
   }
 

@@ -47,7 +47,7 @@ export default class ProductRow extends Component {
   }
 
   save (values) {
-    updateProduct(this.props.product.id, values).catch(e => {})
+    updateProduct(this.props.product.id, values).catch((e) => {})
   }
 
   render () {

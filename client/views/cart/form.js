@@ -4,7 +4,7 @@ import {updateCart} from '../../actions'
 export default ({busy, cart, open, product: {active, available, id}}) => {
   const quantity = cart[id] || 0
   const canIncrement = quantity < available
-  const save = (quantity) => updateCart(id, quantity).catch(e => {})
+  const save = (quantity) => updateCart(id, quantity).catch((e) => {})
   const decrement = () => save(quantity - 1)
   const increment = () => save(quantity + 1)
 

@@ -20,7 +20,7 @@ export default class Index extends Component {
 
   save (e) {
     e.preventDefault()
-    updateMarket(this.state).catch(e => {})
+    updateMarket(this.state).catch((e) => {})
   }
 
   render () {
@@ -32,8 +32,8 @@ export default class Index extends Component {
       <p>
         <strong>The market is {open ? 'open' : 'closed'}. </strong>
         <button type='button' disabled={busy}
-        className={`btn ${open ? 'btn-danger' : 'btn-success'}`}
-        onClick={() => updateMarket({open: !open}).catch(e => {})}>
+          className={`btn ${open ? 'btn-danger' : 'btn-success'}`}
+          onClick={() => updateMarket({open: !open}).catch((e) => {})}>
           {open ? 'Close' : 'Open'} It
         </button>
       </p>
@@ -42,7 +42,7 @@ export default class Index extends Component {
         <div className='form-group'>
           <label htmlFor='message'>Message</label>
           <textarea id='message' className='form-control' value={message} rows='5'
-          onChange={(e) => this.setState({message: e.target.value})}/>
+            onChange={(e) => this.setState({message: e.target.value})}/>
         </div>
         <p>
           <button className='btn btn-primary' disabled={busy}>

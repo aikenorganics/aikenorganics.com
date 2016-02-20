@@ -18,7 +18,7 @@ export default class New extends Component {
     e.preventDefault()
     createLocation({name: this.state.name}).then(() => {
       window.location = '/admin/locations'
-    }).catch(e => {})
+    }).catch((e) => {})
   }
 
   render () {

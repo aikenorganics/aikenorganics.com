@@ -19,7 +19,7 @@ export default ({grower}) => {
           </div>
         </div>
         <div className='media-body'>
-          {email ? <a href={`mailto:${email}`} target='_blank'>{email}</a> : '' }
+          {email ? <a href={`mailto:${email}`} target='_blank'>{email}</a> : ''}
           {email && url ? <br/> : ''}
           {url ? <a href={url} target='_blank'>{url}</a> : ''}
           {location && (email || url) ? <br/> : ''}
