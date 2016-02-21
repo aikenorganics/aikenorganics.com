@@ -986,9 +986,9 @@
       "resolved": "https://registry.npmjs.org/css-color-names/-/css-color-names-0.0.3.tgz"
     },
     "cssnano": {
-      "version": "3.4.0",
-      "from": "cssnano@3.4.0",
-      "resolved": "https://registry.npmjs.org/cssnano/-/cssnano-3.4.0.tgz"
+      "version": "3.5.2",
+      "from": "cssnano@latest",
+      "resolved": "https://registry.npmjs.org/cssnano/-/cssnano-3.5.2.tgz"
     },
     "csso": {
       "version": "1.4.4",
