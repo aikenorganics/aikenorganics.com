@@ -44,8 +44,14 @@ class ProductOrder extends Model {
     }
   }
 
-  total () {
+  get total () {
     return +this.cost * this.quantity
+  }
+
+  toJSON () {
+    return Object.extend(super.toJSON(), {
+      total: this.total
+    })
   }
 
 }

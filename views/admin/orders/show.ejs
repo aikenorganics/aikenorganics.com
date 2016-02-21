@@ -50,7 +50,7 @@
               </select>
             </form>
           </td>
-          <td><%= productOrder.total().toFixed(2) %></td>
+          <td><%= productOrder.total.toFixed(2) %></td>
           <td>
             <form method='POST' action='/admin/product-orders/<%= productOrder.id %>/remove'>
               <input type='hidden' name='return_to' value='<%= req.originalUrl %>'>
@@ -81,7 +81,7 @@
       </td>
       <td></td>
       <td></td>
-      <td><strong>$<%= order.total().toFixed(2) %></strong></td>
+      <td><strong>$<%= order.total.toFixed(2) %></strong></td>
       <td></td>
     </tfoot>
   </table>

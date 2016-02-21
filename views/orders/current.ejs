@@ -27,7 +27,7 @@
             <td><a href='/products/<%= po.product.id %>'><%= po.product.name %></a></td>
             <td>$<%= po.cost %></td>
             <td><%= po.quantity %></td>
-            <td><%= po.total().toFixed(2) %></td>
+            <td><%= po.total.toFixed(2) %></td>
           </tr>
         <% }) %>
       </tbody>
@@ -35,7 +35,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td><strong>$<%= order.total().toFixed(2) %></strong></td>
+        <td><strong>$<%= order.total.toFixed(2) %></strong></td>
       </tfoot>
     </table>
     <% if (locals.open) { %>

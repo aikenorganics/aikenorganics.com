@@ -1,6 +1,6 @@
 'use strict'
 
-let Model = require('./model')
+const Model = require('./model')
 
 class Order extends Model {
 
@@ -20,10 +20,16 @@ class Order extends Model {
     ]
   }
 
-  total () {
-    return this.productOrders.reduce(function (total, productOrder) {
-      return total + productOrder.total()
+  get total () {
+    return (this.productOrders || []).reduce((total, productOrder) => {
+      return total + productOrder.total
     }, 0)
+  }
+
+  toJSON () {
+    return Object.extend(super.toJSON(), {
+      total: this.total
+    })
   }
 
 }

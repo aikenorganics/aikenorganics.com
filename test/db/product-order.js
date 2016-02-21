@@ -8,7 +8,7 @@ test('ProductOrder reports the correct cost', function (t) {
     cost: '5.75',
     quantity: 2
   })
-  t.is(productOrder.total(), 11.50)
+  t.is(productOrder.total, 11.50)
   t.end()
 })
 

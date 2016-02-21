@@ -1,10 +1,16 @@
 'use strict'
 
-let db = require('../../db')
-let test = require('../test')
+const db = require('../../db')
+const test = require('../test')
 
-test('Order reports the correct cost', function (t) {
-  let order = new db.Order()
+test('orders without productOrders have a zero total', (t) => {
+  const order = new db.Order()
+  t.is(order.total, 0)
+  t.end()
+})
+
+test('Order reports the correct cost', (t) => {
+  const order = new db.Order()
   order.productOrders = []
 
   order.productOrders.push(new db.ProductOrder({
@@ -27,6 +33,6 @@ test('Order reports the correct cost', function (t) {
     supply: 10
   })
 
-  t.equal(order.total(), 19)
+  t.equal(order.total, 19)
   t.end()
 })
