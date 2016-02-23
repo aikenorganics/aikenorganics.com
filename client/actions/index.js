@@ -1,4 +1,4 @@
-import {_delete, post} from '../json'
+import {DELETE, POST} from '../json'
 import store from '../store'
 
 // Action Constants
@@ -35,7 +35,7 @@ export const setErrors = (errors) => store.dispatch({type: SET_ERRORS, errors})
 
 export const updateMarket = (values) => {
   busy()
-  return post('/admin/market', {body: values}).then((values) => {
+  return POST('/admin/market', {body: values}).then((values) => {
     store.dispatch({type: UPDATE_MARKET, values})
     done()
   }).catch(done)
@@ -45,7 +45,7 @@ export const updateMarket = (values) => {
 
 export const updateCart = (product_id, quantity) => {
   busy()
-  return post('/cart', {body: {product_id, quantity}}).then(() => {
+  return POST('/cart', {body: {product_id, quantity}}).then(() => {
     store.dispatch({type: UPDATE_CART, product_id, quantity})
     done()
   }).catch(done)
@@ -55,12 +55,12 @@ export const updateCart = (product_id, quantity) => {
 
 export const createGrower = (values) => {
   busy()
-  return post('/growers', {body: values}).then(done).catch(done)
+  return POST('/growers', {body: values}).then(done).catch(done)
 }
 
 export const updateGrower = (id, values) => {
   busy()
-  return post(`/growers/${id}`, {body: values}).then(() => {
+  return POST(`/growers/${id}`, {body: values}).then(() => {
     store.dispatch({type: UPDATE_GROWER, id, values})
     done()
   }).catch(done)
@@ -70,7 +70,7 @@ export const imageGrower = (id, file) => {
   const data = new window.FormData()
   data.append('image', file)
   busy()
-  return post(`/growers/${id}/image`, {body: data}).then((values) => {
+  return POST(`/growers/${id}/image`, {body: data}).then((values) => {
     store.dispatch({type: UPDATE_GROWER, id, values})
     done()
   }).catch(done)
@@ -80,12 +80,12 @@ export const imageGrower = (id, file) => {
 
 export const createProduct = (id, values) => {
   busy()
-  return post(`/growers/${id}/products`, {body: values}).then(done).catch(done)
+  return POST(`/growers/${id}/products`, {body: values}).then(done).catch(done)
 }
 
 export const updateProduct = (id, values) => {
   busy()
-  return post(`/products/${id}`, {body: values}).then(() => {
+  return POST(`/products/${id}`, {body: values}).then(() => {
     store.dispatch({type: UPDATE_PRODUCT, id, values})
     done()
   }).catch(done)
@@ -95,7 +95,7 @@ export const imageProduct = (id, file) => {
   const data = new window.FormData()
   data.append('image', file)
   busy()
-  return post(`/products/${id}/image`, {body: data}).then((values) => {
+  return POST(`/products/${id}/image`, {body: data}).then((values) => {
     store.dispatch({type: UPDATE_PRODUCT, id, values})
     done()
   }).catch(done)
@@ -105,7 +105,7 @@ export const imageProduct = (id, file) => {
 
 export const updateLocation = (id, values) => {
   busy()
-  return post(`/admin/locations/${id}`, {body: values}).then(() => {
+  return POST(`/admin/locations/${id}`, {body: values}).then(() => {
     store.dispatch({type: UPDATE_LOCATION, id, values})
     done()
   }).catch(done)
@@ -113,7 +113,7 @@ export const updateLocation = (id, values) => {
 
 export const destroyLocation = (id) => {
   busy()
-  return _delete(`/admin/locations/${id}`).then(() => {
+  return DELETE(`/admin/locations/${id}`).then(() => {
     store.dispatch({type: REMOVE_LOCATION, id})
     done()
   }).catch(done)
@@ -121,19 +121,19 @@ export const destroyLocation = (id) => {
 
 export const createLocation = (values) => {
   busy()
-  return post('/admin/locations', {body: values}).then(done).catch(done)
+  return POST('/admin/locations', {body: values}).then(done).catch(done)
 }
 
 // Users
 
 export const createUser = (values) => {
   busy()
-  return post('/admin/users', {body: values}).then(done).catch(done)
+  return POST('/admin/users', {body: values}).then(done).catch(done)
 }
 
 export const updateUser = (id, values) => {
   busy()
-  return post(`/admin/users/${id}`, {body: values}).then(() => {
+  return POST(`/admin/users/${id}`, {body: values}).then(() => {
     store.dispatch({type: UPDATE_USER, id, values})
     done()
   }).catch(done)
@@ -141,14 +141,14 @@ export const updateUser = (id, values) => {
 
 export const destroyUser = (id) => {
   busy()
-  return _delete(`/admin/users/${id}`).then(done).catch(done)
+  return DELETE(`/admin/users/${id}`).then(done).catch(done)
 }
 
 export const imageUser = (id, file) => {
   const data = new window.FormData()
   data.append('image', file)
   busy()
-  return post(`/admin/users/${id}/image`, {body: data}).then((values) => {
+  return POST(`/admin/users/${id}/image`, {body: data}).then((values) => {
     store.dispatch({type: UPDATE_USER, id, values})
     done()
   }).catch(done)
