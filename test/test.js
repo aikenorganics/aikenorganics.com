@@ -71,7 +71,7 @@ exports = module.exports = (name, callback) => {
       return new Promise((resolve, reject) => {
         t.agent
         .post('/signin')
-        .send(`email=${email}`)
+        .send({email: email})
         .expect(200)
         .end((e) => e ? reject(e) : resolve())
       }).catch(t.end)
