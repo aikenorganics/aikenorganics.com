@@ -2120,9 +2120,9 @@
       "resolved": "https://registry.npmjs.org/jodid25519/-/jodid25519-1.0.2.tgz"
     },
     "jquery": {
-      "version": "2.2.0",
-      "from": "jquery@2.2.0",
-      "resolved": "https://registry.npmjs.org/jquery/-/jquery-2.2.0.tgz"
+      "version": "2.2.1",
+      "from": "jquery@latest",
+      "resolved": "https://registry.npmjs.org/jquery/-/jquery-2.2.1.tgz"
     },
     "js-base64": {
       "version": "2.1.9",
@@ -3807,9 +3807,9 @@
       "resolved": "https://registry.npmjs.org/ua-parser-js/-/ua-parser-js-0.7.10.tgz"
     },
     "uglify-js": {
-      "version": "2.6.1",
-      "from": "uglify-js@2.6.1",
-      "resolved": "https://registry.npmjs.org/uglify-js/-/uglify-js-2.6.1.tgz",
+      "version": "2.6.2",
+      "from": "uglify-js@latest",
+      "resolved": "https://registry.npmjs.org/uglify-js/-/uglify-js-2.6.2.tgz",
       "dependencies": {
         "async": {
           "version": "0.2.10",

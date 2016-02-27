@@ -54,7 +54,7 @@
     "cssnano": "3.5.2",
     "es6-promise": "3.1.2",
     "isomorphic-fetch": "2.2.1",
-    "jquery": "2.2.0",
+    "jquery": "2.2.1",
     "marked": "0.3.5",
     "moment": "2.11.2",
     "multer": "1.1.0",
@@ -66,7 +66,7 @@
     "react": "0.14.7",
     "react-dom": "0.14.7",
     "redux": "3.3.1",
-    "uglify-js": "2.6.1"
+    "uglify-js": "2.6.2"
   },
   "devDependencies": {
     "deep-freeze": "0.0.1",
