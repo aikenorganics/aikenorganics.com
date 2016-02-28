@@ -17,6 +17,7 @@ const driver = new Builder().forBrowser('chrome').build()
 // Convenient sign in.
 app.post('/signin', (req, res) => {
   db.User.where({email: req.body.email}).find().then((user) => {
+    if (!user) throw new Error(`User not found: ${req.body.email}`)
     req.signIn(user)
     res.end()
   }).catch(res.error)
