@@ -21,13 +21,16 @@ class Order extends Model {
   }
 
   get total () {
-    return (this.productOrders || []).reduce((total, productOrder) => {
+    if (!this.productOrders) return undefined
+    return this.productOrders.reduce((total, productOrder) => {
       return total + productOrder.total
     }, 0)
   }
 
   toJSON () {
-    return Object.extend(super.toJSON(), {
+    return Object.assign(super.toJSON(), {
+      location: this.location,
+      productOrders: this.productOrders,
       total: this.total
     })
   }

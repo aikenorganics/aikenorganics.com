@@ -7,6 +7,8 @@ export const UPDATE_GROWER = 'UPDATE_GROWER'
 export const CREATE_LOCATION = 'CREATE_LOCATION'
 export const REMOVE_LOCATION = 'REMOVE_LOCATION'
 export const UPDATE_LOCATION = 'UPDATE_LOCATION'
+export const CANCEL_ORDER = 'CANCEL_ORDER'
+export const UPDATE_ORDER = 'UPDATE_ORDER'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const UPDATE_USER = 'UPDATE_USER'
 export const UPDATE_MARKET = 'UPDATE_MARKET'
@@ -72,6 +74,24 @@ export const imageGrower = (id, file) => {
   busy()
   return POST(`/growers/${id}/image`, {body: data}).then((values) => {
     store.dispatch({type: UPDATE_GROWER, id, values})
+    done()
+  }).catch(done)
+}
+
+// Orders
+
+export const cancelOrder = (id) => {
+  busy()
+  return DELETE(`/orders/${id}`).then(() => {
+    store.dispatch({type: CANCEL_ORDER, id})
+    done()
+  }).catch(done)
+}
+
+export const updateOrder = (id, values) => {
+  busy()
+  return POST(`/orders/${id}`, {body: values}).then((values) => {
+    store.dispatch({type: UPDATE_ORDER, id, values})
     done()
   }).catch(done)
 }

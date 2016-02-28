@@ -12,11 +12,21 @@ test('GET /orders/current is a 200', function (t) {
   })
 })
 
-test('POST /orders/:id/cancel is a 302', function (t) {
+test('GET /orders/current with no order', function (t) {
+  t.signIn('finn@example.com').then(() => {
+    t.agent
+    .get('/orders/current')
+    .expect(200)
+    .end(t.end)
+  })
+})
+
+test('DELETE /orders/:id is a 200', function (t) {
   t.signIn('user@example.com').then(() => {
     t.agent
-    .post('/orders/2/cancel')
-    .expect(302)
+    .delete('/orders/2')
+    .expect(200)
+    .expect('Content-Type', /json/)
     .end(function (e) {
       if (e) return t.end(e)
       db.Order.find(2).then(function (order) {
@@ -31,10 +41,14 @@ test('POST /orders/:id is a 302', function (t) {
   t.signIn('user@example.com').then(() => {
     t.agent
     .post('/orders/2')
-    .send('location_id=2')
-    .expect(302)
-    .end(function (e) {
+    .send({location_id: 2})
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .end(function (e, res) {
       if (e) return t.end(e)
+      t.ok(res.body.location)
+      t.is(res.body.location.id, 2)
+      t.is(res.body.location_id, 2)
       db.Order.find(2).then(function (order) {
         t.is(order.location_id, 2)
         t.end()
@@ -46,8 +60,9 @@ test('POST /orders/:id is a 302', function (t) {
 test('Cannot cancel someone else\'s order', function (t) {
   t.signIn('user@example.com').then(() => {
     t.agent
-    .post('/orders/1/cancel')
+    .delete('/orders/1')
     .expect(401)
+    .expect('Content-Type', /json/)
     .end(t.end)
   })
 })
@@ -56,7 +71,7 @@ test('Cannout update someone else\'s order', function (t) {
   t.signIn('user@example.com').then(() => {
     t.agent
     .post('/orders/1')
-    .send('location_id=2')
+    .send({location_id: 2})
     .expect(401)
     .end(t.end)
   })
@@ -65,8 +80,10 @@ test('Cannout update someone else\'s order', function (t) {
 test('Canceling a missing order returns a 404', function (t) {
   t.signIn('user@example.com').then(() => {
     t.agent
-    .post('/orders/123456789/cancel')
+    .delete('/orders/123456789')
+    .set('Accept', 'application/json')
     .expect(404)
+    .expect('Content-Type', /json/)
     .end(t.end)
   })
 })
@@ -75,7 +92,7 @@ test('Updating a missing order returns a 404', function (t) {
   t.signIn('user@example.com').then(() => {
     t.agent
     .post('/orders/123456789')
-    .send('location_id=2')
+    .send({location_id: 2})
     .expect(404)
     .end(t.end)
   })

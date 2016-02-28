@@ -76,7 +76,7 @@ router.get('/:grower_id/products/new', (req, res) => {
 })
 
 router.post('/:grower_id/products', (req, res) => {
-  if (!req.canEdit) return res.status(401).render('401')
+  if (!req.canEdit) return res.status(401).json({})
 
   const props = req.permit(
     'name', 'cost', 'unit', 'supply', 'category_id', 'description'

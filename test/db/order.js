@@ -3,9 +3,9 @@
 const db = require('../../db')
 const test = require('../test')
 
-test('orders without productOrders have a zero total', (t) => {
+test('orders without productOrders have undefined total', (t) => {
   const order = new db.Order()
-  t.is(order.total, 0)
+  t.is(order.total, undefined)
   t.end()
 })
 

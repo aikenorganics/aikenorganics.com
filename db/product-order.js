@@ -49,7 +49,8 @@ class ProductOrder extends Model {
   }
 
   toJSON () {
-    return Object.extend(super.toJSON(), {
+    return Object.assign(super.toJSON(), {
+      product: this.product,
       total: this.total
     })
   }

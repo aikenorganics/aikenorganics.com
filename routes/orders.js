@@ -19,39 +19,37 @@ router.get('/current', (req, res) => {
       .find(),
     db.Location.where({active: true}).order('name').all()
   ]).then((results) => {
-    res.render('orders/current', {
+    res.react({
       order: results[0],
       locations: results[1]
     })
-  })
+  }).catch(res.error)
 })
 
 // Update
 router.post('/:order_id', (req, res) => {
-  if (!req.market.open) return res.status(401).render('401')
+  if (!req.market.open) return res.status(401).json({})
 
   // You can only update your own order.
   if (req.user.id !== req.order.user_id) {
-    return res.status(401).render('401')
+    return res.status(401).json({})
   }
 
   req.order.update(req.permit('location_id')).then(() => {
-    res.flash('success', 'Saved')
-    res.redirect('/orders/current')
+    return db.Order.include('location').find(req.order.id).then((order) => {
+      res.json(order)
+    })
   }).catch(res.error)
 })
 
 // Cancel
-router.post('/:order_id/cancel', (req, res) => {
-  if (!req.market.open) return res.status(401).render('401')
+router.delete('/:order_id', (req, res) => {
+  if (!req.market.open) return res.status(401).json({})
 
   // You can only cancel your own order.
   if (req.user.id !== req.order.user_id) {
-    return res.status(401).render('401')
+    return res.status(401).json({})
   }
 
-  req.order.destroy().then(() => {
-    res.flash('success', 'Order cancelled.')
-    res.redirect('/products')
-  }).catch(res.error)
+  req.order.destroy().then(() => res.json({})).catch(res.error)
 })
