@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.0
--- Dumped by pg_dump version 9.5.0
+-- Dumped from database version 9.5.1
+-- Dumped by pg_dump version 9.5.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -720,7 +720,8 @@ CREATE TABLE users (
     member_until date,
     search tsvector,
     image_ext character varying(255),
-    image_updated_at timestamp with time zone
+    image_updated_at timestamp with time zone,
+    stripe_id character varying(255)
 );
 
 
@@ -975,14 +976,14 @@ SELECT pg_catalog.setval('user_growers_id_seq', 2, true);
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY users (id, created_at, updated_at, email, password, is_admin, first, last, phone, member_until, search, image_ext, image_updated_at) FROM stdin;
-1	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	admin@example.com	$2a$04$xSJ1pVH1G3I0QRIHmAqml.4.Sk2UGzBo6zFoRCn2JvF5X/4dyEedy	t	Admin	User	803.555.5555	\N	'admin':1 'admin@example.com':3 'user':2	\N	\N
-2	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	user@example.com	$2a$04$Xji0a5KEjoHOXGI4IfrxWevHLnYM81iLZmSBpuvQgeK8KgMrHHBlm	f	Regular	User	803.532.5859	\N	'regular':1 'user':2 'user@example.com':3	\N	\N
-3	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	jake@example.com	$2a$04$dhus2Ml6LznTeN/A.hCM/Oay6xJvt1gwSMF1wIuRrKWthFOvEr15a	f	Jake	The Dog	803.532.5859	\N	'dog':3 'jake':1 'jake@example.com':4 'the':2	\N	\N
-5	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	grower@example.com	$2a$04$Su42VK4JwDRq8fyLDtxpo.xRtvGAfOAKvOJmWz.Iw5Ulfn49LYQ1G	f	Grower	Montgomery	803.532.5859	\N	'grower':1 'grower@example.com':3 'montgomery':2	\N	\N
-6	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	info@planitfoods.com	$2a$04$u6vrFtGNstxbCn.o3pC1oOnB0CtStY0MazKmd4sDOo.tiJjOi1CzK	f	PlanIt	Foods	803.532.5859	\N	'foods':2 'info@planitfoods.com':3 'planit':1	\N	\N
-7	2015-10-20 15:49:18.595797-04	2015-10-20 15:49:18.595797-04	jwitherow@example.com	$2a$04$tGkU7nuX578X/1MYdSn6R.1iMTllPIAi3Zd21aZOy0bTxHNbQVXqW	f	Joanne	Witherow	803.555.5555	\N	'joanne':1 'jwitherow@example.com':3 'witherow':2	\N	\N
-4	2015-10-13 21:21:45.681861-04	2015-11-15 08:22:41.492-05	finn@example.com	$2a$04$upNAjx.c/6cAwwSwc41JduJJuqthrbwZoSpQAjIU05F7tLLC5gnpu	f	Finn	The Human	803.532.5859	\N	'finn':1 'finn@example.com':4 'human':3 'the':2	\N	\N
+COPY users (id, created_at, updated_at, email, password, is_admin, first, last, phone, member_until, search, image_ext, image_updated_at, stripe_id) FROM stdin;
+1	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	admin@example.com	$2a$04$xSJ1pVH1G3I0QRIHmAqml.4.Sk2UGzBo6zFoRCn2JvF5X/4dyEedy	t	Admin	User	803.555.5555	\N	'admin':1 'admin@example.com':3 'user':2	\N	\N	\N
+2	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	user@example.com	$2a$04$Xji0a5KEjoHOXGI4IfrxWevHLnYM81iLZmSBpuvQgeK8KgMrHHBlm	f	Regular	User	803.532.5859	\N	'regular':1 'user':2 'user@example.com':3	\N	\N	\N
+3	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	jake@example.com	$2a$04$dhus2Ml6LznTeN/A.hCM/Oay6xJvt1gwSMF1wIuRrKWthFOvEr15a	f	Jake	The Dog	803.532.5859	\N	'dog':3 'jake':1 'jake@example.com':4 'the':2	\N	\N	\N
+5	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	grower@example.com	$2a$04$Su42VK4JwDRq8fyLDtxpo.xRtvGAfOAKvOJmWz.Iw5Ulfn49LYQ1G	f	Grower	Montgomery	803.532.5859	\N	'grower':1 'grower@example.com':3 'montgomery':2	\N	\N	\N
+6	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	info@planitfoods.com	$2a$04$u6vrFtGNstxbCn.o3pC1oOnB0CtStY0MazKmd4sDOo.tiJjOi1CzK	f	PlanIt	Foods	803.532.5859	\N	'foods':2 'info@planitfoods.com':3 'planit':1	\N	\N	\N
+7	2015-10-20 15:49:18.595797-04	2015-10-20 15:49:18.595797-04	jwitherow@example.com	$2a$04$tGkU7nuX578X/1MYdSn6R.1iMTllPIAi3Zd21aZOy0bTxHNbQVXqW	f	Joanne	Witherow	803.555.5555	\N	'joanne':1 'jwitherow@example.com':3 'witherow':2	\N	\N	\N
+4	2015-10-13 21:21:45.681861-04	2015-11-15 08:22:41.492-05	finn@example.com	$2a$04$upNAjx.c/6cAwwSwc41JduJJuqthrbwZoSpQAjIU05F7tLLC5gnpu	f	Finn	The Human	803.532.5859	\N	'finn':1 'finn@example.com':4 'human':3 'the':2	\N	\N	\N
 \.
 
 

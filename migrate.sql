@@ -1,1 +1,1 @@
-alter table markets add column message text not null default '';
+alter table users add column stripe_id character varying(255);
