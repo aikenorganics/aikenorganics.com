@@ -1,17 +1,7 @@
 import React from 'react'
 import Form from './form'
-import {cancelOrder, updateCard} from '../../actions'
-
-let stripePromise = null
-const loadStripe = () => {
-  return stripePromise || (stripePromise = new Promise((resolve, reject) => {
-    const script = document.createElement('script')
-    script.src = 'https://checkout.stripe.com/checkout.js'
-    script.async = true
-    script.addEventListener('load', () => resolve())
-    document.head.appendChild(script)
-  }))
-}
+import {cancelOrder} from '../../actions'
+import Billing from '../users/billing'
 
 export default ({busy, market: {open}, locations, order, currentUser}) => {
   if (!order) {
@@ -26,23 +16,6 @@ export default ({busy, market: {open}, locations, order, currentUser}) => {
 
   const cancel = () => {
     if (window.confirm('Are you sure?')) cancelOrder(id)
-  }
-
-  const pay = () => {
-    loadStripe().then(() => {
-      const handler = window.StripeCheckout.configure({
-        allowRememberMe: false,
-        email: currentUser.email,
-        key: JSON.parse(document.getElementById('stripe').innerHTML).key,
-        panelLabel: 'Save',
-        token: (token) => updateCard(currentUser.id, token.id)
-      })
-
-      handler.open({
-        name: 'Aiken Organics',
-        description: 'Billing Information'
-      })
-    })
   }
 
   return <div>
@@ -94,9 +67,7 @@ export default ({busy, market: {open}, locations, order, currentUser}) => {
       ? <div>
         <hr/>
         <h2>Billing Information</h2>
-        <button className='btn btn-primary' onClick={pay} disabled={busy}>
-          {currentUser.stripe_id ? 'Update Billing Info' : 'Enter Billing Info'}
-        </button>
+        <Billing busy={busy} user={currentUser}/>
       </div>
       : ''
     }
