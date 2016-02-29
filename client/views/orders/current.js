@@ -31,8 +31,10 @@ export default ({busy, market: {open}, locations, order, currentUser}) => {
   const pay = () => {
     loadStripe().then(() => {
       const handler = window.StripeCheckout.configure({
+        allowRememberMe: false,
         email: currentUser.email,
         key: JSON.parse(document.getElementById('stripe').innerHTML).key,
+        panelLabel: 'Save',
         token: (token) => updateCard(currentUser.id, token.id)
       })
 
