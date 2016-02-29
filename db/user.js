@@ -1,6 +1,7 @@
 'use strict'
 
 const images = require('ozymandias/images')
+const stripe = require('stripe')(process.env.STRIPE_SK)
 
 class User extends require('ozymandias/user') {
 
@@ -16,7 +17,8 @@ class User extends require('ozymandias/user') {
       'is_admin',
       'image_updated_at',
       'image_ext',
-      'member_until'
+      'member_until',
+      'stripe_id'
     ])
   }
 
@@ -62,6 +64,34 @@ class User extends require('ozymandias/user') {
 
   set member_until (value) {
     this.data.set('member_until', value || null)
+  }
+
+  createCustomer (token) {
+    return new Promise((resolve, reject) => {
+      stripe.customers.create({
+        email: this.email,
+        metadata: {id: this.id},
+        source: token
+      }, (e, customer) => e ? reject(e) : resolve(customer))
+    })
+  }
+
+  updateCustomer (values) {
+    return new Promise((resolve, reject) => {
+      stripe.customers.update(this.stripe_id, values, (e, customer) => {
+        e ? reject(e) : resolve(customer)
+      })
+    })
+  }
+
+  updateCard (token) {
+    if (this.stripe_id) {
+      return this.updateCustomer({source: token})
+    } else {
+      return this.createCustomer(token).then((customer) => {
+        return this.update({stripe_id: customer.id})
+      })
+    }
   }
 
   toJSON () {

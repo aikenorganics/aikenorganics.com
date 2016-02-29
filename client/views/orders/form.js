@@ -16,7 +16,7 @@ export default class Form extends Component {
   }
 
   render () {
-    const {locations} = this.props
+    const {busy, locations} = this.props
     const {location_id} = this.state
 
     return <form onSubmit={(e) => this.save(e)}>
@@ -30,7 +30,7 @@ export default class Form extends Component {
         </select>
       </div>
       <div className='text-right'>
-        <button className='btn btn-primary'>
+        <button className='btn btn-primary' disabled={busy}>
           Update Order
         </button>
       </div>

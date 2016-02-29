@@ -6,3 +6,4 @@
 <link rel='shortcut icon' href='<%= assets.path('favicon.ico') %>'>
 <% include analytics %>
 <%- json('state', locals.state || {}) %>
+<%- json('stripe', {key: process.env.STRIPE_PK}) %>

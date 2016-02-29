@@ -173,3 +173,11 @@ export const imageUser = (id, file) => {
     done()
   }).catch(done)
 }
+
+export const updateCard = (id, token) => {
+  busy()
+  return POST(`/users/${id}/card`, {body: {token}}).then((values) => {
+    store.dispatch({type: UPDATE_USER, id, values})
+    done()
+  }).catch(done)
+}

@@ -1,8 +1,19 @@
 import React from 'react'
 import Form from './form'
-import {cancelOrder} from '../../actions'
+import {cancelOrder, updateCard} from '../../actions'
 
-export default ({busy, market: {open}, locations, order}) => {
+let stripePromise = null
+const loadStripe = () => {
+  return stripePromise || (stripePromise = new Promise((resolve, reject) => {
+    const script = document.createElement('script')
+    script.src = 'https://checkout.stripe.com/checkout.js'
+    script.async = true
+    script.addEventListener('load', () => resolve())
+    document.head.appendChild(script)
+  }))
+}
+
+export default ({busy, market: {open}, locations, order, currentUser}) => {
   if (!order) {
     return <div>
       <p className='text-center'>
@@ -17,9 +28,24 @@ export default ({busy, market: {open}, locations, order}) => {
     if (window.confirm('Are you sure?')) cancelOrder(id)
   }
 
+  const pay = () => {
+    loadStripe().then(() => {
+      const handler = window.StripeCheckout.configure({
+        email: currentUser.email,
+        key: JSON.parse(document.getElementById('stripe').innerHTML).key,
+        token: (token) => updateCard(currentUser.id, token.id)
+      })
+
+      handler.open({
+        name: 'Aiken Organics',
+        description: 'Billing Information'
+      })
+    })
+  }
+
   return <div>
     {open
-      ? <button className='btn btn-danger pull-right' onClick={cancel}>
+      ? <button className='btn btn-danger pull-right' onClick={cancel} disabled={busy}>
         Cancel Order
       </button>
       : ''
@@ -60,6 +86,16 @@ export default ({busy, market: {open}, locations, order}) => {
     </table>
     {open
       ? <Form busy={busy} locations={locations} order={order}/>
+      : ''
+    }
+    {currentUser.is_admin
+      ? <div>
+        <hr/>
+        <h2>Billing Information</h2>
+        <button className='btn btn-primary' onClick={pay} disabled={busy}>
+          {currentUser.stripe_id ? 'Update Billing Info' : 'Enter Billing Info'}
+        </button>
+      </div>
       : ''
     }
   </div>

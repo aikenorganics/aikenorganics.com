@@ -21,6 +21,7 @@ app.use('/growers', require('./routes/growers'))
 app.use('/products', require('./routes/products'))
 app.use('/settings', require('./routes/settings'))
 app.use('/signup', require('./routes/signup'))
+app.use('/users', require('./routes/users'))
 
 // Home
 app.get('/', function (req, res) {
