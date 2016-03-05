@@ -7,8 +7,8 @@
     "node_modules"
   ],
   "engines": {
-    "node": "5.7.0",
-    "npm": "3.8.0"
+    "node": "5.7.1",
+    "npm": "3.8.1"
   },
   "scripts": {
     "build": "./bin/build",
@@ -45,9 +45,9 @@
   "dependencies": {
     "autoprefixer": "6.3.3",
     "babel-plugin-transform-object-assign": "6.5.0",
-    "babel-preset-es2015": "6.5.0",
+    "babel-preset-es2015": "6.6.0",
     "babel-preset-react": "6.5.0",
-    "babel-register": "6.5.2",
+    "babel-register": "6.6.5",
     "babelify": "7.2.0",
     "bootstrap": "3.3.6",
     "browserify": "13.0.0",
@@ -77,6 +77,6 @@
     "selenium-webdriver": "2.52.0",
     "standard": "6.0.7",
     "supertest": "1.2.0",
-    "tape": "4.4.0"
+    "tape": "4.5.0"
   }
 }

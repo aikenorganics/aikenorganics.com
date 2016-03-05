@@ -14,6 +14,13 @@ const getCheckout = () => {
 
 export default class Billing extends Component {
 
+  static propTypes () {
+    return {
+      busy: PropTypes.bool,
+      user: PropTypes.object
+    }
+  }
+
   constructor (props) {
     super(props)
     this.state = {loaded: false}
