@@ -1,9 +1,9 @@
 'use strict'
 
-let db = require('../../db')
-let test = require('../test')
+const db = require('../../db')
+const test = require('../test')
 
-test('/settings/account is a 200 as an admin', function (t) {
+test('/settings/account is a 200 as an admin', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/settings/account')
     .expect(200)
@@ -11,7 +11,7 @@ test('/settings/account is a 200 as an admin', function (t) {
   })
 })
 
-test('/settings/account is a 200 as a regular user', function (t) {
+test('/settings/account is a 200 as a regular user', (t) => {
   t.signIn('user@example.com').then(() => {
     t.agent.get('/settings/account')
     .expect(200)
@@ -19,8 +19,8 @@ test('/settings/account is a 200 as a regular user', function (t) {
   })
 })
 
-test('POST /settings/account is a 302 as a regular user', function (t) {
-  db.User.where({email: 'user@example.com'}).find().then(function (user) {
+test('POST /settings/account is a 302 as a regular user', (t) => {
+  db.User.where({email: 'user@example.com'}).find().then((user) => {
     t.signIn('user@example.com').then(() => {
       t.agent.post('/settings/account')
       .send(`first=${user.first}`)
