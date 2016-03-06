@@ -22,6 +22,7 @@ app.use('/products', require('./routes/products'))
 app.use('/settings', require('./routes/settings'))
 app.use('/signup', require('./routes/signup'))
 app.use('/users', require('./routes/users'))
+app.use('/.well-known/acme-challenge', require('./routes/acme'))
 
 // Home
 app.get('/', function (req, res) {
