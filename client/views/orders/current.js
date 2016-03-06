@@ -1,7 +1,6 @@
 import React from 'react'
 import Form from './form'
 import {cancelOrder} from '../../actions'
-import Billing from '../users/billing'
 
 export default ({busy, market: {open}, locations, order, currentUser}) => {
   if (!order) {
@@ -63,13 +62,10 @@ export default ({busy, market: {open}, locations, order, currentUser}) => {
       ? <Form busy={busy} locations={locations} order={order}/>
       : ''
     }
-    {currentUser.is_admin
-      ? <div>
-        <hr/>
-        <h2>Billing Information</h2>
-        <Billing busy={busy} user={currentUser}/>
-      </div>
-      : ''
-    }
+    <hr/>
+    <p>
+      If youʼd like to pay online, you can update your billing information
+      from <a href='/settings'>your settings</a>.
+    </p>
   </div>
 }

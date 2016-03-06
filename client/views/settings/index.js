@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {updateSettings} from '../../actions'
+import Billing from '../users/billing'
 
 export default class Index extends Component {
 
@@ -19,7 +20,8 @@ export default class Index extends Component {
   }
 
   render () {
-    const {busy} = this.props
+    const {busy, currentUser} = this.props
+    const {stripe_id, card_brand, card_last4} = currentUser
     const {first, last, phone} = this.state
 
     return <div>
@@ -43,6 +45,15 @@ export default class Index extends Component {
           </button>
         </div>
       </form>
+      <hr/>
+      <h1>Billing</h1>
+      <p>
+        {stripe_id
+          ? <span>The card associated with your account is a {card_brand} ending in {card_last4}.</span>
+          : <span>There is currently no card associated with your account.</span>
+        }
+      </p>
+      <Billing busy={busy} user={currentUser}/>
     </div>
   }
 
