@@ -32,6 +32,8 @@ import Market from './views/admin/market/index'
 import AdminGrowers from './views/admin/growers/index'
 import AdminGrowersOrders from './views/admin/growers/orders'
 
+import Settings from './views/settings/index'
+
 export default (state) => {
   return <Router state={state}>
     <Route path='/admin/' Component={Admin}>
@@ -58,6 +60,7 @@ export default (state) => {
       <Route path='products' Component={Products}/>
       <Route path='products/:product_id' Component={Product}/>
       <Route path='products/:product_id/edit' Component={EditProduct}/>
+      <Route path='settings' Component={Settings}/>
     </Route>
   </Router>
 }

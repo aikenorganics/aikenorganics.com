@@ -144,6 +144,16 @@ export const createLocation = (values) => {
   return POST('/admin/locations', {body: values}).then(done).catch(done)
 }
 
+// Settings
+
+export const updateSettings = (values) => {
+  busy()
+  return POST('/settings', {body: values}).then((user) => {
+    store.dispatch({type: UPDATE_USER, id: user.id, values})
+    done()
+  }).catch(done)
+}
+
 // Users
 
 export const createUser = (values) => {

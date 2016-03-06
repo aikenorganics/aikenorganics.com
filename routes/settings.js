@@ -7,15 +7,10 @@ router.use((req, res, next) => {
   res.status(404).render('404')
 })
 
-router.get('/account', (req, res) => {
-  res.render('settings/account', {_user: req.user})
-})
+router.get('/', (req, res) => res.react())
 
-router.post('/account', (req, res) => {
-  req.user.update(req.body, {
-    fields: ['first', 'last', 'phone']
-  }).then(() => {
-    res.flash('success', 'Saved - thanks for being awesome!')
-    res.redirect('/settings/account')
-  })
+router.post('/', (req, res) => {
+  req.user.update(req.permit(
+    'first', 'last', 'phone'
+  )).then(() => res.json(req.user))
 })
