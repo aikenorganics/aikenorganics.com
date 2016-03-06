@@ -542,7 +542,7 @@ CREATE TABLE orders (
     user_id integer NOT NULL,
     status order_status DEFAULT 'open'::order_status NOT NULL,
     notes text DEFAULT ''::text NOT NULL,
-    location_id integer NOT NULL
+    location_id integer
 );
 
 
