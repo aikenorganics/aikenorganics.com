@@ -18,7 +18,9 @@ class User extends require('ozymandias/user') {
       'image_updated_at',
       'image_ext',
       'member_until',
-      'stripe_id'
+      'stripe_id',
+      'card_brand',
+      'card_last4'
     ])
   }
 
@@ -85,12 +87,20 @@ class User extends require('ozymandias/user') {
   }
 
   updateCard (token) {
-    if (this.stripe_id) {
-      return this.updateCustomer({source: token})
-    } else {
-      return this.createCustomer(token).then((customer) => {
-        return this.update({stripe_id: customer.id})
+    const update = (customer) => {
+      const card = customer.sources.data.find((source) => {
+        return source.id === customer.default_source
       })
+      return this.update({
+        stripe_id: customer.id,
+        card_brand: card.brand,
+        card_last4: card.last4
+      })
+    }
+    if (this.stripe_id) {
+      return this.updateCustomer({source: token}).then(update)
+    } else {
+      return this.createCustomer(token).then(update)
     }
   }
 
