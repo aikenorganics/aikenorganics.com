@@ -154,6 +154,14 @@ export const updateSettings = (values) => {
   }).catch(done)
 }
 
+export const updateCard = (id, token) => {
+  busy()
+  return POST('/settings/card', {body: {token}}).then((values) => {
+    store.dispatch({type: UPDATE_USER, id, values})
+    done()
+  }).catch(done)
+}
+
 // Users
 
 export const createUser = (values) => {
@@ -179,14 +187,6 @@ export const imageUser = (id, file) => {
   data.append('image', file)
   busy()
   return POST(`/admin/users/${id}/image`, {body: data}).then((values) => {
-    store.dispatch({type: UPDATE_USER, id, values})
-    done()
-  }).catch(done)
-}
-
-export const updateCard = (id, token) => {
-  busy()
-  return POST(`/users/${id}/card`, {body: {token}}).then((values) => {
     store.dispatch({type: UPDATE_USER, id, values})
     done()
   }).catch(done)
