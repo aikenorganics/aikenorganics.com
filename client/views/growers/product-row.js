@@ -14,7 +14,7 @@ export default class ProductRow extends Component {
     super(props)
     this.state = {
       pending: false,
-      supply: this.props.product.supply
+      supply: props.product.supply
     }
   }
 
