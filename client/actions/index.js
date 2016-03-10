@@ -2,6 +2,7 @@ import {DELETE, POST} from '../json'
 import store from '../store'
 
 // Action Constants
+export const CREATE_PAYMENT = 'CREATE_PAYMENT'
 export const UPDATE_CART = 'UPDATE_CART'
 export const UPDATE_GROWER = 'UPDATE_GROWER'
 export const CREATE_LOCATION = 'CREATE_LOCATION'
@@ -90,9 +91,16 @@ export const cancelOrder = (id) => {
 
 export const updateOrder = (id, values) => {
   busy()
-  return POST(`/orders/${id}`, {body: values}).then((values) => {
-    store.dispatch({type: UPDATE_ORDER, id, values})
+  return POST(`/orders/${id}`, {body: values}).then((payment) => {
+    store.dispatch({type: CREATE_PAYMENT, id, payment})
     done()
+  }).catch(done)
+}
+
+export const chargeOrder = (id, amount) => {
+  busy()
+  return POST(`/orders/${id}/charge`, {body: {amount}}).then((payment) => {
+    store.dispatch({type: CREATE_PAYMENT, id, payment})
   }).catch(done)
 }
 

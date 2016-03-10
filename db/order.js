@@ -1,6 +1,8 @@
 'use strict'
 
 const Model = require('./model')
+const Payment = require('./payment')
+const stripe = require('stripe')(process.env.STRIPE_SK)
 
 class Order extends Model {
 
@@ -27,9 +29,32 @@ class Order extends Model {
     }, 0)
   }
 
+  charge (amount) {
+    return new Promise((resolve, reject) => {
+      if (!this.user.stripe_id) {
+        return reject(new Error('User has no billing information.'))
+      }
+      stripe.charges.create({
+        amount: amount,
+        currency: 'usd',
+        customer: this.user.stripe_id,
+        description: `Aiken Organics - Order #${this.id}`,
+        receipt_email: this.user.email,
+        statement_descriptor: 'Aiken Organics'
+      }, (e, charge) => e ? reject(e) : resolve(charge))
+    }).then((charge) => {
+      return Payment.create({
+        amount: amount,
+        stripe_id: charge.id,
+        order_id: this.id
+      })
+    })
+  }
+
   toJSON () {
     return Object.assign(super.toJSON(), {
       location: this.location,
+      payments: this.payments,
       productOrders: this.productOrders,
       total: this.total
     })

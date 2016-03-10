@@ -1,6 +1,10 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import {CANCEL_ORDER, UPDATE_ORDER} from '../../../client/actions'
+import {
+  CREATE_PAYMENT,
+  CANCEL_ORDER,
+  UPDATE_ORDER
+} from '../../../client/actions'
 import reducer from '../../../client/reducers'
 
 test('update order - location_id', (t) => {
@@ -52,5 +56,16 @@ test('cancel order - wrong id', (t) => {
     id: 2
   })
   t.deepEqual(next.order, {id: 3})
+  t.end()
+})
+
+test('create payment', (t) => {
+  const state = freeze({order: {id: 4, payments: [{id: 1}]}})
+  const next = reducer(state, {
+    type: CREATE_PAYMENT,
+    id: 4,
+    payment: {id: 2}
+  })
+  t.deepEqual(next.order, {id: 4, payments: [{id: 1}, {id: 2}]})
   t.end()
 })

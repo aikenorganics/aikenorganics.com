@@ -2,6 +2,29 @@
 
   <% include ../subnav %>
 
+  <div class='pull-right hidden-print'>
+    <% if (order.status !== 'complete') { %>
+      <form class='form-inline' method='POST' action='/admin/orders/<%= order.id %>' style='display: inline'>
+        <input type='hidden' name='status' value='complete'>
+        <button type='submit' class='btn btn-primary'>Complete</button>
+      </form>
+    <% } %>
+
+    <% if (order.status !== 'canceled') { %>
+      <form class='form-inline' method='POST' action='/admin/orders/<%= order.id %>' style='display: inline'>
+        <input type='hidden' name='status' value='canceled'>
+        <button type='submit' class='btn btn-danger'>Cancel</button>
+      </form>
+    <% } %>
+
+    <% if (order.status !== 'open') { %>
+      <form class='form-inline' method='POST' action='/admin/orders/<%= order.id %>' style='display: inline'>
+        <input type='hidden' name='status' value='open'>
+        <button type='submit' class='btn btn-primary'>Reopen</button>
+      </form>
+    <% } %>
+  </div>
+
   <h2>
     <a href='/admin/orders/<%= order.id %>'>Order #<%= order.id %></a>
     <small><% include status %></small>
@@ -106,27 +129,36 @@
 
   <hr>
 
-  <div class='pull-right hidden-print'>
-    <% if (order.status !== 'complete') { %>
-      <form class='form-inline' method='POST' action='/admin/orders/<%= order.id %>' style='display: inline'>
-        <input type='hidden' name='status' value='complete'>
-        <button type='submit' class='btn btn-primary'>Complete</button>
-      </form>
-    <% } %>
+  <h2>Payments</h2>
 
-    <% if (order.status !== 'canceled') { %>
-      <form class='form-inline' method='POST' action='/admin/orders/<%= order.id %>' style='display: inline'>
-        <input type='hidden' name='status' value='canceled'>
-        <button type='submit' class='btn btn-danger'>Cancel</button>
-      </form>
-    <% } %>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>Stripe ID</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% order.payments.forEach(function (payment) { %>
+        <tr>
+          <td><%= payment.stripe_id %></td>
+          <td>$<%= (payment.amount / 100).toFixed(2) %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td><strong>Total</strong></td>
+        <td><strong>$<%= (order.payments.reduce(function (total, payment) { return total + payment.amount }, 0) / 100).toFixed(2) %></strong></td>
+      </tr>
+    </tfoot>
+  </table>
 
-    <% if (order.status !== 'open') { %>
-      <form class='form-inline' method='POST' action='/admin/orders/<%= order.id %>' style='display: inline'>
-        <input type='hidden' name='status' value='open'>
-        <button type='submit' class='btn btn-primary'>Reopen</button>
-      </form>
-    <% } %>
-  </div>
+  <% if (order.user.stripe_id) { %>
+    <form method='POST' action='/admin/orders/<%= order.id %>/charge'>
+      <input type='number' name='amount' step='.01' min='0.01'>
+      <button type='submit' class='btn btn-primary'>Charge</button>
+    </form>
+  <% } %>
 
 </main>

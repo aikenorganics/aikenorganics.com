@@ -6,7 +6,7 @@ const router = module.exports = require('ozymandias').Router()
 // Find
 // TODO: Order by product name.
 router.find('order', () =>
-  db.Order.include('user', 'location', {productOrders: 'product'})
+  db.Order.include('user', 'location', 'payments', {productOrders: 'product'})
 )
 
 // Find a Product
@@ -78,6 +78,15 @@ router.get('/:order_id', (req, res) => {
 router.post('/:order_id', (req, res) => {
   req.order.update(req.permit('status', 'notes', 'location_id')).then(() => {
     res.flash('success', 'Order Updated')
+    res.redirect(`/admin/orders/${req.order.id}`)
+  }).catch(res.error)
+})
+
+// Charge
+router.post('/:order_id/charge', (req, res) => {
+  const amount = (+req.body.amount * 100) | 0
+  req.order.charge(amount).then((payment) => {
+    // res.json(payment)
     res.redirect(`/admin/orders/${req.order.id}`)
   }).catch(res.error)
 })

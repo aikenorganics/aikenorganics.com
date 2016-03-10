@@ -7,6 +7,7 @@ db.Order = require('./order')
 db.Token = require('ozymandias/token')
 db.Grower = require('./grower')
 db.Market = require('./market')
+db.Payment = require('./payment')
 db.Product = require('./product')
 db.Category = require('./category')
 db.Location = require('./location')
@@ -101,4 +102,14 @@ db.Token.belongsTo('user', {
 db.User.hasMany('tokens', {
   key: 'user_id',
   model: db.Token
+})
+
+db.Payment.belongsTo('order', {
+  key: 'order_id',
+  model: db.Order
+})
+
+db.Order.hasMany('payments', {
+  key: 'order_id',
+  model: db.Payment
 })

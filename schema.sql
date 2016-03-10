@@ -22,6 +22,7 @@ ALTER TABLE ONLY public.products DROP CONSTRAINT products_grower_id_fkey;
 ALTER TABLE ONLY public.products DROP CONSTRAINT products_category_id_fkey;
 ALTER TABLE ONLY public.product_orders DROP CONSTRAINT product_orders_product_id_fkey;
 ALTER TABLE ONLY public.product_orders DROP CONSTRAINT product_orders_order_id_fkey;
+ALTER TABLE ONLY public.payments DROP CONSTRAINT payments_order_id_fkey;
 ALTER TABLE ONLY public.orders DROP CONSTRAINT orders_user_id_fkey;
 ALTER TABLE ONLY public.orders DROP CONSTRAINT orders_location_id_fkey;
 DROP TRIGGER update_user_search ON public.users;
@@ -61,6 +62,7 @@ ALTER TABLE public.users ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE public.user_growers ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE public.products ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE public.product_orders ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.payments ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE public.orders ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE public.markets ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE public.locations ALTER COLUMN id DROP DEFAULT;
@@ -76,6 +78,8 @@ DROP SEQUENCE public.products_id_seq;
 DROP TABLE public.products;
 DROP SEQUENCE public.product_orders_id_seq;
 DROP TABLE public.product_orders;
+DROP SEQUENCE public.payments_id_seq;
+DROP TABLE public.payments;
 DROP SEQUENCE public.orders_id_seq;
 DROP TABLE public.orders;
 DROP SEQUENCE public.markets_id_seq;
@@ -566,6 +570,37 @@ ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
 
 
 --
+-- Name: payments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE payments (
+    id integer NOT NULL,
+    stripe_id character varying(255) NOT NULL,
+    order_id integer NOT NULL,
+    amount integer NOT NULL
+);
+
+
+--
+-- Name: payments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE payments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: payments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE payments_id_seq OWNED BY payments.id;
+
+
+--
 -- Name: product_orders; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -785,6 +820,13 @@ ALTER TABLE ONLY orders ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY payments ALTER COLUMN id SET DEFAULT nextval('payments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY product_orders ALTER COLUMN id SET DEFAULT nextval('product_orders_id_seq'::regclass);
 
 
@@ -893,6 +935,21 @@ COPY orders (id, created_at, updated_at, user_id, status, notes, location_id) FR
 --
 
 SELECT pg_catalog.setval('orders_id_seq', 4, true);
+
+
+--
+-- Data for Name: payments; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY payments (id, stripe_id, order_id, amount) FROM stdin;
+\.
+
+
+--
+-- Name: payments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('payments_id_seq', 1, false);
 
 
 --
@@ -1251,6 +1308,14 @@ ALTER TABLE ONLY orders
 
 ALTER TABLE ONLY orders
     ADD CONSTRAINT orders_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: payments_order_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY payments
+    ADD CONSTRAINT payments_order_id_fkey FOREIGN KEY (order_id) REFERENCES orders(id);
 
 
 --
