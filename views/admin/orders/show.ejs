@@ -156,8 +156,13 @@
 
   <% if (order.user.stripe_id) { %>
     <form method='POST' action='/admin/orders/<%= order.id %>/charge'>
-      <input type='number' name='amount' step='.01' min='0.50'>
-      <button type='submit' class='btn btn-primary'>Charge</button>
+      <div class='input-group'>
+        <span class='input-group-addon'>$</span>
+        <input type='number' name='amount' step='.01' min='0.50' class='form-control'>
+        <span class='input-group-btn'>
+          <button type='submit' class='btn btn-primary'>Charge</button>
+        </span>
+      </div>
     </form>
   <% } %>
 
