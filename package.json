@@ -56,7 +56,7 @@
     "isomorphic-fetch": "2.2.1",
     "jquery": "2.2.1",
     "marked": "0.3.5",
-    "moment": "2.11.2",
+    "moment": "2.12.0",
     "multer": "1.1.0",
     "object-tojson": "1.0.1",
     "ozymandias": "github:braddunbar/ozymandias",
