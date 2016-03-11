@@ -56,7 +56,7 @@ class User extends require('ozymandias/user') {
     this.data.set('phone', value || '')
   }
 
-  name () {
+  get name () {
     return `${this.first} ${this.last}`.trim()
   }
 
@@ -108,6 +108,7 @@ class User extends require('ozymandias/user') {
     return {
       id: this.id,
       email: this.email,
+      name: this.name,
       last: this.last,
       first: this.first,
       phone: this.phone,

@@ -8,13 +8,13 @@ test('User#name combines first and last', function (t) {
     first: 'Steven',
     last: 'Tyler'
   })
-  t.is(user.name(), 'Steven Tyler')
+  t.is(user.name, 'Steven Tyler')
   t.end()
 })
 
 test('User#name is trimmed', function (t) {
   let user = new db.User({})
-  t.is(user.name(), '')
+  t.is(user.name, '')
   t.end()
 })
 

@@ -22,7 +22,7 @@
           <tbody>
             <% grower.userGrowers.forEach(function (userGrower) { %>
               <tr>
-                <td><a href='/admin/users/<%= userGrower.user.id %>/edit'><%= userGrower.user.name() || '-' %></a></td>
+                <td><a href='/admin/users/<%= userGrower.user.id %>/edit'><%= userGrower.user.name || '-' %></a></td>
                 <td><a href='/admin/users/<%= userGrower.user.id %>/edit'><%= userGrower.user.email %></a></td>
                 <td><%= userGrower.user.phone || '-' %></td>
                 <td>
@@ -42,7 +42,7 @@
                 <option value=''>Select a User</option>
                 <% users.forEach(function (user) { %>
                   <option value='<%= user.id %>'>
-                    <%= user.email %> - <%= user.name() %>
+                    <%= user.email %> - <%= user.name %>
                   </option>
                 <% }) %>
               </select>
