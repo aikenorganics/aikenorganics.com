@@ -34,6 +34,14 @@ class Location extends Model {
     this.data.set('active', value || false)
   }
 
+  toJSON () {
+    return {
+      id: this.id,
+      name: this.name,
+      active: this.active
+    }
+  }
+
 }
 
 module.exports = Location

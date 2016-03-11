@@ -34,6 +34,14 @@ class Category extends Model {
     this.data.set('position', value || 0)
   }
 
+  toJSON () {
+    return {
+      id: this.id,
+      name: this.name,
+      position: this.position
+    }
+  }
+
 }
 
 module.exports = Category

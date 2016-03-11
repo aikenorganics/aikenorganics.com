@@ -91,13 +91,25 @@ class Product extends Model {
   }
 
   toJSON () {
-    return Object.assign(super.toJSON(), {
+    return {
+      id: this.id,
+      name: this.name,
+      cost: this.cost,
+      supply: this.supply,
+      unit: this.unit,
+      description: this.description,
+      image_updated_at: this.image_updated_at,
+      image_ext: this.image_ext,
+      reserved: this.reserved,
+      active: this.active,
+      grower_id: this.grower_id,
+      category_id: this.category_id,
       available: this.available,
       category: this.category,
       grower: this.grower,
       smallImage: this.smallImage,
       mediumImage: this.mediumImage
-    })
+    }
   }
 
 }
