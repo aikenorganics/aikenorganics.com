@@ -32,11 +32,14 @@ import Market from './views/admin/market/index'
 import AdminGrowers from './views/admin/growers/index'
 import AdminGrowersOrders from './views/admin/growers/orders'
 
+import Categories from './views/admin/categories/index'
+
 import Settings from './views/settings/index'
 
 export default (state) => {
   return <Router state={state}>
     <Route path='/admin/' Component={Admin}>
+      <Route path='categories' Component={Categories}/>
       <Route path='growers' Component={AdminGrowers}/>
       <Route path='growers/orders' Component={AdminGrowersOrders}/>
       <Route path='locations' Component={Locations}/>

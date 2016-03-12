@@ -5,6 +5,9 @@ import store from '../store'
 export const CREATE_PAYMENT = 'CREATE_PAYMENT'
 export const UPDATE_CART = 'UPDATE_CART'
 export const UPDATE_GROWER = 'UPDATE_GROWER'
+export const CREATE_CATEGORY = 'CREATE_CATEGORY'
+export const REMOVE_CATEGORY = 'REMOVE_CATEGORY'
+export const UPDATE_CATEGORY = 'UPDATE_CATEGORY'
 export const CREATE_LOCATION = 'CREATE_LOCATION'
 export const REMOVE_LOCATION = 'REMOVE_LOCATION'
 export const UPDATE_LOCATION = 'UPDATE_LOCATION'
@@ -125,6 +128,16 @@ export const imageProduct = (id, file) => {
   busy()
   return POST(`/products/${id}/image`, {body: data}).then((values) => {
     store.dispatch({type: UPDATE_PRODUCT, id, values})
+    done()
+  }).catch(done)
+}
+
+// Categories
+
+export const destroyCategory = (id) => {
+  busy()
+  return DELETE(`/admin/categories/${id}`).then(() => {
+    store.dispatch({type: REMOVE_CATEGORY, id})
     done()
   }).catch(done)
 }

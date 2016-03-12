@@ -9,7 +9,7 @@ router.find('category', () => db.Category)
 // Index
 router.get('/',  (req, res) => {
   db.Category.order('position').all().then((categories) => {
-    res.render('admin/categories/index', {categories: categories})
+    res.react({categories: categories})
   })
 })
 
@@ -40,9 +40,8 @@ router.post('/:category_id', (req, res) => {
 })
 
 // Delete
-router.post('/:category_id/delete', (req, res) => {
+router.delete('/:category_id', (req, res) => {
   req.category.destroy().then(() => {
-    res.flash('success', 'Deleted')
-    res.redirect('/admin/categories')
-  })
+    res.json({})
+  }).catch(res.error)
 })

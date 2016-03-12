@@ -1,5 +1,6 @@
 import busy from './busy'
 import cart from './cart'
+import categories from './categories'
 import currentUser from './current-user'
 import errors from './errors'
 import grower from './grower'
@@ -20,7 +21,7 @@ export default combineReducers({
   busy,
   canEdit: pass,
   cart,
-  categories: pass,
+  categories,
   category_id: pass,
   currentUser,
   emails: pass,

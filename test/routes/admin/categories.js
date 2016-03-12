@@ -47,10 +47,11 @@ test('POST /admin/categories/:id is a 302', function (t) {
   })
 })
 
-test('POST /admin/categories/:id/delete is a 302', function (t) {
+test('POST /admin/categories/:id is a 200', function (t) {
   t.signIn('admin@example.com').then(() => {
-    t.agent.post('/admin/categories/6/delete')
-    .expect(302)
+    t.agent.post('/admin/categories/6')
+    .expect(200)
+    .expect('Content-Type', /json/)
     .end(function (e) {
       if (e) return t.end(e)
       db.Category.find(6).then(function (category) {
