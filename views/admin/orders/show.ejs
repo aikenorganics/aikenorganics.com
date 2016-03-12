@@ -31,7 +31,15 @@
   </h2>
   <h3>
     <a href='/admin/users/<%= order.user.id %>/edit'><%= order.user.name %></a>
-    <small><%= order.user.email %></small>
+    <small>
+      <%= order.user.email %>
+      -
+      <% if (order.user.member_until > new Date()) { %>
+        Member until <%= moment(order.user.member_until).format('MM/DD/YYYY') %>
+      <% } else { %>
+        Not a Member
+      <% } %>
+    </small>
   </h3>
   <table class='table'>
     <thead>
