@@ -1,3 +1,4 @@
+import './error-tracking'
 import './pages'
 import message from './message'
 

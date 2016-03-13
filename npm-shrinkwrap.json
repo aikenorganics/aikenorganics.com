@@ -1140,6 +1140,11 @@
       "from": "buffer-xor@>=1.0.2 <2.0.0",
       "resolved": "https://registry.npmjs.org/buffer-xor/-/buffer-xor-1.0.3.tgz"
     },
+    "bugsnag-js": {
+      "version": "2.5.0",
+      "from": "bugsnag-js@latest",
+      "resolved": "https://registry.npmjs.org/bugsnag-js/-/bugsnag-js-2.5.0.tgz"
+    },
     "builtin-status-codes": {
       "version": "2.0.0",
       "from": "builtin-status-codes@>=2.0.0 <3.0.0",
