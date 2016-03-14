@@ -1140,6 +1140,11 @@
       "from": "buffer-xor@>=1.0.2 <2.0.0",
       "resolved": "https://registry.npmjs.org/buffer-xor/-/buffer-xor-1.0.3.tgz"
     },
+    "bugsnag": {
+      "version": "1.7.0",
+      "from": "bugsnag@latest",
+      "resolved": "https://registry.npmjs.org/bugsnag/-/bugsnag-1.7.0.tgz"
+    },
     "bugsnag-js": {
       "version": "2.5.0",
       "from": "bugsnag-js@latest",
@@ -3121,6 +3126,11 @@
       "version": "1.7.4",
       "from": "sshpk@>=1.7.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/sshpk/-/sshpk-1.7.4.tgz"
+    },
+    "stack-trace": {
+      "version": "0.0.9",
+      "from": "stack-trace@0.0.9",
+      "resolved": "https://registry.npmjs.org/stack-trace/-/stack-trace-0.0.9.tgz"
     },
     "statuses": {
       "version": "1.2.1",

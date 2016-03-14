@@ -1,11 +1,15 @@
 'use strict'
 
 // Vendor
+const bugsnag = require('bugsnag').register(process.env.BUGSNAG_KEY)
 const ozymandias = require('ozymandias')
 
 // The App!
 const app = module.exports = ozymandias()
 app.locals = require('./helpers')
+
+// Bugsnag
+app.use(bugsnag.requestHandler)
 
 // Middleware
 app.use(require('./mid/market'))
@@ -24,22 +28,20 @@ app.use('/signup', require('./routes/signup'))
 app.use('/.well-known/acme-challenge', require('./routes/acme'))
 
 // Home
-app.get('/', function (req, res) {
-  res.render('index')
-})
+app.get('/', (req, res) => res.render('index'))
 
 // Learn
-app.get('/learn', function (req, res) {
-  res.render('learn/index')
-})
+app.get('/learn', (req, res) => res.render('learn/index'))
+
+// WAT
+app.get('/wat', (req, res) => wat())
 
 // 404
-app.get('*', function (req, res) {
-  res.status(404).render('404')
-})
+app.get('*', (req, res) => res.status(404).render('404'))
 
 // 500
-app.use(function (e, req, res, next) {
+app.use(bugsnag.errorHandler)
+app.use((e, req, res, next) => {
   console.log(e.stack)
   res.status(500).render('500')
 })
