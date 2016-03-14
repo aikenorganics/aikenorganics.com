@@ -33,9 +33,6 @@ app.get('/', (req, res) => res.render('index'))
 // Learn
 app.get('/learn', (req, res) => res.render('learn/index'))
 
-// WAT
-app.get('/wat', (req, res) => wat())
-
 // 404
 app.get('*', (req, res) => res.status(404).render('404'))
 
