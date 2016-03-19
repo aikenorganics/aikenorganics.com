@@ -7,7 +7,7 @@ const router = module.exports = require('ozymandias').Router()
 router.find('category', () => db.Category)
 
 // Index
-router.get('/',  (req, res) => {
+router.get('/', (req, res) => {
   db.Category.order('position').all().then((categories) => {
     res.react({categories: categories})
   })

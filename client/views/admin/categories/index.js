@@ -31,7 +31,7 @@ export default ({busy, categories}) => {
             <td>{position}</td>
             <td>
               <button type='button' className='btn btn-danger btn-xs' disabled={busy}
-                onClick={(e) => { if (confirm('Are you sure?')) destroyCategory(id) }}>
+                onClick={(e) => { if (window.confirm('Are you sure?')) destroyCategory(id) }}>
                 Delete
               </button>
             </td>

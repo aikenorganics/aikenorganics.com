@@ -39,7 +39,7 @@ export default class Form extends Component {
       <div className='form-group'>
         <label htmlFor='name'>Name</label>
         <input autoFocus type='text' id='name' className='form-control' required value={name}
-        onChange={(e) => this.setState({name: e.target.value})} disabled={busy}/>
+          onChange={(e) => this.setState({name: e.target.value})} disabled={busy}/>
       </div>
       <p className='text-right'>
         <button type='submit' className='btn btn-primary' disabled={busy}>
