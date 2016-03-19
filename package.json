@@ -7,8 +7,8 @@
     "node_modules"
   ],
   "engines": {
-    "node": "5.8.0",
-    "npm": "3.8.1"
+    "node": "5.9.0",
+    "npm": "3.8.3"
   },
   "scripts": {
     "build": "./bin/build",
