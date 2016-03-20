@@ -178,9 +178,9 @@
       "resolved": "https://registry.npmjs.org/autoprefixer/-/autoprefixer-6.3.3.tgz"
     },
     "aws-sdk": {
-      "version": "2.2.39",
-      "from": "aws-sdk@2.2.39",
-      "resolved": "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.2.39.tgz"
+      "version": "2.2.45",
+      "from": "aws-sdk@2.2.45",
+      "resolved": "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.2.45.tgz"
     },
     "aws-sign2": {
       "version": "0.6.0",
@@ -2483,14 +2483,14 @@
       "resolved": "https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.1.tgz"
     },
     "ozymandias": {
-      "version": "0.48.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#a0a6461a49a8cb0c90b1c622fbf4aae820ca2cb8",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#a0a6461a49a8cb0c90b1c622fbf4aae820ca2cb8",
+      "version": "0.49.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#bf9ac21e2504a3a0f17a4b6293ee04e52954467f",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#bf9ac21e2504a3a0f17a4b6293ee04e52954467f",
       "dependencies": {
         "glob": {
-          "version": "7.0.0",
-          "from": "glob@7.0.0",
-          "resolved": "https://registry.npmjs.org/glob/-/glob-7.0.0.tgz"
+          "version": "7.0.3",
+          "from": "glob@7.0.3",
+          "resolved": "https://registry.npmjs.org/glob/-/glob-7.0.3.tgz"
         },
         "rimraf": {
           "version": "2.5.2",
@@ -3535,19 +3535,19 @@
       "resolved": "https://registry.npmjs.org/wrappy/-/wrappy-1.0.1.tgz"
     },
     "xml2js": {
-      "version": "0.4.16",
-      "from": "xml2js@0.4.16",
-      "resolved": "https://registry.npmjs.org/xml2js/-/xml2js-0.4.16.tgz"
+      "version": "0.4.15",
+      "from": "xml2js@0.4.15",
+      "resolved": "https://registry.npmjs.org/xml2js/-/xml2js-0.4.15.tgz"
     },
     "xmlbuilder": {
-      "version": "4.2.1",
-      "from": "xmlbuilder@4.2.1",
-      "resolved": "https://registry.npmjs.org/xmlbuilder/-/xmlbuilder-4.2.1.tgz",
+      "version": "2.6.2",
+      "from": "xmlbuilder@2.6.2",
+      "resolved": "https://registry.npmjs.org/xmlbuilder/-/xmlbuilder-2.6.2.tgz",
       "dependencies": {
         "lodash": {
-          "version": "4.6.1",
-          "from": "lodash@>=4.0.0 <5.0.0",
-          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.6.1.tgz"
+          "version": "3.5.0",
+          "from": "lodash@>=3.5.0 <3.6.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-3.5.0.tgz"
         }
       }
     },
