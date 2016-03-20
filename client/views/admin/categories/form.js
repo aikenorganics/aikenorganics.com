@@ -1,38 +1,39 @@
 import React, {Component, PropTypes} from 'react'
-import {createLocation, updateLocation} from '../../../actions'
+import {createCategory, updateCategory} from '../../../actions'
 
 export default class Form extends Component {
 
   static propTypes () {
     return {
-      location: PropTypes.object
+      category: PropTypes.object
     }
   }
 
   constructor (props) {
     super(props)
-    const {name} = props.location || {}
+    const {name, position} = props.category || {}
     this.state = {
-      name: name || ''
+      name: name || '',
+      position: position || ''
     }
   }
 
   save (e) {
     e.preventDefault()
-    if (this.props.location) {
-      const {id} = this.props.location
-      updateLocation(id, this.state).then(() => {
-        window.location = '/admin/locations'
+    if (this.props.category) {
+      const {id} = this.props.category
+      updateCategory(id, this.state).then(() => {
+        window.location = '/admin/categories'
       }).catch((e) => {})
     } else {
-      createLocation(this.state).then(() => {
-        window.location = '/admin/locations'
+      createCategory(this.state).then(() => {
+        window.location = '/admin/categories'
       }).catch((e) => {})
     }
   }
 
   render () {
-    const {name} = this.state
+    const {name, position} = this.state
     const {busy} = this.props
 
     return <form onSubmit={(e) => this.save(e)}>
@@ -41,6 +42,11 @@ export default class Form extends Component {
         <input autoFocus type='text' id='name' className='form-control' required value={name}
           onChange={(e) => this.setState({name: e.target.value})} disabled={busy}/>
       </div>
+      <div className='form-group'>
+        <label htmlFor='position'>Position</label>
+        <input type='number' id='position' className='form-control' required value={position}
+          onChange={(e) => this.setState({position: e.target.value})} disabled={busy}/>
+      </div>
       <p className='text-right'>
         <button type='submit' className='btn btn-primary' disabled={busy}>
           Save
@@ -48,6 +54,4 @@ export default class Form extends Component {
       </p>
     </form>
   }
-
 }
-

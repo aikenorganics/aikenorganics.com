@@ -22,6 +22,7 @@ export default combineReducers({
   canEdit: pass,
   cart,
   categories,
+  category: pass,
   category_id: pass,
   currentUser,
   emails: pass,

@@ -2,6 +2,10 @@ import React from 'react'
 import {destroyCategory} from '../../../actions'
 
 export default ({busy, categories}) => {
+  const destroy = (id) => {
+    if (window.confirm('Are you sure?')) destroyCategory(id)
+  }
+
   return <div>
     <h1>
       Categories&nbsp;
@@ -31,7 +35,7 @@ export default ({busy, categories}) => {
             <td>{position}</td>
             <td>
               <button type='button' className='btn btn-danger btn-xs' disabled={busy}
-                onClick={(e) => { if (window.confirm('Are you sure?')) destroyCategory(id) }}>
+                onClick={(e) => destroy(id)}>
                 Delete
               </button>
             </td>
@@ -41,4 +45,3 @@ export default ({busy, categories}) => {
     </table>
   </div>
 }
-

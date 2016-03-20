@@ -27,29 +27,29 @@ test('GET /admin/categories/:id/edit is a 200', function (t) {
   })
 })
 
-test('POST /admin/categories is a 302', function (t) {
+test('POST /admin/categories is a 200', function (t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/admin/categories')
-    .send('name=Test')
-    .send('position=2')
-    .expect(302)
-    .end(t.end)
-  })
-})
-
-test('POST /admin/categories/:id is a 302', function (t) {
-  t.signIn('admin@example.com').then(() => {
-    t.agent.post('/admin/categories/1')
-    .send('name=test')
-    .send('position=106')
-    .expect(302)
+    .send({name: 'Test', position: 2})
+    .expect('Content-Type', /json/)
+    .expect(200)
     .end(t.end)
   })
 })
 
 test('POST /admin/categories/:id is a 200', function (t) {
   t.signIn('admin@example.com').then(() => {
-    t.agent.post('/admin/categories/6')
+    t.agent.post('/admin/categories/1')
+    .send({name: 'test', position: 106})
+    .expect('Content-Type', /json/)
+    .expect(200)
+    .end(t.end)
+  })
+})
+
+test('DELETE /admin/categories/:id is a 200', function (t) {
+  t.signIn('admin@example.com').then(() => {
+    t.agent.delete('/admin/categories/6')
     .expect(200)
     .expect('Content-Type', /json/)
     .end(function (e) {

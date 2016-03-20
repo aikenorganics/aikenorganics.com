@@ -18,6 +18,10 @@ import EditGrower from './views/growers/edit'
 import GrowerOrders from './views/growers/orders'
 import GrowerProducts from './views/growers/products'
 
+import Categories from './views/admin/categories/index'
+import EditCategory from './views/admin/categories/edit'
+import NewCategory from './views/admin/categories/new'
+
 import Locations from './views/admin/locations/index'
 import EditLocation from './views/admin/locations/edit'
 import NewLocation from './views/admin/locations/new'
@@ -32,14 +36,14 @@ import Market from './views/admin/market/index'
 import AdminGrowers from './views/admin/growers/index'
 import AdminGrowersOrders from './views/admin/growers/orders'
 
-import Categories from './views/admin/categories/index'
-
 import Settings from './views/settings/index'
 
 export default (state) => {
   return <Router state={state}>
     <Route path='/admin/' Component={Admin}>
       <Route path='categories' Component={Categories}/>
+      <Route path='categories/:category_id/edit' Component={EditCategory}/>
+      <Route path='categories/new' Component={NewCategory}/>
       <Route path='growers' Component={AdminGrowers}/>
       <Route path='growers/orders' Component={AdminGrowersOrders}/>
       <Route path='locations' Component={Locations}/>

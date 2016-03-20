@@ -134,12 +134,25 @@ export const imageProduct = (id, file) => {
 
 // Categories
 
+export const updateCategory = (id, values) => {
+  busy()
+  return POST(`/admin/categories/${id}`, {body: values}).then(() => {
+    store.dispatch({type: UPDATE_CATEGORY, id, values})
+    done()
+  }).catch(done)
+}
+
 export const destroyCategory = (id) => {
   busy()
   return DELETE(`/admin/categories/${id}`).then(() => {
     store.dispatch({type: REMOVE_CATEGORY, id})
     done()
   }).catch(done)
+}
+
+export const createCategory = (values) => {
+  busy()
+  return POST('/admin/categories', {body: values}).then(done).catch(done)
 }
 
 // Locations
