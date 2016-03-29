@@ -214,7 +214,7 @@ begin
 
     poid := null;
     available := (
-      select supply - reserved from products
+      select greatest(0, supply - reserved) from products
       where id = product[1]
     );
 
@@ -927,6 +927,7 @@ COPY orders (id, created_at, updated_at, user_id, status, notes, location_id) FR
 2	2015-10-13 21:21:45.689416-04	2015-10-13 21:21:45.689416-04	2	open		1
 3	2015-10-13 21:21:45.689416-04	2015-10-13 21:21:45.689416-04	2	complete		1
 4	2015-10-13 21:21:45.689416-04	2015-10-13 21:21:45.689416-04	3	open		1
+5	2016-03-28 22:20:49.291557-04	2016-03-28 22:20:49.291557-04	6	open		1
 \.
 
 
@@ -934,7 +935,7 @@ COPY orders (id, created_at, updated_at, user_id, status, notes, location_id) FR
 -- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('orders_id_seq', 4, true);
+SELECT pg_catalog.setval('orders_id_seq', 5, true);
 
 
 --
@@ -949,7 +950,7 @@ COPY payments (id, stripe_id, order_id, amount) FROM stdin;
 -- Name: payments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('payments_id_seq', 1, false);
+SELECT pg_catalog.setval('payments_id_seq', 1, true);
 
 
 --
@@ -966,6 +967,7 @@ COPY product_orders (id, created_at, updated_at, order_id, product_id, quantity,
 7	2015-10-13 21:21:45.691084-04	2015-10-13 21:21:45.691084-04	3	4	2	7.00
 8	2015-10-13 21:21:45.691084-04	2015-10-13 21:21:45.691084-04	4	5	2	14.00
 9	2015-11-26 08:00:53.203478-05	2015-11-26 08:00:53.203478-05	1	8	1	5.00
+10	2016-03-28 22:20:49.291557-04	2016-03-28 22:20:49.291557-04	5	9	3	4.30
 \.
 
 
@@ -973,7 +975,7 @@ COPY product_orders (id, created_at, updated_at, order_id, product_id, quantity,
 -- Name: product_orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('product_orders_id_seq', 9, true);
+SELECT pg_catalog.setval('product_orders_id_seq', 10, true);
 
 
 --
@@ -989,6 +991,7 @@ COPY products (id, created_at, updated_at, name, grower_id, cost, supply, unit, 
 3	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Kale	1	4.50	15	bunch	A buncha kale.	1	1	t	'kale':1	\N	\N
 4	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Vegan Gumbo - Small	2	7.00	15	small container (serves 1-2)	This hearty gumbo features local okra, tomatoes, peppers and corn (cut and frozen in season), fresh herbs and bay leaves simmered in organic vegetable stock and dark porter beer from the Aiken Brewing Company and comes with a side of all natural brown rice.	2	1	t	'gumbo':2 'small':3 'vegan':1	\N	\N
 5	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Vegan Gumbo - Medium	2	14.00	3	Medium container (serves 2-4)	This hearty gumbo features local okra, tomatoes, peppers and corn (cut and frozen in season), fresh herbs and bay leaves simmered in organic vegetable stock and dark porter beer from the Aiken Brewing Company and comes with a side of all natural brown rice.	2	3	t	'gumbo':2 'medium':3 'vegan':1	\N	\N
+9	2016-03-28 22:18:30.836487-04	2016-03-28 22:20:58.953-04	Avocados [Oversold]	1	4.30	2	each		1	3	t	'avocados':1 'oversold':2	\N	\N
 \.
 
 
@@ -996,7 +999,7 @@ COPY products (id, created_at, updated_at, name, grower_id, cost, supply, unit, 
 -- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('products_id_seq', 8, true);
+SELECT pg_catalog.setval('products_id_seq', 9, true);
 
 
 --

@@ -82,3 +82,15 @@ test('checking out with an inactive location raises', (t) => {
     t.end()
   })
 })
+
+test('oversold products do not create a product order', (t) => {
+  db.query('select checkout($1, $2, $3)', [1, 1, [9, 2]]).then(() => {
+    return db.ProductOrder.where({
+      order_id: 1,
+      product_id: 9
+    }).find().then((productOrder) => {
+      t.ok(productOrder == null)
+      t.end()
+    })
+  }).catch(t.end)
+})
