@@ -6,6 +6,8 @@ import Admin from './views/admin/app'
 
 import CurrentOrder from './views/orders/current'
 
+import Cart from './views/cart/index'
+
 import Product from './views/products/show'
 import Products from './views/products/index'
 import NewProduct from './views/products/new'
@@ -56,6 +58,7 @@ export default (state) => {
       <Route path='users/:user_id/edit' Component={EditUser}/>
     </Route>
     <Route path='/' Component={App}>
+      <Route path='cart' Component={Cart}/>
       <Route path='growers' Component={Growers}/>
       <Route path='growers/new' Component={NewGrower}/>
       <Route path='growers/:grower_id' Component={Grower}/>

@@ -57,6 +57,11 @@ export const updateCart = (product_id, quantity) => {
   }).catch(done)
 }
 
+export const checkout = (values) => {
+  busy()
+  return POST('/cart/checkout', {body: values}).then(done).catch(done)
+}
+
 // Growers
 
 export const createGrower = (values) => {
@@ -94,8 +99,8 @@ export const cancelOrder = (id) => {
 
 export const updateOrder = (id, values) => {
   busy()
-  return POST(`/orders/${id}`, {body: values}).then((payment) => {
-    store.dispatch({type: CREATE_PAYMENT, id, payment})
+  return POST(`/orders/${id}`, {body: values}).then((values) => {
+    store.dispatch({type: UPDATE_ORDER, id, values})
     done()
   }).catch(done)
 }
