@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from '../../link'
 import {updateLocation, destroyLocation} from '../../../actions'
 
 export default ({busy, location}) => {
@@ -6,9 +7,9 @@ export default ({busy, location}) => {
 
   return <tr>
     <td>
-      <a className='btn btn-default btn-xs' href={`/admin/locations/${id}/edit`}>
+      <Link className='btn btn-default btn-xs' href={`/admin/locations/${id}/edit`}>
         Edit
-      </a>
+      </Link>
     </td>
     <td>{name}</td>
     <td>

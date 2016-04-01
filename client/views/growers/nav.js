@@ -1,27 +1,28 @@
 import React from 'react'
+import Link from '../link'
 
 export default ({canEdit, grower: {id}, path}) => {
   if (!canEdit) return <span></span>
   return <ul className='nav nav-pills nav-stacked hidden-print'>
     <li className={/^\/growers\/\d\/?$/.test(path) ? 'active' : ''}>
-      <a href={`/growers/${id}`}>
+      <Link href={`/growers/${id}`}>
         Info
-      </a>
+      </Link>
     </li>
     <li className={/^\/growers\/\d+\/edit\/?$/.test(path) ? 'active' : ''}>
-      <a href={`/growers/${id}/edit`}>
+      <Link href={`/growers/${id}/edit`}>
         Edit
-      </a>
+      </Link>
     </li>
     <li className={/^\/growers\/\d+\/orders\/?$/.test(path) ? 'active' : ''}>
-      <a href={`/growers/${id}/orders`}>
+      <Link href={`/growers/${id}/orders`}>
         Orders
-      </a>
+      </Link>
     </li>
     <li className={/^\/growers\/\d+\/products\/?$/.test(path) ? 'active' : ''}>
-      <a href={`/growers/${id}/products`}>
+      <Link href={`/growers/${id}/products`}>
         Products
-      </a>
+      </Link>
     </li>
   </ul>
 }

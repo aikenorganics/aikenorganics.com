@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {createLocation, updateLocation} from '../../../actions'
+import {createLocation, navigate, updateLocation} from '../../../actions'
 
 export default class Form extends Component {
 
@@ -22,11 +22,11 @@ export default class Form extends Component {
     if (this.props.location) {
       const {id} = this.props.location
       updateLocation(id, this.state).then(() => {
-        window.location = '/admin/locations'
+        navigate('/admin/locations')
       }).catch((e) => {})
     } else {
       createLocation(this.state).then(() => {
-        window.location = '/admin/locations'
+        navigate('/admin/locations')
       }).catch((e) => {})
     }
   }

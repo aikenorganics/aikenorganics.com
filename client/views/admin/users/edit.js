@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from './image'
 import Form from './form'
-import {destroyUser} from '../../../actions'
+import {destroyUser, navigate} from '../../../actions'
 
 export default ({busy, user}) => {
   const {id, has_order} = user
@@ -9,7 +9,7 @@ export default ({busy, user}) => {
   const destroy = () => {
     if (!window.confirm('Are you sure?')) return
     destroyUser(id).then(() => {
-      window.location = '/admin/users'
+      navigate('/admin/users')
     }).catch((e) => {})
   }
 

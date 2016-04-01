@@ -1,5 +1,6 @@
 import React from 'react'
 import marked from 'marked'
+import Link from './link'
 
 export default ({cart, children, market: {message, open}, currentUser, path}) => {
   const cartSize = Object.keys(cart).reduce((total, id) => total + cart[id], 0)
@@ -18,23 +19,23 @@ export default ({cart, children, market: {message, open}, currentUser, path}) =>
       }
       <ul className='nav nav-tabs subnav'>
         <li className={/^\/products/.test(path) ? 'active' : ''}>
-          <a href='/products'>Products</a>
+          <Link href='/products'>Products</Link>
         </li>
         <li className={/^\/growers/.test(path) ? 'active' : ''}>
-          <a href='/growers'>Growers</a>
+          <Link href='/growers'>Growers</Link>
         </li>
         {!currentUser || !open ? ''
           : <li className={/^\/cart/.test(path) ? 'active' : ''}>
-            <a href='/cart'>
+            <Link href='/cart'>
               Cart <span id='cart-size' className='badge'>{cartSize}</span>
-            </a>
+            </Link>
           </li>
         }
         {!currentUser ? ''
           : <li className={/^\/orders/.test(path) ? 'active' : ''}>
-            <a href='/orders/current'>
+            <Link href='/orders/current'>
               Orders
-            </a>
+            </Link>
           </li>
         }
       </ul>

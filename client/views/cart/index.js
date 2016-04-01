@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from '../link'
 import Warning from './warning'
 import Checkout from './checkout'
 import {updateCart} from '../../actions'
@@ -33,7 +34,7 @@ export default ({busy, cart, locations, order, products}) => {
           const {cost, id, name, unit} = product
           return <tr key={id}>
             <td>
-              <a href={`/products/${id}`}>{name}</a>
+              <Link href={`/products/${id}`}>{name}</Link>
             </td>
             <td>${(+cost).toFixed(2)} per {unit}</td>
             <td>{quantity(product)}</td>

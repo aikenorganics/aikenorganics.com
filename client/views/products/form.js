@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import Errors from '../errors'
-import {createProduct, updateProduct} from '../../actions'
+import {createProduct, navigate, updateProduct} from '../../actions'
 
 export default class Form extends Component {
 
@@ -42,7 +42,7 @@ export default class Form extends Component {
     } else {
       const {id} = this.props.grower
       createProduct(id, this.state).then(({id}) => {
-        window.location = `/products/${id}`
+        navigate(`/products/${id}`)
       }).catch((e) => {})
     }
   }

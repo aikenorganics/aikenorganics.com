@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from '../link'
 
 export default ({path, children}) => {
   return <main className='container'>
@@ -10,19 +11,19 @@ export default ({path, children}) => {
         <a href='/admin/orders'>Orders</a>
       </li>
       <li className={/^\/admin\/categories/.test(path) ? 'active' : ''}>
-        <a href='/admin/categories'>Categories</a>
+        <Link href='/admin/categories'>Categories</Link>
       </li>
       <li className={/^\/admin\/locations/.test(path) ? 'active' : ''}>
-        <a href='/admin/locations'>Locations</a>
+        <Link href='/admin/locations'>Locations</Link>
       </li>
       <li className={/^\/admin\/products/.test(path) ? 'active' : ''}>
         <a href='/admin/products'>Products</a>
       </li>
       <li className={/^\/admin\/growers/.test(path) ? 'active' : ''}>
-        <a href='/admin/growers'>Growers</a>
+        <Link href='/admin/growers'>Growers</Link>
       </li>
       <li className={/^\/admin\/market/.test(path) ? 'active' : ''}>
-        <a href='/admin/market'>Market</a>
+        <Link href='/admin/market'>Market</Link>
       </li>
     </ul>
     {children}

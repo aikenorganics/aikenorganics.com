@@ -1,5 +1,6 @@
 import React from 'react'
 import marked from 'marked'
+import Link from '../link'
 import Nav from './nav'
 import Product from '../products/product'
 
@@ -24,9 +25,9 @@ export default ({busy, canEdit, cart, grower, market: {open}, path, products, cu
       <h2 style={{clear: 'both'}}>
         <span>Products </span>
         {canEdit
-          ? <a className='btn btn-default btn-xs' href={`/growers/${id}/products/new`}>
+          ? <Link className='btn btn-default btn-xs' href={`/growers/${id}/products/new`}>
             New Product
-          </a>
+          </Link>
           : ''
         }
       </h2>

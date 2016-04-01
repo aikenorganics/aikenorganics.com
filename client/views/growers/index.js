@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from '../link'
 import Grower from './grower'
 
 export default ({currentUser: {is_admin}, growers}) => {
@@ -8,9 +9,9 @@ export default ({currentUser: {is_admin}, growers}) => {
       <hr/>
       {is_admin
         ? <div className='text-center'>
-          <a className='btn btn-default btn-xs' href='/growers/new'>
+          <Link className='btn btn-default btn-xs' href='/growers/new'>
             New Grower
-          </a>
+          </Link>
         </div>
         : ''
       }

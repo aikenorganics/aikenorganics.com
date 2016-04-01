@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from '../link'
 
 export default ({cart, products}) => {
   const unavailable = products.filter(({active, available, grower, id}) => {
@@ -16,7 +17,7 @@ export default ({cart, products}) => {
     <ul>
       {unavailable.map(({active, available, grower, id, name}) => {
         return <li key={id}>
-          <a href={`/products/${id}`}>{name}</a>
+          <Link href={`/products/${id}`}>{name}</Link>
           <span> - </span>
           <span> There {+cart[id] > 1 ? 'are' : 'is'} {+cart[id]} in your cart, but </span>
           {!active || !grower.active

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {checkout} from '../../actions'
+import {checkout, navigate} from '../../actions'
 
 export default class Checkout extends Component {
 
@@ -14,7 +14,7 @@ export default class Checkout extends Component {
   submit (e) {
     e.preventDefault()
     checkout(this.state).then(() => {
-      window.location = '/orders/current'
+      navigate('/orders/current')
     }).catch((e) => {})
   }
 

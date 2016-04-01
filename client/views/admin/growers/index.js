@@ -22,7 +22,9 @@ export default ({growers, path}) => {
         <tbody>
           {growers.map(({active, id, name, total}) => {
             return <tr key={id}>
-              <td><a href={`/admin/growers/${id}`}>{name}</a></td>
+              <td>
+                <a href={`/admin/growers/${id}`}>{name}</a>
+              </td>
               <td>
                 {active
                   ? <span className='label label-primary'>Active</span>

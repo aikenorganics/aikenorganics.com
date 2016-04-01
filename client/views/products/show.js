@@ -1,5 +1,6 @@
 import React from 'react'
 import marked from 'marked'
+import Link from '../link'
 import CartForm from '../cart/form'
 import Nav from './nav'
 
@@ -26,9 +27,9 @@ export default ({busy, canEdit, cart, path, product, market: {open}, currentUser
           } • </span>
         : ''
       }
-      <a href={`/growers/${grower.id}`}>
+      <Link href={`/growers/${grower.id}`}>
         {grower.name}
-      </a> • {category.name}
+      </Link> • {category.name}
       <div className='clearfix'>
         <hr/>
       </div>

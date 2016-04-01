@@ -1,4 +1,4 @@
-import {DELETE, POST} from '../json'
+import {GET, DELETE, POST} from '../json'
 import store from '../store'
 
 // Action Constants
@@ -19,6 +19,7 @@ export const UPDATE_MARKET = 'UPDATE_MARKET'
 export const BUSY = 'BUSY'
 export const DONE = 'DONE'
 export const SET_ERRORS = 'SET_ERRORS'
+export const REPLACE = 'REPLACE'
 
 // Busy
 
@@ -36,6 +37,18 @@ export const done = (value) => {
 // Errors
 
 export const setErrors = (errors) => store.dispatch({type: SET_ERRORS, errors})
+
+// Replace
+
+export const navigate = (url, {push} = {}) => {
+  if (push == null) push = true
+  busy()
+  return GET(url).then((state) => {
+    store.dispatch({type: REPLACE, state})
+    if (push) window.history.pushState(null, document.title, state.url)
+    done()
+  }).catch(done)
+}
 
 // Market
 

@@ -1,3 +1,5 @@
+import {combineReducers} from 'redux'
+
 import busy from './busy'
 import cart from './cart'
 import categories from './categories'
@@ -13,11 +15,11 @@ import product from './product'
 import products from './products'
 import user from './user'
 import users from './users'
-import {combineReducers} from 'redux'
+import {REPLACE} from '../actions'
 
 const pass = (state = null) => state
 
-export default combineReducers({
+const reducer = combineReducers({
   busy,
   canEdit: pass,
   cart,
@@ -43,3 +45,8 @@ export default combineReducers({
   user,
   users
 })
+
+export default (state, action) => {
+  if (action.type === REPLACE) state = action.state
+  return reducer(state, action)
+}

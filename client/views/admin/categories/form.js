@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {createCategory, updateCategory} from '../../../actions'
+import {createCategory, navigate, updateCategory} from '../../../actions'
 
 export default class Form extends Component {
 
@@ -23,11 +23,11 @@ export default class Form extends Component {
     if (this.props.category) {
       const {id} = this.props.category
       updateCategory(id, this.state).then(() => {
-        window.location = '/admin/categories'
+        navigate('/admin/categories')
       }).catch((e) => {})
     } else {
       createCategory(this.state).then(() => {
-        window.location = '/admin/categories'
+        navigate('/admin/categories')
       }).catch((e) => {})
     }
   }

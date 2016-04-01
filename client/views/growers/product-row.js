@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import Link from '../link'
 import {updateProduct} from '../../actions'
 
 export default class ProductRow extends Component {
@@ -55,9 +56,9 @@ export default class ProductRow extends Component {
 
     return <tr>
       <td>
-        <a href={`/products/${id}`}>
+        <Link href={`/products/${id}`}>
           {name}
-        </a>
+        </Link>
       </td>
       <td>
         <input className='form-control' type='number' value={this.state.supply}

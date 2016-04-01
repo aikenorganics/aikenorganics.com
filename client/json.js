@@ -16,20 +16,28 @@ const json = (url, options) => {
   // Let the user know we're doing something.
   message('info', 'Working…')
 
-  return fetch(url, options).then((res) => {
-    if (res.ok) {
+  return fetch(url, options).then((response) => {
+    const error = () => {
+      message('error', response.statusText)
+      const e = new Error(response.statusText)
+      e.response = response
+      throw e
+    }
+
+    if (response.ok) {
       message('success', 'Done.')
       setErrors(null)
-      return res.json()
-    } else if (res.status === 422) {
-      return res.json().then((errors) => {
+      return response.json()
+    }
+
+    if (response.status === 422) {
+      return response.json().then((errors) => {
         setErrors(errors)
-        message('error', 'There was a problem saving your data…')
-        throw new Error(res.statusText)
+        error()
       })
     }
-    message('error', res.statusText)
-    throw new Error(res.statusText)
+
+    error()
   })
 }
 

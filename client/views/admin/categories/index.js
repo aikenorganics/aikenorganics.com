@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from '../../link'
 import {destroyCategory} from '../../../actions'
 
 export default ({busy, categories}) => {
@@ -9,9 +10,9 @@ export default ({busy, categories}) => {
   return <div>
     <h1>
       Categories&nbsp;
-      <a className='btn btn-default btn-xs' href='/admin/categories/new'>
+      <Link className='btn btn-default btn-xs' href='/admin/categories/new'>
         New Category
-      </a>
+      </Link>
     </h1>
     <hr/>
     <table className='table'>
@@ -27,9 +28,9 @@ export default ({busy, categories}) => {
         {categories.map(({id, name, position}) => {
           return <tr key={id}>
             <td>
-              <a className='btn btn-default btn-xs' href={`/admin/categories/${id}/edit`}>
+              <Link className='btn btn-default btn-xs' href={`/admin/categories/${id}/edit`}>
                 Edit
-              </a>
+              </Link>
             </td>
             <td>{name}</td>
             <td>{position}</td>

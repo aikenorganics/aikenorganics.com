@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from '../link'
 import Form from './form'
 import {cancelOrder} from '../../actions'
 
@@ -39,7 +40,7 @@ export default ({busy, market: {open}, locations, order, currentUser}) => {
         {productOrders.map(({cost, id, product, quantity, total}) => {
           return <tr key={id}>
             <td>
-              <a href={`/products/${product.id}`}>{product.name}</a>
+              <Link href={`/products/${product.id}`}>{product.name}</Link>
             </td>
             <td>${cost}</td>
             <td>{quantity}</td>
@@ -65,7 +66,7 @@ export default ({busy, market: {open}, locations, order, currentUser}) => {
     <hr/>
     <p>
       If youʼd like to pay online, you can update your billing information
-      from <a href='/settings'>your settings</a>.
+      from <Link href='/settings'>your settings</Link>.
     </p>
   </div>
 }

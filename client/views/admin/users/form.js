@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {createUser, updateUser} from '../../../actions'
+import {createUser, navigate, updateUser} from '../../../actions'
 
 export default class Form extends Component {
 
@@ -30,7 +30,7 @@ export default class Form extends Component {
       updateUser(id, this.state).catch((e) => {})
     } else {
       createUser(this.state).then((user) => {
-        window.location = `/admin/users/${user.id}/edit`
+        navigate(`/admin/users/${user.id}/edit`)
       }).catch((e) => {})
     }
   }

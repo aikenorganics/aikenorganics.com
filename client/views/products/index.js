@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from '../link'
 import Product from './product'
 import {withParams} from '../../url'
 
@@ -12,9 +13,9 @@ export default ({busy, cart, category_id, categories, page, products, market: {o
       <ul className='nav nav-pills nav-stacked'>
         {categories.map((category) => {
           return <li key={category.id} className={+category_id === category.id ? 'active' : ''}>
-            <a href={`/products?category_id=${category.id}`}>
+            <Link href={`/products?category_id=${category.id}`}>
               {category.name}
-            </a>
+            </Link>
           </li>
         })}
       </ul>
@@ -29,15 +30,15 @@ export default ({busy, cart, category_id, categories, page, products, market: {o
       </div>
       <hr/>
       {more
-        ? <a href={withParams(url, {page: page + 1})} className='pull-right'>
+        ? <Link href={withParams(url, {page: page + 1})} className='pull-right'>
           Next Page →
-        </a>
+        </Link>
         : ''
       }
       {page > 1
-        ? <a href={withParams(url, {page: page - 1})}>
+        ? <Link href={withParams(url, {page: page - 1})}>
           ← Previous Page
-        </a>
+        </Link>
         : ''
       }
     </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from '../link'
 import CartForm from '../cart/form'
 
 export default ({busy, cart, open, product, currentUser}) => {
@@ -7,16 +8,16 @@ export default ({busy, cart, open, product, currentUser}) => {
   return <div className='panel panel-default product'>
     <div className='panel-heading'>
       <h3 className='panel-title'>
-        <a href={`/products/${id}`}>{name}</a>
+        <Link href={`/products/${id}`}>{name}</Link>
       </h3>
     </div>
     <div className='panel-body'>
       <div className='media'>
         <div className='media-left media-middle'>
           <div className='image-wrapper'>
-            <a href={`/products/${id}`}>
+            <Link href={`/products/${id}`}>
               <img className='img-rounded' src={smallImage} style={{maxWidth: '100px', maxHeight: '100px'}}/>
-            </a>
+            </Link>
           </div>
         </div>
         <div className='media-body'>
@@ -27,7 +28,7 @@ export default ({busy, cart, open, product, currentUser}) => {
             : ''
           }
           <strong>
-            <a href={`/growers/${grower.id}`}>{grower.name}</a>
+            <Link href={`/growers/${grower.id}`}>{grower.name}</Link>
             <br/>
             {open
               ? <span>

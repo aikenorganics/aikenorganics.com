@@ -1,13 +1,14 @@
 import React from 'react'
+import Link from '../../link'
 import Row from './row'
 
 export default ({busy, locations}) => {
   return <div>
     <h1>
       <span>Locations </span>
-      <a className='btn btn-default btn-xs' href='/admin/locations/new'>
+      <Link className='btn btn-default btn-xs' href='/admin/locations/new'>
         New Location
-      </a>
+      </Link>
     </h1>
     <hr/>
     <table className='table'>
