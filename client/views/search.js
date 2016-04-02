@@ -10,9 +10,11 @@ export default class Search extends Component {
   }
 
   componentWillReceiveProps (props) {
-    this.setState({
-      value: props.value
-    })
+    if (props.value !== this.props.value) {
+      this.setState({
+        value: props.value
+      })
+    }
   }
 
   submit (e) {
