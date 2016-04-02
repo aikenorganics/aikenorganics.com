@@ -20,7 +20,11 @@ class User extends require('ozymandias/user') {
       'member_until',
       'stripe_id',
       'card_brand',
-      'card_last4'
+      'card_last4',
+      'street',
+      'city',
+      'state',
+      'zip'
     ])
   }
 
@@ -66,6 +70,62 @@ class User extends require('ozymandias/user') {
 
   set member_until (value) {
     this.data.set('member_until', value || null)
+  }
+
+  get street () {
+    return this.data.get('street')
+  }
+
+  set street (value) {
+    if (typeof value === 'string') value = value.trim()
+    this.data.set('street', value)
+  }
+
+  get city () {
+    return this.data.get('city')
+  }
+
+  set city (value) {
+    if (typeof value === 'string') value = value.trim()
+    this.data.set('city', value)
+  }
+
+  get state () {
+    return this.data.get('state')
+  }
+
+  set state (value) {
+    if (typeof value === 'string') value = value.trim().toUpperCase()
+    this.data.set('state', value)
+  }
+
+  get zip () {
+    return this.data.get('zip')
+  }
+
+  set zip (value) {
+    if (typeof value === 'string') value = value.trim()
+    this.data.set('zip', value)
+  }
+
+  validate () {
+    this.errors = {}
+
+    if (this.street != null && !/\S+/.test(this.street)) {
+      this.errors.street = ['Street cannot be blank']
+    }
+
+    if (this.city != null && !/\S+/.test(this.city)) {
+      this.errors.city = ['City cannot be blank']
+    }
+
+    if (this.state != null && !/^[a-z]{2}$/i.test(this.state)) {
+      this.errors.state = ['State must be two letters']
+    }
+
+    if (this.zip != null & !/^\d{5}(-\d{4})?$/.test(this.zip)) {
+      this.errors.zip = ['Zip must be valid (12345 or 12345-1234)']
+    }
   }
 
   createCustomer (token) {
