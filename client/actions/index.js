@@ -44,6 +44,12 @@ export const navigate = (url, {push} = {}) => {
   if (push == null) push = true
   busy()
   return GET(url).then((state) => {
+    // If the assets version has changed, reload the whole page.
+    if (store.getState().version !== state.version) {
+      window.location = url
+      return
+    }
+
     store.dispatch({type: REPLACE, state})
     if (push) window.history.pushState(null, document.title, state.url)
     window.scrollTo(0, 0)

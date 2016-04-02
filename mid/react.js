@@ -6,6 +6,7 @@ const parseUrl = require('url').parse
 const renderToString = require('react-dom/server').renderToString
 const Routes = require('../client/routes').default
 const toJSON = require('object-tojson')
+const assets = require('ozymandias/assets')
 
 module.exports = (req, res, next) => {
   res.react = (state) => {
@@ -20,7 +21,8 @@ module.exports = (req, res, next) => {
       market: req.market,
       path: path,
       url: req.originalUrl,
-      currentUser: req.user
+      currentUser: req.user,
+      version: assets.version
     }, params, state))
 
     res.format({

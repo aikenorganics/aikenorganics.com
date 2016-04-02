@@ -43,7 +43,8 @@ const reducer = combineReducers({
   search: pass,
   url: pass,
   user,
-  users
+  users,
+  version: pass
 })
 
 export default (state, action) => {
