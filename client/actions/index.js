@@ -46,6 +46,7 @@ export const navigate = (url, {push} = {}) => {
   return GET(url).then((state) => {
     store.dispatch({type: REPLACE, state})
     if (push) window.history.pushState(null, document.title, state.url)
+    window.scrollTo(0, 0)
     done()
   }).catch(done)
 }
