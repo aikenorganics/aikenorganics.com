@@ -97,6 +97,9 @@ main, section {
   a, a:hover, a:active, a:visited {
     color: #9d9d9d;
   }
+  img {
+    max-width: 100%;
+  }
   .colophon {
     font-family: Georgia, serif;
     text-transform: uppercase;
