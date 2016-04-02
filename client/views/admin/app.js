@@ -5,7 +5,7 @@ export default ({path, children}) => {
   return <main className='container'>
     <ul className='nav nav-tabs subnav hidden-print'>
       <li className={/^\/admin\/users/.test(path) ? 'active' : ''}>
-        <a href='/admin/users'>Users</a>
+        <Link href='/admin/users'>Users</Link>
       </li>
       <li className={/^\/admin\/orders/.test(path) ? 'active' : ''}>
         <a href='/admin/orders'>Orders</a>
