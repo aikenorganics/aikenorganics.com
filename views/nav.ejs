@@ -34,9 +34,8 @@
             </a>
             <ul class='dropdown-menu' role='menu'>
               <li id='current-user' class='dropdown-header'>
-                <% if (user.first || user.last) { %>
-                  <%= user.first %>
-                  <%= user.last %>
+                <% if (user.name) { %>
+                  <%= user.name %>
                   <br>
                 <% } %>
                 <%= user.email %>
