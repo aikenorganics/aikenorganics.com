@@ -5,23 +5,30 @@ export default class Search extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      search: ''
+      value: props.value
     }
+  }
+
+  componentWillReceiveProps (props) {
+    this.setState({
+      value: props.value
+    })
   }
 
   submit (e) {
     e.preventDefault()
     const {url} = this.props
-    const {search} = this.state
-    navigate(`${url}?search=${encodeURIComponent(search)}`)
+    const {value} = this.state
+    navigate(`${url}?search=${encodeURIComponent(value)}`)
   }
 
   render () {
-    const {search} = this.state
+    const {url} = this.props
+    const {value} = this.state
 
-    return <form className='form-inline' action='/admin/users' onSubmit={(e) => this.submit(e)}>
-      <input type='search' className='form-control' value={search}
-        onChange={(e) => this.setState({search: e.target.value})} placeholder='Search…'/>
+    return <form className='form-inline' action={url} onSubmit={(e) => this.submit(e)}>
+      <input type='search' className='form-control' value={value}
+        onChange={(e) => this.setState({value: e.target.value})} placeholder='Search…'/>
     </form>
   }
 }

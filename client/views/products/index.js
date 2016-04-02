@@ -1,14 +1,13 @@
 import React from 'react'
 import Link from '../link'
+import Search from '../search'
 import Product from './product'
 import {withParams} from '../../url'
 
 export default ({busy, cart, category_id, categories, page, products, market: {open}, more, search, url, currentUser}) => {
   return <div className='row'>
     <div className='col-md-2'>
-      <form>
-        <input className='form-control' type='search' name='search' placeholder='Search…' defaultValue={search || ''}/>
-      </form>
+      <Search url='/products' value={search}/>
       <hr/>
       <ul className='nav nav-pills nav-stacked'>
         {categories.map((category) => {

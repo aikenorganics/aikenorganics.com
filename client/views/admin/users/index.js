@@ -10,7 +10,7 @@ export default ({more, page, search, url, users}) => {
       New User
     </a>
     <div style={{display: 'inline-block'}}>
-      <Search url='/admin/users'/>
+      <Search url='/admin/users' value={search}/>
     </div>
     &nbsp;
     <Link href='/admin/users/emails'>Email List</Link>
