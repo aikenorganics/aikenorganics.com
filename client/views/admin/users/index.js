@@ -51,15 +51,15 @@ export default ({more, page, search, url, users}) => {
     </table>
     <hr/>
     {more
-      ? <a href={withParams(url, {page: page + 1})} className='pull-right'>
+      ? <Link href={withParams(url, {page: page + 1})} className='pull-right'>
         Next Page →
-      </a>
+      </Link>
       : ''
     }
     {page > 1
-      ? <a href={withParams(url, {page: page - 1})}>
+      ? <Link href={withParams(url, {page: page - 1})}>
         ← Previous Page
-      </a>
+      </Link>
       : ''
     }
   </div>
