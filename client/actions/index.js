@@ -38,7 +38,7 @@ export const done = (value) => {
 
 export const setErrors = (errors) => store.dispatch({type: SET_ERRORS, errors})
 
-// Replace
+// Navigate
 
 export const navigate = (url, {push} = {}) => {
   if (push == null) push = true
