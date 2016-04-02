@@ -17,8 +17,8 @@ const json = (url, options) => {
   message('info', 'Working…')
 
   return fetch(url, options).then((response) => {
-    const error = () => {
-      message('error', response.statusText)
+    const error = (text) => {
+      message('error', text)
       const e = new Error(response.statusText)
       e.response = response
       throw e
@@ -33,11 +33,11 @@ const json = (url, options) => {
     if (response.status === 422) {
       return response.json().then((errors) => {
         setErrors(errors)
-        error()
+        error('Whoops! Can you try that again?')
       })
     }
 
-    error()
+    error(response.statusText)
   })
 }
 

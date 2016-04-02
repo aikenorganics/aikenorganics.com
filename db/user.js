@@ -179,6 +179,10 @@ class User extends require('ozymandias/user') {
       stripe_id: this.stripe_id,
       card_brand: this.card_brand,
       card_last4: this.card_last4,
+      street: this.street,
+      city: this.city,
+      state: this.state,
+      zip: this.zip,
       has_order: this.has_order,
       mediumImage: this.mediumImage
     }

@@ -1,16 +1,21 @@
 import React, {Component} from 'react'
-import {updateSettings} from '../../actions'
+import Errors from '../errors'
 import Billing from '../users/billing'
+import {updateSettings} from '../../actions'
 
 export default class Index extends Component {
 
   constructor (props) {
     super(props)
-    const {first, last, phone} = props.currentUser
+    const {first, last, phone, street, city, state, zip} = props.currentUser
     this.state = {
       first,
       last,
-      phone
+      phone,
+      street,
+      city,
+      state,
+      zip
     }
   }
 
@@ -20,24 +25,45 @@ export default class Index extends Component {
   }
 
   render () {
-    const {busy, currentUser} = this.props
+    const {busy, currentUser, errors} = this.props
     const {stripe_id, card_brand, card_last4} = currentUser
-    const {first, last, phone} = this.state
+    const {first, last, phone, street, city, state, zip} = this.state
 
     return <div>
       <h1>Settings</h1>
       <form onSubmit={(e) => this.save(e)}>
-        <div className='form-group'>
-          <label htmlFor='first'>First Name</label>
-          <input autoFocus type='text' className='form-control' value={first} onChange={(e) => this.setState({first: e.target.value})}/>
+        <Errors errors={errors}/>
+        <div className='row'>
+          <div className='form-group col-md-4'>
+            <label htmlFor='first'>First Name</label>
+            <input autoFocus id='first' type='text' className='form-control' value={first} onChange={(e) => this.setState({first: e.target.value})}/>
+          </div>
+          <div className='form-group col-md-4'>
+            <label htmlFor='last'>Last Name</label>
+            <input type='text' id='last' className='form-control' value={last} onChange={(e) => this.setState({last: e.target.value})}/>
+          </div>
+          <div className='form-group col-md-4'>
+            <label htmlFor='phone'>Phone Number</label>
+            <input type='text' id='phone' className='form-control' value={phone} onChange={(e) => this.setState({phone: e.target.value})}/>
+          </div>
         </div>
         <div className='form-group'>
-          <label htmlFor='last'>Last Name</label>
-          <input type='text' className='form-control' value={last} onChange={(e) => this.setState({last: e.target.value})}/>
+          <label htmlFor='street'>Street</label>
+          <input type='text' id='street' className='form-control' value={street} onChange={(e) => this.setState({street: e.target.value.trim() || null})}/>
         </div>
-        <div className='form-group'>
-          <label htmlFor='phone'>Phone Number</label>
-          <input type='text' className='form-control' value={phone} onChange={(e) => this.setState({phone: e.target.value})}/>
+        <div className='row'>
+          <div className='form-group col-md-6'>
+            <label htmlFor='city'>City</label>
+            <input type='text' id='city' className='form-control' value={city} onChange={(e) => this.setState({city: e.target.value.trim() || null})}/>
+          </div>
+          <div className='form-group col-md-2'>
+            <label htmlFor='state'>State</label>
+            <input type='text' id='state' className='form-control' value={state} onChange={(e) => this.setState({state: e.target.value.trim() || null})}/>
+          </div>
+          <div className='form-group col-md-4'>
+            <label htmlFor='zip'>Zip</label>
+            <input type='text' id='zip' className='form-control' value={zip} onChange={(e) => this.setState({zip: e.target.value.trim() || null})}/>
+          </div>
         </div>
         <div className='form-group'>
           <button type='submit' className='btn btn-primary' disabled={busy}>
