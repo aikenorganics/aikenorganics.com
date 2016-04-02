@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import Search from './search'
+import Search from '../../search'
 import Link from '../../link'
 import {withParams} from '../../../url'
 
@@ -9,7 +9,11 @@ export default ({more, page, search, url, users}) => {
     <a href='/admin/users/new' className='btn btn-sm btn-default pull-right'>
       New User
     </a>
-    <Search/>
+    <div style={{display: 'inline-block'}}>
+      <Search url='/admin/users'/>
+    </div>
+    &nbsp;
+    <Link href='/admin/users/emails'>Email List</Link>
     <hr/>
     <table className='table'>
       <thead>
