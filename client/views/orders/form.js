@@ -41,7 +41,7 @@ export default class Form extends Component {
         {this.canDeliver()
           ? <div className='checkbox'>
             <label>
-              <input type='checkbox' value={location_id == null} onChange={(e) => this.toggleDelivery(e)}/>
+              <input type='checkbox' checked={location_id == null} onChange={(e) => this.toggleDelivery(e)}/>
               Deliver to <strong>{address}</strong>
             </label>
           </div>
