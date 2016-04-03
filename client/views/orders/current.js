@@ -26,7 +26,12 @@ export default ({busy, market: {open}, locations, order, currentUser}) => {
       : ''
     }
     <h1>Current Order</h1>
-    <h3>Pickup Location: {location.name}</h3>
+    <h3>
+      {location
+        ? `Pickup Location: ${location.name}`
+        : `Deliver to ${currentUser.address}`
+      }
+    </h3>
     <table className='table'>
       <thead>
         <tr>
@@ -60,7 +65,7 @@ export default ({busy, market: {open}, locations, order, currentUser}) => {
       </tfoot>
     </table>
     {open
-      ? <Form busy={busy} locations={locations} order={order}/>
+      ? <Form busy={busy} locations={locations} order={order} user={currentUser}/>
       : ''
     }
     <hr/>

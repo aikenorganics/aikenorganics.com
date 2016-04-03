@@ -21,7 +21,16 @@ export default class Index extends Component {
 
   save (e) {
     e.preventDefault()
-    updateSettings(this.state).catch((e) => {})
+    const {first, last, phone, street, city, state, zip} = this.state
+    updateSettings({
+      first,
+      last,
+      phone,
+      street: street || null,
+      city: city || null,
+      state: state || null,
+      zip: zip || null
+    }).catch((e) => {})
   }
 
   render () {
@@ -49,20 +58,20 @@ export default class Index extends Component {
         </div>
         <div className='form-group'>
           <label htmlFor='street'>Street</label>
-          <input type='text' id='street' className='form-control' value={street} onChange={(e) => this.setState({street: e.target.value.trim() || null})}/>
+          <input type='text' id='street' className='form-control' value={street || ''} onChange={(e) => this.setState({street: e.target.value})}/>
         </div>
         <div className='row'>
           <div className='form-group col-md-6'>
             <label htmlFor='city'>City</label>
-            <input type='text' id='city' className='form-control' value={city} onChange={(e) => this.setState({city: e.target.value.trim() || null})}/>
+            <input type='text' id='city' className='form-control' value={city || ''} onChange={(e) => this.setState({city: e.target.value})}/>
           </div>
           <div className='form-group col-md-2'>
             <label htmlFor='state'>State</label>
-            <input type='text' id='state' className='form-control' value={state} onChange={(e) => this.setState({state: e.target.value.trim() || null})}/>
+            <input type='text' id='state' className='form-control' value={state || ''} onChange={(e) => this.setState({state: e.target.value})}/>
           </div>
           <div className='form-group col-md-4'>
             <label htmlFor='zip'>Zip</label>
-            <input type='text' id='zip' className='form-control' value={zip} onChange={(e) => this.setState({zip: e.target.value.trim() || null})}/>
+            <input type='text' id='zip' className='form-control' value={zip || ''} onChange={(e) => this.setState({zip: e.target.value})}/>
           </div>
         </div>
         <div className='form-group'>

@@ -14,7 +14,9 @@ export default (state = null, action) => {
 
     case UPDATE_ORDER:
       if (!state || state.id !== action.id) return state
-      return Object.assign({}, state, action.values)
+      const next = Object.assign({}, state, action.values)
+      if (next.location_id == null) delete next.location
+      return next
 
     default:
       return state

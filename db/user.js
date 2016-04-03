@@ -64,6 +64,10 @@ class User extends require('ozymandias/user') {
     return `${this.first} ${this.last}`.trim()
   }
 
+  get address () {
+    return `${this.street}, ${this.city} ${this.state} ${this.zip}`
+  }
+
   get member_until () {
     return this.data.get('member_until') || null
   }
@@ -183,6 +187,7 @@ class User extends require('ozymandias/user') {
       city: this.city,
       state: this.state,
       zip: this.zip,
+      address: this.address,
       has_order: this.has_order,
       mediumImage: this.mediumImage
     }

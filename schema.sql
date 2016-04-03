@@ -197,7 +197,7 @@ declare
   product int[];
 begin
 
-  if not exists(select id from locations where id = $2 and active = true) then
+  if $2 is not null and not exists(select id from locations where id = $2 and active = true) then
     raise 'location must be active';
   end if;
 

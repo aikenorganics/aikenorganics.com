@@ -29,6 +29,17 @@ test('update order - wrong id', (t) => {
   t.end()
 })
 
+test('update order - remove location', (t) => {
+  const state = freeze({order: {id: 1, location_id: 1, location: {}}})
+  const next = reducer(state, {
+    type: UPDATE_ORDER,
+    id: 1,
+    values: {location_id: null}
+  })
+  t.deepEqual(next.order, {id: 1, location_id: null})
+  t.end()
+})
+
 test('cancel order - already null', (t) => {
   const state = freeze({order: null})
   const next = reducer(state, {

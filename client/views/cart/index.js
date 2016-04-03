@@ -4,7 +4,7 @@ import Warning from './warning'
 import Checkout from './checkout'
 import {updateCart} from '../../actions'
 
-export default ({busy, cart, locations, order, products}) => {
+export default ({busy, cart, currentUser, locations, order, products}) => {
   const quantity = ({active, available, grower, id}) => {
     if (!active || !grower.active) return 0
     return Math.min(+cart[id] || 0, available)
@@ -64,7 +64,7 @@ export default ({busy, cart, locations, order, products}) => {
       </tfoot>
     </table>
     {available.length > 0
-      ? <Checkout order={order} locations={locations}/>
+      ? <Checkout busy={busy} order={order} locations={locations} user={currentUser}/>
       : ''
     }
   </div>
