@@ -10,7 +10,7 @@ export default ({busy, categories}) => {
   return <div>
     <h1>
       Categories&nbsp;
-      <Link className='btn btn-default btn-xs' href='/admin/categories/new'>
+      <Link href='/admin/categories/new' className='btn btn-default btn-xs'>
         New Category
       </Link>
     </h1>
@@ -28,7 +28,7 @@ export default ({busy, categories}) => {
         {categories.map(({id, name, position}) => {
           return <tr key={id}>
             <td>
-              <Link className='btn btn-default btn-xs' href={`/admin/categories/${id}/edit`}>
+              <Link href={`/admin/categories/${id}/edit`} className='btn btn-default btn-xs'>
                 Edit
               </Link>
             </td>

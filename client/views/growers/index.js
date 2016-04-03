@@ -9,7 +9,7 @@ export default ({currentUser: {is_admin}, growers}) => {
       <hr/>
       {is_admin
         ? <div className='text-center'>
-          <Link className='btn btn-default btn-xs' href='/growers/new'>
+          <Link href='/growers/new' className='btn btn-default btn-xs'>
             New Grower
           </Link>
         </div>

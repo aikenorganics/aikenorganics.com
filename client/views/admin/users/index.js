@@ -30,7 +30,7 @@ export default ({more, page, search, url, users}) => {
         {users.map(({id, email, is_admin, member_until, name, phone}) => {
           return <tr key={id}>
             <td>
-              <Link className='btn btn-default btn-xs' href={`/admin/users/${id}/edit`}>
+              <Link href={`/admin/users/${id}/edit`} className='btn btn-default btn-xs'>
                 Edit
               </Link>
             </td>

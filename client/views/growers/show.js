@@ -25,7 +25,7 @@ export default ({busy, canEdit, cart, grower, market: {open}, path, products, cu
       <h2 style={{clear: 'both'}}>
         <span>Products </span>
         {canEdit
-          ? <Link className='btn btn-default btn-xs' href={`/growers/${id}/products/new`}>
+          ? <Link href={`/growers/${id}/products/new`} className='btn btn-default btn-xs'>
             New Product
           </Link>
           : ''

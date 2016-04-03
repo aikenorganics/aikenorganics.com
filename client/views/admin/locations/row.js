@@ -7,7 +7,7 @@ export default ({busy, location}) => {
 
   return <tr>
     <td>
-      <Link className='btn btn-default btn-xs' href={`/admin/locations/${id}/edit`}>
+      <Link href={`/admin/locations/${id}/edit`} className='btn btn-default btn-xs'>
         Edit
       </Link>
     </td>

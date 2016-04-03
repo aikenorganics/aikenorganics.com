@@ -6,7 +6,7 @@ export default ({busy, locations}) => {
   return <div>
     <h1>
       <span>Locations </span>
-      <Link className='btn btn-default btn-xs' href='/admin/locations/new'>
+      <Link href='/admin/locations/new' className='btn btn-default btn-xs'>
         New Location
       </Link>
     </h1>
