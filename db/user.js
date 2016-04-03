@@ -68,6 +68,17 @@ class User extends require('ozymandias/user') {
     return `${this.street}, ${this.city} ${this.state} ${this.zip}`
   }
 
+  get canDeliver () {
+    return (
+      this.phone &&
+      this.street &&
+      this.city &&
+      this.state &&
+      this.stripe_id &&
+      this.zip
+    )
+  }
+
   get member_until () {
     return this.data.get('member_until') || null
   }
@@ -171,6 +182,7 @@ class User extends require('ozymandias/user') {
   toJSON () {
     return {
       id: this.id,
+      canDeliver: this.canDeliver,
       email: this.email,
       name: this.name,
       last: this.last,
