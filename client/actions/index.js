@@ -41,17 +41,16 @@ export const setErrors = (errors) => store.dispatch({type: SET_ERRORS, errors})
 // Navigate
 
 export const navigate = (url, {push} = {}) => {
-  if (push == null) push = true
   busy()
+  if (push !== false) window.history.pushState(null, document.title, url)
   return GET(url).then((state) => {
-    // If the assets version has changed, reload the whole page.
+    // If the version has changed, reload the whole page.
     if (store.getState().version !== state.version) {
       window.location = url
       return
     }
 
     store.dispatch({type: REPLACE, state})
-    if (push) window.history.pushState(null, document.title, state.url)
     window.scrollTo(0, 0)
     done()
   }).catch(done)
