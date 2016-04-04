@@ -64,6 +64,9 @@ main, section {
   h1 {
     font-weight: bold;
   }
+  img {
+    max-width: 100%;
+  }
   .content {
     top: 50px;
   }
