@@ -6,7 +6,11 @@
   <a href='/admin/users/<%= order.user.id %>/edit'><%= order.user.name %></a>
   <small><%= order.user.email %></small>
   -
-  <%= order.location.name %>
+  <% if (order.location) { %>
+    <%= order.location.name %>
+  <% } else { %>
+    Deliver to <%= order.user.address %>
+  <% } %>
 </h3>
 <table class='table'>
   <thead>
