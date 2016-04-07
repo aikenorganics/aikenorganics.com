@@ -36,7 +36,9 @@ router.get('/', (req, res) => {
   }
 
   // Location
-  if (req.query.location_id) {
+  if (req.query.location_id === 'delivery') {
+    orders.where({location_id: null})
+  } else if (req.query.location_id) {
     orders.where({location_id: req.query.location_id})
   }
 

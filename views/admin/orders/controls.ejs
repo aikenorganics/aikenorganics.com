@@ -16,6 +16,7 @@
   <div class='form-group'>
     <select class='form-control' name='location_id' onchange='this.form.submit()' style='max-width: 300px'>
       <option value=''>All Locations</option>
+      <option value='delivery' <% if (req.query.location_id === 'delivery') { %>selected<% } %>>Delivery</option>
       <% locations.forEach(function (location) { %>
         <option value='<%= location.id %>' <% if (location.id === +req.query.location_id) { %>selected<% } %>>
           <%= location.name %>
