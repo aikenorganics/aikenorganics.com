@@ -1,7 +1,7 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import {UPDATE_GROWER} from '../../../client/actions'
-import reducer from '../../../client/reducers'
+import {UPDATE_GROWER} from '../../../client/actions/index'
+import reducer from '../../../client/reducers/index'
 
 test('update grower', (t) => {
   const state = freeze({grower: {id: 1, active: false}})

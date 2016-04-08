@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {createLocation, navigate, updateLocation} from '../../../actions'
+import {createLocation, navigate, updateLocation} from '../../../actions/index'
 
 export default class Form extends Component {
 

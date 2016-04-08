@@ -2,7 +2,7 @@ import React from 'react'
 import {render} from 'react-dom'
 import store from '../store'
 import Routes from '../routes'
-import {navigate} from '../actions'
+import {navigate} from '../actions/index'
 
 // The element to render components into.
 const root = document.getElementById('root')

@@ -3,8 +3,8 @@ import freeze from 'deep-freeze'
 import {
   REMOVE_LOCATION,
   UPDATE_LOCATION
-} from '../../../client/actions'
-import reducer from '../../../client/reducers'
+} from '../../../client/actions/index'
+import reducer from '../../../client/reducers/index'
 
 test('update location - activate', (t) => {
   const state = freeze({

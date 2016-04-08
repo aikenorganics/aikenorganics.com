@@ -1,2 +1,2 @@
-import './reducers'
+import './reducers/index'
 import './url'

@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {createCategory, navigate, updateCategory} from '../../../actions'
+import {createCategory, navigate, updateCategory} from '../../../actions/index'
 
 export default class Form extends Component {
 

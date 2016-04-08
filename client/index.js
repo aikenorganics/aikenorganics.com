@@ -1,5 +1,5 @@
 import './error-tracking'
-import './pages'
+import './pages/index'
 import message from './message'
 
 // Bootstrap relies on window.jQuery

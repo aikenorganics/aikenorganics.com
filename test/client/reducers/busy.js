@@ -1,7 +1,7 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import {BUSY, DONE} from '../../../client/actions'
-import reducer from '../../../client/reducers'
+import {BUSY, DONE} from '../../../client/actions/index'
+import reducer from '../../../client/reducers/index'
 
 test('busy', (t) => {
   const state = freeze({busy: false})

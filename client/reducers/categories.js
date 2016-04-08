@@ -1,7 +1,7 @@
 import {
   REMOVE_CATEGORY,
   UPDATE_CATEGORY
-} from '../actions'
+} from '../actions/index'
 
 export default (state = null, action) => {
   switch (action.type) {

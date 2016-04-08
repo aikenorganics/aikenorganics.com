@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Link from '../link'
-import {checkout, navigate} from '../../actions'
+import {checkout, navigate} from '../../actions/index'
 
 export default class Checkout extends Component {
 

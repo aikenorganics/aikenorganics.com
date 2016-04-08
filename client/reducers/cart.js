@@ -1,4 +1,4 @@
-import {UPDATE_CART} from '../actions'
+import {UPDATE_CART} from '../actions/index'
 
 export default (state = null, action) => {
   switch (action.type) {

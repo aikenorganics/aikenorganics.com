@@ -1,7 +1,7 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import {UPDATE_LOCATION} from '../../../client/actions'
-import reducer from '../../../client/reducers'
+import {UPDATE_LOCATION} from '../../../client/actions/index'
+import reducer from '../../../client/reducers/index'
 
 test('update location - activate', (t) => {
   const state = freeze({location: {id: 2, active: false}})

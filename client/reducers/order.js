@@ -1,4 +1,4 @@
-import {CANCEL_ORDER, CREATE_PAYMENT, UPDATE_ORDER} from '../actions'
+import {CANCEL_ORDER, CREATE_PAYMENT, UPDATE_ORDER} from '../actions/index'
 
 export default (state = null, action) => {
   switch (action.type) {

@@ -1,7 +1,7 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import {UPDATE_USER} from '../../../client/actions'
-import reducer from '../../../client/reducers'
+import {UPDATE_USER} from '../../../client/actions/index'
+import reducer from '../../../client/reducers/index'
 
 test('update currentUser - email', (t) => {
   const state = freeze({currentUser: {id: 1, email: 'foo@example.com'}})

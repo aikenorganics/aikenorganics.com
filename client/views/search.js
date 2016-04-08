@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {navigate} from '../actions'
+import {navigate} from '../actions/index'
 
 export default class Search extends Component {
   constructor (props) {

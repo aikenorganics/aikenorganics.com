@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {createGrower, navigate, updateGrower} from '../../actions'
+import {createGrower, navigate, updateGrower} from '../../actions/index'
 
 export default class Form extends Component {
 

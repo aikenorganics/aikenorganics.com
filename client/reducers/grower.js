@@ -1,4 +1,4 @@
-import {UPDATE_GROWER} from '../actions'
+import {UPDATE_GROWER} from '../actions/index'
 
 export default (state = null, action) => {
   switch (action.type) {

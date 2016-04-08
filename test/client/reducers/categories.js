@@ -3,8 +3,8 @@ import freeze from 'deep-freeze'
 import {
   REMOVE_CATEGORY,
   UPDATE_CATEGORY
-} from '../../../client/actions'
-import reducer from '../../../client/reducers'
+} from '../../../client/actions/index'
+import reducer from '../../../client/reducers/index'
 
 test('update category - activate', (t) => {
   const state = freeze({

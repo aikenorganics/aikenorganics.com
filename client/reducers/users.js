@@ -1,4 +1,4 @@
-import {UPDATE_USER} from '../actions'
+import {UPDATE_USER} from '../actions/index'
 
 export default (state = null, action) => {
   switch (action.type) {

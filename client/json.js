@@ -1,7 +1,7 @@
 import 'es6-promise'
 import fetch from 'isomorphic-fetch'
 import message from './message'
-import {setErrors} from './actions'
+import {setErrors} from './actions/index'
 
 const json = (url, options) => {
   if (!options) options = {}

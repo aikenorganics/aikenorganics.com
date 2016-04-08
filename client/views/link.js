@@ -1,5 +1,5 @@
 import React from 'react'
-import {navigate} from '../actions'
+import {navigate} from '../actions/index'
 
 export default (props) => {
   const click = (e) => {

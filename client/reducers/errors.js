@@ -1,4 +1,4 @@
-import {SET_ERRORS} from '../actions'
+import {SET_ERRORS} from '../actions/index'
 
 export default (state = null, action) => {
   switch (action.type) {

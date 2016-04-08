@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Errors from '../errors'
 import Billing from '../users/billing'
-import {updateSettings} from '../../actions'
+import {updateSettings} from '../../actions/index'
 
 export default class Index extends Component {
 

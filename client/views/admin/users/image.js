@@ -1,5 +1,5 @@
 import React from 'react'
-import {imageUser} from '../../../actions'
+import {imageUser} from '../../../actions/index'
 
 export default ({busy, user: {id, mediumImage}}) => {
   const upload = (e) => {

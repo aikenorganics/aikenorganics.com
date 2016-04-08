@@ -2,7 +2,7 @@ import React from 'react'
 import Link from '../link'
 import Warning from './warning'
 import Checkout from './checkout'
-import {updateCart} from '../../actions'
+import {updateCart} from '../../actions/index'
 
 export default ({busy, cart, currentUser, locations, order, products}) => {
   const quantity = ({active, available, grower, id}) => {

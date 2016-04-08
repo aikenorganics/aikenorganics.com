@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import Link from '../link'
-import {updateProduct} from '../../actions'
+import {updateProduct} from '../../actions/index'
 
 export default class ProductRow extends Component {
 

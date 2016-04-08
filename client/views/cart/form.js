@@ -1,5 +1,5 @@
 import React from 'react'
-import {updateCart} from '../../actions'
+import {updateCart} from '../../actions/index'
 
 export default ({busy, cart, open, product: {active, available, id}}) => {
   const quantity = cart[id] || 0

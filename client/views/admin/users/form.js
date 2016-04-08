@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {createUser, navigate, updateUser} from '../../../actions'
+import {createUser, navigate, updateUser} from '../../../actions/index'
 
 export default class Form extends Component {
 

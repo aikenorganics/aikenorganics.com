@@ -1,7 +1,7 @@
 import React from 'react'
 import Nav from './nav'
 import Form from './form'
-import {imageGrower} from '../../actions'
+import {imageGrower} from '../../actions/index'
 
 export default ({busy, canEdit, errors, grower, path}) => {
   const {id, mediumImage} = grower

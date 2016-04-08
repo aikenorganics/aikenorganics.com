@@ -1,4 +1,4 @@
-import {UPDATE_PRODUCT} from '../actions'
+import {UPDATE_PRODUCT} from '../actions/index'
 
 export default (state = null, action) => {
   switch (action.type) {

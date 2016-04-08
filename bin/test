@@ -11,5 +11,5 @@ tape test/index.js
 
 # Client Tests
 mkdir -p public/js
-browserify test/client/index.js > public/js/test.js
+./bin/rollup.js test/client/index.js | browserify - > public/js/test.js
 karma start
