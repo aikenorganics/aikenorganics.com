@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
     )
   }
 
-  products.order('name').paginate(page, 3).then((products) => {
+  products.order('name').paginate(page, 100).then((products) => {
     res.react({
       more: products.more,
       oversold: oversold,
