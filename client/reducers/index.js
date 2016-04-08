@@ -36,6 +36,7 @@ const reducer = combineReducers({
   market,
   more: pass,
   order,
+  oversold: pass,
   page: pass,
   path: pass,
   product,

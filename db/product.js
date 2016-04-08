@@ -82,7 +82,7 @@ class Product extends Model {
     return Math.max(this.supply - this.reserved, 0)
   }
 
-  isOversold () {
+  get oversold () {
     return this.supply < this.reserved
   }
 
@@ -105,6 +105,7 @@ class Product extends Model {
       grower_id: this.grower_id,
       category_id: this.category_id,
       available: this.available,
+      oversold: this.oversold,
       category: this.category,
       grower: this.grower,
       smallImage: this.smallImage,

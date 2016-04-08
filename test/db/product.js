@@ -14,14 +14,14 @@ test('Product#available subtracts reserved from supply', function (t) {
   t.end()
 })
 
-test('Product#isOversold', function (t) {
+test('oversold', function (t) {
   let product = new db.Product({
     supply: 100,
     reserved: 15
   })
-  t.ok(!product.isOversold())
+  t.ok(!product.oversold)
   product.supply = 10
-  t.ok(product.isOversold())
+  t.ok(product.oversold)
   t.end()
 })
 

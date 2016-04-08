@@ -1,13 +1,17 @@
 'use strict'
 
-let db = require('../../db')
-let ozymandias = require('ozymandias')
-let router = module.exports = ozymandias.Router()
+const db = require('../../db')
+const router = module.exports = require('ozymandias').Router()
 
-router.get('/', function (req, res) {
-  let query = db.Product.include('grower')
-  if (req.query.oversold === '1') query.where('reserved > supply')
-  query.order('name').all().then(function (products) {
-    res.render('admin/products/index', {products: products})
+router.get('/', (req, res) => {
+  const oversold = req.query.oversold === '1'
+  const query = db.Product.include('grower')
+  if (oversold) query.where('reserved > supply')
+
+  query.order('name').all().then((products) => {
+    res.react({
+      oversold: oversold,
+      products: products
+    })
   }).catch(res.error)
 })

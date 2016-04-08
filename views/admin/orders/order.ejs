@@ -28,7 +28,7 @@
           <a href='/products/<%= productOrder.product.id %>'>
             <%= productOrder.product.name %>
           </a>
-          <% if (productOrder.product.isOversold()) { %>
+          <% if (productOrder.product.oversold) { %>
             <span class='label label-danger'>Oversold</span>
           <% } %>
         </td>

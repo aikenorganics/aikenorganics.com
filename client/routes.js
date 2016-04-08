@@ -35,6 +35,8 @@ import EditUser from './views/admin/users/edit'
 
 import Market from './views/admin/market/index'
 
+import AdminProducts from './views/admin/products/index'
+
 import AdminGrowers from './views/admin/growers/index'
 import AdminGrowersOrders from './views/admin/growers/orders'
 
@@ -46,6 +48,7 @@ export default (state) => {
       <Route path='categories' Component={Categories}/>
       <Route path='categories/:category_id/edit' Component={EditCategory}/>
       <Route path='categories/new' Component={NewCategory}/>
+      <Route path='products' Component={AdminProducts}/>
       <Route path='growers' Component={AdminGrowers}/>
       <Route path='growers/orders' Component={AdminGrowersOrders}/>
       <Route path='locations' Component={Locations}/>
