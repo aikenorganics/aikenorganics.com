@@ -1,7 +1,9 @@
 import React from 'react'
 import Link from '../../link'
+import Search from '../../search'
+import {withParams} from '../../../url'
 
-export default ({oversold, products}) => {
+export default ({more, oversold, page, products, search, url}) => {
   return <div>
     <h1>Products</h1>
     <div className='hidden-print'>
@@ -23,6 +25,10 @@ export default ({oversold, products}) => {
           </Link>
         </div>
       }
+      &nbsp;
+      <div style={{display: 'inline-block'}}>
+        <Search url='/admin/products' value={search}/>
+      </div>
     </div>
     <hr/>
     <table className='table'>
@@ -69,5 +75,18 @@ export default ({oversold, products}) => {
         })}
       </tbody>
     </table>
+    <hr/>
+    {more
+      ? <Link href={withParams(url, {page: page + 1})} className='pull-right'>
+        Next Page →
+      </Link>
+      : ''
+    }
+    {page > 1
+      ? <Link href={withParams(url, {page: page - 1})}>
+        ← Previous Page
+      </Link>
+      : ''
+    }
   </div>
 }

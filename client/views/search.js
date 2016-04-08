@@ -29,8 +29,8 @@ export default class Search extends Component {
     const {value} = this.state
 
     return <form className='form-inline' action={url} onSubmit={(e) => this.submit(e)}>
-      <input type='search' className='form-control' value={value || ''}
-        onChange={(e) => this.setState({value: e.target.value})} placeholder='Search…'/>
+      <input type='search' value={value || ''} placeholder='Search…' className='form-control'
+        onChange={(e) => this.setState({value: e.target.value})}/>
     </form>
   }
 }
