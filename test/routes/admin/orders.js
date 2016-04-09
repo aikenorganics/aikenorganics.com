@@ -48,7 +48,7 @@ test('GET /admin/orders?full=1 is a 200', function (t) {
   })
 })
 
-test('GET /admin/oders?status=complete is a 200', function (t) {
+test('GET /admin/orders?status=complete is a 200', function (t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .get('/admin/orders?status=complete&full=1')

@@ -22,7 +22,9 @@ class UserGrower extends Model {
     return {
       id: this.id,
       user_id: this.user_id,
-      grower_id: this.grower_id
+      grower_id: this.grower_id,
+      user: this.user,
+      grower: this.grower
     }
   }
 

@@ -39,44 +39,19 @@ router.get('/:grower_id', (req, res) => {
   .where({productOrders: {order: {status: 'complete'}}})
   .groupBy('products.id')
   .all().then((products) => {
-    res.render('admin/growers/show', {products: products})
+    res.react({
+      grower: req.grower,
+      products: products
+    })
   }).catch(res.error)
 })
 
-// Edit
+// Users
 router.get('/:grower_id/users', (req, res) => {
-  let ids = db.UserGrower.select('user_id').where({grower_id: req.grower.id})
-  db.User.not({id: ids}).all().then((users) => {
-    res.render('admin/growers/users', {users: users})
-  }).catch(res.error)
-})
-
-// Add User
-router.post('/:grower_id/adduser', (req, res) => {
-  db.UserGrower.create({
-    user_id: req.body.user_id,
-    grower_id: req.grower.id
-  }).then(() => {
-    res.flash('success', 'User Added')
-    res.redirect(`/admin/growers/${req.grower.id}/users`)
-  }).catch(res.error)
-})
-
-// Remove User
-router.post('/:grower_id/removeuser', (req, res) => {
-  db.UserGrower.where({
-    user_id: req.body.user_id,
-    grower_id: req.grower.id
-  }).delete().then(() => {
-    res.flash('success', 'User Removed')
-    res.redirect(`/admin/growers/${req.grower.id}/users`)
-  }).catch(res.error)
-})
-
-// Update
-router.post('/:grower_id', (req, res) => {
-  req.grower.update(req.permit('active')).then(() => {
-    res.flash('success', 'Saved')
-    res.redirect(req.body.return_to)
+  db.User.all().then((users) => {
+    res.react({
+      grower: req.grower,
+      users: users
+    })
   }).catch(res.error)
 })

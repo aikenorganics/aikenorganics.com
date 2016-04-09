@@ -58,7 +58,7 @@ router.post('/:grower_id', (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
 
   req.grower.update(req.permit(
-    'name', 'email', 'url', 'location', 'description'
+    'active', 'name', 'email', 'url', 'location', 'description'
   )).then(() => {
     res.json(true)
   }).catch(res.error)

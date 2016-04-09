@@ -5,6 +5,8 @@ import store from '../store'
 export const CREATE_PAYMENT = 'CREATE_PAYMENT'
 export const UPDATE_CART = 'UPDATE_CART'
 export const UPDATE_GROWER = 'UPDATE_GROWER'
+export const CREATE_USER_GROWER = 'CREATE_USER_GROWER'
+export const REMOVE_USER_GROWER = 'REMOVE_USER_GROWER'
 export const CREATE_CATEGORY = 'CREATE_CATEGORY'
 export const REMOVE_CATEGORY = 'REMOVE_CATEGORY'
 export const UPDATE_CATEGORY = 'UPDATE_CATEGORY'
@@ -79,6 +81,24 @@ export const updateCart = (product_id, quantity) => {
 export const checkout = (values) => {
   busy()
   return POST('/cart/checkout', {body: values}).then(done).catch(done)
+}
+
+// UserGrowers
+
+export const createUserGrower = (grower_id, user_id) => {
+  busy()
+  return POST('/admin/user-growers', {body: {grower_id, user_id}}).then((userGrower) => {
+    store.dispatch({type: CREATE_USER_GROWER, userGrower})
+    done()
+  }).catch(done)
+}
+
+export const destroyUserGrower = (id) => {
+  busy()
+  return DELETE(`/admin/user-growers/${id}`).then(() => {
+    store.dispatch({type: REMOVE_USER_GROWER, id})
+    done()
+  }).catch(done)
 }
 
 // Growers

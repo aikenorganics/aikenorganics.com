@@ -81,7 +81,8 @@ class Grower extends Model {
       smallImage: this.smallImage,
       mediumImage: this.mediumImage,
       products: this.products,
-      total: this.total
+      total: this.total,
+      userGrowers: this.userGrowers
     }
   }
 

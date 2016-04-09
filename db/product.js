@@ -109,7 +109,11 @@ class Product extends Model {
       category: this.category,
       grower: this.grower,
       smallImage: this.smallImage,
-      mediumImage: this.mediumImage
+      mediumImage: this.mediumImage,
+
+      // From query…
+      quantity: this.quantity,
+      total: this.total
     }
   }
 

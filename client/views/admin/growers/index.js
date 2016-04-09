@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from '../../link'
 import Nav from './nav'
 
 export default ({growers, path}) => {
@@ -23,7 +24,7 @@ export default ({growers, path}) => {
           {growers.map(({active, id, name, total}) => {
             return <tr key={id}>
               <td>
-                <a href={`/admin/growers/${id}`}>{name}</a>
+                <Link href={`/admin/growers/${id}`}>{name}</Link>
               </td>
               <td>
                 {active
