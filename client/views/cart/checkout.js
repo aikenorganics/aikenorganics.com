@@ -31,7 +31,7 @@ export default class Checkout extends Component {
 
     return <form onSubmit={(e) => this.submit(e)}>
       <div className='form-group'>
-        <label>Pickup Location</label>
+        <label>Pickup Location / Delivery</label>
         <select className='form-control' value={location_id || ''} onChange={(e) => this.setLocation(e)}>
           <option value='0' disabled={!canDeliver}>
             {canDeliver
