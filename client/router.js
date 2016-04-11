@@ -10,8 +10,7 @@ const toRegExp = (path) => {
     .replace(escapeRegExp, '\\$&')
     .replace(optionalParam, '(?:$1)?')
     .replace(namedParam, (match, optional) => optional ? match : '([^/?]+)')
-    .replace(splatParam, '([^/]*?)') +
-  '(?:\\?([\\s\\S]*))?$')
+    .replace(splatParam, '([^/]*?)') + '$')
 }
 
 export class Route extends Component { }
