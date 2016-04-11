@@ -8,8 +8,7 @@ export default ({growers, path}) => {
       <Nav path={path}/>
     </div>
     <div className='col-md-10'>
-      {growers.map((grower) => {
-        const {id, name, smallImage} = grower
+      {growers.map(({id, name, products, smallImage}) => {
         return <div key={id}>
           <div className='media'>
             <div className='media-left'>
@@ -20,7 +19,7 @@ export default ({growers, path}) => {
               <h1>{name}</h1>
             </div>
           </div>
-          <Table products={grower.products}/>
+          <Table products={products}/>
         </div>
       })}
     </div>

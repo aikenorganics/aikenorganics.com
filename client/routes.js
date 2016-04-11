@@ -52,9 +52,9 @@ export default (state) => {
       <Route path='categories/new' Component={NewCategory}/>
       <Route path='products' Component={AdminProducts}/>
       <Route path='growers' Component={AdminGrowers}/>
+      <Route path='growers/orders' Component={AdminGrowersOrders}/>
       <Route path='growers/:grower_id' Component={AdminGrowersShow}/>
       <Route path='growers/:grower_id/users' Component={AdminGrowersUsers}/>
-      <Route path='growers/orders' Component={AdminGrowersOrders}/>
       <Route path='locations' Component={Locations}/>
       <Route path='locations/:location_id/edit' Component={EditLocation}/>
       <Route path='locations/new' Component={NewLocation}/>
