@@ -25,9 +25,14 @@ const json = (url, options) => {
     }
 
     if (response.ok) {
-      message('success', 'Done.')
-      setErrors(null)
-      return response.json()
+      return response.json().then((result) => {
+        message('success', 'Done.')
+        setErrors(null)
+        return result
+      }).catch((e) => {
+        message('error', 'Uh oh! Something went wrong. :(')
+        throw e
+      })
     }
 
     if (response.status === 422) {
