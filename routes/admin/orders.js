@@ -78,6 +78,8 @@ router.get('/:order_id', (req, res) => {
 
 // Update
 router.post('/:order_id', (req, res) => {
+  // TODO: REMOVE ME
+  if (/^\s*$/.test(req.body.location_id)) req.body.location_id = null
   req.order.update(req.permit('status', 'notes', 'location_id')).then(() => {
     res.flash('success', 'Order Updated')
     res.redirect(`/admin/orders/${req.order.id}`)
