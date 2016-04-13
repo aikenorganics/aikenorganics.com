@@ -1,9 +1,9 @@
 'use strict'
 
-var db = require('../../db')
-var test = require('../test')
+const db = require('../../db')
+const test = require('../test')
 
-test('GET /orders/current is a 200', function (t) {
+test('GET /orders/current is a 200', (t) => {
   t.signIn('user@example.com').then(() => {
     t.agent
     .get('/orders/current')
@@ -12,7 +12,7 @@ test('GET /orders/current is a 200', function (t) {
   })
 })
 
-test('GET /orders/current with no order', function (t) {
+test('GET /orders/current with no order', (t) => {
   t.signIn('finn@example.com').then(() => {
     t.agent
     .get('/orders/current')
@@ -21,15 +21,15 @@ test('GET /orders/current with no order', function (t) {
   })
 })
 
-test('DELETE /orders/:id is a 200', function (t) {
+test('DELETE /orders/:id is a 200', (t) => {
   t.signIn('user@example.com').then(() => {
     t.agent
     .delete('/orders/2')
     .expect(200)
     .expect('Content-Type', /json/)
-    .end(function (e) {
+    .end((e) => {
       if (e) return t.end(e)
-      db.Order.find(2).then(function (order) {
+      db.Order.find(2).then((order) => {
         t.ok(order == null, 'the order was deleted')
         t.end()
       }).catch(t.end)
@@ -37,19 +37,19 @@ test('DELETE /orders/:id is a 200', function (t) {
   })
 })
 
-test('POST /orders/:id is a 302', function (t) {
+test('POST /orders/:id is a 302', (t) => {
   t.signIn('user@example.com').then(() => {
     t.agent
     .post('/orders/2')
     .send({location_id: 2})
     .expect(200)
     .expect('Content-Type', /json/)
-    .end(function (e, res) {
+    .end((e, res) => {
       if (e) return t.end(e)
       t.ok(res.body.location)
       t.is(res.body.location.id, 2)
       t.is(res.body.location_id, 2)
-      db.Order.find(2).then(function (order) {
+      db.Order.find(2).then((order) => {
         t.is(order.location_id, 2)
         t.end()
       }).catch(t.end)
@@ -57,7 +57,7 @@ test('POST /orders/:id is a 302', function (t) {
   })
 })
 
-test('Cannot cancel someone else\'s order', function (t) {
+test('Cannot cancel someone else\'s order', (t) => {
   t.signIn('user@example.com').then(() => {
     t.agent
     .delete('/orders/1')
@@ -67,7 +67,7 @@ test('Cannot cancel someone else\'s order', function (t) {
   })
 })
 
-test('Cannout update someone else\'s order', function (t) {
+test('Cannout update someone else\'s order', (t) => {
   t.signIn('user@example.com').then(() => {
     t.agent
     .post('/orders/1')
@@ -77,7 +77,7 @@ test('Cannout update someone else\'s order', function (t) {
   })
 })
 
-test('Canceling a missing order returns a 404', function (t) {
+test('Canceling a missing order returns a 404', (t) => {
   t.signIn('user@example.com').then(() => {
     t.agent
     .delete('/orders/123456789')
@@ -88,7 +88,7 @@ test('Canceling a missing order returns a 404', function (t) {
   })
 })
 
-test('Updating a missing order returns a 404', function (t) {
+test('Updating a missing order returns a 404', (t) => {
   t.signIn('user@example.com').then(() => {
     t.agent
     .post('/orders/123456789')
