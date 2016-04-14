@@ -121,7 +121,9 @@
     <div class='form-group'>
       <label>Location</label>
       <select class='form-control' name='location_id'>
-        <option value=''>Deliver to <%= user.address %></option>
+        <% if (order.user.canDeliver) { %>
+          <option value=''>Deliver to <%= order.user.address %></option>
+        <% } %>
         <% locations.forEach(function (location) { %>
           <option value='<%= location.id %>' <% if (location.id === order.location_id) { %>selected<% } %>>
             <%= location.name %>
