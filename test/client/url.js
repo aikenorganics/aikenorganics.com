@@ -1,12 +1,17 @@
 import test from 'tape'
-import {withParams} from '../../client/url'
+import {params} from '../../client/url'
 
 test('add to plain path', (t) => {
-  t.is(withParams('/path', {x: 1, y: 2}), '/path?x=1&y=2')
+  t.is(params('/path', {x: 1, y: 2}), '/path?x=1&y=2')
   t.end()
 })
 
 test('replace existing values', (t) => {
-  t.is(withParams('/path?x=3', {x: 1, y: 2}), '/path?x=1&y=2')
+  t.is(params('/path?x=3', {x: 1, y: 2}), '/path?x=1&y=2')
+  t.end()
+})
+
+test('encodes values', (t) => {
+  t.is(params('/path', {x: '/'}), '/path?x=%2F')
   t.end()
 })

@@ -2,7 +2,7 @@ import React from 'react'
 import Link from '../link'
 import Search from '../search'
 import Product from './product'
-import {withParams} from '../../url'
+import {params} from '../../url'
 
 export default ({busy, cart, category_id, categories, page, products, market: {open}, more, search, url, currentUser}) => {
   return <div className='row'>
@@ -29,13 +29,13 @@ export default ({busy, cart, category_id, categories, page, products, market: {o
       </div>
       <hr/>
       {more
-        ? <Link href={withParams(url, {page: page + 1})} className='pull-right'>
+        ? <Link href={params(url, {page: page + 1})} className='pull-right'>
           Next Page →
         </Link>
         : ''
       }
       {page > 1
-        ? <Link href={withParams(url, {page: page - 1})}>
+        ? <Link href={params(url, {page: page - 1})}>
           ← Previous Page
         </Link>
         : ''

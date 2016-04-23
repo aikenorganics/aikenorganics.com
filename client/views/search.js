@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {navigate} from '../actions/index'
+import {params} from '../url'
 
 export default class Search extends Component {
   constructor (props) {
@@ -21,7 +22,7 @@ export default class Search extends Component {
     e.preventDefault()
     const {url} = this.props
     const {value} = this.state
-    navigate(`${url}?search=${encodeURIComponent(value)}`)
+    navigate(params(url, {search: value}))
   }
 
   render () {

@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import Search from '../../search'
 import Link from '../../link'
-import {withParams} from '../../../url'
+import {params} from '../../../url'
 
 export default ({more, page, search, url, users}) => {
   return <div>
@@ -55,13 +55,13 @@ export default ({more, page, search, url, users}) => {
     </table>
     <hr/>
     {more
-      ? <Link href={withParams(url, {page: page + 1})} className='pull-right'>
+      ? <Link href={params(url, {page: page + 1})} className='pull-right'>
         Next Page →
       </Link>
       : ''
     }
     {page > 1
-      ? <Link href={withParams(url, {page: page - 1})}>
+      ? <Link href={params(url, {page: page - 1})}>
         ← Previous Page
       </Link>
       : ''
