@@ -22,7 +22,7 @@ export default class Search extends Component {
     e.preventDefault()
     const {url} = this.props
     const {value} = this.state
-    navigate(params(url, {search: value}))
+    navigate(value ? params(url, {search: value}) : url)
   }
 
   render () {
