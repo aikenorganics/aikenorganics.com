@@ -2,7 +2,9 @@ import React from 'react'
 import Link from '../link'
 import Grower from './grower'
 
-export default ({currentUser: {is_admin}, growers}) => {
+export default ({currentUser, growers}) => {
+  const {is_admin} = currentUser || {}
+
   return <div className='row'>
     <div className='col-md-2'>
       <h3>Growers</h3>
