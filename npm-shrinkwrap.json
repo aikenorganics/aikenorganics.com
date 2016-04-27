@@ -250,23 +250,28 @@
       "dependencies": {
         "babel-code-frame": {
           "version": "6.7.4",
-          "from": "babel-code-frame@>=6.7.4 <7.0.0"
+          "from": "babel-code-frame@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.7.4.tgz"
         },
         "babel-messages": {
           "version": "6.7.2",
-          "from": "babel-messages@>=6.7.2 <7.0.0"
+          "from": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.7.2.tgz",
+          "resolved": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.7.2.tgz"
         },
         "babel-traverse": {
           "version": "6.7.4",
-          "from": "babel-traverse@>=6.7.2 <7.0.0"
+          "from": "babel-traverse@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.7.4.tgz"
         },
         "babel-types": {
           "version": "6.7.2",
-          "from": "babel-types@>=6.7.2 <7.0.0"
+          "from": "babel-types@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.7.2.tgz"
         },
         "babylon": {
           "version": "6.7.0",
-          "from": "babylon@>=6.7.0 <7.0.0"
+          "from": "babylon@6.7.0",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.7.0.tgz"
         }
       }
     },
@@ -282,23 +287,28 @@
       "dependencies": {
         "babel-code-frame": {
           "version": "6.7.4",
-          "from": "babel-code-frame@>=6.7.4 <7.0.0"
+          "from": "babel-code-frame@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.7.4.tgz"
         },
         "babel-messages": {
           "version": "6.7.2",
-          "from": "babel-messages@>=6.7.2 <7.0.0"
+          "from": "babel-messages@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.7.2.tgz"
         },
         "babel-traverse": {
           "version": "6.7.4",
-          "from": "babel-traverse@>=6.6.5 <7.0.0"
+          "from": "babel-traverse@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.7.4.tgz"
         },
         "babel-types": {
           "version": "6.7.2",
-          "from": "babel-types@>=6.6.5 <7.0.0"
+          "from": "babel-types@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.7.2.tgz"
         },
         "babylon": {
           "version": "6.7.0",
-          "from": "babylon@>=6.7.0 <7.0.0"
+          "from": "babylon@6.7.0",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.7.0.tgz"
         }
       }
     },
@@ -309,23 +319,28 @@
       "dependencies": {
         "babel-code-frame": {
           "version": "6.7.4",
-          "from": "babel-code-frame@>=6.7.4 <7.0.0"
+          "from": "babel-code-frame@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.7.4.tgz"
         },
         "babel-messages": {
           "version": "6.7.2",
-          "from": "babel-messages@>=6.7.2 <7.0.0"
+          "from": "babel-messages@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.7.2.tgz"
         },
         "babel-traverse": {
           "version": "6.7.4",
-          "from": "babel-traverse@>=6.7.2 <7.0.0"
+          "from": "babel-traverse@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.7.4.tgz"
         },
         "babel-types": {
           "version": "6.7.2",
-          "from": "babel-types@>=6.6.5 <7.0.0"
+          "from": "babel-types@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.7.2.tgz"
         },
         "babylon": {
           "version": "6.7.0",
-          "from": "babylon@>=6.7.0 <7.0.0"
+          "from": "babylon@6.7.0",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.7.0.tgz"
         }
       }
     },
@@ -336,27 +351,33 @@
       "dependencies": {
         "babel-code-frame": {
           "version": "6.7.4",
-          "from": "babel-code-frame@>=6.7.4 <7.0.0"
+          "from": "babel-code-frame@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.7.4.tgz"
         },
         "babel-messages": {
           "version": "6.7.2",
-          "from": "babel-messages@>=6.7.2 <7.0.0"
+          "from": "babel-messages@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.7.2.tgz"
         },
         "babel-template": {
           "version": "6.7.0",
-          "from": "babel-template@>=6.6.0 <7.0.0"
+          "from": "babel-template@6.7.0",
+          "resolved": "https://registry.npmjs.org/babel-template/-/babel-template-6.7.0.tgz"
         },
         "babel-traverse": {
           "version": "6.7.4",
-          "from": "babel-traverse@>=6.6.0 <7.0.0"
+          "from": "babel-traverse@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.7.4.tgz"
         },
         "babel-types": {
           "version": "6.7.2",
-          "from": "babel-types@>=6.6.0 <7.0.0"
+          "from": "babel-types@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.7.2.tgz"
         },
         "babylon": {
           "version": "6.7.0",
-          "from": "babylon@>=6.7.0 <7.0.0"
+          "from": "babylon@6.7.0",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.7.0.tgz"
         }
       }
     },
@@ -367,23 +388,28 @@
       "dependencies": {
         "babel-code-frame": {
           "version": "6.7.4",
-          "from": "babel-code-frame@>=6.7.4 <7.0.0"
+          "from": "babel-code-frame@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.7.4.tgz"
         },
         "babel-messages": {
           "version": "6.7.2",
-          "from": "babel-messages@>=6.7.2 <7.0.0"
+          "from": "babel-messages@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.7.2.tgz"
         },
         "babel-traverse": {
           "version": "6.7.4",
-          "from": "babel-traverse@>=6.7.2 <7.0.0"
+          "from": "babel-traverse@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.7.4.tgz"
         },
         "babel-types": {
           "version": "6.7.2",
-          "from": "babel-types@>=6.6.5 <7.0.0"
+          "from": "babel-types@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.7.2.tgz"
         },
         "babylon": {
           "version": "6.7.0",
-          "from": "babylon@>=6.7.0 <7.0.0"
+          "from": "babylon@6.7.0",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.7.0.tgz"
         }
       }
     },
@@ -394,23 +420,28 @@
       "dependencies": {
         "babel-code-frame": {
           "version": "6.7.4",
-          "from": "babel-code-frame@>=6.7.4 <7.0.0"
+          "from": "babel-code-frame@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.7.4.tgz"
         },
         "babel-messages": {
           "version": "6.7.2",
-          "from": "babel-messages@>=6.7.2 <7.0.0"
+          "from": "babel-messages@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.7.2.tgz"
         },
         "babel-traverse": {
           "version": "6.7.4",
-          "from": "babel-traverse@>=6.7.2 <7.0.0"
+          "from": "babel-traverse@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.7.4.tgz"
         },
         "babel-types": {
           "version": "6.7.2",
-          "from": "babel-types@>=6.6.5 <7.0.0"
+          "from": "babel-types@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.7.2.tgz"
         },
         "babylon": {
           "version": "6.7.0",
-          "from": "babylon@>=6.7.0 <7.0.0"
+          "from": "babylon@6.7.0",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.7.0.tgz"
         }
       }
     },
@@ -421,23 +452,28 @@
       "dependencies": {
         "babel-code-frame": {
           "version": "6.7.4",
-          "from": "babel-code-frame@>=6.7.4 <7.0.0"
+          "from": "babel-code-frame@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.7.4.tgz"
         },
         "babel-messages": {
           "version": "6.7.2",
-          "from": "babel-messages@>=6.7.2 <7.0.0"
+          "from": "babel-messages@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.7.2.tgz"
         },
         "babel-traverse": {
           "version": "6.7.4",
-          "from": "babel-traverse@>=6.7.2 <7.0.0"
+          "from": "babel-traverse@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.7.4.tgz"
         },
         "babel-types": {
           "version": "6.7.2",
-          "from": "babel-types@>=6.6.0 <7.0.0"
+          "from": "babel-types@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.7.2.tgz"
         },
         "babylon": {
           "version": "6.7.0",
-          "from": "babylon@>=6.7.0 <7.0.0"
+          "from": "babylon@6.7.0",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.7.0.tgz"
         }
       }
     },
@@ -448,23 +484,28 @@
       "dependencies": {
         "babel-code-frame": {
           "version": "6.7.4",
-          "from": "babel-code-frame@>=6.7.4 <7.0.0"
+          "from": "babel-code-frame@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.7.4.tgz"
         },
         "babel-messages": {
           "version": "6.7.2",
-          "from": "babel-messages@>=6.7.2 <7.0.0"
+          "from": "babel-messages@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.7.2.tgz"
         },
         "babel-traverse": {
           "version": "6.7.4",
-          "from": "babel-traverse@>=6.7.2 <7.0.0"
+          "from": "babel-traverse@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.7.4.tgz"
         },
         "babel-types": {
           "version": "6.7.2",
-          "from": "babel-types@>=6.6.5 <7.0.0"
+          "from": "babel-types@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.7.2.tgz"
         },
         "babylon": {
           "version": "6.7.0",
-          "from": "babylon@>=6.7.0 <7.0.0"
+          "from": "babylon@6.7.0",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.7.0.tgz"
         }
       }
     },
@@ -475,27 +516,33 @@
       "dependencies": {
         "babel-code-frame": {
           "version": "6.7.4",
-          "from": "babel-code-frame@>=6.7.4 <7.0.0"
+          "from": "babel-code-frame@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.7.4.tgz"
         },
         "babel-messages": {
           "version": "6.7.2",
-          "from": "babel-messages@>=6.6.5 <7.0.0"
+          "from": "babel-messages@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.7.2.tgz"
         },
         "babel-template": {
           "version": "6.7.0",
-          "from": "babel-template@>=6.7.0 <7.0.0"
+          "from": "babel-template@6.7.0",
+          "resolved": "https://registry.npmjs.org/babel-template/-/babel-template-6.7.0.tgz"
         },
         "babel-traverse": {
           "version": "6.7.4",
-          "from": "babel-traverse@>=6.7.0 <7.0.0"
+          "from": "babel-traverse@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.7.4.tgz"
         },
         "babel-types": {
           "version": "6.7.2",
-          "from": "babel-types@>=6.7.0 <7.0.0"
+          "from": "babel-types@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.7.2.tgz"
         },
         "babylon": {
           "version": "6.7.0",
-          "from": "babylon@>=6.7.0 <7.0.0"
+          "from": "babylon@6.7.0",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.7.0.tgz"
         }
       }
     },
@@ -583,27 +630,33 @@
       "dependencies": {
         "babel-code-frame": {
           "version": "6.7.4",
-          "from": "babel-code-frame@>=6.7.4 <7.0.0"
+          "from": "babel-code-frame@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.7.4.tgz"
         },
         "babel-messages": {
           "version": "6.7.2",
-          "from": "babel-messages@>=6.6.5 <7.0.0"
+          "from": "babel-messages@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.7.2.tgz"
         },
         "babel-template": {
           "version": "6.7.0",
-          "from": "babel-template@>=6.6.5 <7.0.0"
+          "from": "babel-template@6.7.0",
+          "resolved": "https://registry.npmjs.org/babel-template/-/babel-template-6.7.0.tgz"
         },
         "babel-traverse": {
           "version": "6.7.4",
-          "from": "babel-traverse@>=6.6.5 <7.0.0"
+          "from": "babel-traverse@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.7.4.tgz"
         },
         "babel-types": {
           "version": "6.7.2",
-          "from": "babel-types@>=6.6.5 <7.0.0"
+          "from": "babel-types@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.7.2.tgz"
         },
         "babylon": {
           "version": "6.7.0",
-          "from": "babylon@>=6.7.0 <7.0.0"
+          "from": "babylon@6.7.0",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.7.0.tgz"
         }
       }
     },
@@ -624,23 +677,28 @@
       "dependencies": {
         "babel-code-frame": {
           "version": "6.7.4",
-          "from": "babel-code-frame@>=6.7.4 <7.0.0"
+          "from": "babel-code-frame@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.7.4.tgz"
         },
         "babel-messages": {
           "version": "6.7.2",
-          "from": "babel-messages@>=6.7.2 <7.0.0"
+          "from": "babel-messages@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.7.2.tgz"
         },
         "babel-traverse": {
           "version": "6.7.4",
-          "from": "babel-traverse@>=6.7.2 <7.0.0"
+          "from": "babel-traverse@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.7.4.tgz"
         },
         "babel-types": {
           "version": "6.7.2",
-          "from": "babel-types@>=6.6.4 <7.0.0"
+          "from": "babel-types@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.7.2.tgz"
         },
         "babylon": {
           "version": "6.7.0",
-          "from": "babylon@>=6.7.0 <7.0.0"
+          "from": "babylon@6.7.0",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.7.0.tgz"
         }
       }
     },
@@ -666,23 +724,28 @@
       "dependencies": {
         "babel-code-frame": {
           "version": "6.7.4",
-          "from": "babel-code-frame@>=6.7.4 <7.0.0"
+          "from": "babel-code-frame@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.7.4.tgz"
         },
         "babel-messages": {
           "version": "6.7.2",
-          "from": "babel-messages@>=6.7.2 <7.0.0"
+          "from": "babel-messages@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.7.2.tgz"
         },
         "babel-traverse": {
           "version": "6.7.4",
-          "from": "babel-traverse@>=6.7.0 <7.0.0"
+          "from": "babel-traverse@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.7.4.tgz"
         },
         "babel-types": {
           "version": "6.7.2",
-          "from": "babel-types@>=6.7.0 <7.0.0"
+          "from": "babel-types@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.7.2.tgz"
         },
         "babylon": {
           "version": "6.7.0",
-          "from": "babylon@>=6.7.0 <7.0.0"
+          "from": "babylon@6.7.0",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.7.0.tgz"
         }
       }
     },
@@ -698,23 +761,28 @@
       "dependencies": {
         "babel-code-frame": {
           "version": "6.7.4",
-          "from": "babel-code-frame@>=6.7.4 <7.0.0"
+          "from": "babel-code-frame@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.7.4.tgz"
         },
         "babel-messages": {
           "version": "6.7.2",
-          "from": "babel-messages@>=6.7.2 <7.0.0"
+          "from": "babel-messages@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.7.2.tgz"
         },
         "babel-traverse": {
           "version": "6.7.4",
-          "from": "babel-traverse@>=6.7.0 <7.0.0"
+          "from": "babel-traverse@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.7.4.tgz"
         },
         "babel-types": {
           "version": "6.7.2",
-          "from": "babel-types@>=6.7.0 <7.0.0"
+          "from": "babel-types@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.7.2.tgz"
         },
         "babylon": {
           "version": "6.7.0",
-          "from": "babylon@>=6.7.0 <7.0.0"
+          "from": "babylon@6.7.0",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.7.0.tgz"
         }
       }
     },
@@ -780,23 +848,28 @@
       "dependencies": {
         "babel-code-frame": {
           "version": "6.7.4",
-          "from": "babel-code-frame@>=6.7.4 <7.0.0"
+          "from": "babel-code-frame@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.7.4.tgz"
         },
         "babel-messages": {
           "version": "6.7.2",
-          "from": "babel-messages@>=6.7.2 <7.0.0"
+          "from": "babel-messages@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.7.2.tgz"
         },
         "babel-traverse": {
           "version": "6.7.4",
-          "from": "babel-traverse@>=6.6.5 <7.0.0"
+          "from": "babel-traverse@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.7.4.tgz"
         },
         "babel-types": {
           "version": "6.7.2",
-          "from": "babel-types@>=6.6.5 <7.0.0"
+          "from": "babel-types@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.7.2.tgz"
         },
         "babylon": {
           "version": "6.7.0",
-          "from": "babylon@>=6.6.5 <7.0.0"
+          "from": "babylon@6.7.0",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.7.0.tgz"
         }
       }
     },
@@ -807,23 +880,28 @@
       "dependencies": {
         "babel-code-frame": {
           "version": "6.7.4",
-          "from": "babel-code-frame@>=6.7.4 <7.0.0"
+          "from": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.7.4.tgz",
+          "resolved": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.7.4.tgz"
         },
         "babel-messages": {
           "version": "6.7.2",
-          "from": "babel-messages@>=6.7.2 <7.0.0"
+          "from": "babel-messages@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.7.2.tgz"
         },
         "babel-traverse": {
           "version": "6.7.4",
-          "from": "babel-traverse@>=6.7.2 <7.0.0"
+          "from": "babel-traverse@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.7.4.tgz"
         },
         "babel-types": {
           "version": "6.7.2",
-          "from": "babel-types@>=6.6.5 <7.0.0"
+          "from": "babel-types@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.7.2.tgz"
         },
         "babylon": {
           "version": "6.7.0",
-          "from": "babylon@>=6.7.0 <7.0.0"
+          "from": "babylon@6.7.0",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.7.0.tgz"
         }
       }
     },
@@ -911,23 +989,28 @@
       "dependencies": {
         "babel-code-frame": {
           "version": "6.7.4",
-          "from": "babel-code-frame@>=6.7.4 <7.0.0"
+          "from": "babel-code-frame@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.7.4.tgz"
         },
         "babel-messages": {
           "version": "6.7.2",
-          "from": "babel-messages@>=6.7.2 <7.0.0"
+          "from": "babel-messages@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.7.2.tgz"
         },
         "babel-traverse": {
           "version": "6.7.4",
-          "from": "babel-traverse@>=6.7.0 <7.0.0"
+          "from": "babel-traverse@6.7.4",
+          "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.7.4.tgz"
         },
         "babel-types": {
           "version": "6.7.2",
-          "from": "babel-types@>=6.7.0 <7.0.0"
+          "from": "babel-types@6.7.2",
+          "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.7.2.tgz"
         },
         "babylon": {
           "version": "6.7.0",
-          "from": "babylon@>=6.7.0 <7.0.0"
+          "from": "babylon@6.7.0",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.7.0.tgz"
         }
       }
     },
@@ -957,9 +1040,9 @@
       "resolved": "https://registry.npmjs.org/base64-js/-/base64-js-1.0.4.tgz"
     },
     "bcrypt": {
-      "version": "0.8.5",
-      "from": "bcrypt@0.8.5",
-      "resolved": "https://registry.npmjs.org/bcrypt/-/bcrypt-0.8.5.tgz"
+      "version": "0.8.6",
+      "from": "bcrypt@0.8.6",
+      "resolved": "https://registry.npmjs.org/bcrypt/-/bcrypt-0.8.6.tgz"
     },
     "binary-extensions": {
       "version": "1.4.0",
@@ -2311,9 +2394,9 @@
       }
     },
     "nan": {
-      "version": "2.0.5",
-      "from": "nan@2.0.5",
-      "resolved": "https://registry.npmjs.org/nan/-/nan-2.0.5.tgz"
+      "version": "2.2.1",
+      "from": "nan@2.2.1",
+      "resolved": "https://registry.npmjs.org/nan/-/nan-2.2.1.tgz"
     },
     "negotiator": {
       "version": "0.6.0",
@@ -2434,8 +2517,8 @@
     },
     "ozymandias": {
       "version": "0.50.1",
-      "from": "git://github.com/braddunbar/ozymandias.git#43d193d221a7329ecc2dca5d7c14d40c14f6bdbe",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#43d193d221a7329ecc2dca5d7c14d40c14f6bdbe",
+      "from": "git://github.com/braddunbar/ozymandias.git#710fa9f6c84f7bf2663d137191af1e1bc2208316",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#710fa9f6c84f7bf2663d137191af1e1bc2208316",
       "dependencies": {
         "glob": {
           "version": "7.0.3",
@@ -2520,9 +2603,9 @@
       "resolved": "https://registry.npmjs.org/pg-connection-string/-/pg-connection-string-0.1.3.tgz"
     },
     "pg-types": {
-      "version": "1.10.0",
+      "version": "1.11.0",
       "from": "pg-types@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/pg-types/-/pg-types-1.10.0.tgz"
+      "resolved": "https://registry.npmjs.org/pg-types/-/pg-types-1.11.0.tgz"
     },
     "pgpass": {
       "version": "0.0.3",
@@ -2710,9 +2793,9 @@
       "resolved": "https://registry.npmjs.org/postgres-date/-/postgres-date-1.0.1.tgz"
     },
     "postgres-interval": {
-      "version": "1.0.1",
+      "version": "1.0.2",
       "from": "postgres-interval@>=1.0.0 <1.1.0",
-      "resolved": "https://registry.npmjs.org/postgres-interval/-/postgres-interval-1.0.1.tgz"
+      "resolved": "https://registry.npmjs.org/postgres-interval/-/postgres-interval-1.0.2.tgz"
     },
     "prepend-http": {
       "version": "1.0.3",
