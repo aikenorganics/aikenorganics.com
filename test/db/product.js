@@ -104,3 +104,10 @@ test('non-numeric supply', function (t) {
   t.deepEqual(product.errors.supply, ['Supply must be a number'])
   t.end()
 })
+
+test('empty supply', function (t) {
+  const product = new db.Product({supply: ''})
+  product.validate()
+  t.deepEqual(product.errors.supply, ['Supply must be a number'])
+  t.end()
+})
