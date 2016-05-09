@@ -2,8 +2,8 @@
 
 const router = module.exports = require('ozymandias').Router()
 
-router.get('/HPvHWWOX7N2nItb5RAwhZIUYTD2wSfnf4DBwM7qz9RM', (req, res) => {
+router.get('/l8vzbBXaCWcmA9vXrGwi44Iz1IX5PmBm53Wity1BbyE', (req, res) => {
   res.set('Content-Type', 'text/plain')
-  res.send('HPvHWWOX7N2nItb5RAwhZIUYTD2wSfnf4DBwM7qz9RM.ceWqF_4Sc8ECFdbNG-K06eUghznPWnSMud9vYlAafe0')
+  res.send('l8vzbBXaCWcmA9vXrGwi44Iz1IX5PmBm53Wity1BbyE.ceWqF_4Sc8ECFdbNG-K06eUghznPWnSMud9vYlAafe0')
   res.end()
 })

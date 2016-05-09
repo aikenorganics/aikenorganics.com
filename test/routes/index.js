@@ -1,4 +1,3 @@
-require('./acme')
 require('./auth')
 require('./cart')
 require('./home')
