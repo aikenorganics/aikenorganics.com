@@ -1,5 +1,5 @@
 import 'es6-promise'
-import fetch from 'isomorphic-fetch'
+import 'whatwg-fetch'
 import message from './message'
 import {setErrors} from './actions/index'
 
