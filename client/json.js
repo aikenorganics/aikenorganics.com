@@ -16,7 +16,7 @@ const json = (url, options) => {
   // Let the user know we're doing something.
   message('info', 'Working…')
 
-  return fetch(url, options).then((response) => {
+  return window.fetch(url, options).then((response) => {
     const error = (text) => {
       message('error', text)
       const e = new Error(response.statusText)
