@@ -45,7 +45,7 @@ router.get('/:user_id/edit', (req, res) => {
 })
 
 // New
-router.get('/new', (req, res) => { res.react() })
+router.get('/new', (req, res) => res._react('admin/users/new.ejson'))
 
 // Create
 router.post('/', (req, res) => {
