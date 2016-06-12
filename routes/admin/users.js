@@ -41,7 +41,7 @@ router.get('/emails', (req, res) => {
 
 // Edit
 router.get('/:user_id/edit', (req, res) => {
-  res.react({user: req._user})
+  res._react('admin/users/edit.ejson')
 })
 
 // New
