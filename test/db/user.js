@@ -152,3 +152,36 @@ test('validate zip', (t) => {
 
   t.end()
 })
+
+test('canDeliver', (t) => {
+  const user = new db.User({
+    phone: '555.555.5555',
+    street: '123 Street Drive',
+    city: 'Townsville',
+    state: 'SC',
+    stripe_id: '12345',
+    zip: '12345'
+  })
+  t.is(user.canDeliver, true)
+
+  user.zip = null
+  t.is(user.canDeliver, false)
+
+  t.end()
+})
+
+test('address', (t) => {
+  const user = new db.User({
+    street: '123 Street Drive',
+    city: 'Townsville',
+    state: 'SC',
+    zip: '12345'
+  })
+
+  t.is(user.address, '123 Street Drive, Townsville SC 12345')
+
+  user.zip = null
+  t.is(user.address, null)
+
+  t.end()
+})

@@ -65,11 +65,14 @@ class User extends require('ozymandias/user') {
   }
 
   get address () {
+    if (!this.street || !this.city || !this.state || !this.zip) {
+      return null
+    }
     return `${this.street}, ${this.city} ${this.state} ${this.zip}`
   }
 
   get canDeliver () {
-    return (
+    return !!(
       this.phone &&
       this.street &&
       this.city &&
