@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
   const page = res.locals.page = +(req.query.page || 1)
 
   users.order('email').paginate(page, 100).then((users) => {
-    res.react({
+    res._react('admin/users/index.ejson', {
       more: users.more,
       page: page,
       users: users

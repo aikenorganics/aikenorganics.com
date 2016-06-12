@@ -1,0 +1,6 @@
+json.pick(market,
+  'id',
+  'domain',
+  'message',
+  'open'
+)

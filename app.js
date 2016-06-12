@@ -6,7 +6,16 @@ const ozymandias = require('ozymandias')
 
 // The App!
 const app = module.exports = ozymandias()
-app.locals = require('./helpers')
+
+// React Component
+app.set('component', require('./client/routes').default)
+
+// Locals
+Object.assign(app.locals, {
+  marked: require('marked'),
+  moment: require('moment'),
+  assets: require('ozymandias/assets')
+})
 
 // Bugsnag
 app.use(bugsnag.requestHandler)

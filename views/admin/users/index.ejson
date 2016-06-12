@@ -1,0 +1,6 @@
+<%! ../../app.ejson %>
+
+json.set('more', locals.users.more)
+json.set('users', locals.users, (user) => {
+  <%! ../../users/user.ejson %>
+})

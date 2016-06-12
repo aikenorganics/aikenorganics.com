@@ -46,7 +46,7 @@
     "moment": "2.13.0",
     "multer": "1.1.0",
     "object-tojson": "1.0.1",
-    "ozymandias": "braddunbar/ozymandias",
+    "ozymandias": "github:braddunbar/ozymandias",
     "postcss-cli": "2.5.1",
     "postcss-import": "8.1.0",
     "postcss-nested": "1.0.0",
