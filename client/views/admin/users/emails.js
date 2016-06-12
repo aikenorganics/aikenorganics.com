@@ -1,11 +1,12 @@
 import React from 'react'
+import Link from '../../link'
 
 export default ({emails}) => {
   return <div>
     <h1>User Emails</h1>
-    <a href='/admin/users'>
+    <Link href='/admin/users'>
       Full List
-    </a>
+    </Link>
     <hr/>
     <textarea rows='30' className='form-control' defaultValue={emails.join('\n')}/>
   </div>
