@@ -11,6 +11,7 @@ import location from './location'
 import locations from './locations'
 import market from './market'
 import order from './order'
+import page from './page'
 import product from './product'
 import products from './products'
 import user from './user'
@@ -37,7 +38,7 @@ const reducer = combineReducers({
   more: pass,
   order,
   oversold: pass,
-  page: pass,
+  page: page,
   path: pass,
   product,
   products,
