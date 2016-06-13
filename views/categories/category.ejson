@@ -1,0 +1,5 @@
+json.pick(category,
+  'id',
+  'name',
+  'position'
+)

@@ -9,16 +9,18 @@ router.find('category', () => db.Category)
 // Index
 router.get('/', (req, res) => {
   db.Category.order('position').all().then((categories) => {
-    res.react({categories: categories})
+    res._react('admin/categories/index.ejson', {categories})
   }).catch(res.error)
 })
 
 // New
-router.get('/new', (req, res) => res.react())
+router.get('/new', (req, res) => res._react('admin/categories/new.ejson'))
 
 // Edit
 router.get('/:category_id/edit', (req, res) => {
-  res.react({category: req.category})
+  res._react('admin/categories/edit.ejson', {
+    category: req.category
+  })
 })
 
 // Create

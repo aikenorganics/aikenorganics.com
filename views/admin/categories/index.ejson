@@ -1,0 +1,5 @@
+<%! ../../app.ejson %>
+
+json.set('categories', locals.categories, (category) => {
+  <%! ../../categories/category.ejson %>
+})
