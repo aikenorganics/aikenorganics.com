@@ -11,6 +11,7 @@ class Category extends Model {
   static get columns () {
     return [
       'id',
+      'meat',
       'name',
       'position',
       'created_at',
@@ -34,9 +35,18 @@ class Category extends Model {
     this.data.set('position', value || 0)
   }
 
+  get meat () {
+    return !!this.data.get('meat')
+  }
+
+  set meat (value) {
+    this.data.set('meat', !!value)
+  }
+
   toJSON () {
     return {
       id: this.id,
+      meat: this.meat,
       name: this.name,
       position: this.position
     }

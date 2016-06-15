@@ -11,8 +11,9 @@ export default class Form extends Component {
 
   constructor (props) {
     super(props)
-    const {name, position} = props.category || {}
+    const {meat, name, position} = props.category || {}
     this.state = {
+      meat: !!meat,
       name: name || '',
       position: position || ''
     }
@@ -33,7 +34,7 @@ export default class Form extends Component {
   }
 
   render () {
-    const {name, position} = this.state
+    const {meat, name, position} = this.state
     const {busy} = this.props
 
     return <form onSubmit={(e) => this.save(e)}>
@@ -46,6 +47,13 @@ export default class Form extends Component {
         <label htmlFor='position'>Position</label>
         <input type='number' id='position' className='form-control' required value={position}
           onChange={(e) => this.setState({position: e.target.value})} disabled={busy}/>
+      </div>
+      <div className='form-group'>
+        <label>
+          <input type='checkbox' checked={meat}
+            onChange={(e) => this.setState({meat: e.target.checked})} disabled={busy}/>
+          <span> Meat</span>
+        </label>
       </div>
       <p className='text-right'>
         <button type='submit' className='btn btn-success' disabled={busy}>

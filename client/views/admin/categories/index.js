@@ -21,11 +21,12 @@ export default ({busy, categories}) => {
           <th></th>
           <th>Name</th>
           <th>Position</th>
+          <th>Meat</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        {categories.map(({id, name, position}) => {
+        {categories.map(({id, meat, name, position}) => {
           return <tr key={id}>
             <td>
               <Link href={`/admin/categories/${id}/edit`} className='btn btn-default btn-xs'>
@@ -34,6 +35,7 @@ export default ({busy, categories}) => {
             </td>
             <td>{name}</td>
             <td>{position}</td>
+            <td>{meat ? '✓' : ''}</td>
             <td>
               <button type='button' className='btn btn-danger btn-xs' disabled={busy}
                 onClick={(e) => destroy(id)}>
