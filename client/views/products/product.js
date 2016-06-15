@@ -16,7 +16,7 @@ export default ({busy, cart, open, product, currentUser}) => {
         <div className='media-left media-middle'>
           <div className='image-wrapper'>
             <Link href={`/products/${id}`}>
-              <img className='img-rounded' src={smallImage} style={{maxWidth: '100px', maxHeight: '100px'}}/>
+              <img className='img-rounded' src={smallImage} style={{maxWidth: '100px', maxHeight: '100px', border: 'solid 3px orange'}}/>
             </Link>
           </div>
         </div>
