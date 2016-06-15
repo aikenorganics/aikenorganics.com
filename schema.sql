@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.1
--- Dumped by pg_dump version 9.5.1
+-- Dumped from database version 9.5.3
+-- Dumped by pg_dump version 9.5.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -428,7 +428,8 @@ CREATE TABLE categories (
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     name character varying(255) DEFAULT ''::character varying NOT NULL,
-    "position" double precision DEFAULT 0 NOT NULL
+    "position" double precision DEFAULT 0 NOT NULL,
+    meat boolean DEFAULT false
 );
 
 
@@ -863,13 +864,13 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 -- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY categories (id, created_at, updated_at, name, "position") FROM stdin;
-1	2015-10-13 21:21:45.684372-04	2015-10-13 21:21:45.684372-04	Fruits & Veggies	1
-2	2015-10-13 21:21:45.684372-04	2015-10-13 21:21:45.684372-04	Prepared Food	2
-3	2015-10-13 21:21:45.684372-04	2015-10-13 21:21:45.684372-04	Herbs	3
-4	2015-10-13 21:21:45.684372-04	2015-10-13 21:21:45.684372-04	Beauty	4
-5	2015-10-13 21:21:45.684372-04	2015-10-13 21:21:45.684372-04	Dairy & Eggs	5
-6	2015-10-13 21:21:45.684372-04	2015-10-13 21:21:45.684372-04	Meat	6
+COPY categories (id, created_at, updated_at, name, "position", meat) FROM stdin;
+1	2015-10-13 21:21:45.684372-04	2015-10-13 21:21:45.684372-04	Fruits & Veggies	1	f
+2	2015-10-13 21:21:45.684372-04	2015-10-13 21:21:45.684372-04	Prepared Food	2	f
+3	2015-10-13 21:21:45.684372-04	2015-10-13 21:21:45.684372-04	Herbs	3	f
+4	2015-10-13 21:21:45.684372-04	2015-10-13 21:21:45.684372-04	Beauty	4	f
+5	2015-10-13 21:21:45.684372-04	2015-10-13 21:21:45.684372-04	Dairy & Eggs	5	f
+6	2015-10-13 21:21:45.684372-04	2015-10-13 21:21:45.684372-04	Meat	6	f
 \.
 
 
