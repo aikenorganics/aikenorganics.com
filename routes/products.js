@@ -38,7 +38,11 @@ router.get('/', (req, res) => {
 
   Promise.all([
     products.order('name').paginate(page, 30),
-    db.Category.order('position').all()
+    db.Category.where(`exists(
+      select 1 from products
+      inner join growers on growers.id = products.grower_id
+      where category_id = categories.id and products.active and growers.active
+    )`).order('position').all()
   ]).then((results) => {
     const products = results[0]
     const categories = results[1]
