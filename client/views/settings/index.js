@@ -75,7 +75,7 @@ export default class Index extends Component {
           </div>
         </div>
         <div className='form-group'>
-          <button type='submit' className='btn btn-primary' disabled={busy}>
+          <button type='submit' className='btn btn-success' disabled={busy}>
             Save
           </button>
         </div>

@@ -50,7 +50,7 @@ export default class Checkout extends Component {
         }
       </div>
       <div className='text-right'>
-        <button type='submit' className='btn btn-primary' disabled={busy}>
+        <button type='submit' className='btn btn-success' disabled={busy}>
           Check Out
         </button>
       </div>

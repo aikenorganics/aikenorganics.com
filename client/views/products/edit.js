@@ -30,7 +30,7 @@ export default ({busy, categories, canEdit, errors, path, product}) => {
             onClick={() => updateProduct(id, {active: false}).catch((e) => {})}>
             Deactivate
           </button>
-          : <button className='btn btn-primary btn-sm' disabled={busy}
+          : <button className='btn btn-success btn-sm' disabled={busy}
             onClick={() => updateProduct(id, {active: true}).catch((e) => {})}>
             Activate
           </button>

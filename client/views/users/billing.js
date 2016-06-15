@@ -46,7 +46,7 @@ export default class Billing extends Component {
 
     if (!loaded) getCheckout().then(() => this.setState({loaded: true}))
 
-    return <button className='btn btn-primary' onClick={(e) => this.open()} disabled={busy || !loaded}>
+    return <button className='btn btn-success' onClick={(e) => this.open()} disabled={busy || !loaded}>
       {user.stripe_id ? 'Update Billing Info' : 'Enter Billing Info'}
     </button>
   }

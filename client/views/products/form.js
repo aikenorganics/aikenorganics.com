@@ -87,7 +87,7 @@ export default class Form extends Component {
         <textarea rows='5' id='description' className='form-control' value={description} onChange={(e) => this.setState({description: e.target.value})}/>
       </div>
       <p className='text-right'>
-        <button type='submit' className='btn btn-primary' disabled={busy}>
+        <button type='submit' className='btn btn-success' disabled={busy}>
           Save
         </button>
       </p>

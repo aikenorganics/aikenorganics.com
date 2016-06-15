@@ -48,7 +48,7 @@ export default class Form extends Component {
           onChange={(e) => this.setState({position: e.target.value})} disabled={busy}/>
       </div>
       <p className='text-right'>
-        <button type='submit' className='btn btn-primary' disabled={busy}>
+        <button type='submit' className='btn btn-success' disabled={busy}>
           Save
         </button>
       </p>

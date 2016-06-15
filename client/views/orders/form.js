@@ -47,7 +47,7 @@ export default class Form extends Component {
         }
       </div>
       <div className='text-right'>
-        <button className='btn btn-primary' disabled={busy}>
+        <button className='btn btn-success' disabled={busy}>
           Update Order
         </button>
       </div>

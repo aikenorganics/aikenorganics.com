@@ -11,7 +11,7 @@ export default ({busy, grower}) => {
       ? <button disabled={busy} className='btn btn-default btn-sm pull-right' onClick={(e) => update({active: false})}>
         Deactivate
       </button>
-      : <button disabled={busy} className='btn btn-primary btn-sm pull-right' onClick={(e) => update({active: true})}>
+      : <button disabled={busy} className='btn btn-success btn-sm pull-right' onClick={(e) => update({active: true})}>
         Activate
       </button>
     }

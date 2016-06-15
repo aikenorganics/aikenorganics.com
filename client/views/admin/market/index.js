@@ -45,7 +45,7 @@ export default class Index extends Component {
             onChange={(e) => this.setState({message: e.target.value})}/>
         </div>
         <p>
-          <button className='btn btn-primary' disabled={busy}>
+          <button className='btn btn-success' disabled={busy}>
             Save
           </button>
         </p>

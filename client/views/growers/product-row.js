@@ -70,7 +70,7 @@ export default class ProductRow extends Component {
       <td>
         <div className='btn-group'>
           <button type='button' disabled={busy}
-            className={`btn ${active ? 'btn-primary' : 'btn-default'}`}
+            className={`btn ${active ? 'btn-success' : 'btn-default'}`}
             onClick={() => this.toggleActive(true)}>
             Active
           </button>

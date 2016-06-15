@@ -12,12 +12,12 @@ export default ({more, oversold, page, products, search, url}) => {
           <Link href='/admin/products' className='btn btn-default'>
             All
           </Link>
-          <Link href='/admin/products?oversold=1' className='btn btn-primary'>
+          <Link href='/admin/products?oversold=1' className='btn btn-success'>
             Oversold
           </Link>
         </div>
         : <div className='btn-group'>
-          <Link href='/admin/products' className='btn btn-primary'>
+          <Link href='/admin/products' className='btn btn-success'>
             All
           </Link>
           <Link href='/admin/products?oversold=1' className='btn btn-default'>
@@ -55,7 +55,7 @@ export default ({more, oversold, page, products, search, url}) => {
             <td>{supply}</td>
             <td>{reserved}</td>
             <td>
-              <a href={`/admin/orders?product_id=${id}`} className='btn btn-primary btn-xs'>
+              <a href={`/admin/orders?product_id=${id}`} className='btn btn-success btn-xs'>
                 View Orders
               </a>
             </td>

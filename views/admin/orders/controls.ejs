@@ -1,13 +1,13 @@
 <form class='form-inline hidden-print' method='get' action='/admin/orders'>
   <div class='btn-group'>
-    <label class='btn <% if (req.query.full === '1') { %>btn-primary<% } else { %>btn-default<% } %>'>
+    <label class='btn <% if (req.query.full === '1') { %>btn-success<% } else { %>btn-default<% } %>'>
       <input type='checkbox' name='full' onclick='this.form.submit()' value='1' <% if (req.query.full === '1') { %>checked<% } %>>
       Full
     </label>
   </div>
   <div class='btn-group'>
     <% ['open', 'complete', 'canceled'].forEach(function (status) { %>
-      <label class='btn <% if (~req.query.status.indexOf(status)) { %>btn-primary<% } else { %>btn-default<% } %>'>
+      <label class='btn <% if (~req.query.status.indexOf(status)) { %>btn-success<% } else { %>btn-default<% } %>'>
         <input type='checkbox' name='status[]' onclick='this.form.submit()' value='<%= status %>' <% if (~req.query.status.indexOf(status)) { %>checked<% } %>>
         <%= status.slice(0, 1).toUpperCase() + status.slice(1) %>
       </label>

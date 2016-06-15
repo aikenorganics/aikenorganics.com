@@ -15,7 +15,7 @@ export default ({busy, location}) => {
     <td>
       <div className='btn-group'>
         <button type='button' disabled={busy}
-          className={`btn btn-xs ${active ? 'btn-primary' : 'btn-default'}`}
+          className={`btn btn-xs ${active ? 'btn-success' : 'btn-default'}`}
           onClick={() => updateLocation(id, {active: true}).catch((e) => {})}>
           Active
         </button>
