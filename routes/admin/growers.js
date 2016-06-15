@@ -48,7 +48,7 @@ router.get('/:grower_id', (req, res) => {
 
 // Users
 router.get('/:grower_id/users', (req, res) => {
-  db.User.all().then((users) => {
+  db.User.order('first').all().then((users) => {
     res.react({
       grower: req.grower,
       users: users
