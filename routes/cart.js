@@ -14,7 +14,10 @@ router.use((req, res, next) => {
 // Index
 router.get('/', (req, res) => {
   Promise.all([
-    db.Product.include('grower').where({id: req.cart.ids}).order('name').all(),
+    db.Product
+      .include('category', 'grower')
+      .where({id: req.cart.ids})
+      .order('name').all(),
     db.Location.where({active: true}).order('name').all(),
     db.Order.where({status: 'open', user_id: req.user.id}).find()
   ]).then((results) => {

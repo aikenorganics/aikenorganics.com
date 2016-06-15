@@ -16,6 +16,8 @@ export default ({busy, cart, currentUser, locations, order, products}) => {
 
   const remove = (id) => updateCart(id, 0).catch((e) => {})
 
+  const meatWarning = products.some((product) => product.category.meat)
+
   return <div>
     <h1>Shopping Cart</h1>
     <Warning cart={cart} products={products}/>
@@ -63,6 +65,14 @@ export default ({busy, cart, currentUser, locations, order, products}) => {
         </tr>
       </tfoot>
     </table>
+    {meatWarning
+      ? <p className='help-block'>
+        The price of some items in your cart are based on weight and their
+        price may change slightly.
+      </p>
+      : ''
+    }
+    <hr/>
     {available.length > 0
       ? <Checkout busy={busy} order={order} locations={locations} user={currentUser}/>
       : ''
