@@ -1,6 +1,0 @@
-<%! ../../app.ejson %>
-
-json.set('user', () => {
-  const user = locals.req._user
-  <%! ../../users/user.ejson %>
-})

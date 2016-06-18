@@ -1,6 +1,7 @@
 'use strict'
 
 const db = require('../../db')
+const json = require('../../json/admin/categories')
 const router = module.exports = require('ozymandias').Router()
 
 // Find
@@ -9,16 +10,16 @@ router.find('category', () => db.Category)
 // Index
 router.get('/', (req, res) => {
   db.Category.order('position').all().then((categories) => {
-    res._react('admin/categories/index.ejson', {categories})
+    res._react(json.index, {categories})
   }).catch(res.error)
 })
 
 // New
-router.get('/new', (req, res) => res._react('admin/categories/new.ejson'))
+router.get('/new', (req, res) => res._react(json.new))
 
 // Edit
 router.get('/:category_id/edit', (req, res) => {
-  res._react('admin/categories/edit.ejson', {
+  res._react(json.edit, {
     category: req.category
   })
 })

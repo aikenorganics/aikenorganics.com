@@ -1,6 +1,7 @@
 'use strict'
 
 const db = require('../../db')
+const json = require('../../json/admin/users')
 const upload = require('multer')({dest: 'tmp/uploads'})
 const router = module.exports = require('ozymandias').Router()
 
@@ -24,7 +25,7 @@ router.get('/', (req, res) => {
   const page = res.locals.page = +(req.query.page || 1)
 
   users.order('email').paginate(page, 100).then((users) => {
-    res._react('admin/users/index.ejson', {
+    res._react(json.index, {
       more: users.more,
       page: page,
       users: users
@@ -35,17 +36,17 @@ router.get('/', (req, res) => {
 // Emails
 router.get('/emails', (req, res) => {
   db.User.order('email').all().then((users) => {
-    res._react('admin/users/emails.ejson', {users})
+    res._react(json.emails, {users})
   }).catch(res.error)
 })
 
 // Edit
 router.get('/:user_id/edit', (req, res) => {
-  res._react('admin/users/edit.ejson')
+  res._react(json.edit)
 })
 
 // New
-router.get('/new', (req, res) => res._react('admin/users/new.ejson'))
+router.get('/new', (req, res) => res._react(json.new))
 
 // Create
 router.post('/', (req, res) => {

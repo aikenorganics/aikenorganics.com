@@ -1,5 +1,0 @@
-<%! ../../app.ejson %>
-
-const {users} = locals
-
-json.set('emails', users.map((user) => user.email))

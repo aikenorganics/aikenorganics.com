@@ -1758,11 +1758,6 @@
       "from": "fresh@0.3.0",
       "resolved": "https://registry.npmjs.org/fresh/-/fresh-0.3.0.tgz"
     },
-    "fripp": {
-      "version": "1.0.0",
-      "from": "git://github.com/braddunbar/fripp.git#fa0eda77fa853e9cc8c82274532a646cc549cadf",
-      "resolved": "git://github.com/braddunbar/fripp.git#fa0eda77fa853e9cc8c82274532a646cc549cadf"
-    },
     "fsevents": {
       "version": "1.0.7",
       "from": "fsevents@>=1.0.0 <2.0.0",
@@ -2562,9 +2557,9 @@
       "resolved": "https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.1.tgz"
     },
     "ozymandias": {
-      "version": "0.60.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#a188aabd7d63c028adf9c94358a263bf71391942",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#a188aabd7d63c028adf9c94358a263bf71391942",
+      "version": "0.61.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#c4b660699c5216a780fcea284b4723afa838fd6b",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#c4b660699c5216a780fcea284b4723afa838fd6b",
       "dependencies": {
         "glob": {
           "version": "7.0.3",
@@ -3042,9 +3037,9 @@
       "resolved": "https://registry.npmjs.org/regjsparser/-/regjsparser-0.1.5.tgz"
     },
     "remora": {
-      "version": "1.0.0",
-      "from": "git://github.com/braddunbar/remora.git#d3f7d5111dd5cad03783827f577b552350092979",
-      "resolved": "git://github.com/braddunbar/remora.git#d3f7d5111dd5cad03783827f577b552350092979"
+      "version": "2.1.0",
+      "from": "git://github.com/braddunbar/remora.git#c5a127538fc00891b2d819dbd2cfa33432d918f0",
+      "resolved": "git://github.com/braddunbar/remora.git#c5a127538fc00891b2d819dbd2cfa33432d918f0"
     },
     "repeat-element": {
       "version": "1.1.2",
