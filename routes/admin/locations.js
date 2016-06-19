@@ -1,8 +1,8 @@
 'use strict'
 
-let ozymandias = require('ozymandias')
-let router = module.exports = ozymandias.Router()
-let db = require('../../db')
+const db = require('../../db')
+const json = require('../../json/admin/locations')
+const router = module.exports = require('ozymandias').Router()
 
 // Find the location
 router.find('location', () => db.Location)
@@ -10,16 +10,16 @@ router.find('location', () => db.Location)
 // Index
 router.get('/', function (req, res) {
   db.Location.order('name').all().then((locations) => {
-    res.react({locations: locations})
+    res._react(json.index, {locations})
   }).catch(res.error)
 })
 
 // New
-router.get('/new', (req, res) => res.react())
+router.get('/new', (req, res) => res._react(json.new))
 
 // Edit
 router.get('/:location_id/edit', (req, res) => {
-  res.react({location: req.location})
+  res._react(json.edit, {location: req.location})
 })
 
 // Create
