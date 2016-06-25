@@ -2557,9 +2557,9 @@
       "resolved": "https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.1.tgz"
     },
     "ozymandias": {
-      "version": "0.61.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#c4b660699c5216a780fcea284b4723afa838fd6b",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#c4b660699c5216a780fcea284b4723afa838fd6b",
+      "version": "0.62.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#dc63a303c8569c040da74c9d9ea2038202d8e6e7",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#dc63a303c8569c040da74c9d9ea2038202d8e6e7",
       "dependencies": {
         "glob": {
           "version": "7.0.3",
@@ -2924,14 +2924,14 @@
       "resolved": "https://registry.npmjs.org/range-parser/-/range-parser-1.0.3.tgz"
     },
     "raw-body": {
-      "version": "2.1.6",
+      "version": "2.1.7",
       "from": "raw-body@>=2.1.5 <2.2.0",
-      "resolved": "https://registry.npmjs.org/raw-body/-/raw-body-2.1.6.tgz",
+      "resolved": "https://registry.npmjs.org/raw-body/-/raw-body-2.1.7.tgz",
       "dependencies": {
         "bytes": {
-          "version": "2.3.0",
-          "from": "bytes@2.3.0",
-          "resolved": "https://registry.npmjs.org/bytes/-/bytes-2.3.0.tgz"
+          "version": "2.4.0",
+          "from": "bytes@2.4.0",
+          "resolved": "https://registry.npmjs.org/bytes/-/bytes-2.4.0.tgz"
         }
       }
     },
