@@ -1,7 +1,7 @@
 'use strict'
 
-module.exports = (json, user) => {
-  json.pick(user,
+module.exports = (set, user) => {
+  set(user,
     'id',
     'canDeliver',
     'email',

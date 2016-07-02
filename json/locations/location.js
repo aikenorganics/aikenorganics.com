@@ -1,7 +1,7 @@
 'use strict'
 
-module.exports = (json, location) => {
-  json.pick(location,
+module.exports = (set, location) => {
+  set(location,
     'id',
     'name',
     'active'

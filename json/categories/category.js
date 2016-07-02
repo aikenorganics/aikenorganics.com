@@ -1,7 +1,7 @@
 'use strict'
 
-module.exports = (json, category) => {
-  json.pick(category,
+module.exports = (set, category) => {
+  set(category,
     'id',
     'meat',
     'name',

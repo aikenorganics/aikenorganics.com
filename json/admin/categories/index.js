@@ -1,18 +1,16 @@
 'use strict'
 
 const app = require('../../app')
-const category = require('../../categories/category')
+const categoryJson = require('../../categories/category')
 
-exports.edit = (json, locals) => {
-  app(json, locals)
-  json.set('category', locals.category)
+exports.edit = (set, {category}) => {
+  set(app)
+  set('category', category, categoryJson)
 }
 
-exports.index = (json, locals) => {
-  app(json, locals)
-  json.set('categories', locals.categories, category)
+exports.index = (set, {categories}) => {
+  set(app)
+  set('categories', categories, categoryJson)
 }
 
-exports.new = (json, locals) => {
-  app(json, locals)
-}
+exports.new = (set) => set(app)

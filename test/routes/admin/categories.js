@@ -30,20 +30,32 @@ test('GET /admin/categories/:id/edit is a 200', function (t) {
 test('POST /admin/categories is a 200', function (t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/admin/categories')
-    .send({name: 'Test', position: 2})
+    .send({name: 'test', position: 2, meat: true})
     .expect('Content-Type', /json/)
     .expect(200)
-    .end(t.end)
+    .end((e, res) => {
+      if (e) return t.end(e)
+      t.is(res.body.name, 'test')
+      t.is(res.body.position, 2)
+      t.is(res.body.meat, true)
+      t.end()
+    })
   })
 })
 
 test('POST /admin/categories/:id is a 200', function (t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/admin/categories/1')
-    .send({name: 'test', position: 106})
+    .send({name: 'test', position: 106, meat: true})
     .expect('Content-Type', /json/)
     .expect(200)
-    .end(t.end)
+    .end((e, res) => {
+      if (e) return t.end(e)
+      t.is(res.body.name, 'test')
+      t.is(res.body.position, 106)
+      t.is(res.body.meat, true)
+      t.end()
+    })
   })
 })
 

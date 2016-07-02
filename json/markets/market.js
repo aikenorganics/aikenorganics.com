@@ -1,7 +1,7 @@
 'use strict'
 
-module.exports = (json, market) => {
-  json.pick(market,
+module.exports = (set, market) => {
+  set(market,
     'id',
     'domain',
     'message',

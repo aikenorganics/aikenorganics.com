@@ -3,22 +3,20 @@
 const app = require('../../app')
 const user = require('../../users/user')
 
-exports.edit = (json, locals) => {
-  app(json, locals)
-  json.set('user', locals._user)
+exports.edit = (set, {_user}) => {
+  set(app)
+  set('user', _user)
 }
 
-exports.emails = (json, locals) => {
-  app(json, locals)
-  json.set('emails', locals.users.map((user) => user.email))
+exports.emails = (set, {users}) => {
+  set(app)
+  set('emails', users.map((user) => user.email))
 }
 
-exports.index = (json, locals) => {
-  app(json, locals)
-  json.set('more', locals.users.more)
-  json.set('users', locals.users, user)
+exports.index = (set, {users}) => {
+  set(app)
+  set(users, 'more')
+  set('users', users, user)
 }
 
-exports.new = (json, locals) => {
-  app(json, locals)
-}
+exports.new = (set) => set(app)
