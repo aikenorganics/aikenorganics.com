@@ -67,6 +67,6 @@
     "selenium-webdriver": "2.53.1",
     "standard": "6.0.8",
     "supertest": "braddunbar/supertest#ipv6",
-    "tape": "4.5.1"
+    "tape": "4.6.0"
   }
 }
