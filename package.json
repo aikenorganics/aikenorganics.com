@@ -61,8 +61,8 @@
   },
   "devDependencies": {
     "deep-freeze": "0.0.1",
-    "karma": "0.13.22",
-    "karma-chrome-launcher": "0.2.3",
+    "karma": "1.1.0",
+    "karma-chrome-launcher": "1.0.1",
     "karma-tap": "1.0.4",
     "selenium-webdriver": "2.53.1",
     "standard": "6.0.8",
