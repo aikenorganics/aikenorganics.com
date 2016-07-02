@@ -15,3 +15,10 @@ test('encodes values', (t) => {
   t.is(params('/path', {x: '/'}), '/path?x=%2F')
   t.end()
 })
+
+test('exclude null values', (t) => {
+  t.is(params('/path?x=1', {x: null}), '/path')
+  t.is(params('/path?x=1', {x: undefined}), '/path')
+  t.is(params('/path?x=1', {x: undefined, y: 2}), '/path?y=2')
+  t.end()
+})

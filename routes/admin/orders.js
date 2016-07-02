@@ -1,6 +1,7 @@
 'use strict'
 
 const db = require('../../db')
+const json = require('../../json/admin/orders')
 const router = module.exports = require('ozymandias').Router()
 
 // Find
@@ -11,7 +12,7 @@ router.find('order', () =>
 
 // Find a Product
 router.get('/', (req, res, next) => {
-  let id = req.query.product_id
+  const id = req.query.product_id
   if (!id) return next()
   db.Product.find(id).then((product) => {
     req.product = res.locals.product = product
@@ -21,10 +22,13 @@ router.get('/', (req, res, next) => {
 
 // Index
 router.get('/', (req, res) => {
-  let full = req.query.full === '1'
-  let status = req.query.status =
-    Array.isArray(req.query.status) ? req.query.status : ['open']
-  let orders = db.Order.include('user', 'location').where({status: status})
+  const full = req.query.full === '1'
+  const location_id = req.query.location_id
+  const status = Array.isArray(req.query.status)
+    ? req.query.status
+    : [req.query.status || 'open']
+
+  let orders = db.Order.include('user', 'location').where({status})
 
   // Product
   if (req.product) {
@@ -36,24 +40,31 @@ router.get('/', (req, res) => {
   }
 
   // Location
-  if (req.query.location_id === 'delivery') {
+  if (location_id === 'delivery') {
     orders.where({location_id: null})
-  } else if (req.query.location_id) {
-    orders.where({location_id: req.query.location_id})
+  } else if (location_id) {
+    orders.where({location_id})
   }
 
+  // Pagination
+  const page = +(req.query.page || 1)
+
+  // Include product orders?
   if (full) orders.include({productOrders: 'product'})
 
   Promise.all([
-    orders.order(['created_at', 'descending']).all(),
+    orders.order(['created_at', 'descending']).paginate(page, 50),
     db.Location.order('name').all(),
     db.Product.order('name').all()
-  ]).then((results) => {
-    let view = full ? 'admin/orders/full' : 'admin/orders/index'
-    res.render(view, {
-      orders: results[0],
-      locations: results[1],
-      products: results[2]
+  ]).then(([orders, locations, products]) => {
+    res._react(json.index, {
+      full,
+      orders,
+      page,
+      location_id,
+      locations,
+      products,
+      status
     })
   }).catch(res.error)
 })

@@ -42,6 +42,8 @@ import AdminGrowersShow from './views/admin/growers/show'
 import AdminGrowersOrders from './views/admin/growers/orders'
 import AdminGrowersUsers from './views/admin/growers/users'
 
+import AdminOrders from './views/admin/orders/index'
+
 import Settings from './views/settings/index'
 
 export default (state) => {
@@ -58,6 +60,7 @@ export default (state) => {
       <Route path='locations' Component={Locations}/>
       <Route path='locations/:location_id/edit' Component={EditLocation}/>
       <Route path='locations/new' Component={NewLocation}/>
+      <Route path='orders' Component={AdminOrders}/>
       <Route path='market' Component={Market}/>
       <Route path='users' Component={Users}/>
       <Route path='users/new' Component={NewUser}/>
