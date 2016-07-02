@@ -91,18 +91,18 @@ export default ({full, location_id, locations, more, orders, page, product, prod
         </tbody>
       </table>
     }
-  <hr/>
-  {more
-    ? <Link href={params(url, {page: page + 1})} className='pull-right'>
-      Next Page →
-    </Link>
-    : ''
-  }
-  {page > 1
-    ? <Link href={params(url, {page: page - 1})}>
-      ← Previous Page
-    </Link>
-    : ''
-  }
+    <hr/>
+    {more
+      ? <Link href={params(url, {page: page + 1})} className='pull-right'>
+        Next Page →
+      </Link>
+      : ''
+    }
+    {page > 1
+      ? <Link href={params(url, {page: page - 1})}>
+        ← Previous Page
+      </Link>
+      : ''
+    }
   </div>
 }
