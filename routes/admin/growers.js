@@ -40,19 +40,13 @@ router.get('/:grower_id', (req, res) => {
   .where({productOrders: {order: {status: 'complete'}}})
   .groupBy('products.id')
   .all().then((products) => {
-    res.react({
-      grower: req.grower,
-      products: products
-    })
+    res._react({grower: req.grower, products})
   }).catch(res.error)
 })
 
 // Users
 router.get('/:grower_id/users', (req, res) => {
   db.User.order('first').all().then((users) => {
-    res.react({
-      grower: req.grower,
-      users: users
-    })
+    res._react(json.users, {grower: req.grower, users})
   }).catch(res.error)
 })
