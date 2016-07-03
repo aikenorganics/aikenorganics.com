@@ -1,6 +1,7 @@
 'use strict'
 
 const db = require('../../db')
+const json = require('../../json/admin/growers')
 const router = module.exports = require('ozymandias').Router()
 
 // Find
@@ -16,7 +17,7 @@ router.get('/', (req, res) => {
     where products.grower_id = growers.id and orders.status = 'complete'
   ) as total`)
   .order('name').all().then((growers) => {
-    res.react({growers: growers})
+    res._react(json.index, {growers})
   }).catch(res.error)
 })
 
