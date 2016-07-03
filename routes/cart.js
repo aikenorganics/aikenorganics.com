@@ -1,6 +1,7 @@
 'use strict'
 
 const db = require('../db')
+const json = require('../json/cart/index')
 const router = module.exports = require('ozymandias').Router()
 
 router.use((req, res, next) => {
@@ -20,12 +21,8 @@ router.get('/', (req, res) => {
       .order('name').all(),
     db.Location.where({active: true}).order('name').all(),
     db.Order.where({status: 'open', user_id: req.user.id}).find()
-  ]).then((results) => {
-    res.react({
-      products: results[0],
-      locations: results[1],
-      order: results[2]
-    })
+  ]).then(([products, locations, order]) => {
+    res._react(json.index, {products, locations, order})
   }).catch(res.error)
 })
 

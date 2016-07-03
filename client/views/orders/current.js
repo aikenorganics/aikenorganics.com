@@ -49,7 +49,7 @@ export default ({busy, market: {open}, locations, order, currentUser}) => {
             </td>
             <td>${cost}</td>
             <td>{quantity}</td>
-            <td>{total.toFixed(2)}</td>
+            <td>${total.toFixed(2)}</td>
           </tr>
         })}
       </tbody>
