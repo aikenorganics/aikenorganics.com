@@ -3383,9 +3383,16 @@
       "resolved": "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-1.0.4.tgz"
     },
     "stripe": {
-      "version": "4.5.0",
+      "version": "4.7.0",
       "from": "stripe@latest",
-      "resolved": "https://registry.npmjs.org/stripe/-/stripe-4.5.0.tgz"
+      "resolved": "https://registry.npmjs.org/stripe/-/stripe-4.7.0.tgz",
+      "dependencies": {
+        "lodash": {
+          "version": "4.13.1",
+          "from": "lodash@>=4.11.1 <5.0.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.13.1.tgz"
+        }
+      }
     },
     "subarg": {
       "version": "1.0.0",
