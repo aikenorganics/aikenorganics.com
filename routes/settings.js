@@ -17,10 +17,6 @@ router.post('/', (req, res) => {
     'first', 'last', 'phone', 'street', 'city', 'state', 'zip'
   )).then(() => {
     res.json(req.user)
-  }).catch((e) => {
-    if (e.message !== 'invalid') throw e
-    res.status(422)
-    res.json(e.model.errors)
   }).catch(res.error)
 })
 

@@ -78,10 +78,6 @@ router.post('/:product_id', (req, res) => {
     'active', 'category_id', 'cost', 'description', 'name', 'supply', 'unit'
   )).then(() => {
     res.json(req.product)
-  }).catch((e) => {
-    if (e.message !== 'invalid') throw e
-    res.status(422)
-    res.json(e.model.errors)
   }).catch(res.error)
 })
 

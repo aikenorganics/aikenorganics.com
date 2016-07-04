@@ -85,10 +85,6 @@ router.post('/:grower_id/products', (req, res) => {
 
   db.Product.create(props).then((product) => {
     res.json(product)
-  }).catch((e) => {
-    if (e.message !== 'invalid') throw e
-    res.status(422)
-    res.json(e.model.errors)
   }).catch(res.error)
 })
 
