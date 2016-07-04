@@ -1,8 +1,9 @@
 import React from 'react'
 import Nav from './nav'
 import Row from './product-row'
+import Errors from '../errors'
 
-export default ({busy, canEdit, grower, path, products}) => {
+export default ({busy, canEdit, errors, grower, path, products}) => {
   return <div className='row'>
     <div className='col-md-2 text-center'>
       <Nav grower={grower} path={path} canEdit={canEdit}/>
@@ -11,6 +12,7 @@ export default ({busy, canEdit, grower, path, products}) => {
       <h1>{grower.name}</h1>
       <h2>Products</h2>
       <hr/>
+      <Errors errors={errors}/>
       <table className='table'>
         <thead>
           <tr>

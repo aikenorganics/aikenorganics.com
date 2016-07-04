@@ -6,7 +6,7 @@ export default class Input extends Component {
     super(props)
     this.state = {
       pending: false,
-      value: props.value || 0
+      value: props.value || ''
     }
   }
 
@@ -15,12 +15,14 @@ export default class Input extends Component {
     clearTimeout(timer)
     this.setState({
       pending: true,
-      timer: setTimeout(() => this.update(), 2000),
+      timer: setTimeout(() => this.button.click(), 2000),
       value: e.target.value
     })
   }
 
-  update () {
+  submit (e) {
+    e.preventDefault()
+
     const {onUpdate} = this.props
     const {pending, value, timer} = this.state
 
@@ -33,10 +35,12 @@ export default class Input extends Component {
   render () {
     const {value} = this.state
 
-    return <input {...this.props} value={value}
-      onBlur={(e) => this.update()}
-      onChange={(e) => this.change(e)}
-      onKeyDown={(e) => { if (e.which === 13) this.update() }}
-    />
+    return <form onSubmit={(e) => this.submit(e)} style={{display: 'inline'}}>
+      <input {...this.props} value={value}
+        onBlur={(e) => this.button.click()}
+        onChange={(e) => this.change(e)}
+      />
+      <button style={{display: 'none'}} ref={(button) => this.button = button}></button>
+    </form>
   }
 }

@@ -11,7 +11,7 @@ export default ({busy, product: {id, active, name, supply}}) => {
       <Link href={`/products/${id}`}>{name}</Link>
     </td>
     <td>
-      <Input className='form-control' type='number' value={supply} min='0'
+      <Input className='form-control' type='number' value={supply || 0} min='0' required
         onUpdate={(value) => save({supply: value || 0})}/>
     </td>
     <td>
