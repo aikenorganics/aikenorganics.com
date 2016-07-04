@@ -37,20 +37,25 @@ test('DELETE /orders/:id is a 200', (t) => {
   })
 })
 
-test('POST /orders/:id is a 302', (t) => {
+test('POST /orders/:id is a 200', (t) => {
   t.signIn('user@example.com').then(() => {
     t.agent
     .post('/orders/2')
-    .send({location_id: 2})
+    .send({
+      location_id: 2,
+      status: 'canceled',
+      notes: 'updated'
+    })
     .expect(200)
     .expect('Content-Type', /json/)
     .end((e, res) => {
       if (e) return t.end(e)
       t.ok(res.body.location)
       t.is(res.body.location.id, 2)
-      t.is(res.body.location_id, 2)
       db.Order.find(2).then((order) => {
         t.is(order.location_id, 2)
+        t.is(order.status, 'open')
+        t.is(order.notes, '')
         t.end()
       }).catch(t.end)
     })
@@ -74,6 +79,30 @@ test('Cannout update someone else\'s order', (t) => {
     .send({location_id: 2})
     .expect(401)
     .end(t.end)
+  })
+})
+
+test('Admins can update someone else\'s order', (t) => {
+  t.signIn('admin@example.com').then(() => {
+    t.agent
+    .post('/orders/5')
+    .send({
+      location_id: 2,
+      status: 'canceled',
+      notes: 'updated'
+    })
+    .expect(200)
+    .end((e, res) => {
+      if (e) return t.end(e)
+      t.ok(res.body.location)
+      t.is(res.body.location.id, 2)
+      db.Order.find(5).then((order) => {
+        t.is(order.location_id, 2)
+        t.is(order.status, 'canceled')
+        t.is(order.notes, 'updated')
+        t.end()
+      }).catch(t.end)
+    })
   })
 })
 

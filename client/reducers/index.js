@@ -12,8 +12,10 @@ import locations from './locations'
 import market from './market'
 import order from './order'
 import page from './page'
+import payments from './payments'
 import product from './product'
 import products from './products'
+import productOrders from './product-orders'
 import user from './user'
 import users from './users'
 import {REPLACE} from '../actions/index'
@@ -42,9 +44,11 @@ const reducer = combineReducers({
   oversold: pass,
   page: page,
   path: pass,
+  payments,
   product,
   product_id: pass,
   products,
+  productOrders,
   search: pass,
   status: pass,
   url: pass,

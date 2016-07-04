@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from '../link'
-import Input from '../input'
+import Form from '../form'
 import {updateProduct} from '../../actions/index'
 
 export default ({busy, product: {id, active, name, supply}}) => {
@@ -11,8 +11,9 @@ export default ({busy, product: {id, active, name, supply}}) => {
       <Link href={`/products/${id}`}>{name}</Link>
     </td>
     <td>
-      <Input className='form-control' type='number' value={supply || 0} min='0' required
-        onUpdate={(value) => save({supply: value || 0})}/>
+      <Form onUpdate={(value) => save({supply: value || 0})}>
+        <input className='form-control' type='number' defaultValue={supply || 0} min='0' required/>
+      </Form>
     </td>
     <td>
       <div className='btn-group'>

@@ -2,7 +2,6 @@ import {GET, DELETE, POST} from '../json'
 import store from '../store'
 
 // Action Constants
-export const CREATE_PAYMENT = 'CREATE_PAYMENT'
 export const UPDATE_CART = 'UPDATE_CART'
 export const UPDATE_GROWER = 'UPDATE_GROWER'
 export const CREATE_USER_GROWER = 'CREATE_USER_GROWER'
@@ -16,12 +15,16 @@ export const UPDATE_LOCATION = 'UPDATE_LOCATION'
 export const CANCEL_ORDER = 'CANCEL_ORDER'
 export const UPDATE_ORDER = 'UPDATE_ORDER'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+export const ADD_PRODUCT_ORDER = 'ADD_PRODUCT_ORDER'
+export const REMOVE_PRODUCT_ORDER = 'REMOVE_PRODUCT_ORDER'
+export const UPDATE_PRODUCT_ORDER = 'UPDATE_PRODUCT_ORDER'
 export const UPDATE_USER = 'UPDATE_USER'
 export const UPDATE_MARKET = 'UPDATE_MARKET'
 export const BUSY = 'BUSY'
 export const DONE = 'DONE'
 export const SET_ERRORS = 'SET_ERRORS'
 export const REPLACE = 'REPLACE'
+export const ADD_PAYMENT = 'ADD_PAYMENT'
 
 // Busy
 
@@ -144,10 +147,12 @@ export const updateOrder = (id, values) => {
   }).catch(done)
 }
 
-export const chargeOrder = (id, amount) => {
+// Payments
+
+export const createPayment = (id, amount) => {
   busy()
-  return POST(`/orders/${id}/charge`, {body: {amount}}).then((payment) => {
-    store.dispatch({type: CREATE_PAYMENT, id, payment})
+  return POST(`/admin/orders/${id}/charge`, {body: {amount}}).then((values) => {
+    store.dispatch({type: ADD_PAYMENT, values})
   }).catch(done)
 }
 
@@ -172,6 +177,32 @@ export const imageProduct = (id, file) => {
   busy()
   return POST(`/products/${id}/image`, {body: data}).then((values) => {
     store.dispatch({type: UPDATE_PRODUCT, id, values})
+    done()
+  }).catch(done)
+}
+
+// Product Orders
+
+export const createProductOrder = (values) => {
+  busy()
+  return POST('/admin/product-orders', {body: values}).then((values) => {
+    store.dispatch({type: ADD_PRODUCT_ORDER, values})
+    done()
+  }).catch(done)
+}
+
+export const updateProductOrder = (id, values) => {
+  busy()
+  return POST(`/admin/product-orders/${id}`, {body: values}).then((values) => {
+    store.dispatch({type: UPDATE_PRODUCT_ORDER, id, values})
+    done()
+  }).catch(done)
+}
+
+export const destroyProductOrder = (id) => {
+  busy()
+  return DELETE(`/admin/product-orders/${id}`).then(() => {
+    store.dispatch({type: REMOVE_PRODUCT_ORDER, id})
     done()
   }).catch(done)
 }

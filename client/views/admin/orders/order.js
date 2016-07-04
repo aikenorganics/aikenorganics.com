@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from '../../link'
 import Status from './status'
 
 export default ({order}) => {
@@ -6,11 +7,11 @@ export default ({order}) => {
 
   return <div>
     <h2>
-      <a href={`/admin/orders/${id}`}>Order #{id}</a>
+      <Link href={`/admin/orders/${id}`}>Order #{id}</Link>
       <small> <Status order={order}/></small>
     </h2>
     <h3>
-      <a href={`/admin/users/${user.id}/edit`}>{user.name}</a>
+      <Link href={`/admin/users/${user.id}/edit`}>{user.name}</Link>
       <small> {user.email} - {location ? location.name : `Deliver to ${user.address}`}</small>
     </h3>
     <table className='table'>
@@ -26,7 +27,7 @@ export default ({order}) => {
         {order.productOrders.map(({cost, id, product, quantity, total}) => {
           return <tr key={id}>
             <td>
-              <a href={`/products/${product.id}`}>{product.name}</a>
+              <Link href={`/products/${product.id}`}>{product.name}</Link>
               {product.oversold
                 ? <span> <span className='label label-danger'>Oversold</span></span>
                 : ''

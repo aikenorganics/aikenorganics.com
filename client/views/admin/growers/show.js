@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from '../../link'
 import Nav from './show-nav'
 import Header from './header'
 
@@ -23,7 +24,7 @@ export default ({busy, grower, path, products}) => {
           {products.map(({id, name, quantity, total}) => {
             return <tr key={id}>
               <td>
-                <a href={`/products/${id}`}>{name}</a>
+                <Link href={`/products/${id}`}>{name}</Link>
               </td>
               <td>{quantity}</td>
               <td>${total}</td>

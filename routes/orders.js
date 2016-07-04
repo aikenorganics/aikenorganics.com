@@ -31,11 +31,17 @@ router.post('/:order_id', (req, res) => {
   if (!req.market.open) return res.status(401).json({})
 
   // You can only update your own order.
-  if (req.user.id !== req.order.user_id) {
+  if (!req.user.is_admin && req.user.id !== req.order.user_id) {
     return res.status(401).json({})
   }
 
-  req.order.update(req.permit('location_id')).then(() => {
+  const values = req.permit('location_id')
+
+  if (req.user.is_admin) {
+    Object.assign(values, req.permit('notes', 'status'))
+  }
+
+  req.order.update(values).then(() => {
     return db.Order.include('location').find(req.order.id).then((order) => {
       res.json(order)
     })

@@ -71,29 +71,15 @@ router.get('/', (req, res) => {
 
 // Show
 router.get('/:order_id', (req, res) => {
-  let products = db.Product.join('grower')
+  const products = db.Product.join('grower')
     .where({active: true, grower: {active: true}})
     .where('supply > reserved')
-    .not({id: req.order.productOrders.map((po) => po.product_id)})
 
   Promise.all([
     products.order('name').all(),
     db.Location.order('name').all()
-  ]).then((results) => {
-    res.render('admin/orders/show', {
-      products: results[0],
-      locations: results[1]
-    })
-  }).catch(res.error)
-})
-
-// Update
-router.post('/:order_id', (req, res) => {
-  // TODO: REMOVE ME
-  if (/^\s*$/.test(req.body.location_id)) req.body.location_id = null
-  req.order.update(req.permit('status', 'notes', 'location_id')).then(() => {
-    res.flash('success', 'Order Updated')
-    res.redirect(`/admin/orders/${req.order.id}`)
+  ]).then(([products, locations]) => {
+    res._react(json.show, {products, locations})
   }).catch(res.error)
 })
 
@@ -101,7 +87,6 @@ router.post('/:order_id', (req, res) => {
 router.post('/:order_id/charge', (req, res) => {
   const amount = (+req.body.amount * 100) | 0
   req.order.charge(amount).then((payment) => {
-    // res.json(payment)
-    res.redirect(`/admin/orders/${req.order.id}`)
+    res.json(payment)
   }).catch(res.error)
 })

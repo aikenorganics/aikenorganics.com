@@ -8,7 +8,7 @@ export default ({path, children}) => {
         <Link href='/admin/users'>Users</Link>
       </li>
       <li className={/^\/admin\/orders/.test(path) ? 'active' : ''}>
-        <a href='/admin/orders'>Orders</a>
+        <Link href='/admin/orders'>Orders</Link>
       </li>
       <li className={/^\/admin\/categories/.test(path) ? 'active' : ''}>
         <Link href='/admin/categories'>Categories</Link>
@@ -17,7 +17,7 @@ export default ({path, children}) => {
         <Link href='/admin/locations'>Locations</Link>
       </li>
       <li className={/^\/admin\/products/.test(path) ? 'active' : ''}>
-        <a href='/admin/products'>Products</a>
+        <Link href='/admin/products'>Products</Link>
       </li>
       <li className={/^\/admin\/growers/.test(path) ? 'active' : ''}>
         <Link href='/admin/growers'>Growers</Link>

@@ -6,9 +6,9 @@ import {params} from '../../../url'
 
 export default ({more, page, search, url, users}) => {
   return <div>
-    <a href='/admin/users/new' className='btn btn-sm btn-default pull-right'>
+    <Link href='/admin/users/new' className='btn btn-sm btn-default pull-right'>
       New User
-    </a>
+    </Link>
     <div style={{display: 'inline-block'}}>
       <Search url='/admin/users' value={search}/>
     </div>

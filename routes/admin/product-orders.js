@@ -1,35 +1,33 @@
 'use strict'
 
-let db = require('../../db')
-let ozymandias = require('ozymandias')
-let router = module.exports = ozymandias.Router()
+const db = require('../../db')
+const router = module.exports = require('ozymandias').Router()
 
 // Find the ProductOrder
 router.find('product_order_id', 'productOrder', () => db.ProductOrder)
 
 // Create
-router.post('/', function (req, res) {
+router.post('/', (req, res) => {
   db.ProductOrder.create(req.permit('order_id', 'quantity', 'product_id'))
-  .then(function () {
-    res.flash('success', 'Product added.')
-    res.redirect(`/admin/orders/${req.body.order_id}`)
-  }).catch(res.error)
+  .then(({id}) => (
+    db.ProductOrder.include('product').find(id).then((productOrder) => {
+      res.json(productOrder)
+    })
+  )).catch(res.error)
 })
 
 // Delete
-router.post('/:product_order_id/remove', function (req, res) {
-  req.productOrder.destroy().then(function () {
-    res.flash('success', 'Removed.')
-    res.redirect(
-      req.body.return_to || `/admin/orders/${req.params.order_id}`
-    )
+router.delete('/:product_order_id', (req, res) => {
+  req.productOrder.destroy().then(() => {
+    res.json(true)
   }).catch(res.error)
 })
 
 // Update
-router.post('/:product_order_id', function (req, res) {
-  req.productOrder.update(req.permit('quantity', 'cost')).then(function () {
-    res.flash('success', 'Updated')
-    res.redirect(`/admin/orders/${req.productOrder.order_id}`)
+router.post('/:product_order_id', (req, res) => {
+  req.productOrder.update(req.permit('quantity', 'cost')).then(() => {
+    return db.ProductOrder.include('product').find(req.productOrder.id).then((productOrder) => {
+      res.json(productOrder)
+    })
   }).catch(res.error)
 })
