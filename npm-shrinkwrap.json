@@ -2582,9 +2582,9 @@
       "resolved": "https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.1.tgz"
     },
     "ozymandias": {
-      "version": "0.67.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#ab17c9643a9e4995b210a754f36c06c614ff97ee",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#ab17c9643a9e4995b210a754f36c06c614ff97ee",
+      "version": "0.68.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#f5857f923c2c3921e0d2645060cb5cfe05971b6d",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#f5857f923c2c3921e0d2645060cb5cfe05971b6d",
       "dependencies": {
         "bl": {
           "version": "1.1.2",
@@ -2605,16 +2605,6 @@
           "version": "6.1.0",
           "from": "qs@>=6.1.0 <6.2.0",
           "resolved": "https://registry.npmjs.org/qs/-/qs-6.1.0.tgz"
-        },
-        "react": {
-          "version": "15.0.1",
-          "from": "react@15.0.1",
-          "resolved": "https://registry.npmjs.org/react/-/react-15.0.1.tgz"
-        },
-        "react-dom": {
-          "version": "15.0.1",
-          "from": "react-dom@15.0.1",
-          "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-15.0.1.tgz"
         },
         "request": {
           "version": "2.72.0",
