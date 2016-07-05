@@ -19,12 +19,12 @@ export default ({busy, product: {id, active, name, supply}}) => {
       <div className='btn-group'>
         <button type='button' disabled={busy}
           className={`btn ${active ? 'btn-success' : 'btn-default'}`}
-          onClick={() => this.save({active: true})}>
+          onClick={() => save({active: true})}>
           Active
         </button>
         <button type='button' disabled={busy}
           className={`btn ${active ? 'btn-default' : 'btn-danger'}`}
-          onClick={() => this.save({active: false})}>
+          onClick={() => save({active: false})}>
           Inactive
         </button>
       </div>

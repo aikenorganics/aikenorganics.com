@@ -2582,9 +2582,9 @@
       "resolved": "https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.1.tgz"
     },
     "ozymandias": {
-      "version": "0.68.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#f5857f923c2c3921e0d2645060cb5cfe05971b6d",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#f5857f923c2c3921e0d2645060cb5cfe05971b6d",
+      "version": "0.70.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#ee5d6e2f2d2a9155020392534bc10512737ae5ed",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#ee5d6e2f2d2a9155020392534bc10512737ae5ed",
       "dependencies": {
         "bl": {
           "version": "1.1.2",
