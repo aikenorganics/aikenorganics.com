@@ -61,6 +61,13 @@ export const navigate = (url, {push} = {}) => {
   }).catch(done)
 }
 
+// Signup
+
+export const signup = (values) => {
+  busy()
+  return POST('/signup', {body: values}).then(done()).catch(done)
+}
+
 // Market
 
 export const updateMarket = (values) => {

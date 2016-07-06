@@ -2,7 +2,8 @@ import React from 'react'
 import Router, {Route} from './router'
 
 import App from './views/app'
-import Admin from './views/admin/app'
+import Nav from './views/nav'
+import AdminNav from './views/admin/nav'
 
 import CurrentOrder from './views/orders/current'
 
@@ -45,44 +46,48 @@ import AdminGrowersUsers from './views/admin/growers/users'
 import AdminOrders from './views/admin/orders/index'
 import AdminOrdersShow from './views/admin/orders/show'
 
+import Signup from './views/signup/index'
 import Settings from './views/settings/index'
 
 export default (state) => {
   return <Router state={state}>
-    <Route path='/admin/' Component={Admin}>
-      <Route path='categories' Component={Categories}/>
-      <Route path='categories/:category_id/edit' Component={EditCategory}/>
-      <Route path='categories/new' Component={NewCategory}/>
-      <Route path='products' Component={AdminProducts}/>
-      <Route path='growers' Component={AdminGrowers}/>
-      <Route path='growers/orders' Component={AdminGrowersOrders}/>
-      <Route path='growers/:grower_id' Component={AdminGrowersShow}/>
-      <Route path='growers/:grower_id/users' Component={AdminGrowersUsers}/>
-      <Route path='locations' Component={Locations}/>
-      <Route path='locations/:location_id/edit' Component={EditLocation}/>
-      <Route path='locations/new' Component={NewLocation}/>
-      <Route path='orders' Component={AdminOrders}/>
-      <Route path='orders/:order_id' Component={AdminOrdersShow}/>
-      <Route path='market' Component={Market}/>
-      <Route path='users' Component={Users}/>
-      <Route path='users/new' Component={NewUser}/>
-      <Route path='users/emails' Component={Emails}/>
-      <Route path='users/:user_id/edit' Component={EditUser}/>
-    </Route>
-    <Route path='/' Component={App}>
-      <Route path='cart' Component={Cart}/>
-      <Route path='growers' Component={Growers}/>
-      <Route path='growers/new' Component={NewGrower}/>
-      <Route path='growers/:grower_id' Component={Grower}/>
-      <Route path='growers/:grower_id/edit' Component={EditGrower}/>
-      <Route path='growers/:grower_id/orders' Component={GrowerOrders}/>
-      <Route path='growers/:grower_id/products' Component={GrowerProducts}/>
-      <Route path='growers/:grower_id/products/new' Component={NewProduct}/>
-      <Route path='orders/current' Component={CurrentOrder}/>
-      <Route path='products' Component={Products}/>
-      <Route path='products/:product_id' Component={Product}/>
-      <Route path='products/:product_id/edit' Component={EditProduct}/>
-      <Route path='settings' Component={Settings}/>
+    <Route path='' Component={App}>
+      <Route path='/signup' Component={Signup}/>
+      <Route path='/admin/' Component={AdminNav}>
+        <Route path='categories' Component={Categories}/>
+        <Route path='categories/:category_id/edit' Component={EditCategory}/>
+        <Route path='categories/new' Component={NewCategory}/>
+        <Route path='products' Component={AdminProducts}/>
+        <Route path='growers' Component={AdminGrowers}/>
+        <Route path='growers/orders' Component={AdminGrowersOrders}/>
+        <Route path='growers/:grower_id' Component={AdminGrowersShow}/>
+        <Route path='growers/:grower_id/users' Component={AdminGrowersUsers}/>
+        <Route path='locations' Component={Locations}/>
+        <Route path='locations/:location_id/edit' Component={EditLocation}/>
+        <Route path='locations/new' Component={NewLocation}/>
+        <Route path='orders' Component={AdminOrders}/>
+        <Route path='orders/:order_id' Component={AdminOrdersShow}/>
+        <Route path='market' Component={Market}/>
+        <Route path='users' Component={Users}/>
+        <Route path='users/new' Component={NewUser}/>
+        <Route path='users/emails' Component={Emails}/>
+        <Route path='users/:user_id/edit' Component={EditUser}/>
+      </Route>
+      <Route path='/' Component={Nav}>
+        <Route path='cart' Component={Cart}/>
+        <Route path='growers' Component={Growers}/>
+        <Route path='growers/new' Component={NewGrower}/>
+        <Route path='growers/:grower_id' Component={Grower}/>
+        <Route path='growers/:grower_id/edit' Component={EditGrower}/>
+        <Route path='growers/:grower_id/orders' Component={GrowerOrders}/>
+        <Route path='growers/:grower_id/products' Component={GrowerProducts}/>
+        <Route path='growers/:grower_id/products/new' Component={NewProduct}/>
+        <Route path='orders/current' Component={CurrentOrder}/>
+        <Route path='products' Component={Products}/>
+        <Route path='products/:product_id' Component={Product}/>
+        <Route path='products/:product_id/edit' Component={EditProduct}/>
+        <Route path='settings' Component={Settings}/>
+      </Route>
     </Route>
   </Router>
 }

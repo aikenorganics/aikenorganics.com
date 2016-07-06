@@ -2,7 +2,7 @@ import React from 'react'
 import Link from '../link'
 
 export default ({path, children}) => {
-  return <main className='container'>
+  return <div>
     <ul className='nav nav-tabs subnav hidden-print'>
       <li className={/^\/admin\/users/.test(path) ? 'active' : ''}>
         <Link href='/admin/users'>Users</Link>
@@ -27,5 +27,5 @@ export default ({path, children}) => {
       </li>
     </ul>
     {children}
-  </main>
+  </div>
 }
