@@ -13,8 +13,9 @@ exports.emails = (set, {users}) => {
   set('emails', users.map((user) => user.email))
 }
 
-exports.index = (set, {users}) => {
+exports.index = (set, {page, users}) => {
   set(app)
+  set({page})
   set(users, 'more')
   set('users', users, user)
 }
