@@ -142,3 +142,17 @@ test('POST /admin/users is a 200', (t) => {
     })
   })
 })
+
+test('return page in JSON', (t) => {
+  t.signIn('admin@example.com').then(() => {
+    t.agent
+    .get('/admin/users')
+    .set('Accept', 'application/json')
+    .expect(200)
+    .end((e, res) => {
+      if (e) return t.end(e)
+      t.is(res.body.page, 1)
+      t.end()
+    })
+  })
+})
