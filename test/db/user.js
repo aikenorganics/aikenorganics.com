@@ -53,18 +53,20 @@ test('trim street', (t) => {
 
 test('validate street', (t) => {
   const user = new db.User({street: null})
-  t.ok(user.valid)
+  user.validate()
+  t.is(user.errors.street, undefined)
 
   user.street = ''
-  t.ok(!user.valid)
+  user.validate()
   t.deepEqual(user.errors.street, ['Street cannot be blank'])
 
   user.street = '   '
-  t.ok(!user.valid)
+  user.validate()
   t.deepEqual(user.errors.street, ['Street cannot be blank'])
 
   user.street = '123 street drive'
-  t.ok(user.valid)
+  user.validate()
+  t.is(user.errors.street, undefined)
 
   t.end()
 })
@@ -78,18 +80,20 @@ test('trim city', (t) => {
 
 test('validate city', (t) => {
   const user = new db.User({city: null})
-  t.ok(user.valid)
+  user.validate()
+  t.is(user.errors.city, undefined)
 
   user.city = ''
-  t.ok(!user.valid)
+  user.validate()
   t.deepEqual(user.errors.city, ['City cannot be blank'])
 
   user.city = '   '
-  t.ok(!user.valid)
+  user.validate()
   t.deepEqual(user.errors.city, ['City cannot be blank'])
 
   user.city = 'Lexington'
-  t.ok(user.valid)
+  user.validate()
+  t.is(user.errors.city, undefined)
 
   t.end()
 })
@@ -102,18 +106,20 @@ test('trim and capitalize state', (t) => {
 
 test('validate state', (t) => {
   const user = new db.User({state: null})
-  t.ok(user.valid)
+  user.validate()
+  t.is(user.errors.state, undefined)
 
   user.state = ''
-  t.ok(!user.valid)
+  user.validate()
   t.deepEqual(user.errors.state, ['State must be two letters'])
 
   user.state = ' '
-  t.ok(!user.valid)
+  user.validate()
   t.deepEqual(user.errors.state, ['State must be two letters'])
 
   user.state = 'sc'
-  t.ok(user.valid)
+  user.validate()
+  t.is(user.errors.state, undefined)
 
   t.end()
 })
@@ -126,29 +132,32 @@ test('trim zip', (t) => {
 
 test('validate zip', (t) => {
   const user = new db.User({zip: null})
-  t.ok(user.valid)
+  user.validate()
+  t.is(user.errors.zip, undefined)
 
   user.zip = ''
-  t.ok(!user.valid)
+  user.validate()
   t.deepEqual(user.errors.zip, ['Zip must be valid (12345 or 12345-1234)'])
 
   user.zip = ' '
-  t.ok(!user.valid)
+  user.validate()
   t.deepEqual(user.errors.zip, ['Zip must be valid (12345 or 12345-1234)'])
 
   user.zip = '1234'
-  t.ok(!user.valid)
+  user.validate()
   t.deepEqual(user.errors.zip, ['Zip must be valid (12345 or 12345-1234)'])
 
   user.zip = '12345-'
-  t.ok(!user.valid)
+  user.validate()
   t.deepEqual(user.errors.zip, ['Zip must be valid (12345 or 12345-1234)'])
 
   user.zip = '12345'
-  t.ok(user.valid)
+  user.validate()
+  t.is(user.errors.zip, undefined)
 
   user.zip = '12345-1234'
-  t.ok(user.valid)
+  user.validate()
+  t.is(user.errors.zip, undefined)
 
   t.end()
 })
@@ -182,6 +191,36 @@ test('address', (t) => {
 
   user.zip = null
   t.is(user.address, null)
+
+  t.end()
+})
+
+test('validate email', (t) => {
+  const user = new db.User()
+
+  user.email = 'foo'
+  user.validate()
+  t.deepEqual(user.errors.email, ['Invalid Email'])
+
+  user.email = ' '
+  user.validate()
+  t.deepEqual(user.errors.email, ['Invalid Email'])
+
+  user.email = 'foo@'
+  user.validate()
+  t.deepEqual(user.errors.email, ['Invalid Email'])
+
+  user.email = 'foo@bar'
+  user.validate()
+  t.deepEqual(user.errors.email, ['Invalid Email'])
+
+  user.email = '@bar.com'
+  user.validate()
+  t.deepEqual(user.errors.email, ['Invalid Email'])
+
+  user.email = 'foo@bar.com'
+  user.validate()
+  t.is(user.errors.email, undefined)
 
   t.end()
 })
