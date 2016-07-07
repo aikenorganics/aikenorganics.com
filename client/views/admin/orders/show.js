@@ -1,6 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import Link from '../../link'
+import Errors from '../../errors'
 import Status from './status'
 import Form from '../../form'
 import Charge from './charge'
@@ -11,7 +12,7 @@ import {
   destroyProductOrder
 } from '../../../actions/index'
 
-export default ({locations, order, payments, products, productOrders}) => {
+export default ({errors, locations, order, payments, products, productOrders}) => {
   const {id, location_id, status, user} = order
 
   const addProduct = (product_id) => {
@@ -64,6 +65,7 @@ export default ({locations, order, payments, products, productOrders}) => {
         }
       </small>
     </h3>
+    <Errors errors={errors}/>
     <table className='table'>
       <thead>
         <tr>
@@ -93,13 +95,13 @@ export default ({locations, order, payments, products, productOrders}) => {
               <Form onUpdate={(value) => update({cost: value || 0})}>
                 <div className='input-group'>
                   <span className='input-group-addon'>$</span>
-                  <input type='number' className='form-control' defaultValue={cost || 0} min='0' step='.01'/>
+                  <input className='form-control' defaultValue={cost || 0} required/>
                 </div>
               </Form>
             </td>
             <td>
               <Form onUpdate={(value) => update({quantity: value || 0})}>
-                <input type='number' className='form-control' defaultValue={quantity || 0} min='1' max={quantity + product.available}/>
+                <input type='number' className='form-control' defaultValue={quantity || 0} min='1' max={quantity + product.available} required/>
               </Form>
             </td>
             <td>${total.toFixed(2)}</td>

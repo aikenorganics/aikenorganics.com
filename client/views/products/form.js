@@ -61,7 +61,7 @@ export default class Form extends Component {
         <label htmlFor='cost'>Cost</label>
         <div className='input-group'>
           <span className='input-group-addon'>$</span>
-          <input type='number' id='cost' min='.5' step='.01' className='form-control' required value={cost} onChange={(e) => this.setState({cost: e.target.value})}/>
+          <input id='cost' className='form-control' required value={cost} onChange={(e) => this.setState({cost: e.target.value})}/>
         </div>
       </div>
       <div className='form-group'>
