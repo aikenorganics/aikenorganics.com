@@ -62,6 +62,17 @@ test('POST /orders/:id is a 200', (t) => {
   })
 })
 
+test('Cannout update an order when the market is closed', (t) => {
+  t.hostname('closed.localhost')
+  t.signIn('user@example.com').then(() => {
+    t.agent
+    .post('/orders/2')
+    .send({location_id: 2})
+    .expect(401)
+    .end(t.end)
+  })
+})
+
 test('Cannot cancel someone else\'s order', (t) => {
   t.signIn('user@example.com').then(() => {
     t.agent
@@ -103,6 +114,17 @@ test('Admins can update someone else\'s order', (t) => {
         t.end()
       }).catch(t.end)
     })
+  })
+})
+
+test('Admins can update orders when the market is closed', (t) => {
+  t.hostname('closed.localhost')
+  t.signIn('admin@example.com').then(() => {
+    t.agent
+    .post('/orders/5')
+    .send({location_id: 2})
+    .expect(200)
+    .end(t.end)
   })
 })
 

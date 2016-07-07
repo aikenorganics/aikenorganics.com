@@ -28,7 +28,10 @@ router.get('/current', (req, res) => {
 
 // Update
 router.post('/:order_id', (req, res) => {
-  if (!req.market.open) return res.status(401).json({})
+  // You can only update when the market is open.
+  if (!req.user.is_admin && !req.market.open) {
+    return res.status(401).json({})
+  }
 
   // You can only update your own order.
   if (!req.user.is_admin && req.user.id !== req.order.user_id) {
