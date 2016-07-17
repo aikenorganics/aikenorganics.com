@@ -62,6 +62,13 @@ test('GET /products?search=query is a 200 logged out', function (t) {
   .end(t.end)
 })
 
+test('GET /products?search=foo%20bar is a 200', function (t) {
+  t.request()
+  .get('/products?search=ice%20cream')
+  .expect(200)
+  .end(t.end)
+})
+
 // Show
 
 test('GET /products/:id is a 200 as an admin', function (t) {

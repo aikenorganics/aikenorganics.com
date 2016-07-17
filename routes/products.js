@@ -17,11 +17,7 @@ router.get('/', (req, res) => {
     .where({active: true, grower: {active: true}})
 
   // Search
-  if (req.query.search) {
-    products.where(
-      "search @@ to_tsquery('simple', ?)", `${req.query.search}:*`
-    )
-  }
+  if (req.query.search) products.search(req.query.search)
 
   // Category
   if (req.query.category_id) {

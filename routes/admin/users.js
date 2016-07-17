@@ -15,11 +15,7 @@ router.get('/', (req, res) => {
   let users = db.User
 
   // Search
-  if (req.query.search) {
-    users = users.where(
-      "search @@ to_tsquery('simple', ?)", `${req.query.search}:*`
-    )
-  }
+  if (req.query.search) users = users.search(req.query.search)
 
   // Pagination
   const page = res.locals.page = +(req.query.page || 1)

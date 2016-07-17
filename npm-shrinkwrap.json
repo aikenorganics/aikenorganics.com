@@ -2582,9 +2582,9 @@
       "resolved": "https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.1.tgz"
     },
     "ozymandias": {
-      "version": "0.70.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#ee5d6e2f2d2a9155020392534bc10512737ae5ed",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#ee5d6e2f2d2a9155020392534bc10512737ae5ed",
+      "version": "0.71.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#ea2bd8541ab7658ff62a2532d7ec100978da6298",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#ea2bd8541ab7658ff62a2532d7ec100978da6298",
       "dependencies": {
         "bl": {
           "version": "1.1.2",
@@ -2886,9 +2886,9 @@
       "resolved": "https://registry.npmjs.org/postgres-bytea/-/postgres-bytea-1.0.0.tgz"
     },
     "postgres-date": {
-      "version": "1.0.2",
+      "version": "1.0.3",
       "from": "postgres-date@>=1.0.0 <1.1.0",
-      "resolved": "https://registry.npmjs.org/postgres-date/-/postgres-date-1.0.2.tgz"
+      "resolved": "https://registry.npmjs.org/postgres-date/-/postgres-date-1.0.3.tgz"
     },
     "postgres-interval": {
       "version": "1.0.2",

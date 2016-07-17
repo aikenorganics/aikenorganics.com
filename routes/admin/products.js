@@ -13,11 +13,7 @@ router.get('/', (req, res) => {
   if (oversold) products.where('reserved > supply')
 
   // Search
-  if (req.query.search) {
-    products = products.where(
-      "search @@ to_tsquery('simple', ?)", `${req.query.search}:*`
-    )
-  }
+  if (req.query.search) products = products.search(req.query.search)
 
   products.order('name').paginate(page, 100).then((products) => {
     res.react({
