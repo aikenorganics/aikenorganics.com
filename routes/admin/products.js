@@ -1,13 +1,14 @@
 'use strict'
 
 const db = require('../../db')
+const json = require('../../json/admin/products')
 const router = module.exports = require('ozymandias').Router()
 
 router.get('/', (req, res) => {
   let products = db.Product.include('grower')
 
   const oversold = req.query.oversold === '1'
-  const page = res.locals.page = +(req.query.page || 1)
+  const page = +(req.query.page || 1)
 
   // Oversold?
   if (oversold) products.where('reserved > supply')
@@ -16,11 +17,6 @@ router.get('/', (req, res) => {
   if (req.query.search) products = products.search(req.query.search)
 
   products.order('name').paginate(page, 100).then((products) => {
-    res.react({
-      more: products.more,
-      oversold: oversold,
-      page: page,
-      products: products
-    })
+    res._react(json.index, {oversold, page, products})
   }).catch(res.error)
 })
