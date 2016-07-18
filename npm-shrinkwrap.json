@@ -2541,11 +2541,6 @@
       "from": "object-assign@>=4.0.0 <5.0.0",
       "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.0.1.tgz"
     },
-    "object-tojson": {
-      "version": "1.0.1",
-      "from": "object-tojson@1.0.1",
-      "resolved": "https://registry.npmjs.org/object-tojson/-/object-tojson-1.0.1.tgz"
-    },
     "object.omit": {
       "version": "2.0.0",
       "from": "object.omit@>=2.0.0 <3.0.0",
