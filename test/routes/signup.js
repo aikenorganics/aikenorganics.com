@@ -55,25 +55,29 @@ test('Full signup flow', (t) => {
 
       t.agent
       .post('/auth/signin')
-      .send('email=jake@ooo.net')
-      .send('password=sandwiches')
+      .send({
+        email: 'jake@ooo.net',
+        password: 'sandwiches'
+      })
       .expect(422)
       .end((e) => {
         if (e) return t.end(e)
 
         t.agent
         .post('/auth/signin')
-        .send('email=jake@oooo.net')
-        .send('password=sandwich')
-        .expect(404)
+        .send({
+          email: 'jake@oooo.net',
+          password: 'sandwich'
+        })
+        .expect(422)
         .end((e) => {
           if (e) return t.end(e)
 
           t.agent
-          .post('/auth/signin')
+          .post('/signin')
           .send('email=jake@ooo.net')
           .send('password=sandwich')
-          .expect(302)
+          .expect(200)
           .end(t.end)
         })
       })

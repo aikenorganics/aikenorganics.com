@@ -5,13 +5,7 @@ const app = require('../app')
 const tape = require('tape')
 const request = require('supertest')
 const query = db.query
-const wd = require('selenium-webdriver')
-
-// Web Driver shortcuts
-const By = wd.By
-const Key = wd.Key
-const until = wd.until
-const Builder = wd.Builder
+const {Builder, By} = require('selenium-webdriver')
 const driver = new Builder().forBrowser('chrome').build()
 
 // Convenient sign in.
@@ -26,14 +20,6 @@ app.post('/signin', (req, res) => {
 // Export a function with the tape API.
 exports = module.exports = (name, callback) => {
   tape(name, (t) => {
-    // Integration tests
-    t.driver = driver
-
-    // Some handy shortcuts…
-    t.By = By
-    t.Key = Key
-    t.until = until
-
     // Have we visited any pages?
     let visited = false
 
@@ -46,12 +32,10 @@ exports = module.exports = (name, callback) => {
     // Find an element with a CSS selector.
     t.$ = (selector) => driver.findElement(By.css(selector))
 
+    t.wait = (...args) => driver.wait(...args)
+
     // Get the current path.
-    t.getPath = () => {
-      return driver.getCurrentUrl().then((url) => {
-        return url.replace(/^http:\/\/open.localhost:4444/, '')
-      })
-    }
+    t.getPath = () => driver.executeScript('return window.location.pathname')
 
     // Set up transactions.
     const transaction = db.transaction()

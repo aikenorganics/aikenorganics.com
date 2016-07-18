@@ -3,9 +3,9 @@ import React from 'react'
 export default ({errors}) => {
   if (!errors) return <span></span>
 
-  return <div className='alert alert-danger'>
+  return <div className='alert alert-danger' id='errors'>
     <p>
-      <strong>Whoops!</strong> We had some trouble saving your data.
+      <strong>Whoops!</strong> Can you try that again?
     </p>
     <ul>
       {Object.keys(errors).map((name) => {

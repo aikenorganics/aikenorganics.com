@@ -46,12 +46,19 @@ import AdminGrowersUsers from './views/admin/growers/users'
 import AdminOrders from './views/admin/orders/index'
 import AdminOrdersShow from './views/admin/orders/show'
 
+import Reset from './views/signin/reset'
+import Signin from './views/signin/index'
+import Forgot from './views/signin/forgot'
+
 import Signup from './views/signup/index'
 import Settings from './views/settings/index'
 
 export default (state) => {
   return <Router state={state}>
     <Route path='' Component={App}>
+      <Route path='/signin' Component={Signin}/>
+      <Route path='/signin/forgot' Component={Forgot}/>
+      <Route path='/signin/reset/:token_id' Component={Reset}/>
       <Route path='/signup' Component={Signup}/>
       <Route path='/admin/' Component={AdminNav}>
         <Route path='categories' Component={Categories}/>

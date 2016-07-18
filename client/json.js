@@ -26,7 +26,7 @@ const json = (url, options) => {
 
     if (response.ok) {
       return response.json().then((result) => {
-        message('success', 'Done.')
+        message(null)
         setErrors(null)
         return result
       }).catch((e) => {

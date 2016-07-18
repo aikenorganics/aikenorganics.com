@@ -33,6 +33,7 @@ app.use('/orders', require('./routes/orders'))
 app.use('/growers', require('./routes/growers'))
 app.use('/products', require('./routes/products'))
 app.use('/settings', require('./routes/settings'))
+app.use('/signin', require('./routes/signin'))
 app.use('/signup', require('./routes/signup'))
 
 // Home
