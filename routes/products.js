@@ -1,6 +1,7 @@
 'use strict'
 
 const db = require('../db')
+const json = require('../json/products')
 const upload = require('multer')({dest: 'tmp/uploads'})
 const router = module.exports = require('ozymandias').Router()
 
@@ -39,30 +40,22 @@ router.get('/', (req, res) => {
       inner join growers on growers.id = products.grower_id
       where category_id = categories.id and products.active and growers.active
     )`).order('position').all()
-  ]).then((results) => {
-    const products = results[0]
-    const categories = results[1]
-    res.react({
-      more: products.more,
-      page: page,
-      products: products,
-      categories: categories
-    })
+  ]).then(([products, categories]) => {
+    res._react(json.index, {page, products, categories})
   }).catch(res.error)
 })
 
 // Show
-router.get('/:product_id', (req, res) => res.react({product: req.product}))
+router.get('/:product_id', (req, res) => {
+  res._react(json.show, {product: req.product})
+})
 
 // Edit
 router.get('/:product_id/edit', (req, res) => {
   if (!req.canEdit) return res.status(401).render('401')
 
   db.Category.order('position').all().then((categories) => {
-    res.react({
-      categories: categories,
-      product: req.product
-    })
+    res._react(json.edit, {categories, product: req.product})
   }).catch(res.error)
 })
 

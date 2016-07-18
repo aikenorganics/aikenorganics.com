@@ -1,5 +1,6 @@
 'use strict'
 
+const json = require('../json/settings')
 const router = module.exports = require('ozymandias').Router()
 
 router.use((req, res, next) => {
@@ -10,7 +11,7 @@ router.use((req, res, next) => {
   })
 })
 
-router.get('/', (req, res) => res.react())
+router.get('/', (req, res) => res._react(json.index))
 
 router.post('/', (req, res) => {
   req.user.update(req.permit(

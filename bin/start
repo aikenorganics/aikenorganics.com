@@ -1,0 +1,7 @@
+#!/bin/bash -e
+
+printf 'Compiling assets…\n'
+./bin/compile-js
+
+printf 'Starting server…\n'
+env $(cat .env | xargs) node index.js
