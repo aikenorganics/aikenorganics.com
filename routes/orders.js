@@ -1,6 +1,7 @@
 'use strict'
 
 const db = require('../db')
+const json = require('../json/orders')
 const router = module.exports = require('ozymandias').Router()
 
 router.use((req, res, next) => {
@@ -18,11 +19,8 @@ router.get('/current', (req, res) => {
       .where({status: 'open', user_id: req.user.id})
       .find(),
     db.Location.where({active: true}).order('name').all()
-  ]).then((results) => {
-    res.react({
-      order: results[0],
-      locations: results[1]
-    })
+  ]).then(([order, locations]) => {
+    res._react(json.current, {locations, order})
   }).catch(res.error)
 })
 

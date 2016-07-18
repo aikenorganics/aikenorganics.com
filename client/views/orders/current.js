@@ -3,7 +3,7 @@ import Link from '../link'
 import Form from './form'
 import {cancelOrder} from '../../actions/index'
 
-export default ({busy, market: {open}, locations, order, currentUser}) => {
+export default ({busy, market: {open}, locations, order, productOrders, currentUser}) => {
   if (!order) {
     return <div>
       <p className='text-center'>
@@ -12,7 +12,7 @@ export default ({busy, market: {open}, locations, order, currentUser}) => {
     </div>
   }
 
-  const {id, location, productOrders} = order
+  const {id, location} = order
 
   const cancel = () => {
     if (window.confirm('Are you sure?')) cancelOrder(id)
