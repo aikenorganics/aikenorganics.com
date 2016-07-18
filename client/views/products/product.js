@@ -2,8 +2,8 @@ import React from 'react'
 import Link from '../link'
 import CartForm from '../cart/form'
 
-export default ({busy, cart, open, product, currentUser}) => {
-  const {active, available, cost, id, grower, name, smallImage, unit} = product
+export default ({busy, cart, grower, open, product, currentUser}) => {
+  const {active, available, cost, id, name, smallImage, unit} = product
 
   return <div className='panel panel-default product'>
     <div className='panel-heading'>

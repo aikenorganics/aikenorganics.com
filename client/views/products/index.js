@@ -33,8 +33,10 @@ export default ({busy, cart, category_id, categories, page, products, market: {o
     <div className='col-md-10'>
       <div className='row'>
         {products.map((product) => {
-          return <div key={product.id} className='col-md-6'>
-            <Product busy={busy} cart={cart} open={open} product={product} currentUser={currentUser}/>
+          const {id, grower} = product
+          const props = {busy, cart, currentUser, grower, open, product}
+          return <div key={id} className='col-md-6'>
+            <Product {...props}/>
           </div>
         })}
       </div>

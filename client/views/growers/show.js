@@ -34,8 +34,9 @@ export default ({busy, canEdit, cart, grower, market: {open}, path, products, cu
       <hr/>
       <div className='row'>
         {products.map((product) => {
+          const props = {busy, cart, currentUser, grower, open, product}
           return <div key={product.id} className='col-md-6'>
-            <Product busy={busy} cart={cart} open={open} product={product} currentUser={currentUser}/>
+            <Product {...props}/>
           </div>
         })}
       </div>
