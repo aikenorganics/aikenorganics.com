@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
     db.Location.where({active: true}).order('name').all(),
     db.Order.where({status: 'open', user_id: req.user.id}).find()
   ]).then(([products, locations, order]) => {
-    res._react(json.index, {products, locations, order})
+    res.react(json.index, {products, locations, order})
   }).catch(res.error)
 })
 

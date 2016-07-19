@@ -10,16 +10,16 @@ router.find('location', () => db.Location)
 // Index
 router.get('/', function (req, res) {
   db.Location.order('name').all().then((locations) => {
-    res._react(json.index, {locations})
+    res.react(json.index, {locations})
   }).catch(res.error)
 })
 
 // New
-router.get('/new', (req, res) => res._react(json.new))
+router.get('/new', (req, res) => res.react(json.new))
 
 // Edit
 router.get('/:location_id/edit', (req, res) => {
-  res._react(json.edit, {location: req.location})
+  res.react(json.edit, {location: req.location})
 })
 
 // Create

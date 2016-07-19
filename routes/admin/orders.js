@@ -57,7 +57,7 @@ router.get('/', (req, res) => {
     db.Location.order('name').all(),
     db.Product.order('name').all()
   ]).then(([orders, locations, products]) => {
-    res._react(json.index, {
+    res.react(json.index, {
       full,
       orders,
       page,
@@ -79,7 +79,7 @@ router.get('/:order_id', (req, res) => {
     products.order('name').all(),
     db.Location.order('name').all()
   ]).then(([products, locations]) => {
-    res._react(json.show, {products, locations})
+    res.react(json.show, {products, locations})
   }).catch(res.error)
 })
 

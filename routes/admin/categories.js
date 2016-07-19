@@ -10,16 +10,16 @@ router.find('category', () => db.Category)
 // Index
 router.get('/', (req, res) => {
   db.Category.order('position').all().then((categories) => {
-    res._react(json.index, {categories})
+    res.react(json.index, {categories})
   }).catch(res.error)
 })
 
 // New
-router.get('/new', (req, res) => res._react(json.new))
+router.get('/new', (req, res) => res.react(json.new))
 
 // Edit
 router.get('/:category_id/edit', (req, res) => {
-  res._react(json.edit, {
+  res.react(json.edit, {
     category: req.category
   })
 })

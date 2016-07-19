@@ -17,6 +17,6 @@ router.get('/', (req, res) => {
   if (req.query.search) products = products.search(req.query.search)
 
   products.order('name').paginate(page, 100).then((products) => {
-    res._react(json.index, {oversold, page, products})
+    res.react(json.index, {oversold, page, products})
   }).catch(res.error)
 })

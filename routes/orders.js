@@ -20,7 +20,7 @@ router.get('/current', (req, res) => {
       .find(),
     db.Location.where({active: true}).order('name').all()
   ]).then(([order, locations]) => {
-    res._react(json.current, {locations, order})
+    res.react(json.current, {locations, order})
   }).catch(res.error)
 })
 

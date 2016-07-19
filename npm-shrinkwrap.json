@@ -2541,6 +2541,11 @@
       "from": "object-assign@>=4.0.0 <5.0.0",
       "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.0.1.tgz"
     },
+    "object-tojson": {
+      "version": "1.0.1",
+      "from": "object-tojson@1.0.1",
+      "resolved": "https://registry.npmjs.org/object-tojson/-/object-tojson-1.0.1.tgz"
+    },
     "object.omit": {
       "version": "2.0.0",
       "from": "object.omit@>=2.0.0 <3.0.0",
@@ -2577,9 +2582,9 @@
       "resolved": "https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.1.tgz"
     },
     "ozymandias": {
-      "version": "0.71.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#ea2bd8541ab7658ff62a2532d7ec100978da6298",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#ea2bd8541ab7658ff62a2532d7ec100978da6298",
+      "version": "0.72.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#c7524297d254b87455ae800833289527a39f1736",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#c7524297d254b87455ae800833289527a39f1736",
       "dependencies": {
         "bl": {
           "version": "1.1.2",

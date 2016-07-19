@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
     where products.grower_id = growers.id and orders.status = 'complete'
   ) as total`)
   .order('name').all().then((growers) => {
-    res._react(json.index, {growers})
+    res.react(json.index, {growers})
   }).catch(res.error)
 })
 
@@ -26,7 +26,7 @@ router.get('/orders', (req, res) => {
   db.Grower
   .where('exists(select id from products where reserved > 0 and grower_id = growers.id)')
   .include('products').all().then((growers) => {
-    res._react(json.orders, {growers})
+    res.react(json.orders, {growers})
   }).catch(res.error)
 })
 
@@ -40,13 +40,13 @@ router.get('/:grower_id', (req, res) => {
   .where({productOrders: {order: {status: 'complete'}}})
   .groupBy('products.id')
   .all().then((products) => {
-    res._react({grower: req.grower, products})
+    res.react({grower: req.grower, products})
   }).catch(res.error)
 })
 
 // Users
 router.get('/:grower_id/users', (req, res) => {
   db.User.order('first').all().then((users) => {
-    res._react(json.users, {grower: req.grower, users})
+    res.react(json.users, {grower: req.grower, users})
   }).catch(res.error)
 })

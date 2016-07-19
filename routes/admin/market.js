@@ -4,7 +4,7 @@ const json = require('../../json/admin/market')
 const router = module.exports = require('ozymandias').Router()
 
 // Index
-router.get('/', (req, res) => res._react(json.index))
+router.get('/', (req, res) => res.react(json.index))
 
 // Update
 router.post('/', (req, res) => {

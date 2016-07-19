@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
   const page = res.locals.page = +(req.query.page || 1)
 
   users.order('email').paginate(page, 100).then((users) => {
-    res._react(json.index, {
+    res.react(json.index, {
       more: users.more,
       page: page,
       users: users
@@ -32,17 +32,17 @@ router.get('/', (req, res) => {
 // Emails
 router.get('/emails', (req, res) => {
   db.User.order('email').all().then((users) => {
-    res._react(json.emails, {users})
+    res.react(json.emails, {users})
   }).catch(res.error)
 })
 
 // Edit
 router.get('/:user_id/edit', (req, res) => {
-  res._react(json.edit)
+  res.react(json.edit)
 })
 
 // New
-router.get('/new', (req, res) => res._react(json.new))
+router.get('/new', (req, res) => res.react(json.new))
 
 // Create
 router.post('/', (req, res) => {

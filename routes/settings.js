@@ -11,7 +11,7 @@ router.use((req, res, next) => {
   })
 })
 
-router.get('/', (req, res) => res._react(json.index))
+router.get('/', (req, res) => res.react(json.index))
 
 router.post('/', (req, res) => {
   req.user.update(req.permit(

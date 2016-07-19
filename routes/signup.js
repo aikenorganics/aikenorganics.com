@@ -4,7 +4,7 @@ const db = require('../db')
 const json = require('../json/signup')
 const router = module.exports = require('ozymandias').Router()
 
-router.get('/', (req, res) => res._react(json.index))
+router.get('/', (req, res) => res.react(json.index))
 
 // Validations
 router.post('/', (req, res, next) => {
