@@ -1,17 +1,10 @@
 'use strict'
 
-const app = require('../app')
+exports.index = (set) => {}
 
-exports.index = (set) => {
-  set(app)
-}
-
-exports.forgot = (set) => {
-  set(app)
-}
+exports.forgot = (set) => {}
 
 exports.reset = (set, {expired, token}) => {
-  set(app)
   set('expired', expired)
   if (token) {
     set('token', token.id)

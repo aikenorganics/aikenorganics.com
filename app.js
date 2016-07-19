@@ -7,8 +7,9 @@ const ozymandias = require('ozymandias')
 // The App!
 const app = module.exports = ozymandias()
 
-// React Component
+// Some settings.
 app.set('component', require('./client/routes').default)
+app.set('layout.json', require('./json/layout'))
 
 // Locals
 Object.assign(app.locals, {

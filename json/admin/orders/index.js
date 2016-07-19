@@ -1,12 +1,10 @@
 'use strict'
 
-const app = require('../../app')
 const orderJson = require('../../orders/order')
 const paymentJson = require('../../payments/payment')
 const productOrderJson = require('../../product-orders/product-order')
 
 exports.index = (set, {full, locations, orders, page, product, products, status}) => {
-  set(app)
   set({full, status, page, more: orders.more})
   set('orders', orders, orderJson, (set, order) => {
     if (order.productOrders) {
@@ -19,7 +17,6 @@ exports.index = (set, {full, locations, orders, page, product, products, status}
 }
 
 exports.show = (set, {locations, order, products}) => {
-  set(app)
   set('order', order, orderJson)
   set('payments', order.payments, paymentJson)
   set('products', products, (set, product) => set(product, 'id', 'name'))

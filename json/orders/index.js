@@ -1,12 +1,10 @@
 'use strict'
 
-const app = require('../app')
 const orderJson = require('./order')
 const locationJson = require('../locations/location')
 const productOrderJson = require('../product-orders/product-order')
 
 exports.current = (set, {locations, order}) => {
-  set(app)
   set('locations', locations, (set, location) => {
     set(location, 'id', 'name')
   })
