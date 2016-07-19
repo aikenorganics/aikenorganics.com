@@ -3673,9 +3673,9 @@
       "resolved": "https://registry.npmjs.org/ua-parser-js/-/ua-parser-js-0.7.10.tgz"
     },
     "uglify-js": {
-      "version": "2.6.4",
-      "from": "uglify-js@latest",
-      "resolved": "https://registry.npmjs.org/uglify-js/-/uglify-js-2.6.4.tgz",
+      "version": "2.7.0",
+      "from": "uglify-js@2.7.0",
+      "resolved": "https://registry.npmjs.org/uglify-js/-/uglify-js-2.7.0.tgz",
       "dependencies": {
         "async": {
           "version": "0.2.10",
