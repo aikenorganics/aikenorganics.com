@@ -2311,9 +2311,9 @@
       "resolved": "https://registry.npmjs.org/lodash/-/lodash-3.10.1.tgz"
     },
     "lodash-es": {
-      "version": "4.11.1",
+      "version": "4.13.1",
       "from": "lodash-es@>=4.2.1 <5.0.0",
-      "resolved": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.11.1.tgz"
+      "resolved": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.13.1.tgz"
     },
     "lodash._basetostring": {
       "version": "3.0.1",
@@ -3062,14 +3062,14 @@
       }
     },
     "redux": {
-      "version": "3.5.1",
+      "version": "3.5.2",
       "from": "redux@latest",
-      "resolved": "https://registry.npmjs.org/redux/-/redux-3.5.1.tgz",
+      "resolved": "https://registry.npmjs.org/redux/-/redux-3.5.2.tgz",
       "dependencies": {
         "lodash": {
-          "version": "4.11.1",
+          "version": "4.13.1",
           "from": "lodash@>=4.2.1 <5.0.0",
-          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.11.1.tgz"
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.13.1.tgz"
         }
       }
     },
@@ -3497,9 +3497,9 @@
       "resolved": "https://registry.npmjs.org/svgo/-/svgo-0.6.1.tgz"
     },
     "symbol-observable": {
-      "version": "0.2.2",
-      "from": "symbol-observable@>=0.2.1 <0.3.0",
-      "resolved": "https://registry.npmjs.org/symbol-observable/-/symbol-observable-0.2.2.tgz"
+      "version": "0.2.4",
+      "from": "symbol-observable@>=0.2.3 <0.3.0",
+      "resolved": "https://registry.npmjs.org/symbol-observable/-/symbol-observable-0.2.4.tgz"
     },
     "syntax-error": {
       "version": "1.1.6",
