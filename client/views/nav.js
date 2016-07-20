@@ -5,7 +5,7 @@ import Link from './link'
 export default ({cart, children, market: {message, open}, currentUser, path}) => {
   const cartSize = Object.keys(cart).reduce((total, id) => total + cart[id], 0)
 
-  return <div>
+  return <main className='container'>
     <div className='hidden-print'>
       {open
         ? <div className='alert alert-info' dangerouslySetInnerHTML={{__html: marked(message)}}></div>
@@ -41,5 +41,5 @@ export default ({cart, children, market: {message, open}, currentUser, path}) =>
       </ul>
     </div>
     {children}
-  </div>
+  </main>
 }

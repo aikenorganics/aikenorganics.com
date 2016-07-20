@@ -26,7 +26,7 @@ export default class Index extends Component {
     const {busy, errors} = this.props
     const {email, first, last, password, phone} = this.state
 
-    return <div>
+    return <main className='container'>
       <form onSubmit={(e) => this.submit(e)}>
         <div className='panel panel-default panel-small'>
           <div className='panel-heading'>
@@ -71,7 +71,7 @@ export default class Index extends Component {
           </div>
         </div>
       </form>
-    </div>
+    </main>
   }
 
 }

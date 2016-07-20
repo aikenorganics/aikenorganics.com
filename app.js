@@ -37,7 +37,7 @@ app.use('/signin', require('./routes/signin'))
 app.use('/signup', require('./routes/signup'))
 
 // Home
-app.get('/', (req, res) => res.render('index'))
+app.get('/', (req, res) => res.react())
 
 // Learn
 app.get('/learn', (req, res) => res.react())

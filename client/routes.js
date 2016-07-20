@@ -53,11 +53,13 @@ import Forgot from './views/signin/forgot'
 import Signup from './views/signup/index'
 import Settings from './views/settings/index'
 
+import Index from './views/index'
 import Learn from './views/learn/index'
 
 export default (state) => {
   return <Router state={state}>
     <Route path='' Component={App}>
+      <Route path='/' Component={Index}/>
       <Route path='/learn' Component={Learn}/>
       <Route path='/signin' Component={Signin}/>
       <Route path='/signin/forgot' Component={Forgot}/>
