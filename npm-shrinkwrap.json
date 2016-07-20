@@ -2606,6 +2606,11 @@
           "from": "qs@>=6.1.0 <6.2.0",
           "resolved": "https://registry.npmjs.org/qs/-/qs-6.1.0.tgz"
         },
+        "remora": {
+          "version": "3.1.0",
+          "from": "git://github.com/braddunbar/remora.git#e971724536e2296883ac62d8bf2c3e1da3f53a95",
+          "resolved": "git://github.com/braddunbar/remora.git#e971724536e2296883ac62d8bf2c3e1da3f53a95"
+        },
         "request": {
           "version": "2.72.0",
           "from": "request@2.72.0",
@@ -3098,11 +3103,6 @@
       "from": "regjsparser@>=0.1.4 <0.2.0",
       "resolved": "https://registry.npmjs.org/regjsparser/-/regjsparser-0.1.5.tgz"
     },
-    "remora": {
-      "version": "3.1.0",
-      "from": "git://github.com/braddunbar/remora.git#e971724536e2296883ac62d8bf2c3e1da3f53a95",
-      "resolved": "git://github.com/braddunbar/remora.git#e971724536e2296883ac62d8bf2c3e1da3f53a95"
-    },
     "repeat-element": {
       "version": "1.1.2",
       "from": "repeat-element@>=1.1.2 <2.0.0",
@@ -3163,9 +3163,9 @@
       "resolved": "https://registry.npmjs.org/ripemd160/-/ripemd160-1.0.1.tgz"
     },
     "rollup": {
-      "version": "0.33.0",
+      "version": "0.34.1",
       "from": "rollup@latest",
-      "resolved": "https://registry.npmjs.org/rollup/-/rollup-0.33.0.tgz",
+      "resolved": "https://registry.npmjs.org/rollup/-/rollup-0.34.1.tgz",
       "dependencies": {
         "source-map": {
           "version": "0.1.32",
@@ -3173,9 +3173,9 @@
           "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.1.32.tgz"
         },
         "source-map-support": {
-          "version": "0.4.1",
+          "version": "0.4.2",
           "from": "source-map-support@>=0.4.0 <0.5.0",
-          "resolved": "https://registry.npmjs.org/source-map-support/-/source-map-support-0.4.1.tgz"
+          "resolved": "https://registry.npmjs.org/source-map-support/-/source-map-support-0.4.2.tgz"
         }
       }
     },
