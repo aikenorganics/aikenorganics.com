@@ -43,11 +43,8 @@ app.get('/', (req, res) => res.render('index'))
 app.get('/learn', (req, res) => res.render('learn/index'))
 
 // 404
-app.get('*', (req, res) => res.status(404).render('404'))
+app.get('*', (req, res) => res.notfound())
 
 // 500
 app.use(bugsnag.errorHandler)
-app.use((e, req, res, next) => {
-  console.log(e.stack)
-  res.status(500).render('500')
-})
+app.use((e, req, res, next) => res.error(e))

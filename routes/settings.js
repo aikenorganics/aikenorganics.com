@@ -5,10 +5,7 @@ const router = module.exports = require('ozymandias').Router()
 
 router.use((req, res, next) => {
   if (req.user) return next()
-  res.format({
-    html: () => res.status(401).render('401'),
-    json: () => res.status(401).json({})
-  })
+  res.unauthorized()
 })
 
 router.get('/', (req, res) => res.react(json.index))

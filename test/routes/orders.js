@@ -77,6 +77,7 @@ test('Cannot cancel someone else\'s order', (t) => {
   t.signIn('user@example.com').then(() => {
     t.agent
     .delete('/orders/1')
+    .set('Accept', 'application/json')
     .expect(401)
     .expect('Content-Type', /json/)
     .end(t.end)

@@ -6,10 +6,7 @@ const router = module.exports = require('ozymandias').Router()
 
 router.use((req, res, next) => {
   if (req.user && req.market.open) return next()
-  res.status(401).format({
-    html: () => { res.render('401') },
-    json: () => { res.json({message: 'Access Denied'}) }
-  })
+  res.unauthorized()
 })
 
 // Index

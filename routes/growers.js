@@ -20,12 +20,12 @@ router.get('/', (req, res) => {
 
 // New Grower
 router.get('/new', (req, res) => {
-  if (!req.admin) return res.status(401).render('401')
+  if (!req.admin) return res.unauthorized()
   res.react(json.new)
 })
 
 router.post('/', (req, res) => {
-  if (!req.admin) return res.status(401).render('401')
+  if (!req.admin) return res.unauthorized()
 
   db.Grower.create(req.permit(
     'url', 'name', 'email', 'location', 'description'
@@ -46,12 +46,12 @@ router.get('/:grower_id', (req, res) => {
 
 // Edit Grower
 router.get('/:grower_id/edit', (req, res) => {
-  if (!req.canEdit) return res.status(401).render('401')
+  if (!req.canEdit) return res.unauthorized()
   res.react(json.edit, {grower: req.grower})
 })
 
 router.post('/:grower_id', (req, res) => {
-  if (!req.canEdit) return res.status(401).render('401')
+  if (!req.canEdit) return res.unauthorized()
 
   req.grower.update(req.permit(
     'active', 'name', 'email', 'url', 'location', 'description'
@@ -62,14 +62,14 @@ router.post('/:grower_id', (req, res) => {
 
 // New Product
 router.get('/:grower_id/products/new', (req, res) => {
-  if (!req.canEdit) return res.status(401).render('401')
+  if (!req.canEdit) return res.unauthorized()
   db.Category.all().then((categories) => {
     res.react(json.newProduct, {grower: req.grower, categories})
   }).catch(res.error)
 })
 
 router.post('/:grower_id/products', (req, res) => {
-  if (!req.canEdit) return res.status(401).json({})
+  if (!req.canEdit) return res.unauthorized()
 
   const props = req.permit(
     'name', 'cost', 'unit', 'supply', 'category_id', 'description'
@@ -83,7 +83,7 @@ router.post('/:grower_id/products', (req, res) => {
 
 // Orders
 router.get('/:grower_id/orders', (req, res) => {
-  if (!req.canEdit) return res.status(401).render('401')
+  if (!req.canEdit) return res.unauthorized()
 
   db.Product
   .where({grower_id: req.grower.id})
@@ -95,7 +95,7 @@ router.get('/:grower_id/orders', (req, res) => {
 
 // Products
 router.get('/:grower_id/products', (req, res) => {
-  if (!req.canEdit) return res.status(401).render('401')
+  if (!req.canEdit) return res.unauthorized()
 
   db.Product.where({grower_id: req.grower.id}).order('name').all()
   .then((products) => {
@@ -104,7 +104,7 @@ router.get('/:grower_id/products', (req, res) => {
 })
 
 router.post('/:grower_id/image', upload.single('image'), (req, res) => {
-  if (!req.canEdit) return res.status(401).render('401')
+  if (!req.canEdit) return res.unauthorized()
   req.grower.uploadImage(req.file).then(() => {
     res.json(req.grower)
   }).catch(res.error)

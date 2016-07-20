@@ -9,6 +9,6 @@ module.exports = (set, {req: {canEdit, cart, market, user}}) => {
     canEdit: canEdit,
     cart: cart.cart
   })
-  set('currentUser', user, userJson)
-  set('market', market, marketJson)
+  if (user) set('currentUser', user, userJson)
+  if (market) set('market', market, marketJson)
 }

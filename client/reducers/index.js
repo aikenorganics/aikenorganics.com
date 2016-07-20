@@ -53,6 +53,7 @@ const reducer = combineReducers({
   productOrders,
   search: pass,
   status: pass,
+  statusCode: pass,
   token: pass,
   url: pass,
   user,

@@ -6,7 +6,7 @@ const router = module.exports = require('ozymandias').Router()
 
 router.use((req, res, next) => {
   if (req.user) return next()
-  res.status(401).render('401')
+  res.unauthorized()
 })
 
 router.find('order', () => db.Order)
@@ -28,12 +28,12 @@ router.get('/current', (req, res) => {
 router.post('/:order_id', (req, res) => {
   // You can only update when the market is open.
   if (!req.user.is_admin && !req.market.open) {
-    return res.status(401).json({})
+    return res.unauthorized()
   }
 
   // You can only update your own order.
   if (!req.user.is_admin && req.user.id !== req.order.user_id) {
-    return res.status(401).json({})
+    return res.unauthorized()
   }
 
   const values = req.permit('location_id')
@@ -51,11 +51,11 @@ router.post('/:order_id', (req, res) => {
 
 // Cancel
 router.delete('/:order_id', (req, res) => {
-  if (!req.market.open) return res.status(401).json({})
+  if (!req.market.open) return res.unauthorized()
 
   // You can only cancel your own order.
   if (req.user.id !== req.order.user_id) {
-    return res.status(401).json({})
+    return res.unauthorized()
   }
 
   req.order.destroy().then(() => res.json({})).catch(res.error)

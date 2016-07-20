@@ -40,7 +40,7 @@ router.get('/:grower_id', (req, res) => {
   .where({productOrders: {order: {status: 'complete'}}})
   .groupBy('products.id')
   .all().then((products) => {
-    res.react({grower: req.grower, products})
+    res.react(json.show, {grower: req.grower, products})
   }).catch(res.error)
 })
 

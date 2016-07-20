@@ -15,9 +15,10 @@ exports.orders = (set, {growers}) => {
   })
 }
 
-exports.show = (set, {grower}) => {
-  set('grower', grower, growerJson, (set, grower) => {
-    set('products', grower.products, productJson)
+exports.show = (set, {grower, products}) => {
+  set('grower', grower, growerJson)
+  set('products', products, productJson, (set, product) => {
+    set(product, 'quantity', 'total')
   })
 }
 

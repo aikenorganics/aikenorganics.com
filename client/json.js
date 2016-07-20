@@ -30,8 +30,7 @@ const json = (url, options) => {
         setErrors(null)
         return result
       }).catch((e) => {
-        message('error', 'Uh oh! Something went wrong. :(')
-        throw e
+        error('Uh oh! Something went wrong. :(')
       })
     }
 
@@ -42,7 +41,12 @@ const json = (url, options) => {
       })
     }
 
-    error(response.statusText)
+    return response.json().then((result) => {
+      message(null)
+      return result
+    }).catch((e) => {
+      error('Uh oh! Something went wrong. :(')
+    })
   })
 }
 

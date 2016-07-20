@@ -53,6 +53,6 @@ export default class Router extends Component {
       if (match) return match
     }
 
-    return ''
+    return null
   }
 }
