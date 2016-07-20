@@ -10,6 +10,7 @@ import growers from './growers'
 import location from './location'
 import locations from './locations'
 import market from './market'
+import message from './message'
 import order from './order'
 import page from './page'
 import payments from './payments'
@@ -40,6 +41,7 @@ const reducer = combineReducers({
   location,
   locations,
   market,
+  message,
   more: pass,
   order,
   orders: pass,

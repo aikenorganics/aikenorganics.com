@@ -1,4 +1,5 @@
 import React from 'react'
+import Nav from './nav'
 import Footer from './footer'
 import Signin from './signin/index'
 import assets from 'ozymandias/assets/index'
@@ -54,7 +55,8 @@ const main = (props) => {
 
 export default (props) => {
   return <div>
+    <Nav {...props}/>
     {main(props)}
-    <Footer/>
+    <Footer {...props}/>
   </div>
 }

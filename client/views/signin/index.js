@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Link from '../link'
 import Errors from '../errors'
-import {signin} from '../../actions/index'
+import {navigate, signin} from '../../actions/index'
 
 export default class Index extends Component {
 
@@ -16,7 +16,7 @@ export default class Index extends Component {
   submit (e) {
     e.preventDefault()
     signin(this.state).then(() => {
-      window.location = '/products'
+      navigate('/products')
     }).catch(() => {})
   }
 

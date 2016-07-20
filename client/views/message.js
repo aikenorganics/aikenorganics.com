@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default ({active, message, type}) => {
+export default ({message}) => {
+  let {active, text, type} = message || {}
   if (type === 'error') type = 'danger'
-  return <div className={`message ${active ? 'active' : ''}`}>
-    <span className={`alert alert-${type}`}>
-      {message}
-    </span>
+
+  return <div id='message' className={`message ${active ? 'active' : ''}`}>
+    <span className={`alert alert-${type}`}>{text}</span>
   </div>
 }

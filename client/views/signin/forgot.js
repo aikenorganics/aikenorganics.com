@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import Errors from '../errors'
-import message from '../../message'
-import {forgot} from '../../actions/index'
+import {forgot, setMessage} from '../../actions/index'
 
 export default class Forgot extends Component {
 
@@ -15,7 +14,7 @@ export default class Forgot extends Component {
   submit (e) {
     e.preventDefault()
     forgot(this.state).then(() => {
-      message('success', 'Thanks! We sent you an email to reset your password.')
+      setMessage('success', 'Thanks! We sent you an email to reset your password.')
     }).catch(() => {})
   }
 

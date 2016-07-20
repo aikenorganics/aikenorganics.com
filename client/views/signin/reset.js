@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Link from '../link'
 import Errors from '../errors'
-import {reset} from '../../actions/index'
+import {navigate, reset} from '../../actions/index'
 
 export default class Reset extends Component {
 
@@ -16,7 +16,7 @@ export default class Reset extends Component {
     e.preventDefault()
     const {token} = this.props
     reset(token, this.state).then(() => {
-      window.location = '/products'
+      navigate('/products')
     }).catch(() => {})
   }
 

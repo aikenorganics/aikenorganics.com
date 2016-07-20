@@ -25,6 +25,8 @@ export const DONE = 'DONE'
 export const SET_ERRORS = 'SET_ERRORS'
 export const REPLACE = 'REPLACE'
 export const ADD_PAYMENT = 'ADD_PAYMENT'
+export const SET_MESSAGE = 'SET_MESSAGE'
+export const CLEAR_MESSAGE = 'CLEAR_MESSAGE'
 
 // Busy
 
@@ -42,6 +44,20 @@ export const done = (value) => {
 // Errors
 
 export const setErrors = (errors) => store.dispatch({type: SET_ERRORS, errors})
+
+// Message
+
+let messageTimer
+export const setMessage = (type, text) => {
+  clearTimeout(messageTimer)
+  store.dispatch({type: SET_MESSAGE, message: {active: true, type, text}})
+  messageTimer = setTimeout(clearMessage, 10000)
+}
+
+export const clearMessage = () => {
+  clearTimeout(messageTimer)
+  store.dispatch({type: CLEAR_MESSAGE})
+}
 
 // Navigate
 

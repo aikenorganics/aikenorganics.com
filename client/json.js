@@ -1,7 +1,6 @@
 import 'es6-promise'
 import 'whatwg-fetch'
-import message from './message'
-import {setErrors} from './actions/index'
+import {setErrors, setMessage, clearMessage} from './actions/index'
 
 const json = (url, options) => {
   if (!options) options = {}
@@ -14,11 +13,11 @@ const json = (url, options) => {
   options.headers.Accept = 'application/json'
 
   // Let the user know we're doing something.
-  message('info', 'Working…')
+  setMessage('info', 'Working…')
 
   return window.fetch(url, options).then((response) => {
     const error = (text) => {
-      message('error', text)
+      setMessage('error', text)
       const e = new Error(response.statusText)
       e.response = response
       throw e
@@ -26,7 +25,7 @@ const json = (url, options) => {
 
     if (response.ok) {
       return response.json().then((result) => {
-        message(null)
+        clearMessage()
         setErrors(null)
         return result
       }).catch((e) => {
@@ -42,7 +41,7 @@ const json = (url, options) => {
     }
 
     return response.json().then((result) => {
-      message(null)
+      clearMessage()
       return result
     }).catch((e) => {
       error('Uh oh! Something went wrong. :(')

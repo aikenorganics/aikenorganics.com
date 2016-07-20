@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Errors from '../errors'
-import {signup} from '../../actions/index'
+import {navigate, signup} from '../../actions/index'
 
 export default class Index extends Component {
 
@@ -18,7 +18,7 @@ export default class Index extends Component {
   submit (e) {
     e.preventDefault()
     signup(this.state).then(() => {
-      window.location = '/products'
+      navigate('/products')
     }).catch(() => {})
   }
 

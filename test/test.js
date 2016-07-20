@@ -32,7 +32,11 @@ exports = module.exports = (name, callback) => {
     // Find an element with a CSS selector.
     t.$ = (selector) => driver.findElement(By.css(selector))
 
-    t.wait = (...args) => driver.wait(...args)
+    // Does the element exist?
+    t.present = (selector) => driver.isElementPresent(By.css(selector))
+
+    // Wait for something to happen.
+    t.wait = (predicate) => driver.wait(predicate)
 
     // Get the current path.
     t.getPath = () => driver.executeScript('return window.location.pathname')
