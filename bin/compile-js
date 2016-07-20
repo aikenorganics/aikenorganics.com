@@ -1,4 +1,4 @@
 #!/bin/bash -e
 
 mkdir -p public/js
-./bin/rollup.js client/index.js | browserify - | uglifyjs > public/js/app.js
+./bin/rollup.js client/index.js | browserify - | uglifyjs -m -c > public/js/app.js
