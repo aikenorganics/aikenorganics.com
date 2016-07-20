@@ -40,7 +40,7 @@ app.use('/signup', require('./routes/signup'))
 app.get('/', (req, res) => res.render('index'))
 
 // Learn
-app.get('/learn', (req, res) => res.render('learn/index'))
+app.get('/learn', (req, res) => res.react())
 
 // 404
 app.get('*', (req, res) => res.notfound())

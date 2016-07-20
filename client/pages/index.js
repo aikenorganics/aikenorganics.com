@@ -14,8 +14,16 @@ const update = () => render(<Routes {...store.getState()}/>, root)
 store.subscribe(update)
 
 // Navigate on popstate.
+let hashChanged
 window.addEventListener('popstate', () => {
-  navigate(window.location.href, {push: false})
+  hashChanged = false
+  setTimeout(() => {
+    if (!hashChanged) navigate(window.location.href, {push: false})
+  }, 0)
+})
+
+window.addEventListener('hashchange', () => {
+  hashChanged = true
 })
 
 // Kick the tires
