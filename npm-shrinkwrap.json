@@ -2438,9 +2438,9 @@
       "resolved": "https://registry.npmjs.org/module-deps/-/module-deps-4.0.7.tgz"
     },
     "moment": {
-      "version": "2.13.0",
+      "version": "2.14.1",
       "from": "moment@latest",
-      "resolved": "https://registry.npmjs.org/moment/-/moment-2.13.0.tgz"
+      "resolved": "https://registry.npmjs.org/moment/-/moment-2.14.1.tgz"
     },
     "ms": {
       "version": "0.7.1",
