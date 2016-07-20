@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from '../link'
 
 export default () => {
   return <main className='container'>
@@ -82,7 +83,7 @@ export default () => {
 
           <a id='how-do-i-join' className='anchor'></a>
           <h2>How do I join?</h2>
-          <p>Fill out the form on the <a href='/signup'>sign up</a> page and begin shopping!</p>
+          <p>Fill out the form on the <Link href='/signup'>sign up</Link> page and begin shopping!</p>
 
           <a id='membership-fees' className='anchor'></a>
           <h2>Are there membership fees?</h2>

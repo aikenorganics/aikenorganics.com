@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from './link'
 import assets from 'ozymandias/assets'
 
 export default () => {
@@ -14,9 +15,9 @@ export default () => {
           </strong>
         </p>
         <p>
-          <a href='/products' className='btn btn-success btn-lg' role='button'>
+          <Link href='/products' className='btn btn-success btn-lg' role='button'>
             Start Shopping
-          </a>
+          </Link>
         </p>
       </div>
     </div>
@@ -62,9 +63,9 @@ export default () => {
         <div className='row'>
           <h2>Visit the Market</h2>
           <p>
-            <a href='/products' className='btn btn-success btn-lg' role='button'>
+            <Link href='/products' className='btn btn-success btn-lg' role='button'>
               View Products
-            </a>
+            </Link>
           </p>
         </div>
       </div>

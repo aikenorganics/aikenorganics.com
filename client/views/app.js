@@ -1,5 +1,6 @@
 import React from 'react'
 import Nav from './nav'
+import Link from './link'
 import Footer from './footer'
 import Signin from './signin/index'
 import assets from 'ozymandias/assets/index'
@@ -20,7 +21,7 @@ const main = (props) => {
           ? <div>
             <h1 className='text-center'>Uh oh! Looks like you donʼt have access to this page.</h1>
             <p className='text-center'>
-              Go back to the <a href='/'>home page</a>?
+              Go back to the <Link href='/'>home page</Link>?
             </p>
           </div>
           : <div>
@@ -36,7 +37,7 @@ const main = (props) => {
           <img src={assets.path('img/logo-small.png')}/>
         </h1>
         <h1>Whoops! That page doesnʼt exist.</h1>
-        <p>Go back to the <a href='/'>home page</a>?</p>
+        <p>Go back to the <Link href='/'>home page</Link>?</p>
       </main>
 
     case 500:
@@ -45,7 +46,7 @@ const main = (props) => {
           <img src={assets.path('img/logo-small.png')}/>
         </h1>
         <h1>Whoops! Something went wrong!</h1>
-        <p>Go back to the <a href='/'>home page</a>?</p>
+        <p>Go back to the <Link href='/'>home page</Link>?</p>
       </main>
 
     default:

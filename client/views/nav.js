@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from './link'
 import Message from './message'
 
 const User = ({currentUser}) => {
@@ -16,9 +17,9 @@ const User = ({currentUser}) => {
         {name ? <span>{name}<br/></span> : ''}
         {email}
       </li>
-      {is_admin ? <li><a href='/admin/users'>Admin</a></li> : ''}
+      {is_admin ? <li><Link href='/admin/users'>Admin</Link></li> : ''}
       <li>
-        <a href='/settings'>Settings</a>
+        <Link href='/settings'>Settings</Link>
       </li>
       <li>
         <a href='/auth/signout'>Sign Out</a>
@@ -40,27 +41,27 @@ export default (props) => {
           <span className='icon-bar'></span>
           <span className='icon-bar'></span>
         </button>
-        <a className='navbar-brand' href='/'>
+        <Link className='navbar-brand' href='/'>
           <strong>Aiken Organics</strong>
-        </a>
+        </Link>
       </div>
       <div className='collapse navbar-collapse' id='navbar-collapse'>
         <ul className='nav navbar-nav'>
           <li>
-            <a href='/'>Home</a>
+            <Link href='/'>Home</Link>
           </li>
           <li>
-            <a href='/#about'>About</a>
+            <Link href='/#about'>About</Link>
           </li>
           <li>
-            <a href='/learn'>Learn More</a>
+            <Link href='/learn'>Learn More</Link>
           </li>
           <li>
-            <a href='/products'>Market</a>
+            <Link href='/products'>Market</Link>
           </li>
           <User currentUser={currentUser}/>
-          {currentUser ? null : <li><a href='/signin'>Sign In</a></li>}
-          {currentUser ? null : <li><a href='/signup'>Sign Up</a></li>}
+          {currentUser ? null : <li><Link href='/signin'>Sign In</Link></li>}
+          {currentUser ? null : <li><Link href='/signup'>Sign Up</Link></li>}
         </ul>
       </div>
     </div>
