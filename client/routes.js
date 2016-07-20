@@ -2,7 +2,7 @@ import React from 'react'
 import Router, {Route} from './router'
 
 import App from './views/app'
-import Nav from './views/nav'
+import SubNav from './views/sub-nav'
 import AdminNav from './views/admin/nav'
 
 import CurrentOrder from './views/orders/current'
@@ -85,7 +85,7 @@ export default (state) => {
         <Route path='users/emails' Component={Emails}/>
         <Route path='users/:user_id/edit' Component={EditUser}/>
       </Route>
-      <Route path='/' Component={Nav}>
+      <Route path='/' Component={SubNav}>
         <Route path='cart' Component={Cart}/>
         <Route path='growers' Component={Growers}/>
         <Route path='growers/new' Component={NewGrower}/>
