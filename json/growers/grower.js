@@ -10,8 +10,6 @@ module.exports = (set, grower) => {
     'email',
     'active',
     'location',
-    'image_updated_at',
-    'image_ext',
     'smallImage',
     'mediumImage'
   )

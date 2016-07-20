@@ -10,8 +10,6 @@ module.exports = (set, product) => {
     'name',
     'supply',
     'unit',
-    'image_updated_at',
-    'image_ext',
     'reserved',
     'active',
     'grower_id',

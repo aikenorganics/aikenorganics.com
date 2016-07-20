@@ -10,8 +10,6 @@ module.exports = (set, user) => {
     'first',
     'phone',
     'is_admin',
-    'image_updated_at',
-    'image_ext',
     'member_until',
     'stripe_id',
     'card_brand',
