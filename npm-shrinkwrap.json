@@ -3470,9 +3470,9 @@
       "resolved": "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-1.0.4.tgz"
     },
     "stripe": {
-      "version": "4.7.0",
+      "version": "4.9.0",
       "from": "stripe@latest",
-      "resolved": "https://registry.npmjs.org/stripe/-/stripe-4.7.0.tgz",
+      "resolved": "https://registry.npmjs.org/stripe/-/stripe-4.9.0.tgz",
       "dependencies": {
         "lodash": {
           "version": "4.13.1",
