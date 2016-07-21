@@ -34,7 +34,7 @@ export default class Index extends Component {
   }
 
   render () {
-    const {busy, currentUser, errors} = this.props
+    const {busy, currentUser, errors, stripeKey} = this.props
     const {stripe_id, card_brand, card_last4} = currentUser
     const {first, last, phone, street, city, state, zip} = this.state
 
@@ -88,7 +88,7 @@ export default class Index extends Component {
           : <span>There is currently no card associated with your account.</span>
         }
       </p>
-      <Billing busy={busy} user={currentUser}/>
+      <Billing busy={busy} user={currentUser} stripeKey={stripeKey}/>
     </div>
   }
 

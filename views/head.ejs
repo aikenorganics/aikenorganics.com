@@ -6,7 +6,6 @@
 <link rel='shortcut icon' href='<%= assets.path('favicon.ico') %>'>
 <% include analytics %>
 <%- json('state', locals.state || {}) %>
-<%- json('stripe', {key: process.env.STRIPE_PK}) %>
 <%- json('bugsnag', {
   apiKey: 'fbe45b981d9d62f9c26e2ec78d469d17',
   releaseStage: process.env.NODE_ENV,

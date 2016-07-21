@@ -27,11 +27,11 @@ export default class Billing extends Component {
   }
 
   open () {
-    const {user} = this.props
+    const {user, stripeKey} = this.props
     window.StripeCheckout.configure({
       allowRememberMe: false,
       email: user.email,
-      key: JSON.parse(document.getElementById('stripe').innerHTML).key,
+      key: stripeKey,
       panelLabel: 'Save',
       token: (token) => updateCard(user.id, token.id)
     }).open({

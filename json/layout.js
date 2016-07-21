@@ -7,7 +7,8 @@ module.exports = (set, {req: {canEdit, cart, market, user}}) => {
   set({
     busy: false,
     canEdit: canEdit,
-    cart: cart.cart
+    cart: cart.cart,
+    stripeKey: process.env.STRIPE_PK
   })
   if (user) set('currentUser', user, userJson)
   if (market) set('market', market, marketJson)
