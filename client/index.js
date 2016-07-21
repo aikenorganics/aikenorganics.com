@@ -1,9 +1,12 @@
-import './error-tracking'
+import 'bugsnag-js'
 import React from 'react'
 import {render} from 'react-dom'
 import store from './store'
 import Routes from './routes'
 import {navigate} from './actions/index'
+
+// Bugs!
+Object.assign(window.Bugsnag, store.getState().bugsnag)
 
 // Bootstrap relies on window.jQuery
 window.jQuery = require('jquery')

@@ -24,6 +24,7 @@ import {REPLACE} from '../actions/index'
 const pass = (state = null) => state
 
 const reducer = combineReducers({
+  bugsnag: pass,
   busy,
   canEdit: pass,
   cart,
@@ -56,6 +57,7 @@ const reducer = combineReducers({
   search: pass,
   status: pass,
   statusCode: pass,
+  stripeKey: pass,
   token: pass,
   url: pass,
   user,
