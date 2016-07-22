@@ -149,3 +149,12 @@ test('Updating a missing order returns a 404', (t) => {
     .end(t.end)
   })
 })
+
+test('GET /orders/previous', (t) => {
+  t.signIn('admin@example.com').then(() => {
+    t.agent
+    .get('/orders/previous')
+    .expect(200)
+    .end(t.end)
+  })
+})

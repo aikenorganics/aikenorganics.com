@@ -5,7 +5,9 @@ import App from './views/app'
 import SubNav from './views/sub-nav'
 import AdminNav from './views/admin/nav'
 
+import OrdersNav from './views/orders/nav'
 import CurrentOrder from './views/orders/current'
+import PreviousOrders from './views/orders/previous'
 
 import Cart from './views/cart/index'
 
@@ -94,7 +96,10 @@ export default (state) => {
         <Route path='growers/:grower_id/orders' Component={GrowerOrders}/>
         <Route path='growers/:grower_id/products' Component={GrowerProducts}/>
         <Route path='growers/:grower_id/products/new' Component={NewProduct}/>
-        <Route path='orders/current' Component={CurrentOrder}/>
+        <Route path='orders' Component={OrdersNav}>
+          <Route path='/current' Component={CurrentOrder}/>
+          <Route path='/previous' Component={PreviousOrders}/>
+        </Route>
         <Route path='products' Component={Products}/>
         <Route path='products/:product_id' Component={Product}/>
         <Route path='products/:product_id/edit' Component={EditProduct}/>

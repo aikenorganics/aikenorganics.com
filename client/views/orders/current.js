@@ -6,9 +6,9 @@ import {cancelOrder} from '../../actions/index'
 export default ({busy, market: {open}, locations, order, productOrders, currentUser}) => {
   if (!order) {
     return <div>
-      <p className='text-center'>
-        You havenʼt placed an order yet.
-      </p>
+      <h2 className='text-center'>
+        You havenʼt placed an order this week.
+      </h2>
     </div>
   }
 
@@ -25,7 +25,6 @@ export default ({busy, market: {open}, locations, order, productOrders, currentU
       </button>
       : ''
     }
-    <h1>Current Order</h1>
     <h3>
       {location
         ? `Pickup Location: ${location.name}`

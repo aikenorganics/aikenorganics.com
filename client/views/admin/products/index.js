@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from '../../link'
+import Pagination from '../../pagination'
 import Search from '../../search'
-import {params} from '../../../url'
 
 export default ({more, oversold, page, products, search, url}) => {
   return <div>
@@ -76,17 +76,6 @@ export default ({more, oversold, page, products, search, url}) => {
       </tbody>
     </table>
     <hr/>
-    {more
-      ? <Link href={params(url, {page: page + 1})} className='pull-right'>
-        Next Page →
-      </Link>
-      : ''
-    }
-    {page > 1
-      ? <Link href={params(url, {page: page - 1})}>
-        ← Previous Page
-      </Link>
-      : ''
-    }
+    <Pagination more={more} page={page} url={url}/>
   </div>
 }

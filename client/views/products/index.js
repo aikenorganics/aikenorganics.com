@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from '../link'
+import Pagination from '../pagination'
 import Search from '../search'
 import Product from './product'
-import {params} from '../../url'
 import {navigate} from '../../actions/index'
 
 export default ({busy, cart, category_id, categories, page, products, market: {open}, more, search, url, currentUser}) => {
@@ -41,18 +41,7 @@ export default ({busy, cart, category_id, categories, page, products, market: {o
         })}
       </div>
       <hr/>
-      {more
-        ? <Link href={params(url, {page: page + 1})} className='pull-right'>
-          Next Page →
-        </Link>
-        : ''
-      }
-      {page > 1
-        ? <Link href={params(url, {page: page - 1})}>
-          ← Previous Page
-        </Link>
-        : ''
-      }
+      <Pagination more={more} page={page} url={url}/>
     </div>
   </div>
 }

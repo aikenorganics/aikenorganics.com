@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from '../../link'
+import Pagination from '../../pagination'
 import Row from './row'
 import Order from './order'
 import {navigate} from '../../../actions/index'
@@ -92,17 +93,6 @@ export default ({full, location_id, locations, more, orders, page, product, prod
       </table>
     }
     <hr/>
-    {more
-      ? <Link href={params(url, {page: page + 1})} className='pull-right'>
-        Next Page →
-      </Link>
-      : ''
-    }
-    {page > 1
-      ? <Link href={params(url, {page: page - 1})}>
-        ← Previous Page
-      </Link>
-      : ''
-    }
+    <Pagination more={more} page={page} url={url}/>
   </div>
 }

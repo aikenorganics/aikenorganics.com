@@ -24,6 +24,19 @@ router.get('/current', (req, res) => {
   }).catch(res.error)
 })
 
+// Previous
+router.get('/previous', (req, res) => {
+  const page = res.locals.page = +(req.query.page || 1)
+
+  db.Order
+  .include('location', {productOrders: 'product'})
+  .where({status: 'complete', user_id: req.user.id})
+  .paginate(page, 10)
+  .then((orders) => {
+    res.react(json.previous, {orders})
+  }).catch(res.error)
+})
+
 // Update
 router.post('/:order_id', (req, res) => {
   // You can only update when the market is open.

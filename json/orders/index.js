@@ -15,3 +15,11 @@ exports.current = (set, {locations, order}) => {
     set('productOrders', order.productOrders, productOrderJson)
   }
 }
+
+exports.previous = (set, {orders, page}) => {
+  set({page})
+  set(orders, 'more')
+  set('orders', orders, orderJson, (set, order) => {
+    set('productOrders', order.productOrders, productOrderJson)
+  })
+}

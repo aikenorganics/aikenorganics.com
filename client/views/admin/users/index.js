@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import Search from '../../search'
 import Link from '../../link'
-import {params} from '../../../url'
+import Pagination from '../../pagination'
 
 export default ({more, page, search, url, users}) => {
   return <div>
@@ -54,17 +54,6 @@ export default ({more, page, search, url, users}) => {
       </tbody>
     </table>
     <hr/>
-    {more
-      ? <Link href={params(url, {page: page + 1})} className='pull-right'>
-        Next Page →
-      </Link>
-      : ''
-    }
-    {page > 1
-      ? <Link href={params(url, {page: page - 1})}>
-        ← Previous Page
-      </Link>
-      : ''
-    }
+    <Pagination more={more} page={page} url={url}/>
   </div>
 }
