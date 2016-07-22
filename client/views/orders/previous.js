@@ -2,10 +2,11 @@ import React from 'react'
 import Link from '../link'
 import Pagination from '../pagination'
 
-export default ({more, orders, page, url}) => {
+export default ({currentUser, more, orders, page, url}) => {
   return <div>
-    {orders.map(({currentUser, location, productOrders, total}) => {
-      return <div>
+    {orders.map(({id, location, productOrders, total}) => {
+      return <div key={id}>
+        <h2>Order #{id}</h2>
         <h3>
           {location
             ? `Pickup Location: ${location.name}`
