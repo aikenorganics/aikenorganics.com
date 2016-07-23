@@ -9,6 +9,7 @@ const app = module.exports = ozymandias()
 
 // Some settings.
 app.set('component', require('./client/routes').default)
+app.set('layout', require('./views/layout'))
 app.set('layout.json', require('./json/layout'))
 
 // Locals

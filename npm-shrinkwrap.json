@@ -2582,9 +2582,9 @@
       "resolved": "https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.1.tgz"
     },
     "ozymandias": {
-      "version": "0.79.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#667d646b857b3a017ebdbb899511716ea0de5a3e",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#667d646b857b3a017ebdbb899511716ea0de5a3e",
+      "version": "0.81.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#6520e29b5f48f29286989aa35406eca88f2cb419",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#6520e29b5f48f29286989aa35406eca88f2cb419",
       "dependencies": {
         "bl": {
           "version": "1.1.2",
@@ -2605,11 +2605,6 @@
           "version": "6.1.0",
           "from": "qs@>=6.1.0 <6.2.0",
           "resolved": "https://registry.npmjs.org/qs/-/qs-6.1.0.tgz"
-        },
-        "remora": {
-          "version": "3.1.0",
-          "from": "git://github.com/braddunbar/remora.git#e971724536e2296883ac62d8bf2c3e1da3f53a95",
-          "resolved": "git://github.com/braddunbar/remora.git#e971724536e2296883ac62d8bf2c3e1da3f53a95"
         },
         "request": {
           "version": "2.72.0",
@@ -3102,6 +3097,11 @@
       "version": "0.1.5",
       "from": "regjsparser@>=0.1.4 <0.2.0",
       "resolved": "https://registry.npmjs.org/regjsparser/-/regjsparser-0.1.5.tgz"
+    },
+    "remora": {
+      "version": "3.1.0",
+      "from": "git://github.com/braddunbar/remora.git#e971724536e2296883ac62d8bf2c3e1da3f53a95",
+      "resolved": "git://github.com/braddunbar/remora.git#e971724536e2296883ac62d8bf2c3e1da3f53a95"
     },
     "repeat-element": {
       "version": "1.1.2",
