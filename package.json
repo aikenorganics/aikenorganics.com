@@ -45,7 +45,7 @@
     "marked": "0.3.5",
     "moment": "2.14.1",
     "multer": "1.1.0",
-    "ozymandias": "github:braddunbar/ozymandias#v0.82.0",
+    "ozymandias": "github:braddunbar/ozymandias#v0.84.0",
     "postcss-cli": "2.5.1",
     "postcss-import": "8.1.0",
     "postcss-nested": "1.0.0",

@@ -1606,11 +1606,6 @@
       "from": "ee-first@1.1.1",
       "resolved": "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"
     },
-    "ejs": {
-      "version": "2.4.1",
-      "from": "ejs@2.4.1",
-      "resolved": "https://registry.npmjs.org/ejs/-/ejs-2.4.1.tgz"
-    },
     "elliptic": {
       "version": "6.3.1",
       "from": "elliptic@>=6.0.0 <7.0.0",
@@ -2582,9 +2577,9 @@
       "resolved": "https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.1.tgz"
     },
     "ozymandias": {
-      "version": "0.82.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#ec387b2354be32bfd314e098bf6c30e6b8c6a8de",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#ec387b2354be32bfd314e098bf6c30e6b8c6a8de",
+      "version": "0.84.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#53e4b7127ca9c028b36ed67e116a42b849d213ba",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#53e4b7127ca9c028b36ed67e116a42b849d213ba",
       "dependencies": {
         "bl": {
           "version": "1.1.2",
