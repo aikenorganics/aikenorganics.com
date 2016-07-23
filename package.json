@@ -60,9 +60,9 @@
   },
   "devDependencies": {
     "deep-freeze": "0.0.1",
-    "karma": "1.1.0",
+    "karma": "1.1.1",
     "karma-chrome-launcher": "1.0.1",
-    "karma-tap": "1.0.4",
+    "karma-tap": "2.0.1",
     "selenium-webdriver": "2.53.1",
     "standard": "6.0.8",
     "supertest": "braddunbar/supertest#ipv6",
