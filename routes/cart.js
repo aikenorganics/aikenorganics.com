@@ -2,6 +2,7 @@
 
 const db = require('../db')
 const json = require('../json/cart/index')
+const updateMail = require('../mail/orders/update')
 const router = module.exports = require('ozymandias').Router()
 
 router.use((req, res, next) => {
@@ -48,13 +49,13 @@ router.post('/checkout', (req, res) => {
     req.user.id,
     req.body.location_id,
     req.cart.ids.map((id) => [id, req.cart.cart[id]])
-  ]).then(() => {
-    return req.mail('mail/orders/update', {
+  ]).then(() => (
+    req.mail(updateMail, {
       to: [req.user.email],
       subject: 'Aiken Organics: Order Updated',
       url: `http://${req.get('host')}/orders/current`
     })
-  }).then(() => {
+  )).then(() => {
     req.cart.clear()
     res.json({})
   }).catch(res.error)

@@ -1,6 +1,7 @@
 'use strict'
 
 const db = require('../db')
+const forgotMail = require('../mail/forgot')
 const router = module.exports = require('ozymandias').Router()
 
 // Find User
@@ -27,13 +28,13 @@ router.post('/forgot', (req, res) => {
   db.Token.create({
     user_id: req.user.id,
     expires_at: expires_at
-  }).then((token) => {
-    return req.mail('mail/forgot', {
+  }).then((token) => (
+    req.mail(forgotMail, {
       to: [req.user.email],
       subject: `${process.env.NAME}: Password Reset`,
       url: `http://${req.get('host')}/signin/reset/${token.id}`
     })
-  }).then(() => {
+  )).then(() => {
     res.json(true)
   }).catch(res.error)
 })
