@@ -3028,9 +3028,9 @@
       "resolved": "https://registry.npmjs.org/rc/-/rc-1.1.6.tgz"
     },
     "react": {
-      "version": "15.2.0",
-      "from": "react@15.2.0",
-      "resolved": "https://registry.npmjs.org/react/-/react-15.2.0.tgz",
+      "version": "15.2.1",
+      "from": "react@latest",
+      "resolved": "https://registry.npmjs.org/react/-/react-15.2.1.tgz",
       "dependencies": {
         "object-assign": {
           "version": "4.1.0",
@@ -3040,9 +3040,9 @@
       }
     },
     "react-dom": {
-      "version": "15.2.0",
-      "from": "react-dom@15.2.0",
-      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-15.2.0.tgz"
+      "version": "15.2.1",
+      "from": "react-dom@latest",
+      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-15.2.1.tgz"
     },
     "read-cache": {
       "version": "1.0.0",
