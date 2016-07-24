@@ -1,3 +1,4 @@
+import assign from 'object-assign'
 import {UPDATE_GROWER} from '../actions/index'
 
 export default (state = null, action) => {
@@ -6,7 +7,7 @@ export default (state = null, action) => {
       if (!state) return state
       return state.map((grower) => {
         if (grower.id !== action.id) return grower
-        return Object.assign({}, grower, action.values)
+        return assign({}, grower, action.values)
       })
 
     default:

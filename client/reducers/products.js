@@ -1,3 +1,4 @@
+import assign from 'object-assign'
 import {UPDATE_PRODUCT} from '../actions/index'
 
 export default (state = null, action) => {
@@ -6,7 +7,7 @@ export default (state = null, action) => {
       if (!state) return state
       return state.map((product) => {
         if (product.id !== action.id) return product
-        return Object.assign({}, product, action.values)
+        return assign({}, product, action.values)
       })
 
     default:

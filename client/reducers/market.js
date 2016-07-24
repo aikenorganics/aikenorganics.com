@@ -1,9 +1,10 @@
+import assign from 'object-assign'
 import {UPDATE_MARKET} from '../actions/index'
 
 export default (state = null, action) => {
   switch (action.type) {
     case UPDATE_MARKET:
-      return Object.assign({}, state, action.values)
+      return assign({}, state, action.values)
 
     default:
       return state

@@ -1,3 +1,4 @@
+import assign from 'object-assign'
 import {
   ADD_PRODUCT_ORDER,
   REMOVE_PRODUCT_ORDER,
@@ -14,7 +15,7 @@ export default (state = null, action) => {
       if (!Array.isArray(state)) return state
       return state.map((productOrder) => {
         if (productOrder.id !== action.id) return productOrder
-        return Object.assign({}, productOrder, action.values)
+        return assign({}, productOrder, action.values)
       })
 
     case REMOVE_PRODUCT_ORDER:

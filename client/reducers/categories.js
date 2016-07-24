@@ -1,3 +1,4 @@
+import assign from 'object-assign'
 import {
   REMOVE_CATEGORY,
   UPDATE_CATEGORY
@@ -9,7 +10,7 @@ export default (state = null, action) => {
       if (!state) return state
       return state.map((category) => {
         if (category.id !== action.id) return category
-        return Object.assign({}, category, action.values)
+        return assign({}, category, action.values)
       })
 
     case REMOVE_CATEGORY:

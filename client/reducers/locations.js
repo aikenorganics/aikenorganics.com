@@ -1,3 +1,4 @@
+import assign from 'object-assign'
 import {
   REMOVE_LOCATION,
   UPDATE_LOCATION
@@ -9,7 +10,7 @@ export default (state = null, action) => {
       if (!state) return state
       return state.map((location) => {
         if (location.id !== action.id) return location
-        return Object.assign({}, location, action.values)
+        return assign({}, location, action.values)
       })
 
     case REMOVE_LOCATION:

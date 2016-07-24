@@ -1,3 +1,4 @@
+import assign from 'object-assign'
 import {
   CANCEL_ORDER,
   UPDATE_ORDER
@@ -11,7 +12,7 @@ export default (state = null, action) => {
 
     case UPDATE_ORDER:
       if (!state || state.id !== action.id) return state
-      const next = Object.assign({}, state, action.values)
+      const next = assign({}, state, action.values)
       if (next.location_id == null) delete next.location
       return next
 

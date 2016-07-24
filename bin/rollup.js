@@ -9,9 +9,7 @@ rollup({
   plugins: [
     babel({
       exclude: 'node_modules/**',
-      plugins: [
-        'transform-object-assign'
-      ],
+      plugins: [],
       presets: [
         'react',
         'es2015-rollup'
