@@ -29,7 +29,6 @@
   },
   "homepage": "https://github.com/aikenorganics/aikenorganics",
   "dependencies": {
-    "autoprefixer": "6.3.7",
     "bootstrap": "3.3.6",
     "browserify": "13.0.1",
     "bugsnag": "1.7.0",
