@@ -25,7 +25,7 @@ export default ({more, oversold, page, products, search, url}) => {
           </Link>
         </div>
       }
-      &nbsp;
+      <span> </span>
       <div style={{display: 'inline-block'}}>
         <Search url='/admin/products' value={search}/>
       </div>

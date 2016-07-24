@@ -32,7 +32,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
         </button>
         : ''
       }
-      &nbsp;
+      <span> </span>
       {status !== 'canceled'
         ? <button className='btn btn-danger'
           onClick={(e) => updateOrder(id, {status: 'canceled'})}>
@@ -40,7 +40,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
         </button>
         : ''
       }
-      &nbsp;
+      <span> </span>
       {status !== 'open'
         ? <button className='btn btn-info'
           onClick={(e) => updateOrder(id, {status: 'open'})}>
@@ -55,10 +55,10 @@ export default ({errors, locations, order, payments, products, productOrders}) =
     </h2>
     <h3>
       <Link href={`/admin/users/${user.id}/edit`}>{user.name}</Link>
-      &nbsp;
+      <span> </span>
       <small>
         {user.email}
-        &nbsp;—&nbsp;
+        <span> - </span>
         {moment(user.member_until).isSameOrAfter(new Date())
           ? `Member until ${moment(user.member_until).format('MM/DD/YYYY')}`
           : 'Not a Member'
@@ -85,7 +85,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
           return <tr key={id}>
             <td style={{whiteSpace: 'nowrap'}}>
               <Link href={`/products/${product.id}`}>{product.name}</Link>
-              &nbsp;
+              <span> </span>
               {product.oversold
                 ? <span className='label label-danger'>Oversold</span>
                 : ''

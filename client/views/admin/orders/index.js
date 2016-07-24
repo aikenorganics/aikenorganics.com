@@ -41,18 +41,14 @@ export default ({full, location_id, locations, more, orders, page, product, prod
           <input type='checkbox' checked={full} onChange={toggleFull}/>
           <span> Full</span>
         </label>
-      </div>
-      &nbsp;
-      <div className='btn-group'>
+      </div> <div className='btn-group'>
         {['open', 'complete', 'canceled'].map((name) => {
           return <label key={name} className={`btn ${~status.indexOf(name) ? 'btn-success' : 'btn-default'}`}>
             <input type='checkbox' checked={~status.indexOf(name)} onChange={(e) => toggleStatus(name)}/>
             <span> {name.slice(0, 1).toUpperCase() + name.slice(1)}</span>
           </label>
         })}
-      </div>
-      &nbsp;
-      <div className='form-group'>
+      </div> <div className='form-group'>
         <select className='form-control' style={{maxWidth: 300}} value={location_id} onChange={changeLocation}>
           <option value=''>All Locations</option>
           <option value='delivery'>Delivery</option>
@@ -60,9 +56,7 @@ export default ({full, location_id, locations, more, orders, page, product, prod
             return <option key={id} value={id}>{name}</option>
           })}
         </select>
-      </div>
-      &nbsp;
-      <div className='form-group'>
+      </div> <div className='form-group'>
         <select className='form-control' style={{maxWidth: 300}} onChange={changeProduct}>
           <option value=''>All Products</option>
           {products.map(({id, name}) => {

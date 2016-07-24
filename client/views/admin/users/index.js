@@ -12,7 +12,7 @@ export default ({more, page, search, url, users}) => {
     <div style={{display: 'inline-block'}}>
       <Search url='/admin/users' value={search}/>
     </div>
-    &nbsp;
+    <span> </span>
     <Link href='/admin/users/emails'>Email List</Link>
     <hr/>
     <table className='table'>

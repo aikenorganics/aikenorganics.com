@@ -8,7 +8,7 @@ const ozymandias = require('ozymandias')
 const app = module.exports = ozymandias()
 
 // Some settings.
-app.set('component', require('./client/routes').default)
+app.set('component', require('./client/component'))
 app.set('layout', require('./views/layout'))
 app.set('layout.json', require('./json/layout'))
 

@@ -16,8 +16,7 @@ export default ({busy, grower}) => {
       </button>
     }
     <h1>
-      {grower.name}&nbsp;
-      <small>
+      {grower.name} <small>
         {grower.active
           ? <span className='label label-primary'>Active</span>
           : <span className='label label-default'>Inactive</span>

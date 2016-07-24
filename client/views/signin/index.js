@@ -45,7 +45,7 @@ export default class Index extends Component {
           </div>
           <div className='panel-footer text-right'>
             <Link href='/signin/forgot'>Forgot Password</Link>
-            &nbsp;
+            <span> </span>
             <button className='btn btn-primary' disabled={busy}>
               Sign In
             </button>
