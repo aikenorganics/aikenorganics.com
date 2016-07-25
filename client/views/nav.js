@@ -13,7 +13,7 @@ export default ({currentUser}) => {
         <li><Link href='/products'>Market</Link></li>
         {currentUser ? <li><Link href='/settings'>Settings</Link></li> : null}
         {is_admin ? <li><Link href='/admin/users'>Admin</Link></li> : null}
-        {currentUser ? <li><a href='/auth/signout'>Sign Out</a></li> : null}
+        {currentUser ? <li><a id='signout' href='/auth/signout'>Sign Out</a></li> : null}
         {currentUser ? null : <li><Link href='/signin'>Sign In</Link></li>}
         {currentUser ? null : <li><Link href='/signup'>Sign Up</Link></li>}
       </ul>

@@ -8,12 +8,7 @@ test('sign in', (t) => {
   t.$('#email').sendKeys('admin@example.com')
   t.$('#password').sendKeys('password')
   t.$('#password').submit()
-  t.wait(() => t.present('#current-user'))
-  t.wait(() => (
-    t.$('#current-user').getInnerHtml().then((html) => (
-      /admin@example.com/.test(html)
-    ))
-  ))
+  t.wait(() => t.present('#signout'))
   .then(() => t.end())
   .catch(t.end)
 })
