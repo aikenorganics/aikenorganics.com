@@ -1,7 +1,13 @@
 #!/bin/sh -e
 
-./bin/compile-js
-./bin/compile-css
+convert public/img/emblem.png \
+    -resize 48x48 \
+    public/favicon.ico
 
-convert public/img/emblem.png -resize 48x48 public/favicon.ico
-convert public/img/emblem.png -resize 129x129 public/apple-touch-icon.png
+convert public/img/emblem.png \
+    -background white \
+    -flatten \
+    -resize 100x100 \
+    -gravity center \
+    -extent 129x129 \
+    public/apple-touch-icon.png
