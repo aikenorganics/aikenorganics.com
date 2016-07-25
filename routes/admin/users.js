@@ -15,17 +15,14 @@ router.get('/', (req, res) => {
   let users = db.User
 
   // Search
-  if (req.query.search) users = users.search(req.query.search)
+  const {search} = req.query
+  if (search) users = users.search(search)
 
   // Pagination
   const page = res.locals.page = +(req.query.page || 1)
 
   users.order('email').paginate(page, 100).then((users) => {
-    res.react(json.index, {
-      more: users.more,
-      page: page,
-      users: users
-    })
+    res.react(json.index, {page, search, users})
   }).catch(res.error)
 })
 

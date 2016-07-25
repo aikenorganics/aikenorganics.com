@@ -10,8 +10,8 @@ exports.edit = (set, {categories, product}) => {
   })
 }
 
-exports.index = (set, {categories, page, products}) => {
-  set({page})
+exports.index = (set, {categories, page, products, search}) => {
+  set({page, search})
   set(products, 'more')
   set('categories', categories, categoryJson)
   set('products', products, productJson)

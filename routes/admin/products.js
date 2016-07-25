@@ -14,9 +14,10 @@ router.get('/', (req, res) => {
   if (oversold) products.where('reserved > supply')
 
   // Search
-  if (req.query.search) products = products.search(req.query.search)
+  const {search} = req.query
+  if (search) products = products.search(search)
 
   products.order('name').paginate(page, 100).then((products) => {
-    res.react(json.index, {oversold, page, products})
+    res.react(json.index, {oversold, page, products, search})
   }).catch(res.error)
 })

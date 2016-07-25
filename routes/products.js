@@ -18,7 +18,8 @@ router.get('/', (req, res) => {
     .where({active: true, grower: {active: true}})
 
   // Search
-  if (req.query.search) products.search(req.query.search)
+  const {search} = req.query
+  if (search) products.search(search)
 
   // Category
   if (req.query.category_id) {
@@ -41,7 +42,7 @@ router.get('/', (req, res) => {
       where category_id = categories.id and products.active and growers.active
     )`).order('position').all()
   ]).then(([products, categories]) => {
-    res.react(json.index, {page, products, categories})
+    res.react(json.index, {categories, page, products, search})
   }).catch(res.error)
 })
 
