@@ -9,10 +9,6 @@ import {navigate} from './actions/index'
 // Bugs!
 assign(window.Bugsnag, store.getState().bugsnag)
 
-// Bootstrap relies on window.jQuery
-window.jQuery = require('jquery')
-require('bootstrap')
-
 // The element to render components into.
 const root = document.getElementById('root')
 
