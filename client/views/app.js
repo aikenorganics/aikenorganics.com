@@ -3,6 +3,7 @@ import Nav from './nav'
 import Link from './link'
 import Footer from './footer'
 import Signin from './signin/index'
+import Message from './message'
 import assets from 'ozymandias/assets/index'
 
 const main = (props) => {
@@ -55,8 +56,11 @@ const main = (props) => {
 }
 
 export default (props) => {
+  const {message} = props
+
   return <div>
     <Nav {...props}/>
+    <Message message={message}/>
     {main(props)}
     <Footer {...props}/>
   </div>

@@ -1,12 +1,10 @@
 import React from 'react'
 import Link from './link'
-import Message from './message'
 
-export default ({currentUser, message}) => {
+export default ({currentUser}) => {
   const {is_admin} = currentUser || {}
 
   return <nav className='navbar navbar-inverse navbar-fixed-top'>
-    <Message message={message}/>
     <div className='container'>
       <ul className='nav navbar-nav'>
         <li><Link href='/'>Home</Link></li>
