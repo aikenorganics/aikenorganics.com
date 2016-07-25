@@ -3,6 +3,10 @@
 # Clean up some lint
 ./bin/lint
 
+# Compile Assets
+./bin/compile-css
+./bin/compile-js
+
 # Reset
 ./bin/reset
 
