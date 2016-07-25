@@ -1,5 +1,11 @@
 #!/bin/bash -e
 
 mkdir -p public/js
+
 ./bin/rollup.js client/routes.js > client/component.js
-./bin/rollup.js client/index.js | browserify - | uglifyjs -m -c > public/js/app.js
+
+if [ "$NODE_ENV" = "production" ]; then
+  ./bin/rollup.js client/index.js | browserify - | uglifyjs -m -c warnings=false > public/js/app.js
+else
+  ./bin/rollup.js client/index.js | browserify - > public/js/app.js
+fi
