@@ -26,6 +26,7 @@ module.exports = ({json, state}, content) => html`
   <title>Aiken Organics</title>
   <link rel='stylesheet' href='${assets.path('css/app.css')}'>
   <link rel='shortcut icon' href='${assets.path('favicon.ico')}'>
+  <link rel='apple-touch-icon' href='${assets.path('apple-touch-icon.png')}'>
   ${raw(analytics())}
   ${raw(json('state', state || {}))}
 </head>

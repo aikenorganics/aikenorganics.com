@@ -4,3 +4,4 @@
 ./bin/compile-css
 
 convert public/img/emblem.png -resize 48x48 public/favicon.ico
+convert public/img/emblem.png -resize 129x129 public/apple-touch-icon.png
