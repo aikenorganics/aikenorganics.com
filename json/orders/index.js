@@ -10,7 +10,7 @@ exports.current = (set, {locations, order}) => {
   })
   if (order) {
     set('order', order, orderJson, (set, order) => {
-      set('location', order.location, locationJson)
+      if (order.location) set('location', order.location, locationJson)
     })
     set('productOrders', order.productOrders, productOrderJson)
   }
