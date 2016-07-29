@@ -6,10 +6,9 @@ import {imageProduct, updateProduct} from '../../actions/index'
 export default ({busy, categories, canEdit, errors, path, product}) => {
   const {active, id, grower, mediumImage} = product
 
-  const upload = (e) => {
-    imageProduct(id, e.target.files[0])
-    .then(() => { e.target.value = '' })
-    .catch((e) => {})
+  const upload = ({target}) => {
+    imageProduct(id, target.files[0]).catch(() => {})
+    target.value = ''
   }
 
   return <div className='row'>
@@ -27,11 +26,11 @@ export default ({busy, categories, canEdit, errors, path, product}) => {
       <div className='pull-right'>
         {active
           ? <button className='btn btn-default btn-sm' disabled={busy}
-            onClick={() => updateProduct(id, {active: false}).catch((e) => {})}>
+            onClick={() => updateProduct(id, {active: false}).catch(() => {})}>
             Deactivate
           </button>
           : <button className='btn btn-success btn-sm' disabled={busy}
-            onClick={() => updateProduct(id, {active: true}).catch((e) => {})}>
+            onClick={() => updateProduct(id, {active: true}).catch(() => {})}>
             Activate
           </button>
         }

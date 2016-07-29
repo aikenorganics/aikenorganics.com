@@ -2,10 +2,9 @@ import React from 'react'
 import {imageUser} from '../../../actions/index'
 
 export default ({busy, user: {id, mediumImage}}) => {
-  const upload = (e) => {
-    imageUser(id, e.target.files[0])
-    .then(() => { e.target.value = '' })
-    .catch((e) => {})
+  const upload = ({target}) => {
+    imageUser(id, target.files[0]).catch(() => {})
+    target.value = ''
   }
 
   return <div>
