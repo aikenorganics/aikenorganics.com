@@ -1555,9 +1555,9 @@
       "resolved": "https://registry.npmjs.org/osenv/-/osenv-0.1.3.tgz"
     },
     "ozymandias": {
-      "version": "0.86.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#9cf9f11db73eafe496c1057495375230accb438d",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#9cf9f11db73eafe496c1057495375230accb438d",
+      "version": "0.87.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#e7f446d8c7ee83c9441d781fcb2513ad430571fd",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#e7f446d8c7ee83c9441d781fcb2513ad430571fd",
       "dependencies": {
         "bl": {
           "version": "1.1.2",
@@ -1578,11 +1578,6 @@
           "version": "6.1.0",
           "from": "qs@>=6.1.0 <6.2.0",
           "resolved": "https://registry.npmjs.org/qs/-/qs-6.1.0.tgz"
-        },
-        "remora": {
-          "version": "3.1.0",
-          "from": "git://github.com/braddunbar/remora.git#e971724536e2296883ac62d8bf2c3e1da3f53a95",
-          "resolved": "git://github.com/braddunbar/remora.git#e971724536e2296883ac62d8bf2c3e1da3f53a95"
         },
         "request": {
           "version": "2.72.0",
@@ -1844,6 +1839,11 @@
           "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.13.1.tgz"
         }
       }
+    },
+    "remora": {
+      "version": "3.1.0",
+      "from": "git://github.com/braddunbar/remora.git#e971724536e2296883ac62d8bf2c3e1da3f53a95",
+      "resolved": "git://github.com/braddunbar/remora.git#e971724536e2296883ac62d8bf2c3e1da3f53a95"
     },
     "repeat-string": {
       "version": "1.5.2",
