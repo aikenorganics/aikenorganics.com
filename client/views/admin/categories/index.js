@@ -9,10 +9,7 @@ export default ({busy, categories}) => {
 
   return <div>
     <h1>
-      Categories&nbsp;
-      <Link href='/admin/categories/new' className='btn btn-default btn-xs'>
-        New Category
-      </Link>
+      Categories <Link href='/admin/categories/new' className='btn btn-default btn-sm'>New Category</Link>
     </h1>
     <hr/>
     <table className='table'>

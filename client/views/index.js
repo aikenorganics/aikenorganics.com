@@ -32,7 +32,7 @@ export default () => {
         <div className='col-md-6 text-center'>
           <img src={assets.path('img/pen-and-pad-square.jpg')} className='img-circle'/>
           <h2>2. Customers place their order</h2>
-          <p>Sunday 8am - Wednesday 12pm</p>
+          <p>Sunday 8am — Wednesday 12pm</p>
         </div>
       </div>
       <div className='row'>
@@ -44,15 +44,14 @@ export default () => {
           <img src={assets.path('img/food-basket-square.jpg')} className='img-circle'/>
           <h2>4. Customer picks up order</h2>
           <p>
-            Aiken Yoga, Thursday 4:00pm-6:30pm
+            Aiken Yoga, Thursday 4:00pm — 6:30pm
           </p>
           <p>
             116 B Pendleton St SW<br/>
             Aiken, SC 29801
           </p>
           <p>
-            <span className='label label-info'>NOW AVAILABLE</span>
-            &nbsp;Home/Office Delivery
+            <span className='label label-info'>NOW AVAILABLE</span> Home/Office Delivery
           </p>
         </div>
       </div>

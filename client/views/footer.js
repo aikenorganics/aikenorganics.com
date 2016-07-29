@@ -22,20 +22,17 @@ export default () => {
           <h2>Social</h2>
           <p>
             <a href='https://twitter.com/aikenorganics'>
-              <img src={assets.path('img/twitter-32.png')}/>
-              &nbsp;@aikenorganics
+              <img src={assets.path('img/twitter-32.png')}/> @aikenorganics
             </a>
           </p>
           <p>
             <a href='https://www.facebook.com/aikenorganics'>
-              <img src={assets.path('img/facebook-3-32.png')}/>
-              &nbsp;@aikenorganics
+              <img src={assets.path('img/facebook-3-32.png')}/> @aikenorganics
             </a>
           </p>
           <p>
             <a href='https://instagram.com/aikenorganics'>
-              <img src={assets.path('img/instagram-32.png')}/>
-              &nbsp;@aikenorganics
+              <img src={assets.path('img/instagram-32.png')}/> @aikenorganics
             </a>
           </p>
         </div>
