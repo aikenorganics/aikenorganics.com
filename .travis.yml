@@ -1,0 +1,9 @@
+addons:
+  postgresql: "9.4"
+language: node_js
+node_js:
+  - "6"
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database aikenorganics_test;' -U postgres
