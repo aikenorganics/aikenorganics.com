@@ -83,11 +83,6 @@
       "from": "ap@>=0.2.0 <0.3.0",
       "resolved": "https://registry.npmjs.org/ap/-/ap-0.2.0.tgz"
     },
-    "append-field": {
-      "version": "0.1.0",
-      "from": "append-field@>=0.1.0 <0.2.0",
-      "resolved": "https://registry.npmjs.org/append-field/-/append-field-0.1.0.tgz"
-    },
     "are-we-there-yet": {
       "version": "1.0.5",
       "from": "are-we-there-yet@~1.0.0",
@@ -395,18 +390,6 @@
       "version": "2.0.0",
       "from": "builtin-status-codes@>=2.0.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/builtin-status-codes/-/builtin-status-codes-2.0.0.tgz"
-    },
-    "busboy": {
-      "version": "0.2.12",
-      "from": "busboy@>=0.2.11 <0.3.0",
-      "resolved": "https://registry.npmjs.org/busboy/-/busboy-0.2.12.tgz",
-      "dependencies": {
-        "readable-stream": {
-          "version": "1.1.13",
-          "from": "readable-stream@>=1.1.0 <1.2.0",
-          "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-1.1.13.tgz"
-        }
-      }
     },
     "bytes": {
       "version": "2.4.0",
@@ -1413,18 +1396,6 @@
       "from": "ms@0.7.1",
       "resolved": "https://registry.npmjs.org/ms/-/ms-0.7.1.tgz"
     },
-    "multer": {
-      "version": "1.1.0",
-      "from": "multer@1.1.0",
-      "resolved": "https://registry.npmjs.org/multer/-/multer-1.1.0.tgz",
-      "dependencies": {
-        "object-assign": {
-          "version": "3.0.0",
-          "from": "object-assign@>=3.0.0 <4.0.0",
-          "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-3.0.0.tgz"
-        }
-      }
-    },
     "nan": {
       "version": "2.3.5",
       "from": "nan@2.3.5",
@@ -2274,11 +2245,6 @@
       "version": "0.14.0",
       "from": "tweetnacl@>=0.13.0 <1.0.0",
       "resolved": "https://registry.npmjs.org/tweetnacl/-/tweetnacl-0.14.0.tgz"
-    },
-    "type-is": {
-      "version": "1.6.11",
-      "from": "type-is@>=1.6.4 <2.0.0",
-      "resolved": "https://registry.npmjs.org/type-is/-/type-is-1.6.11.tgz"
     },
     "typedarray": {
       "version": "0.0.6",

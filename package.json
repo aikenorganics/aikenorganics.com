@@ -35,7 +35,6 @@
     "es6-promise": "3.1.2",
     "marked": "0.3.5",
     "moment": "2.14.1",
-    "multer": "1.1.0",
     "node-sass": "3.8.0",
     "object-assign": "4.1.0",
     "ozymandias": "github:braddunbar/ozymandias#v0.89.0",
