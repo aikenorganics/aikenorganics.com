@@ -12,11 +12,12 @@
   },
   "scripts": {
     "build": "./bin/build",
-    "dump": "heroku local:run ./bin/dump",
+    "dump": "env $(cat .env | xargs) ./bin/dump",
     "postinstall": "./bin/postinstall",
     "start": "env $(cat .env | xargs) ./bin/start",
     "test": "env $(cat .testenv | xargs) ./bin/test",
-    "reset": "heroku local:run ./bin/reset"
+    "reset": "env $(cat .env | xargs) ./bin/reset",
+    "migrate": "env $(cat .env | xargs) ./bin/migrate"
   },
   "repository": {
     "type": "git",

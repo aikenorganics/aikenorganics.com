@@ -18,7 +18,6 @@ class Grower extends Model {
       'active',
       'location',
       'image_updated_at',
-      'image_ext',
       'description',
       'created_at',
       'updated_at'
@@ -76,7 +75,6 @@ class Grower extends Model {
       active: this.active,
       location: this.location,
       image_updated_at: this.image_updated_at,
-      image_ext: this.image_ext,
       description: this.description,
       smallImage: this.smallImage,
       mediumImage: this.mediumImage,
