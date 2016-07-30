@@ -2,7 +2,6 @@
 
 const db = require('../db')
 const json = require('../json/growers')
-const upload = require('multer')({dest: 'tmp/uploads'})
 const router = module.exports = require('ozymandias').Router()
 
 // Find
@@ -103,9 +102,9 @@ router.get('/:grower_id/products', (req, res) => {
   }).catch(res.error)
 })
 
-router.post('/:grower_id/image', upload.single('image'), (req, res) => {
+router.post('/:grower_id/image', (req, res) => {
   if (!req.canEdit) return res.unauthorized()
-  req.grower.uploadImage(req.file).then(() => {
+  req.grower.uploadImage(req).then(() => {
     res.json(req.grower)
   }).catch(res.error)
 })
