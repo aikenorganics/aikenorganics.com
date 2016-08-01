@@ -100,14 +100,14 @@ main, section {
 
 // Fix scrolling after turning the device.
 @media (orientation: portrait) {
-  .navbar {
-    -webkit-animation: scrollfix 1s;
+  .navbar-nav {
+    -webkit-animation: scrollfix .5s;
   }
-}
 
-@-webkit-keyframes scrollfix {
-  0% { overflow-x: visible; }
-  100% { overflow-x: auto; }
+  @-webkit-keyframes scrollfix {
+    0% { overflow-x: hidden; }
+    100% { overflow-x: auto; }
+  }
 }
 
 .footer {
