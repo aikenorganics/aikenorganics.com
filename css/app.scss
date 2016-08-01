@@ -99,6 +99,7 @@ main, section {
 }
 
 // Fix scrolling after turning the device.
+// http://stackoverflow.com/questions/23893973/webkit-overflow-scrolling-touch-orientation-change-issue
 @media (orientation: portrait) {
   .navbar {
     -webkit-animation: scrollfix .5s;
