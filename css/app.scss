@@ -98,6 +98,13 @@ main, section {
   }
 }
 
+// Fix scrolling after turning the device.
+@media (orientation: landscape) {
+  .navbar {
+    padding-left: 1px;
+  }
+}
+
 .footer {
   background-color: #222;
   color: #9d9d9d;
