@@ -100,7 +100,7 @@ main, section {
 
 // Fix scrolling after turning the device.
 @media (orientation: portrait) {
-  .navbar-nav {
+  .navbar {
     -webkit-animation: scrollfix .5s;
   }
 
