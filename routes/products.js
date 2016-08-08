@@ -66,7 +66,7 @@ router.post('/:product_id', (req, res) => {
   req.product.update(req.permit(
     'active', 'category_id', 'cost', 'description', 'name', 'supply', 'unit'
   )).then(() => {
-    res.json(req.product)
+    res.json(json.update)
   }).catch(res.error)
 })
 

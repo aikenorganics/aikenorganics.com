@@ -205,8 +205,8 @@ export const createProduct = (id, values) => {
 
 export const updateProduct = (id, values) => {
   busy()
-  return POST(`/products/${id}`, {body: values}).then(() => {
-    store.dispatch({type: UPDATE_PRODUCT, id, values})
+  return POST(`/products/${id}`, {body: values}).then(({product}) => {
+    store.dispatch({type: UPDATE_PRODUCT, id, values: product})
     done()
   }).catch(done)
 }
