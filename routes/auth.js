@@ -35,7 +35,7 @@ router.post('/forgot', (req, res) => {
       url: `http://${req.get('host')}/signin/reset/${token.id}`
     })
   )).then(() => {
-    res.json(true)
+    res.json({})
   }).catch(res.error)
 })
 
@@ -56,7 +56,7 @@ router.post('/reset/:token_id', (req, res) => {
 
     return token.user.update(req.permit('password')).then(() => {
       req.signIn(token.user)
-      res.json(true)
+      res.json({})
     })
   }).catch(res.error)
 })
@@ -81,7 +81,7 @@ router.post('/signin', (req, res) => {
   req.user.authenticate(req.body.password).then((match) => {
     if (match) {
       req.signIn(req.user)
-      res.json(true)
+      res.json({})
       return
     }
 

@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
 // Delete
 router.delete('/:product_order_id', (req, res) => {
   req.productOrder.destroy().then(() => {
-    res.json(true)
+    res.json({})
   }).catch(res.error)
 })
 

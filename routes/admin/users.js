@@ -54,7 +54,7 @@ router.post('/:user_id', (req, res) => {
   req._user.update(req.permit(
     'email', 'first', 'last', 'phone', 'is_admin', 'member_until'
   )).then(() => {
-    res.json(true)
+    res.json({})
   }).catch(res.error)
 })
 
@@ -67,5 +67,5 @@ router.post('/:user_id/image', (req, res) => {
 
 // Delete
 router.delete('/:user_id', (req, res) => {
-  req._user.destroy().then(() => res.json(true)).catch(res.error)
+  req._user.destroy().then(() => res.json({})).catch(res.error)
 })

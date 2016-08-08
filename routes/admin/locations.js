@@ -25,18 +25,18 @@ router.get('/:location_id/edit', (req, res) => {
 // Create
 router.post('/', (req, res) => {
   db.Location.create(req.permit('name')).then(() => {
-    res.json(true)
+    res.json({})
   }).catch(res.error)
 })
 
 // Update
 router.post('/:location_id', (req, res) => {
   req.location.update(req.permit('name', 'active')).then(() => {
-    res.json(true)
+    res.json({})
   }).catch(res.error)
 })
 
 // Destroy
 router.delete('/:location_id', (req, res) => {
-  req.location.destroy().then(() => res.json(true)).catch(res.error)
+  req.location.destroy().then(() => res.json({})).catch(res.error)
 })

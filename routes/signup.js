@@ -30,6 +30,6 @@ router.post('/', (req, res) => {
     'first', 'last', 'phone', 'password', 'email'
   )).then((user) => {
     req.signIn(user)
-    res.json(true)
+    res.json({})
   }).catch(res.error)
 })

@@ -55,7 +55,7 @@ router.post('/:grower_id', (req, res) => {
   req.grower.update(req.permit(
     'active', 'name', 'email', 'url', 'location', 'description'
   )).then(() => {
-    res.json(true)
+    res.json({})
   }).catch(res.error)
 })
 
