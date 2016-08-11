@@ -105,8 +105,8 @@ export const signup = (values) => {
 
 export const updateMarket = (values) => {
   busy()
-  return POST('/admin/market', {body: values}).then((values) => {
-    store.dispatch({type: UPDATE_MARKET, values})
+  return POST('/admin/market', {body: values}).then(({market}) => {
+    store.dispatch({type: UPDATE_MARKET, values: market})
     done()
   }).catch(done)
 }
@@ -191,8 +191,8 @@ export const updateOrder = (id, values) => {
 
 export const createPayment = (id, amount) => {
   busy()
-  return POST(`/admin/orders/${id}/charge`, {body: {amount}}).then((values) => {
-    store.dispatch({type: ADD_PAYMENT, values})
+  return POST(`/admin/orders/${id}/charge`, {body: {amount}}).then(({payment}) => {
+    store.dispatch({type: ADD_PAYMENT, values: payment})
   }).catch(done)
 }
 

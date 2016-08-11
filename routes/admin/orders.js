@@ -87,6 +87,6 @@ router.get('/:order_id', (req, res) => {
 router.post('/:order_id/charge', (req, res) => {
   const amount = (+req.body.amount * 100) | 0
   req.order.charge(amount).then((payment) => {
-    res.json(payment)
+    res.json(json.charge, {payment})
   }).catch(res.error)
 })

@@ -4,6 +4,10 @@ const orderJson = require('../../orders/order')
 const paymentJson = require('../../payments/payment')
 const productOrderJson = require('../../product-orders/product-order')
 
+exports.charge = (set, {payment}) => {
+  set('payment', payment, paymentJson)
+}
+
 exports.index = (set, {full, locations, orders, page, product, products, status}) => {
   set({full, status, page, more: orders.more})
   set('orders', orders, orderJson, (set, order) => {
