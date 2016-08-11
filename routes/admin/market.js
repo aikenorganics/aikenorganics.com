@@ -9,6 +9,6 @@ router.get('/', (req, res) => res.react(json.index))
 // Update
 router.post('/', (req, res) => {
   req.market.update(req.permit('message', 'open')).then(() => {
-    res.json(req.market)
+    res.json(json.update)
   }).catch(res.error)
 })
