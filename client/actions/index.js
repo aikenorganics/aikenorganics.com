@@ -251,8 +251,8 @@ export const destroyProductOrder = (id) => {
 
 export const updateCategory = (id, values) => {
   busy()
-  return POST(`/admin/categories/${id}`, {body: values}).then(() => {
-    store.dispatch({type: UPDATE_CATEGORY, id, values})
+  return POST(`/admin/categories/${id}`, {body: values}).then(({category}) => {
+    store.dispatch({type: UPDATE_CATEGORY, id, values: category})
     done()
   }).catch(done)
 }

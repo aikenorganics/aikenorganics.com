@@ -15,3 +15,7 @@ exports.index = (set, {categories}) => {
 }
 
 exports.new = (set) => {}
+
+exports.update = (set, {category}) => {
+  set('category', category, categoryJson)
+}

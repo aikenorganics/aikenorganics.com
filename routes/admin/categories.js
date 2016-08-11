@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
 // Update
 router.post('/:category_id', (req, res) => {
   req.category.update(req.permit('meat', 'name', 'position')).then(() => {
-    res.json(req.category)
+    res.json(json.update)
   }).catch(res.error)
 })
 
