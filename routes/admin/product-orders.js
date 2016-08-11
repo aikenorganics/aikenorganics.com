@@ -1,6 +1,7 @@
 'use strict'
 
 const db = require('../../db')
+const json = require('../../json/admin/product-orders')
 const router = module.exports = require('ozymandias').Router()
 
 // Find the ProductOrder
@@ -11,7 +12,7 @@ router.post('/', (req, res) => {
   db.ProductOrder.create(req.permit('order_id', 'quantity', 'product_id'))
   .then(({id}) => (
     db.ProductOrder.include('product').find(id).then((productOrder) => {
-      res.json(productOrder)
+      res.json(json.create, {productOrder})
     })
   )).catch(res.error)
 })
@@ -27,7 +28,7 @@ router.delete('/:product_order_id', (req, res) => {
 router.post('/:product_order_id', (req, res) => {
   req.productOrder.update(req.permit('quantity', 'cost')).then(() => {
     return db.ProductOrder.include('product').find(req.productOrder.id).then((productOrder) => {
-      res.json(productOrder)
+      res.json(json.update)
     })
   }).catch(res.error)
 })

@@ -225,16 +225,16 @@ export const imageProduct = (id, file) => {
 
 export const createProductOrder = (values) => {
   busy()
-  return POST('/admin/product-orders', {body: values}).then((values) => {
-    store.dispatch({type: ADD_PRODUCT_ORDER, values})
+  return POST('/admin/product-orders', {body: values}).then(({productOrder}) => {
+    store.dispatch({type: ADD_PRODUCT_ORDER, values: productOrder})
     done()
   }).catch(done)
 }
 
 export const updateProductOrder = (id, values) => {
   busy()
-  return POST(`/admin/product-orders/${id}`, {body: values}).then((values) => {
-    store.dispatch({type: UPDATE_PRODUCT_ORDER, id, values})
+  return POST(`/admin/product-orders/${id}`, {body: values}).then(({productOrder}) => {
+    store.dispatch({type: UPDATE_PRODUCT_ORDER, id, values: productOrder})
     done()
   }).catch(done)
 }
