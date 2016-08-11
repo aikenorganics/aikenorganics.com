@@ -130,7 +130,7 @@ export const checkout = (values) => {
 
 export const createUserGrower = (grower_id, user_id) => {
   busy()
-  return POST('/admin/user-growers', {body: {grower_id, user_id}}).then((userGrower) => {
+  return POST('/admin/user-growers', {body: {grower_id, user_id}}).then(({userGrower}) => {
     store.dispatch({type: CREATE_USER_GROWER, userGrower})
     done()
   }).catch(done)
