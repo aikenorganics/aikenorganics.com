@@ -18,9 +18,10 @@ test('POST /admin/market is a 200', (t) => {
     .expect('Content-Type', /json/)
     .end((e, res) => {
       if (e) return t.end(e)
-      t.is(typeof res.body.id, 'number')
-      t.is(res.body.open, true)
-      t.is(res.body.message, 'test')
+      const {id, message, open} = res.body.market
+      t.is(id, 1)
+      t.is(open, true)
+      t.is(message, 'test')
       db.Market.find(1).then((market) => {
         t.ok(market.open)
         t.end()
@@ -39,9 +40,10 @@ test('POST /admin/market is a 200', (t) => {
     .expect('Content-Type', /json/)
     .end((e, res) => {
       if (e) return t.end(e)
-      t.is(typeof res.body.id, 'number')
-      t.is(res.body.open, false)
-      t.is(res.body.message, 'test')
+      const {id, message, open} = res.body.market
+      t.is(id, 2)
+      t.is(open, false)
+      t.is(message, 'test')
       db.Market.find(2).then((market) => {
         t.ok(!market.open)
         t.end()

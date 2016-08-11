@@ -26,8 +26,9 @@ test('POST /product-orders/:id is a 200', function (t) {
     .expect(200)
     .end(function (e, res) {
       if (e) return t.end(e)
-      t.is(res.body.cost, '1.23')
-      t.is(res.body.quantity, 1)
+      const {cost, quantity} = res.body.productOrder
+      t.is(cost, '1.23')
+      t.is(quantity, 1)
       db.ProductOrder.find(1).then(function (productOrder) {
         t.equal(productOrder.cost, '1.23')
         t.equal(productOrder.quantity, 1)
@@ -45,10 +46,11 @@ test('POST /product-orders is a 200', function (t) {
     .expect(200)
     .end((e, res) => {
       if (e) return t.end(e)
-      t.is(res.body.quantity, 1)
-      t.is(res.body.order_id, 1)
-      t.is(res.body.product_id, 3)
-      db.ProductOrder.find(res.body.id).then((productOrder) => {
+      const {id, order_id, product_id, quantity} = res.body.productOrder
+      t.is(quantity, 1)
+      t.is(order_id, 1)
+      t.is(product_id, 3)
+      db.ProductOrder.find(id).then((productOrder) => {
         t.is(productOrder.quantity, 1)
         t.end()
       })
@@ -63,8 +65,9 @@ test('editing an inactive product order', function (t) {
     .expect(200)
     .end(function (e, res) {
       if (e) return t.end(e)
-      t.is(res.body.cost, '6.00')
-      t.is(res.body.quantity, 2)
+      const {cost, quantity} = res.body.productOrder
+      t.is(cost, '6')
+      t.is(quantity, 2)
       db.ProductOrder.find(9).then(function (productOrder) {
         t.is(productOrder.quantity, 2)
         t.is(productOrder.cost, '6.00')

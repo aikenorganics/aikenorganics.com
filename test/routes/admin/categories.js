@@ -52,9 +52,10 @@ test('POST /admin/categories/:id is a 200', function (t) {
     .expect(200)
     .end((e, res) => {
       if (e) return t.end(e)
-      t.is(res.body.name, 'test')
-      t.is(res.body.position, 106)
-      t.is(res.body.meat, true)
+      const {meat, name, position} = res.body.category
+      t.is(name, 'test')
+      t.is(position, 106)
+      t.is(meat, true)
       t.end()
     })
   })
