@@ -2,6 +2,10 @@
 
 const categoryJson = require('../../categories/category')
 
+exports.create = (set, {category}) => {
+  set('category', category, categoryJson)
+}
+
 exports.edit = (set, {category}) => {
   set('category', category, categoryJson)
 }

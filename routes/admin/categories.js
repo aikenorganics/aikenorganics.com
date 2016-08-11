@@ -27,7 +27,7 @@ router.get('/:category_id/edit', (req, res) => {
 // Create
 router.post('/', (req, res) => {
   db.Category.create(req.permit('meat', 'name', 'position')).then((category) => {
-    res.json(category)
+    res.json(json.create, {category})
   }).catch(res.error)
 })
 

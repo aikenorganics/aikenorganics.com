@@ -3,7 +3,7 @@ import Form from './form'
 
 export default ({busy}) => {
   return <div>
-    <h1>Edit Category</h1>
+    <h1>New Category</h1>
     <hr/>
     <Form busy={busy}/>
   </div>
