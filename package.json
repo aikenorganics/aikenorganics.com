@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "aikenorganics.com",
   "main": "index.js",
-  "cacheDirectories": [
-    "node_modules"
-  ],
+  "cacheDirectories": [],
   "engines": {
     "node": "6.3.1",
     "npm": "3.10.7"
