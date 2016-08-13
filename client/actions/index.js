@@ -297,16 +297,16 @@ export const createLocation = (values) => {
 
 export const updateSettings = (values) => {
   busy()
-  return POST('/settings', {body: values}).then((user) => {
-    store.dispatch({type: UPDATE_USER, id: user.id, values})
+  return POST('/settings', {body: values}).then(({user}) => {
+    store.dispatch({type: UPDATE_USER, id: user.id, values: user})
     done()
   }).catch(done)
 }
 
 export const updateCard = (id, token) => {
   busy()
-  return POST('/settings/card', {body: {token}}).then((values) => {
-    store.dispatch({type: UPDATE_USER, id, values})
+  return POST('/settings/card', {body: {token}}).then(({user}) => {
+    store.dispatch({type: UPDATE_USER, id, values: user})
     done()
   }).catch(done)
 }

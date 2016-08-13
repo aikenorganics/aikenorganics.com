@@ -8,18 +8,21 @@ router.use((req, res, next) => {
   res.unauthorized()
 })
 
+// Index
 router.get('/', (req, res) => res.react(json.index))
 
+// Update
 router.post('/', (req, res) => {
   req.user.update(req.permit(
     'first', 'last', 'phone', 'street', 'city', 'state', 'zip'
   )).then(() => {
-    res.json(req.user)
+    res.json(json.update)
   }).catch(res.error)
 })
 
+// Card
 router.post('/card', (req, res) => {
   req.user.updateCard(req.body.token).then(() => {
-    res.json(req.user)
+    res.json(json.card)
   }).catch(res.error)
 })
