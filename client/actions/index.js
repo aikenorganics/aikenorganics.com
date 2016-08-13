@@ -163,8 +163,8 @@ export const imageGrower = (id, file) => {
   const data = new window.FormData()
   data.append('image', file)
   busy()
-  return POST(`/growers/${id}/image`, {body: data}).then((values) => {
-    store.dispatch({type: UPDATE_GROWER, id, values})
+  return POST(`/growers/${id}/image`, {body: data}).then(({grower}) => {
+    store.dispatch({type: UPDATE_GROWER, id, values: grower})
     done()
   }).catch(done)
 }

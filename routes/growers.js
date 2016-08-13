@@ -106,6 +106,6 @@ router.get('/:grower_id/products', (req, res) => {
 router.post('/:grower_id/image', (req, res) => {
   if (!req.canEdit) return res.unauthorized()
   req.grower.uploadImage(req).then(() => {
-    res.json(req.grower)
+    res.json(json.image)
   }).catch(res.error)
 })

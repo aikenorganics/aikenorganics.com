@@ -20,6 +20,10 @@ exports.edit = (set, {grower}) => {
   })
 }
 
+exports.image = (set, {grower}) => {
+  set('grower', grower, growerJson)
+}
+
 exports.index = (set, {growers}) => {
   set('growers', growers, growerJson)
 }
