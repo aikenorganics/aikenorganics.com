@@ -61,7 +61,7 @@ router.post('/:user_id', (req, res) => {
 // Image
 router.post('/:user_id/image', (req, res) => {
   req._user.uploadImage(req).then(() => {
-    res.json(req._user)
+    res.json(json.image)
   }).catch(res.error)
 })
 

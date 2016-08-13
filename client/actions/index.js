@@ -335,8 +335,8 @@ export const imageUser = (id, file) => {
   const data = new window.FormData()
   data.append('image', file)
   busy()
-  return POST(`/admin/users/${id}/image`, {body: data}).then((values) => {
-    store.dispatch({type: UPDATE_USER, id, values})
+  return POST(`/admin/users/${id}/image`, {body: data}).then(({user}) => {
+    store.dispatch({type: UPDATE_USER, id, values: user})
     done()
   }).catch(done)
 }
