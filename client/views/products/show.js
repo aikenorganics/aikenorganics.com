@@ -1,11 +1,10 @@
 import React from 'react'
-import marked from 'marked'
 import Link from '../link'
 import CartForm from '../cart/form'
 import Nav from './nav'
 
 export default ({busy, canEdit, cart, path, product, market: {open}, currentUser}) => {
-  const {active, available, category, cost, description, grower, name, mediumImage, unit} = product
+  const {active, available, category, cost, descriptionHtml, grower, name, mediumImage, unit} = product
   return <div className='row'>
     <div className='col-md-3 text-center'>
       {currentUser
@@ -33,7 +32,7 @@ export default ({busy, canEdit, cart, path, product, market: {open}, currentUser
       <div className='clearfix'>
         <hr/>
       </div>
-      <div dangerouslySetInnerHTML={{__html: marked(description, {sanitize: true})}}/>
+      <div dangerouslySetInnerHTML={{__html: descriptionHtml}}/>
     </div>
   </div>
 }

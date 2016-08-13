@@ -1,11 +1,10 @@
 import React from 'react'
-import marked from 'marked'
 import Link from '../link'
 import Nav from './nav'
 import Product from '../products/product'
 
 export default ({busy, canEdit, cart, grower, market: {open}, path, products, currentUser}) => {
-  const {description, email, id, location, mediumImage, name, url} = grower
+  const {descriptionHtml, email, id, location, mediumImage, name, url} = grower
 
   return <div className='row'>
     <div className='col-md-2 text-center'>
@@ -21,7 +20,7 @@ export default ({busy, canEdit, cart, grower, market: {open}, path, products, cu
       {location ? ` • ${location}` : ''}
       <hr style={{clear: 'both'}}/>
       <img className='img-rounded pull-right' src={mediumImage}/>
-      <div dangerouslySetInnerHTML={{__html: marked(description, {sanitize: true})}}></div>
+      <div dangerouslySetInnerHTML={{__html: descriptionHtml}}></div>
       <h2 style={{clear: 'both'}}>
         <span>Products </span>
         {canEdit

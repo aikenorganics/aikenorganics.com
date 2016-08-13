@@ -5,6 +5,7 @@ module.exports = (set, market) => {
     'id',
     'domain',
     'message',
+    'messageHtml',
     'open'
   )
 }

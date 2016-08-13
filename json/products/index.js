@@ -23,7 +23,7 @@ exports.index = (set, {categories, page, products, search}) => {
 
 exports.show = (set, {product}) => {
   set('product', product, productJson, (set, product) => {
-    set(product, 'description')
+    set(product, 'descriptionHtml')
   })
 }
 

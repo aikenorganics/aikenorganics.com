@@ -47,7 +47,7 @@ exports.products = (set, {grower, products}) => {
 
 exports.show = (set, {grower, products}) => {
   set('grower', grower, growerJson, (set, grower) => {
-    set(grower, 'description')
+    set(grower, 'descriptionHtml')
   })
   set('products', products, productJson)
 }

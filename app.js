@@ -14,7 +14,6 @@ app.set('layout.json', require('./json/layout'))
 
 // Locals
 Object.assign(app.locals, {
-  marked: require('marked'),
   moment: require('moment'),
   assets: require('ozymandias/assets')
 })

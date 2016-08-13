@@ -1,14 +1,13 @@
 import React from 'react'
-import marked from 'marked'
 import Link from './link'
 
-export default ({cart, children, market: {message, open}, currentUser, path}) => {
+export default ({cart, children, market: {messageHtml, open}, currentUser, path}) => {
   const cartSize = Object.keys(cart).reduce((total, id) => total + cart[id], 0)
 
   return <main className='container'>
     <div className='hidden-print'>
       {open
-        ? <div className='alert alert-info' dangerouslySetInnerHTML={{__html: marked(message)}}></div>
+        ? <div className='alert alert-info' dangerouslySetInnerHTML={{__html: messageHtml}}></div>
         : <div className='alert alert-warning text-center'>
           <p>
             <strong>The market is currently closed and will re-open on Sunday at 8:00AM. </strong>

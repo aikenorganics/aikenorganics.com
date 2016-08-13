@@ -1,7 +1,8 @@
 'use strict'
 
-let Model = require('./model')
-let images = require('ozymandias/images')
+const marked = require('marked')
+const Model = require('./model')
+const images = require('ozymandias/images')
 
 class Product extends Model {
 
@@ -57,6 +58,10 @@ class Product extends Model {
 
   set description (value) {
     this.data.set('description', value || '')
+  }
+
+  get descriptionHtml () {
+    return marked(this.description, {sanitize: true})
   }
 
   validate () {

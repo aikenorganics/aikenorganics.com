@@ -1,6 +1,7 @@
 'use strict'
 
-let Model = require('./model')
+const marked = require('marked')
+const Model = require('./model')
 
 class Market extends Model {
 
@@ -17,6 +18,10 @@ class Market extends Model {
       'created_at',
       'updated_at'
     ]
+  }
+
+  get messageHtml () {
+    return marked(this.message)
   }
 
 }
