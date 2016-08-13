@@ -170,8 +170,9 @@ test('POST /growers is a 200 for admins', function (t) {
     .expect('Content-Type', /json/)
     .end((e, res) => {
       if (e) return t.end(e)
-      t.is(res.body.name, 'New Grower')
-      t.is(typeof res.body.id, 'number')
+      const {id, name} = res.body.grower
+      t.is(name, 'New Grower')
+      t.is(typeof id, 'number')
       t.end()
     })
   })

@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
   db.Grower.create(req.permit(
     'url', 'name', 'email', 'location', 'description'
   )).then((grower) => {
-    res.json(grower)
+    res.json(json.create, {grower})
   }).catch(res.error)
 })
 

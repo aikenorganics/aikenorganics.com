@@ -23,7 +23,7 @@ export default class Form extends Component {
       const {id} = this.props.grower
       updateGrower(id, this.state).catch((e) => {})
     } else {
-      createGrower(this.state).then(({id}) => {
+      createGrower(this.state).then(({grower: {id}}) => {
         navigate(`/growers/${id}`)
       }).catch((e) => {})
     }

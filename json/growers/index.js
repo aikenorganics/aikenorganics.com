@@ -4,6 +4,12 @@ const growerJson = require('./grower')
 const productJson = require('../products/product')
 const categoryJson = require('../categories/category')
 
+exports.create = (set, {grower}) => {
+  set('grower', grower, growerJson, (set, grower) => {
+    set(grower, 'description')
+  })
+}
+
 exports.edit = (set, {grower}) => {
   set('grower', grower, growerJson, (set, grower) => {
     set(grower, 'description')
