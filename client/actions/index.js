@@ -215,8 +215,8 @@ export const imageProduct = (id, file) => {
   const data = new window.FormData()
   data.append('image', file)
   busy()
-  return POST(`/products/${id}/image`, {body: data}).then((values) => {
-    store.dispatch({type: UPDATE_PRODUCT, id, values})
+  return POST(`/products/${id}/image`, {body: data}).then(({product}) => {
+    store.dispatch({type: UPDATE_PRODUCT, id, values: product})
     done()
   }).catch(done)
 }

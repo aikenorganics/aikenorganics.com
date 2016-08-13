@@ -10,6 +10,10 @@ exports.edit = (set, {categories, product}) => {
   })
 }
 
+exports.image = (set, {product}) => {
+  set('product', product, productJson)
+}
+
 exports.index = (set, {categories, page, products, search}) => {
   set({page, search})
   set(products, 'more')

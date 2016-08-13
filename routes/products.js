@@ -74,6 +74,6 @@ router.post('/:product_id', (req, res) => {
 router.post('/:product_id/image', (req, res) => {
   if (!req.canEdit) return res.unauthorized()
   req.product.uploadImage(req).then(() => {
-    res.json(req.product)
+    res.json(json.image)
   }).catch(res.error)
 })
