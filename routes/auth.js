@@ -5,7 +5,7 @@ const forgotMail = require('../mail/forgot')
 const router = module.exports = require('ozymandias').Router()
 
 // Find User
-function findUser (req, res, next) {
+const findUser = (req, res, next) => {
   db.User.where('trim(lower(email)) = trim(lower(?))', req.body.email).find()
   .then((user) => {
     req.user = res.locals.user = user
