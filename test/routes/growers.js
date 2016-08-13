@@ -181,7 +181,7 @@ test('POST /growers is a 200 for admins', function (t) {
 test('POST /growers/:id/products is a 200 for admins', function (t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/growers/1/products')
-    .send('name=New Grower')
+    .send('name=New Product')
     .send('cost=2.45')
     .send('supply=32')
     .send('category_id=1')
@@ -189,11 +189,12 @@ test('POST /growers/:id/products is a 200 for admins', function (t) {
     .expect(200)
     .end((e, res) => {
       if (e) return t.end(e)
-      t.is(res.body.cost, '2.45')
-      t.is(res.body.category_id, 1)
-      t.is(res.body.supply, 32)
-      t.is(res.body.name, 'New Grower')
-      t.is(typeof res.body.id, 'number')
+      const {category_id, cost, id, name, supply} = res.body.product
+      t.is(category_id, 1)
+      t.is(cost, '2.45')
+      t.is(name, 'New Product')
+      t.is(supply, 32)
+      t.is(typeof id, 'number')
       t.end()
     })
   })

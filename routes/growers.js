@@ -67,6 +67,7 @@ router.get('/:grower_id/products/new', (req, res) => {
   }).catch(res.error)
 })
 
+// Create Product
 router.post('/:grower_id/products', (req, res) => {
   if (!req.canEdit) return res.unauthorized()
 
@@ -76,7 +77,7 @@ router.post('/:grower_id/products', (req, res) => {
   props.grower_id = req.grower.id
 
   db.Product.create(props).then((product) => {
-    res.json(product)
+    res.json(json.createProduct, {product})
   }).catch(res.error)
 })
 

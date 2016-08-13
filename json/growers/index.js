@@ -10,6 +10,10 @@ exports.create = (set, {grower}) => {
   })
 }
 
+exports.createProduct = (set, {product}) => {
+  set('product', product, productJson)
+}
+
 exports.edit = (set, {grower}) => {
   set('grower', grower, growerJson, (set, grower) => {
     set(grower, 'description')
