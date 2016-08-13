@@ -1,19 +1,27 @@
 'use strict'
 
-const user = require('../../users/user')
+const userJson = require('../../users/user')
+
+exports.create = (set, {_user}) => {
+  set('user', _user, userJson)
+}
 
 exports.edit = (set, {_user}) => {
-  set('user', _user)
+  set('user', _user, userJson)
 }
 
 exports.emails = (set, {users}) => {
-  set('emails', users.map((user) => user.email))
+  set('emails', users.map(({email}) => email))
 }
 
 exports.index = (set, {page, search, users}) => {
   set({page, search})
   set(users, 'more')
-  set('users', users, user)
+  set('users', users, userJson)
 }
 
 exports.new = (set) => {}
+
+exports.update = (set, {_user}) => {
+  set('user', _user, userJson)
+}

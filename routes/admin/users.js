@@ -44,8 +44,8 @@ router.get('/new', (req, res) => res.react(json.new))
 router.post('/', (req, res) => {
   db.User.create(req.permit(
     'email', 'first', 'last', 'phone', 'member_until'
-  )).then((user) => {
-    res.json(user)
+  )).then((_user) => {
+    res.json(json.create, {_user})
   }).catch(res.error)
 })
 
@@ -54,7 +54,7 @@ router.post('/:user_id', (req, res) => {
   req._user.update(req.permit(
     'email', 'first', 'last', 'phone', 'is_admin', 'member_until'
   )).then(() => {
-    res.json({})
+    res.json(json.update)
   }).catch(res.error)
 })
 

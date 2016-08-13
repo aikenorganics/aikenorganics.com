@@ -320,8 +320,8 @@ export const createUser = (values) => {
 
 export const updateUser = (id, values) => {
   busy()
-  return POST(`/admin/users/${id}`, {body: values}).then(() => {
-    store.dispatch({type: UPDATE_USER, id, values})
+  return POST(`/admin/users/${id}`, {body: values}).then(({user}) => {
+    store.dispatch({type: UPDATE_USER, id, values: user})
     done()
   }).catch(done)
 }

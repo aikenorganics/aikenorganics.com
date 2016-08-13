@@ -11,8 +11,12 @@ test('POST /admin/users/:id is a 200', (t) => {
     .send('last=last')
     .send('phone=555-555-5555')
     .expect(200)
-    .end((e) => {
+    .end((e, res) => {
       if (e) return t.end(e)
+      const {first, last, phone} = res.body.user
+      t.is(first, 'first')
+      t.is(last, 'last')
+      t.is(phone, '555-555-5555')
       db.User.find(2).then((user) => {
         t.is(user.first, 'first')
         t.is(user.last, 'last')

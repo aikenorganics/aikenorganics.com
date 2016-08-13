@@ -29,7 +29,7 @@ export default class Form extends Component {
       const {id} = this.props.user
       updateUser(id, this.state).catch((e) => {})
     } else {
-      createUser(this.state).then((user) => {
+      createUser(this.state).then(({user}) => {
         navigate(`/admin/users/${user.id}/edit`)
       }).catch((e) => {})
     }
