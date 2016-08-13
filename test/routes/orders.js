@@ -50,8 +50,11 @@ test('POST /orders/:id is a 200', (t) => {
     .expect('Content-Type', /json/)
     .end((e, res) => {
       if (e) return t.end(e)
-      t.ok(res.body.location)
-      t.is(res.body.location.id, 2)
+      const {location, status, notes} = res.body.order
+      t.ok(location)
+      t.is(location.id, 2)
+      t.is(status, 'open')
+      t.is(notes, '')
       db.Order.find(2).then((order) => {
         t.is(order.location_id, 2)
         t.is(order.status, 'open')
@@ -106,8 +109,11 @@ test('Admins can update someone else\'s order', (t) => {
     .expect(200)
     .end((e, res) => {
       if (e) return t.end(e)
-      t.ok(res.body.location)
-      t.is(res.body.location.id, 2)
+      const {location, notes, status} = res.body.order
+      t.ok(location)
+      t.is(location.id, 2)
+      t.is(notes, 'updated')
+      t.is(status, 'canceled')
       db.Order.find(5).then((order) => {
         t.is(order.location_id, 2)
         t.is(order.status, 'canceled')

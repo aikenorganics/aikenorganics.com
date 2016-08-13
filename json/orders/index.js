@@ -23,3 +23,7 @@ exports.previous = (set, {orders, page}) => {
     set('productOrders', order.productOrders, productOrderJson)
   })
 }
+
+exports.update = (set, {order}) => {
+  set('order', order, orderJson)
+}

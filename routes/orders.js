@@ -55,11 +55,11 @@ router.post('/:order_id', (req, res) => {
     Object.assign(values, req.permit('notes', 'status'))
   }
 
-  req.order.update(values).then(() => {
-    return db.Order.include('location').find(req.order.id).then((order) => {
-      res.json(order)
+  req.order.update(values).then(() => (
+    db.Order.include('location').find(req.order.id).then((order) => {
+      res.json(json.update, {order})
     })
-  }).catch(res.error)
+  )).catch(res.error)
 })
 
 // Cancel

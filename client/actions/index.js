@@ -181,8 +181,8 @@ export const cancelOrder = (id) => {
 
 export const updateOrder = (id, values) => {
   busy()
-  return POST(`/orders/${id}`, {body: values}).then((values) => {
-    store.dispatch({type: UPDATE_ORDER, id, values})
+  return POST(`/orders/${id}`, {body: values}).then(({order}) => {
+    store.dispatch({type: UPDATE_ORDER, id, values: order})
     done()
   }).catch(done)
 }
