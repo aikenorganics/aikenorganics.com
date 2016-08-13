@@ -186,28 +186,7 @@ class User extends require('ozymandias/user') {
   }
 
   toJSON () {
-    return {
-      id: this.id,
-      canDeliver: this.canDeliver,
-      email: this.email,
-      name: this.name,
-      last: this.last,
-      first: this.first,
-      phone: this.phone,
-      is_admin: this.is_admin,
-      image_updated_at: this.image_updated_at,
-      member_until: this.member_until,
-      stripe_id: this.stripe_id,
-      card_brand: this.card_brand,
-      card_last4: this.card_last4,
-      street: this.street,
-      city: this.city,
-      state: this.state,
-      zip: this.zip,
-      address: this.address,
-      has_order: this.has_order,
-      mediumImage: this.mediumImage
-    }
+    throw new Error('toJSON')
   }
 
 }

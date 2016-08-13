@@ -89,32 +89,6 @@ class Product extends Model {
     return +this.cost * this.reserved
   }
 
-  toJSON () {
-    return {
-      id: this.id,
-      name: this.name,
-      cost: this.cost,
-      supply: this.supply,
-      unit: this.unit,
-      description: this.description,
-      image_updated_at: this.image_updated_at,
-      reserved: this.reserved,
-      active: this.active,
-      grower_id: this.grower_id,
-      category_id: this.category_id,
-      available: this.available,
-      oversold: this.oversold,
-      category: this.category,
-      grower: this.grower,
-      smallImage: this.smallImage,
-      mediumImage: this.mediumImage,
-
-      // From query…
-      quantity: this.quantity,
-      total: this.total
-    }
-  }
-
 }
 
 images.hasImage(Product, {

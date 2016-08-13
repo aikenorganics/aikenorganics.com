@@ -51,20 +51,6 @@ class Order extends Model {
     })
   }
 
-  toJSON () {
-    return {
-      id: this.id,
-      location_id: this.location_id,
-      notes: this.notes,
-      status: this.status,
-      user_id: this.user_id,
-      location: this.location,
-      payments: this.payments,
-      productOrders: this.productOrders,
-      total: this.total
-    }
-  }
-
 }
 
 module.exports = Order

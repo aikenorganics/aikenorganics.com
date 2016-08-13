@@ -19,14 +19,6 @@ class Market extends Model {
     ]
   }
 
-  toJSON () {
-    return {
-      id: this.id,
-      open: this.open,
-      domain: this.domain,
-      message: this.message
-    }
-  }
 }
 
 module.exports = Market

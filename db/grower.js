@@ -66,24 +66,6 @@ class Grower extends Model {
     this.data.set('description', value || '')
   }
 
-  toJSON () {
-    return {
-      id: this.id,
-      url: this.url,
-      name: this.name,
-      email: this.email,
-      active: this.active,
-      location: this.location,
-      image_updated_at: this.image_updated_at,
-      description: this.description,
-      smallImage: this.smallImage,
-      mediumImage: this.mediumImage,
-      products: this.products,
-      total: this.total,
-      userGrowers: this.userGrowers
-    }
-  }
-
 }
 
 images.hasImage(Grower, {
