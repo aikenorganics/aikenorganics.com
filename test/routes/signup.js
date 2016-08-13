@@ -48,8 +48,8 @@ test('Full signup flow', (t) => {
     if (e) return t.end(e)
 
     t.agent
-    .get('/auth/signout')
-    .expect(302)
+    .post('/auth/signout')
+    .expect(200)
     .end((e) => {
       if (e) return t.end(e)
 

@@ -18,6 +18,7 @@ test('incorrect password', (t) => {
   t.$('#email').sendKeys('admin@example.com')
   t.$('#password').sendKeys('wrong')
   t.$('#password').submit()
+  t.wait(() => t.present('#errors'))
   t.wait(() => (
     t.$('#errors').getText().then((text) => (
       /Sorry! That password is incorrect\./.test(text)
@@ -32,6 +33,7 @@ test('email not found', (t) => {
   t.$('#email').sendKeys('wrong@example.com')
   t.$('#password').sendKeys('password')
   t.$('#password').submit()
+  t.wait(() => t.present('#errors'))
   t.wait(() => (
     t.$('#errors').getText().then((text) => (
       /Sorry! We don’t recognize that email\./.test(text)

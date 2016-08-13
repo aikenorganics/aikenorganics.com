@@ -62,9 +62,9 @@ router.post('/reset/:token_id', (req, res) => {
 })
 
 // Sign Out
-router.get('/signout', (req, res) => {
+router.post('/signout', (req, res) => {
   req.signOut()
-  res.redirect('/')
+  res.json({})
 })
 
 // Sign In

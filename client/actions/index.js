@@ -101,6 +101,13 @@ export const signup = (values) => {
   return POST('/signup', {body: values}).then(done).catch(done)
 }
 
+// Signout
+
+export const signout = () => {
+  busy()
+  return POST('/auth/signout').then(done).catch(done)
+}
+
 // Market
 
 export const updateMarket = (values) => {
