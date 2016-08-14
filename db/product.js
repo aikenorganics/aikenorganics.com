@@ -24,7 +24,8 @@ class Product extends Model {
       'grower_id',
       'category_id',
       'created_at',
-      'updated_at'
+      'updated_at',
+      'featured'
     ]
   }
 

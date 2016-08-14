@@ -71,12 +71,24 @@ router.get('/:grower_id/products/new', (req, res) => {
 router.post('/:grower_id/products', (req, res) => {
   if (!req.canEdit) return res.unauthorized()
 
-  const props = req.permit(
-    'name', 'cost', 'unit', 'supply', 'category_id', 'description'
+  const values = req.permit(
+    'name',
+    'cost',
+    'unit',
+    'supply',
+    'category_id',
+    'description'
   )
-  props.grower_id = req.grower.id
 
-  db.Product.create(props).then((product) => {
+  // Set the grower id.
+  values.grower_id = req.grower.id
+
+  // Admins can set featured.
+  if (req.user.is_admin) {
+    Object.assign(values, req.permit('featured'))
+  }
+
+  db.Product.create(values).then((product) => {
     res.json(json.createProduct, {product})
   }).catch(res.error)
 })

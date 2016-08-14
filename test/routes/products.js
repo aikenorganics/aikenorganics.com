@@ -189,6 +189,36 @@ test('POST /products/:id accepts JSON', (t) => {
   })
 })
 
+test('admins can update featured', (t) => {
+  t.signIn('admin@example.com').then(() => {
+    t.agent.post('/products/1')
+    .send({featured: true})
+    .expect(200)
+    .end((error, response) => {
+      if (error) return t.end(error)
+      db.Product.find(1).then((product) => {
+        t.is(product.featured, true)
+        t.end()
+      }).catch(t.end)
+    })
+  })
+})
+
+test('non-admins cannot update featured', (t) => {
+  t.signIn('grower@example.com').then(() => {
+    t.agent.post('/products/1')
+    .send({featured: true})
+    .expect(200)
+    .end((error, response) => {
+      if (error) return t.end(error)
+      db.Product.find(1).then((product) => {
+        t.is(product.featured, false)
+        t.end()
+      }).catch(t.end)
+    })
+  })
+})
+
 // Image
 
 test('POST /products/:id/image is a 401 as a non-admin', (t) => {

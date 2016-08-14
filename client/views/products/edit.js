@@ -3,7 +3,7 @@ import Nav from './nav'
 import Form from './form'
 import {imageProduct, updateProduct} from '../../actions/index'
 
-export default ({busy, categories, canEdit, errors, path, product}) => {
+export default ({busy, categories, canEdit, currentUser, errors, path, product}) => {
   const {active, id, grower, mediumImage} = product
 
   const upload = ({target}) => {
@@ -43,7 +43,7 @@ export default ({busy, categories, canEdit, errors, path, product}) => {
         }
       </h4>
       <hr/>
-      <Form busy={busy} categories={categories} errors={errors} product={product}/>
+      <Form busy={busy} categories={categories} currentUser={currentUser} errors={errors} product={product}/>
     </div>
   </div>
 }

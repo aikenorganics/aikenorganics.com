@@ -1,4 +1,4 @@
-var test = require('../test')
+const test = require('../test')
 
 test('GET /growers is a 200', function (t) {
   t.request()
@@ -215,26 +215,48 @@ test('POST /growers/:id/products is a 401 for non-admins', function (t) {
 test('POST /growers/:id/products is a 200 if allowed', function (t) {
   t.signIn('grower@example.com').then(() => {
     t.agent.post('/growers/1/products')
-    .send('name=New Product')
-    .send('cost=2.50')
-    .send('supply=23')
-    .send('category_id=1')
-    .expect('Content-Type', /json/)
+    .send({
+      category_id: 1,
+      cost: '2.50',
+      featured: true,
+      name: 'New Product',
+      supply: 23
+    })
     .expect(200)
-    .end(t.end)
+    .end((error, response) => {
+      if (error) return t.end(error)
+      const {category_id, cost, featured, name, supply} = response.body.product
+      t.is(category_id, 1)
+      t.is(cost, '2.50')
+      t.is(featured, false)
+      t.is(name, 'New Product')
+      t.is(supply, 23)
+      t.end()
+    })
   })
 })
 
 test('POST /growers/:id/products is a 200 for admins', function (t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/growers/1/products')
-    .send('name=New Product')
-    .send('cost=2.50')
-    .send('supply=23')
-    .send('category_id=1')
-    .expect('Content-Type', /json/)
+    .send({
+      name: 'New Product',
+      cost: '2.50',
+      supply: 23,
+      category_id: 1,
+      featured: true
+    })
     .expect(200)
-    .end(t.end)
+    .end((error, response) => {
+      if (error) return t.end(error)
+      const {category_id, cost, featured, name, supply} = response.body.product
+      t.is(category_id, 1)
+      t.is(cost, '2.50')
+      t.is(featured, true)
+      t.is(name, 'New Product')
+      t.is(supply, 23)
+      t.end()
+    })
   })
 })
 

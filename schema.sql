@@ -652,7 +652,8 @@ CREATE TABLE products (
     reserved integer DEFAULT 0 NOT NULL,
     active boolean DEFAULT true NOT NULL,
     search tsvector,
-    image_updated_at timestamp with time zone
+    image_updated_at timestamp with time zone,
+    featured boolean DEFAULT false NOT NULL
 );
 
 
@@ -988,16 +989,16 @@ SELECT pg_catalog.setval('product_orders_id_seq', 10, true);
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY products (id, created_at, updated_at, name, grower_id, cost, supply, unit, description, category_id, reserved, active, search, image_updated_at) FROM stdin;
-6	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Happy Pesto Sauce [Inactive Grower]	3	5.50	23	4 oz.	It starts with our own organically grown basil and ends with a finished product full of rich flavor.  Our Happy Pesto is the perfect pasta sauce, but is also delicious on fish, chicken, eggs or any other recipe calling for pesto.  Our pesto is made super concentrated so cutting it with additional olive oil will make this sauce go twice as far.	2	0	t	'grower':5 'happy':1 'inactive':4 'pesto':2 'sauce':3	\N
-7	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Spanish Rice [Inactive]	2	4.32	3	medium side item - (2 cups)	Made with all natural brown rice and organic tomatoes, corn and sweet peas, this rice packs a lot of flavor and is the perfect side for our enchiladas or great on its own! (vegetarian and gluten free)	2	0	f	'inactive':3 'rice':2 'spanish':1	\N
-8	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Mild Chow Chow [Inactive]	1	5.00	7	Pint Jar	Cabbage, onions, sugar, red bell pepper, vinegar, ground mustard, celery seed, salt, citric acid, turmeric, erythorbric acid to promote color retention.	2	0	f	'chow':2,3 'inactive':4 'mild':1	\N
-1	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Peaches	1	14.00	22	box	A box of peaches.	1	2	t	'peaches':1	\N
-2	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Strawberries	1	8.00	15	box	Some strawberries.	1	3	t	'strawberries':1	\N
-3	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Kale	1	4.50	15	bunch	A buncha kale.	1	1	t	'kale':1	\N
-4	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Vegan Gumbo - Small	2	7.00	15	small container (serves 1-2)	This hearty gumbo features local okra, tomatoes, peppers and corn (cut and frozen in season), fresh herbs and bay leaves simmered in organic vegetable stock and dark porter beer from the Aiken Brewing Company and comes with a side of all natural brown rice.	2	1	t	'gumbo':2 'small':3 'vegan':1	\N
-5	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Vegan Gumbo - Medium	2	14.00	3	Medium container (serves 2-4)	This hearty gumbo features local okra, tomatoes, peppers and corn (cut and frozen in season), fresh herbs and bay leaves simmered in organic vegetable stock and dark porter beer from the Aiken Brewing Company and comes with a side of all natural brown rice.	2	3	t	'gumbo':2 'medium':3 'vegan':1	\N
-9	2016-03-28 22:18:30.836487-04	2016-03-28 22:20:58.953-04	Avocados [Oversold]	1	4.30	2	each		1	3	t	'avocados':1 'oversold':2	\N
+COPY products (id, created_at, updated_at, name, grower_id, cost, supply, unit, description, category_id, reserved, active, search, image_updated_at, featured) FROM stdin;
+6	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Happy Pesto Sauce [Inactive Grower]	3	5.50	23	4 oz.	It starts with our own organically grown basil and ends with a finished product full of rich flavor.  Our Happy Pesto is the perfect pasta sauce, but is also delicious on fish, chicken, eggs or any other recipe calling for pesto.  Our pesto is made super concentrated so cutting it with additional olive oil will make this sauce go twice as far.	2	0	t	'grower':5 'happy':1 'inactive':4 'pesto':2 'sauce':3	\N	f
+7	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Spanish Rice [Inactive]	2	4.32	3	medium side item - (2 cups)	Made with all natural brown rice and organic tomatoes, corn and sweet peas, this rice packs a lot of flavor and is the perfect side for our enchiladas or great on its own! (vegetarian and gluten free)	2	0	f	'inactive':3 'rice':2 'spanish':1	\N	f
+8	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Mild Chow Chow [Inactive]	1	5.00	7	Pint Jar	Cabbage, onions, sugar, red bell pepper, vinegar, ground mustard, celery seed, salt, citric acid, turmeric, erythorbric acid to promote color retention.	2	0	f	'chow':2,3 'inactive':4 'mild':1	\N	f
+1	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Peaches	1	14.00	22	box	A box of peaches.	1	2	t	'peaches':1	\N	f
+2	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Strawberries	1	8.00	15	box	Some strawberries.	1	3	t	'strawberries':1	\N	f
+3	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Kale	1	4.50	15	bunch	A buncha kale.	1	1	t	'kale':1	\N	f
+4	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Vegan Gumbo - Small	2	7.00	15	small container (serves 1-2)	This hearty gumbo features local okra, tomatoes, peppers and corn (cut and frozen in season), fresh herbs and bay leaves simmered in organic vegetable stock and dark porter beer from the Aiken Brewing Company and comes with a side of all natural brown rice.	2	1	t	'gumbo':2 'small':3 'vegan':1	\N	f
+5	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Vegan Gumbo - Medium	2	14.00	3	Medium container (serves 2-4)	This hearty gumbo features local okra, tomatoes, peppers and corn (cut and frozen in season), fresh herbs and bay leaves simmered in organic vegetable stock and dark porter beer from the Aiken Brewing Company and comes with a side of all natural brown rice.	2	3	t	'gumbo':2 'medium':3 'vegan':1	\N	f
+9	2016-03-28 22:18:30.836487-04	2016-03-28 22:20:58.953-04	Avocados [Oversold]	1	4.30	2	each		1	3	t	'avocados':1 'oversold':2	\N	f
 \.
 
 

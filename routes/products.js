@@ -63,9 +63,21 @@ router.get('/:product_id/edit', (req, res) => {
 router.post('/:product_id', (req, res) => {
   if (!req.canEdit) return res.unauthorized()
 
-  req.product.update(req.permit(
-    'active', 'category_id', 'cost', 'description', 'name', 'supply', 'unit'
-  )).then(() => {
+  const values = req.permit(
+    'active',
+    'category_id',
+    'cost',
+    'description',
+    'name',
+    'supply',
+    'unit'
+  )
+
+  if (req.user.is_admin) {
+    Object.assign(values, req.permit('featured'))
+  }
+
+  req.product.update(values).then(() => {
     res.json(json.update)
   }).catch(res.error)
 })

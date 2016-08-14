@@ -17,7 +17,8 @@ module.exports = (set, product) => {
     'available',
     'oversold',
     'smallImage',
-    'mediumImage'
+    'mediumImage',
+    'featured'
   )
 
   if (product.category) {

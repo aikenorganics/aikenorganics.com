@@ -63,7 +63,7 @@ export default class Form extends Component {
       {user
         ? <div className='form-group'>
           <label>
-            <input type='checkbox' value='1' checked={is_admin} onChange={(e) => this.setState({is_admin: e.target.checked})}/>
+            <input type='checkbox' checked={is_admin} onChange={(e) => this.setState({is_admin: e.target.checked})}/>
             <span> Admin</span>
           </label>
         </div>
