@@ -63,7 +63,19 @@ export const clearMessage = () => {
 
 export const navigate = (url, {push} = {}) => {
   busy()
-  if (push !== false) window.history.pushState(null, document.title, url)
+
+  // No pushState?
+  if (!window.history || !window.history.pushState) {
+    window.location = url
+    return
+  }
+
+  // Change the url.
+  if (push !== false) {
+    window.history.pushState(null, document.title, url)
+  }
+
+  // Fetch the page state and render the page.
   return GET(url).then((state) => {
     // If the version has changed, reload the whole page.
     if (store.getState().version !== state.version) {
