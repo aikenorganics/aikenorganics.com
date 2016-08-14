@@ -1,4 +1,9 @@
 addons:
+  apt:
+    packages:
+    - g++-4.8
+    sources:
+    - ubuntu-toolchain-r-test
   postgresql: "9.4"
 before_script:
   - psql -c 'create database aikenorganics_test;' -U postgres
