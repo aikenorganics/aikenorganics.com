@@ -1,0 +1,4 @@
+database:
+  override:
+    - psql -U ubuntu -c 'create database aikenorganics_test;'
+    - psql -U ubuntu < schema.sql
