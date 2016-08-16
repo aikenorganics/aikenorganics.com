@@ -5,7 +5,7 @@ import {
   REMOVE_PRODUCT_ORDER,
   UPDATE_PRODUCT_ORDER
 } from '../../../client/actions'
-import reducer from '../../../client/reducers/index'
+import reducer from '../../../client/reducers'
 
 test('add productOrder', (t) => {
   const state = freeze({

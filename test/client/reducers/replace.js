@@ -1,7 +1,7 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
 import {REPLACE} from '../../../client/actions'
-import reducer from '../../../client/reducers/index'
+import reducer from '../../../client/reducers'
 
 test('replace state', (t) => {
   const state = freeze({

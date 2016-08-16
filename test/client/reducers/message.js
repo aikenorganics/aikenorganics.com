@@ -1,7 +1,7 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
 import {CLEAR_MESSAGE, SET_MESSAGE} from '../../../client/actions'
-import reducer from '../../../client/reducers/index'
+import reducer from '../../../client/reducers'
 
 test('set message', (t) => {
   const state = freeze({message: {active: true, type: 'success', text: 'Done!'}})

@@ -4,7 +4,7 @@ import {
   REMOVE_CATEGORY,
   UPDATE_CATEGORY
 } from '../../../client/actions'
-import reducer from '../../../client/reducers/index'
+import reducer from '../../../client/reducers'
 
 test('update category - activate', (t) => {
   const state = freeze({

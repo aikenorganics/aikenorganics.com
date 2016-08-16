@@ -1,7 +1,7 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
 import {ADD_PAYMENT} from '../../../client/actions'
-import reducer from '../../../client/reducers/index'
+import reducer from '../../../client/reducers'
 
 test('add payment', (t) => {
   const state = freeze({

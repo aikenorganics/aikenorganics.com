@@ -1,7 +1,7 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
 import {UPDATE_CART} from '../../../client/actions'
-import reducer from '../../../client/reducers/index'
+import reducer from '../../../client/reducers'
 
 test('update cart', (t) => {
   const state = freeze({cart: {1: 3, 2: 5}})

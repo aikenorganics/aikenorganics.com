@@ -1,4 +1,4 @@
-import reducer from './reducers/index'
+import reducer from './reducers'
 import {createStore} from 'redux'
 
 const el = typeof document !== 'undefined' && document.getElementById('state')

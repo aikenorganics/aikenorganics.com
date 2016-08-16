@@ -1,6 +1,6 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import reducer from '../../../client/reducers/index'
+import reducer from '../../../client/reducers'
 import {
   CREATE_USER_GROWER,
   REMOVE_USER_GROWER,

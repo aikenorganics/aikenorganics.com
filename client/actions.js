@@ -1,5 +1,5 @@
-import {GET, DELETE, POST} from '../json'
-import store from '../store'
+import {GET, DELETE, POST} from './json'
+import store from './store'
 
 // Action Constants
 export const UPDATE_CART = 'UPDATE_CART'

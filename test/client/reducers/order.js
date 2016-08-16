@@ -4,7 +4,7 @@ import {
   CANCEL_ORDER,
   UPDATE_ORDER
 } from '../../../client/actions'
-import reducer from '../../../client/reducers/index'
+import reducer from '../../../client/reducers'
 
 test('update order - location_id', (t) => {
   const state = freeze({order: {id: 1, location_id: 1}})

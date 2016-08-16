@@ -1,6 +1,6 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import reducer from '../../../client/reducers/index'
+import reducer from '../../../client/reducers'
 
 test('default page to 1', (t) => {
   const state = freeze({page: ''})
