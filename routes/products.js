@@ -73,7 +73,7 @@ router.post('/:product_id', (req, res) => {
     'unit'
   )
 
-  if (req.user.is_admin) {
+  if (req.admin) {
     Object.assign(values, req.permit('featured'))
   }
 

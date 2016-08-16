@@ -6,7 +6,7 @@ const updateMail = require('../mail/orders/update')
 const router = module.exports = require('ozymandias').Router()
 
 router.use((req, res, next) => {
-  if (req.user && req.market.open) return next()
+  if (req.currentUser && req.market.open) return next()
   res.unauthorized()
 })
 
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
       .where({id: req.cart.ids})
       .order('name').all(),
     db.Location.where({active: true}).order('name').all(),
-    db.Order.where({status: 'open', user_id: req.user.id}).find()
+    db.Order.where({status: 'open', user_id: req.currentUser.id}).find()
   ]).then(([products, locations, order]) => {
     res.react(json.index, {products, locations, order})
   }).catch(res.error)
@@ -46,12 +46,12 @@ router.post('/', (req, res) => {
 // Checkout
 router.post('/checkout', (req, res) => {
   db.query('select checkout($1, $2, $3)', [
-    req.user.id,
+    req.currentUser.id,
     req.body.location_id,
     req.cart.ids.map((id) => [id, req.cart.cart[id]])
   ]).then(() => (
     req.mail(updateMail, {
-      to: [req.user.email],
+      to: [req.currentUser.email],
       subject: 'Aiken Organics: Order Updated',
       url: `http://${req.get('host')}/orders/current`
     })

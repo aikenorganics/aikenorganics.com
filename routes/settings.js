@@ -4,7 +4,7 @@ const json = require('../json/settings')
 const router = module.exports = require('ozymandias').Router()
 
 router.use((req, res, next) => {
-  if (req.user) return next()
+  if (req.currentUser) return next()
   res.unauthorized()
 })
 
@@ -13,7 +13,7 @@ router.get('/', (req, res) => res.react(json.index))
 
 // Update
 router.post('/', (req, res) => {
-  req.user.update(req.permit(
+  req.currentUser.update(req.permit(
     'first', 'last', 'phone', 'street', 'city', 'state', 'zip'
   )).then(() => {
     res.json(json.update)
@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
 
 // Card
 router.post('/card', (req, res) => {
-  req.user.updateCard(req.body.token).then(() => {
+  req.currentUser.updateCard(req.body.token).then(() => {
     res.json(json.card)
   }).catch(res.error)
 })

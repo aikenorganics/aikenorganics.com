@@ -22,7 +22,7 @@ test('growers/authorize: missing user', function (t) {
 })
 
 test('growers/authorize: missing grower', function (t) {
-  var req = {user: {id: 2}}
+  var req = {currentUser: {id: 2}}
   var res = {locals: {}}
   authorize(req, res, function () {
     t.ok(!req.canEdit)
@@ -32,7 +32,7 @@ test('growers/authorize: missing grower', function (t) {
 })
 
 test('growers/authorize: admin', function (t) {
-  var req = {user: {id: 5}, grower: {id: 2}, admin: 1}
+  var req = {currentUser: {id: 5}, grower: {id: 2}, admin: 1}
   var res = {locals: {}}
   authorize(req, res, function () {
     t.ok(req.canEdit)
@@ -42,7 +42,7 @@ test('growers/authorize: admin', function (t) {
 })
 
 test('growers/authorize: regular user', function (t) {
-  var req = {user: {id: 2}, grower: {id: 1}}
+  var req = {currentUser: {id: 2}, grower: {id: 1}}
   var res = {locals: {}}
   authorize(req, res, function () {
     t.ok(!req.canEdit)
@@ -52,7 +52,7 @@ test('growers/authorize: regular user', function (t) {
 })
 
 test('growers/authorize: authorized user', function (t) {
-  var req = {user: {id: 5}, grower: {id: 1}}
+  var req = {currentUser: {id: 5}, grower: {id: 1}}
   var res = {locals: {}}
   authorize(req, res, function () {
     t.ok(req.canEdit)
@@ -62,7 +62,7 @@ test('growers/authorize: authorized user', function (t) {
 })
 
 test('growers/authorize: authorized user for different grower', function (t) {
-  var req = {user: {id: 5}, grower: {id: 2}}
+  var req = {currentUser: {id: 5}, grower: {id: 2}}
   var res = {locals: {}}
   authorize(req, res, function () {
     t.ok(!req.canEdit)

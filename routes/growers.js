@@ -84,7 +84,7 @@ router.post('/:grower_id/products', (req, res) => {
   values.grower_id = req.grower.id
 
   // Admins can set featured.
-  if (req.user.is_admin) {
+  if (req.admin) {
     Object.assign(values, req.permit('featured'))
   }
 

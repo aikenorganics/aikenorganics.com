@@ -1,9 +1,9 @@
 'use strict'
 
-let db = require('../../db')
+const db = require('../../db')
 
-module.exports = function (req, res, next) {
-  if (!req.user || !req.grower) return next()
+module.exports = (req, res, next) => {
+  if (!req.currentUser || !req.grower) return next()
 
   if (req.admin) {
     req.canEdit = res.locals.canEdit = true
@@ -11,9 +11,9 @@ module.exports = function (req, res, next) {
   }
 
   db.UserGrower.where({
-    user_id: req.user.id,
+    user_id: req.currentUser.id,
     grower_id: req.grower.id
-  }).find().then(function (userGrower) {
+  }).find().then((userGrower) => {
     req.canEdit = res.locals.canEdit = !!userGrower
     next()
   }).catch(res.error)

@@ -22,7 +22,7 @@ test('products/authorize: missing user', function (t) {
 })
 
 test('products/authorize: missing product', function (t) {
-  var req = {user: {id: 2}}
+  var req = {currentUser: {id: 2}}
   var res = {locals: {}}
   authorize(req, res, function () {
     t.ok(!req.canEdit)
@@ -32,7 +32,7 @@ test('products/authorize: missing product', function (t) {
 })
 
 test('products/authorize: admin', function (t) {
-  var req = {user: {id: 5}, product: {grower_id: 2}, admin: 1}
+  var req = {currentUser: {id: 5}, product: {grower_id: 2}, admin: 1}
   var res = {locals: {}}
   authorize(req, res, function () {
     t.ok(req.canEdit)
@@ -42,7 +42,7 @@ test('products/authorize: admin', function (t) {
 })
 
 test('products/authorize: regular user', function (t) {
-  var req = {user: {id: 2}, product: {grower_id: 1}}
+  var req = {currentUser: {id: 2}, product: {grower_id: 1}}
   var res = {locals: {}}
   authorize(req, res, function () {
     t.ok(!req.canEdit)
@@ -52,7 +52,7 @@ test('products/authorize: regular user', function (t) {
 })
 
 test('products/authorize: authorized user', function (t) {
-  var req = {user: {id: 5}, product: {grower_id: 1}}
+  var req = {currentUser: {id: 5}, product: {grower_id: 1}}
   var res = {locals: {}}
   authorize(req, res, function () {
     t.ok(req.canEdit)
@@ -62,7 +62,7 @@ test('products/authorize: authorized user', function (t) {
 })
 
 test('products/authorize: authorized user for different grower', function (t) {
-  var req = {user: {id: 5}, product: {grower_id: 2}}
+  var req = {currentUser: {id: 5}, product: {grower_id: 2}}
   var res = {locals: {}}
   authorize(req, res, function () {
     t.ok(!req.canEdit)

@@ -5,7 +5,7 @@ const json = require('../../json/admin/users')
 const router = module.exports = require('ozymandias').Router()
 
 // Find
-router.find('user_id', '_user', () => db.User.select(`exists(
+router.find('user', () => db.User.select(`exists(
   select id from orders where user_id = users.id
 ) as has_order`))
 
@@ -44,14 +44,14 @@ router.get('/new', (req, res) => res.react(json.new))
 router.post('/', (req, res) => {
   db.User.create(req.permit(
     'email', 'first', 'last', 'phone', 'member_until'
-  )).then((_user) => {
-    res.json(json.create, {_user})
+  )).then((user) => {
+    res.json(json.create, {user})
   }).catch(res.error)
 })
 
 // Update
 router.post('/:user_id', (req, res) => {
-  req._user.update(req.permit(
+  req.user.update(req.permit(
     'email', 'first', 'last', 'phone', 'is_admin', 'member_until'
   )).then(() => {
     res.json(json.update)
@@ -60,12 +60,12 @@ router.post('/:user_id', (req, res) => {
 
 // Image
 router.post('/:user_id/image', (req, res) => {
-  req._user.uploadImage(req).then(() => {
+  req.user.uploadImage(req).then(() => {
     res.json(json.image)
   }).catch(res.error)
 })
 
 // Delete
 router.delete('/:user_id', (req, res) => {
-  req._user.destroy().then(() => res.json({})).catch(res.error)
+  req.user.destroy().then(() => res.json({})).catch(res.error)
 })

@@ -2,12 +2,12 @@
 
 const userJson = require('../users/user')
 
-exports.card = (set, {user}) => {
-  set('user', user, userJson)
+exports.card = (set, {currentUser}) => {
+  set('user', currentUser, userJson)
 }
 
 exports.index = (set) => {}
 
-exports.update = (set, {user}) => {
-  set('user', user, userJson)
+exports.update = (set, {currentUser}) => {
+  set('user', currentUser, userJson)
 }
