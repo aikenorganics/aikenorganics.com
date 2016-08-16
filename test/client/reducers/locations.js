@@ -3,7 +3,7 @@ import freeze from 'deep-freeze'
 import {
   REMOVE_LOCATION,
   UPDATE_LOCATION
-} from '../../../client/actions/index'
+} from '../../../client/actions'
 import reducer from '../../../client/reducers/index'
 
 test('update location - activate', (t) => {

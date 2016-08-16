@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from '../../link'
-import {updateLocation, destroyLocation} from '../../../actions/index'
+import {updateLocation, destroyLocation} from '../../../actions'
 
 export default ({busy, location}) => {
   const {active, id, name} = location

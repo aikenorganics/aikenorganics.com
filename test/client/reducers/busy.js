@@ -1,6 +1,6 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import {BUSY, DONE} from '../../../client/actions/index'
+import {BUSY, DONE} from '../../../client/actions'
 import reducer from '../../../client/reducers/index'
 
 test('busy', (t) => {

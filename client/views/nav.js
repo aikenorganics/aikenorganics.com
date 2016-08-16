@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from './link'
-import {navigate, signout} from '../actions/index'
+import {navigate, signout} from '../actions'
 
 export default ({currentUser}) => {
   const {is_admin} = currentUser || {}

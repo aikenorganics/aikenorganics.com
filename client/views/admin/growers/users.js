@@ -2,7 +2,7 @@ import React from 'react'
 import Link from '../../link'
 import Nav from './show-nav'
 import Header from './header'
-import {createUserGrower, destroyUserGrower} from '../../../actions/index'
+import {createUserGrower, destroyUserGrower} from '../../../actions'
 
 export default ({busy, grower, path, users}) => {
   const create = (e) => {

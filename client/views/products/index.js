@@ -3,7 +3,7 @@ import Link from '../link'
 import Pagination from '../pagination'
 import Search from '../search'
 import Product from './product'
-import {navigate} from '../../actions/index'
+import {navigate} from '../../actions'
 
 export default ({busy, cart, category_id, categories, page, products, market: {open}, more, search, url, currentUser}) => {
   return <div className='row'>

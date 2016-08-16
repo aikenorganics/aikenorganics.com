@@ -5,7 +5,7 @@ import {
   CREATE_USER_GROWER,
   REMOVE_USER_GROWER,
   UPDATE_GROWER
-} from '../../../client/actions/index'
+} from '../../../client/actions'
 
 test('update grower', (t) => {
   const state = freeze({grower: {id: 1, active: false}})

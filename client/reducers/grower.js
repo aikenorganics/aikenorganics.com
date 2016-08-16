@@ -3,7 +3,7 @@ import {
   CREATE_USER_GROWER,
   REMOVE_USER_GROWER,
   UPDATE_GROWER
-} from '../actions/index'
+} from '../actions'
 
 export default (state = null, action) => {
   switch (action.type) {

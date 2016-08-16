@@ -1,6 +1,6 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import {SET_ERRORS} from '../../../client/actions/index'
+import {SET_ERRORS} from '../../../client/actions'
 import reducer from '../../../client/reducers/index'
 
 test('set errors', (t) => {

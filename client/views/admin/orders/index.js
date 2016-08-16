@@ -3,7 +3,7 @@ import Link from '../../link'
 import Pagination from '../../pagination'
 import Row from './row'
 import Order from './order'
-import {navigate} from '../../../actions/index'
+import {navigate} from '../../../actions'
 import {params} from '../../../url'
 
 export default ({full, location_id, locations, more, orders, page, product, products, status, url}) => {

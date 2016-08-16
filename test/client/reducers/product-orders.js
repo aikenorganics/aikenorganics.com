@@ -4,7 +4,7 @@ import {
   ADD_PRODUCT_ORDER,
   REMOVE_PRODUCT_ORDER,
   UPDATE_PRODUCT_ORDER
-} from '../../../client/actions/index'
+} from '../../../client/actions'
 import reducer from '../../../client/reducers/index'
 
 test('add productOrder', (t) => {

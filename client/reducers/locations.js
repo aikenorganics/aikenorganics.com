@@ -2,7 +2,7 @@ import assign from 'object-assign'
 import {
   REMOVE_LOCATION,
   UPDATE_LOCATION
-} from '../actions/index'
+} from '../actions'
 
 export default (state = null, action) => {
   switch (action.type) {

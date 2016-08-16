@@ -1,6 +1,6 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import {UPDATE_PRODUCT} from '../../../client/actions/index'
+import {UPDATE_PRODUCT} from '../../../client/actions'
 import reducer from '../../../client/reducers/index'
 
 test('update product - activate', (t) => {

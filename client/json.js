@@ -1,6 +1,6 @@
 import 'es6-promise'
 import 'whatwg-fetch'
-import {setErrors, setMessage, clearMessage} from './actions/index'
+import {setErrors, setMessage, clearMessage} from './actions'
 
 const json = (url, options) => {
   if (!options) options = {}

@@ -1,5 +1,5 @@
 import assign from 'object-assign'
-import {UPDATE_GROWER} from '../actions/index'
+import {UPDATE_GROWER} from '../actions'
 
 export default (state = null, action) => {
   switch (action.type) {

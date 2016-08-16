@@ -1,5 +1,5 @@
 import React, {PureComponent, PropTypes} from 'react'
-import {createLocation, navigate, updateLocation} from '../../../actions/index'
+import {createLocation, navigate, updateLocation} from '../../../actions'
 
 export default class Form extends PureComponent {
 

@@ -1,4 +1,4 @@
-import {BUSY, DONE} from '../actions/index'
+import {BUSY, DONE} from '../actions'
 
 export default (state = null, action) => {
   switch (action.type) {

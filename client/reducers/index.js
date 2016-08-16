@@ -19,7 +19,7 @@ import products from './products'
 import productOrders from './product-orders'
 import user from './user'
 import users from './users'
-import {REPLACE} from '../actions/index'
+import {REPLACE} from '../actions'
 
 const pass = (state = null) => state
 

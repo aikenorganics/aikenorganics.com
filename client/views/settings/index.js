@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react'
 import Errors from '../errors'
 import Billing from '../users/billing'
-import {updateSettings} from '../../actions/index'
+import {updateSettings} from '../../actions'
 
 export default class Index extends PureComponent {
 

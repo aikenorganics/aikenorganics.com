@@ -1,6 +1,6 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import {UPDATE_USER} from '../../../client/actions/index'
+import {UPDATE_USER} from '../../../client/actions'
 import reducer from '../../../client/reducers/index'
 
 test('update user - email', (t) => {

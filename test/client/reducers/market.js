@@ -1,6 +1,6 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import {UPDATE_MARKET} from '../../../client/actions/index'
+import {UPDATE_MARKET} from '../../../client/actions'
 import reducer from '../../../client/reducers/index'
 
 test('update location - activate', (t) => {

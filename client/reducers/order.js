@@ -2,7 +2,7 @@ import assign from 'object-assign'
 import {
   CANCEL_ORDER,
   UPDATE_ORDER
-} from '../actions/index'
+} from '../actions'
 
 export default (state = null, action) => {
   switch (action.type) {

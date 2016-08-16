@@ -1,6 +1,6 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import {UPDATE_CART} from '../../../client/actions/index'
+import {UPDATE_CART} from '../../../client/actions'
 import reducer from '../../../client/reducers/index'
 
 test('update cart', (t) => {

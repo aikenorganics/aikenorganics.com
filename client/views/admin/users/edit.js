@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from './image'
 import Form from './form'
-import {destroyUser, navigate} from '../../../actions/index'
+import {destroyUser, navigate} from '../../../actions'
 
 export default ({busy, user}) => {
   const {id, has_order} = user

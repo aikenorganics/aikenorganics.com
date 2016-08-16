@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from '../link'
 import Form from './form'
-import {cancelOrder} from '../../actions/index'
+import {cancelOrder} from '../../actions'
 
 export default ({busy, market: {open}, locations, order, productOrders, currentUser}) => {
   if (!order) {

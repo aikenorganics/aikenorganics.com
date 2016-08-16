@@ -2,7 +2,7 @@ import assign from 'object-assign'
 import {
   REMOVE_CATEGORY,
   UPDATE_CATEGORY
-} from '../actions/index'
+} from '../actions'
 
 export default (state = null, action) => {
   switch (action.type) {

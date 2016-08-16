@@ -3,7 +3,7 @@ import freeze from 'deep-freeze'
 import {
   REMOVE_CATEGORY,
   UPDATE_CATEGORY
-} from '../../../client/actions/index'
+} from '../../../client/actions'
 import reducer from '../../../client/reducers/index'
 
 test('update category - activate', (t) => {

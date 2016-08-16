@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 import Link from '../link'
-import {checkout, navigate} from '../../actions/index'
+import {checkout, navigate} from '../../actions'
 
 export default class Checkout extends PureComponent {
 

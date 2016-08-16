@@ -1,6 +1,6 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import {CLEAR_MESSAGE, SET_MESSAGE} from '../../../client/actions/index'
+import {CLEAR_MESSAGE, SET_MESSAGE} from '../../../client/actions'
 import reducer from '../../../client/reducers/index'
 
 test('set message', (t) => {

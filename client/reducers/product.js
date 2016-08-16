@@ -1,5 +1,5 @@
 import assign from 'object-assign'
-import {UPDATE_PRODUCT} from '../actions/index'
+import {UPDATE_PRODUCT} from '../actions'
 
 export default (state = null, action) => {
   switch (action.type) {

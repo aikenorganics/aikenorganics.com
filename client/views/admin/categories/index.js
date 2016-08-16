@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from '../../link'
-import {destroyCategory} from '../../../actions/index'
+import {destroyCategory} from '../../../actions'
 
 export default ({busy, categories}) => {
   const destroy = (id) => {

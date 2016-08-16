@@ -1,5 +1,5 @@
 import React from 'react'
-import {updateGrower} from '../../../actions/index'
+import {updateGrower} from '../../../actions'
 
 export default ({busy, grower}) => {
   const update = (values) => {

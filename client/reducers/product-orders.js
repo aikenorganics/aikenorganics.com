@@ -3,7 +3,7 @@ import {
   ADD_PRODUCT_ORDER,
   REMOVE_PRODUCT_ORDER,
   UPDATE_PRODUCT_ORDER
-} from '../actions/index'
+} from '../actions'
 
 export default (state = null, action) => {
   switch (action.type) {

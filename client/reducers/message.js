@@ -1,5 +1,5 @@
 import assign from 'object-assign'
-import {CLEAR_MESSAGE, SET_MESSAGE} from '../actions/index'
+import {CLEAR_MESSAGE, SET_MESSAGE} from '../actions'
 
 export default (state = null, {type, message}) => {
   switch (type) {

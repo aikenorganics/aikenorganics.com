@@ -1,5 +1,5 @@
 import React, {PureComponent, PropTypes} from 'react'
-import {createUser, navigate, updateUser} from '../../../actions/index'
+import {createUser, navigate, updateUser} from '../../../actions'
 
 export default class Form extends PureComponent {
 

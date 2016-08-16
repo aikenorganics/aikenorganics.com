@@ -3,7 +3,7 @@ import freeze from 'deep-freeze'
 import {
   CANCEL_ORDER,
   UPDATE_ORDER
-} from '../../../client/actions/index'
+} from '../../../client/actions'
 import reducer from '../../../client/reducers/index'
 
 test('update order - location_id', (t) => {

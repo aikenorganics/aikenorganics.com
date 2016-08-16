@@ -1,6 +1,6 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import {UPDATE_GROWER} from '../../../client/actions/index'
+import {UPDATE_GROWER} from '../../../client/actions'
 import reducer from '../../../client/reducers/index'
 
 test('update grower', (t) => {

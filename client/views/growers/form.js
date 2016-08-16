@@ -1,5 +1,5 @@
 import React, {PureComponent, PropTypes} from 'react'
-import {createGrower, navigate, updateGrower} from '../../actions/index'
+import {createGrower, navigate, updateGrower} from '../../actions'
 
 export default class Form extends PureComponent {
 

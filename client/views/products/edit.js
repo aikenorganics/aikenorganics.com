@@ -1,7 +1,7 @@
 import React from 'react'
 import Nav from './nav'
 import Form from './form'
-import {imageProduct, updateProduct} from '../../actions/index'
+import {imageProduct, updateProduct} from '../../actions'
 
 export default ({busy, categories, canEdit, currentUser, errors, path, product}) => {
   const {active, id, grower, mediumImage} = product

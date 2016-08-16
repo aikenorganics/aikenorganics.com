@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react'
-import {createPayment} from '../../../actions/index'
+import {createPayment} from '../../../actions'
 
 export default class Charge extends PureComponent {
 

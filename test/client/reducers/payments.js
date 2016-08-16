@@ -1,6 +1,6 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import {ADD_PAYMENT} from '../../../client/actions/index'
+import {ADD_PAYMENT} from '../../../client/actions'
 import reducer from '../../../client/reducers/index'
 
 test('add payment', (t) => {

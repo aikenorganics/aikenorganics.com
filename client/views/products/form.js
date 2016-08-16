@@ -1,6 +1,6 @@
 import React, {PureComponent, PropTypes} from 'react'
 import Errors from '../errors'
-import {createProduct, navigate, updateProduct} from '../../actions/index'
+import {createProduct, navigate, updateProduct} from '../../actions'
 
 export default class Form extends PureComponent {
 

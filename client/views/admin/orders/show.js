@@ -10,7 +10,7 @@ import {
   createProductOrder,
   updateProductOrder,
   destroyProductOrder
-} from '../../../actions/index'
+} from '../../../actions'
 
 export default ({errors, locations, order, payments, products, productOrders}) => {
   const {id, location_id, status, user} = order

@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react'
-import {navigate} from '../actions/index'
+import {navigate} from '../actions'
 import {params} from '../url'
 
 export default class Search extends PureComponent {

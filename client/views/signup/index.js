@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 import Errors from '../errors'
-import {navigate, signup} from '../../actions/index'
+import {navigate, signup} from '../../actions'
 
 export default class Index extends PureComponent {
 

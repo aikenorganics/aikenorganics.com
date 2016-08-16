@@ -1,5 +1,5 @@
 import React, {PureComponent, PropTypes} from 'react'
-import {updateCard} from '../../actions/index'
+import {updateCard} from '../../actions'
 
 let checkout = null
 const getCheckout = () => {

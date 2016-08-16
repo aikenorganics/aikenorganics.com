@@ -1,5 +1,5 @@
 import React, {PureComponent, PropTypes} from 'react'
-import {updateMarket} from '../../../actions/index'
+import {updateMarket} from '../../../actions'
 
 export default class Index extends PureComponent {
 

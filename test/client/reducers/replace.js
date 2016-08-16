@@ -1,6 +1,6 @@
 import test from 'tape'
 import freeze from 'deep-freeze'
-import {REPLACE} from '../../../client/actions/index'
+import {REPLACE} from '../../../client/actions'
 import reducer from '../../../client/reducers/index'
 
 test('replace state', (t) => {

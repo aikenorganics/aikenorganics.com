@@ -1,4 +1,4 @@
-import {ADD_PAYMENT} from '../actions/index'
+import {ADD_PAYMENT} from '../actions'
 
 export default (state = null, action) => {
   switch (action.type) {

@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 import Errors from '../errors'
-import {forgot, setMessage} from '../../actions/index'
+import {forgot, setMessage} from '../../actions'
 
 export default class Forgot extends PureComponent {
 

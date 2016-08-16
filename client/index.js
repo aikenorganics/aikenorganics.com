@@ -4,7 +4,7 @@ import store from './store'
 import Routes from './routes'
 import {render} from 'react-dom'
 import assign from 'object-assign'
-import {navigate} from './actions/index'
+import {navigate} from './actions'
 
 // Bugs!
 assign(window.Bugsnag, store.getState().bugsnag)

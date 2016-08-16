@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 import Link from '../link'
-import {updateOrder} from '../../actions/index'
+import {updateOrder} from '../../actions'
 
 export default class Form extends PureComponent {
 

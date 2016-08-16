@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react'
 import Link from '../link'
 import Errors from '../errors'
-import {navigate, reset} from '../../actions/index'
+import {navigate, reset} from '../../actions'
 
 export default class Reset extends PureComponent {
 
