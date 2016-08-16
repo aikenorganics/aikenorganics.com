@@ -12,7 +12,7 @@ test('replace existing values', (t) => {
 })
 
 test('encodes values', (t) => {
-  t.is(params('/path', {x: '/'}), '/path?x=%2F')
+  t.is(params('/path', {'/': '/'}), '/path?%2F=%2F')
   t.end()
 })
 
