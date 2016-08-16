@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import {createPayment} from '../../../actions/index'
 
-export default class Charge extends Component {
+export default class Charge extends PureComponent {
 
   constructor (props) {
     super(props)

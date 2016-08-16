@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import Errors from '../errors'
 import {forgot, setMessage} from '../../actions/index'
 
-export default class Forgot extends Component {
+export default class Forgot extends PureComponent {
 
   constructor (props) {
     super(props)

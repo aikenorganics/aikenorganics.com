@@ -1,7 +1,7 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PureComponent, PropTypes} from 'react'
 import {updateMarket} from '../../../actions/index'
 
-export default class Index extends Component {
+export default class Index extends PureComponent {
 
   static get propTypes () {
     return {

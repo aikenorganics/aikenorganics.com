@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import Link from '../link'
 import {checkout, navigate} from '../../actions/index'
 
-export default class Checkout extends Component {
+export default class Checkout extends PureComponent {
 
   constructor (props) {
     super(props)

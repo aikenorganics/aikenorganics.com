@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import {navigate} from '../actions/index'
 import {params} from '../url'
 
-export default class Search extends Component {
+export default class Search extends PureComponent {
   constructor (props) {
     super(props)
     this.state = {

@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import Link from '../link'
 import Errors from '../errors'
 import {navigate, reset} from '../../actions/index'
 
-export default class Reset extends Component {
+export default class Reset extends PureComponent {
 
   constructor (props) {
     super(props)

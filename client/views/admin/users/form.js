@@ -1,7 +1,7 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PureComponent, PropTypes} from 'react'
 import {createUser, navigate, updateUser} from '../../../actions/index'
 
-export default class Form extends Component {
+export default class Form extends PureComponent {
 
   static get propTypes () {
     return {

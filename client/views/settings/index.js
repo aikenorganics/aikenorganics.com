@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import Errors from '../errors'
 import Billing from '../users/billing'
 import {updateSettings} from '../../actions/index'
 
-export default class Index extends Component {
+export default class Index extends PureComponent {
 
   constructor (props) {
     super(props)

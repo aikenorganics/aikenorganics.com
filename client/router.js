@@ -1,4 +1,4 @@
-import React, {Children, Component, PropTypes} from 'react'
+import React, {Children, PureComponent, PropTypes} from 'react'
 
 const optionalParam = /\((.*?)\)/g
 const namedParam = /(\(\?)?:\w+/g
@@ -13,9 +13,9 @@ const toRegExp = (path) => {
     .replace(splatParam, '([^/]*?)') + '$')
 }
 
-export class Route extends Component { }
+export class Route extends PureComponent { }
 
-export default class Router extends Component {
+export default class Router extends PureComponent {
 
   static propTypes () {
     return {

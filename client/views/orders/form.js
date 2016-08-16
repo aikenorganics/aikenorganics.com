@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import Link from '../link'
 import {updateOrder} from '../../actions/index'
 
-export default class Form extends Component {
+export default class Form extends PureComponent {
 
   constructor (props) {
     super(props)

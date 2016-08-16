@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, {PureComponent, PropTypes} from 'react'
 import {updateCard} from '../../actions/index'
 
 let checkout = null
@@ -12,7 +12,7 @@ const getCheckout = () => {
   }))
 }
 
-export default class Billing extends Component {
+export default class Billing extends PureComponent {
 
   static propTypes () {
     return {
