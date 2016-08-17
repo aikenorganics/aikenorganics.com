@@ -22,3 +22,9 @@ test('exclude null values', (t) => {
   t.is(params('/path?x=1', {x: undefined, y: 2}), '/path?y=2')
   t.end()
 })
+
+test('exlude empty arrays', (t) => {
+  t.is(params('/path', {x: []}), '/path')
+  t.is(params('/path?y=1', {x: []}), '/path?y=1')
+  t.end()
+})
