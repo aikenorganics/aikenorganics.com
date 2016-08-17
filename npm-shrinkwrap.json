@@ -298,9 +298,9 @@
       "resolved": "https://registry.npmjs.org/browserify-zlib/-/browserify-zlib-0.1.4.tgz"
     },
     "buble": {
-      "version": "0.12.5",
-      "from": "buble@>=0.12.0 <0.13.0",
-      "resolved": "https://registry.npmjs.org/buble/-/buble-0.12.5.tgz",
+      "version": "0.13.1",
+      "from": "buble@>=0.13.1 <0.14.0",
+      "resolved": "https://registry.npmjs.org/buble/-/buble-0.13.1.tgz",
       "dependencies": {
         "acorn": {
           "version": "3.3.0",
@@ -1767,14 +1767,14 @@
       "resolved": "https://registry.npmjs.org/ripemd160/-/ripemd160-1.0.1.tgz"
     },
     "rollup": {
-      "version": "0.34.7",
-      "from": "rollup@0.34.7",
-      "resolved": "https://registry.npmjs.org/rollup/-/rollup-0.34.7.tgz"
+      "version": "0.34.9",
+      "from": "rollup@latest",
+      "resolved": "https://registry.npmjs.org/rollup/-/rollup-0.34.9.tgz"
     },
     "rollup-plugin-buble": {
-      "version": "0.12.1",
-      "from": "rollup-plugin-buble@0.12.1",
-      "resolved": "https://registry.npmjs.org/rollup-plugin-buble/-/rollup-plugin-buble-0.12.1.tgz"
+      "version": "0.13.0",
+      "from": "rollup-plugin-buble@latest",
+      "resolved": "https://registry.npmjs.org/rollup-plugin-buble/-/rollup-plugin-buble-0.13.0.tgz"
     },
     "rollup-pluginutils": {
       "version": "1.5.1",
@@ -2201,7 +2201,7 @@
     },
     "whatwg-fetch": {
       "version": "1.0.0",
-      "from": "whatwg-fetch@1.0.0",
+      "from": "whatwg-fetch@>=0.10.0",
       "resolved": "https://registry.npmjs.org/whatwg-fetch/-/whatwg-fetch-1.0.0.tgz"
     },
     "which": {
