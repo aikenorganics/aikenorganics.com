@@ -1,73 +1,80 @@
-import 'es6-promise'
-import 'whatwg-fetch'
 import {setErrors, setMessage, clearMessage} from './actions'
 
-const json = (url, options) => {
-  if (!options) options = {}
-  if (!options.headers) options.headers = {}
+const json = (url, options = {}) => new Promise((resolve, reject) => {
+  const request = new window.XMLHttpRequest()
+  const headers = options.headers || {}
+  let {body} = options
 
-  // Include credentials.
-  options.credentials = 'include'
-
-  // Set Accept header.
-  options.headers.Accept = 'application/json'
-
-  // Let the user know we're doing something.
-  setMessage('info', 'Working…')
-
-  return window.fetch(url, options).then((response) => {
-    const error = (text) => {
-      setMessage('error', text)
-      const e = new Error(response.statusText)
-      e.response = response
-      throw e
-    }
-
-    if (response.ok) {
-      return response.json().then((result) => {
-        clearMessage()
-        setErrors(null)
-        return result
-      }).catch((e) => {
-        error('Uh oh! Something went wrong. :(')
-      })
-    }
-
-    if (response.status === 422) {
-      return response.json().then((errors) => {
-        setErrors(errors)
-        error('Whoops! Can you try that again?')
-      })
-    }
-
-    return response.json().then((result) => {
-      clearMessage()
-      return result
-    }).catch((e) => {
-      error('Uh oh! Something went wrong. :(')
-    })
-  })
-}
-
-const withMethod = (method) => (url, options) => {
-  if (!options) options = {}
-  if (!options.headers) options.headers = {}
-
-  // Set method
-  options.method = method
+  // Display an error, optionally with state.
+  const error = (text, responseText = null) => {
+    setMessage('error', text)
+    const error = new Error('xhr error')
+    try {
+      error.state = JSON.parse(responseText)
+    } catch (error) {}
+    reject(error)
+  }
 
   // Stringify the body if necessary.
-  const {body, headers} = options
-  const multipart = body instanceof window.FormData
-  if (!multipart && body && typeof body !== 'string') {
-    options.body = JSON.stringify(body)
+  if (typeof body === 'object' && !(body instanceof window.FormData)) {
+    body = JSON.stringify(body)
     headers['Content-Type'] = 'application/json'
   }
 
+  // Set Accept header.
+  headers.Accept = 'application/json'
+
+  // Include credentials.
+  request.withCredentials = true
+
+  // Open the request.
+  request.open(options.method || 'get', url)
+
+  // Set headers.
+  for (const key in headers) request.setRequestHeader(key, headers[key])
+
+  // Send it!
+  request.send(body)
+
+  // Complete
+  request.addEventListener('load', () => {
+    const {status, responseText} = request
+
+    if (status === 200) {
+      clearMessage()
+      setErrors(null)
+      resolve(JSON.parse(responseText))
+    } else if (status === 422) {
+      const errors = JSON.parse(responseText)
+      setErrors(errors)
+      error('Whoops! Can you try that again?')
+    } else {
+      error('Whoops! Something went wrong…', responseText)
+    }
+  })
+
+  // Error
+  request.addEventListener('error', (event) => {
+    error('Whoops! Something went wrong…')
+  })
+
+  // Timeout
+  request.addEventListener('timeout', (event) => {
+    error('Whoops! Something went wrong…')
+  })
+
+  // Let the user know we're doing something.
+  setMessage('info', 'Working…')
+})
+
+export const GET = json
+
+export const POST = (url, options = {}) => {
+  options.method = 'post'
   return json(url, options)
 }
 
-export const GET = json
-export const POST = withMethod('post')
-export const PUT = withMethod('put')
-export const DELETE = withMethod('delete')
+export const DELETE = (url, options = {}) => {
+  options.method = 'delete'
+  return json(url, options)
+}

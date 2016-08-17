@@ -86,7 +86,10 @@ export const navigate = (url, {push} = {}) => {
     store.dispatch({type: REPLACE, state})
     window.scrollTo(0, 0)
     done()
-  }).catch(done)
+  }).catch(({state}) => {
+    if (state) store.dispatch({type: REPLACE, state})
+    done()
+  })
 }
 
 // Signin
