@@ -335,9 +335,9 @@
       "resolved": "https://registry.npmjs.org/bugsnag/-/bugsnag-1.7.0.tgz"
     },
     "bugsnag-js": {
-      "version": "2.5.0",
-      "from": "bugsnag-js@2.5.0",
-      "resolved": "https://registry.npmjs.org/bugsnag-js/-/bugsnag-js-2.5.0.tgz"
+      "version": "3.0.1",
+      "from": "bugsnag-js@latest",
+      "resolved": "https://registry.npmjs.org/bugsnag-js/-/bugsnag-js-3.0.1.tgz"
     },
     "builtin-modules": {
       "version": "1.1.1",
@@ -700,9 +700,9 @@
       "resolved": "https://registry.npmjs.org/es6-iterator/-/es6-iterator-2.0.0.tgz"
     },
     "es6-promise": {
-      "version": "3.1.2",
-      "from": "es6-promise@3.1.2",
-      "resolved": "https://registry.npmjs.org/es6-promise/-/es6-promise-3.1.2.tgz"
+      "version": "3.2.1",
+      "from": "es6-promise@latest",
+      "resolved": "https://registry.npmjs.org/es6-promise/-/es6-promise-3.2.1.tgz"
     },
     "es6-symbol": {
       "version": "3.1.0",
@@ -1250,9 +1250,9 @@
       "resolved": "https://registry.npmjs.org/map-obj/-/map-obj-1.0.1.tgz"
     },
     "marked": {
-      "version": "0.3.5",
-      "from": "marked@0.3.5",
-      "resolved": "https://registry.npmjs.org/marked/-/marked-0.3.5.tgz"
+      "version": "0.3.6",
+      "from": "marked@latest",
+      "resolved": "https://registry.npmjs.org/marked/-/marked-0.3.6.tgz"
     },
     "media-typer": {
       "version": "0.3.0",
@@ -2101,9 +2101,9 @@
       "resolved": "https://registry.npmjs.org/ua-parser-js/-/ua-parser-js-0.7.10.tgz"
     },
     "uglify-js": {
-      "version": "2.7.0",
-      "from": "uglify-js@2.7.0",
-      "resolved": "https://registry.npmjs.org/uglify-js/-/uglify-js-2.7.0.tgz",
+      "version": "2.7.2",
+      "from": "uglify-js@latest",
+      "resolved": "https://registry.npmjs.org/uglify-js/-/uglify-js-2.7.2.tgz",
       "dependencies": {
         "async": {
           "version": "0.2.10",
