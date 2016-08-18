@@ -4,7 +4,7 @@ import {destroyCategory} from '../../../actions'
 
 export default ({busy, categories}) => {
   const destroy = (id) => {
-    if (window.confirm('Are you sure?')) destroyCategory(id)
+    if (window.confirm('Are you sure?')) destroyCategory(id).catch(() => {})
   }
 
   return <div>
@@ -23,7 +23,7 @@ export default ({busy, categories}) => {
         </tr>
       </thead>
       <tbody>
-        {categories.map(({id, meat, name, position}) => {
+        {categories.map(({id, meat, name, position, removable}) => {
           return <tr key={id}>
             <td>
               <Link href={`/admin/categories/${id}/edit`} className='btn btn-default btn-xs'>
@@ -34,10 +34,13 @@ export default ({busy, categories}) => {
             <td>{position}</td>
             <td>{meat ? '✓' : ''}</td>
             <td>
-              <button type='button' className='btn btn-danger btn-xs' disabled={busy}
-                onClick={(e) => destroy(id)}>
-                Delete
-              </button>
+              {removable
+                ? <button type='button' className='btn btn-danger btn-xs' disabled={busy}
+                  onClick={(e) => destroy(id)}>
+                  Delete
+                </button>
+                : null
+              }
             </td>
           </tr>
         })}

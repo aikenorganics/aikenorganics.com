@@ -9,7 +9,9 @@ router.find('category', () => db.Category)
 
 // Index
 router.get('/', (req, res) => {
-  db.Category.order('position').all().then((categories) => {
+  db.Category
+  .select('not exists(select 1 from products where category_id = categories.id) as removable')
+  .order('position').all().then((categories) => {
     res.react(json.index, {categories})
   }).catch(res.error)
 })

@@ -25,11 +25,11 @@ export default class Form extends PureComponent {
       const {id} = this.props.category
       updateCategory(id, this.state).then(() => {
         navigate('/admin/categories')
-      }).catch((e) => {})
+      }).catch(() => {})
     } else {
       createCategory(this.state).then(() => {
         navigate('/admin/categories')
-      }).catch((e) => {})
+      }).catch(() => {})
     }
   }
 

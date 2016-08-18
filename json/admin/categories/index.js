@@ -11,7 +11,9 @@ exports.edit = (set, {category}) => {
 }
 
 exports.index = (set, {categories}) => {
-  set('categories', categories, categoryJson)
+  set('categories', categories, categoryJson, (set, category) => {
+    set(category, 'removable')
+  })
 }
 
 exports.new = (set) => {}
