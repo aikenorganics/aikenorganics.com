@@ -1,7 +1,7 @@
 'use strict'
 
-let db = require('../../../db')
-let test = require('../../test')
+const db = require('../../../db')
+const test = require('../../test')
 
 test('DELETE /product_orders/:id is a 200', (t) => {
   t.signIn('admin@example.com').then(() => {

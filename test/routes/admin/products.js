@@ -1,6 +1,6 @@
 'use strict'
 
-let test = require('../../test')
+const test = require('../../test')
 
 test('/admin/products?oversold=1 is a 200', (t) => {
   t.signIn('admin@example.com').then(() => {

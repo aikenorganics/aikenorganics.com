@@ -1,6 +1,6 @@
 'use strict'
 
-let Model = require('./model')
+const Model = require('./model')
 
 class ProductOrder extends Model {
 

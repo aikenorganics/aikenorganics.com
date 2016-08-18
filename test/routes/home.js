@@ -1,5 +1,7 @@
-var test = require('../test')
-var app = require('../../app')
+'use strict'
+
+const test = require('../test')
+const app = require('../../app')
 
 test('home page is a 200', (t) => {
   t.request(app)

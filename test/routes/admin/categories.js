@@ -1,7 +1,7 @@
 'use strict'
 
-let db = require('../../../db')
-let test = require('../../test')
+const db = require('../../../db')
+const test = require('../../test')
 
 test('GET /admin/categories/show is a 404 for missing ids', (t) => {
   t.signIn('admin@example.com').then(() => {

@@ -1,10 +1,10 @@
 'use strict'
 
-let db = require('../../db')
-let test = require('../test')
+const db = require('../../db')
+const test = require('../test')
 
 test('ProductOrder reports the correct cost', (t) => {
-  let productOrder = new db.ProductOrder({
+  const productOrder = new db.ProductOrder({
     cost: '5.75',
     quantity: 2
   })
@@ -170,7 +170,7 @@ test('Updating takes the previous quantity into account', (t) => {
 })
 
 test('validate cost', (t) => {
-  let productOrder = new db.ProductOrder({cost: 'asdf'})
+  const productOrder = new db.ProductOrder({cost: 'asdf'})
   t.ok(!productOrder.valid)
   t.deepEqual(productOrder.errors, {
     cost: ['Cost must be a valid dollar amount']

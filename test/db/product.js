@@ -1,10 +1,10 @@
 'use strict'
 
-let test = require('../test')
-let db = require('../../db')
+const test = require('../test')
+const db = require('../../db')
 
 test('Product#available subtracts reserved from supply', (t) => {
-  let product = new db.Product({
+  const product = new db.Product({
     supply: 100,
     reserved: 15
   })
@@ -15,7 +15,7 @@ test('Product#available subtracts reserved from supply', (t) => {
 })
 
 test('oversold', (t) => {
-  let product = new db.Product({
+  const product = new db.Product({
     supply: 100,
     reserved: 15
   })
@@ -26,7 +26,7 @@ test('oversold', (t) => {
 })
 
 test('Product#reservedCost', (t) => {
-  let product = new db.Product({
+  const product = new db.Product({
     supply: 100,
     reserved: 8,
     cost: '1.25'
@@ -36,63 +36,63 @@ test('Product#reservedCost', (t) => {
 })
 
 test('validate cost', (t) => {
-  let product = new db.Product({cost: 'asdf'})
+  const product = new db.Product({cost: 'asdf'})
   t.ok(!product.valid)
   t.deepEqual(product.errors.cost, ['Cost must be a valid dollar amount'])
   t.end()
 })
 
 test('validate cost', (t) => {
-  let product = new db.Product({cost: '.53'})
+  const product = new db.Product({cost: '.53'})
   product.validate()
   t.ok(!product.errors.cost)
   t.end()
 })
 
 test('validate cost', (t) => {
-  let product = new db.Product({cost: '32'})
+  const product = new db.Product({cost: '32'})
   product.validate()
   t.ok(!product.errors.cost)
   t.end()
 })
 
 test('validate cost', (t) => {
-  let product = new db.Product({cost: '32.25'})
+  const product = new db.Product({cost: '32.25'})
   product.validate()
   t.ok(!product.errors.cost)
   t.end()
 })
 
 test('validate cost', (t) => {
-  let product = new db.Product({cost: '32.25'})
+  const product = new db.Product({cost: '32.25'})
   product.validate()
   t.ok(!product.errors.cost)
   t.end()
 })
 
 test('validate cost', (t) => {
-  let product = new db.Product({cost: '  10  '})
+  const product = new db.Product({cost: '  10  '})
   product.validate()
   t.ok(!product.errors.cost)
   t.end()
 })
 
 test('validate cost', (t) => {
-  let product = new db.Product({cost: '  $32.25  '})
+  const product = new db.Product({cost: '  $32.25  '})
   product.validate()
   t.ok(!product.errors.cost)
   t.end()
 })
 
 test('validate name', (t) => {
-  let product = new db.Product({name: ''})
+  const product = new db.Product({name: ''})
   product.validate()
   t.deepEqual(product.errors.name, ['Name cannot be blank'])
   t.end()
 })
 
 test('validate supply', (t) => {
-  let product = new db.Product({supply: -2})
+  const product = new db.Product({supply: -2})
   product.validate()
   t.deepEqual(product.errors.supply, ['Supply cannot be negative'])
   t.end()

@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
     ? req.query.status
     : [req.query.status || 'open']
 
-  let orders = db.Order.include('user', 'location').where({status})
+  const orders = db.Order.include('user', 'location').where({status})
 
   // Product
   if (req.product) {

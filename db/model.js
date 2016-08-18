@@ -1,6 +1,6 @@
 'use strict'
 
-let db = require('./db')
+const db = require('./db')
 
 class Model extends db.Model {
 

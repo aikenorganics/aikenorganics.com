@@ -1,6 +1,6 @@
 'use strict'
 
-let db = module.exports = require('./db')
+const db = module.exports = require('./db')
 
 db.User = require('./user')
 db.Order = require('./order')
