@@ -36,6 +36,34 @@ test('GET /cart is a 200 logged in', (t) => {
 })
 
 test('POST /cart/checkout', (t) => {
+  const verify = () => {
+    Promise.all([
+      db.Order.find(1),
+      db.ProductOrder.where({orderId: 1}).order('productId').all(),
+      db.Product.where({id: [1, 2, 3, 4]}).order('id').all()
+    ]).then((results) => {
+      t.is(results[0].locationId, 2)
+      t.deepEqual(results[1].map((productOrder) => {
+        return productOrder.slice('productId', 'quantity')
+      }), [
+        {productId: 1, quantity: 4},
+        {productId: 2, quantity: 3},
+        {productId: 3, quantity: 4},
+        {productId: 4, quantity: 14},
+        {productId: 8, quantity: 1}
+      ])
+      t.deepEqual(results[2].map((product) => {
+        return product.slice('id', 'reserved')
+      }), [
+        {id: 1, reserved: 4},
+        {id: 2, reserved: 3},
+        {id: 3, reserved: 5},
+        {id: 4, reserved: 15}
+      ])
+      t.end()
+    }).catch(t.end)
+  }
+
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/cart').send({productId: 1, quantity: 2})
     .expect(200).end((error) => {
@@ -63,34 +91,6 @@ test('POST /cart/checkout', (t) => {
       })
     })
   })
-
-  function verify () {
-    Promise.all([
-      db.Order.find(1),
-      db.ProductOrder.where({orderId: 1}).order('productId').all(),
-      db.Product.where({id: [1, 2, 3, 4]}).order('id').all()
-    ]).then((results) => {
-      t.is(results[0].locationId, 2)
-      t.deepEqual(results[1].map((productOrder) => {
-        return productOrder.slice('productId', 'quantity')
-      }), [
-        {productId: 1, quantity: 4},
-        {productId: 2, quantity: 3},
-        {productId: 3, quantity: 4},
-        {productId: 4, quantity: 14},
-        {productId: 8, quantity: 1}
-      ])
-      t.deepEqual(results[2].map((product) => {
-        return product.slice('id', 'reserved')
-      }), [
-        {id: 1, reserved: 4},
-        {id: 2, reserved: 3},
-        {id: 3, reserved: 5},
-        {id: 4, reserved: 15}
-      ])
-      t.end()
-    }).catch(t.end)
-  }
 })
 
 test('POST /cart is a 200 for inactive products/growers', (t) => {

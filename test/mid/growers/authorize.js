@@ -1,70 +1,70 @@
 var test = require('../../test')
 var authorize = require('../../../mid/growers/authorize')
 
-test('growers/authorize: missing user and grower', function (t) {
+test('growers/authorize: missing user and grower', (t) => {
   var req = {}
   var res = {locals: {}}
-  authorize(req, res, function () {
+  authorize(req, res, () => {
     t.ok(!req.canEdit)
     t.ok(!res.locals.canEdit)
     t.end()
   })
 })
 
-test('growers/authorize: missing user', function (t) {
+test('growers/authorize: missing user', (t) => {
   var req = {grower: {id: 1}}
   var res = {locals: {}}
-  authorize(req, res, function () {
+  authorize(req, res, () => {
     t.ok(!req.canEdit)
     t.ok(!res.locals.canEdit)
     t.end()
   })
 })
 
-test('growers/authorize: missing grower', function (t) {
+test('growers/authorize: missing grower', (t) => {
   var req = {currentUser: {id: 2}}
   var res = {locals: {}}
-  authorize(req, res, function () {
+  authorize(req, res, () => {
     t.ok(!req.canEdit)
     t.ok(!res.locals.canEdit)
     t.end()
   })
 })
 
-test('growers/authorize: admin', function (t) {
+test('growers/authorize: admin', (t) => {
   var req = {currentUser: {id: 5}, grower: {id: 2}, admin: 1}
   var res = {locals: {}}
-  authorize(req, res, function () {
+  authorize(req, res, () => {
     t.ok(req.canEdit)
     t.ok(res.locals.canEdit)
     t.end()
   })
 })
 
-test('growers/authorize: regular user', function (t) {
+test('growers/authorize: regular user', (t) => {
   var req = {currentUser: {id: 2}, grower: {id: 1}}
   var res = {locals: {}}
-  authorize(req, res, function () {
+  authorize(req, res, () => {
     t.ok(!req.canEdit)
     t.ok(!res.locals.canEdit)
     t.end()
   })
 })
 
-test('growers/authorize: authorized user', function (t) {
+test('growers/authorize: authorized user', (t) => {
   var req = {currentUser: {id: 5}, grower: {id: 1}}
   var res = {locals: {}}
-  authorize(req, res, function () {
+  authorize(req, res, () => {
     t.ok(req.canEdit)
     t.ok(res.locals.canEdit)
     t.end()
   })
 })
 
-test('growers/authorize: authorized user for different grower', function (t) {
+test('growers/authorize: authorized user for different grower', (t) => {
   var req = {currentUser: {id: 5}, grower: {id: 2}}
   var res = {locals: {}}
-  authorize(req, res, function () {
+  authorize(req, res, () => {
     t.ok(!req.canEdit)
     t.ok(!res.locals.canEdit)
     t.end()

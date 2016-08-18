@@ -2,7 +2,7 @@
 
 const Cart = require('../lib/cart')
 
-module.exports = function (req, res, next) {
+module.exports = (req, res, next) => {
   req.cart = res.locals.cart = new Cart(req.session)
   next()
 }

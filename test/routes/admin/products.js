@@ -2,7 +2,7 @@
 
 let test = require('../../test')
 
-test('/admin/products?oversold=1 is a 200', function (t) {
+test('/admin/products?oversold=1 is a 200', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .get('/admin/products?oversold=1')
@@ -11,7 +11,7 @@ test('/admin/products?oversold=1 is a 200', function (t) {
   })
 })
 
-test('/admin/products is a 200', function (t) {
+test('/admin/products is a 200', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .get('/admin/products')

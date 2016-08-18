@@ -3,14 +3,14 @@
 let db = require('../../../db')
 let test = require('../../test')
 
-test('DELETE /product_orders/:id is a 200', function (t) {
+test('DELETE /product_orders/:id is a 200', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .delete('/admin/product-orders/1')
     .expect(200)
-    .end(function (error) {
+    .end((error) => {
       if (error) return t.end(error)
-      db.ProductOrder.find(1).then(function (productOrder) {
+      db.ProductOrder.find(1).then((productOrder) => {
         t.ok(productOrder == null)
         t.end()
       })
@@ -18,18 +18,18 @@ test('DELETE /product_orders/:id is a 200', function (t) {
   })
 })
 
-test('POST /product-orders/:id is a 200', function (t) {
+test('POST /product-orders/:id is a 200', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/admin/product-orders/1')
     .send({quantity: 1, cost: '1.23'})
     .expect(200)
-    .end(function (error, res) {
+    .end((error, res) => {
       if (error) return t.end(error)
       const {cost, quantity} = res.body.productOrder
       t.is(cost, '1.23')
       t.is(quantity, 1)
-      db.ProductOrder.find(1).then(function (productOrder) {
+      db.ProductOrder.find(1).then((productOrder) => {
         t.equal(productOrder.cost, '1.23')
         t.equal(productOrder.quantity, 1)
         t.end()
@@ -38,7 +38,7 @@ test('POST /product-orders/:id is a 200', function (t) {
   })
 })
 
-test('POST /product-orders is a 200', function (t) {
+test('POST /product-orders is a 200', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/admin/product-orders')
@@ -58,17 +58,17 @@ test('POST /product-orders is a 200', function (t) {
   })
 })
 
-test('editing an inactive product order', function (t) {
+test('editing an inactive product order', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/admin/product-orders/9')
     .send({quantity: 2, cost: '6'})
     .expect(200)
-    .end(function (error, res) {
+    .end((error, res) => {
       if (error) return t.end(error)
       const {cost, quantity} = res.body.productOrder
       t.is(cost, '6')
       t.is(quantity, 2)
-      db.ProductOrder.find(9).then(function (productOrder) {
+      db.ProductOrder.find(9).then((productOrder) => {
         t.is(productOrder.quantity, 2)
         t.is(productOrder.cost, '6.00')
         t.end()

@@ -67,14 +67,14 @@ exports = module.exports = (name, callback) => {
     }
 
     // Rollback the transaction before ending the test.
-    const end = t.end
-    t.end = function () {
-      const args = arguments
-      const next = () => end.apply(t, args)
+    const end = t.end.bind(t)
+    t.end = (...args) => {
       Promise.all([
         transaction.rollback(),
         visited ? driver.manage().deleteAllCookies() : Promise.resolve()
-      ]).then(next).catch(next)
+      ])
+      .then(() => end(...args))
+      .catch(() => end(...args))
       db.query = query
     }
 

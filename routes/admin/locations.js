@@ -8,7 +8,7 @@ const router = module.exports = require('ozymandias').Router()
 router.find('location', () => db.Location)
 
 // Index
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
   db.Location.order('name').all().then((locations) => {
     res.react(json.index, {locations})
   }).catch(res.error)
