@@ -33,8 +33,8 @@ test('POST /admin/categories is a 200', function (t) {
     .send({name: 'test', position: 2, meat: true})
     .expect('Content-Type', /json/)
     .expect(200)
-    .end((e, res) => {
-      if (e) return t.end(e)
+    .end((error, res) => {
+      if (error) return t.end(error)
       const {category} = res.body
       t.is(category.name, 'test')
       t.is(category.position, 2)
@@ -50,8 +50,8 @@ test('POST /admin/categories/:id is a 200', function (t) {
     .send({name: 'test', position: 106, meat: true})
     .expect('Content-Type', /json/)
     .expect(200)
-    .end((e, res) => {
-      if (e) return t.end(e)
+    .end((error, res) => {
+      if (error) return t.end(error)
       const {meat, name, position} = res.body.category
       t.is(name, 'test')
       t.is(position, 106)
@@ -66,8 +66,8 @@ test('DELETE /admin/categories/:id is a 200', function (t) {
     t.agent.delete('/admin/categories/6')
     .expect(200)
     .expect('Content-Type', /json/)
-    .end(function (e) {
-      if (e) return t.end(e)
+    .end(function (error) {
+      if (error) return t.end(error)
       db.Category.find(6).then(function (category) {
         t.is(category, null)
         t.end()

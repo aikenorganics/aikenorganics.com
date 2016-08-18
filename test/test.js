@@ -62,7 +62,7 @@ exports = module.exports = (name, callback) => {
         .post('/signin')
         .send({email: email})
         .expect(200)
-        .end((e) => e ? reject(e) : resolve())
+        .end((error) => error ? reject(error) : resolve())
       }).catch(t.end)
     }
 

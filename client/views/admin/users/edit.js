@@ -10,7 +10,7 @@ export default ({busy, user}) => {
     if (!window.confirm('Are you sure?')) return
     destroyUser(id).then(() => {
       navigate('/admin/users')
-    }).catch((e) => {})
+    }).catch(() => {})
   }
 
   return <div>

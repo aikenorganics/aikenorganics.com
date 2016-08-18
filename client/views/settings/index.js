@@ -19,8 +19,8 @@ export default class Index extends PureComponent {
     }
   }
 
-  save (e) {
-    e.preventDefault()
+  save (event) {
+    event.preventDefault()
     const {first, last, phone, street, city, state, zip} = this.state
     updateSettings({
       first,
@@ -30,7 +30,7 @@ export default class Index extends PureComponent {
       city: city || null,
       state: state || null,
       zip: zip || null
-    }).catch((e) => {})
+    }).catch(() => {})
   }
 
   render () {
@@ -40,38 +40,38 @@ export default class Index extends PureComponent {
 
     return <div>
       <h1>Settings</h1>
-      <form onSubmit={(e) => this.save(e)}>
+      <form onSubmit={(event) => this.save(event)}>
         <Errors errors={errors} />
         <div className='row'>
           <div className='form-group col-md-4'>
             <label htmlFor='first'>First Name</label>
-            <input autoFocus id='first' type='text' className='form-control' value={first} onChange={(e) => this.setState({first: e.target.value})} />
+            <input autoFocus id='first' type='text' className='form-control' value={first} onChange={(event) => this.setState({first: event.target.value})} />
           </div>
           <div className='form-group col-md-4'>
             <label htmlFor='last'>Last Name</label>
-            <input type='text' id='last' className='form-control' value={last} onChange={(e) => this.setState({last: e.target.value})} />
+            <input type='text' id='last' className='form-control' value={last} onChange={(event) => this.setState({last: event.target.value})} />
           </div>
           <div className='form-group col-md-4'>
             <label htmlFor='phone'>Phone Number</label>
-            <input type='text' id='phone' className='form-control' value={phone} onChange={(e) => this.setState({phone: e.target.value})} />
+            <input type='text' id='phone' className='form-control' value={phone} onChange={(event) => this.setState({phone: event.target.value})} />
           </div>
         </div>
         <div className='form-group'>
           <label htmlFor='street'>Street</label>
-          <input type='text' id='street' className='form-control' value={street || ''} onChange={(e) => this.setState({street: e.target.value})} />
+          <input type='text' id='street' className='form-control' value={street || ''} onChange={(event) => this.setState({street: event.target.value})} />
         </div>
         <div className='row'>
           <div className='form-group col-md-6'>
             <label htmlFor='city'>City</label>
-            <input type='text' id='city' className='form-control' value={city || ''} onChange={(e) => this.setState({city: e.target.value})} />
+            <input type='text' id='city' className='form-control' value={city || ''} onChange={(event) => this.setState({city: event.target.value})} />
           </div>
           <div className='form-group col-md-2'>
             <label htmlFor='state'>State</label>
-            <input type='text' id='state' className='form-control' value={state || ''} onChange={(e) => this.setState({state: e.target.value})} />
+            <input type='text' id='state' className='form-control' value={state || ''} onChange={(event) => this.setState({state: event.target.value})} />
           </div>
           <div className='form-group col-md-4'>
             <label htmlFor='zip'>Zip</label>
-            <input type='text' id='zip' className='form-control' value={zip || ''} onChange={(e) => this.setState({zip: e.target.value})} />
+            <input type='text' id='zip' className='form-control' value={zip || ''} onChange={(event) => this.setState({zip: event.target.value})} />
           </div>
         </div>
         <div className='form-group'>

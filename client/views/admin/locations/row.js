@@ -16,12 +16,12 @@ export default ({busy, location}) => {
       <div className='btn-group'>
         <button type='button' disabled={busy}
           className={`btn btn-xs ${active ? 'btn-success' : 'btn-default'}`}
-          onClick={() => updateLocation(id, {active: true}).catch((e) => {})}>
+          onClick={() => updateLocation(id, {active: true}).catch(() => {})}>
           Active
         </button>
         <button type='button' disabled={busy}
           className={`btn btn-xs ${!active ? 'btn-danger' : 'btn-default'}`}
-          onClick={() => updateLocation(id, {active: false}).catch((e) => {})}>
+          onClick={() => updateLocation(id, {active: false}).catch(() => {})}>
           Inactive
         </button>
       </div>
@@ -29,7 +29,7 @@ export default ({busy, location}) => {
     <td>
       <button type='button' disabled={busy}
         className='btn btn-danger btn-xs'
-        onClick={() => { if (window.confirm('Are you sure?')) destroyLocation(id).catch((e) => {}) }}>
+        onClick={() => { if (window.confirm('Are you sure?')) destroyLocation(id).catch(() => {}) }}>
         Delete
       </button>
     </td>

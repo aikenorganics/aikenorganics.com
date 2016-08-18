@@ -36,7 +36,7 @@ export default ({busy, categories}) => {
             <td>
               {removable
                 ? <button type='button' className='btn btn-danger btn-xs' disabled={busy}
-                  onClick={(e) => destroy(id)}>
+                  onClick={() => destroy(id)}>
                   Delete
                 </button>
                 : null

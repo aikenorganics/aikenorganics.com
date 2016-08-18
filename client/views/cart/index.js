@@ -14,7 +14,7 @@ export default ({busy, cart, currentUser, locations, order, products}) => {
 
   const available = products.filter((product) => quantity(product) > 0)
 
-  const remove = (id) => updateCart(id, 0).catch((e) => {})
+  const remove = (id) => updateCart(id, 0).catch(() => {})
 
   const meatWarning = products.some((product) => product.category.meat)
 
@@ -42,7 +42,7 @@ export default ({busy, cart, currentUser, locations, order, products}) => {
             <td>{quantity(product)}</td>
             <td>${total(product).toFixed(2)}</td>
             <td>
-              <button className='btn btn-danger btn-xs' onClick={(e) => remove(id)}>
+              <button className='btn btn-danger btn-xs' onClick={() => remove(id)}>
                 Remove
               </button>
             </td>

@@ -5,14 +5,14 @@ import Header from './header'
 import {createUserGrower, destroyUserGrower} from '../../../actions'
 
 export default ({busy, grower, path, users}) => {
-  const create = (e) => {
-    e.preventDefault()
-    createUserGrower(grower.id, +e.target.value).catch((e) => {})
-    e.target.value = ''
+  const create = (event) => {
+    event.preventDefault()
+    createUserGrower(grower.id, +event.target.value).catch(() => {})
+    event.target.value = ''
   }
 
   const destroy = (id) => {
-    destroyUserGrower(+id).catch((e) => {})
+    destroyUserGrower(+id).catch(() => {})
   }
 
   const userIds = grower.userGrowers.map(({userId}) => userId)
@@ -47,7 +47,7 @@ export default ({busy, grower, path, users}) => {
                 </td>
                 <td>{user.phone || '-'}</td>
                 <td>
-                  <button className='btn btn-danger btn-xs' onClick={(e) => destroy(id)} disabled={busy}>
+                  <button className='btn btn-danger btn-xs' onClick={() => destroy(id)} disabled={busy}>
                     Remove
                   </button>
                 </td>
@@ -56,7 +56,7 @@ export default ({busy, grower, path, users}) => {
           </tbody>
         </table>
         <div className='panel-footer'>
-          <select required className='form-control' disabled={busy} onChange={(e) => create(e)}>
+          <select required className='form-control' disabled={busy} onChange={(event) => create(event)}>
             <option value=''>Add a User</option>
             {users.filter(({id}) => !~userIds.indexOf(id)).map(({email, id, name}) => {
               return <option key={id} value={id}>{email} - {name}</option>

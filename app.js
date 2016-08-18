@@ -47,4 +47,4 @@ app.get('*', (req, res) => res.notfound())
 
 // 500
 app.use(bugsnag.errorHandler)
-app.use((e, req, res, next) => res.error(e))
+app.use((error, req, res, next) => res.error(error))

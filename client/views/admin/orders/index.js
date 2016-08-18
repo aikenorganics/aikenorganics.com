@@ -7,7 +7,7 @@ import {navigate} from '../../../actions'
 import {params} from '../../../url'
 
 export default ({full, locationId, locations, more, orders, page, product, products, status, url}) => {
-  const toggleFull = (e) => {
+  const toggleFull = () => {
     navigate(params(url, {full: full ? null : '1'}))
   }
 
@@ -19,12 +19,12 @@ export default ({full, locationId, locations, more, orders, page, product, produ
     }
   }
 
-  const changeLocation = (e) => {
-    navigate(params(url, {page: null, locationId: e.target.value || null}))
+  const changeLocation = (event) => {
+    navigate(params(url, {page: null, locationId: event.target.value || null}))
   }
 
-  const changeProduct = (e) => {
-    navigate(params(url, {page: null, productId: e.target.value || null}))
+  const changeProduct = (event) => {
+    navigate(params(url, {page: null, productId: event.target.value || null}))
   }
 
   return <div>
@@ -44,7 +44,7 @@ export default ({full, locationId, locations, more, orders, page, product, produ
       </div> <div className='btn-group'>
         {['open', 'complete', 'canceled'].map((name) => {
           return <label key={name} className={`btn ${~status.indexOf(name) ? 'btn-success' : 'btn-default'}`}>
-            <input type='checkbox' checked={~status.indexOf(name)} onChange={(e) => toggleStatus(name)} />
+            <input type='checkbox' checked={~status.indexOf(name)} onChange={() => toggleStatus(name)} />
             <span> {name.slice(0, 1).toUpperCase() + name.slice(1)}</span>
           </label>
         })}

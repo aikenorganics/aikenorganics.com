@@ -4,7 +4,7 @@ import Form from '../form'
 import {updateProduct} from '../../actions'
 
 export default ({busy, product: {id, active, name, supply}}) => {
-  const save = (values) => updateProduct(id, values).catch((e) => {})
+  const save = (values) => updateProduct(id, values).catch(() => {})
 
   return <tr>
     <td>

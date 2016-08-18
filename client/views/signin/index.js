@@ -13,8 +13,8 @@ export default class Index extends PureComponent {
     }
   }
 
-  submit (e) {
-    e.preventDefault()
+  submit (event) {
+    event.preventDefault()
     signin(this.state).then(() => {
       navigate('/products')
     }).catch(() => {})
@@ -25,7 +25,7 @@ export default class Index extends PureComponent {
     const {email, password} = this.state
 
     return <main className='container'>
-      <form onSubmit={(e) => this.submit(e)}>
+      <form onSubmit={(event) => this.submit(event)}>
         <div className='panel panel-default panel-small'>
           <div className='panel-heading'>
             <h3 className='panel-title'>Sign In</h3>
@@ -34,12 +34,12 @@ export default class Index extends PureComponent {
             <div className='form-group'>
               <label htmlFor='email'>Email</label>
               <input type='text' id='email' className='form-control' placeholder='you@example.com' required autoFocus
-                value={email} onChange={(e) => this.setState({email: e.target.value})} />
+                value={email} onChange={(event) => this.setState({email: event.target.value})} />
             </div>
             <div className='form-group'>
               <label htmlFor='password'>Password</label>
               <input type='password' id='password' className='form-control' required
-                value={password} onChange={(e) => this.setState({password: e.target.value})} />
+                value={password} onChange={(event) => this.setState({password: event.target.value})} />
             </div>
             <Errors errors={errors} />
           </div>

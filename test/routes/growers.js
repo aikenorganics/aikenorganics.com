@@ -168,8 +168,8 @@ test('POST /growers is a 200 for admins', function (t) {
     .send('name=New Grower')
     .expect(200)
     .expect('Content-Type', /json/)
-    .end((e, res) => {
-      if (e) return t.end(e)
+    .end((error, res) => {
+      if (error) return t.end(error)
       const {id, name} = res.body.grower
       t.is(name, 'New Grower')
       t.is(typeof id, 'number')
@@ -187,8 +187,8 @@ test('POST /growers/:id/products is a 200 for admins', function (t) {
     .send('categoryId=1')
     .expect('Content-Type', /json/)
     .expect(200)
-    .end((e, res) => {
-      if (e) return t.end(e)
+    .end((error, res) => {
+      if (error) return t.end(error)
       const {categoryId, cost, id, name, supply} = res.body.product
       t.is(categoryId, 1)
       t.is(cost, '2.45')

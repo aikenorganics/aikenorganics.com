@@ -11,8 +11,8 @@ test('POST /admin/users/:id is a 200', (t) => {
     .send('last=last')
     .send('phone=555-555-5555')
     .expect(200)
-    .end((e, res) => {
-      if (e) return t.end(e)
+    .end((error, res) => {
+      if (error) return t.end(error)
       const {first, last, phone} = res.body.user
       t.is(first, 'first')
       t.is(last, 'last')
@@ -106,8 +106,8 @@ test('Delete a user', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent.delete('/admin/users/7')
     .expect(200)
-    .end((e) => {
-      if (e) return t.end(e)
+    .end((error) => {
+      if (error) return t.end(error)
       db.User.find(7).then((user) => {
         t.ok(user == null)
         t.end()
@@ -133,8 +133,8 @@ test('POST /admin/users is a 200', (t) => {
     .send('last=last')
     .send('phone=555-555-5555')
     .expect(200)
-    .end((e) => {
-      if (e) return t.end(e)
+    .end((error) => {
+      if (error) return t.end(error)
       db.User.where({email: 'new@example.com'}).find().then((user) => {
         t.is(user.password, null)
         t.is(user.email, 'new@example.com')
@@ -153,8 +153,8 @@ test('return page in JSON', (t) => {
     .get('/admin/users')
     .set('Accept', 'application/json')
     .expect(200)
-    .end((e, res) => {
-      if (e) return t.end(e)
+    .end((error, res) => {
+      if (error) return t.end(error)
       t.is(res.body.page, 1)
       t.end()
     })

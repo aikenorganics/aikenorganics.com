@@ -27,7 +27,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
     <div className='pull-right hidden-print'>
       {status !== 'complete'
         ? <button className='btn btn-success'
-          onClick={(e) => updateOrder(id, {status: 'complete'})}>
+          onClick={() => updateOrder(id, {status: 'complete'})}>
           Complete
         </button>
         : ''
@@ -35,7 +35,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
       <span> </span>
       {status !== 'canceled'
         ? <button className='btn btn-danger'
-          onClick={(e) => updateOrder(id, {status: 'canceled'})}>
+          onClick={() => updateOrder(id, {status: 'canceled'})}>
           Cancel
         </button>
         : ''
@@ -43,7 +43,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
       <span> </span>
       {status !== 'open'
         ? <button className='btn btn-info'
-          onClick={(e) => updateOrder(id, {status: 'open'})}>
+          onClick={() => updateOrder(id, {status: 'open'})}>
           Reopen
         </button>
         : ''
@@ -107,7 +107,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
             <td>${total.toFixed(2)}</td>
             <td>
               <button className='btn btn-danger btn-xs'
-                onClick={(e) => { if (window.confirm('Are you sure?')) destroyProductOrder(id) }}>
+                onClick={() => { if (window.confirm('Are you sure?')) destroyProductOrder(id) }}>
                 Remove
               </button>
             </td>
@@ -117,7 +117,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
       <tfoot>
         <tr>
           <td colSpan='3'>
-            <select className='form-control' onChange={(e) => addProduct(e.target.value)} value=''>
+            <select className='form-control' onChange={(event) => addProduct(event.target.value)} value=''>
               <option value=''>Add to Order…</option>
               {products.filter(({id}) => {
                 return !productOrders.some(({productId}) => id === productId)
@@ -133,7 +133,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
     </table>
     <div className='form-group'>
       <label>Location</label>
-      <select className='form-control' defaultValue={locationId} onChange={(e) => updateOrder(id, {locationId: e.target.value || null})}>
+      <select className='form-control' defaultValue={locationId} onChange={(event) => updateOrder(id, {locationId: event.target.value || null})}>
         {user.canDeliver
           ? <option value=''>Deliver to {user.address}</option>
           : ''

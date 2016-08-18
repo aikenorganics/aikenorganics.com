@@ -41,7 +41,7 @@ class Order extends Model {
         description: `Aiken Organics - Order #${this.id}`,
         receipt_email: this.user.email,
         statement_descriptor: 'Aiken Organics'
-      }, (e, charge) => e ? reject(e) : resolve(charge))
+      }, (error, charge) => error ? reject(error) : resolve(charge))
     }).then((charge) => {
       return Payment.create({
         amount: amount,

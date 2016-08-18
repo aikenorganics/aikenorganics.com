@@ -21,7 +21,7 @@ export default ({busy, cart, categoryId, categories, page, products, market: {op
       </ul>
       <div className='visible-sm-block visible-xs-block'>
         <select className='form-control' value={categoryId || ''}
-          onChange={(e) => navigate(`/products?categoryId=${e.target.value}`)}>
+          onChange={(event) => navigate(`/products?categoryId=${event.target.value}`)}>
           <option value=''>Pick a Category</option>
           {categories.map(({id, name}) => {
             return <option key={id} value={id}>{name}</option>

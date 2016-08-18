@@ -9,6 +9,6 @@ rollup({
   plugins: [buble({objectAssign: "require('object-assign')"})]
 }).then((code) => {
   console.log(code.generate({format: 'cjs'}).code)
-}).catch((e) => {
-  console.error(e.stack)
+}).catch((error) => {
+  console.error(error.stack)
 })

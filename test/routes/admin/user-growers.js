@@ -9,8 +9,8 @@ test('POST /admin/user-growers is a 200', (t) => {
     .post('/admin/user-growers')
     .send({userId: 2, growerId: 1})
     .expect(200)
-    .end((e) => {
-      if (e) return t.end(e)
+    .end((error) => {
+      if (error) return t.end(error)
       db.UserGrower.where({userId: 2, growerId: 1}).find().then((userGrower) => {
         t.ok(userGrower)
         t.end()
@@ -24,8 +24,8 @@ test('DELETE /admin/user-growers/:userGrowerId is a 200', (t) => {
     t.agent
     .delete('/admin/user-growers/1')
     .expect(200)
-    .end((e) => {
-      if (e) return t.end(e)
+    .end((error) => {
+      if (error) return t.end(error)
       db.UserGrower.find(1).then((userGrower) => {
         t.ok(!userGrower)
         t.end()

@@ -3,15 +3,15 @@ import {updateGrower} from '../../../actions'
 
 export default ({busy, grower}) => {
   const update = (values) => {
-    updateGrower(grower.id, values).catch((e) => {})
+    updateGrower(grower.id, values).catch(() => {})
   }
 
   return <div>
     {grower.active
-      ? <button disabled={busy} className='btn btn-default btn-sm pull-right' onClick={(e) => update({active: false})}>
+      ? <button disabled={busy} className='btn btn-default btn-sm pull-right' onClick={() => update({active: false})}>
         Deactivate
       </button>
-      : <button disabled={busy} className='btn btn-success btn-sm pull-right' onClick={(e) => update({active: true})}>
+      : <button disabled={busy} className='btn btn-success btn-sm pull-right' onClick={() => update({active: true})}>
         Activate
       </button>
     }

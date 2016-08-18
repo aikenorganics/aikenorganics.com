@@ -26,8 +26,8 @@ test('GET /cart is a 200 logged in', (t) => {
     .post('/cart')
     .send({productId: 1, quantity: 2})
     .expect(200)
-    .end((e) => {
-      if (e) return t.end(e)
+    .end((error) => {
+      if (error) return t.end(error)
       t.agent.get('/cart')
       .expect(200)
       .end(t.end)
@@ -38,22 +38,23 @@ test('GET /cart is a 200 logged in', (t) => {
 test('POST /cart/checkout', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/cart').send({productId: 1, quantity: 2})
-    .expect(200).end((e) => {
-      if (e) return t.end(e)
+    .expect(200).end((error) => {
+      if (error) return t.end(error)
       t.agent.post('/cart').send({productId: 3, quantity: 4})
-      .expect(200).end((e) => {
-        if (e) return t.end(e)
+      .expect(200).end((error) => {
+        if (error) return t.end(error)
         t.agent.post('/cart').send({productId: 4, quantity: 20})
-        .expect(200).end((e) => {
-          if (e) return t.end(e)
+        .expect(200).end((error) => {
+          if (error) return t.end(error)
           t.agent.post('/cart').send({productId: 5, quantity: 1})
-          .expect(200).end((e) => {
-            if (e) return t.end(e)
+          .expect(200).end((error) => {
+            if (error) return t.end(error)
             t.agent.post('/cart').send({productId: 8, quantity: 1})
-            .expect(200).end((e) => {
+            .expect(200).end((error) => {
+              if (error) return t.end(error)
               t.agent.post('/cart/checkout').send({locationId: 2}).expect(200)
-              .end((e) => {
-                if (e) return t.end(e)
+              .end((error) => {
+                if (error) return t.end(error)
                 verify()
               })
             })

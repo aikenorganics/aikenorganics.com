@@ -2,11 +2,11 @@ import React from 'react'
 import {navigate} from '../actions'
 
 export default (props) => {
-  const click = (e) => {
-    if (e.metaKey) return
-    e.preventDefault()
+  const click = (event) => {
+    if (event.metaKey) return
+    event.preventDefault()
     navigate(props.href)
   }
 
-  return <a {...props} onClick={(e) => click(e)}>{props.children}</a>
+  return <a {...props} onClick={(event) => click(event)}>{props.children}</a>
 }

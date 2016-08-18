@@ -18,9 +18,9 @@ export default class Index extends PureComponent {
     }
   }
 
-  save (e) {
-    e.preventDefault()
-    updateMarket(this.state).catch((e) => {})
+  save (event) {
+    event.preventDefault()
+    updateMarket(this.state).catch(() => {})
   }
 
   render () {
@@ -33,16 +33,16 @@ export default class Index extends PureComponent {
         <strong>The market is {open ? 'open' : 'closed'}. </strong>
         <button type='button' disabled={busy}
           className={`btn ${open ? 'btn-danger' : 'btn-success'}`}
-          onClick={() => updateMarket({open: !open}).catch((e) => {})}>
+          onClick={() => updateMarket({open: !open}).catch(() => {})}>
           {open ? 'Close' : 'Open'} It
         </button>
       </p>
       <hr />
-      <form onSubmit={(e) => this.save(e)}>
+      <form onSubmit={(event) => this.save(event)}>
         <div className='form-group'>
           <label htmlFor='message'>Message</label>
           <textarea id='message' className='form-control' value={message} rows='5'
-            onChange={(e) => this.setState({message: e.target.value})} />
+            onChange={(event) => this.setState({message: event.target.value})} />
         </div>
         <p>
           <button className='btn btn-success' disabled={busy}>

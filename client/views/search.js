@@ -18,8 +18,8 @@ export default class Search extends PureComponent {
     }
   }
 
-  submit (e) {
-    e.preventDefault()
+  submit (event) {
+    event.preventDefault()
     const {url} = this.props
     const {value} = this.state
     navigate(value ? params(url, {search: value}) : url)
@@ -29,9 +29,9 @@ export default class Search extends PureComponent {
     const {url} = this.props
     const {value} = this.state
 
-    return <form className='form-inline' action={url} onSubmit={(e) => this.submit(e)}>
+    return <form className='form-inline' action={url} onSubmit={(event) => this.submit(event)}>
       <input type='search' value={value || ''} placeholder='Search…' className='form-control'
-        onChange={(e) => this.setState({value: e.target.value})} />
+        onChange={(event) => this.setState({value: event.target.value})} />
     </form>
   }
 }

@@ -19,7 +19,7 @@ test('Cannot insert product order for inactive products', function (t) {
     quantity: 1
   }).then(function () {
     t.end('Product order inserted for inactive product')
-  }).catch(function (e) {
+  }).catch(function () {
     t.end()
   })
 })
@@ -31,7 +31,7 @@ test('Cannot insert product order for inactive grower', function (t) {
     quantity: 1
   }).then(function () {
     t.end('Product order inserted for inactive grower')
-  }).catch(function (e) {
+  }).catch(function () {
     t.end()
   })
 })
@@ -43,7 +43,7 @@ test('Cannot insert product order with none available', function (t) {
     quantity: 1
   }).then(function () {
     t.end('Product order inserted with none available')
-  }).catch(function (e) {
+  }).catch(function () {
     t.end()
   })
 })
@@ -52,7 +52,7 @@ test('Cannot update product order with none available', function (t) {
   db.ProductOrder.find(8).then(function (productOrder) {
     productOrder.update({quantity: 15}).then(function () {
       t.end('Product order updated with none available')
-    }).catch(function (e) {
+    }).catch(function () {
       t.end()
     })
   }).catch(t.end)

@@ -44,14 +44,14 @@ test('Full signup flow', (t) => {
     password: 'sandwich'
   })
   .expect(200)
-  .end((e) => {
-    if (e) return t.end(e)
+  .end((error) => {
+    if (error) return t.end(error)
 
     t.agent
     .post('/auth/signout')
     .expect(200)
-    .end((e) => {
-      if (e) return t.end(e)
+    .end((error) => {
+      if (error) return t.end(error)
 
       t.agent
       .post('/auth/signin')
@@ -60,8 +60,8 @@ test('Full signup flow', (t) => {
         password: 'sandwiches'
       })
       .expect(422)
-      .end((e) => {
-        if (e) return t.end(e)
+      .end((error) => {
+        if (error) return t.end(error)
 
         t.agent
         .post('/auth/signin')
@@ -70,8 +70,8 @@ test('Full signup flow', (t) => {
           password: 'sandwich'
         })
         .expect(422)
-        .end((e) => {
-          if (e) return t.end(e)
+        .end((error) => {
+          if (error) return t.end(error)
 
           t.agent
           .post('/signin')

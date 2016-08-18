@@ -27,8 +27,8 @@ test('DELETE /orders/:id is a 200', (t) => {
     .delete('/orders/2')
     .expect(200)
     .expect('Content-Type', /json/)
-    .end((e) => {
-      if (e) return t.end(e)
+    .end((error) => {
+      if (error) return t.end(error)
       db.Order.find(2).then((order) => {
         t.ok(order == null, 'the order was deleted')
         t.end()
@@ -48,8 +48,8 @@ test('POST /orders/:id is a 200', (t) => {
     })
     .expect(200)
     .expect('Content-Type', /json/)
-    .end((e, res) => {
-      if (e) return t.end(e)
+    .end((error, res) => {
+      if (error) return t.end(error)
       const {location, status, notes} = res.body.order
       t.ok(location)
       t.is(location.id, 2)
@@ -107,8 +107,8 @@ test('Admins can update someone else\'s order', (t) => {
       notes: 'updated'
     })
     .expect(200)
-    .end((e, res) => {
-      if (e) return t.end(e)
+    .end((error, res) => {
+      if (error) return t.end(error)
       const {location, notes, status} = res.body.order
       t.ok(location)
       t.is(location.id, 2)

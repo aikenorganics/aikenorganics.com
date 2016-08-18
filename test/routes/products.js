@@ -244,13 +244,13 @@ test('GET /products has no inactive products', (t) => {
   .end(t.end)
 })
 
-test('POST /products/:id activates products', (t) => {
+test('POST /products/:id deactivates products', (t) => {
   t.signIn('grower@example.com').then(() => {
     t.agent.post('/products/1')
-    .send('active=0')
-    .expect(302)
-    .end((e) => {
-      if (e) return t.end()
+    .send({active: false})
+    .expect(200)
+    .end((error) => {
+      if (error) return t.end(error)
       db.Product.find(1).then((product) => {
         t.equal(product.active, false)
         t.end()
@@ -259,13 +259,13 @@ test('POST /products/:id activates products', (t) => {
   })
 })
 
-test('POST /products/:id deactivates products', (t) => {
+test('POST /products/:id activates products', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/products/7')
-    .send('active=1')
-    .expect(302)
-    .end((e) => {
-      if (e) return t.end()
+    .send({active: true})
+    .expect(200)
+    .end((error) => {
+      if (error) return t.end(error)
       db.Product.find(7).then((product) => {
         t.equal(product.active, true)
         t.end()

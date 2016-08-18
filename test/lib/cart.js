@@ -78,7 +78,7 @@ test('checkout total for multiple products', (t) => {
 test('checking out with an inactive location raises', (t) => {
   db.query('select checkout($1, $2, $3)', [1, 3, [1, 1]]).then(() => {
     t.end('Inactive locations should raise.')
-  }).catch((e) => {
+  }).catch(() => {
     t.end()
   })
 })

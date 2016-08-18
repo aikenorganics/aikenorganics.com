@@ -19,8 +19,8 @@ export default class Form extends PureComponent {
     }
   }
 
-  save (e) {
-    e.preventDefault()
+  save (event) {
+    event.preventDefault()
     if (this.props.category) {
       const {id} = this.props.category
       updateCategory(id, this.state).then(() => {
@@ -37,21 +37,21 @@ export default class Form extends PureComponent {
     const {meat, name, position} = this.state
     const {busy} = this.props
 
-    return <form onSubmit={(e) => this.save(e)}>
+    return <form onSubmit={(event) => this.save(event)}>
       <div className='form-group'>
         <label htmlFor='name'>Name</label>
         <input autoFocus type='text' id='name' className='form-control' required value={name}
-          onChange={(e) => this.setState({name: e.target.value})} disabled={busy} />
+          onChange={(event) => this.setState({name: event.target.value})} disabled={busy} />
       </div>
       <div className='form-group'>
         <label htmlFor='position'>Position</label>
         <input type='number' id='position' className='form-control' required value={position}
-          onChange={(e) => this.setState({position: e.target.value})} disabled={busy} />
+          onChange={(event) => this.setState({position: event.target.value})} disabled={busy} />
       </div>
       <div className='form-group'>
         <label>
           <input type='checkbox' checked={meat}
-            onChange={(e) => this.setState({meat: e.target.checked})} disabled={busy} />
+            onChange={(event) => this.setState({meat: event.target.checked})} disabled={busy} />
           <span> Meat</span>
         </label>
       </div>

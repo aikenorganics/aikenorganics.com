@@ -12,8 +12,8 @@ export default class Reset extends PureComponent {
     }
   }
 
-  submit (e) {
-    e.preventDefault()
+  submit (event) {
+    event.preventDefault()
     const {token} = this.props
     reset(token, this.state).then(() => {
       navigate('/products')
@@ -25,7 +25,7 @@ export default class Reset extends PureComponent {
     const {password} = this.state
 
     return <main className='container'>
-      <form onSubmit={(e) => this.submit(e)}>
+      <form onSubmit={(event) => this.submit(event)}>
         <div className='panel panel-default panel-small'>
           <div className='panel-heading'>
             <h3 className='panel-title'>Reset Password</h3>
@@ -41,7 +41,7 @@ export default class Reset extends PureComponent {
               : <div className='form-group'>
                 <label htmlFor='password'>New Password for {email || ''}</label>
                 <input type='password' id='password' className='form-control' required autoFocus
-                  value={password} onChange={(e) => this.setState({password: e.target.value})} />
+                  value={password} onChange={(event) => this.setState({password: event.target.value})} />
               </div>
             }
             <Errors errors={errors} />

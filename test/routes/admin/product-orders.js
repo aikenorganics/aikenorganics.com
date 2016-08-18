@@ -8,8 +8,8 @@ test('DELETE /product_orders/:id is a 200', function (t) {
     t.agent
     .delete('/admin/product-orders/1')
     .expect(200)
-    .end(function (e) {
-      if (e) return t.end(e)
+    .end(function (error) {
+      if (error) return t.end(error)
       db.ProductOrder.find(1).then(function (productOrder) {
         t.ok(productOrder == null)
         t.end()
@@ -24,8 +24,8 @@ test('POST /product-orders/:id is a 200', function (t) {
     .post('/admin/product-orders/1')
     .send({quantity: 1, cost: '1.23'})
     .expect(200)
-    .end(function (e, res) {
-      if (e) return t.end(e)
+    .end(function (error, res) {
+      if (error) return t.end(error)
       const {cost, quantity} = res.body.productOrder
       t.is(cost, '1.23')
       t.is(quantity, 1)
@@ -44,8 +44,8 @@ test('POST /product-orders is a 200', function (t) {
     .post('/admin/product-orders')
     .send({quantity: 1, orderId: 1, productId: 3})
     .expect(200)
-    .end((e, res) => {
-      if (e) return t.end(e)
+    .end((error, res) => {
+      if (error) return t.end(error)
       const {id, orderId, productId, quantity} = res.body.productOrder
       t.is(quantity, 1)
       t.is(orderId, 1)
@@ -63,8 +63,8 @@ test('editing an inactive product order', function (t) {
     t.agent.post('/admin/product-orders/9')
     .send({quantity: 2, cost: '6'})
     .expect(200)
-    .end(function (e, res) {
-      if (e) return t.end(e)
+    .end(function (error, res) {
+      if (error) return t.end(error)
       const {cost, quantity} = res.body.productOrder
       t.is(cost, '6')
       t.is(quantity, 2)

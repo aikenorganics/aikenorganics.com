@@ -155,14 +155,14 @@ class User extends require('ozymandias/user') {
         email: this.email,
         metadata: {id: this.id},
         source: token
-      }, (e, customer) => e ? reject(e) : resolve(customer))
+      }, (error, customer) => error ? reject(error) : resolve(customer))
     })
   }
 
   updateCustomer (values) {
     return new Promise((resolve, reject) => {
-      stripe.customers.update(this.stripeId, values, (e, customer) => {
-        e ? reject(e) : resolve(customer)
+      stripe.customers.update(this.stripeId, values, (error, customer) => {
+        error ? reject(error) : resolve(customer)
       })
     })
   }

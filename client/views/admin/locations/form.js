@@ -17,17 +17,17 @@ export default class Form extends PureComponent {
     }
   }
 
-  save (e) {
-    e.preventDefault()
+  save (event) {
+    event.preventDefault()
     if (this.props.location) {
       const {id} = this.props.location
       updateLocation(id, this.state).then(() => {
         navigate('/admin/locations')
-      }).catch((e) => {})
+      }).catch(() => {})
     } else {
       createLocation(this.state).then(() => {
         navigate('/admin/locations')
-      }).catch((e) => {})
+      }).catch(() => {})
     }
   }
 
@@ -35,11 +35,11 @@ export default class Form extends PureComponent {
     const {name} = this.state
     const {busy} = this.props
 
-    return <form onSubmit={(e) => this.save(e)}>
+    return <form onSubmit={(event) => this.save(event)}>
       <div className='form-group'>
         <label htmlFor='name'>Name</label>
         <input autoFocus type='text' id='name' className='form-control' required value={name}
-          onChange={(e) => this.setState({name: e.target.value})} disabled={busy} />
+          onChange={(event) => this.setState({name: event.target.value})} disabled={busy} />
       </div>
       <p className='text-right'>
         <button type='submit' className='btn btn-success' disabled={busy}>

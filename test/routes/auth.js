@@ -49,8 +49,8 @@ test('GET /signin/reset is a 200 for valid tokens', (t) => {
   t.agent.post('/auth/forgot')
   .send({email: 'admin@example.com'})
   .expect(200)
-  .end((e) => {
-    if (e) return t.end(e)
+  .end((error) => {
+    if (error) return t.end(error)
     db.Token.where({userId: 1}).find().then((token) => {
       t.agent.get(`/signin/reset/${token.id}`)
       .expect(200)
@@ -63,8 +63,8 @@ test('POST /auth/reset is a 302 for valid tokens', (t) => {
   t.agent.post('/auth/forgot')
   .send({email: 'admin@example.com'})
   .expect(200)
-  .end((e) => {
-    if (e) return t.end(e)
+  .end((error) => {
+    if (error) return t.end(error)
     db.Token.where({userId: 1}).find().then((token) => {
       t.agent.post(`/auth/reset/${token.id}`)
       .send({password: 'password'})
@@ -86,8 +86,8 @@ test('POST /auth/reset enforces password length of 8', (t) => {
   t.agent.post('/auth/forgot')
   .send({email: 'admin@example.com'})
   .expect(200)
-  .end((e) => {
-    if (e) return t.end(e)
+  .end((error) => {
+    if (error) return t.end(error)
     db.Token.where({userId: 1}).find().then((token) => {
       t.agent.post(`/auth/reset/${token.id}`)
       .send({password: 'secret'})

@@ -11,15 +11,15 @@ export default class Form extends PureComponent {
     this.button.click()
   }
 
-  change (e) {
+  change (event) {
     this.pending = true
     clearTimeout(this.timer)
     this.timer = setTimeout(() => this.button.click(), 2000)
-    this.value = e.target.value
+    this.value = event.target.value
   }
 
-  submit (e) {
-    e.preventDefault()
+  submit (event) {
+    event.preventDefault()
     clearTimeout(this.timer)
     if (!this.pending) return
     this.pending = false
@@ -28,10 +28,10 @@ export default class Form extends PureComponent {
 
   render () {
     return <form style={{display: 'inline'}}
-      onSubmit={(e) => this.submit(e)}
-      onChange={(e) => this.change(e)}
-      onBlur={(e) => this.blur(e)}
-      onFocus={(e) => this.focus(e)}>
+      onSubmit={(event) => this.submit(event)}
+      onChange={(event) => this.change(event)}
+      onBlur={(event) => this.blur(event)}
+      onFocus={(event) => this.focus(event)}>
       {this.props.children}
       <button style={{display: 'none'}} ref={(button) => { this.button = button }}>
       </button>
