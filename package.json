@@ -32,7 +32,7 @@
   "dependencies": {
     "browserify": "13.1.0",
     "bugsnag": "1.7.0",
-    "bugsnag-js": "3.0.1",
+    "bugsnag-js": "3.0.2",
     "es6-promise": "3.2.1",
     "marked": "0.3.6",
     "moment": "2.14.1",
@@ -42,7 +42,7 @@
     "react": "15.3.0",
     "react-dom": "15.3.0",
     "redux": "3.5.2",
-    "rollup": "0.34.9",
+    "rollup": "0.34.10",
     "rollup-plugin-buble": "0.13.0",
     "stripe": "4.9.0",
     "uglify-js": "2.7.3"
