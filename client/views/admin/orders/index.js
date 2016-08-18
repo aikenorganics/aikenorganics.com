@@ -6,7 +6,7 @@ import Order from './order'
 import {navigate} from '../../../actions'
 import {params} from '../../../url'
 
-export default ({full, location_id, locations, more, orders, page, product, products, status, url}) => {
+export default ({full, locationId, locations, more, orders, page, product, products, status, url}) => {
   const toggleFull = (e) => {
     navigate(params(url, {full: full ? null : '1'}))
   }
@@ -20,11 +20,11 @@ export default ({full, location_id, locations, more, orders, page, product, prod
   }
 
   const changeLocation = (e) => {
-    navigate(params(url, {page: null, location_id: e.target.value || null}))
+    navigate(params(url, {page: null, locationId: e.target.value || null}))
   }
 
   const changeProduct = (e) => {
-    navigate(params(url, {page: null, product_id: e.target.value || null}))
+    navigate(params(url, {page: null, productId: e.target.value || null}))
   }
 
   return <div>
@@ -49,7 +49,7 @@ export default ({full, location_id, locations, more, orders, page, product, prod
           </label>
         })}
       </div> <div className='form-group'>
-        <select className='form-control' style={{maxWidth: 300}} value={location_id} onChange={changeLocation}>
+        <select className='form-control' style={{maxWidth: 300}} value={locationId} onChange={changeLocation}>
           <option value=''>All Locations</option>
           <option value='delivery'>Delivery</option>
           {locations.map(({id, name}) => {

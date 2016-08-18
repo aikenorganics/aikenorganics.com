@@ -13,12 +13,12 @@ import {
 } from '../../../actions'
 
 export default ({errors, locations, order, payments, products, productOrders}) => {
-  const {id, location_id, status, user} = order
+  const {id, locationId, status, user} = order
 
-  const addProduct = (product_id) => {
+  const addProduct = (productId) => {
     createProductOrder({
-      order_id: id,
-      product_id,
+      orderId: id,
+      productId,
       quantity: 1
     })
   }
@@ -59,8 +59,8 @@ export default ({errors, locations, order, payments, products, productOrders}) =
       <small>
         {user.email}
         <span> - </span>
-        {moment(user.member_until).isSameOrAfter(new Date())
-          ? `Member until ${moment(user.member_until).format('MM/DD/YYYY')}`
+        {moment(user.memberUntil).isSameOrAfter(new Date())
+          ? `Member until ${moment(user.memberUntil).format('MM/DD/YYYY')}`
           : 'Not a Member'
         }
       </small>
@@ -120,7 +120,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
             <select className='form-control' onChange={(e) => addProduct(e.target.value)} value=''>
               <option value=''>Add to Order…</option>
               {products.filter(({id}) => {
-                return !productOrders.some(({product_id}) => id === product_id)
+                return !productOrders.some(({productId}) => id === productId)
               }).map(({id, name}) => {
                 return <option key={id} value={id}>{name}</option>
               })}
@@ -133,7 +133,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
     </table>
     <div className='form-group'>
       <label>Location</label>
-      <select className='form-control' defaultValue={location_id} onChange={(e) => updateOrder(id, {location_id: e.target.value || null})}>
+      <select className='form-control' defaultValue={locationId} onChange={(e) => updateOrder(id, {locationId: e.target.value || null})}>
         {user.canDeliver
           ? <option value=''>Deliver to {user.address}</option>
           : ''
@@ -158,11 +158,11 @@ export default ({errors, locations, order, payments, products, productOrders}) =
         </tr>
       </thead>
       <tbody>
-        {payments.map(({amount, id, stripe_id}) => {
+        {payments.map(({amount, id, stripeId}) => {
           return <tr key={id}>
             <td>
-              <a href={`https://dashboard.stripe.com/payments/${stripe_id}`} target='_blank'>
-                {stripe_id}
+              <a href={`https://dashboard.stripe.com/payments/${stripeId}`} target='_blank'>
+                {stripeId}
               </a>
             </td>
             <td>${(amount / 100).toFixed(2)}</td>
@@ -178,7 +178,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
         </tr>
       </tfoot>
     </table>
-    {user.stripe_id
+    {user.stripeId
       ? <Charge order={order}/>
       : ''
     }

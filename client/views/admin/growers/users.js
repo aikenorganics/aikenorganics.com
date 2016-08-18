@@ -15,7 +15,7 @@ export default ({busy, grower, path, users}) => {
     destroyUserGrower(+id).catch((e) => {})
   }
 
-  const user_ids = grower.userGrowers.map(({user_id}) => user_id)
+  const userIds = grower.userGrowers.map(({userId}) => userId)
 
   return <div className='row'>
     <div className='col-md-2'>
@@ -58,7 +58,7 @@ export default ({busy, grower, path, users}) => {
         <div className='panel-footer'>
           <select required className='form-control' disabled={busy} onChange={(e) => create(e)}>
             <option value=''>Add a User</option>
-            {users.filter(({id}) => !~user_ids.indexOf(id)).map(({email, id, name}) => {
+            {users.filter(({id}) => !~userIds.indexOf(id)).map(({email, id, name}) => {
               return <option key={id} value={id}>{email} - {name}</option>
             })}
           </select>

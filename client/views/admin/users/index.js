@@ -27,7 +27,7 @@ export default ({more, page, search, url, users}) => {
         </tr>
       </thead>
       <tbody>
-        {users.map(({id, email, is_admin, member_until, name, phone}) => {
+        {users.map(({id, email, isAdmin, memberUntil, name, phone}) => {
           return <tr key={id}>
             <td>
               <Link href={`/admin/users/${id}/edit`} className='btn btn-default btn-xs'>
@@ -38,13 +38,13 @@ export default ({more, page, search, url, users}) => {
             <td>{name}</td>
             <td>{phone || '-'}</td>
             <td>
-              {moment(member_until).isAfter(new Date())
+              {moment(memberUntil).isAfter(new Date())
                 ? <span className='label label-info'>Member</span>
                 : ''
               }
             </td>
             <td>
-              {is_admin
+              {isAdmin
                 ? <span className='label label-primary'>Admin</span>
                 : ''
               }

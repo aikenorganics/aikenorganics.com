@@ -8,7 +8,7 @@ const router = module.exports = require('ozymandias').Router()
 router.find('product', () => db.Product.include('grower', 'category'))
 
 // Authorize
-router.param('product_id', require('../mid/products/authorize'))
+router.param('productId', require('../mid/products/authorize'))
 
 // Index
 router.get('/', (req, res) => {
@@ -21,13 +21,13 @@ router.get('/', (req, res) => {
   if (search) products.search(search)
 
   // Category
-  if (req.query.category_id) {
-    products = products.where({category_id: req.query.category_id})
+  if (req.query.categoryId) {
+    products = products.where({categoryId: req.query.categoryId})
   }
 
   // Grower
-  if (req.query.grower_id) {
-    products = products.where({grower_id: req.query.grower_id})
+  if (req.query.growerId) {
+    products = products.where({growerId: req.query.growerId})
   }
 
   // Pagination
@@ -46,12 +46,12 @@ router.get('/', (req, res) => {
 })
 
 // Show
-router.get('/:product_id', (req, res) => {
+router.get('/:productId', (req, res) => {
   res.react(json.show, {product: req.product})
 })
 
 // Edit
-router.get('/:product_id/edit', (req, res) => {
+router.get('/:productId/edit', (req, res) => {
   if (!req.canEdit) return res.unauthorized()
 
   db.Category.order('position').all().then((categories) => {
@@ -60,12 +60,12 @@ router.get('/:product_id/edit', (req, res) => {
 })
 
 // Update
-router.post('/:product_id', (req, res) => {
+router.post('/:productId', (req, res) => {
   if (!req.canEdit) return res.unauthorized()
 
   const values = req.permit(
     'active',
-    'category_id',
+    'categoryId',
     'cost',
     'description',
     'name',
@@ -83,7 +83,7 @@ router.post('/:product_id', (req, res) => {
 })
 
 // Image
-router.post('/:product_id/image', (req, res) => {
+router.post('/:productId/image', (req, res) => {
   if (!req.canEdit) return res.unauthorized()
   req.product.uploadImage(req).then(() => {
     res.json(json.image)

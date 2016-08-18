@@ -1,14 +1,14 @@
 import assign from 'object-assign'
 import {UPDATE_CART} from '../actions'
 
-export default (state = null, {product_id, quantity, type}) => {
+export default (state = null, {productId, quantity, type}) => {
   switch (type) {
     case UPDATE_CART:
       const next = assign({}, state)
       if (quantity === 0) {
-        delete next[product_id]
+        delete next[productId]
       } else {
-        next[product_id] = quantity
+        next[productId] = quantity
       }
       return next
 

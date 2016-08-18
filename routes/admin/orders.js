@@ -12,7 +12,7 @@ router.find('order', () =>
 
 // Find a Product
 router.get('/', (req, res, next) => {
-  const id = req.query.product_id
+  const id = req.query.productId
   if (!id) return next()
   db.Product.find(id).then((product) => {
     req.product = res.locals.product = product
@@ -23,7 +23,7 @@ router.get('/', (req, res, next) => {
 // Index
 router.get('/', (req, res) => {
   const full = req.query.full === '1'
-  const location_id = req.query.location_id
+  const locationId = req.query.locationId
   const status = Array.isArray(req.query.status)
     ? req.query.status
     : [req.query.status || 'open']
@@ -33,17 +33,17 @@ router.get('/', (req, res) => {
   // Product
   if (req.product) {
     orders.where({
-      id: db.ProductOrder.select('order_id').where({
-        product_id: req.product.id
+      id: db.ProductOrder.select('orderId').where({
+        productId: req.product.id
       })
     })
   }
 
   // Location
-  if (location_id === 'delivery') {
-    orders.where({location_id: null})
-  } else if (location_id) {
-    orders.where({location_id})
+  if (locationId === 'delivery') {
+    orders.where({locationId: null})
+  } else if (locationId) {
+    orders.where({locationId})
   }
 
   // Pagination
@@ -53,7 +53,7 @@ router.get('/', (req, res) => {
   if (full) orders.include({productOrders: 'product'})
 
   Promise.all([
-    orders.order(['created_at', 'descending']).paginate(page, 50),
+    orders.order(['createdAt', 'descending']).paginate(page, 50),
     db.Location.order('name').all(),
     db.Product.order('name').all()
   ]).then(([orders, locations, products]) => {
@@ -61,7 +61,7 @@ router.get('/', (req, res) => {
       full,
       orders,
       page,
-      location_id,
+      locationId,
       locations,
       products,
       status
@@ -70,7 +70,7 @@ router.get('/', (req, res) => {
 })
 
 // Show
-router.get('/:order_id', (req, res) => {
+router.get('/:orderId', (req, res) => {
   const products = db.Product.join('grower')
     .where({active: true, grower: {active: true}})
     .where('supply > reserved')
@@ -84,7 +84,7 @@ router.get('/:order_id', (req, res) => {
 })
 
 // Charge
-router.post('/:order_id/charge', (req, res) => {
+router.post('/:orderId/charge', (req, res) => {
   const amount = (+req.body.amount * 100) | 0
   req.order.charge(amount).then((payment) => {
     res.json(json.charge, {payment})

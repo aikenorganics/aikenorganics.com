@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
       .where({id: req.cart.ids})
       .order('name').all(),
     db.Location.where({active: true}).order('name').all(),
-    db.Order.where({status: 'open', user_id: req.currentUser.id}).find()
+    db.Order.where({status: 'open', userId: req.currentUser.id}).find()
   ]).then(([products, locations, order]) => {
     res.react(json.index, {products, locations, order})
   }).catch(res.error)
@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 
 // Update
 router.post('/', (req, res, next) => {
-  const id = req.body.product_id
+  const id = req.body.productId
 
   db.Product.include('grower').find(id).then((product) => {
     if (product && product.grower.active) {
@@ -47,7 +47,7 @@ router.post('/', (req, res) => {
 router.post('/checkout', (req, res) => {
   db.query('select checkout($1, $2, $3)', [
     req.currentUser.id,
-    req.body.location_id,
+    req.body.locationId,
     req.cart.ids.map((id) => [id, req.cart.cart[id]])
   ]).then(() => (
     req.mail(updateMail, {

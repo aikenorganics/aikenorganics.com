@@ -18,10 +18,10 @@ class Grower extends Model {
       'email',
       'active',
       'location',
-      'image_updated_at',
+      'imageUpdatedAt',
       'description',
-      'created_at',
-      'updated_at'
+      'createdAt',
+      'updatedAt'
     ]
   }
 

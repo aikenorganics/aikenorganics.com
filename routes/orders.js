@@ -16,7 +16,7 @@ router.get('/current', (req, res) => {
   Promise.all([
     db.Order
       .include('location', {productOrders: 'product'})
-      .where({status: 'open', user_id: req.currentUser.id})
+      .where({status: 'open', userId: req.currentUser.id})
       .find(),
     db.Location.where({active: true}).order('name').all()
   ]).then(([order, locations]) => {
@@ -30,7 +30,7 @@ router.get('/previous', (req, res) => {
 
   db.Order
   .include('location', {productOrders: 'product'})
-  .where({status: 'complete', user_id: req.currentUser.id})
+  .where({status: 'complete', userId: req.currentUser.id})
   .paginate(page, 10)
   .then((orders) => {
     res.react(json.previous, {orders})
@@ -38,18 +38,18 @@ router.get('/previous', (req, res) => {
 })
 
 // Update
-router.post('/:order_id', (req, res) => {
+router.post('/:orderId', (req, res) => {
   // You can only update when the market is open.
   if (!req.admin && !req.market.open) {
     return res.unauthorized()
   }
 
   // You can only update your own order.
-  if (!req.admin && req.currentUser.id !== req.order.user_id) {
+  if (!req.admin && req.currentUser.id !== req.order.userId) {
     return res.unauthorized()
   }
 
-  const values = req.permit('location_id')
+  const values = req.permit('locationId')
 
   if (req.admin) {
     Object.assign(values, req.permit('notes', 'status'))
@@ -63,11 +63,11 @@ router.post('/:order_id', (req, res) => {
 })
 
 // Cancel
-router.delete('/:order_id', (req, res) => {
+router.delete('/:orderId', (req, res) => {
   if (!req.market.open) return res.unauthorized()
 
   // You can only cancel your own order.
-  if (req.currentUser.id !== req.order.user_id) {
+  if (req.currentUser.id !== req.order.userId) {
     return res.unauthorized()
   }
 

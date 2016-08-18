@@ -18,13 +18,13 @@ class Product extends Model {
       'supply',
       'unit',
       'description',
-      'image_updated_at',
+      'imageUpdatedAt',
       'reserved',
       'active',
-      'grower_id',
-      'category_id',
-      'created_at',
-      'updated_at',
+      'growerId',
+      'categoryId',
+      'createdAt',
+      'updatedAt',
       'featured'
     ]
   }

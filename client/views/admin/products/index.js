@@ -55,7 +55,7 @@ export default ({more, oversold, page, products, search, url}) => {
             <td>{supply}</td>
             <td>{reserved}</td>
             <td>
-              <Link href={`/admin/orders?product_id=${id}`} className='btn btn-success btn-xs'>
+              <Link href={`/admin/orders?productId=${id}`} className='btn btn-success btn-xs'>
                 View Orders
               </Link>
             </td>

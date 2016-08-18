@@ -26,7 +26,7 @@ router.post('/forgot', (req, res) => {
   }
 
   db.Token.create({
-    user_id: req.user.id,
+    userId: req.user.id,
     expires_at: expires_at
   }).then((token) => (
     req.mail(forgotMail, {
@@ -40,14 +40,14 @@ router.post('/forgot', (req, res) => {
 })
 
 // Reset
-router.post('/reset/:token_id', (req, res) => {
+router.post('/reset/:tokenId', (req, res) => {
   if ((req.body.password || '').length < 8) {
     return res.status(422).json({
       password: ['Sorry! Passwords must be at least eight characters long.']
     })
   }
 
-  db.Token.include('user').find(req.params.token_id).then((token) => {
+  db.Token.include('user').find(req.params.tokenId).then((token) => {
     if (!token || token.expires_at < new Date()) {
       return res.status(422).json({
         password: ['Sorry! That token is expired.']

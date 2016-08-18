@@ -7,11 +7,11 @@ test('POST /admin/user-growers is a 200', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/admin/user-growers')
-    .send({user_id: 2, grower_id: 1})
+    .send({userId: 2, growerId: 1})
     .expect(200)
     .end((e) => {
       if (e) return t.end(e)
-      db.UserGrower.where({user_id: 2, grower_id: 1}).find().then((userGrower) => {
+      db.UserGrower.where({userId: 2, growerId: 1}).find().then((userGrower) => {
         t.ok(userGrower)
         t.end()
       }).catch(t.end)
@@ -19,7 +19,7 @@ test('POST /admin/user-growers is a 200', (t) => {
   })
 })
 
-test('DELETE /admin/user-growers/:user_grower_id is a 200', (t) => {
+test('DELETE /admin/user-growers/:userGrowerId is a 200', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .delete('/admin/user-growers/1')

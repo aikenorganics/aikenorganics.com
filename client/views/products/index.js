@@ -5,23 +5,23 @@ import Search from '../search'
 import Product from './product'
 import {navigate} from '../../actions'
 
-export default ({busy, cart, category_id, categories, page, products, market: {open}, more, search, url, currentUser}) => {
+export default ({busy, cart, categoryId, categories, page, products, market: {open}, more, search, url, currentUser}) => {
   return <div className='row'>
     <div className='col-md-2'>
       <Search url='/products' value={search}/>
       <hr/>
       <ul className='nav nav-pills nav-stacked hidden-sm hidden-xs'>
         {categories.map((category) => {
-          return <li key={category.id} className={+category_id === category.id ? 'active' : ''}>
-            <Link href={`/products?category_id=${category.id}`}>
+          return <li key={category.id} className={+categoryId === category.id ? 'active' : ''}>
+            <Link href={`/products?categoryId=${category.id}`}>
               {category.name}
             </Link>
           </li>
         })}
       </ul>
       <div className='visible-sm-block visible-xs-block'>
-        <select className='form-control' value={category_id || ''}
-          onChange={(e) => navigate(`/products?category_id=${e.target.value}`)}>
+        <select className='form-control' value={categoryId || ''}
+          onChange={(e) => navigate(`/products?categoryId=${e.target.value}`)}>
           <option value=''>Pick a Category</option>
           {categories.map(({id, name}) => {
             return <option key={id} value={id}>{name}</option>

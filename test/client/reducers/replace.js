@@ -6,7 +6,7 @@ import reducer from '../../../client/reducers'
 test('replace state', (t) => {
   const state = freeze({
     busy: true,
-    category_id: 7,
+    categoryId: 7,
     user: {id: 1, email: 'finn@ooo.net'}
   })
   const next = reducer(state, {
@@ -16,7 +16,7 @@ test('replace state', (t) => {
       user: {id: 7, email: 'jake@ooo.net'}
     }
   })
-  t.is(next.category_id, null)
+  t.is(next.categoryId, null)
   t.is(next.busy, false)
   t.deepEqual(next.user, {id: 7, email: 'jake@ooo.net'})
   t.end()

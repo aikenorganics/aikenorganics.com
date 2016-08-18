@@ -39,9 +39,9 @@ test('GET /products is a 200 signed out', (t) => {
   .end(t.end)
 })
 
-test('GET /products?category_id=:id is a 200', (t) => {
+test('GET /products?categoryId=:id is a 200', (t) => {
   t.request()
-  .get('/products?category_id=1')
+  .get('/products?categoryId=1')
   .expect(200)
   .end(t.end)
 })
@@ -172,7 +172,7 @@ test('POST /products/:id is a 422 for invalid data', (t) => {
     .send('name=')
     .send('cost=asdf')
     .send('supply=-23')
-    .send('category_id=1')
+    .send('categoryId=1')
     .expect(422)
     .end(t.end)
   })

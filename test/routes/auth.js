@@ -51,7 +51,7 @@ test('GET /signin/reset is a 200 for valid tokens', (t) => {
   .expect(200)
   .end((e) => {
     if (e) return t.end(e)
-    db.Token.where({user_id: 1}).find().then((token) => {
+    db.Token.where({userId: 1}).find().then((token) => {
       t.agent.get(`/signin/reset/${token.id}`)
       .expect(200)
       .end(t.end)
@@ -65,7 +65,7 @@ test('POST /auth/reset is a 302 for valid tokens', (t) => {
   .expect(200)
   .end((e) => {
     if (e) return t.end(e)
-    db.Token.where({user_id: 1}).find().then((token) => {
+    db.Token.where({userId: 1}).find().then((token) => {
       t.agent.post(`/auth/reset/${token.id}`)
       .send({password: 'password'})
       .expect(200)
@@ -88,7 +88,7 @@ test('POST /auth/reset enforces password length of 8', (t) => {
   .expect(200)
   .end((e) => {
     if (e) return t.end(e)
-    db.Token.where({user_id: 1}).find().then((token) => {
+    db.Token.where({userId: 1}).find().then((token) => {
       t.agent.post(`/auth/reset/${token.id}`)
       .send({password: 'secret'})
       .expect(422)

@@ -3,13 +3,13 @@ import Link from '../link'
 import Grower from './grower'
 
 export default ({currentUser, growers}) => {
-  const {is_admin} = currentUser || {}
+  const {isAdmin} = currentUser || {}
 
   return <div className='row'>
     <div className='col-md-2'>
       <h3>Growers</h3>
       <hr/>
-      {is_admin
+      {isAdmin
         ? <div className='text-center'>
           <Link href='/growers/new' className='btn btn-default btn-xs'>
             New Grower

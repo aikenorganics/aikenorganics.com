@@ -18,29 +18,29 @@ test('User#name is trimmed', (t) => {
   t.end()
 })
 
-test('User#member_until is null for empty values', (t) => {
-  const user = new db.User({member_until: ''})
-  t.is(user.member_until, null)
-  user.member_until = 0
-  t.is(user.member_until, null)
-  user.member_until = undefined
-  t.is(user.member_until, null)
+test('User#memberUntil is null for empty values', (t) => {
+  const user = new db.User({memberUntil: ''})
+  t.is(user.memberUntil, null)
+  user.memberUntil = 0
+  t.is(user.memberUntil, null)
+  user.memberUntil = undefined
+  t.is(user.memberUntil, null)
   t.end()
 })
 
-test('User#is_admin accepts falsy/truthy strings', (t) => {
-  const user = new db.User({is_admin: 0})
-  t.is(user.is_admin, false)
-  user.is_admin = 1
-  t.is(user.is_admin, true)
-  user.is_admin = '0'
-  t.is(user.is_admin, false)
-  user.is_admin = '1'
-  t.is(user.is_admin, true)
-  user.is_admin = true
-  t.is(user.is_admin, true)
-  user.is_admin = false
-  t.is(user.is_admin, false)
+test('User#isAdmin accepts falsy/truthy strings', (t) => {
+  const user = new db.User({isAdmin: 0})
+  t.is(user.isAdmin, false)
+  user.isAdmin = 1
+  t.is(user.isAdmin, true)
+  user.isAdmin = '0'
+  t.is(user.isAdmin, false)
+  user.isAdmin = '1'
+  t.is(user.isAdmin, true)
+  user.isAdmin = true
+  t.is(user.isAdmin, true)
+  user.isAdmin = false
+  t.is(user.isAdmin, false)
   t.end()
 })
 
@@ -168,7 +168,7 @@ test('canDeliver', (t) => {
     street: '123 Street Drive',
     city: 'Townsville',
     state: 'SC',
-    stripe_id: '12345',
+    stripeId: '12345',
     zip: '12345'
   })
   t.is(user.canDeliver, true)

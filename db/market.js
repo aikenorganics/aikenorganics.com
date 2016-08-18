@@ -15,8 +15,8 @@ class Market extends Model {
       'open',
       'domain',
       'message',
-      'created_at',
-      'updated_at'
+      'createdAt',
+      'updatedAt'
     ]
   }
 

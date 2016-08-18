@@ -11,8 +11,8 @@ class Payment extends Model {
   static get columns () {
     return [
       'id',
-      'stripe_id',
-      'order_id',
+      'stripeId',
+      'orderId',
       'amount'
     ]
   }

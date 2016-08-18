@@ -5,8 +5,8 @@ const userJson = require('../users/user')
 module.exports = (set, userGrower) => {
   set(userGrower,
     'id',
-    'user_id',
-    'grower_id'
+    'userId',
+    'growerId'
   )
 
   if (userGrower.user) {

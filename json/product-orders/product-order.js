@@ -6,8 +6,8 @@ module.exports = (set, productOrder) => {
   set(productOrder,
     'id',
     'cost',
-    'order_id',
-    'product_id',
+    'orderId',
+    'productId',
     'quantity',
     'total'
   )

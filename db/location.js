@@ -13,8 +13,8 @@ class Location extends Model {
       'id',
       'name',
       'active',
-      'created_at',
-      'updated_at'
+      'createdAt',
+      'updatedAt'
     ]
   }
 

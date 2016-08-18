@@ -47,7 +47,7 @@ test('GET /admin/users/show is a 200 as an admin', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/admin/users/1/edit')
     .expect(200)
-    .expect(/is_admin/)
+    .expect(/isAdmin/)
     .end(t.end)
   })
 })

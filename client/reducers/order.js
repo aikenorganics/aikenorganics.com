@@ -13,7 +13,7 @@ export default (state = null, action) => {
     case UPDATE_ORDER:
       if (!state || state.id !== action.id) return state
       const next = assign({}, state, action.values)
-      if (next.location_id == null) delete next.location
+      if (next.locationId == null) delete next.location
       return next
 
     default:

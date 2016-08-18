@@ -14,8 +14,8 @@ class Category extends Model {
       'meat',
       'name',
       'position',
-      'created_at',
-      'updated_at'
+      'createdAt',
+      'updatedAt'
     ]
   }
 

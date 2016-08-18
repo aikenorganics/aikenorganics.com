@@ -42,14 +42,14 @@ test('POST /product-orders is a 200', function (t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/admin/product-orders')
-    .send({quantity: 1, order_id: 1, product_id: 3})
+    .send({quantity: 1, orderId: 1, productId: 3})
     .expect(200)
     .end((e, res) => {
       if (e) return t.end(e)
-      const {id, order_id, product_id, quantity} = res.body.productOrder
+      const {id, orderId, productId, quantity} = res.body.productOrder
       t.is(quantity, 1)
-      t.is(order_id, 1)
-      t.is(product_id, 3)
+      t.is(orderId, 1)
+      t.is(productId, 3)
       db.ProductOrder.find(id).then((productOrder) => {
         t.is(productOrder.quantity, 1)
         t.end()

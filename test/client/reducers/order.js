@@ -6,36 +6,36 @@ import {
 } from '../../../client/actions'
 import reducer from '../../../client/reducers'
 
-test('update order - location_id', (t) => {
-  const state = freeze({order: {id: 1, location_id: 1}})
+test('update order - locationId', (t) => {
+  const state = freeze({order: {id: 1, locationId: 1}})
   const next = reducer(state, {
     type: UPDATE_ORDER,
     id: 1,
-    values: {location_id: 2}
+    values: {locationId: 2}
   })
-  t.deepEqual(next.order, {id: 1, location_id: 2})
+  t.deepEqual(next.order, {id: 1, locationId: 2})
   t.end()
 })
 
 test('update order - wrong id', (t) => {
-  const state = freeze({order: {id: 1, location_id: 1}})
+  const state = freeze({order: {id: 1, locationId: 1}})
   const next = reducer(state, {
     type: UPDATE_ORDER,
     id: 2,
-    values: {location_id: 2}
+    values: {locationId: 2}
   })
-  t.deepEqual(next.order, {id: 1, location_id: 1})
+  t.deepEqual(next.order, {id: 1, locationId: 1})
   t.end()
 })
 
 test('update order - remove location', (t) => {
-  const state = freeze({order: {id: 1, location_id: 1, location: {}}})
+  const state = freeze({order: {id: 1, locationId: 1, location: {}}})
   const next = reducer(state, {
     type: UPDATE_ORDER,
     id: 1,
-    values: {location_id: null}
+    values: {locationId: null}
   })
-  t.deepEqual(next.order, {id: 1, location_id: null})
+  t.deepEqual(next.order, {id: 1, locationId: null})
   t.end()
 })
 

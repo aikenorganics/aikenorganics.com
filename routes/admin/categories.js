@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 router.get('/new', (req, res) => res.react(json.new))
 
 // Edit
-router.get('/:category_id/edit', (req, res) => {
+router.get('/:categoryId/edit', (req, res) => {
   res.react(json.edit, {
     category: req.category
   })
@@ -32,14 +32,14 @@ router.post('/', (req, res) => {
 })
 
 // Update
-router.post('/:category_id', (req, res) => {
+router.post('/:categoryId', (req, res) => {
   req.category.update(req.permit('meat', 'name', 'position')).then(() => {
     res.json(json.update)
   }).catch(res.error)
 })
 
 // Delete
-router.delete('/:category_id', (req, res) => {
+router.delete('/:categoryId', (req, res) => {
   req.category.destroy().then(() => {
     res.json({})
   }).catch(res.error)

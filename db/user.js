@@ -14,12 +14,12 @@ class User extends require('ozymandias/user') {
       'last',
       'first',
       'phone',
-      'is_admin',
-      'image_updated_at',
-      'member_until',
-      'stripe_id',
-      'card_brand',
-      'card_last4',
+      'isAdmin',
+      'imageUpdatedAt',
+      'memberUntil',
+      'stripeId',
+      'cardBrand',
+      'cardLast4',
       'street',
       'city',
       'state',
@@ -27,12 +27,12 @@ class User extends require('ozymandias/user') {
     ])
   }
 
-  get is_admin () {
-    return !!+this.data.get('is_admin') || false
+  get isAdmin () {
+    return !!+this.data.get('isAdmin') || false
   }
 
-  set is_admin (value) {
-    this.data.set('is_admin', !!+value || false)
+  set isAdmin (value) {
+    this.data.set('isAdmin', !!+value || false)
   }
 
   get first () {
@@ -76,17 +76,17 @@ class User extends require('ozymandias/user') {
       this.street &&
       this.city &&
       this.state &&
-      this.stripe_id &&
+      this.stripeId &&
       this.zip
     )
   }
 
-  get member_until () {
-    return this.data.get('member_until') || null
+  get memberUntil () {
+    return this.data.get('memberUntil') || null
   }
 
-  set member_until (value) {
-    this.data.set('member_until', value || null)
+  set memberUntil (value) {
+    this.data.set('memberUntil', value || null)
   }
 
   get street () {
@@ -161,7 +161,7 @@ class User extends require('ozymandias/user') {
 
   updateCustomer (values) {
     return new Promise((resolve, reject) => {
-      stripe.customers.update(this.stripe_id, values, (e, customer) => {
+      stripe.customers.update(this.stripeId, values, (e, customer) => {
         e ? reject(e) : resolve(customer)
       })
     })
@@ -173,12 +173,12 @@ class User extends require('ozymandias/user') {
         return source.id === customer.default_source
       })
       return this.update({
-        stripe_id: customer.id,
-        card_brand: card.brand,
-        card_last4: card.last4
+        stripeId: customer.id,
+        cardBrand: card.brand,
+        cardLast4: card.last4
       })
     }
-    if (this.stripe_id) {
+    if (this.stripeId) {
       return this.updateCustomer({source: token}).then(update)
     } else {
       return this.createCustomer(token).then(update)

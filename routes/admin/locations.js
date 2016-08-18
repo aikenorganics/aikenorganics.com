@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
 router.get('/new', (req, res) => res.react(json.new))
 
 // Edit
-router.get('/:location_id/edit', (req, res) => {
+router.get('/:locationId/edit', (req, res) => {
   res.react(json.edit, {location: req.location})
 })
 
@@ -30,13 +30,13 @@ router.post('/', (req, res) => {
 })
 
 // Update
-router.post('/:location_id', (req, res) => {
+router.post('/:locationId', (req, res) => {
   req.location.update(req.permit('name', 'active')).then(() => {
     res.json({})
   }).catch(res.error)
 })
 
 // Destroy
-router.delete('/:location_id', (req, res) => {
+router.delete('/:locationId', (req, res) => {
   req.location.destroy().then(() => res.json({})).catch(res.error)
 })

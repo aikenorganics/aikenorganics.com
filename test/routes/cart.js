@@ -14,7 +14,7 @@ test('POST /cart is a 200 logged in', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/cart')
-    .send({product_id: 1, quantity: 2})
+    .send({productId: 1, quantity: 2})
     .expect(200)
     .end(t.end)
   })
@@ -24,7 +24,7 @@ test('GET /cart is a 200 logged in', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/cart')
-    .send({product_id: 1, quantity: 2})
+    .send({productId: 1, quantity: 2})
     .expect(200)
     .end((e) => {
       if (e) return t.end(e)
@@ -37,21 +37,21 @@ test('GET /cart is a 200 logged in', (t) => {
 
 test('POST /cart/checkout', (t) => {
   t.signIn('admin@example.com').then(() => {
-    t.agent.post('/cart').send({product_id: 1, quantity: 2})
+    t.agent.post('/cart').send({productId: 1, quantity: 2})
     .expect(200).end((e) => {
       if (e) return t.end(e)
-      t.agent.post('/cart').send({product_id: 3, quantity: 4})
+      t.agent.post('/cart').send({productId: 3, quantity: 4})
       .expect(200).end((e) => {
         if (e) return t.end(e)
-        t.agent.post('/cart').send({product_id: 4, quantity: 20})
+        t.agent.post('/cart').send({productId: 4, quantity: 20})
         .expect(200).end((e) => {
           if (e) return t.end(e)
-          t.agent.post('/cart').send({product_id: 5, quantity: 1})
+          t.agent.post('/cart').send({productId: 5, quantity: 1})
           .expect(200).end((e) => {
             if (e) return t.end(e)
-            t.agent.post('/cart').send({product_id: 8, quantity: 1})
+            t.agent.post('/cart').send({productId: 8, quantity: 1})
             .expect(200).end((e) => {
-              t.agent.post('/cart/checkout').send({location_id: 2}).expect(200)
+              t.agent.post('/cart/checkout').send({locationId: 2}).expect(200)
               .end((e) => {
                 if (e) return t.end(e)
                 verify()
@@ -66,18 +66,18 @@ test('POST /cart/checkout', (t) => {
   function verify () {
     Promise.all([
       db.Order.find(1),
-      db.ProductOrder.where({order_id: 1}).order('product_id').all(),
+      db.ProductOrder.where({orderId: 1}).order('productId').all(),
       db.Product.where({id: [1, 2, 3, 4]}).order('id').all()
     ]).then((results) => {
-      t.is(results[0].location_id, 2)
+      t.is(results[0].locationId, 2)
       t.deepEqual(results[1].map((productOrder) => {
-        return productOrder.slice('product_id', 'quantity')
+        return productOrder.slice('productId', 'quantity')
       }), [
-        {product_id: 1, quantity: 4},
-        {product_id: 2, quantity: 3},
-        {product_id: 3, quantity: 4},
-        {product_id: 4, quantity: 14},
-        {product_id: 8, quantity: 1}
+        {productId: 1, quantity: 4},
+        {productId: 2, quantity: 3},
+        {productId: 3, quantity: 4},
+        {productId: 4, quantity: 14},
+        {productId: 8, quantity: 1}
       ])
       t.deepEqual(results[2].map((product) => {
         return product.slice('id', 'reserved')
@@ -96,7 +96,7 @@ test('POST /cart is a 200 for inactive products/growers', (t) => {
   t.signIn('user@example.com').then(() => {
     t.agent
     .post('/cart')
-    .send({product_id: 6, quantity: 1})
+    .send({productId: 6, quantity: 1})
     .expect(200)
     .end(t.end)
   })

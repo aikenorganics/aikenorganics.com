@@ -12,11 +12,11 @@ class ProductOrder extends Model {
     return [
       'id',
       'cost',
-      'order_id',
-      'product_id',
+      'orderId',
+      'productId',
       'quantity',
-      'created_at',
-      'updated_at'
+      'createdAt',
+      'updatedAt'
     ]
   }
 

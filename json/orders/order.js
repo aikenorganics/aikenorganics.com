@@ -6,10 +6,10 @@ const locationJson = require('../locations/location')
 module.exports = (set, order) => {
   set(order,
     'id',
-    'location_id',
+    'locationId',
     'notes',
     'status',
-    'user_id',
+    'userId',
     'total'
   )
 

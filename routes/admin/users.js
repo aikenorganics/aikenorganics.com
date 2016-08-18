@@ -33,7 +33,7 @@ router.get('/emails', (req, res) => {
 })
 
 // Edit
-router.get('/:user_id/edit', (req, res) => {
+router.get('/:userId/edit', (req, res) => {
   res.react(json.edit)
 })
 
@@ -43,29 +43,29 @@ router.get('/new', (req, res) => res.react(json.new))
 // Create
 router.post('/', (req, res) => {
   db.User.create(req.permit(
-    'email', 'first', 'last', 'phone', 'member_until'
+    'email', 'first', 'last', 'phone', 'memberUntil'
   )).then((user) => {
     res.json(json.create, {user})
   }).catch(res.error)
 })
 
 // Update
-router.post('/:user_id', (req, res) => {
+router.post('/:userId', (req, res) => {
   req.user.update(req.permit(
-    'email', 'first', 'last', 'phone', 'is_admin', 'member_until'
+    'email', 'first', 'last', 'phone', 'isAdmin', 'memberUntil'
   )).then(() => {
     res.json(json.update)
   }).catch(res.error)
 })
 
 // Image
-router.post('/:user_id/image', (req, res) => {
+router.post('/:userId/image', (req, res) => {
   req.user.uploadImage(req).then(() => {
     res.json(json.image)
   }).catch(res.error)
 })
 
 // Delete
-router.delete('/:user_id', (req, res) => {
+router.delete('/:userId', (req, res) => {
   req.user.destroy().then(() => res.json({})).catch(res.error)
 })

@@ -13,12 +13,12 @@ class Order extends Model {
   static get columns () {
     return [
       'id',
-      'location_id',
+      'locationId',
       'notes',
       'status',
-      'user_id',
-      'created_at',
-      'updated_at'
+      'userId',
+      'createdAt',
+      'updatedAt'
     ]
   }
 
@@ -31,13 +31,13 @@ class Order extends Model {
 
   charge (amount) {
     return new Promise((resolve, reject) => {
-      if (!this.user.stripe_id) {
+      if (!this.user.stripeId) {
         return reject(new Error('User has no billing information.'))
       }
       stripe.charges.create({
         amount: amount,
         currency: 'usd',
-        customer: this.user.stripe_id,
+        customer: this.user.stripeId,
         description: `Aiken Organics - Order #${this.id}`,
         receipt_email: this.user.email,
         statement_descriptor: 'Aiken Organics'
@@ -45,8 +45,8 @@ class Order extends Model {
     }).then((charge) => {
       return Payment.create({
         amount: amount,
-        stripe_id: charge.id,
-        order_id: this.id
+        stripeId: charge.id,
+        orderId: this.id
       })
     })
   }

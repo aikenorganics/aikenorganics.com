@@ -35,7 +35,7 @@ export default class Index extends PureComponent {
 
   render () {
     const {busy, currentUser, errors, stripeKey} = this.props
-    const {stripe_id, card_brand, card_last4} = currentUser
+    const {stripeId, cardBrand, cardLast4} = currentUser
     const {first, last, phone, street, city, state, zip} = this.state
 
     return <div>
@@ -83,8 +83,8 @@ export default class Index extends PureComponent {
       <hr/>
       <h1>Billing</h1>
       <p>
-        {stripe_id
-          ? <span>The card associated with your account is a {card_brand} ending in {card_last4}.</span>
+        {stripeId
+          ? <span>The card associated with your account is a {cardBrand} ending in {cardLast4}.</span>
           : <span>There is currently no card associated with your account.</span>
         }
       </p>

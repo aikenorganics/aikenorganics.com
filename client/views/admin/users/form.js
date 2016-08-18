@@ -12,14 +12,14 @@ export default class Form extends PureComponent {
 
   constructor (props) {
     super(props)
-    const {email, first, is_admin, last, phone, member_until} = props.user || {}
+    const {email, first, isAdmin, last, phone, memberUntil} = props.user || {}
     this.state = {
       email: email || '',
       first: first || '',
-      is_admin: is_admin || false,
+      isAdmin: isAdmin || false,
       last: last || '',
       phone: phone || '',
-      member_until: member_until || ''
+      memberUntil: memberUntil || ''
     }
   }
 
@@ -37,7 +37,7 @@ export default class Form extends PureComponent {
 
   render () {
     const {busy, user} = this.props
-    const {email, first, is_admin, last, member_until, phone} = this.state
+    const {email, first, isAdmin, last, memberUntil, phone} = this.state
 
     return <form onSubmit={(e) => this.save(e)}>
       <div className='form-group'>
@@ -57,13 +57,13 @@ export default class Form extends PureComponent {
         <input type='text' id='phone' className='form-control' value={phone} onChange={(e) => this.setState({phone: e.target.value})}/>
       </div>
       <div className='form-group'>
-        <label htmlFor='member_until'>Member Until</label>
-        <input type='date' id='member_until' className='form-control' value={(member_until || '').slice(0, 10)} onChange={(e) => this.setState({member_until: e.target.value})}/>
+        <label htmlFor='memberUntil'>Member Until</label>
+        <input type='date' id='memberUntil' className='form-control' value={(memberUntil || '').slice(0, 10)} onChange={(e) => this.setState({memberUntil: e.target.value})}/>
       </div>
       {user
         ? <div className='form-group'>
           <label>
-            <input type='checkbox' checked={is_admin} onChange={(e) => this.setState({is_admin: e.target.checked})}/>
+            <input type='checkbox' checked={isAdmin} onChange={(e) => this.setState({isAdmin: e.target.checked})}/>
             <span> Admin</span>
           </label>
         </div>

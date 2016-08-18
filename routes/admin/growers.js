@@ -31,12 +31,12 @@ router.get('/orders', (req, res) => {
 })
 
 // Show
-router.get('/:grower_id', (req, res) => {
+router.get('/:growerId', (req, res) => {
   db.Product
   .join({productOrders: 'order'})
   .select('sum(quantity) as quantity')
   .select('sum(quantity * product_orders.cost) as total')
-  .where({grower_id: req.grower.id})
+  .where({growerId: req.grower.id})
   .where({productOrders: {order: {status: 'complete'}}})
   .groupBy('products.id')
   .all().then((products) => {
@@ -45,7 +45,7 @@ router.get('/:grower_id', (req, res) => {
 })
 
 // Users
-router.get('/:grower_id/users', (req, res) => {
+router.get('/:growerId/users', (req, res) => {
   db.User.order('first').all().then((users) => {
     res.react(json.users, {grower: req.grower, users})
   }).catch(res.error)

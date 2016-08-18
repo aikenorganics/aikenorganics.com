@@ -14,8 +14,8 @@ test('ProductOrder reports the correct cost', function (t) {
 
 test('Cannot insert product order for inactive products', function (t) {
   db.ProductOrder.create({
-    order_id: 2,
-    product_id: 7,
+    orderId: 2,
+    productId: 7,
     quantity: 1
   }).then(function () {
     t.end('Product order inserted for inactive product')
@@ -26,8 +26,8 @@ test('Cannot insert product order for inactive products', function (t) {
 
 test('Cannot insert product order for inactive grower', function (t) {
   db.ProductOrder.create({
-    order_id: 2,
-    product_id: 6,
+    orderId: 2,
+    productId: 6,
     quantity: 1
   }).then(function () {
     t.end('Product order inserted for inactive grower')
@@ -38,8 +38,8 @@ test('Cannot insert product order for inactive grower', function (t) {
 
 test('Cannot insert product order with none available', function (t) {
   db.ProductOrder.create({
-    order_id: 1,
-    product_id: 5,
+    orderId: 1,
+    productId: 5,
     quantity: 1
   }).then(function () {
     t.end('Product order inserted with none available')
@@ -73,8 +73,8 @@ test('Updating quantity updates product.reserved', function (t) {
 
 test('Inserting a new product order updates product.reserved', function (t) {
   db.ProductOrder.create({
-    order_id: 2,
-    product_id: 1,
+    orderId: 2,
+    productId: 1,
     quantity: 3
   }).then(verify).catch(t.end)
 
@@ -101,8 +101,8 @@ test('Deleting a product order updates product.reserved', function (t) {
 
 test('insert: completed orders don\'t affect product.reserved', function (t) {
   db.ProductOrder.create({
-    order_id: 3,
-    product_id: 1,
+    orderId: 3,
+    productId: 1,
     quantity: 3
   }).then(verify).catch(t.end)
 
@@ -141,7 +141,7 @@ test('Update: completed orders don\'t affect product.reserved', function (t) {
 })
 
 test('Inserting a new product order sets cost', function (t) {
-  db.ProductOrder.create({order_id: 2, product_id: 1, quantity: 3})
+  db.ProductOrder.create({orderId: 2, productId: 1, quantity: 3})
   .then(function (productOrder) {
     t.is(productOrder.cost, '14.00')
     t.end()

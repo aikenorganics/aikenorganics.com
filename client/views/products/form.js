@@ -19,7 +19,7 @@ export default class Form extends PureComponent {
     super(props)
 
     const {
-      category_id,
+      categoryId,
       cost,
       description,
       featured,
@@ -29,7 +29,7 @@ export default class Form extends PureComponent {
     } = props.product || {}
 
     this.state = {
-      category_id: category_id || props.categories[0].id,
+      categoryId: categoryId || props.categories[0].id,
       cost: cost || '',
       description: description || '',
       featured: featured || false,
@@ -53,8 +53,8 @@ export default class Form extends PureComponent {
   }
 
   render () {
-    const {busy, categories, currentUser: {is_admin}, errors} = this.props
-    const {category_id, cost, description, featured, name, supply, unit} = this.state
+    const {busy, categories, currentUser: {isAdmin}, errors} = this.props
+    const {categoryId, cost, description, featured, name, supply, unit} = this.state
 
     return <form onSubmit={(event) => this.save(event)}>
       <Errors errors={errors}/>
@@ -78,8 +78,8 @@ export default class Form extends PureComponent {
         <input type='number' id='supply' min='0' className='form-control' required value={supply} onChange={({target: {value}}) => this.setState({supply: value})}/>
       </div>
       <div className='form-group'>
-        <label htmlFor='category_id'>Category</label>
-        <select type='text' id='category_id' className='form-control' required value={category_id} onChange={({target: {value}}) => this.setState({category_id: value})}>
+        <label htmlFor='categoryId'>Category</label>
+        <select type='text' id='categoryId' className='form-control' required value={categoryId} onChange={({target: {value}}) => this.setState({categoryId: value})}>
           {categories.map((category) => {
             return <option key={category.id} value={category.id}>
               {category.name}
@@ -91,7 +91,7 @@ export default class Form extends PureComponent {
         <label htmlFor='description'>Description</label>
         <textarea rows='5' id='description' className='form-control' value={description} onChange={({target: {value}}) => this.setState({description: value})}/>
       </div>
-      {is_admin
+      {isAdmin
         ? <div className='form-group'>
           <label>
             <input type='checkbox' checked={featured} onChange={({target: {checked}}) => this.setState({featured: checked})}/>

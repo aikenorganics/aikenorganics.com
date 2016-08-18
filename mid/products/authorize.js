@@ -11,8 +11,8 @@ module.exports = (req, res, next) => {
   }
 
   db.UserGrower.where({
-    user_id: req.currentUser.id,
-    grower_id: req.product.grower_id
+    userId: req.currentUser.id,
+    growerId: req.product.growerId
   }).find().then((userGrower) => {
     req.canEdit = res.locals.canEdit = !!userGrower
     next()

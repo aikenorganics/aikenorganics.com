@@ -8,7 +8,7 @@ export default class Checkout extends PureComponent {
     super(props)
     const {locations, order} = props
     this.state = {
-      location_id: order ? order.location_id : locations[0].id
+      locationId: order ? order.locationId : locations[0].id
     }
   }
 
@@ -21,18 +21,18 @@ export default class Checkout extends PureComponent {
   }
 
   setLocation (e) {
-    this.setState({location_id: +e.target.value || null})
+    this.setState({locationId: +e.target.value || null})
   }
 
   render () {
     const {busy, locations} = this.props
     const {address, canDeliver} = this.props.user
-    const {location_id} = this.state
+    const {locationId} = this.state
 
     return <form onSubmit={(e) => this.submit(e)}>
       <div className='form-group'>
         <label>Pickup Location / Delivery</label>
-        <select className='form-control' value={location_id || ''} onChange={(e) => this.setLocation(e)}>
+        <select className='form-control' value={locationId || ''} onChange={(e) => this.setLocation(e)}>
           <option value='0' disabled={!canDeliver}>
             {canDeliver
               ? `Deliver to ${address}`

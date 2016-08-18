@@ -6,25 +6,25 @@ export default class Form extends PureComponent {
 
   constructor (props) {
     super(props)
-    const {location_id} = props.order
-    this.state = {location_id}
+    const {locationId} = props.order
+    this.state = {locationId}
   }
 
   setLocation (e) {
     const {id} = this.props.order
-    const location_id = +e.target.value || null
-    this.setState({location_id})
-    updateOrder(id, {location_id}).catch((e) => {})
+    const locationId = +e.target.value || null
+    this.setState({locationId})
+    updateOrder(id, {locationId}).catch((e) => {})
   }
 
   render () {
     const {busy, locations} = this.props
     const {address, canDeliver} = this.props.user
-    const {location_id} = this.state
+    const {locationId} = this.state
 
     return <div className='form-group'>
       <label>Pickup Location / Delivery</label>
-      <select className='form-control' value={location_id || ''} onChange={(e) => this.setLocation(e)} disabled={busy}>
+      <select className='form-control' value={locationId || ''} onChange={(e) => this.setLocation(e)} disabled={busy}>
         <option value='0' disabled={!canDeliver}>
           {canDeliver
             ? `Deliver to ${address}`

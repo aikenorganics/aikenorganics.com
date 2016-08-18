@@ -42,7 +42,7 @@ test('POST /orders/:id is a 200', (t) => {
     t.agent
     .post('/orders/2')
     .send({
-      location_id: 2,
+      locationId: 2,
       status: 'canceled',
       notes: 'updated'
     })
@@ -56,7 +56,7 @@ test('POST /orders/:id is a 200', (t) => {
       t.is(status, 'open')
       t.is(notes, '')
       db.Order.find(2).then((order) => {
-        t.is(order.location_id, 2)
+        t.is(order.locationId, 2)
         t.is(order.status, 'open')
         t.is(order.notes, '')
         t.end()
@@ -70,7 +70,7 @@ test('Cannout update an order when the market is closed', (t) => {
   t.signIn('user@example.com').then(() => {
     t.agent
     .post('/orders/2')
-    .send({location_id: 2})
+    .send({locationId: 2})
     .expect(401)
     .end(t.end)
   })
@@ -91,7 +91,7 @@ test('Cannout update someone else\'s order', (t) => {
   t.signIn('user@example.com').then(() => {
     t.agent
     .post('/orders/1')
-    .send({location_id: 2})
+    .send({locationId: 2})
     .expect(401)
     .end(t.end)
   })
@@ -102,7 +102,7 @@ test('Admins can update someone else\'s order', (t) => {
     t.agent
     .post('/orders/5')
     .send({
-      location_id: 2,
+      locationId: 2,
       status: 'canceled',
       notes: 'updated'
     })
@@ -115,7 +115,7 @@ test('Admins can update someone else\'s order', (t) => {
       t.is(notes, 'updated')
       t.is(status, 'canceled')
       db.Order.find(5).then((order) => {
-        t.is(order.location_id, 2)
+        t.is(order.locationId, 2)
         t.is(order.status, 'canceled')
         t.is(order.notes, 'updated')
         t.end()
@@ -129,7 +129,7 @@ test('Admins can update orders when the market is closed', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/orders/5')
-    .send({location_id: 2})
+    .send({locationId: 2})
     .expect(200)
     .end(t.end)
   })
@@ -150,7 +150,7 @@ test('Updating a missing order returns a 404', (t) => {
   t.signIn('user@example.com').then(() => {
     t.agent
     .post('/orders/123456789')
-    .send({location_id: 2})
+    .send({locationId: 2})
     .expect(404)
     .end(t.end)
   })

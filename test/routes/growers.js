@@ -184,13 +184,13 @@ test('POST /growers/:id/products is a 200 for admins', function (t) {
     .send('name=New Product')
     .send('cost=2.45')
     .send('supply=32')
-    .send('category_id=1')
+    .send('categoryId=1')
     .expect('Content-Type', /json/)
     .expect(200)
     .end((e, res) => {
       if (e) return t.end(e)
-      const {category_id, cost, id, name, supply} = res.body.product
-      t.is(category_id, 1)
+      const {categoryId, cost, id, name, supply} = res.body.product
+      t.is(categoryId, 1)
       t.is(cost, '2.45')
       t.is(name, 'New Product')
       t.is(supply, 32)
@@ -206,7 +206,7 @@ test('POST /growers/:id/products is a 401 for non-admins', function (t) {
     .send('name=New Product')
     .send('cost=2.45')
     .send('supply=32')
-    .send('category_id=1')
+    .send('categoryId=1')
     .expect(401)
     .end(t.end)
   })
@@ -216,7 +216,7 @@ test('POST /growers/:id/products is a 200 if allowed', function (t) {
   t.signIn('grower@example.com').then(() => {
     t.agent.post('/growers/1/products')
     .send({
-      category_id: 1,
+      categoryId: 1,
       cost: '2.50',
       featured: true,
       name: 'New Product',
@@ -225,8 +225,8 @@ test('POST /growers/:id/products is a 200 if allowed', function (t) {
     .expect(200)
     .end((error, response) => {
       if (error) return t.end(error)
-      const {category_id, cost, featured, name, supply} = response.body.product
-      t.is(category_id, 1)
+      const {categoryId, cost, featured, name, supply} = response.body.product
+      t.is(categoryId, 1)
       t.is(cost, '2.50')
       t.is(featured, false)
       t.is(name, 'New Product')
@@ -243,14 +243,14 @@ test('POST /growers/:id/products is a 200 for admins', function (t) {
       name: 'New Product',
       cost: '2.50',
       supply: 23,
-      category_id: 1,
+      categoryId: 1,
       featured: true
     })
     .expect(200)
     .end((error, response) => {
       if (error) return t.end(error)
-      const {category_id, cost, featured, name, supply} = response.body.product
-      t.is(category_id, 1)
+      const {categoryId, cost, featured, name, supply} = response.body.product
+      t.is(categoryId, 1)
       t.is(cost, '2.50')
       t.is(featured, true)
       t.is(name, 'New Product')
@@ -266,7 +266,7 @@ test('POST /growers/:id/products is a 422 for invalid data', function (t) {
     .send('name=New Product')
     .send('cost=asdf')
     .send('supply=23')
-    .send('category_id=1')
+    .send('categoryId=1')
     .expect(422)
     .end(t.end)
   })

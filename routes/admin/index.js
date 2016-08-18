@@ -1,9 +1,9 @@
 'use strict'
 
-let ozymandias = require('ozymandias')
-let router = module.exports = ozymandias.Router()
+const ozymandias = require('ozymandias')
+const router = module.exports = ozymandias.Router()
 
-router.use(function (req, res, next) {
+router.use((req, res, next) => {
   if (!req.admin) return res.unauthorized()
   next()
 })

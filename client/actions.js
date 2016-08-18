@@ -135,10 +135,10 @@ export const updateMarket = (values) => {
 
 // Cart
 
-export const updateCart = (product_id, quantity) => {
+export const updateCart = (productId, quantity) => {
   busy()
-  return POST('/cart', {body: {product_id, quantity}}).then(() => {
-    store.dispatch({type: UPDATE_CART, product_id, quantity})
+  return POST('/cart', {body: {productId, quantity}}).then(() => {
+    store.dispatch({type: UPDATE_CART, productId, quantity})
     done()
   }).catch(done)
 }
@@ -150,9 +150,9 @@ export const checkout = (values) => {
 
 // UserGrowers
 
-export const createUserGrower = (grower_id, user_id) => {
+export const createUserGrower = (growerId, userId) => {
   busy()
-  return POST('/admin/user-growers', {body: {grower_id, user_id}}).then(({userGrower}) => {
+  return POST('/admin/user-growers', {body: {growerId, userId}}).then(({userGrower}) => {
     store.dispatch({type: CREATE_USER_GROWER, userGrower})
     done()
   }).catch(done)

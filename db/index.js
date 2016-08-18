@@ -15,101 +15,101 @@ db.UserGrower = require('./user-grower')
 db.ProductOrder = require('./product-order')
 
 db.User.hasMany('userGrowers', {
-  key: 'user_id',
+  key: 'userId',
   model: db.UserGrower
 })
 
 db.UserGrower.belongsTo('user', {
-  key: 'user_id',
+  key: 'userId',
   model: db.User
 })
 
 db.Grower.hasMany('userGrowers', {
-  key: 'grower_id',
+  key: 'growerId',
   model: db.UserGrower
 })
 
 db.UserGrower.belongsTo('grower', {
-  key: 'grower_id',
+  key: 'growerId',
   model: db.Grower
 })
 
 db.Product.belongsTo('grower', {
-  key: 'grower_id',
+  key: 'growerId',
   model: db.Grower
 })
 
 db.Grower.hasMany('products', {
-  key: 'grower_id',
+  key: 'growerId',
   model: db.Product
 })
 
 db.Product.belongsTo('category', {
-  key: 'category_id',
+  key: 'categoryId',
   model: db.Category
 })
 
 db.Category.hasMany('products', {
-  key: 'category_id',
+  key: 'categoryId',
   model: db.Product
 })
 
 db.Order.belongsTo('location', {
-  key: 'location_id',
+  key: 'locationId',
   model: db.Location
 })
 
 db.Location.hasMany('orders', {
-  key: 'location_id',
+  key: 'locationId',
   model: db.Order
 })
 
 db.Order.belongsTo('user', {
-  key: 'user_id',
+  key: 'userId',
   model: db.User
 })
 
 db.User.hasMany('orders', {
-  key: 'user_id',
+  key: 'userId',
   model: db.Order
 })
 
 db.ProductOrder.belongsTo('order', {
-  key: 'order_id',
+  key: 'orderId',
   model: db.Order
 })
 
 db.Order.hasMany('productOrders', {
-  key: 'order_id',
+  key: 'orderId',
   model: db.ProductOrder
 })
 
 db.ProductOrder.belongsTo('product', {
-  key: 'product_id',
+  key: 'productId',
   model: db.Product
 })
 
 db.Product.hasMany('productOrders', {
-  key: 'product_id',
+  key: 'productId',
   model: db.ProductOrder
 })
 
 db.Token.belongsTo('user', {
-  key: 'user_id',
+  key: 'userId',
   model: db.User
 })
 
 db.User.hasMany('tokens', {
-  key: 'user_id',
+  key: 'userId',
   model: db.Token
 })
 
 db.Payment.belongsTo('order', {
-  key: 'order_id',
+  key: 'orderId',
   model: db.Order
 })
 
 db.Order.hasMany('payments', {
-  key: 'order_id',
+  key: 'orderId',
   model: db.Payment
 })

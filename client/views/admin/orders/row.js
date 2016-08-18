@@ -12,8 +12,8 @@ export default ({order}) => {
     <td>{user.phone || '-'}</td>
     <td><Status order={order}/></td>
     <td>
-      {moment(user.member_until).isSameOrAfter(new Date())
-        ? <span className='label label-info' title={`Until ${moment(user.member_until).format('MM/DD/YYYY')}`}>
+      {moment(user.memberUntil).isSameOrAfter(new Date())
+        ? <span className='label label-info' title={`Until ${moment(user.memberUntil).format('MM/DD/YYYY')}`}>
           Member
         </span>
         : ''
