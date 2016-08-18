@@ -39,7 +39,7 @@ export default class Router extends PureComponent {
     }
 
     if (toRegExp(prefix).test(state.path)) {
-      return <Component {...state}/>
+      return <Component {...state} />
     }
 
     return null

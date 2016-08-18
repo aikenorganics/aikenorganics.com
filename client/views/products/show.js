@@ -9,14 +9,14 @@ export default ({busy, canEdit, cart, path, product, market: {open}, currentUser
     <div className='col-md-3 text-center'>
       {currentUser
         ? <p>
-          <CartForm busy={busy} product={product} cart={cart} open={open}/>
+          <CartForm busy={busy} product={product} cart={cart} open={open} />
         </p>
         : ''
       }
       <p>
-        <img className='img-rounded' src={mediumImage}/>
+        <img className='img-rounded' src={mediumImage} />
       </p>
-      <Nav canEdit={canEdit} path={path} product={product}/>
+      <Nav canEdit={canEdit} path={path} product={product} />
     </div>
     <div className='col-md-9'>
       <h1>{name}</h1>
@@ -30,9 +30,9 @@ export default ({busy, canEdit, cart, path, product, market: {open}, currentUser
         {grower.name}
       </Link> • {category.name}
       <div className='clearfix'>
-        <hr/>
+        <hr />
       </div>
-      <div dangerouslySetInnerHTML={{__html: descriptionHtml}}/>
+      <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
     </div>
   </div>
 }

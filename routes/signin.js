@@ -15,7 +15,7 @@ router.get('/reset/:tokenId', (req, res) => {
   db.Token.include('user').find(req.params.tokenId).then((token) => {
     res.react(json.reset, {
       token,
-      expired: !token || token.expires_at < new Date()
+      expired: !token || token.expiresAt < new Date()
     })
   }).catch(res.error)
 })

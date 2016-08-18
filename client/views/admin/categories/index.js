@@ -11,7 +11,7 @@ export default ({busy, categories}) => {
     <h1>
       Categories <Link href='/admin/categories/new' className='btn btn-default btn-sm'>New Category</Link>
     </h1>
-    <hr/>
+    <hr />
     <table className='table'>
       <thead>
         <tr>

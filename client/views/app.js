@@ -16,7 +16,7 @@ const main = (props) => {
     case 401:
       return <main className='container'>
         <h1 className='text-center'>
-          <img src={assets.path('img/logo-small.png')}/>
+          <img src={assets.path('img/logo-small.png')} />
         </h1>
         {currentUser
           ? <div>
@@ -27,7 +27,7 @@ const main = (props) => {
           </div>
           : <div>
             <p className='text-center'>You need to sign in to access to this page.</p>
-            <Signin {...props}/>
+            <Signin {...props} />
           </div>
         }
       </main>
@@ -35,7 +35,7 @@ const main = (props) => {
     case 404:
       return <main className='container text-center'>
         <h1>
-          <img src={assets.path('img/logo-small.png')}/>
+          <img src={assets.path('img/logo-small.png')} />
         </h1>
         <h1>Whoops! That page doesnʼt exist.</h1>
         <p>Go back to the <Link href='/'>home page</Link>?</p>
@@ -44,7 +44,7 @@ const main = (props) => {
     case 500:
       return <main className='container text-center'>
         <h1>
-          <img src={assets.path('img/logo-small.png')}/>
+          <img src={assets.path('img/logo-small.png')} />
         </h1>
         <h1>Whoops! Something went wrong!</h1>
         <p>Go back to the <Link href='/'>home page</Link>?</p>
@@ -59,9 +59,9 @@ export default (props) => {
   const {message} = props
 
   return <div>
-    <Nav {...props}/>
-    <Message message={message}/>
+    <Nav {...props} />
+    <Message message={message} />
     {main(props)}
-    <Footer {...props}/>
+    <Footer {...props} />
   </div>
 }

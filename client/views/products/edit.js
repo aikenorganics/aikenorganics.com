@@ -14,12 +14,12 @@ export default ({busy, categories, canEdit, currentUser, errors, path, product})
   return <div className='row'>
     <div className='col-md-3'>
       <p className='text-center'>
-        <img className='img-rounded' src={mediumImage}/>
+        <img className='img-rounded' src={mediumImage} />
       </p>
       <p>
-        <input type='file' className='form-control' onChange={upload} disabled={busy}/>
+        <input type='file' className='form-control' onChange={upload} disabled={busy} />
       </p>
-      <Nav canEdit={canEdit} path={path} product={product}/>
+      <Nav canEdit={canEdit} path={path} product={product} />
     </div>
     <div className='col-md-9'>
       <h1>Edit Product</h1>
@@ -42,8 +42,8 @@ export default ({busy, categories, canEdit, currentUser, errors, path, product})
           : <span className='label label-default'>Inactive</span>
         }
       </h4>
-      <hr/>
-      <Form busy={busy} categories={categories} currentUser={currentUser} errors={errors} product={product}/>
+      <hr />
+      <Form busy={busy} categories={categories} currentUser={currentUser} errors={errors} product={product} />
     </div>
   </div>
 }

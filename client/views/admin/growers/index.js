@@ -7,11 +7,11 @@ export default ({growers, path}) => {
 
   return <div className='row'>
     <div className='col-md-2'>
-      <Nav path={path}/>
+      <Nav path={path} />
     </div>
     <div className='col-md-10'>
       <h1>Growers</h1>
-      <hr/>
+      <hr />
       <table className='table'>
         <thead>
           <tr>

@@ -47,7 +47,7 @@ export default ({currentUser, more, orders, page, url}) => {
         </table>
       </div>
     })}
-    <hr/>
-    <Pagination more={more} page={page} url={url}/>
+    <hr />
+    <Pagination more={more} page={page} url={url} />
   </div>
 }

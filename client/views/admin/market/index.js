@@ -37,12 +37,12 @@ export default class Index extends PureComponent {
           {open ? 'Close' : 'Open'} It
         </button>
       </p>
-      <hr/>
+      <hr />
       <form onSubmit={(e) => this.save(e)}>
         <div className='form-group'>
           <label htmlFor='message'>Message</label>
           <textarea id='message' className='form-control' value={message} rows='5'
-            onChange={(e) => this.setState({message: e.target.value})}/>
+            onChange={(e) => this.setState({message: e.target.value})} />
         </div>
         <p>
           <button className='btn btn-success' disabled={busy}>

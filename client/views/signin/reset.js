@@ -41,10 +41,10 @@ export default class Reset extends PureComponent {
               : <div className='form-group'>
                 <label htmlFor='password'>New Password for {email || ''}</label>
                 <input type='password' id='password' className='form-control' required autoFocus
-                  value={password} onChange={(e) => this.setState({password: e.target.value})}/>
+                  value={password} onChange={(e) => this.setState({password: e.target.value})} />
               </div>
             }
-            <Errors errors={errors}/>
+            <Errors errors={errors} />
           </div>
           {token
             ? <div className='panel-footer text-right'>

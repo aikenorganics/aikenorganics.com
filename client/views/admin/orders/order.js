@@ -8,7 +8,7 @@ export default ({order}) => {
   return <div>
     <h2>
       <Link href={`/admin/orders/${id}`}>Order #{id}</Link>
-      <small> <Status order={order}/></small>
+      <small> <Status order={order} /></small>
     </h2>
     <h3>
       <Link href={`/admin/users/${user.id}/edit`}>{user.name}</Link>

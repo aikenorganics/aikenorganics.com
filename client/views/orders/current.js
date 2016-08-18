@@ -64,10 +64,10 @@ export default ({busy, market: {open}, locations, order, productOrders, currentU
       </tfoot>
     </table>
     {open
-      ? <Form busy={busy} locations={locations} order={order} user={currentUser}/>
+      ? <Form busy={busy} locations={locations} order={order} user={currentUser} />
       : ''
     }
-    <hr/>
+    <hr />
     <p>
       If youʼd like to pay online, you can update your billing information
       from <Link href='/settings'>your settings</Link>.

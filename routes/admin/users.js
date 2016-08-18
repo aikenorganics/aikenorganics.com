@@ -7,7 +7,7 @@ const router = module.exports = require('ozymandias').Router()
 // Find
 router.find('user', () => db.User.select(`exists(
   select id from orders where user_id = users.id
-) as has_order`))
+) as "hasOrder"`))
 
 // Index
 router.get('/', (req, res) => {

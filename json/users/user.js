@@ -19,7 +19,7 @@ module.exports = (set, user) => {
     'state',
     'zip',
     'address',
-    'has_order',
+    'hasOrder',
     'mediumImage'
   )
 }

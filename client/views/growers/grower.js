@@ -15,15 +15,15 @@ export default ({grower}) => {
         <div className='media-left media-middle'>
           <div className='image-wrapper'>
             <Link href={`/growers/${id}`}>
-              <img className='img-rounded' src={smallImage} style={{maxWidth: '100px', maxHeight: '100px'}}/>
+              <img className='img-rounded' src={smallImage} style={{maxWidth: '100px', maxHeight: '100px'}} />
             </Link>
           </div>
         </div>
         <div className='media-body'>
           {email ? <a href={`mailto:${email}`} target='_blank'>{email}</a> : ''}
-          {email && url ? <br/> : ''}
+          {email && url ? <br /> : ''}
           {url ? <a href={url} target='_blank'>{url}</a> : ''}
-          {location && (email || url) ? <br/> : ''}
+          {location && (email || url) ? <br /> : ''}
           {location || ''}
         </div>
       </div>

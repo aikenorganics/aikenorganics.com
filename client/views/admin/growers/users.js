@@ -19,10 +19,10 @@ export default ({busy, grower, path, users}) => {
 
   return <div className='row'>
     <div className='col-md-2'>
-      <Nav id={grower.id} path={path}/>
+      <Nav id={grower.id} path={path} />
     </div>
     <div className='col-md-10'>
-      <Header busy={busy} grower={grower}/>
+      <Header busy={busy} grower={grower} />
       <div className='panel panel-default'>
         <div className='panel-heading'>
           <h3 className='panel-title'>Users With Access</h3>

@@ -32,9 +32,9 @@ export default class Forgot extends PureComponent {
             <div className='form-group'>
               <label htmlFor='email'>Email</label>
               <input type='text' id='email' className='form-control' placeholder='you@example.com' required autoFocus
-                value={email} onChange={(e) => this.setState({email: e.target.value})}/>
+                value={email} onChange={(e) => this.setState({email: e.target.value})} />
             </div>
-            <Errors errors={errors}/>
+            <Errors errors={errors} />
           </div>
           <div className='panel-footer text-right'>
             <button className='btn btn-success' disabled={busy}>

@@ -8,7 +8,7 @@ export default ({currentUser, growers}) => {
   return <div className='row'>
     <div className='col-md-2'>
       <h3>Growers</h3>
-      <hr/>
+      <hr />
       {isAdmin
         ? <div className='text-center'>
           <Link href='/growers/new' className='btn btn-default btn-xs'>
@@ -22,7 +22,7 @@ export default ({currentUser, growers}) => {
       <div className='row'>
         {growers.map((grower) => {
           return <div key={grower.id} className='col-md-6'>
-            <Grower grower={grower}/>
+            <Grower grower={grower} />
           </div>
         })}
       </div>

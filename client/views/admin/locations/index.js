@@ -10,7 +10,7 @@ export default ({busy, locations}) => {
         New Location
       </Link>
     </h1>
-    <hr/>
+    <hr />
     <table className='table'>
       <thead>
         <tr>
@@ -22,7 +22,7 @@ export default ({busy, locations}) => {
       </thead>
       <tbody>
         {locations.map((location) => {
-          return <Row busy={busy} key={location.id} location={location}/>
+          return <Row busy={busy} key={location.id} location={location} />
         })}
       </tbody>
     </table>

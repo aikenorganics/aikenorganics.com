@@ -16,24 +16,24 @@ export default ({busy, cart, grower, open, product, currentUser}) => {
         <div className='media-left media-middle'>
           <div className='image-wrapper'>
             <Link href={`/products/${id}`}>
-              <img className='img-rounded' src={smallImage} style={{maxWidth: '100px', maxHeight: '100px', border: 'solid 3px orange'}}/>
+              <img className='img-rounded' src={smallImage} style={{maxWidth: '100px', maxHeight: '100px', border: 'solid 3px orange'}} />
             </Link>
           </div>
         </div>
         <div className='media-body'>
           {currentUser
             ? <div className='pull-right'>
-              <CartForm busy={busy} product={product} cart={cart} open={open}/>
+              <CartForm busy={busy} product={product} cart={cart} open={open} />
             </div>
             : ''
           }
           <strong>
             <Link href={`/growers/${grower.id}`}>{grower.name}</Link>
-            <br/>
+            <br />
             {open
               ? <span>
                 {active ? `${available} Available` : <span>Unavailable</span>}
-                <br/>
+                <br />
                 ${cost} per {unit}
               </span>
               : ''

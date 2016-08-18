@@ -34,14 +34,14 @@ export default class Index extends PureComponent {
             <div className='form-group'>
               <label htmlFor='email'>Email</label>
               <input type='text' id='email' className='form-control' placeholder='you@example.com' required autoFocus
-                value={email} onChange={(e) => this.setState({email: e.target.value})}/>
+                value={email} onChange={(e) => this.setState({email: e.target.value})} />
             </div>
             <div className='form-group'>
               <label htmlFor='password'>Password</label>
               <input type='password' id='password' className='form-control' required
-                value={password} onChange={(e) => this.setState({password: e.target.value})}/>
+                value={password} onChange={(e) => this.setState({password: e.target.value})} />
             </div>
-            <Errors errors={errors}/>
+            <Errors errors={errors} />
           </div>
           <div className='panel-footer text-right'>
             <Link href='/signin/forgot'>Forgot Password</Link>

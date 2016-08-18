@@ -6,12 +6,12 @@ import Header from './header'
 export default ({busy, grower, path, products}) => {
   return <div className='row'>
     <div className='col-md-2'>
-      <Nav id={grower.id} path={path}/>
+      <Nav id={grower.id} path={path} />
     </div>
     <div className='col-md-10'>
-      <Header busy={busy} grower={grower}/>
+      <Header busy={busy} grower={grower} />
       <h3>Totals from Complete Orders</h3>
-      <hr/>
+      <hr />
       <table className='table'>
         <thead>
           <tr>

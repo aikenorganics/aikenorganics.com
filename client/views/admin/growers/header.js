@@ -23,6 +23,6 @@ export default ({busy, grower}) => {
         }
       </small>
     </h1>
-    <hr/>
+    <hr />
   </div>
 }

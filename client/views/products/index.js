@@ -8,8 +8,8 @@ import {navigate} from '../../actions'
 export default ({busy, cart, categoryId, categories, page, products, market: {open}, more, search, url, currentUser}) => {
   return <div className='row'>
     <div className='col-md-2'>
-      <Search url='/products' value={search}/>
-      <hr/>
+      <Search url='/products' value={search} />
+      <hr />
       <ul className='nav nav-pills nav-stacked hidden-sm hidden-xs'>
         {categories.map((category) => {
           return <li key={category.id} className={+categoryId === category.id ? 'active' : ''}>
@@ -27,7 +27,7 @@ export default ({busy, cart, categoryId, categories, page, products, market: {op
             return <option key={id} value={id}>{name}</option>
           })}
         </select>
-        <hr/>
+        <hr />
       </div>
     </div>
     <div className='col-md-10'>
@@ -36,12 +36,12 @@ export default ({busy, cart, categoryId, categories, page, products, market: {op
           const {id, grower} = product
           const props = {busy, cart, currentUser, grower, open, product}
           return <div key={id} className='col-md-6'>
-            <Product {...props}/>
+            <Product {...props} />
           </div>
         })}
       </div>
-      <hr/>
-      <Pagination more={more} page={page} url={url}/>
+      <hr />
+      <Pagination more={more} page={page} url={url} />
     </div>
   </div>
 }

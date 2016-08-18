@@ -7,7 +7,7 @@ export default ({emails}) => {
     <Link href='/admin/users'>
       Full List
     </Link>
-    <hr/>
-    <textarea rows='30' className='form-control' defaultValue={emails.join('\n')}/>
+    <hr />
+    <textarea rows='30' className='form-control' defaultValue={emails.join('\n')} />
   </div>
 }

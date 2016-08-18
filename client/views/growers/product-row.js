@@ -12,7 +12,7 @@ export default ({busy, product: {id, active, name, supply}}) => {
     </td>
     <td>
       <Form onUpdate={(value) => save({supply: value || 0})}>
-        <input className='form-control' type='number' defaultValue={supply || 0} min='0' required/>
+        <input className='form-control' type='number' defaultValue={supply || 0} min='0' required />
       </Form>
     </td>
     <td>

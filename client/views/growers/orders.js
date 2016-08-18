@@ -8,12 +8,12 @@ export default ({canEdit, grower, path, products}) => {
   return <div className='row'>
     <div className='col-md-3 text-center'>
       <p>
-        <img className='img-rounded' src={mediumImage}/>
+        <img className='img-rounded' src={mediumImage} />
       </p>
-      <Nav canEdit={canEdit} grower={grower} path={path}/>
+      <Nav canEdit={canEdit} grower={grower} path={path} />
     </div>
     <div className='col-md-9'>
-      <Table products={products}/>
+      <Table products={products} />
     </div>
   </div>
 }

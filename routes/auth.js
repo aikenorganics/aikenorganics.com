@@ -16,8 +16,8 @@ const findUser = (req, res, next) => {
 // Forgot
 router.post('/forgot', findUser)
 router.post('/forgot', (req, res) => {
-  const expires_at = new Date()
-  expires_at.setDate(expires_at.getDate() + 7)
+  const expiresAt = new Date()
+  expiresAt.setDate(expiresAt.getDate() + 7)
 
   if (!req.user) {
     return res.status(422).json({
@@ -27,7 +27,7 @@ router.post('/forgot', (req, res) => {
 
   db.Token.create({
     userId: req.user.id,
-    expires_at: expires_at
+    expiresAt: expiresAt
   }).then((token) => (
     req.mail(forgotMail, {
       to: [req.user.email],
@@ -48,7 +48,7 @@ router.post('/reset/:tokenId', (req, res) => {
   }
 
   db.Token.include('user').find(req.params.tokenId).then((token) => {
-    if (!token || token.expires_at < new Date()) {
+    if (!token || token.expiresAt < new Date()) {
       return res.status(422).json({
         password: ['Sorry! That token is expired.']
       })

@@ -27,10 +27,10 @@ export default ({more, oversold, page, products, search, url}) => {
       }
       <span> </span>
       <div style={{display: 'inline-block'}}>
-        <Search url='/admin/products' value={search}/>
+        <Search url='/admin/products' value={search} />
       </div>
     </div>
-    <hr/>
+    <hr />
     <table className='table'>
       <thead>
         <tr>
@@ -75,7 +75,7 @@ export default ({more, oversold, page, products, search, url}) => {
         })}
       </tbody>
     </table>
-    <hr/>
-    <Pagination more={more} page={page} url={url}/>
+    <hr />
+    <Pagination more={more} page={page} url={url} />
   </div>
 }

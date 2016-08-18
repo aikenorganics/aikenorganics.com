@@ -57,25 +57,25 @@ export default class Form extends PureComponent {
     const {categoryId, cost, description, featured, name, supply, unit} = this.state
 
     return <form onSubmit={(event) => this.save(event)}>
-      <Errors errors={errors}/>
+      <Errors errors={errors} />
       <div className='form-group'>
         <label htmlFor='name'>Name</label>
-        <input autoFocus type='text' id='name' className='form-control' required value={name} onChange={({target: {value}}) => this.setState({name: value})}/>
+        <input autoFocus type='text' id='name' className='form-control' required value={name} onChange={({target: {value}}) => this.setState({name: value})} />
       </div>
       <div className='form-group'>
         <label htmlFor='cost'>Cost</label>
         <div className='input-group'>
           <span className='input-group-addon'>$</span>
-          <input id='cost' className='form-control' required value={cost} onChange={({target: {value}}) => this.setState({cost: value})}/>
+          <input id='cost' className='form-control' required value={cost} onChange={({target: {value}}) => this.setState({cost: value})} />
         </div>
       </div>
       <div className='form-group'>
         <label htmlFor='unit'>Unit</label>
-        <input type='text' id='unit' className='form-control' required value={unit} onChange={({target: {value}}) => this.setState({unit: value})}/>
+        <input type='text' id='unit' className='form-control' required value={unit} onChange={({target: {value}}) => this.setState({unit: value})} />
       </div>
       <div className='form-group'>
         <label htmlFor='supply'>Supply</label>
-        <input type='number' id='supply' min='0' className='form-control' required value={supply} onChange={({target: {value}}) => this.setState({supply: value})}/>
+        <input type='number' id='supply' min='0' className='form-control' required value={supply} onChange={({target: {value}}) => this.setState({supply: value})} />
       </div>
       <div className='form-group'>
         <label htmlFor='categoryId'>Category</label>
@@ -89,12 +89,12 @@ export default class Form extends PureComponent {
       </div>
       <div className='form-group'>
         <label htmlFor='description'>Description</label>
-        <textarea rows='5' id='description' className='form-control' value={description} onChange={({target: {value}}) => this.setState({description: value})}/>
+        <textarea rows='5' id='description' className='form-control' value={description} onChange={({target: {value}}) => this.setState({description: value})} />
       </div>
       {isAdmin
         ? <div className='form-group'>
           <label>
-            <input type='checkbox' checked={featured} onChange={({target: {checked}}) => this.setState({featured: checked})}/>
+            <input type='checkbox' checked={featured} onChange={({target: {checked}}) => this.setState({featured: checked})} />
             <span> Featured</span>
           </label>
         </div>

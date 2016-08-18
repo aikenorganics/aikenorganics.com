@@ -10,11 +10,11 @@ export default ({more, page, search, url, users}) => {
       New User
     </Link>
     <div style={{display: 'inline-block'}}>
-      <Search url='/admin/users' value={search}/>
+      <Search url='/admin/users' value={search} />
     </div>
     <span> </span>
     <Link href='/admin/users/emails'>Email List</Link>
-    <hr/>
+    <hr />
     <table className='table'>
       <thead>
         <tr>
@@ -53,7 +53,7 @@ export default ({more, page, search, url, users}) => {
         })}
       </tbody>
     </table>
-    <hr/>
-    <Pagination more={more} page={page} url={url}/>
+    <hr />
+    <Pagination more={more} page={page} url={url} />
   </div>
 }

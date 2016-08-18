@@ -20,7 +20,7 @@ export default ({busy, cart, currentUser, locations, order, products}) => {
 
   return <div>
     <h1>Shopping Cart</h1>
-    <Warning cart={cart} products={products}/>
+    <Warning cart={cart} products={products} />
     <table className='table'>
       <thead>
         <tr>
@@ -72,9 +72,9 @@ export default ({busy, cart, currentUser, locations, order, products}) => {
       </p>
       : ''
     }
-    <hr/>
+    <hr />
     {available.length > 0
-      ? <Checkout busy={busy} order={order} locations={locations} user={currentUser}/>
+      ? <Checkout busy={busy} order={order} locations={locations} user={currentUser} />
       : ''
     }
   </div>

@@ -41,17 +41,17 @@ export default class Form extends PureComponent {
       <div className='form-group'>
         <label htmlFor='name'>Name</label>
         <input autoFocus type='text' id='name' className='form-control' required value={name}
-          onChange={(e) => this.setState({name: e.target.value})} disabled={busy}/>
+          onChange={(e) => this.setState({name: e.target.value})} disabled={busy} />
       </div>
       <div className='form-group'>
         <label htmlFor='position'>Position</label>
         <input type='number' id='position' className='form-control' required value={position}
-          onChange={(e) => this.setState({position: e.target.value})} disabled={busy}/>
+          onChange={(e) => this.setState({position: e.target.value})} disabled={busy} />
       </div>
       <div className='form-group'>
         <label>
           <input type='checkbox' checked={meat}
-            onChange={(e) => this.setState({meat: e.target.checked})} disabled={busy}/>
+            onChange={(e) => this.setState({meat: e.target.checked})} disabled={busy} />
           <span> Meat</span>
         </label>
       </div>

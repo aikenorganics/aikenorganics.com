@@ -51,7 +51,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
     </div>
     <h2>
       <Link href={`/admin/orders/${id}`}>Order #{id}</Link>
-      <small> <Status order={order}/></small>
+      <small> <Status order={order} /></small>
     </h2>
     <h3>
       <Link href={`/admin/users/${user.id}/edit`}>{user.name}</Link>
@@ -65,7 +65,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
         }
       </small>
     </h3>
-    <Errors errors={errors}/>
+    <Errors errors={errors} />
     <table className='table'>
       <thead>
         <tr>
@@ -95,13 +95,13 @@ export default ({errors, locations, order, payments, products, productOrders}) =
               <Form onUpdate={(value) => update({cost: value || 0})}>
                 <div className='input-group'>
                   <span className='input-group-addon'>$</span>
-                  <input className='form-control' defaultValue={cost || 0} required/>
+                  <input className='form-control' defaultValue={cost || 0} required />
                 </div>
               </Form>
             </td>
             <td>
               <Form onUpdate={(value) => update({quantity: value || 0})}>
-                <input type='number' className='form-control' defaultValue={quantity || 0} min='1' max={quantity + product.available} required/>
+                <input type='number' className='form-control' defaultValue={quantity || 0} min='1' max={quantity + product.available} required />
               </Form>
             </td>
             <td>${total.toFixed(2)}</td>
@@ -146,7 +146,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
     <div className='form-group'>
       <label>Notes</label>
       <Form onUpdate={(notes) => updateOrder(id, {notes})}>
-        <textarea className='form-control' rows='10' defaultValue={order.notes}/>
+        <textarea className='form-control' rows='10' defaultValue={order.notes} />
       </Form>
     </div>
     <h2>Payments</h2>
@@ -179,7 +179,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
       </tfoot>
     </table>
     {user.stripeId
-      ? <Charge order={order}/>
+      ? <Charge order={order} />
       : ''
     }
   </div>

@@ -5,7 +5,7 @@ export default ({children, path}) => {
   return <div className='row'>
     <div className='col-md-2'>
       <h2>Orders</h2>
-      <hr/>
+      <hr />
       <ul className='nav nav-pills nav-stacked hidden-print'>
         <li className={/^\/orders\/current\/?$/.test(path) ? 'active' : ''}>
           <Link href='/orders/current'>

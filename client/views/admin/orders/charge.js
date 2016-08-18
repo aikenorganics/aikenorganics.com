@@ -30,7 +30,7 @@ export default class Charge extends PureComponent {
       <div className='input-group'>
         <span className='input-group-addon'>$</span>
         <input type='number' className='form-control' step='.01' min='0.50'
-          required value={amount} onChange={(e) => this.changeAmount(e)}/>
+          required value={amount} onChange={(e) => this.changeAmount(e)} />
         <span className='input-group-btn'>
           <button className='btn btn-primary'>Charge</button>
         </span>
