@@ -74,9 +74,11 @@ test('Full signup flow', (t) => {
           if (error) return t.end(error)
 
           t.agent
-          .post('/signin')
-          .send('email=jake@ooo.net')
-          .send('password=sandwich')
+          .post('/session')
+          .send({
+            email: 'jake@ooo.net',
+            password: 'sandwich'
+          })
           .expect(200)
           .end(t.end)
         })

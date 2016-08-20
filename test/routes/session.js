@@ -14,13 +14,6 @@ test('Can sign in with password', (t) => {
   .end(t.end)
 })
 
-test('GET /signin/forgot is a 200', (t) => {
-  t.request()
-  .get('/signin/forgot')
-  .expect(200)
-  .end(t.end)
-})
-
 test('POST /session/forgot is a 422 for missing emails', (t) => {
   t.request()
   .post('/session/forgot')
@@ -36,27 +29,6 @@ test('POST /session/forgot is a 200 for existing emails', (t) => {
   .send({email: 'admin@example.com'})
   .expect(200)
   .end(t.end)
-})
-
-test('GET /signin/reset is a 200 for missing tokens', (t) => {
-  t.request()
-  .get('/signin/reset/doesnotexist')
-  .expect(200)
-  .end(t.end)
-})
-
-test('GET /signin/reset is a 200 for valid tokens', (t) => {
-  t.agent.post('/session/forgot')
-  .send({email: 'admin@example.com'})
-  .expect(200)
-  .end((error) => {
-    if (error) return t.end(error)
-    db.Token.where({userId: 1}).find().then((token) => {
-      t.agent.get(`/signin/reset/${token.id}`)
-      .expect(200)
-      .end(t.end)
-    }).catch(t.end)
-  })
 })
 
 test('POST /session/reset is a 302 for valid tokens', (t) => {
