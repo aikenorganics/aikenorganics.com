@@ -41,12 +41,6 @@ router.post('/forgot', (req, res) => {
 
 // Reset
 router.post('/reset/:tokenId', (req, res) => {
-  if ((req.body.password || '').length < 8) {
-    return res.status(422).json({
-      password: ['Sorry! Passwords must be at least eight characters long.']
-    })
-  }
-
   db.Token.include('user').find(req.params.tokenId).then((token) => {
     if (!token || token.expiresAt < new Date()) {
       return res.status(422).json({

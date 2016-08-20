@@ -8,14 +8,6 @@ router.get('/', (req, res) => res.react(json.index))
 
 // Validations
 router.post('/', (req, res, next) => {
-  // Validate the password.
-  if (!/[\s\S]{8,}/.test(req.body.password)) {
-    res.status(422).json({
-      password: ['Password must be at least eight characters long.']
-    })
-    return
-  }
-
   db.User.where('trim(lower(email)) = trim(lower(?))', req.body.email).find()
   .then((user) => {
     if (!user) return next()
