@@ -26,7 +26,7 @@ app.use(require('./mid/market'))
 app.use(require('./mid/cart'))
 
 // Routes
-app.use('/auth', require('./routes/auth'))
+app.use('/session', require('./routes/session'))
 app.use('/cart', require('./routes/cart'))
 app.use('/admin', require('./routes/admin'))
 app.use('/orders', require('./routes/orders'))

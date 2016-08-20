@@ -96,17 +96,17 @@ export const navigate = (url, {push} = {}) => {
 
 export const signin = (values) => {
   busy()
-  return POST('/auth/signin', {body: values}).then(done).catch(done)
+  return POST('/session', {body: values}).then(done).catch(done)
 }
 
 export const forgot = (values) => {
   busy()
-  return POST('/auth/forgot', {body: values}).then(done).catch(done)
+  return POST('/session/forgot', {body: values}).then(done).catch(done)
 }
 
 export const reset = (token, values) => {
   busy()
-  return POST(`/auth/reset/${token}`, {body: values}).then(done).catch(done)
+  return POST(`/session/reset/${token}`, {body: values}).then(done).catch(done)
 }
 
 // Signup
@@ -120,7 +120,7 @@ export const signup = (values) => {
 
 export const signout = () => {
   busy()
-  return POST('/auth/signout').then(done).catch(done)
+  return DELETE('/session').then(done).catch(done)
 }
 
 // Market

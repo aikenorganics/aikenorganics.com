@@ -1,4 +1,4 @@
-require('./auth')
+require('./session')
 require('./cart')
 require('./home')
 require('./admin')

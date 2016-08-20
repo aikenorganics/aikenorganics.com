@@ -48,13 +48,13 @@ test('Full signup flow', (t) => {
     if (error) return t.end(error)
 
     t.agent
-    .post('/auth/signout')
+    .delete('/session')
     .expect(200)
     .end((error) => {
       if (error) return t.end(error)
 
       t.agent
-      .post('/auth/signin')
+      .post('/session')
       .send({
         email: 'jake@ooo.net',
         password: 'sandwiches'
@@ -64,7 +64,7 @@ test('Full signup flow', (t) => {
         if (error) return t.end(error)
 
         t.agent
-        .post('/auth/signin')
+        .post('/session')
         .send({
           email: 'jake@oooo.net',
           password: 'sandwich'

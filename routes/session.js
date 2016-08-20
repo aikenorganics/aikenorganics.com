@@ -62,14 +62,14 @@ router.post('/reset/:tokenId', (req, res) => {
 })
 
 // Sign Out
-router.post('/signout', (req, res) => {
+router.delete('/', (req, res) => {
   req.signOut()
   res.json({})
 })
 
 // Sign In
-router.post('/signin', findUser)
-router.post('/signin', (req, res) => {
+router.post('/', findUser)
+router.post('/', (req, res) => {
   if (!req.user) {
     res.status(422).json({
       email: ['Sorry! We don’t recognize that email.']
