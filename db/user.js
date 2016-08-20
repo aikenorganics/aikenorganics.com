@@ -126,7 +126,7 @@ class User extends require('ozymandias/user') {
   }
 
   validate () {
-    this.errors = {}
+    super.validate()
 
     if (this.street != null && !/\S+/.test(this.street)) {
       this.errors.street = ['Street cannot be blank']
@@ -142,10 +142,6 @@ class User extends require('ozymandias/user') {
 
     if (this.zip != null & !/^\d{5}(-\d{4})?$/.test(this.zip)) {
       this.errors.zip = ['Zip must be valid (12345 or 12345-1234)']
-    }
-
-    if (!/^\S+@\S+\.\S+$/.test(this.email)) {
-      this.errors.email = ['Invalid Email']
     }
   }
 
