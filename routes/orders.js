@@ -31,6 +31,7 @@ router.get('/previous', (req, res) => {
   db.Order
   .include('location', {productOrders: 'product'})
   .where({status: 'complete', userId: req.currentUser.id})
+  .order(['createdAt', 'descending'])
   .paginate(page, 10)
   .then((orders) => {
     res.react(json.previous, {orders})
