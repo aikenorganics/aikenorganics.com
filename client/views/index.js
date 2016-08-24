@@ -44,7 +44,7 @@ export default () => {
           <img src={assets.path('img/food-basket-square.jpg')} className='img-circle' />
           <h2>4. Customer picks up order</h2>
           <p>
-            Aiken Yoga, Thursday 4:00pm — 6:30pm
+            Aiken Yoga, Thursday 3:00pm — 6:30pm
           </p>
           <p>
             116 B Pendleton St SW<br />
