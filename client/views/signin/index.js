@@ -44,9 +44,7 @@ export default class Index extends PureComponent {
             <Errors errors={errors} />
           </div>
           <div className='panel-footer text-right'>
-            <Link href='/signin/forgot'>Forgot Password</Link>
-            <span> </span>
-            <button className='btn btn-primary' disabled={busy}>
+            <Link href='/signin/forgot'>Forgot Password</Link> <button className='btn btn-primary' disabled={busy}>
               Sign In
             </button>
           </div>

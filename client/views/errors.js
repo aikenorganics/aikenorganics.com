@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default ({errors}) => {
-  if (!errors) return <span></span>
+  if (!errors) return null
 
   return <div className='alert alert-danger' id='errors'>
     <p>

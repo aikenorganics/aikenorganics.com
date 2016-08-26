@@ -11,14 +11,12 @@ export default ({more, page, search, url, users}) => {
     </Link>
     <div style={{display: 'inline-block'}}>
       <Search url='/admin/users' value={search} />
-    </div>
-    <span> </span>
-    <Link href='/admin/users/emails'>Email List</Link>
+    </div> <Link href='/admin/users/emails'>Email List</Link>
     <hr />
     <table className='table'>
       <thead>
         <tr>
-          <th></th>
+          <th />
           <th>Email</th>
           <th>Name</th>
           <th>Phone</th>

@@ -54,9 +54,9 @@ export default ({busy, market: {open}, locations, order, productOrders, currentU
       </tbody>
       <tfoot>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td />
+          <td />
+          <td />
           <td>
             <strong>${order.total.toFixed(2)}</strong>
           </td>

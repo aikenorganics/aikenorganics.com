@@ -38,8 +38,8 @@ export default ({growers, path}) => {
         </tbody>
         <tfoot>
           <tr>
-            <td></td>
-            <td></td>
+            <td />
+            <td />
             <td>${total.toFixed(2)}</td>
           </tr>
         </tfoot>

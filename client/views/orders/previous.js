@@ -36,9 +36,9 @@ export default ({currentUser, more, orders, page, url}) => {
           </tbody>
           <tfoot>
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td />
+              <td />
+              <td />
               <td>
                 <strong>${total.toFixed(2)}</strong>
               </td>

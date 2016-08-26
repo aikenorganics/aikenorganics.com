@@ -20,7 +20,7 @@ export default ({busy, canEdit, cart, grower, market: {open}, path, products, cu
       {location ? ` • ${location}` : ''}
       <hr style={{clear: 'both'}} />
       <img className='img-rounded pull-right' src={mediumImage} />
-      <div dangerouslySetInnerHTML={{__html: descriptionHtml}}></div>
+      <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
       <h2 style={{clear: 'both'}}>
         <span>Products </span>
         {canEdit

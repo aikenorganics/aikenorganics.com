@@ -22,8 +22,8 @@ export default ({products}) => {
       </tbody>
       <tfoot>
         <tr>
-          <td></td>
-          <td></td>
+          <td />
+          <td />
           <td>${total.toFixed(2)}</td>
         </tr>
       </tfoot>

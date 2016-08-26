@@ -28,7 +28,7 @@ export default ({busy, cart, currentUser, locations, order, products}) => {
           <th>Cost</th>
           <th>Quantity</th>
           <th>Total</th>
-          <th></th>
+          <th />
         </tr>
       </thead>
       <tbody>
@@ -51,9 +51,9 @@ export default ({busy, cart, currentUser, locations, order, products}) => {
       </tbody>
       <tfoot>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td />
+          <td />
+          <td />
           <td>
             <strong>
               ${available.reduce((sum, product) => {
@@ -61,7 +61,7 @@ export default ({busy, cart, currentUser, locations, order, products}) => {
               }, 0).toFixed(2)}
             </strong>
           </td>
-          <td></td>
+          <td />
         </tr>
       </tfoot>
     </table>

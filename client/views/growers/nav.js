@@ -2,7 +2,7 @@ import React from 'react'
 import Link from '../link'
 
 export default ({canEdit, grower: {id}, path}) => {
-  if (!canEdit) return <span></span>
+  if (!canEdit) return null
   return <ul className='nav nav-pills nav-stacked hidden-print'>
     <li className={/^\/growers\/\d\/?$/.test(path) ? 'active' : ''}>
       <Link href={`/growers/${id}`}>

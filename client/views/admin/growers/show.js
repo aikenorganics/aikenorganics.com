@@ -33,8 +33,8 @@ export default ({busy, grower, path, products}) => {
         </tbody>
         <tfoot>
           <tr>
-            <td></td>
-            <td></td>
+            <td />
+            <td />
             <td>${products.reduce((total, product) => {
               return total + +product.total
             }, 0).toFixed(2)}</td>

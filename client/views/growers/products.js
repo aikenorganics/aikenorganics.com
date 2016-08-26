@@ -18,7 +18,7 @@ export default ({busy, canEdit, errors, grower, path, products}) => {
           <tr>
             <th>Product</th>
             <th>Supply</th>
-            <th></th>
+            <th />
           </tr>
         </thead>
         <tbody>

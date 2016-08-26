@@ -73,7 +73,7 @@ export default ({full, locationId, locations, more, orders, page, product, produ
       : <table className='table'>
         <thead>
           <tr>
-            <th></th>
+            <th />
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>

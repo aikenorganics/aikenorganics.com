@@ -15,11 +15,11 @@ export default ({busy, categories}) => {
     <table className='table'>
       <thead>
         <tr>
-          <th></th>
+          <th />
           <th>Name</th>
           <th>Position</th>
           <th>Meat</th>
-          <th></th>
+          <th />
         </tr>
       </thead>
       <tbody>

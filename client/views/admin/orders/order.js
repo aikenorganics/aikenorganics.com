@@ -41,9 +41,9 @@ export default ({order}) => {
       </tbody>
       <tfoot>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td />
+          <td />
+          <td />
           <td><strong>${total.toFixed(2)}</strong></td>
         </tr>
       </tfoot>

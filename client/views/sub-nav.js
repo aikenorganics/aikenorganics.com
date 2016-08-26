@@ -7,7 +7,7 @@ export default ({cart, children, market: {messageHtml, open}, currentUser, path}
   return <main className='container'>
     <div className='hidden-print'>
       {open
-        ? <div className='alert alert-info' dangerouslySetInnerHTML={{__html: messageHtml}}></div>
+        ? <div className='alert alert-info' dangerouslySetInnerHTML={{__html: messageHtml}} />
         : <div className='alert alert-warning text-center'>
           <p>
             <strong>The market is currently closed and will re-open on Sunday at 8:00AM. </strong>

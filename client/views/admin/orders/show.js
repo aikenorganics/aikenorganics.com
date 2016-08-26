@@ -31,17 +31,13 @@ export default ({errors, locations, order, payments, products, productOrders}) =
           Complete
         </button>
         : ''
-      }
-      <span> </span>
-      {status !== 'canceled'
+      } {status !== 'canceled'
         ? <button className='btn btn-danger'
           onClick={() => updateOrder(id, {status: 'canceled'})}>
           Cancel
         </button>
         : ''
-      }
-      <span> </span>
-      {status !== 'open'
+      } {status !== 'open'
         ? <button className='btn btn-info'
           onClick={() => updateOrder(id, {status: 'open'})}>
           Reopen
@@ -54,9 +50,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
       <small> <Status order={order} /></small>
     </h2>
     <h3>
-      <Link href={`/admin/users/${user.id}/edit`}>{user.name}</Link>
-      <span> </span>
-      <small>
+      <Link href={`/admin/users/${user.id}/edit`}>{user.name}</Link> <small>
         {user.email}
         <span> - </span>
         {moment(user.memberUntil).isSameOrAfter(new Date())
@@ -73,7 +67,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
           <th>Cost</th>
           <th>Quantity</th>
           <th>Total</th>
-          <th></th>
+          <th />
         </tr>
       </thead>
       <tbody>
@@ -84,9 +78,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
 
           return <tr key={id}>
             <td style={{whiteSpace: 'nowrap'}}>
-              <Link href={`/products/${product.id}`}>{product.name}</Link>
-              <span> </span>
-              {product.oversold
+              <Link href={`/products/${product.id}`}>{product.name}</Link> {product.oversold
                 ? <span className='label label-danger'>Oversold</span>
                 : ''
               }
@@ -127,7 +119,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
             </select>
           </td>
           <td><strong>${productOrders.reduce((sum, {total}) => sum + total, 0).toFixed(2)}</strong></td>
-          <td></td>
+          <td />
         </tr>
       </tfoot>
     </table>

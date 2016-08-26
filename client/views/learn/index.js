@@ -32,7 +32,7 @@ export default () => {
       </div>
       <div className='col-md-9'>
         <section>
-          <a id='why-local' className='anchor'></a>
+          <a id='why-local' className='anchor' />
           <h1>Why Local?</h1>
           <p>
             Local food systems rely upon a network of small, usually sustainably
@@ -60,7 +60,7 @@ export default () => {
           </p>
         </section>
         <section>
-          <a id='standards' className='anchor'></a>
+          <a id='standards' className='anchor' />
           <h1>Standards</h1>
           <p>
             Aiken Organics is passionate about the quality of food we offer. We
@@ -78,14 +78,14 @@ export default () => {
           </ul>
         </section>
         <section>
-          <a id='faq' className='anchor'></a>
+          <a id='faq' className='anchor' />
           <h1>FAQ</h1>
 
-          <a id='how-do-i-join' className='anchor'></a>
+          <a id='how-do-i-join' className='anchor' />
           <h2>How do I join?</h2>
           <p>Fill out the form on the <Link href='/signup'>sign up</Link> page and begin shopping!</p>
 
-          <a id='membership-fees' className='anchor'></a>
+          <a id='membership-fees' className='anchor' />
           <h2>Are there membership fees?</h2>
           <p>
             Yes, we ask that you pay an annual fee of $29 per household for one calendar
@@ -100,7 +100,7 @@ export default () => {
             food at the lowest possible price, set by the farmers themselves.
           </p>
 
-          <a id='buy-what-you-want' className='anchor'></a>
+          <a id='buy-what-you-want' className='anchor' />
           <h2>Will I have to buy vegetables I don't want?</h2>
           <p>
             Unlike some co-ops or CSAs, at Aiken Organics you get to order what
@@ -109,7 +109,7 @@ export default () => {
             of items available in our market.
           </p>
 
-          <a id='how-do-i-order' className='anchor'></a>
+          <a id='how-do-i-order' className='anchor' />
           <h2>How do I order?</h2>
           <p>
             Every Sunday at 8am, a list of available products is sent to all of
@@ -117,7 +117,7 @@ export default () => {
             week no later than Wednesday at noon. Orders can be placed here on our website.
           </p>
 
-          <a id='when-do-i-pay' className='anchor'></a>
+          <a id='when-do-i-pay' className='anchor' />
           <h2>When do I pay?</h2>
           <p>
             We do not accept advance payment on the website right now. We accept
@@ -131,14 +131,14 @@ export default () => {
             time of pick-up.
           </p>
 
-          <a id='pick-up' className='anchor'></a>
+          <a id='pick-up' className='anchor' />
           <h2>When and Where do I pick up my order?</h2>
           <p>
             You pick up your order on Thursday from 4:30-7pm at Aiken Yoga
             116B Pendleton Street SW; Aiken, South Carolina 29801.
           </p>
 
-          <a id='not-picked-up' className='anchor'></a>
+          <a id='not-picked-up' className='anchor' />
           <h2>Am I still charged for my order if I do not pick it up?</h2>
           <p>
             Yes. The growers harvested for you and Aiken Organics paid the
@@ -151,7 +151,7 @@ export default () => {
             email and we'll work with you to figure out a convenient time.
           </p>
 
-          <a id='why-support' className='anchor'></a>
+          <a id='why-support' className='anchor' />
           <h2>Why Support Aiken Organics?</h2>
           <ol>
             <li><p>Locally grown food tastes better.</p></li>
@@ -166,20 +166,20 @@ export default () => {
             <li><p>Local food is about the future.</p></li>
           </ol>
 
-          <a id='payment-methods' className='anchor'></a>
+          <a id='payment-methods' className='anchor' />
           <h2>What methods of payment do you accept?</h2>
           <p>
             Customers are encouraged to pay by check or cash, but do accept credit cards at the time of pick-up.
           </p>
 
-          <a id='wic-snap-ebt' className='anchor'></a>
+          <a id='wic-snap-ebt' className='anchor' />
           <h2>Do you accept WIC/SNAP/EBT?</h2>
           <p>
             We do not offer these payment methods at this time. Please Email the
             market manager if you have additional questions or interest in this.
           </p>
 
-          <a id='how-do-i-sell' className='anchor'></a>
+          <a id='how-do-i-sell' className='anchor' />
           <h2>How can I sell through this market?</h2>
           <p>
             Contact Alexandrea Kneece at 803.920.7153 or <a href='mailto:Alexandrea@aikenorganics.com'>Alexandrea@aikenorganics.com</a>

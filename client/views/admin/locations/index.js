@@ -14,10 +14,10 @@ export default ({busy, locations}) => {
     <table className='table'>
       <thead>
         <tr>
-          <th></th>
+          <th />
           <th>Name</th>
-          <th></th>
-          <th></th>
+          <th />
+          <th />
         </tr>
       </thead>
       <tbody>

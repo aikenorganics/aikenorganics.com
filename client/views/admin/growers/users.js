@@ -33,7 +33,7 @@ export default ({busy, grower, path, users}) => {
               <th>Name</th>
               <th>Email</th>
               <th>Phone</th>
-              <th></th>
+              <th />
             </tr>
           </thead>
           <tbody>

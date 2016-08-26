@@ -24,9 +24,7 @@ export default ({more, oversold, page, products, search, url}) => {
             Oversold
           </Link>
         </div>
-      }
-      <span> </span>
-      <div style={{display: 'inline-block'}}>
+      } <div style={{display: 'inline-block'}}>
         <Search url='/admin/products' value={search} />
       </div>
     </div>
@@ -38,9 +36,9 @@ export default ({more, oversold, page, products, search, url}) => {
           <th>Grower</th>
           <th>Supply</th>
           <th>Reserved</th>
-          <th></th>
-          <th></th>
-          <th></th>
+          <th />
+          <th />
+          <th />
         </tr>
       </thead>
       <tbody>

@@ -33,8 +33,7 @@ export default class Form extends PureComponent {
       onBlur={(event) => this.blur(event)}
       onFocus={(event) => this.focus(event)}>
       {this.props.children}
-      <button style={{display: 'none'}} ref={(button) => { this.button = button }}>
-      </button>
+      <button style={{display: 'none'}} ref={(button) => { this.button = button }} />
     </form>
   }
 

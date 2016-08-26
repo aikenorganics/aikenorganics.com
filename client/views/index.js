@@ -5,7 +5,7 @@ import assets from 'ozymandias/assets'
 export default () => {
   return <div>
     <div className='jumbotron covered'>
-      <div className='cover' style={{backgroundImage: `url(${assets.path('img/field-one.jpg')})`}}></div>
+      <div className='cover' style={{backgroundImage: `url(${assets.path('img/field-one.jpg')})`}} />
       <div className='container content slide-in'>
         <img src={assets.path('img/logo-small.png')} />
         <h1>Making Local Easy</h1>
@@ -22,7 +22,7 @@ export default () => {
       </div>
     </div>
     <section className='container' id='how-it-works-container'>
-      <a id='how-it-works' className='anchor'></a>
+      <a id='how-it-works' className='anchor' />
       <h1 className='text-center'>How it Works</h1>
       <div className='row'>
         <div className='col-md-6 text-center'>
@@ -57,7 +57,7 @@ export default () => {
       </div>
     </section>
     <div className='covered hero-secondary'>
-      <div className='cover' style={{backgroundImage: `url(${assets.path('img/field-two.jpg')})`}}></div>
+      <div className='cover' style={{backgroundImage: `url(${assets.path('img/field-two.jpg')})`}} />
       <div className='container content'>
         <div className='row'>
           <h2>Visit the Market</h2>

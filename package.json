@@ -53,7 +53,7 @@
     "karma-chrome-launcher": "1.0.1",
     "karma-tap": "2.1.4",
     "selenium-webdriver": "2.53.1",
-    "standard": "7.1.2",
+    "standard": "8.0.0",
     "supertest": "github:braddunbar/supertest#ipv6",
     "tape": "4.6.0"
   }
