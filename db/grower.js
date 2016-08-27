@@ -77,7 +77,7 @@ images.hasImage(Grower, {
   name: 'image',
   sizes: {
     small: 100,
-    medium: 250
+    medium: 300
   },
   defaults: [
     'img/vegetables-square.jpg',
