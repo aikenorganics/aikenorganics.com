@@ -330,9 +330,9 @@
       "resolved": "https://registry.npmjs.org/buffer-xor/-/buffer-xor-1.0.3.tgz"
     },
     "bugsnag": {
-      "version": "1.7.0",
-      "from": "bugsnag@1.7.0",
-      "resolved": "https://registry.npmjs.org/bugsnag/-/bugsnag-1.7.0.tgz"
+      "version": "1.8.0",
+      "from": "bugsnag@1.8.0",
+      "resolved": "https://registry.npmjs.org/bugsnag/-/bugsnag-1.8.0.tgz"
     },
     "bugsnag-js": {
       "version": "3.0.2",
@@ -1675,14 +1675,14 @@
       "resolved": "https://registry.npmjs.org/raw-body/-/raw-body-2.1.7.tgz"
     },
     "react": {
-      "version": "15.3.0",
-      "from": "react@15.3.0",
-      "resolved": "https://registry.npmjs.org/react/-/react-15.3.0.tgz"
+      "version": "15.3.1",
+      "from": "react@15.3.1",
+      "resolved": "https://registry.npmjs.org/react/-/react-15.3.1.tgz"
     },
     "react-dom": {
-      "version": "15.3.0",
-      "from": "react-dom@15.3.0",
-      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-15.3.0.tgz"
+      "version": "15.3.1",
+      "from": "react-dom@15.3.1",
+      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-15.3.1.tgz"
     },
     "read-only-stream": {
       "version": "2.0.0",
