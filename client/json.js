@@ -24,11 +24,11 @@ const json = (url, options = {}) => new Promise((resolve, reject) => {
   // Set Accept header.
   headers.Accept = 'application/json'
 
-  // Include credentials.
-  request.withCredentials = true
-
   // Open the request.
   request.open(options.method || 'get', url)
+
+  // Include credentials (must be after open for IE11 and below).
+  request.withCredentials = true
 
   // Set headers.
   for (const key in headers) request.setRequestHeader(key, headers[key])
