@@ -1,5 +1,4 @@
 import React from 'react'
-import Nav from './nav'
 import Form from './form'
 import {imageProduct, updateProduct} from '../../actions'
 
@@ -13,19 +12,18 @@ export default ({busy, categories, canEdit, currentUser, errors, path, product})
 
   return <div className='row'>
     <div className='col-md-3'>
-      <p className='text-center'>
-        <img className='img-rounded' src={mediumImage} />
+      <p className='text-xs-center'>
+        <img className='img-rounded img-fluid' src={mediumImage} />
       </p>
       <p>
         <input type='file' className='form-control' onChange={upload} disabled={busy} />
       </p>
-      <Nav canEdit={canEdit} path={path} product={product} />
     </div>
     <div className='col-md-9'>
       <h1>Edit Product</h1>
-      <div className='pull-right'>
+      <div className='pull-xs-right'>
         {active
-          ? <button className='btn btn-default btn-sm' disabled={busy}
+          ? <button className='btn btn-secondary btn-sm' disabled={busy}
             onClick={() => updateProduct(id, {active: false}).catch(() => {})}>
             Deactivate
           </button>
@@ -38,8 +36,8 @@ export default ({busy, categories, canEdit, currentUser, errors, path, product})
       <h4>
         <span>{grower.name} </span>
         {active
-          ? <span className='label label-primary'>Active</span>
-          : <span className='label label-default'>Inactive</span>
+          ? <span className='tag tag-primary'>Active</span>
+          : <span className='tag tag-default'>Inactive</span>
         }
       </h4>
       <hr />

@@ -48,14 +48,14 @@ export default class Form extends PureComponent {
         <input type='number' id='position' className='form-control' required value={position}
           onChange={(event) => this.setState({position: event.target.value})} disabled={busy} />
       </div>
-      <div className='form-group'>
-        <label>
-          <input type='checkbox' checked={meat}
+      <div className='form-check'>
+        <label className='form-check-label'>
+          <input className='form-check-input' type='checkbox' checked={meat}
             onChange={(event) => this.setState({meat: event.target.checked})} disabled={busy} />
           <span> Meat</span>
         </label>
       </div>
-      <p className='text-right'>
+      <p className='text-xs-right'>
         <button type='submit' className='btn btn-success' disabled={busy}>
           Save
         </button>

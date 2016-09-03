@@ -5,7 +5,7 @@ import Errors from '../errors'
 
 export default ({busy, canEdit, errors, grower, path, products}) => {
   return <div className='row'>
-    <div className='col-md-2 text-center'>
+    <div className='col-md-2 text-xs-center'>
       <Nav grower={grower} path={path} canEdit={canEdit} />
     </div>
     <div className='col-md-10'>
@@ -13,20 +13,22 @@ export default ({busy, canEdit, errors, grower, path, products}) => {
       <h2>Products</h2>
       <hr />
       <Errors errors={errors} />
-      <table className='table'>
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Supply</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((product) => (
-            <Row busy={busy} product={product} key={product.id} />
-          ))}
-        </tbody>
-      </table>
+      <div className='table-responsive'>
+        <table className='table'>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Supply</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((product) => (
+              <Row busy={busy} product={product} key={product.id} />
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 }

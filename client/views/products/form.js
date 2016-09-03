@@ -1,4 +1,5 @@
 import React, {PureComponent, PropTypes} from 'react'
+import Link from '../link'
 import Errors from '../errors'
 import {createProduct, navigate, updateProduct} from '../../actions'
 
@@ -80,11 +81,9 @@ export default class Form extends PureComponent {
       <div className='form-group'>
         <label htmlFor='categoryId'>Category</label>
         <select type='text' id='categoryId' className='form-control' required value={categoryId} onChange={({target: {value}}) => this.setState({categoryId: value})}>
-          {categories.map((category) => {
-            return <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          })}
+          {categories.map(({id, name}) => (
+            <option key={id} value={id}>{name}</option>
+          ))}
         </select>
       </div>
       <div className='form-group'>
@@ -92,18 +91,20 @@ export default class Form extends PureComponent {
         <textarea rows='5' id='description' className='form-control' value={description} onChange={({target: {value}}) => this.setState({description: value})} />
       </div>
       {isAdmin
-        ? <div className='form-group'>
-          <label>
-            <input type='checkbox' checked={featured} onChange={({target: {checked}}) => this.setState({featured: checked})} />
+        ? <div className='form-check'>
+          <label className='form-check-label'>
+            <input className='form-check-input' type='checkbox' checked={featured} onChange={({target: {checked}}) => this.setState({featured: checked})} />
             <span> Featured</span>
           </label>
         </div>
         : null
       }
-      <p className='text-right'>
+      <p className='text-xs-right'>
         <button type='submit' className='btn btn-success' disabled={busy}>
           Save
-        </button>
+        </button> <Link className='btn btn-secondary' onClick={() => window.history.back()}>
+          Cancel
+        </Link>
       </p>
     </form>
   }

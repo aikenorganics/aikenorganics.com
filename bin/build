@@ -1,13 +1,30 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 convert public/img/emblem.png \
-    -resize 48x48 \
-    public/favicon.ico
+  -resize '48x48' \
+  public/favicon.ico
 
 convert public/img/emblem.png \
-    -background white \
-    -flatten \
-    -resize 100x100 \
-    -gravity center \
-    -extent 129x129 \
-    public/apple-touch-icon.png
+  -background 'white' \
+  -flatten \
+  -resize '100x100' \
+  -gravity 'center' \
+  -extent '129x129' \
+  public/apple-touch-icon.png
+
+for file in \
+  'food-basket.jpg' \
+  'pen-and-pad.jpg' \
+  'vegetables.png' \
+  'veggies-in-boxes.jpg' \
+; do
+  convert "public/img/${file}" \
+    -strip \
+    -interlace 'Plane' \
+    -resize '300x300^' \
+    -gravity 'center' \
+    -crop '300x300+0+0' \
+    -quality '70%' \
+    -density '72x72' \
+    "public/img/${file%.*}-square.jpg"
+done

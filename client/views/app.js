@@ -15,25 +15,25 @@ const main = (props) => {
 
     case 401:
       return <main className='container'>
-        <h1 className='text-center'>
+        <h1 className='text-xs-center'>
           <img src={assets.path('img/logo-small.png')} />
         </h1>
         {currentUser
           ? <div>
-            <h1 className='text-center'>Uh oh! Looks like you donʼt have access to this page.</h1>
-            <p className='text-center'>
+            <h1 className='text-xs-center'>Uh oh! Looks like you donʼt have access to this page.</h1>
+            <p className='text-xs-center'>
               Go back to the <Link href='/'>home page</Link>?
             </p>
           </div>
           : <div>
-            <p className='text-center'>You need to sign in to access to this page.</p>
+            <p className='text-xs-center'>You need to sign in to access to this page.</p>
             <Signin {...props} />
           </div>
         }
       </main>
 
     case 404:
-      return <main className='container text-center'>
+      return <main className='container text-xs-center'>
         <h1>
           <img src={assets.path('img/logo-small.png')} />
         </h1>
@@ -42,7 +42,7 @@ const main = (props) => {
       </main>
 
     case 500:
-      return <main className='container text-center'>
+      return <main className='container text-xs-center'>
         <h1>
           <img src={assets.path('img/logo-small.png')} />
         </h1>

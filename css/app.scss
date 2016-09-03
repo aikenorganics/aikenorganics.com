@@ -5,10 +5,8 @@
 @import 'anchor';
 @import 'animation';
 @import 'covered';
-@import 'grower';
 @import 'messages';
 @import 'print';
-@import 'product';
 @import 'util';
 
 html, body {
@@ -45,17 +43,12 @@ article {
 }
 
 main, section {
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
-.subnav {
-  margin-bottom: 20px;
-}
-
-.panel-small {
-  max-width: 500px;
-  margin: 20px auto;
+.nav-tabs {
+  margin-bottom: 1rem;
 }
 
 .jumbotron {
@@ -90,11 +83,9 @@ main, section {
 }
 
 .navbar-nav {
-  li, li > a {
+  .nav-item, .nav-link {
     display: inline-block;
-    font-weight: bold;
-    font-family: Georgia, serif;
-    text-transform: uppercase;
+    float: none;
   }
 }
 
@@ -111,17 +102,11 @@ main, section {
   }
 }
 
-.footer {
+footer {
   background-color: #222;
   color: #9d9d9d;
+  padding-top: 1rem;
   a, a:hover, a:active, a:visited {
     color: #9d9d9d;
-  }
-  img {
-    max-width: 100%;
-  }
-  .colophon {
-    font-family: Georgia, serif;
-    text-transform: uppercase;
   }
 }

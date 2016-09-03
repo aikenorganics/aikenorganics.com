@@ -36,19 +36,16 @@ export default ({full, locationId, locations, more, orders, page, product, produ
       }
     </h1>
     <form className='form-inline hidden-print' method='get' action='/admin/orders'>
-      <div className='btn-group'>
-        <label className={`btn ${full ? 'btn-success' : 'btn-default'}`}>
-          <input type='checkbox' checked={full} onChange={toggleFull} />
-          <span> Full</span>
+      <label className='form-check-inline'>
+        <input className='form-check-input' type='checkbox' checked={full} onChange={toggleFull} />
+        <span> Full</span>
+      </label>
+      {['open', 'complete', 'canceled'].map((name) => {
+        return <label key={name} className='form-check-inline'>
+          <input className='form-check-input' type='checkbox' checked={~status.indexOf(name)} onChange={() => toggleStatus(name)} />
+          <span> {name.slice(0, 1).toUpperCase() + name.slice(1)}</span>
         </label>
-      </div> <div className='btn-group'>
-        {['open', 'complete', 'canceled'].map((name) => {
-          return <label key={name} className={`btn ${~status.indexOf(name) ? 'btn-success' : 'btn-default'}`}>
-            <input type='checkbox' checked={~status.indexOf(name)} onChange={() => toggleStatus(name)} />
-            <span> {name.slice(0, 1).toUpperCase() + name.slice(1)}</span>
-          </label>
-        })}
-      </div> <div className='form-group'>
+      })} <div className='form-group'>
         <select className='form-control' style={{maxWidth: 300}} value={locationId} onChange={changeLocation}>
           <option value=''>All Locations</option>
           <option value='delivery'>Delivery</option>
@@ -70,21 +67,23 @@ export default ({full, locationId, locations, more, orders, page, product, produ
       ? <div>
         {orders.map((order) => <Order key={order.id} order={order} />)}
       </div>
-      : <table className='table'>
-        <thead>
-          <tr>
-            <th />
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Status</th>
-            <th>Member</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.map((order) => <Row key={order.id} order={order} />)}
-        </tbody>
-      </table>
+      : <div className='table-responsive'>
+        <table className='table'>
+          <thead>
+            <tr>
+              <th />
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Status</th>
+              <th>Member</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders.map((order) => <Row key={order.id} order={order} />)}
+          </tbody>
+        </table>
+      </div>
     }
     <hr />
     <Pagination more={more} page={page} url={url} />

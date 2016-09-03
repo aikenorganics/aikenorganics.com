@@ -26,7 +26,7 @@ export default ({busy, user}) => {
     {!hasOrder
       ? <div>
         <hr />
-        <button type='submit' className='btn btn-danger' onClick={destroy} disabled={busy}>
+        <button type='submit' className='btn btn-link' onClick={destroy} disabled={busy}>
           Delete
         </button>
       </div>

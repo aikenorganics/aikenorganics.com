@@ -9,7 +9,7 @@ export default ({more, oversold, page, products, search, url}) => {
     <div className='hidden-print'>
       {oversold
         ? <div className='btn-group'>
-          <Link href='/admin/products' className='btn btn-default'>
+          <Link href='/admin/products' className='btn btn-secondary'>
             All
           </Link>
           <Link href='/admin/products?oversold=1' className='btn btn-success'>
@@ -20,59 +20,61 @@ export default ({more, oversold, page, products, search, url}) => {
           <Link href='/admin/products' className='btn btn-success'>
             All
           </Link>
-          <Link href='/admin/products?oversold=1' className='btn btn-default'>
+          <Link href='/admin/products?oversold=1' className='btn btn-secondary'>
             Oversold
           </Link>
         </div>
       } <div style={{display: 'inline-block'}}>
-        <Search url='/admin/products' value={search} />
+        <Search url='/admin/products' value={search} inline />
       </div>
     </div>
     <hr />
-    <table className='table'>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Grower</th>
-          <th>Supply</th>
-          <th>Reserved</th>
-          <th />
-          <th />
-          <th />
-        </tr>
-      </thead>
-      <tbody>
-        {products.map(({active, grower, id, name, oversold, reserved, supply}) => {
-          return <tr key={id}>
-            <td>
-              <Link href={`/products/${id}`}>{name}</Link>
-            </td>
-            <td>
-              <Link href={`/growers/${grower.id}`}>{grower.name}</Link>
-            </td>
-            <td>{supply}</td>
-            <td>{reserved}</td>
-            <td>
-              <Link href={`/admin/orders?productId=${id}`} className='btn btn-success btn-xs'>
-                View Orders
-              </Link>
-            </td>
-            <td>
-              {active
-                ? <span className='label label-primary'>Active</span>
-                : <span className='label label-default'>InActive</span>
-              }
-            </td>
-            <td>
-              {oversold
-                ? <span className='label label-danger'>Oversold</span>
-                : ''
-              }
-            </td>
+    <div className='table-responsive'>
+      <table className='table'>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Grower</th>
+            <th>Supply</th>
+            <th>Reserved</th>
+            <th />
+            <th />
+            <th />
           </tr>
-        })}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {products.map(({active, grower, id, name, oversold, reserved, supply}) => {
+            return <tr key={id}>
+              <td>
+                <Link href={`/products/${id}`}>{name}</Link>
+              </td>
+              <td>
+                <Link href={`/growers/${grower.id}`}>{grower.name}</Link>
+              </td>
+              <td>{supply}</td>
+              <td>{reserved}</td>
+              <td>
+                <Link href={`/admin/orders?productId=${id}`} className='btn btn-link btn-sm'>
+                  View Orders
+                </Link>
+              </td>
+              <td>
+                {active
+                  ? <span className='tag tag-primary'>Active</span>
+                  : <span className='tag tag-default'>InActive</span>
+                }
+              </td>
+              <td>
+                {oversold
+                  ? <span className='tag tag-danger'>Oversold</span>
+                  : ''
+                }
+              </td>
+            </tr>
+          })}
+        </tbody>
+      </table>
+    </div>
     <hr />
     <Pagination more={more} page={page} url={url} />
   </div>

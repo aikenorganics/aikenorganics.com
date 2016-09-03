@@ -41,7 +41,7 @@ export default class Form extends PureComponent {
         <input autoFocus type='text' id='name' className='form-control' required value={name}
           onChange={(event) => this.setState({name: event.target.value})} disabled={busy} />
       </div>
-      <p className='text-right'>
+      <p className='text-xs-right'>
         <button type='submit' className='btn btn-success' disabled={busy}>
           Save
         </button>

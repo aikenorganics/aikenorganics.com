@@ -7,13 +7,13 @@ export default ({children, path}) => {
       <h2>Orders</h2>
       <hr />
       <ul className='nav nav-pills nav-stacked hidden-print'>
-        <li className={/^\/orders\/current\/?$/.test(path) ? 'active' : ''}>
-          <Link href='/orders/current'>
+        <li className='nav-item'>
+          <Link className={`nav-link${/^\/orders\/current\/?$/.test(path) ? ' active' : ''}`} href='/orders/current'>
             Current
           </Link>
         </li>
-        <li className={/^\/orders\/previous\/?$/.test(path) ? 'active' : ''}>
-          <Link href='/orders/previous'>
+        <li className='nav-item'>
+          <Link className={`nav-link${/^\/orders\/previous\/?$/.test(path) ? ' active' : ''}`} href='/orders/previous'>
             Previous
           </Link>
         </li>

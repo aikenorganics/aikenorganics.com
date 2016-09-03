@@ -23,10 +23,8 @@ export default ({busy, grower, path, users}) => {
     </div>
     <div className='col-md-10'>
       <Header busy={busy} grower={grower} />
-      <div className='panel panel-default'>
-        <div className='panel-heading'>
-          <h3 className='panel-title'>Users With Access</h3>
-        </div>
+      <h3>Users With Access</h3>
+      <div className='table-responsive'>
         <table className='table'>
           <thead>
             <tr>
@@ -47,7 +45,7 @@ export default ({busy, grower, path, users}) => {
                 </td>
                 <td>{user.phone || '-'}</td>
                 <td>
-                  <button className='btn btn-danger btn-xs' onClick={() => destroy(id)} disabled={busy}>
+                  <button className='btn btn-danger btn-sm' onClick={() => destroy(id)} disabled={busy}>
                     Remove
                   </button>
                 </td>
@@ -55,15 +53,13 @@ export default ({busy, grower, path, users}) => {
             })}
           </tbody>
         </table>
-        <div className='panel-footer'>
-          <select required className='form-control' disabled={busy} onChange={(event) => create(event)}>
-            <option value=''>Add a User</option>
-            {users.filter(({id}) => !~userIds.indexOf(id)).map(({email, id, name}) => {
-              return <option key={id} value={id}>{email} - {name}</option>
-            })}
-          </select>
-        </div>
       </div>
+      <select required className='form-control' disabled={busy} onChange={(event) => create(event)}>
+        <option value=''>Add a User</option>
+        {users.filter(({id}) => !~userIds.indexOf(id)).map(({email, id, name}) => {
+          return <option key={id} value={id}>{email} - {name}</option>
+        })}
+      </select>
     </div>
   </div>
 }

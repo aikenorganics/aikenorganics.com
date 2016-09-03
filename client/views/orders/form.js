@@ -33,13 +33,11 @@ export default class Form extends PureComponent {
         </option>
         {locations.map(({id, name}) => <option key={id} value={id}>{name}</option>)}
       </select>
-      {!canDeliver
-        ? <p className='help-block'>
-          For delivery, please enter your address, phone number, and
-          billing information. <Link href='/settings'>Edit Settings</Link>
-        </p>
-        : ''
-      }
+      <small className='form-text text-muted'>
+        For delivery and online payment, please make sure your address, phone
+        number, and billing information are up to date.
+        <Link href='/settings'>Edit Settings</Link>
+      </small>
     </div>
   }
 

@@ -52,7 +52,7 @@ export default class Form extends PureComponent {
         <label htmlFor='description'>Description</label>
         <textarea rows='5' id='description' className='form-control' value={description || ''} onChange={(event) => this.setState({description: event.target.value})} />
       </div>
-      <p className='text-right'>
+      <p className='text-xs-right'>
         <button type='submit' className='btn btn-success'>
           Save
         </button>

@@ -13,7 +13,7 @@ export default ({order}) => {
     <td><Status order={order} /></td>
     <td>
       {moment(user.memberUntil).isSameOrAfter(new Date())
-        ? <span className='label label-info' title={`Until ${moment(user.memberUntil).format('MM/DD/YYYY')}`}>
+        ? <span className='tag tag-info' title={`Until ${moment(user.memberUntil).format('MM/DD/YYYY')}`}>
           Member
         </span>
         : ''

@@ -8,7 +8,7 @@ export default ({cart, children, market: {messageHtml, open}, currentUser, path}
     <div className='hidden-print'>
       {open
         ? <div className='alert alert-info' dangerouslySetInnerHTML={{__html: messageHtml}} />
-        : <div className='alert alert-warning text-center'>
+        : <div className='alert alert-warning text-xs-center'>
           <p>
             <strong>The market is currently closed and will re-open on Sunday at 8:00AM. </strong>
             If you need help in the meantime, feel free to drop us a line
@@ -16,23 +16,23 @@ export default ({cart, children, market: {messageHtml, open}, currentUser, path}
           </p>
         </div>
       }
-      <ul className='nav nav-tabs subnav'>
-        <li className={/^\/products/.test(path) ? 'active' : ''}>
-          <Link href='/products'>Products</Link>
+      <ul className='nav nav-tabs'>
+        <li className='nav-item'>
+          <Link className={`nav-link${/^\/products/.test(path) ? ' active' : ''}`} href='/products'>Products</Link>
         </li>
-        <li className={/^\/growers/.test(path) ? 'active' : ''}>
-          <Link href='/growers'>Growers</Link>
+        <li className='nav-item'>
+          <Link className={`nav-link${/^\/growers/.test(path) ? ' active' : ''}`} href='/growers'>Growers</Link>
         </li>
         {!currentUser || !open ? ''
-          : <li className={/^\/cart/.test(path) ? 'active' : ''}>
-            <Link href='/cart'>
-              Cart <span id='cart-size' className='badge'>{cartSize}</span>
+          : <li className='nav-item'>
+            <Link className={`nav-link${/^\/cart/.test(path) ? ' active' : ''}`} href='/cart'>
+              Cart <span className='tag tag-pill tag-info'>{cartSize}</span>
             </Link>
           </li>
         }
         {!currentUser ? ''
-          : <li className={/^\/orders/.test(path) ? 'active' : ''}>
-            <Link href='/orders/current'>
+          : <li className='nav-item'>
+            <Link className={`nav-link${/^\/orders/.test(path) ? ' active' : ''}`} href='/orders/current'>
               Orders
             </Link>
           </li>

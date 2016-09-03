@@ -25,37 +25,33 @@ export default class Reset extends PureComponent {
     const {password} = this.state
 
     return <main className='container'>
-      <form onSubmit={(event) => this.submit(event)}>
-        <div className='panel panel-default panel-small'>
-          <div className='panel-heading'>
-            <h3 className='panel-title'>Reset Password</h3>
-          </div>
-          <div className='panel-body'>
-            {expired
-              ? <div>
-                <h3>Sorry! That token is expired.</h3>
-                <p>
-                  Would you like us to <Link href='/signin/forgot'>send you another one</Link>?
-                </p>
-              </div>
-              : <div className='form-group'>
-                <label htmlFor='password'>New Password for {email || ''}</label>
-                <input type='password' id='password' className='form-control' required autoFocus
-                  value={password} onChange={(event) => this.setState({password: event.target.value})} />
-              </div>
-            }
-            <Errors errors={errors} />
-          </div>
+      <div className='row'>
+        <form onSubmit={(event) => this.submit(event)} className='col-md-6 offset-md-3'>
+          <h3>Reset Password</h3>
+          {expired
+            ? <div>
+              <h3>Sorry! That token is expired.</h3>
+              <p>
+                Would you like us to <Link href='/signin/forgot'>send you another one</Link>?
+              </p>
+            </div>
+            : <div className='form-group'>
+              <label htmlFor='password'>New Password for {email || ''}</label>
+              <input type='password' id='password' className='form-control' required autoFocus
+                value={password} onChange={(event) => this.setState({password: event.target.value})} />
+            </div>
+          }
+          <Errors errors={errors} />
           {token
-            ? <div className='panel-footer text-right'>
+            ? <div className='text-xs-right'>
               <button className='btn btn-success' disabled={busy}>
                 Reset Password
               </button>
             </div>
             : ''
           }
-        </div>
-      </form>
+        </form>
+      </div>
     </main>
   }
 

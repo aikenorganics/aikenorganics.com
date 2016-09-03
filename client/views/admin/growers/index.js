@@ -12,38 +12,40 @@ export default ({growers, path}) => {
     <div className='col-md-10'>
       <h1>Growers</h1>
       <hr />
-      <table className='table'>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Active</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {growers.map(({active, id, name, total}) => {
-            return <tr key={id}>
-              <td>
-                <Link href={`/admin/growers/${id}`}>{name}</Link>
-              </td>
-              <td>
-                {active
-                  ? <span className='label label-primary'>Active</span>
-                  : <span className='label label-default'>Inactive</span>
-                }
-              </td>
-              <td>${total || 0}</td>
+      <div className='table-responsive'>
+        <table className='table'>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Active</th>
+              <th>Total</th>
             </tr>
-          })}
-        </tbody>
-        <tfoot>
-          <tr>
-            <td />
-            <td />
-            <td>${total.toFixed(2)}</td>
-          </tr>
-        </tfoot>
-      </table>
+          </thead>
+          <tbody>
+            {growers.map(({active, id, name, total}) => {
+              return <tr key={id}>
+                <td>
+                  <Link href={`/admin/growers/${id}`}>{name}</Link>
+                </td>
+                <td>
+                  {active
+                    ? <span className='tag tag-primary'>Active</span>
+                    : <span className='tag tag-default'>Inactive</span>
+                  }
+                </td>
+                <td>${total || 0}</td>
+              </tr>
+            })}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td />
+              <td />
+              <td>${total.toFixed(2)}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </div>
   </div>
 }

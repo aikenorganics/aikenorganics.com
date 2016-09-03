@@ -14,8 +14,8 @@ exports.image = (set, {product}) => {
   set('product', product, productJson)
 }
 
-exports.index = (set, {categories, page, products, search}) => {
-  set({page, search})
+exports.index = (set, {categories, categoryId, page, products, search}) => {
+  set({categoryId, page, search})
   set(products, 'more')
   set('categories', categories, categoryJson)
   set('products', products, productJson)

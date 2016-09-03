@@ -2,12 +2,12 @@ import React from 'react'
 import assets from 'ozymandias/assets'
 
 export default () => {
-  return <div className='footer hidden-print'>
+  return <footer className='hidden-print'>
     <div className='container'>
       <div className='row'>
         <div className='col-md-4'>
           <h2>
-            <img src={assets.path('img/logo-small.png')} />
+            <img className='img-fluid' src={assets.path('img/logo-small.png')} />
           </h2>
         </div>
         <div className='col-md-4'>
@@ -38,9 +38,7 @@ export default () => {
         </div>
       </div>
       <hr />
-      <div className='colophon'>
-        <p>© Aiken Organics</p>
-      </div>
+      <p>© Aiken Organics</p>
     </div>
-  </div>
+  </footer>
 }

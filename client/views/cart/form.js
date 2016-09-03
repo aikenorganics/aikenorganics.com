@@ -9,15 +9,15 @@ export default ({busy, cart, open, product: {active, available, id}}) => {
   const increment = () => save(quantity + 1)
 
   if (!open) {
-    return <button className='btn btn-default' disabled>Market Closed</button>
+    return <button className='btn btn-sm btn-secondary' disabled>Market Closed</button>
   }
 
   if (!available) {
-    return <button className='btn btn-default' disabled>Sold Out</button>
+    return <button className='btn btn-sm btn-secondary' disabled>Sold Out</button>
   }
 
   if (!active) {
-    return <button className='btn btn-default' disabled>Unavailable</button>
+    return <button className='btn btn-sm btn-secondary' disabled>Unavailable</button>
   }
 
   return <span className='form-inline'>
@@ -25,19 +25,19 @@ export default ({busy, cart, open, product: {active, available, id}}) => {
       ? <span className='form-group'>
         <span className='input-group'>
           <span className='input-group-btn'>
-            <button type='button' className='btn btn-success' disabled={busy} onClick={decrement}>
+            <button type='button' className='btn btn-sm btn-primary' disabled={busy} onClick={decrement}>
               -
             </button>
           </span>
-          <span className='form-control'>{quantity}</span>
+          <span className='form-control form-control-sm'>{quantity}</span>
           <span className='input-group-btn'>
-            <button type='button' className='btn btn-success' disabled={busy || !canIncrement} onClick={increment}>
+            <button type='button' className='btn btn-sm btn-primary' disabled={busy || !canIncrement} onClick={increment}>
               +
             </button>
           </span>
         </span>
       </span>
-      : <button type='button' className='btn btn-success' disabled={busy} onClick={increment}>
+      : <button type='button' className='btn btn-sm btn-primary' disabled={busy} onClick={increment}>
         Add to Cart
       </button>
     }

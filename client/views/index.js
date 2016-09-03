@@ -23,24 +23,24 @@ export default () => {
     </div>
     <section className='container' id='how-it-works-container'>
       <a id='how-it-works' className='anchor' />
-      <h1 className='text-center'>How it Works</h1>
+      <h1 className='text-xs-center'>How it Works</h1>
       <div className='row'>
-        <div className='col-md-6 text-center'>
+        <div className='col-md-6 text-xs-center'>
           <img src={assets.path('img/vegetables-square.jpg')} className='img-circle' />
           <h2>1. Farmers post available products</h2>
         </div>
-        <div className='col-md-6 text-center'>
+        <div className='col-md-6 text-xs-center'>
           <img src={assets.path('img/pen-and-pad-square.jpg')} className='img-circle' />
           <h2>2. Customers place their order</h2>
           <p>Sunday 8am — Wednesday 12pm</p>
         </div>
       </div>
       <div className='row'>
-        <div className='col-md-6 text-center'>
+        <div className='col-md-6 text-xs-center'>
           <img src={assets.path('img/veggies-in-boxes-square.jpg')} className='img-circle' />
           <h2>3. Sellers deliver order</h2>
         </div>
-        <div className='col-md-6 text-center'>
+        <div className='col-md-6 text-xs-center'>
           <img src={assets.path('img/food-basket-square.jpg')} className='img-circle' />
           <h2>4. Customer picks up order</h2>
           <p>
@@ -51,7 +51,7 @@ export default () => {
             Aiken, SC 29801
           </p>
           <p>
-            <span className='label label-info'>NOW AVAILABLE</span> Home/Office Delivery
+            <span className='tag tag-info'>NOW AVAILABLE</span> Home/Office Delivery
           </p>
         </div>
       </div>
@@ -82,7 +82,7 @@ export default () => {
           </p>
         </div>
         <div className='col-md-6'>
-          <p className='text-center'>
+          <p className='text-xs-center'>
             <img className='img-rounded' src={assets.path('img/alex-small.jpg')} />
           </p>
         </div>

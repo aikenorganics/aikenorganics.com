@@ -10,18 +10,53 @@ export default ({currentUser}) => {
     signout().then(() => navigate('/'))
   }
 
-  return <nav className='navbar navbar-inverse navbar-fixed-top'>
+  return <nav className='navbar navbar-dark bg-inverse navbar-fixed-top'>
     <div className='container'>
       <ul className='nav navbar-nav'>
-        <li><Link href='/'>Home</Link></li>
-        <li><Link href='/#about'>About</Link></li>
-        <li><Link href='/learn'>Learn</Link></li>
-        <li><Link href='/products'>Market</Link></li>
-        {currentUser ? <li><Link href='/settings'>Settings</Link></li> : null}
-        {isAdmin ? <li><Link href='/admin/users'>Admin</Link></li> : null}
-        {currentUser ? <li><a id='signout' href='/session' onClick={handleSignout}>Sign Out</a></li> : null}
-        {currentUser ? null : <li><Link href='/signin'>Sign In</Link></li>}
-        {currentUser ? null : <li><Link href='/signup'>Sign Up</Link></li>}
+        <li className='nav-item'>
+          <Link className='nav-link' href='/'>Home</Link>
+        </li>
+        <li className='nav-item'>
+          <Link className='nav-link' href='/#about'>About</Link>
+        </li>
+        <li className='nav-item'>
+          <Link className='nav-link' href='/learn'>Learn</Link>
+        </li>
+        <li className='nav-item'>
+          <Link className='nav-link' href='/products'>Market</Link>
+        </li>
+        {currentUser
+          ? <li className='nav-item'>
+            <Link className='nav-link' href='/settings'>Settings</Link>
+          </li>
+          : null
+        }
+        {isAdmin
+          ? <li className='nav-item'>
+            <Link className='nav-link' href='/admin/users'>Admin</Link>
+          </li>
+          : null
+        }
+        {currentUser
+          ? <li className='nav-item'>
+            <a className='nav-link' id='signout' href='/session' onClick={handleSignout}>
+              Sign Out
+            </a>
+          </li>
+          : null
+        }
+        {currentUser
+          ? null
+          : <li className='nav-item'>
+            <Link className='nav-link' href='/signin'>Sign In</Link>
+          </li>
+        }
+        {currentUser
+          ? null
+          : <li className='nav-item'>
+            <Link className='nav-link' href='/signup'>Sign Up</Link>
+          </li>
+        }
       </ul>
     </div>
   </nav>

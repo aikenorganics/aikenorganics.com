@@ -8,7 +8,7 @@ export default ({busy, user: {id, mediumImage}}) => {
   }
 
   return <div>
-    <div className='form-group text-center'>
+    <div className='form-group text-xs-center'>
       <img className='img-rounded' src={mediumImage} />
     </div>
     <div className='form-group'>

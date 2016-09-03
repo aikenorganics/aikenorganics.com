@@ -23,26 +23,22 @@ export default class Forgot extends PureComponent {
     const {email} = this.state
 
     return <main className='container'>
-      <form onSubmit={(event) => this.submit(event)}>
-        <div className='panel panel-default panel-small'>
-          <div className='panel-heading'>
-            <h3 className='panel-title'>Forgot Password</h3>
+      <div className='row'>
+        <form onSubmit={(event) => this.submit(event)} className='col-md-6 offset-md-3'>
+          <h3>Forgot Password</h3>
+          <div className='form-group'>
+            <label htmlFor='email'>Email</label>
+            <input type='text' id='email' className='form-control' placeholder='you@example.com' required autoFocus
+              value={email} onChange={(event) => this.setState({email: event.target.value})} />
           </div>
-          <div className='panel-body'>
-            <div className='form-group'>
-              <label htmlFor='email'>Email</label>
-              <input type='text' id='email' className='form-control' placeholder='you@example.com' required autoFocus
-                value={email} onChange={(event) => this.setState({email: event.target.value})} />
-            </div>
-            <Errors errors={errors} />
-          </div>
-          <div className='panel-footer text-right'>
+          <Errors errors={errors} />
+          <div className='text-xs-right'>
             <button className='btn btn-success' disabled={busy}>
               Email My Password
             </button>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </main>
   }
 

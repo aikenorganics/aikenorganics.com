@@ -13,38 +13,40 @@ export default ({currentUser, more, orders, page, url}) => {
             : `Deliver to ${currentUser.address}`
           }
         </h3>
-        <table className='table'>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Cost</th>
-              <th>Quantity</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {productOrders.map(({cost, id, product, quantity, total}) => {
-              return <tr key={id}>
-                <td>
-                  <Link href={`/products/${product.id}`}>{product.name}</Link>
-                </td>
-                <td>${cost}</td>
-                <td>{quantity}</td>
-                <td>${total.toFixed(2)}</td>
+        <div className='table-responsive'>
+          <table className='table'>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Cost</th>
+                <th>Quantity</th>
+                <th>Total</th>
               </tr>
-            })}
-          </tbody>
-          <tfoot>
-            <tr>
-              <td />
-              <td />
-              <td />
-              <td>
-                <strong>${total.toFixed(2)}</strong>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
+            </thead>
+            <tbody>
+              {productOrders.map(({cost, id, product, quantity, total}) => {
+                return <tr key={id}>
+                  <td>
+                    <Link href={`/products/${product.id}`}>{product.name}</Link>
+                  </td>
+                  <td>${cost}</td>
+                  <td>{quantity}</td>
+                  <td>${total.toFixed(2)}</td>
+                </tr>
+              })}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td />
+                <td />
+                <td />
+                <td>
+                  <strong>${total.toFixed(2)}</strong>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
       </div>
     })}
     <hr />

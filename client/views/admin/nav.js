@@ -3,27 +3,27 @@ import Link from '../link'
 
 export default ({path, children}) => {
   return <main className='container'>
-    <ul className='nav nav-tabs subnav hidden-print'>
-      <li className={/^\/admin\/users/.test(path) ? 'active' : ''}>
-        <Link href='/admin/users'>Users</Link>
+    <ul className='nav nav-tabs hidden-print'>
+      <li className='nav-item'>
+        <Link className={`nav-link${/^\/admin\/users/.test(path) ? ' active' : ''}`} href='/admin/users'>Users</Link>
       </li>
-      <li className={/^\/admin\/orders/.test(path) ? 'active' : ''}>
-        <Link href='/admin/orders'>Orders</Link>
+      <li className='nav-item'>
+        <Link className={`nav-link${/^\/admin\/orders/.test(path) ? ' active' : ''}`} href='/admin/orders'>Orders</Link>
       </li>
-      <li className={/^\/admin\/categories/.test(path) ? 'active' : ''}>
-        <Link href='/admin/categories'>Categories</Link>
+      <li className='nav-item'>
+        <Link className={`nav-link${/^\/admin\/categories/.test(path) ? ' active' : ''}`} href='/admin/categories'>Categories</Link>
       </li>
-      <li className={/^\/admin\/locations/.test(path) ? 'active' : ''}>
-        <Link href='/admin/locations'>Locations</Link>
+      <li className='nav-item'>
+        <Link className={`nav-link${/^\/admin\/locations/.test(path) ? ' active' : ''}`} href='/admin/locations'>Locations</Link>
       </li>
-      <li className={/^\/admin\/products/.test(path) ? 'active' : ''}>
-        <Link href='/admin/products'>Products</Link>
+      <li className='nav-item'>
+        <Link className={`nav-link${/^\/admin\/products/.test(path) ? ' active' : ''}`} href='/admin/products'>Products</Link>
       </li>
-      <li className={/^\/admin\/growers/.test(path) ? 'active' : ''}>
-        <Link href='/admin/growers'>Growers</Link>
+      <li className='nav-item'>
+        <Link className={`nav-link${/^\/admin\/growers/.test(path) ? ' active' : ''}`} href='/admin/growers'>Growers</Link>
       </li>
-      <li className={/^\/admin\/market/.test(path) ? 'active' : ''}>
-        <Link href='/admin/market'>Market</Link>
+      <li className='nav-item'>
+        <Link className={`nav-link${/^\/admin\/market/.test(path) ? ' active' : ''}`} href='/admin/market'>Market</Link>
       </li>
     </ul>
     {children}

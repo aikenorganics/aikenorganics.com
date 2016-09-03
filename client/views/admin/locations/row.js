@@ -7,7 +7,7 @@ export default ({busy, location}) => {
 
   return <tr>
     <td>
-      <Link href={`/admin/locations/${id}/edit`} className='btn btn-default btn-xs'>
+      <Link href={`/admin/locations/${id}/edit`} className='btn btn-link btn-sm'>
         Edit
       </Link>
     </td>
@@ -15,12 +15,12 @@ export default ({busy, location}) => {
     <td>
       <div className='btn-group'>
         <button type='button' disabled={busy}
-          className={`btn btn-xs ${active ? 'btn-success' : 'btn-default'}`}
+          className={`btn btn-sm ${active ? 'btn-success' : 'btn-secondary'}`}
           onClick={() => updateLocation(id, {active: true}).catch(() => {})}>
           Active
         </button>
         <button type='button' disabled={busy}
-          className={`btn btn-xs ${!active ? 'btn-danger' : 'btn-default'}`}
+          className={`btn btn-sm ${!active ? 'btn-danger' : 'btn-secondary'}`}
           onClick={() => updateLocation(id, {active: false}).catch(() => {})}>
           Inactive
         </button>
@@ -28,7 +28,7 @@ export default ({busy, location}) => {
     </td>
     <td>
       <button type='button' disabled={busy}
-        className='btn btn-danger btn-xs'
+        className='btn btn-link btn-sm'
         onClick={() => { if (window.confirm('Are you sure?')) destroyLocation(id).catch(() => {}) }}>
         Delete
       </button>

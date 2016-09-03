@@ -61,9 +61,9 @@ export default class Form extends PureComponent {
         <input type='date' id='memberUntil' className='form-control' value={(memberUntil || '').slice(0, 10)} onChange={(event) => this.setState({memberUntil: event.target.value})} />
       </div>
       {user
-        ? <div className='form-group'>
-          <label>
-            <input type='checkbox' checked={isAdmin} onChange={(event) => this.setState({isAdmin: event.target.checked})} />
+        ? <div className='form-check'>
+          <label className='form-check-label'>
+            <input className='form-check-input' type='checkbox' checked={isAdmin} onChange={(event) => this.setState({isAdmin: event.target.checked})} />
             <span> Admin</span>
           </label>
         </div>

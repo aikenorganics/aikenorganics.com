@@ -7,7 +7,7 @@ export default ({busy, canEdit, cart, grower, market: {open}, path, products, cu
   const {descriptionHtml, email, id, location, mediumImage, name, url} = grower
 
   return <div className='row'>
-    <div className='col-md-2 text-center'>
+    <div className='col-md-2 text-xs-center'>
       <Nav canEdit={canEdit} grower={grower} path={path} />
     </div>
     <div className='col-md-10'>
@@ -19,12 +19,12 @@ export default ({busy, canEdit, cart, grower, market: {open}, path, products, cu
       }
       {location ? ` • ${location}` : ''}
       <hr style={{clear: 'both'}} />
-      <img className='img-rounded pull-right' src={mediumImage} />
+      <img className='img-rounded img-fluid pull-xs-right' src={mediumImage} />
       <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
       <h2 style={{clear: 'both'}}>
         <span>Products </span>
         {canEdit
-          ? <Link href={`/growers/${id}/products/new`} className='btn btn-default btn-xs'>
+          ? <Link href={`/growers/${id}/products/new`} className='btn btn-secondary btn-sm'>
             New Product
           </Link>
           : ''
@@ -33,8 +33,8 @@ export default ({busy, canEdit, cart, grower, market: {open}, path, products, cu
       <hr />
       <div className='row'>
         {products.map((product) => {
-          const props = {busy, cart, currentUser, grower, open, product}
-          return <div key={product.id} className='col-md-6'>
+          const props = {busy, cart, currentUser, open, product}
+          return <div key={product.id} className='col-xs-6 col-md-6 col-lg-4'>
             <Product {...props} />
           </div>
         })}

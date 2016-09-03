@@ -26,10 +26,10 @@ export default class Search extends PureComponent {
   }
 
   render () {
-    const {url} = this.props
+    const {url, inline} = this.props
     const {value} = this.state
 
-    return <form className='form-inline' action={url} onSubmit={(event) => this.submit(event)}>
+    return <form className={inline ? 'form-inline' : ''} action={url} onSubmit={(event) => this.submit(event)}>
       <input type='search' value={value || ''} placeholder='Search…' className='form-control'
         onChange={(event) => this.setState({value: event.target.value})} />
     </form>

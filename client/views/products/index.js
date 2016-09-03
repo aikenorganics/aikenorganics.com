@@ -10,16 +10,16 @@ export default ({busy, cart, categoryId, categories, page, products, market: {op
     <div className='col-md-2'>
       <Search url='/products' value={search} />
       <hr />
-      <ul className='nav nav-pills nav-stacked hidden-sm hidden-xs'>
-        {categories.map((category) => {
-          return <li key={category.id} className={+categoryId === category.id ? 'active' : ''}>
-            <Link href={`/products?categoryId=${category.id}`}>
-              {category.name}
+      <ul className='nav nav-pills nav-stacked hidden-sm-down'>
+        {categories.map(({id, name}) => {
+          return <li key={id} className='nav-item'>
+            <Link className={`nav-link${+categoryId === id ? ' active' : ''}`} href={`/products?categoryId=${id}`}>
+              {name}
             </Link>
           </li>
         })}
       </ul>
-      <div className='visible-sm-block visible-xs-block'>
+      <div className='hidden-md-up'>
         <select className='form-control' value={categoryId || ''}
           onChange={(event) => navigate(`/products?categoryId=${event.target.value}`)}>
           <option value=''>Pick a Category</option>
@@ -33,9 +33,9 @@ export default ({busy, cart, categoryId, categories, page, products, market: {op
     <div className='col-md-10'>
       <div className='row'>
         {products.map((product) => {
-          const {id, grower} = product
-          const props = {busy, cart, currentUser, grower, open, product}
-          return <div key={id} className='col-md-6'>
+          const {id} = product
+          const props = {busy, cart, currentUser, open, product}
+          return <div key={id} className='col-xs-6 col-md-6 col-lg-4'>
             <Product {...props} />
           </div>
         })}
