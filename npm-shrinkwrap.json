@@ -1365,13 +1365,18 @@
           "version": "7.0.6",
           "from": "glob@>=7.0.3 <8.0.0",
           "resolved": "https://registry.npmjs.org/glob/-/glob-7.0.6.tgz"
+        },
+        "npmlog": {
+          "version": "3.1.2",
+          "from": "npmlog@>=0.0.0 <1.0.0||>=1.0.0 <2.0.0||>=2.0.0 <3.0.0||>=3.0.0 <4.0.0",
+          "resolved": "https://registry.npmjs.org/npmlog/-/npmlog-3.1.2.tgz"
         }
       }
     },
     "node-sass": {
-      "version": "3.8.0",
-      "from": "node-sass@3.8.0",
-      "resolved": "https://registry.npmjs.org/node-sass/-/node-sass-3.8.0.tgz",
+      "version": "3.9.3",
+      "from": "node-sass@latest",
+      "resolved": "https://registry.npmjs.org/node-sass/-/node-sass-3.9.3.tgz",
       "dependencies": {
         "glob": {
           "version": "7.0.6",
@@ -1396,9 +1401,9 @@
       "resolved": "https://registry.npmjs.org/normalize-package-data/-/normalize-package-data-2.3.5.tgz"
     },
     "npmlog": {
-      "version": "3.1.2",
-      "from": "npmlog@>=0.0.0 <1.0.0||>=1.0.0 <2.0.0||>=2.0.0 <3.0.0||>=3.0.0 <4.0.0",
-      "resolved": "https://registry.npmjs.org/npmlog/-/npmlog-3.1.2.tgz"
+      "version": "4.0.0",
+      "from": "npmlog@>=4.0.0 <5.0.0",
+      "resolved": "https://registry.npmjs.org/npmlog/-/npmlog-4.0.0.tgz"
     },
     "number-is-nan": {
       "version": "1.0.0",
