@@ -9,10 +9,6 @@ class Model extends db.Model {
     return super.update(values)
   }
 
-  toJSON () {
-    throw new Error('toJSON')
-  }
-
 }
 
 module.exports = Model
