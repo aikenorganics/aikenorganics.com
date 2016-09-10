@@ -21,9 +21,9 @@ for file in \
   convert "public/img/${file}" \
     -strip \
     -interlace 'Plane' \
-    -resize '300x300^' \
+    -resize '400x400^' \
     -gravity 'center' \
-    -crop '300x300+0+0' \
+    -crop '400x400+0+0' \
     -quality '70%' \
     -density '72x72' \
     "public/img/${file%.*}-square.jpg"
