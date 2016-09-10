@@ -4,4 +4,4 @@ database:
     - psql -U ubuntu < schema.sql
 machine:
   node:
-    version: 6.3.1
+    version: 6.5.0
