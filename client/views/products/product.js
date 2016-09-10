@@ -14,9 +14,11 @@ export default ({busy, cart, grower, open, product, currentUser}) => {
         {name}
       </Link>
       <hr />
-      <Link className='card-link text-muted text-truncate' href={`/growers/${grower.id}`} title={grower.name}>
-        {grower.name}
-      </Link>
+      <p className='card-text'>
+        <Link className='text-muted text-truncate' href={`/growers/${grower.id}`} title={grower.name}>
+          {grower.name}
+        </Link>
+      </p>
       {open
         ? <p className='card-text text-muted text-truncate'>
           {active
