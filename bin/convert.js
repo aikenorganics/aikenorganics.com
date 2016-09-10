@@ -11,13 +11,12 @@ Promise.all([
 ]).then(([growers, products, users]) => {
   const models = [].concat(growers, products, users)
   const convert = () => {
+    if (!models.length) return
     const model = models.pop()
     console.log(`Converting ${model.tableName}:${model.id}`)
-    return model.convertImage().then(() => {
-      if (models.length) return convert()
-    })
+    return model.convertImage().then(() => convert())
   }
-  return convert()
+  return Promise.all([convert(), convert(), convert()])
 })
 .then(() => db.close())
 .catch((error) => console.log(error))

@@ -183,7 +183,7 @@ images.hasImage(User, {
   name: 'image',
   sizes: {
     small: 100,
-    medium: 300
+    medium: 400
   },
   defaults: [
     'img/vegetables-square.jpg',
