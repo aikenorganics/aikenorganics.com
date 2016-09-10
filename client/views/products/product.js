@@ -2,7 +2,7 @@ import React from 'react'
 import Link from '../link'
 import CartForm from '../cart/form'
 
-export default ({busy, cart, open, product, currentUser}) => {
+export default ({busy, cart, grower, open, product, currentUser}) => {
   const {active, available, cost, id, name, mediumImage, unit} = product
 
   return <div className='card'>
@@ -10,19 +10,25 @@ export default ({busy, cart, open, product, currentUser}) => {
       <img className='card-img-top img-fluid' src={mediumImage} />
     </Link>
     <div className='card-block'>
-      <h5 className='card-title text-truncate' title={name}>
+      <div className='card-title h6 text-truncate' title={name}>
         <Link href={`/products/${id}`}>
           {name}
         </Link>
-      </h5>
+      </div>
+      <hr />
+      <Link className='card-link text-muted text-truncate' href={`/growers/${grower.id}`} title={grower.name}>
+        {grower.name}
+      </Link>
       {open
         ? <p className='card-text text-muted text-truncate'>
           {active
-            ? (available ? `${available} Available` : 'Sold Out')
-            : <span>Unavailable</span>
+            ? available
+              ? <small>{available} Available</small>
+              : <small className='text-danger'>Sold Out</small>
+            : <small>Unavailable</small>
           }
           <br />
-          <span title={`$${cost} per ${unit}`}>${cost} per {unit}</span>
+          <small title={`$${cost} / ${unit}`}>${cost} / {unit}</small>
         </p>
         : null
       }

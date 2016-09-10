@@ -39,7 +39,7 @@ export default ({busy, cart, currentUser, locations, order, products}) => {
               <td>
                 <Link href={`/products/${id}`}>{name}</Link>
               </td>
-              <td>${(+cost).toFixed(2)} per {unit}</td>
+              <td>${(+cost).toFixed(2)} / {unit}</td>
               <td>{quantity(product)}</td>
               <td>${total(product).toFixed(2)}</td>
               <td>
@@ -74,7 +74,6 @@ export default ({busy, cart, currentUser, locations, order, products}) => {
       </p>
       : ''
     }
-    <hr />
     {available.length > 0
       ? <Checkout busy={busy} order={order} locations={locations} user={currentUser} />
       : ''

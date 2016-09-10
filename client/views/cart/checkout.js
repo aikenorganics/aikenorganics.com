@@ -42,10 +42,10 @@ export default class Checkout extends PureComponent {
           {locations.map(({id, name}) => <option key={id} value={id}>{name}</option>)}
         </select>
         {!canDeliver
-          ? <p className='form-text'>
+          ? <small className='form-text text-muted'>
             For delivery, please enter your address, phone number, and
             billing information. <Link href='/settings'>Edit Settings</Link>
-          </p>
+          </small>
           : ''
         }
       </div>

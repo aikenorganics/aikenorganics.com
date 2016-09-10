@@ -33,8 +33,8 @@ export default ({busy, cart, categoryId, categories, page, products, market: {op
     <div className='col-md-10'>
       <div className='row'>
         {products.map((product) => {
-          const {id} = product
-          const props = {busy, cart, currentUser, open, product}
+          const {grower, id} = product
+          const props = {busy, cart, currentUser, grower, open, product}
           return <div key={id} className='col-xs-6 col-md-6 col-lg-4'>
             <Product {...props} />
           </div>

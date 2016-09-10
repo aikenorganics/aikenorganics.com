@@ -6,7 +6,7 @@ export default ({busy, canEdit, cart, path, product, market: {open}, currentUser
   const {active, available, category, cost, descriptionHtml, grower, id, name, unit} = product
   return <div className='row'>
     <div className='col-md-3'>
-      <Product busy={busy} cart={cart} currentUser={currentUser} open={open} product={product} />
+      <Product busy={busy} cart={cart} currentUser={currentUser} grower={product.grower} open={open} product={product} />
     </div>
     <div className='col-md-9'>
       {canEdit
@@ -17,7 +17,7 @@ export default ({busy, canEdit, cart, path, product, market: {open}, currentUser
       }
       <h1>{name}</h1>
       {open
-        ? <span> ${cost} per {unit} • {
+        ? <span> ${cost} / {unit} • {
             active && grower.active ? `${available} Available` : 'Unavailable'
           } • </span>
         : ''
