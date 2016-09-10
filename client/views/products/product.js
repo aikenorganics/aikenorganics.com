@@ -10,11 +10,9 @@ export default ({busy, cart, grower, open, product, currentUser}) => {
       <img className='card-img-top img-fluid' src={mediumImage} />
     </Link>
     <div className='card-block'>
-      <div className='card-title h6 text-truncate' title={name}>
-        <Link href={`/products/${id}`}>
-          {name}
-        </Link>
-      </div>
+      <Link href={`/products/${id}`} className='card-title h6 text-truncate' title={name}>
+        {name}
+      </Link>
       <hr />
       <Link className='card-link text-muted text-truncate' href={`/growers/${grower.id}`} title={grower.name}>
         {grower.name}
