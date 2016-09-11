@@ -6,10 +6,9 @@ import Pagination from '../../pagination'
 
 export default ({more, page, search, url, users}) => {
   return <div>
-    <Link href='/admin/users/new' className='btn btn-sm btn-secondary pull-xs-right'>
+    <Link href='/admin/users/new' className='btn btn-secondary'>
       New User
-    </Link>
-    <div style={{display: 'inline-block'}}>
+    </Link> <div style={{display: 'inline-block'}}>
       <Search url='/admin/users' value={search} inline />
     </div> <Link href='/admin/users/emails'>Email List</Link>
     <hr />
