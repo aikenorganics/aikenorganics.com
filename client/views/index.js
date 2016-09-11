@@ -33,22 +33,22 @@ export default () => {
       <h1 className='text-xs-center'>How it Works</h1>
       <div className='row'>
         <div className='col-md-6 text-xs-center'>
-          <img src={vegetablesPath} className='img-circle img-fluid' />
+          <img src={vegetablesPath} className='img-circle img-fluid m-x-auto' />
           <h2>1. Farmers post available products</h2>
         </div>
         <div className='col-md-6 text-xs-center'>
-          <img src={penAndPadPath} className='img-circle img-fluid' />
+          <img src={penAndPadPath} className='img-circle img-fluid m-x-auto' />
           <h2>2. Customers place their order</h2>
           <p>Sunday 8am — Wednesday 12pm</p>
         </div>
       </div>
       <div className='row'>
         <div className='col-md-6 text-xs-center'>
-          <img src={veggiesPath} className='img-circle img-fluid' />
+          <img src={veggiesPath} className='img-circle img-fluid m-x-auto' />
           <h2>3. Sellers deliver order</h2>
         </div>
         <div className='col-md-6 text-xs-center'>
-          <img src={foodBasketPath} className='img-circle img-fluid' />
+          <img src={foodBasketPath} className='img-circle img-fluid m-x-auto' />
           <h2>4. Customer picks up order</h2>
           <p>
             Aiken Yoga, Thursday 3:00pm — 6:30pm
