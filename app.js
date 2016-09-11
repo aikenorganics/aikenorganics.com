@@ -12,12 +12,6 @@ app.set('component', require('./client/component'))
 app.set('layout', require('./views/layout'))
 app.set('layout.json', require('./json/layout'))
 
-// Locals
-Object.assign(app.locals, {
-  moment: require('moment'),
-  assets: require('ozymandias/assets')
-})
-
 // Bugsnag
 app.use(bugsnag.requestHandler)
 
