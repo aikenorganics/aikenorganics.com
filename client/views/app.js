@@ -4,7 +4,7 @@ import Link from './link'
 import Footer from './footer'
 import Signin from './signin/index'
 import Message from './message'
-import assets from 'ozymandias/assets/index'
+import logoPath from '../../public/img/logo-small.png'
 
 const main = (props) => {
   const {children, currentUser, statusCode} = props
@@ -16,7 +16,7 @@ const main = (props) => {
     case 401:
       return <main className='container'>
         <h1 className='text-xs-center'>
-          <img src={assets.path('img/logo-small.png')} />
+          <img src={logoPath} />
         </h1>
         {currentUser
           ? <div>
@@ -35,7 +35,7 @@ const main = (props) => {
     case 404:
       return <main className='container text-xs-center'>
         <h1>
-          <img src={assets.path('img/logo-small.png')} />
+          <img src={logoPath} />
         </h1>
         <h1>Whoops! That page doesnʼt exist.</h1>
         <p>Go back to the <Link href='/'>home page</Link>?</p>
@@ -44,7 +44,7 @@ const main = (props) => {
     case 500:
       return <main className='container text-xs-center'>
         <h1>
-          <img src={assets.path('img/logo-small.png')} />
+          <img src={logoPath} />
         </h1>
         <h1>Whoops! Something went wrong!</h1>
         <p>Go back to the <Link href='/'>home page</Link>?</p>

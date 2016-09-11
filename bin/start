@@ -3,6 +3,7 @@
 printf 'Compiling assets…\n'
 ./bin/compile-css
 ./bin/compile-js
+ozy manifest
 
 printf 'Starting server…\n'
 node index.js

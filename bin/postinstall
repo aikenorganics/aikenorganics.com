@@ -3,5 +3,5 @@
 if [ "$NODE_ENV" = "production" ]; then
   ./bin/compile-js
   ./bin/compile-css
-  ozy fingerprint
+  ozy manifest
 fi

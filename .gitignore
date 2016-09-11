@@ -2,6 +2,7 @@ tmp
 .env
 node_modules
 npm-debug.log
+public/assets
 public/js/app.js
 public/js/test.js
 public/css/app.css

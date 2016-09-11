@@ -1,13 +1,20 @@
 import React from 'react'
 import Link from './link'
-import assets from 'ozymandias/assets'
+import alexPath from '../../public/img/alex-small.jpg'
+import logoPath from '../../public/img/logo-small.png'
+import fieldOnePath from '../../public/img/field-one.jpg'
+import fieldTwoPath from '../../public/img/field-two.jpg'
+import vegetablesPath from '../../public/img/vegetables-square.jpg'
+import penAndPadPath from '../../public/img/pen-and-pad-square.jpg'
+import veggiesPath from '../../public/img/veggies-in-boxes-square.jpg'
+import foodBasketPath from '../../public/img/food-basket-square.jpg'
 
 export default () => {
   return <div>
     <div className='jumbotron covered'>
-      <div className='cover' style={{backgroundImage: `url(${assets.path('img/field-one.jpg')})`}} />
+      <div className='cover' style={{backgroundImage: `url(${fieldOnePath})`}} />
       <div className='container content slide-in'>
-        <img src={assets.path('img/logo-small.png')} />
+        <img src={logoPath} />
         <h1>Making Local Easy</h1>
         <p className='lead'>
           <strong>
@@ -26,22 +33,22 @@ export default () => {
       <h1 className='text-xs-center'>How it Works</h1>
       <div className='row'>
         <div className='col-md-6 text-xs-center'>
-          <img src={assets.path('img/vegetables-square.jpg')} className='img-circle' />
+          <img src={vegetablesPath} className='img-circle img-fluid' />
           <h2>1. Farmers post available products</h2>
         </div>
         <div className='col-md-6 text-xs-center'>
-          <img src={assets.path('img/pen-and-pad-square.jpg')} className='img-circle' />
+          <img src={penAndPadPath} className='img-circle img-fluid' />
           <h2>2. Customers place their order</h2>
           <p>Sunday 8am — Wednesday 12pm</p>
         </div>
       </div>
       <div className='row'>
         <div className='col-md-6 text-xs-center'>
-          <img src={assets.path('img/veggies-in-boxes-square.jpg')} className='img-circle' />
+          <img src={veggiesPath} className='img-circle img-fluid' />
           <h2>3. Sellers deliver order</h2>
         </div>
         <div className='col-md-6 text-xs-center'>
-          <img src={assets.path('img/food-basket-square.jpg')} className='img-circle' />
+          <img src={foodBasketPath} className='img-circle img-fluid' />
           <h2>4. Customer picks up order</h2>
           <p>
             Aiken Yoga, Thursday 3:00pm — 6:30pm
@@ -57,7 +64,7 @@ export default () => {
       </div>
     </section>
     <div className='covered hero-secondary'>
-      <div className='cover' style={{backgroundImage: `url(${assets.path('img/field-two.jpg')})`}} />
+      <div className='cover' style={{backgroundImage: `url(${fieldTwoPath})`}} />
       <div className='container content'>
         <div className='row'>
           <h2>Visit the Market</h2>
@@ -83,7 +90,7 @@ export default () => {
         </div>
         <div className='col-md-6'>
           <p className='text-xs-center'>
-            <img className='img-rounded' src={assets.path('img/alex-small.jpg')} />
+            <img className='img-rounded' src={alexPath} />
           </p>
         </div>
       </div>
