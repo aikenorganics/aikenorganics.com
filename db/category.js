@@ -46,3 +46,7 @@ class Category extends Model {
 }
 
 module.exports = Category
+
+const Product = require('./product')
+
+Category.hasMany('products', {key: 'categoryId', model: Product})

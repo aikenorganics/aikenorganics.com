@@ -21,3 +21,9 @@ class UserGrower extends Model {
 }
 
 module.exports = UserGrower
+
+const User = require('./user')
+const Grower = require('./grower')
+
+UserGrower.belongsTo('user', {key: 'userId', model: User})
+UserGrower.belongsTo('grower', {key: 'growerId', model: Grower})

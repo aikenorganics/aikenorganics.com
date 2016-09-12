@@ -1,7 +1,6 @@
 'use strict'
 
 const Model = require('./model')
-const Payment = require('./payment')
 const stripe = require('stripe')(process.env.STRIPE_SK)
 
 class Order extends Model {
@@ -54,3 +53,13 @@ class Order extends Model {
 }
 
 module.exports = Order
+
+const User = require('./user')
+const Payment = require('./payment')
+const Location = require('./location')
+const ProductOrder = require('./product-order')
+
+Order.belongsTo('user', {key: 'userId', model: User})
+Order.belongsTo('location', {key: 'locationId', model: Location})
+Order.hasMany('payments', {key: 'orderId', model: Payment})
+Order.hasMany('productOrders', {key: 'orderId', model: ProductOrder})

@@ -20,3 +20,7 @@ class Payment extends Model {
 }
 
 module.exports = Payment
+
+const Order = require('./order')
+
+Payment.belongsTo('order', {key: 'orderId', model: Order})

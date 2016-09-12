@@ -37,3 +37,7 @@ class Location extends Model {
 }
 
 module.exports = Location
+
+const Order = require('./order')
+
+Location.hasMany('orders', {key: 'locationId', model: Order})

@@ -51,3 +51,9 @@ class ProductOrder extends Model {
 }
 
 module.exports = ProductOrder
+
+const Order = require('./order')
+const Product = require('./product')
+
+ProductOrder.belongsTo('order', {key: 'orderId', model: Order})
+ProductOrder.belongsTo('product', {key: 'productId', model: Product})

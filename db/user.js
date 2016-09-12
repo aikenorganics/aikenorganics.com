@@ -194,3 +194,9 @@ images.hasImage(User, {
 })
 
 module.exports = User
+
+const Order = require('./order')
+const UserGrower = require('./user-grower')
+
+User.hasMany('orders', {key: 'userId', model: Order})
+User.hasMany('userGrowers', {key: 'userId', model: UserGrower})
