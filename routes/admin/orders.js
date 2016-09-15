@@ -61,9 +61,15 @@ router.get('/', (req, res) => {
     // CSV
     if (req.query.csv) {
       res.setHeader('Content-Type', 'text/csv')
-      res.write(csv.row('id', 'name', 'email', 'location'))
+      res.write(csv.row('id', 'name', 'email', 'member', 'location'))
       for (const {id, location, user} of orders) {
-        res.write(csv.row(id, user.name, user.email, location.name))
+        res.write(csv.row(
+          id,
+          user.name,
+          user.email,
+          user.memberUntil > new Date() ? '✓' : '',
+          location.name
+        ))
       }
       res.end()
       return

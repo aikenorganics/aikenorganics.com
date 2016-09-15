@@ -8,6 +8,11 @@ test('escape null values', (t) => {
   t.end()
 })
 
+test('escape empty values', (t) => {
+  t.is(csv.row('', ' '), '""," "\n')
+  t.end()
+})
+
 test('do not escape numbers', (t) => {
   t.is(csv.row(1, 1.234), '1,1.234\n')
   t.end()
