@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from '../../link'
 import Pagination from '../../pagination'
 import Row from './row'
 import Order from './order'
@@ -28,13 +27,7 @@ export default ({full, locationId, locations, more, orders, page, product, produ
   }
 
   return <div>
-    <h1>
-      Orders
-      {product
-        ? <span> for <Link href={`/products/${product.id}`}>{product.name}</Link></span>
-        : ''
-      }
-    </h1>
+    <h1>Orders</h1>
     <form className='form-inline hidden-print' method='get' action='/admin/orders'>
       <label className='form-check-inline'>
         <input className='form-check-input' type='checkbox' checked={full} onChange={toggleFull} />
@@ -60,7 +53,9 @@ export default ({full, locationId, locations, more, orders, page, product, produ
             return <option key={id} value={id}>{name}</option>
           })}
         </select>
-      </div>
+      </div> <a className='btn btn-secondary' href={params(url, {csv: '1'})}>
+        Export CSV
+      </a>
     </form>
     <hr />
     {full

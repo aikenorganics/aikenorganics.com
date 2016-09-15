@@ -1,6 +1,7 @@
 'use strict'
 
 const db = require('../../db')
+const csv = require('../../lib/csv')
 const json = require('../../json/admin/orders')
 const router = module.exports = require('ozymandias').Router()
 
@@ -57,6 +58,17 @@ router.get('/', (req, res) => {
     db.Location.order('name').all(),
     db.Product.order('name').all()
   ]).then(([orders, locations, products]) => {
+    // CSV
+    if (req.query.csv) {
+      res.setHeader('Content-Type', 'text/csv')
+      res.write(csv.row('id', 'name', 'email', 'location'))
+      for (const {id, location, user} of orders) {
+        res.write(csv.row(id, user.name, user.email, location.name))
+      }
+      res.end()
+      return
+    }
+
     res.react(json.index, {
       full,
       orders,

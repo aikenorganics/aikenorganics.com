@@ -55,3 +55,14 @@ test('GET /admin/orders?status=complete is a 200', (t) => {
     .end(t.end)
   })
 })
+
+test('Download a CSV', (t) => {
+  t.signIn('admin@example.com').then(() => {
+    t.agent
+    .get('/admin/orders?status=complete&csv=1')
+    .expect('Content-Type', 'text/csv')
+    .expect('id,name,email,location\n3,Regular User,user@example.com,Aiken Organics\n')
+    .expect(200)
+    .end(t.end)
+  })
+})
