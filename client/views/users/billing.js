@@ -1,16 +1,15 @@
 import React, {PureComponent, PropTypes} from 'react'
 import {updateCard} from '../../actions'
 
-let checkout = null
-const getCheckout = () => {
-  return checkout || (checkout = new Promise((resolve, reject) => {
-    const script = document.createElement('script')
-    script.src = 'https://checkout.stripe.com/checkout.js'
-    script.async = true
-    script.addEventListener('load', () => resolve())
-    document.head.appendChild(script)
-  }))
-}
+let stripe = null
+const getStripe = () => stripe || (stripe = new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = 'https://checkout.stripe.com/checkout.js'
+  script.async = true
+  script.addEventListener('load', resolve)
+  script.addEventListener('error', reject)
+  document.head.appendChild(script)
+}))
 
 export default class Billing extends PureComponent {
 
@@ -21,32 +20,26 @@ export default class Billing extends PureComponent {
     }
   }
 
-  constructor (props) {
-    super(props)
-    this.state = {loaded: false}
-  }
-
   open () {
     const {user, stripeKey} = this.props
-    window.StripeCheckout.configure({
-      allowRememberMe: false,
-      email: user.email,
-      key: stripeKey,
-      panelLabel: 'Save',
-      token: (token) => updateCard(user.id, token.id)
-    }).open({
-      name: 'Aiken Organics',
-      description: 'Billing Information'
-    })
+    getStripe().then(() => {
+      window.StripeCheckout.configure({
+        allowRememberMe: false,
+        email: user.email,
+        key: stripeKey,
+        panelLabel: 'Save',
+        token: (token) => updateCard(user.id, token.id)
+      }).open({
+        name: 'Aiken Organics',
+        description: 'Billing Information'
+      })
+    }).catch(() => {})
   }
 
   render () {
-    const {loaded} = this.state
     const {busy, user} = this.props
 
-    if (!loaded) getCheckout().then(() => this.setState({loaded: true}))
-
-    return <button className='btn btn-success' onClick={() => this.open()} disabled={busy || !loaded}>
+    return <button className='btn btn-success' onClick={() => this.open()} disabled={busy}>
       {user.stripeId ? 'Update Billing Info' : 'Enter Billing Info'}
     </button>
   }

@@ -8,7 +8,7 @@ test('/settings is a 200 as an admin', (t) => {
     t.agent.get('/settings')
     .expect(200)
     .end(t.end)
-  })
+  }).catch(t.end)
 })
 
 test('/settings is a 200 as a regular user', (t) => {
@@ -16,7 +16,7 @@ test('/settings is a 200 as a regular user', (t) => {
     t.agent.get('/settings')
     .expect(200)
     .end(t.end)
-  })
+  }).catch(t.end)
 })
 
 test('POST /settings is a 200 as a regular user', (t) => {
@@ -34,5 +34,5 @@ test('POST /settings is a 200 as a regular user', (t) => {
       .expect(200)
       .end(t.end)
     })
-  })
+  }).catch(t.end)
 })
