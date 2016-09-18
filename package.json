@@ -39,7 +39,7 @@
     "moment": "2.14.1",
     "node-sass": "3.9.3",
     "object-assign": "4.1.0",
-    "ozymandias": "github:braddunbar/ozymandias#v0.110.0",
+    "ozymandias": "github:braddunbar/ozymandias#v0.111.0",
     "react": "15.3.1",
     "react-dom": "15.3.1",
     "redux": "3.6.0",

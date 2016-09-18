@@ -19,19 +19,19 @@ class Location extends Model {
   }
 
   get name () {
-    return this.data.get('name') || ''
+    return this._name || ''
   }
 
   set name (value) {
-    this.data.set('name', value || '')
+    this._name = value || ''
   }
 
   get active () {
-    return this.data.get('active') || false
+    return this._active || false
   }
 
   set active (value) {
-    this.data.set('active', value || false)
+    this._active = value || false
   }
 
 }

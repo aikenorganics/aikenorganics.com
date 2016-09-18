@@ -30,35 +30,35 @@ class Product extends Model {
   }
 
   get name () {
-    return this.data.get('name') || ''
+    return this._name || ''
   }
 
   set name (value) {
-    this.data.set('name', value || '')
+    this._name = value || ''
   }
 
   get cost () {
-    return (this.data.get('cost') || '0').trim()
+    return (this._cost || '0').trim()
   }
 
   set cost (value) {
-    this.data.set('cost', (value || '0').trim().replace(/^\$/, ''))
+    this._cost = (value || '0').trim().replace(/^\$/, '')
   }
 
   get unit () {
-    return this.data.get('unit')
+    return this._unit
   }
 
   set unit (value) {
-    this.data.set('unit', value || '')
+    this._unit = value || ''
   }
 
   get description () {
-    return this.data.get('description')
+    return this._description
   }
 
   set description (value) {
-    this.data.set('description', value || '')
+    this._description = value || ''
   }
 
   get descriptionHtml () {

@@ -20,27 +20,27 @@ class Category extends Model {
   }
 
   get name () {
-    return this.data.get('name') || ''
+    return this._name || ''
   }
 
   set name (value) {
-    this.data.set('name', value || '')
+    this._name = value || ''
   }
 
   get position () {
-    return this.data.get('position') || 0
+    return this._position || 0
   }
 
   set position (value) {
-    this.data.set('position', value || 0)
+    this._position = value || 0
   }
 
   get meat () {
-    return !!this.data.get('meat')
+    return !!this._meat
   }
 
   set meat (value) {
-    this.data.set('meat', !!value)
+    this._meat = !!value
   }
 
 }

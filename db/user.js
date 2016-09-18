@@ -24,35 +24,35 @@ class User extends require('ozymandias/user') {
   }
 
   get isAdmin () {
-    return !!+this.data.get('isAdmin') || false
+    return !!+this._isAdmin || false
   }
 
   set isAdmin (value) {
-    this.data.set('isAdmin', !!+value || false)
+    this._isAdmin = !!+value || false
   }
 
   get first () {
-    return this.data.get('first') || ''
+    return this._first || ''
   }
 
   set first (value) {
-    this.data.set('first', value || '')
+    this._first = value || ''
   }
 
   get last () {
-    return this.data.get('last') || ''
+    return this._last || ''
   }
 
   set last (value) {
-    this.data.set('last', value || '')
+    this._last = value || ''
   }
 
   get phone () {
-    return this.data.get('phone') || ''
+    return this._phone || ''
   }
 
   set phone (value) {
-    this.data.set('phone', value || '')
+    this._phone = value || ''
   }
 
   get name () {
@@ -78,47 +78,47 @@ class User extends require('ozymandias/user') {
   }
 
   get memberUntil () {
-    return this.data.get('memberUntil') || null
+    return this._memberUntil || null
   }
 
   set memberUntil (value) {
-    this.data.set('memberUntil', value || null)
+    this._memberUntil = value || null
   }
 
   get street () {
-    return this.data.get('street')
+    return this._street
   }
 
   set street (value) {
     if (typeof value === 'string') value = value.trim()
-    this.data.set('street', value)
+    this._street = value
   }
 
   get city () {
-    return this.data.get('city')
+    return this._city
   }
 
   set city (value) {
     if (typeof value === 'string') value = value.trim()
-    this.data.set('city', value)
+    this._city = value
   }
 
   get state () {
-    return this.data.get('state')
+    return this._state
   }
 
   set state (value) {
     if (typeof value === 'string') value = value.trim().toUpperCase()
-    this.data.set('state', value)
+    this._state = value
   }
 
   get zip () {
-    return this.data.get('zip')
+    return this._zip
   }
 
   set zip (value) {
     if (typeof value === 'string') value = value.trim()
-    this.data.set('zip', value)
+    this._zip = value
   }
 
   validate () {

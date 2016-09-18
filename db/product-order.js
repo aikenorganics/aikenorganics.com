@@ -21,19 +21,19 @@ class ProductOrder extends Model {
   }
 
   get cost () {
-    return this.data.get('cost') || '0'
+    return this._cost || '0'
   }
 
   set cost (value) {
-    this.data.set('cost', (value || '0').trim().replace(/^\$/, ''))
+    this._cost = (value || '0').trim().replace(/^\$/, '')
   }
 
   get quantity () {
-    return this.data.get('quantity') || 0
+    return this._quantity || 0
   }
 
   set quantity (value) {
-    this.data.set('quantity', value || 0)
+    this._quantity = value || 0
   }
 
   validate () {

@@ -1469,9 +1469,9 @@
       "resolved": "https://registry.npmjs.org/osenv/-/osenv-0.1.3.tgz"
     },
     "ozymandias": {
-      "version": "0.110.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#4f428d2f24da992a5329832464abfe6d922a292e",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#4f428d2f24da992a5329832464abfe6d922a292e",
+      "version": "0.111.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#a9e69c90a0d96e3b1afff51b1d20a0d20ec739ea",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#a9e69c90a0d96e3b1afff51b1d20a0d20ec739ea",
       "dependencies": {
         "glob": {
           "version": "7.0.6",
@@ -1568,9 +1568,9 @@
       "resolved": "https://registry.npmjs.org/pg-connection-string/-/pg-connection-string-0.1.3.tgz"
     },
     "pg-pool": {
-      "version": "1.4.3",
+      "version": "1.5.0",
       "from": "pg-pool@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/pg-pool/-/pg-pool-1.4.3.tgz"
+      "resolved": "https://registry.npmjs.org/pg-pool/-/pg-pool-1.5.0.tgz"
     },
     "pg-types": {
       "version": "1.11.0",

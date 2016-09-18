@@ -26,45 +26,45 @@ class Grower extends Model {
   }
 
   get name () {
-    return this.data.get('name') || ''
+    return this._name || ''
   }
 
   set name (value) {
-    this.data.set('name', value || '')
+    this._name = value || ''
   }
 
   get email () {
-    return this.data.get('email') || ''
+    return this._email || ''
   }
 
   set email (value) {
-    this.data.set('email', value || '')
+    this._email = value || ''
   }
 
   get url () {
-    let url = this.data.get('url')
+    let url = this._url
     if (!/^https?:\/\//.test(url)) url = 'http://' + url
     return url
   }
 
   set url (value) {
-    this.data.set('url', value || '')
+    this._url = value || ''
   }
 
   get location () {
-    return this.data.get('location') || ''
+    return this._location || ''
   }
 
   set location (value) {
-    this.data.set('location', value || '')
+    this._location = value || ''
   }
 
   get description () {
-    return this.data.get('description') || ''
+    return this._description || ''
   }
 
   set description (value) {
-    this.data.set('description', value || '')
+    this._description = value || ''
   }
 
   get descriptionHtml () {
