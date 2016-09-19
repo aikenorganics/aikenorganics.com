@@ -61,7 +61,18 @@ test('Download a CSV', (t) => {
     t.agent
     .get('/admin/orders?status=complete&csv=1')
     .expect('Content-Type', 'text/csv')
-    .expect('id,name,email,member,location\n3,Regular User,user@example.com,"",Aiken Organics\n')
+    .expect('id,name,email,member,location,delivery\n3,Regular User,user@example.com,"",Aiken Organics,""\n')
+    .expect(200)
+    .end(t.end)
+  })
+})
+
+test('Download a CSV with a delivery', (t) => {
+  t.signIn('admin@example.com').then(() => {
+    t.agent
+    .get('/admin/orders?locationId=delivery&csv=1')
+    .expect('Content-Type', 'text/csv')
+    .expect('id,name,email,member,location,delivery\n1,Admin User,admin@example.com,"","123 Street Drive, Townville SC 55555",✓\n')
     .expect(200)
     .end(t.end)
   })
