@@ -47,19 +47,9 @@ router.get('/', (req, res) => {
     orders.where({locationId})
   }
 
-  // Pagination
-  const page = +(req.query.page || 1)
-
-  // Include product orders?
-  if (full) orders.include({productOrders: 'product'})
-
-  Promise.all([
-    orders.order(['createdAt', 'descending']).paginate(page, 50),
-    db.Location.order('name').all(),
-    db.Product.order('name').all()
-  ]).then(([orders, locations, products]) => {
-    // CSV
-    if (req.query.csv) {
+  // CSV
+  if (req.query.csv) {
+    orders.all().then((orders) => {
       res.setHeader('Content-Type', 'text/csv')
       res.write(csv.row('id', 'name', 'email', 'member', 'location', 'delivery'))
       for (const {id, location, user} of orders) {
@@ -73,9 +63,21 @@ router.get('/', (req, res) => {
         ))
       }
       res.end()
-      return
-    }
+    }).catch(res.error)
+    return
+  }
 
+  // Pagination
+  const page = +(req.query.page || 1)
+
+  // Include product orders?
+  if (full) orders.include({productOrders: 'product'})
+
+  Promise.all([
+    orders.order(['createdAt', 'descending']).paginate(page, 50),
+    db.Location.order('name').all(),
+    db.Product.order('name').all()
+  ]).then(([orders, locations, products]) => {
     res.react(json.index, {
       full,
       orders,
