@@ -11,20 +11,10 @@ router.find('order', () =>
   db.Order.include('user', 'location', 'payments', {productOrders: 'product'})
 )
 
-// Find a Product
-router.get('/', (req, res, next) => {
-  const id = req.query.productId
-  if (!id) return next()
-  db.Product.find(id).then((product) => {
-    req.product = res.locals.product = product
-    next()
-  }).catch(next)
-})
-
 // Index
 router.get('/', (req, res) => {
   const full = req.query.full === '1'
-  const locationId = req.query.locationId
+  const {locationId, productId} = req.query
   const status = Array.isArray(req.query.status)
     ? req.query.status
     : [req.query.status || 'open']
@@ -32,12 +22,8 @@ router.get('/', (req, res) => {
   const orders = db.Order.include('user', 'location').where({status})
 
   // Product
-  if (req.product) {
-    orders.where({
-      id: db.ProductOrder.select('orderId').where({
-        productId: req.product.id
-      })
-    })
+  if (productId) {
+    orders.where({id: db.ProductOrder.select('orderId').where({productId})})
   }
 
   // Location
@@ -84,6 +70,7 @@ router.get('/', (req, res) => {
       page,
       locationId,
       locations,
+      productId,
       products,
       status
     })

@@ -40,6 +40,7 @@ const reducer = combineReducers({
   grower,
   growers,
   location,
+  locationId: pass,
   locations,
   market,
   message,

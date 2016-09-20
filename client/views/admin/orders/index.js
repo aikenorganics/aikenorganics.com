@@ -5,7 +5,7 @@ import Order from './order'
 import {navigate} from '../../../actions'
 import {params} from '../../../url'
 
-export default ({full, locationId, locations, more, orders, page, product, products, status, url}) => {
+export default ({full, locationId, locations, more, orders, page, productId, products, status, url}) => {
   const toggleFull = () => {
     navigate(params(url, {full: full ? null : '1'}))
   }
@@ -47,7 +47,7 @@ export default ({full, locationId, locations, more, orders, page, product, produ
           })}
         </select>
       </div> <div className='form-group'>
-        <select className='form-control' style={{maxWidth: 300}} onChange={changeProduct}>
+        <select className='form-control' style={{maxWidth: 300}} onChange={changeProduct} value={productId}>
           <option value=''>All Products</option>
           {products.map(({id, name}) => {
             return <option key={id} value={id}>{name}</option>
