@@ -157,9 +157,26 @@
       "resolved": "https://registry.npmjs.org/async-foreach/-/async-foreach-0.1.3.tgz"
     },
     "aws-sdk": {
-      "version": "2.5.5",
-      "from": "aws-sdk@2.5.5",
-      "resolved": "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.5.5.tgz"
+      "version": "2.6.4",
+      "from": "aws-sdk@2.6.4",
+      "resolved": "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.6.4.tgz",
+      "dependencies": {
+        "crypto-browserify": {
+          "version": "1.0.9",
+          "from": "crypto-browserify@1.0.9",
+          "resolved": "https://registry.npmjs.org/crypto-browserify/-/crypto-browserify-1.0.9.tgz"
+        },
+        "punycode": {
+          "version": "1.3.2",
+          "from": "punycode@1.3.2",
+          "resolved": "https://registry.npmjs.org/punycode/-/punycode-1.3.2.tgz"
+        },
+        "url": {
+          "version": "0.10.3",
+          "from": "url@0.10.3",
+          "resolved": "https://registry.npmjs.org/url/-/url-0.10.3.tgz"
+        }
+      }
     },
     "aws-sign2": {
       "version": "0.6.0",
@@ -1469,14 +1486,14 @@
       "resolved": "https://registry.npmjs.org/osenv/-/osenv-0.1.3.tgz"
     },
     "ozymandias": {
-      "version": "0.113.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#394bf452440905c32984888a52347f8ec3e466e7",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#394bf452440905c32984888a52347f8ec3e466e7",
+      "version": "0.114.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#3a22983d8ebcdd31110fc4b00b9c0acd78ba6698",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#3a22983d8ebcdd31110fc4b00b9c0acd78ba6698",
       "dependencies": {
         "glob": {
-          "version": "7.0.6",
-          "from": "glob@7.0.6",
-          "resolved": "https://registry.npmjs.org/glob/-/glob-7.0.6.tgz"
+          "version": "7.1.0",
+          "from": "glob@7.1.0",
+          "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.0.tgz"
         }
       }
     },

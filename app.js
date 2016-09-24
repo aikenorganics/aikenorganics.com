@@ -11,6 +11,7 @@ const app = module.exports = ozymandias()
 app.set('component', require('./client/component'))
 app.set('layout', require('./views/layout'))
 app.set('layout.json', require('./json/layout'))
+app.set('user', require('./db/user'))
 
 // Bugsnag
 app.use(bugsnag.requestHandler)
