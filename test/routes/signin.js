@@ -1,6 +1,6 @@
 'use strict'
 
-const db = require('../../db')
+const Token = require('ozymandias/token')
 const test = require('../test')
 
 test('GET /signin/forgot is a 200', (t) => {
@@ -23,7 +23,7 @@ test('GET /signin/reset is a 200 for valid tokens', (t) => {
   .expect(200)
   .end((error) => {
     if (error) return t.end(error)
-    db.Token.where({userId: 1}).find().then((token) => {
+    Token.where({userId: 1}).find().then((token) => {
       t.agent.get(`/signin/reset/${token.id}`)
       .expect(200)
       .end(t.end)

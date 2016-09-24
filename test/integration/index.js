@@ -1,6 +1,7 @@
 'use strict'
 
-const db = require('../../db')
+const User = require('ozymandias/user')
+const Token = require('ozymandias/token')
 const test = require('../test')
 
 test('sign in', (t) => {
@@ -58,7 +59,7 @@ test('forgot password', (t) => {
 
   // Reset password
   .then(() => (
-    db.Token.find().then((token) => {
+    Token.find().then((token) => {
       t.visit(`/signin/reset/${token.id}`)
       t.$('#password').sendKeys('newpassword')
       t.$('#password').submit()
@@ -67,7 +68,7 @@ test('forgot password', (t) => {
   ))
 
   // Verify new password
-  .then(() => db.User.find(1)).then((user) => (
+  .then(() => User.find(1)).then((user) => (
     user.authenticate('newpassword').then((match) => {
       t.ok(match)
       t.end()
