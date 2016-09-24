@@ -2,4 +2,4 @@
 
 mkdir -p public/css
 
-node-sass --output-style=compressed css/app.scss public/css/app.css
+./bin/sass.js css/app.scss > public/css/app.css

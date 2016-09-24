@@ -2,8 +2,6 @@ import React from 'react'
 import Link from './link'
 import alexPath from '../../public/img/alex-small.jpg'
 import logoPath from '../../public/img/logo-small.png'
-import fieldOnePath from '../../public/img/field-one.jpg'
-import fieldTwoPath from '../../public/img/field-two.jpg'
 import vegetablesPath from '../../public/img/vegetables-square.jpg'
 import penAndPadPath from '../../public/img/pen-and-pad-square.jpg'
 import veggiesPath from '../../public/img/veggies-in-boxes-square.jpg'
@@ -11,8 +9,8 @@ import foodBasketPath from '../../public/img/food-basket-square.jpg'
 
 export default () => {
   return <div>
-    <div className='jumbotron covered'>
-      <div className='cover' style={{backgroundImage: `url(${fieldOnePath})`}} />
+    <div className='hero jumbotron covered'>
+      <div className='cover' />
       <div className='container content slide-in'>
         <img src={logoPath} />
         <h1>Making Local Easy</h1>
@@ -64,7 +62,7 @@ export default () => {
       </div>
     </section>
     <div className='covered hero-secondary'>
-      <div className='cover' style={{backgroundImage: `url(${fieldTwoPath})`}} />
+      <div className='cover' />
       <div className='container content'>
         <div className='row'>
           <h2>Visit the Market</h2>

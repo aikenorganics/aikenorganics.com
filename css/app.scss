@@ -65,6 +65,14 @@ main, section {
   }
 }
 
+.hero .cover {
+  background-image: asset-path('/img/field-one.jpg');
+}
+
+.hero-secondary .cover {
+  background-image: asset-path('/img/field-two.jpg');
+}
+
 .hero-secondary {
   text-align: center;
   .content {
