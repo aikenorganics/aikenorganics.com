@@ -1,6 +1,6 @@
 'use strict'
 
-const db = module.exports = require('./db')
+const db = module.exports = require('ozymandias/db/instance')
 
 db.User = require('./user')
 db.Order = require('./order')

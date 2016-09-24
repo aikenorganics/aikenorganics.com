@@ -1,6 +1,6 @@
 'use strict'
 
-const db = require('./db')
+const db = require('ozymandias/db/instance')
 
 class Model extends db.Model {
 
