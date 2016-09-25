@@ -10,7 +10,6 @@ class User extends require('ozymandias/user') {
       'last',
       'first',
       'phone',
-      'isAdmin',
       'imageUpdatedAt',
       'memberUntil',
       'stripeId',
