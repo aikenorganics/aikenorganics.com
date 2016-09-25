@@ -29,6 +29,7 @@ app.use('/products', require('./routes/products'))
 app.use('/settings', require('./routes/settings'))
 app.use('/signin', require('./routes/signin'))
 app.use('/signup', require('./routes/signup'))
+app.use('/session', require('ozymandias/session'))
 
 // Home
 app.get('/', (req, res) => res.react())

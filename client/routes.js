@@ -48,7 +48,7 @@ import AdminGrowersUsers from './views/admin/growers/users'
 import AdminOrders from './views/admin/orders/index'
 import AdminOrdersShow from './views/admin/orders/show'
 
-import Reset from './views/signin/reset'
+import Reset from './views/session/reset'
 import Signin from './views/signin/index'
 import Forgot from './views/signin/forgot'
 
@@ -65,7 +65,7 @@ export default (state) => {
       <Route path='/learn' Component={Learn} />
       <Route path='/signin' Component={Signin} />
       <Route path='/signin/forgot' Component={Forgot} />
-      <Route path='/signin/reset/:tokenId' Component={Reset} />
+      <Route path='/session/reset/:tokenId' Component={Reset} />
       <Route path='/signup' Component={Signup} />
       <Route path='/admin/' Component={AdminNav}>
         <Route path='categories' Component={Categories} />

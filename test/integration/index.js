@@ -60,7 +60,7 @@ test('forgot password', (t) => {
   // Reset password
   .then(() => (
     Token.find().then((token) => {
-      t.visit(`/signin/reset/${token.id}`)
+      t.visit(`/session/reset/${token.id}`)
       t.$('#password').sendKeys('newpassword')
       t.$('#password').submit()
       return t.wait(() => t.getPath().then((path) => path === '/products'))
