@@ -1,16 +1,23 @@
 #!/bin/bash -e
 
 convert public/img/emblem.png \
+  -strip \
   -resize '48x48' \
   public/favicon.ico
 
 convert public/img/emblem.png \
+  -strip \
   -background 'white' \
   -flatten \
   -resize '100x100' \
   -gravity 'center' \
   -extent '129x129' \
-  public/apple-touch-icon.png
+  - | pngquant 256 > public/apple-touch-icon.png
+
+convert public/img/logo.png \
+  -strip \
+  -resize 'x150' \
+  - | pngquant 256 > public/img/logo-small.png
 
 for file in \
   'food-basket.jpg' \
