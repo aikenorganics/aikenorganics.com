@@ -28,6 +28,24 @@ convert public/img/alex.jpg \
   -density '72x72' \
   public/img/alex-small.jpg
 
+convert public/img/field-one-full.jpg \
+  -strip \
+  -resize '1200x800' \
+  -gravity 'center' \
+  -crop '1200x800+0+0' \
+  -quality '50%' \
+  -density '72x72' \
+  public/img/field-one.jpg
+
+convert public/img/field-two-full.jpg \
+  -strip \
+  -resize '1200x800' \
+  -gravity 'center' \
+  -crop '1200x800+0+0' \
+  -quality '50%' \
+  -density '72x72' \
+  public/img/field-two.jpg
+
 for file in \
   'food-basket.jpg' \
   'pen-and-pad.jpg' \
