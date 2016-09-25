@@ -19,6 +19,15 @@ convert public/img/logo.png \
   -resize 'x150' \
   - | pngquant 256 > public/img/logo-small.png
 
+convert public/img/alex.jpg \
+  -strip \
+  -resize '300x300^' \
+  -gravity 'center' \
+  -crop '300x300+0+0' \
+  -quality '70%' \
+  -density '72x72' \
+  public/img/alex-small.jpg
+
 for file in \
   'food-basket.jpg' \
   'pen-and-pad.jpg' \
