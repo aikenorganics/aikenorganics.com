@@ -22,14 +22,6 @@ class User extends require('ozymandias/user') {
     ])
   }
 
-  get isAdmin () {
-    return !!+this._isAdmin || false
-  }
-
-  set isAdmin (value) {
-    this._isAdmin = !!+value || false
-  }
-
   get first () {
     return this._first || ''
   }
