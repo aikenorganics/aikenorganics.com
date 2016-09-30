@@ -15,5 +15,5 @@ tape test/index.js
 
 # Client Tests
 mkdir -p public/js
-./bin/rollup.js test/client/index.js | browserify - > public/js/test.js
+ozy rollup test/client/index.js | browserify - > public/js/test.js
 tape public/js/test.js

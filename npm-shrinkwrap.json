@@ -36,7 +36,7 @@
       "dependencies": {
         "acorn": {
           "version": "3.3.0",
-          "from": "acorn@>=3.1.0 <4.0.0",
+          "from": "acorn@^3.1.0",
           "resolved": "https://registry.npmjs.org/acorn/-/acorn-3.3.0.tgz"
         }
       }
@@ -45,11 +45,6 @@
       "version": "0.1.4",
       "from": "align-text@>=0.1.3 <0.2.0",
       "resolved": "https://registry.npmjs.org/align-text/-/align-text-0.1.4.tgz"
-    },
-    "amdefine": {
-      "version": "1.0.0",
-      "from": "amdefine@>=0.0.4",
-      "resolved": "https://registry.npmjs.org/amdefine/-/amdefine-1.0.0.tgz"
     },
     "ansi-regex": {
       "version": "2.0.0",
@@ -82,9 +77,9 @@
       "resolved": "https://registry.npmjs.org/array-filter/-/array-filter-0.0.1.tgz"
     },
     "array-find-index": {
-      "version": "1.0.1",
+      "version": "1.0.2",
       "from": "array-find-index@>=1.0.1 <2.0.0",
-      "resolved": "https://registry.npmjs.org/array-find-index/-/array-find-index-1.0.1.tgz"
+      "resolved": "https://registry.npmjs.org/array-find-index/-/array-find-index-1.0.2.tgz"
     },
     "array-flatten": {
       "version": "1.1.1",
@@ -835,9 +830,9 @@
       "resolved": "https://registry.npmjs.org/gauge/-/gauge-2.6.0.tgz"
     },
     "gaze": {
-      "version": "1.1.1",
+      "version": "1.1.2",
       "from": "gaze@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/gaze/-/gaze-1.1.1.tgz"
+      "resolved": "https://registry.npmjs.org/gaze/-/gaze-1.1.2.tgz"
     },
     "generate-function": {
       "version": "2.0.0",
@@ -1061,9 +1056,9 @@
       "resolved": "https://registry.npmjs.org/is-builtin-module/-/is-builtin-module-1.0.0.tgz"
     },
     "is-finite": {
-      "version": "1.0.1",
+      "version": "1.0.2",
       "from": "is-finite@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/is-finite/-/is-finite-1.0.1.tgz"
+      "resolved": "https://registry.npmjs.org/is-finite/-/is-finite-1.0.2.tgz"
     },
     "is-fullwidth-code-point": {
       "version": "1.0.0",
@@ -1231,7 +1226,7 @@
     },
     "lodash.assign": {
       "version": "4.2.0",
-      "from": "lodash.assign@>=4.0.3 <5.0.0",
+      "from": "lodash.assign@>=4.2.0 <5.0.0",
       "resolved": "https://registry.npmjs.org/lodash.assign/-/lodash.assign-4.2.0.tgz"
     },
     "lodash.clonedeep": {
@@ -1395,12 +1390,12 @@
     },
     "node-sass": {
       "version": "3.10.0",
-      "from": "node-sass@latest",
+      "from": "node-sass@3.10.0",
       "resolved": "https://registry.npmjs.org/node-sass/-/node-sass-3.10.0.tgz",
       "dependencies": {
         "glob": {
           "version": "7.1.0",
-          "from": "glob@>=7.0.3 <8.0.0",
+          "from": "glob@^7.0.3",
           "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.0.tgz"
         }
       }
@@ -1486,9 +1481,9 @@
       "resolved": "https://registry.npmjs.org/osenv/-/osenv-0.1.3.tgz"
     },
     "ozymandias": {
-      "version": "0.120.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#39594a9c7b4eb9ef67f4cfc74a0d416f926c4c11",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#39594a9c7b4eb9ef67f4cfc74a0d416f926c4c11",
+      "version": "0.121.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#c78093e80253b0a33984efcc2da44fa3b51d21d5",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#c78093e80253b0a33984efcc2da44fa3b51d21d5",
       "dependencies": {
         "glob": {
           "version": "7.1.0",
@@ -1797,13 +1792,13 @@
       "resolved": "https://registry.npmjs.org/ripemd160/-/ripemd160-1.0.1.tgz"
     },
     "rollup": {
-      "version": "0.36.0",
-      "from": "rollup@latest",
-      "resolved": "https://registry.npmjs.org/rollup/-/rollup-0.36.0.tgz"
+      "version": "0.36.1",
+      "from": "rollup@0.36.1",
+      "resolved": "https://registry.npmjs.org/rollup/-/rollup-0.36.1.tgz"
     },
     "rollup-plugin-buble": {
       "version": "0.14.0",
-      "from": "rollup-plugin-buble@latest",
+      "from": "rollup-plugin-buble@0.14.0",
       "resolved": "https://registry.npmjs.org/rollup-plugin-buble/-/rollup-plugin-buble-0.14.0.tgz"
     },
     "rollup-pluginutils": {
@@ -1889,16 +1884,9 @@
       "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.5.6.tgz"
     },
     "source-map-support": {
-      "version": "0.4.2",
+      "version": "0.4.3",
       "from": "source-map-support@>=0.4.0 <0.5.0",
-      "resolved": "https://registry.npmjs.org/source-map-support/-/source-map-support-0.4.2.tgz",
-      "dependencies": {
-        "source-map": {
-          "version": "0.1.32",
-          "from": "source-map@0.1.32",
-          "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.1.32.tgz"
-        }
-      }
+      "resolved": "https://registry.npmjs.org/source-map-support/-/source-map-support-0.4.3.tgz"
     },
     "spdx-correct": {
       "version": "1.0.2",
