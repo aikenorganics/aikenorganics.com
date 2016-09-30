@@ -1,9 +1,7 @@
 #!/bin/bash -e
 
 printf 'Compiling assets…\n'
-./bin/compile-css
-./bin/compile-js
-ozy manifest
+./bin/postinstall
 
 printf 'Starting server…\n'
 node index.js

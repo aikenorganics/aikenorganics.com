@@ -4,8 +4,7 @@
 ./bin/lint
 
 # Compile Assets
-./bin/compile-css
-./bin/compile-js
+./bin/postinstall
 
 # Reset
 ./bin/reset

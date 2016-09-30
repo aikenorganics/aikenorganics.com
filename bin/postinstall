@@ -1,7 +1,5 @@
 #!/bin/bash -e
 
-if [ "$NODE_ENV" = "production" ]; then
-  ./bin/compile-js
-  ./bin/compile-css
-  ozy manifest
-fi
+./bin/compile-css
+./bin/compile-js
+ozy manifest
