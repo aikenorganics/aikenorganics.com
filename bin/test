@@ -13,6 +13,5 @@ standard
 tape test/index.js
 
 # Client Tests
-mkdir -p public/js
 ozy browserify test/client/index.js > public/js/test.js
 tape public/js/test.js
