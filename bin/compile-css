@@ -1,5 +1,0 @@
-#!/bin/bash -e
-
-mkdir -p public/css
-
-ozy sass css/app.scss > public/css/app.css

@@ -1,6 +1,0 @@
-#!/bin/bash -e
-
-mkdir -p public/js
-
-ozy rollup client/routes.js > client/component.js
-ozy browserify client/index.js > public/js/app.js

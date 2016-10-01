@@ -1,5 +1,9 @@
 #!/bin/bash -e
 
-./bin/compile-css
-./bin/compile-js
+mkdir -p public/js
+mkdir -p public/css
+
+ozy sass css/app.scss > public/css/app.css
+ozy rollup client/routes.js > client/component.js
+ozy browserify client/index.js > public/js/app.js
 ozy manifest
