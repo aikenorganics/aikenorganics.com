@@ -33,7 +33,7 @@
   "dependencies": {
     "bugsnag": "1.8.0",
     "bugsnag-js": "3.0.4",
-    "es6-promise": "3.3.1",
+    "es6-promise": "4.0.3",
     "marked": "0.3.6",
     "moment": "2.15.1",
     "object-assign": "4.1.0",
