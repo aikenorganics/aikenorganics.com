@@ -3,9 +3,4 @@
 mkdir -p public/js
 
 ozy rollup client/routes.js > client/component.js
-
-if [ "$NODE_ENV" = "production" ]; then
-  ozy rollup client/index.js | browserify - | uglifyjs -m -c warnings=false > public/js/app.js
-else
-  ozy rollup client/index.js | browserify - > public/js/app.js
-fi
+ozy browserify client/index.js > public/js/app.js
