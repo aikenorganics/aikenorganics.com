@@ -1,7 +1,11 @@
 #!/bin/sh -e
 
 # Clean up some lint
-./bin/lint
+find . \
+  -not -path ./node_modules/\* \
+  -not -path ./public/\* \
+  -iname \*.js |
+xargs standard --fix
 
 # Compile Assets
 ./bin/postinstall
@@ -14,5 +18,5 @@ tape test/index.js
 
 # Client Tests
 mkdir -p public/js
-ozy rollup test/client/index.js | browserify - > public/js/test.js
+ozy browserify test/client/index.js > public/js/test.js
 tape public/js/test.js

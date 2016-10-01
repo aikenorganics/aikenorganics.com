@@ -1,7 +1,0 @@
-#!/bin/sh -e
-
-find . \
-  -not -path ./node_modules/\* \
-  -not -path ./public/\* \
-  -iname \*.js |
-xargs standard --fix
