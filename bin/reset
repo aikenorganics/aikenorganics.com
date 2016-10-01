@@ -2,6 +2,3 @@
 
 # Load the schema.
 psql $DATABASE_URL < schema.sql
-
-# Reset sequences.
-./bin/resequence
