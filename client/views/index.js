@@ -20,7 +20,7 @@ export default () => {
           </strong>
         </p>
         <p>
-          <Link href='/products' className='btn btn-success btn-lg' role='button'>
+          <Link href='/market' className='btn btn-success btn-lg' role='button'>
             Start Shopping
           </Link>
         </p>
@@ -67,7 +67,7 @@ export default () => {
         <div className='row'>
           <h2>Visit the Market</h2>
           <p>
-            <Link href='/products' className='btn btn-success btn-lg' role='button'>
+            <Link href='/market' className='btn btn-success btn-lg' role='button'>
               View Products
             </Link>
           </p>

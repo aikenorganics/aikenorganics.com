@@ -23,7 +23,7 @@ export default ({currentUser}) => {
           <Link className='nav-link' href='/learn'>Learn</Link>
         </li>
         <li className='nav-item'>
-          <Link className='nav-link' href='/products'>Market</Link>
+          <Link className='nav-link' href='/market'>Market</Link>
         </li>
         {currentUser
           ? <li className='nav-item'>
