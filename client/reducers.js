@@ -45,6 +45,7 @@ const reducer = combineReducers({
   market,
   message,
   more: pass,
+  newsHtml: pass,
   order,
   orders: pass,
   oversold: pass,

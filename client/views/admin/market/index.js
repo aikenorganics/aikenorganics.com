@@ -12,9 +12,10 @@ export default class Index extends PureComponent {
 
   constructor (props) {
     super(props)
-    const {message} = props.market
+    const {message, news} = props.market
     this.state = {
-      message
+      message,
+      news
     }
   }
 
@@ -25,7 +26,7 @@ export default class Index extends PureComponent {
 
   render () {
     const {busy, market: {open}} = this.props
-    const {message} = this.state
+    const {message, news} = this.state
 
     return <div>
       <h1>Market</h1>
@@ -43,6 +44,11 @@ export default class Index extends PureComponent {
           <label htmlFor='message'>Message</label>
           <textarea id='message' className='form-control' value={message} rows='5'
             onChange={(event) => this.setState({message: event.target.value})} />
+        </div>
+        <div className='form-group'>
+          <label htmlFor='news'>News</label>
+          <textarea id='news' className='form-control' value={news} rows='5'
+            onChange={(event) => this.setState({news: event.target.value})} />
         </div>
         <p>
           <button className='btn btn-success' disabled={busy}>

@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 # Clean up some lint
-standard
+standard --fix
 
 # Compile Assets
 ./bin/postinstall

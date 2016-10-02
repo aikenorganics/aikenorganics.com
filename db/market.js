@@ -12,6 +12,7 @@ class Market extends Model {
   static get columns () {
     return [
       'id',
+      'news',
       'open',
       'domain',
       'message',
@@ -22,6 +23,10 @@ class Market extends Model {
 
   get messageHtml () {
     return marked(this.message)
+  }
+
+  get newsHtml () {
+    return marked(this.news)
   }
 
 }

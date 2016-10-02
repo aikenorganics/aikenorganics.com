@@ -1,8 +1,9 @@
 import React from 'react'
 import Product from '../products/product'
 
-export default ({busy, cart, currentUser, open, products}) => {
+export default ({busy, cart, currentUser, newsHtml, open, products}) => {
   return <div>
+    <div dangerouslySetInnerHTML={{__html: newsHtml}} />
     <h2>Featured Items</h2>
     <div className='row'>
       {products.map((product) => {

@@ -512,7 +512,8 @@ CREATE TABLE markets (
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     open boolean DEFAULT false NOT NULL,
     domain character varying(255) DEFAULT ''::character varying NOT NULL,
-    message text DEFAULT ''::text NOT NULL
+    message text DEFAULT ''::text NOT NULL,
+    news text DEFAULT ''::text NOT NULL
 );
 
 
@@ -912,9 +913,9 @@ SELECT pg_catalog.setval('locations_id_seq', 3, true);
 -- Data for Name: markets; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY markets (id, created_at, updated_at, open, domain, message) FROM stdin;
-2	2015-10-13 21:21:45.67863-04	2015-10-13 21:21:45.67863-04	f	closed.localhost	
-1	2015-10-13 21:21:45.67863-04	2016-01-24 08:24:52.563-05	t	open.localhost	**Hi!** Aiken Organics is still under development, so please bear with us while we work out the kinks! If something goes wrong, or you have a question, or you just want to shoot the breeze, send an email to [support@aikenorganics.com](mailto:support@aikenorganics.com).
+COPY markets (id, created_at, updated_at, open, domain, message, news) FROM stdin;
+2	2015-10-13 21:21:45.67863-04	2015-10-13 21:21:45.67863-04	f	closed.localhost		
+1	2015-10-13 21:21:45.67863-04	2016-10-02 07:40:38.128-04	t	open.localhost	**Hi!** Aiken Organics is still under development, so please bear with us while we work out the kinks! If something goes wrong, or you have a question, or you just want to shoot the breeze, send an email to [support@aikenorganics.com](mailto:support@aikenorganics.com).	## Some News\n\nLorem ipsum dolor sit amet!
 \.
 
 
