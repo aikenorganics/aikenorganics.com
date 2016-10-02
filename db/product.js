@@ -2,7 +2,6 @@
 
 const marked = require('marked')
 const Model = require('./model')
-const images = require('ozymandias/images')
 
 class Product extends Model {
 
@@ -97,7 +96,7 @@ class Product extends Model {
 
 }
 
-images.hasImage(Product, {
+Product.hasImage({
   name: 'image',
   sizes: {
     small: 100,

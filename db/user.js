@@ -1,6 +1,5 @@
 'use strict'
 
-const images = require('ozymandias/images')
 const stripe = require('stripe')(process.env.STRIPE_SK)
 
 class User extends require('ozymandias/user') {
@@ -170,7 +169,7 @@ class User extends require('ozymandias/user') {
 
 }
 
-images.hasImage(User, {
+User.hasImage({
   name: 'image',
   sizes: {
     small: 100,
