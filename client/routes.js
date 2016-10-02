@@ -5,6 +5,8 @@ import App from './views/app'
 import SubNav from './views/sub-nav'
 import AdminNav from './views/admin/nav'
 
+import Market from './views/market/index'
+
 import OrdersNav from './views/orders/nav'
 import CurrentOrder from './views/orders/current'
 import PreviousOrders from './views/orders/previous'
@@ -36,7 +38,7 @@ import Users from './views/admin/users/index'
 import NewUser from './views/admin/users/new'
 import EditUser from './views/admin/users/edit'
 
-import Market from './views/admin/market/index'
+import AdminMarket from './views/admin/market/index'
 
 import AdminProducts from './views/admin/products/index'
 
@@ -81,7 +83,7 @@ export default (state) => {
         <Route path='locations/new' Component={NewLocation} />
         <Route path='orders' Component={AdminOrders} />
         <Route path='orders/:orderId' Component={AdminOrdersShow} />
-        <Route path='market' Component={Market} />
+        <Route path='market' Component={AdminMarket} />
         <Route path='users' Component={Users} />
         <Route path='users/new' Component={NewUser} />
         <Route path='users/emails' Component={Emails} />
@@ -89,6 +91,7 @@ export default (state) => {
       </Route>
       <Route path='/' Component={SubNav}>
         <Route path='cart' Component={Cart} />
+        <Route path='market' Component={Market} />
         <Route path='growers' Component={Growers} />
         <Route path='growers/new' Component={NewGrower} />
         <Route path='growers/:growerId' Component={Grower} />

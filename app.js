@@ -23,6 +23,7 @@ app.use(require('./mid/cart'))
 // Routes
 app.use('/cart', require('./routes/cart'))
 app.use('/admin', require('./routes/admin'))
+app.use('/market', require('./routes/market'))
 app.use('/orders', require('./routes/orders'))
 app.use('/growers', require('./routes/growers'))
 app.use('/products', require('./routes/products'))
