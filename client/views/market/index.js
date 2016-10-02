@@ -1,7 +1,7 @@
 import React from 'react'
 import Product from '../products/product'
 
-export default ({busy, cart, currentUser, newsHtml, open, products}) => {
+export default ({busy, cart, currentUser, newsHtml, market: {open}, products}) => {
   return <div>
     <article dangerouslySetInnerHTML={{__html: newsHtml}} />
     <h2>Featured Items</h2>
