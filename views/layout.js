@@ -26,10 +26,10 @@ module.exports = ({json, state}, content) => html`
   <link rel='apple-touch-icon' href='${assets.path('apple-touch-icon.png')}'>
   <script defer src='${assets.path('js/app.js')}'></script>
   ${raw(analytics())}
-  ${raw(json('state', state || {}))}
 </head>
 <body>
   ${raw(content)}
+  ${raw(json('state', state || {}))}
 </body>
 </html>
 `
