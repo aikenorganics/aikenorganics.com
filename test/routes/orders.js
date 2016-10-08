@@ -48,9 +48,9 @@ test('POST /orders/:id is a 200', (t) => {
     })
     .expect(200)
     .expect('Content-Type', /json/)
-    .end((error, res) => {
+    .end((error, response) => {
       if (error) return t.end(error)
-      const {location, status, notes} = res.body.order
+      const {location, status, notes} = response.body.order
       t.ok(location)
       t.is(location.id, 2)
       t.is(status, 'open')
@@ -107,9 +107,9 @@ test('Admins can update someone else\'s order', (t) => {
       notes: 'updated'
     })
     .expect(200)
-    .end((error, res) => {
+    .end((error, response) => {
       if (error) return t.end(error)
-      const {location, notes, status} = res.body.order
+      const {location, notes, status} = response.body.order
       t.ok(location)
       t.is(location.id, 2)
       t.is(notes, 'updated')

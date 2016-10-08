@@ -24,9 +24,9 @@ test('POST /product-orders/:id is a 200', (t) => {
     .post('/admin/product-orders/1')
     .send({quantity: 1, cost: '1.23'})
     .expect(200)
-    .end((error, res) => {
+    .end((error, response) => {
       if (error) return t.end(error)
-      const {cost, quantity} = res.body.productOrder
+      const {cost, quantity} = response.body.productOrder
       t.is(cost, '1.23')
       t.is(quantity, 1)
       db.ProductOrder.find(1).then((productOrder) => {
@@ -44,9 +44,9 @@ test('POST /product-orders is a 200', (t) => {
     .post('/admin/product-orders')
     .send({quantity: 1, orderId: 1, productId: 3})
     .expect(200)
-    .end((error, res) => {
+    .end((error, response) => {
       if (error) return t.end(error)
-      const {id, orderId, productId, quantity} = res.body.productOrder
+      const {id, orderId, productId, quantity} = response.body.productOrder
       t.is(quantity, 1)
       t.is(orderId, 1)
       t.is(productId, 3)
@@ -63,9 +63,9 @@ test('editing an inactive product order', (t) => {
     t.agent.post('/admin/product-orders/9')
     .send({quantity: 2, cost: '6'})
     .expect(200)
-    .end((error, res) => {
+    .end((error, response) => {
       if (error) return t.end(error)
-      const {cost, quantity} = res.body.productOrder
+      const {cost, quantity} = response.body.productOrder
       t.is(cost, '6')
       t.is(quantity, 2)
       db.ProductOrder.find(9).then((productOrder) => {

@@ -4,24 +4,24 @@ const db = require('../db')
 const json = require('../json/signup')
 const router = module.exports = require('ozymandias').Router()
 
-router.get('/', (req, res) => res.react(json.index))
+router.get('/', (request, response) => response.react(json.index))
 
 // Validations
-router.post('/', (req, res, next) => {
-  db.User.where('trim(lower(email)) = trim(lower(?))', req.body.email).find()
+router.post('/', (request, response, next) => {
+  db.User.where('trim(lower(email)) = trim(lower(?))', request.body.email).find()
   .then((user) => {
     if (!user) return next()
-    res.status(422).json({
+    response.status(422).json({
       email: ['That user already exists! Is it you?']
     })
-  }).catch(res.error)
+  }).catch(response.error)
 })
 
-router.post('/', (req, res) => {
-  db.User.create(req.permit(
+router.post('/', (request, response) => {
+  db.User.create(request.permit(
     'first', 'last', 'phone', 'password', 'email'
   )).then((user) => {
-    req.signIn(user)
-    res.json({})
-  }).catch(res.error)
+    request.signIn(user)
+    response.json({})
+  }).catch(response.error)
 })

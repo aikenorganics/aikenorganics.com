@@ -8,79 +8,79 @@ const router = module.exports = require('ozymandias').Router()
 router.find('grower', () => db.Grower)
 
 // Authorize
-router.param('growerId', (req, res, next) => {
-  if (!req.currentUser || !req.grower) return next()
+router.param('growerId', (request, response, next) => {
+  if (!request.currentUser || !request.grower) return next()
   db.UserGrower.where({
-    userId: req.currentUser.id,
-    growerId: req.grower.id
+    userId: request.currentUser.id,
+    growerId: request.grower.id
   }).find().then((userGrower) => {
-    req.canEdit = res.locals.canEdit = req.admin || !!userGrower
+    request.canEdit = response.locals.canEdit = request.admin || !!userGrower
     next()
-  }).catch(res.error)
+  }).catch(response.error)
 })
 
 // Index
-router.get('/', (req, res) => {
+router.get('/', (request, response) => {
   db.Grower.where({active: true}).order('name').all().then((growers) => {
-    res.react(json.index, {growers})
+    response.react(json.index, {growers})
   })
 })
 
 // New Grower
-router.get('/new', (req, res) => {
-  if (!req.admin) return res.unauthorized()
-  res.react(json.new)
+router.get('/new', (request, response) => {
+  if (!request.admin) return response.unauthorized()
+  response.react(json.new)
 })
 
-router.post('/', (req, res) => {
-  if (!req.admin) return res.unauthorized()
+router.post('/', (request, response) => {
+  if (!request.admin) return response.unauthorized()
 
-  db.Grower.create(req.permit(
+  db.Grower.create(request.permit(
     'url', 'name', 'email', 'location', 'description'
   )).then((grower) => {
-    res.json(json.create, {grower})
-  }).catch(res.error)
+    response.json(json.create, {grower})
+  }).catch(response.error)
 })
 
 // Show
-router.get('/:growerId', (req, res) => {
-  const products = db.Product.where({growerId: req.grower.id})
-  if (!req.canEdit) products.where({active: true})
+router.get('/:growerId', (request, response) => {
+  const products = db.Product.where({growerId: request.grower.id})
+  if (!request.canEdit) products.where({active: true})
 
   products.order('name').all().then((products) => {
-    res.react(json.show, {grower: req.grower, products})
-  }).catch(res.error)
+    response.react(json.show, {grower: request.grower, products})
+  }).catch(response.error)
 })
 
 // Edit Grower
-router.get('/:growerId/edit', (req, res) => {
-  if (!req.canEdit) return res.unauthorized()
-  res.react(json.edit, {grower: req.grower})
+router.get('/:growerId/edit', (request, response) => {
+  if (!request.canEdit) return response.unauthorized()
+  response.react(json.edit, {grower: request.grower})
 })
 
-router.post('/:growerId', (req, res) => {
-  if (!req.canEdit) return res.unauthorized()
+router.post('/:growerId', (request, response) => {
+  if (!request.canEdit) return response.unauthorized()
 
-  req.grower.update(req.permit(
+  request.grower.update(request.permit(
     'active', 'name', 'email', 'url', 'location', 'description'
   )).then(() => {
-    res.json({})
-  }).catch(res.error)
+    response.json({})
+  }).catch(response.error)
 })
 
 // New Product
-router.get('/:growerId/products/new', (req, res) => {
-  if (!req.canEdit) return res.unauthorized()
+router.get('/:growerId/products/new', (request, response) => {
+  if (!request.canEdit) return response.unauthorized()
   db.Category.all().then((categories) => {
-    res.react(json.newProduct, {grower: req.grower, categories})
-  }).catch(res.error)
+    response.react(json.newProduct, {grower: request.grower, categories})
+  }).catch(response.error)
 })
 
 // Create Product
-router.post('/:growerId/products', (req, res) => {
-  if (!req.canEdit) return res.unauthorized()
+router.post('/:growerId/products', (request, response) => {
+  if (!request.canEdit) return response.unauthorized()
 
-  const values = req.permit(
+  const values = request.permit(
     'name',
     'cost',
     'unit',
@@ -90,43 +90,43 @@ router.post('/:growerId/products', (req, res) => {
   )
 
   // Set the grower id.
-  values.growerId = req.grower.id
+  values.growerId = request.grower.id
 
   // Admins can set featured.
-  if (req.admin) {
-    Object.assign(values, req.permit('featured'))
+  if (request.admin) {
+    Object.assign(values, request.permit('featured'))
   }
 
   db.Product.create(values).then((product) => {
-    res.json(json.createProduct, {product})
-  }).catch(res.error)
+    response.json(json.createProduct, {product})
+  }).catch(response.error)
 })
 
 // Orders
-router.get('/:growerId/orders', (req, res) => {
-  if (!req.canEdit) return res.unauthorized()
+router.get('/:growerId/orders', (request, response) => {
+  if (!request.canEdit) return response.unauthorized()
 
   db.Product
-  .where({growerId: req.grower.id})
+  .where({growerId: request.grower.id})
   .where('reserved > 0')
   .all().then((products) => {
-    res.react(json.orders, {grower: req.grower, products})
-  }).catch(res.error)
+    response.react(json.orders, {grower: request.grower, products})
+  }).catch(response.error)
 })
 
 // Products
-router.get('/:growerId/products', (req, res) => {
-  if (!req.canEdit) return res.unauthorized()
+router.get('/:growerId/products', (request, response) => {
+  if (!request.canEdit) return response.unauthorized()
 
-  db.Product.where({growerId: req.grower.id}).order('name').all()
+  db.Product.where({growerId: request.grower.id}).order('name').all()
   .then((products) => {
-    res.react(json.products, {grower: req.grower, products})
-  }).catch(res.error)
+    response.react(json.products, {grower: request.grower, products})
+  }).catch(response.error)
 })
 
-router.post('/:growerId/image', (req, res) => {
-  if (!req.canEdit) return res.unauthorized()
-  req.grower.uploadImage(req).then(() => {
-    res.json(json.image)
-  }).catch(res.error)
+router.post('/:growerId/image', (request, response) => {
+  if (!request.canEdit) return response.unauthorized()
+  request.grower.uploadImage(request).then(() => {
+    response.json(json.image)
+  }).catch(response.error)
 })

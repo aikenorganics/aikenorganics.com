@@ -8,41 +8,41 @@ const router = module.exports = require('ozymandias').Router()
 router.find('category', () => db.Category)
 
 // Index
-router.get('/', (req, res) => {
+router.get('/', (request, response) => {
   db.Category
   .select('not exists(select 1 from products where category_id = categories.id) as removable')
   .order('position').all().then((categories) => {
-    res.react(json.index, {categories})
-  }).catch(res.error)
+    response.react(json.index, {categories})
+  }).catch(response.error)
 })
 
 // New
-router.get('/new', (req, res) => res.react(json.new))
+router.get('/new', (request, response) => response.react(json.new))
 
 // Edit
-router.get('/:categoryId/edit', (req, res) => {
-  res.react(json.edit, {
-    category: req.category
+router.get('/:categoryId/edit', (request, response) => {
+  response.react(json.edit, {
+    category: request.category
   })
 })
 
 // Create
-router.post('/', (req, res) => {
-  db.Category.create(req.permit('meat', 'name', 'position')).then((category) => {
-    res.json(json.create, {category})
-  }).catch(res.error)
+router.post('/', (request, response) => {
+  db.Category.create(request.permit('meat', 'name', 'position')).then((category) => {
+    response.json(json.create, {category})
+  }).catch(response.error)
 })
 
 // Update
-router.post('/:categoryId', (req, res) => {
-  req.category.update(req.permit('meat', 'name', 'position')).then(() => {
-    res.json(json.update)
-  }).catch(res.error)
+router.post('/:categoryId', (request, response) => {
+  request.category.update(request.permit('meat', 'name', 'position')).then(() => {
+    response.json(json.update)
+  }).catch(response.error)
 })
 
 // Delete
-router.delete('/:categoryId', (req, res) => {
-  req.category.destroy().then(() => {
-    res.json({})
-  }).catch(res.error)
+router.delete('/:categoryId', (request, response) => {
+  request.category.destroy().then(() => {
+    response.json({})
+  }).catch(response.error)
 })

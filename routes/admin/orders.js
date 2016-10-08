@@ -12,12 +12,12 @@ router.find('order', () =>
 )
 
 // Index
-router.get('/', (req, res) => {
-  const full = req.query.full === '1'
-  const {locationId, productId} = req.query
-  const status = Array.isArray(req.query.status)
-    ? req.query.status
-    : [req.query.status || 'open']
+router.get('/', (request, response) => {
+  const full = request.query.full === '1'
+  const {locationId, productId} = request.query
+  const status = Array.isArray(request.query.status)
+    ? request.query.status
+    : [request.query.status || 'open']
 
   const orders = db.Order.include('user', 'location').where({status})
 
@@ -34,12 +34,12 @@ router.get('/', (req, res) => {
   }
 
   // CSV
-  if (req.query.csv) {
+  if (request.query.csv) {
     orders.all().then((orders) => {
-      res.setHeader('Content-Type', 'text/csv')
-      res.write(csv.row('id', 'name', 'email', 'member', 'location', 'delivery'))
+      response.setHeader('Content-Type', 'text/csv')
+      response.write(csv.row('id', 'name', 'email', 'member', 'location', 'delivery'))
       for (const {id, location, user} of orders) {
-        res.write(csv.row(
+        response.write(csv.row(
           id,
           user.name,
           user.email,
@@ -48,13 +48,13 @@ router.get('/', (req, res) => {
           location ? '' : '✓'
         ))
       }
-      res.end()
-    }).catch(res.error)
+      response.end()
+    }).catch(response.error)
     return
   }
 
   // Pagination
-  const page = +(req.query.page || 1)
+  const page = +(request.query.page || 1)
 
   // Include product orders?
   if (full) orders.include({productOrders: 'product'})
@@ -64,7 +64,7 @@ router.get('/', (req, res) => {
     db.Location.order('name').all(),
     db.Product.order('name').all()
   ]).then(([orders, locations, products]) => {
-    res.react(json.index, {
+    response.react(json.index, {
       full,
       orders,
       page,
@@ -74,11 +74,11 @@ router.get('/', (req, res) => {
       products,
       status
     })
-  }).catch(res.error)
+  }).catch(response.error)
 })
 
 // Show
-router.get('/:orderId', (req, res) => {
+router.get('/:orderId', (request, response) => {
   const products = db.Product.join('grower')
     .where({active: true, grower: {active: true}})
     .where('supply > reserved')
@@ -87,14 +87,14 @@ router.get('/:orderId', (req, res) => {
     products.order('name').all(),
     db.Location.order('name').all()
   ]).then(([products, locations]) => {
-    res.react(json.show, {products, locations})
-  }).catch(res.error)
+    response.react(json.show, {products, locations})
+  }).catch(response.error)
 })
 
 // Charge
-router.post('/:orderId/charge', (req, res) => {
-  const amount = (+req.body.amount * 100) | 0
-  req.order.charge(amount).then((payment) => {
-    res.json(json.charge, {payment})
-  }).catch(res.error)
+router.post('/:orderId/charge', (request, response) => {
+  const amount = (+request.body.amount * 100) | 0
+  request.order.charge(amount).then((payment) => {
+    response.json(json.charge, {payment})
+  }).catch(response.error)
 })

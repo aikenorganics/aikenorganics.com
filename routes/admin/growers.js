@@ -8,7 +8,7 @@ const router = module.exports = require('ozymandias').Router()
 router.find('grower', () => db.Grower.include({userGrowers: 'user'}))
 
 // Index
-router.get('/', (req, res) => {
+router.get('/', (request, response) => {
   db.Grower
   .select(`(
     select sum(quantity * product_orders.cost) from product_orders
@@ -17,36 +17,36 @@ router.get('/', (req, res) => {
     where products.grower_id = growers.id and orders.status = 'complete'
   ) as total`)
   .order('name').all().then((growers) => {
-    res.react(json.index, {growers})
-  }).catch(res.error)
+    response.react(json.index, {growers})
+  }).catch(response.error)
 })
 
 // Orders
-router.get('/orders', (req, res) => {
+router.get('/orders', (request, response) => {
   db.Grower
   .where('exists(select id from products where reserved > 0 and grower_id = growers.id)')
   .include('products').all().then((growers) => {
-    res.react(json.orders, {growers})
-  }).catch(res.error)
+    response.react(json.orders, {growers})
+  }).catch(response.error)
 })
 
 // Show
-router.get('/:growerId', (req, res) => {
+router.get('/:growerId', (request, response) => {
   db.Product
   .join({productOrders: 'order'})
   .select('sum(quantity) as quantity')
   .select('sum(quantity * product_orders.cost) as total')
-  .where({growerId: req.grower.id})
+  .where({growerId: request.grower.id})
   .where({productOrders: {order: {status: 'complete'}}})
   .groupBy('products.id')
   .all().then((products) => {
-    res.react(json.show, {grower: req.grower, products})
-  }).catch(res.error)
+    response.react(json.show, {grower: request.grower, products})
+  }).catch(response.error)
 })
 
 // Users
-router.get('/:growerId/users', (req, res) => {
+router.get('/:growerId/users', (request, response) => {
   db.User.order('first').all().then((users) => {
-    res.react(json.users, {grower: req.grower, users})
-  }).catch(res.error)
+    response.react(json.users, {grower: request.grower, users})
+  }).catch(response.error)
 })

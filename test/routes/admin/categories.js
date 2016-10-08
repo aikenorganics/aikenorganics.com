@@ -33,9 +33,9 @@ test('POST /admin/categories is a 200', (t) => {
     .send({name: 'test', position: 2, meat: true})
     .expect('Content-Type', /json/)
     .expect(200)
-    .end((error, res) => {
+    .end((error, response) => {
       if (error) return t.end(error)
-      const {category} = res.body
+      const {category} = response.body
       t.is(category.name, 'test')
       t.is(category.position, 2)
       t.is(category.meat, true)
@@ -50,9 +50,9 @@ test('POST /admin/categories/:id is a 200', (t) => {
     .send({name: 'test', position: 106, meat: true})
     .expect('Content-Type', /json/)
     .expect(200)
-    .end((error, res) => {
+    .end((error, response) => {
       if (error) return t.end(error)
-      const {meat, name, position} = res.body.category
+      const {meat, name, position} = response.body.category
       t.is(name, 'test')
       t.is(position, 106)
       t.is(meat, true)

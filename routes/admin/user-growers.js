@@ -8,18 +8,18 @@ const router = module.exports = require('ozymandias').Router()
 router.find('userGrower', () => db.UserGrower.include('user', 'grower'))
 
 // Create
-router.post('/', (req, res) => {
-  const {userId, growerId} = req.body
+router.post('/', (request, response) => {
+  const {userId, growerId} = request.body
   db.UserGrower.create({userId, growerId}).then((userGrower) => (
     db.UserGrower.include('user', 'grower').find(userGrower.id).then((userGrower) => {
-      res.json(json.create, {userGrower})
+      response.json(json.create, {userGrower})
     })
-  )).catch(res.error)
+  )).catch(response.error)
 })
 
 // Destroy
-router.delete('/:userGrowerId', (req, res) => {
-  req.userGrower.destroy().then(() => {
-    res.json({})
-  }).catch(res.error)
+router.delete('/:userGrowerId', (request, response) => {
+  request.userGrower.destroy().then(() => {
+    response.json({})
+  }).catch(response.error)
 })

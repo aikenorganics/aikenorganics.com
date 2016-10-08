@@ -3,8 +3,8 @@
 const ozymandias = require('ozymandias')
 const router = module.exports = ozymandias.Router()
 
-router.use((req, res, next) => {
-  if (!req.admin) return res.unauthorized()
+router.use((request, response, next) => {
+  if (!request.admin) return response.unauthorized()
   next()
 })
 

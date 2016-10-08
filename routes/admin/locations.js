@@ -8,35 +8,35 @@ const router = module.exports = require('ozymandias').Router()
 router.find('location', () => db.Location)
 
 // Index
-router.get('/', (req, res) => {
+router.get('/', (request, response) => {
   db.Location.order('name').all().then((locations) => {
-    res.react(json.index, {locations})
-  }).catch(res.error)
+    response.react(json.index, {locations})
+  }).catch(response.error)
 })
 
 // New
-router.get('/new', (req, res) => res.react(json.new))
+router.get('/new', (request, response) => response.react(json.new))
 
 // Edit
-router.get('/:locationId/edit', (req, res) => {
-  res.react(json.edit, {location: req.location})
+router.get('/:locationId/edit', (request, response) => {
+  response.react(json.edit, {location: request.location})
 })
 
 // Create
-router.post('/', (req, res) => {
-  db.Location.create(req.permit('name')).then(() => {
-    res.json({})
-  }).catch(res.error)
+router.post('/', (request, response) => {
+  db.Location.create(request.permit('name')).then(() => {
+    response.json({})
+  }).catch(response.error)
 })
 
 // Update
-router.post('/:locationId', (req, res) => {
-  req.location.update(req.permit('name', 'active')).then(() => {
-    res.json({})
-  }).catch(res.error)
+router.post('/:locationId', (request, response) => {
+  request.location.update(request.permit('name', 'active')).then(() => {
+    response.json({})
+  }).catch(response.error)
 })
 
 // Destroy
-router.delete('/:locationId', (req, res) => {
-  req.location.destroy().then(() => res.json({})).catch(res.error)
+router.delete('/:locationId', (request, response) => {
+  request.location.destroy().then(() => response.json({})).catch(response.error)
 })

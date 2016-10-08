@@ -11,9 +11,9 @@ test('POST /admin/users/:id is a 200', (t) => {
     .send('last=last')
     .send('phone=555-555-5555')
     .expect(200)
-    .end((error, res) => {
+    .end((error, response) => {
       if (error) return t.end(error)
-      const {first, last, phone} = res.body.user
+      const {first, last, phone} = response.body.user
       t.is(first, 'first')
       t.is(last, 'last')
       t.is(phone, '555-555-5555')
@@ -153,9 +153,9 @@ test('return page in JSON', (t) => {
     .get('/admin/users')
     .set('Accept', 'application/json')
     .expect(200)
-    .end((error, res) => {
+    .end((error, response) => {
       if (error) return t.end(error)
-      t.is(res.body.page, 1)
+      t.is(response.body.page, 1)
       t.end()
     })
   })

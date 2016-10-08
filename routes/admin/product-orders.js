@@ -8,27 +8,27 @@ const router = module.exports = require('ozymandias').Router()
 router.find('productOrder', () => db.ProductOrder)
 
 // Create
-router.post('/', (req, res) => {
-  db.ProductOrder.create(req.permit('orderId', 'quantity', 'productId'))
+router.post('/', (request, response) => {
+  db.ProductOrder.create(request.permit('orderId', 'quantity', 'productId'))
   .then(({id}) => (
     db.ProductOrder.include('product').find(id).then((productOrder) => {
-      res.json(json.create, {productOrder})
+      response.json(json.create, {productOrder})
     })
-  )).catch(res.error)
+  )).catch(response.error)
 })
 
 // Delete
-router.delete('/:productOrderId', (req, res) => {
-  req.productOrder.destroy().then(() => {
-    res.json({})
-  }).catch(res.error)
+router.delete('/:productOrderId', (request, response) => {
+  request.productOrder.destroy().then(() => {
+    response.json({})
+  }).catch(response.error)
 })
 
 // Update
-router.post('/:productOrderId', (req, res) => {
-  req.productOrder.update(req.permit('quantity', 'cost')).then(() => {
-    return db.ProductOrder.include('product').find(req.productOrder.id).then((productOrder) => {
-      res.json(json.update)
+router.post('/:productOrderId', (request, response) => {
+  request.productOrder.update(request.permit('quantity', 'cost')).then(() => {
+    return db.ProductOrder.include('product').find(request.productOrder.id).then((productOrder) => {
+      response.json(json.update)
     })
-  }).catch(res.error)
+  }).catch(response.error)
 })

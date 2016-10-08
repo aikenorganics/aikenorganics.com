@@ -5,58 +5,58 @@ const json = require('../json/cart/index')
 const updateMail = require('../mail/orders/update')
 const router = module.exports = require('ozymandias').Router()
 
-router.use((req, res, next) => {
-  if (req.currentUser && req.market.open) return next()
-  res.unauthorized()
+router.use((request, response, next) => {
+  if (request.currentUser && request.market.open) return next()
+  response.unauthorized()
 })
 
 // Index
-router.get('/', (req, res) => {
+router.get('/', (request, response) => {
   Promise.all([
     db.Product
       .include('category', 'grower')
-      .where({id: req.cart.ids})
+      .where({id: request.cart.ids})
       .order('name').all(),
     db.Location.where({active: true}).order('name').all(),
-    db.Order.where({status: 'open', userId: req.currentUser.id}).find()
+    db.Order.where({status: 'open', userId: request.currentUser.id}).find()
   ]).then(([products, locations, order]) => {
-    res.react(json.index, {products, locations, order})
-  }).catch(res.error)
+    response.react(json.index, {products, locations, order})
+  }).catch(response.error)
 })
 
 // Update
-router.post('/', (req, res, next) => {
-  const id = req.body.productId
+router.post('/', (request, response, next) => {
+  const id = request.body.productId
 
   db.Product.include('grower').find(id).then((product) => {
     if (product && product.grower.active) {
-      req.product = res.locals.product = product
+      request.product = response.locals.product = product
       return next()
     }
-    res.json({message: 'That product is unavailable'})
-  }).catch(res.error)
+    response.json({message: 'That product is unavailable'})
+  }).catch(response.error)
 })
 
-router.post('/', (req, res) => {
-  const quantity = +req.body.quantity
-  req.cart.update(req.product, quantity)
-  res.json({message: 'Cart updated.'})
+router.post('/', (request, response) => {
+  const quantity = +request.body.quantity
+  request.cart.update(request.product, quantity)
+  response.json({message: 'Cart updated.'})
 })
 
 // Checkout
-router.post('/checkout', (req, res) => {
+router.post('/checkout', (request, response) => {
   db.query('select checkout($1, $2, $3)', [
-    req.currentUser.id,
-    req.body.locationId,
-    req.cart.ids.map((id) => [id, req.cart.cart[id]])
+    request.currentUser.id,
+    request.body.locationId,
+    request.cart.ids.map((id) => [id, request.cart.cart[id]])
   ]).then(() => (
-    req.mail(updateMail, {
-      to: [req.currentUser.email],
+    request.mail(updateMail, {
+      to: [request.currentUser.email],
       subject: 'Aiken Organics: Order Updated',
-      url: `http://${req.get('host')}/orders/current`
+      url: `http://${request.get('host')}/orders/current`
     })
   )).then(() => {
-    req.cart.clear()
-    res.json({})
-  }).catch(res.error)
+    request.cart.clear()
+    response.json({})
+  }).catch(response.error)
 })

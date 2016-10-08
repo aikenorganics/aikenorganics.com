@@ -168,9 +168,9 @@ test('POST /growers is a 200 for admins', (t) => {
     .send('name=New Grower')
     .expect(200)
     .expect('Content-Type', /json/)
-    .end((error, res) => {
+    .end((error, response) => {
       if (error) return t.end(error)
-      const {id, name} = res.body.grower
+      const {id, name} = response.body.grower
       t.is(name, 'New Grower')
       t.is(typeof id, 'number')
       t.end()
@@ -187,9 +187,9 @@ test('POST /growers/:id/products is a 200 for admins', (t) => {
     .send('categoryId=1')
     .expect('Content-Type', /json/)
     .expect(200)
-    .end((error, res) => {
+    .end((error, response) => {
       if (error) return t.end(error)
-      const {categoryId, cost, id, name, supply} = res.body.product
+      const {categoryId, cost, id, name, supply} = response.body.product
       t.is(categoryId, 1)
       t.is(cost, '2.45')
       t.is(name, 'New Product')
@@ -301,8 +301,8 @@ test('GET /growers/:id authorized users see new product link', (t) => {
     t.agent
     .get('/growers/1')
     .expect(200)
-    .expect((res) => {
-      if (!~res.text.indexOf('/growers/1/products/new')) {
+    .expect((response) => {
+      if (!~response.text.indexOf('/growers/1/products/new')) {
         return 'missing new product link'
       }
     })
@@ -314,8 +314,8 @@ test('GET /growers does not return inactive growers', (t) => {
   t.request()
   .get('/growers')
   .expect(200)
-  .expect((res) => {
-    if (~res.text.indexOf('/growers/3')) {
+  .expect((response) => {
+    if (~response.text.indexOf('/growers/3')) {
       return 'should not see inactive growers'
     }
   })
@@ -327,11 +327,11 @@ test('GET /growers/:id as admin includes inactive products', (t) => {
     t.agent
     .get('/growers/2')
     .expect(200)
-    .expect((res) => {
-      if (!~res.text.indexOf('/products/7')) {
+    .expect((response) => {
+      if (!~response.text.indexOf('/products/7')) {
         return 'should see inactive products'
       }
-      if (!~res.text.indexOf('/products/4')) {
+      if (!~response.text.indexOf('/products/4')) {
         return 'should see active products'
       }
     })
@@ -344,11 +344,11 @@ test('GET /growers/:id as grower includes inactive products', (t) => {
     t.agent
     .get('/growers/2')
     .expect(200)
-    .expect((res) => {
-      if (!~res.text.indexOf('/products/7')) {
+    .expect((response) => {
+      if (!~response.text.indexOf('/products/7')) {
         return 'should see inactive products'
       }
-      if (!~res.text.indexOf('/products/4')) {
+      if (!~response.text.indexOf('/products/4')) {
         return 'should see active products'
       }
     })
@@ -361,11 +361,11 @@ test('GET /growers/:id as non-grower does not include inactive products', (t) =>
     t.agent
     .get('/growers/1')
     .expect(200)
-    .expect((res) => {
-      if (~res.text.indexOf('/products/8')) {
+    .expect((response) => {
+      if (~response.text.indexOf('/products/8')) {
         return 'should not see inactive products'
       }
-      if (!~res.text.indexOf('/products/1')) {
+      if (!~response.text.indexOf('/products/1')) {
         return 'should see active products'
       }
     })

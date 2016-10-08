@@ -9,12 +9,12 @@ const {Builder, By} = require('selenium-webdriver')
 const driver = new Builder().forBrowser('chrome').build()
 
 // Convenient sign in.
-app.post('/signin', (req, res) => {
-  db.User.where({email: req.body.email}).find().then((user) => {
-    if (!user) throw new Error(`User not found: ${req.body.email}`)
-    req.signIn(user)
-    res.end()
-  }).catch(res.error)
+app.post('/signin', (request, response) => {
+  db.User.where({email: request.body.email}).find().then((user) => {
+    if (!user) throw new Error(`User not found: ${request.body.email}`)
+    request.signIn(user)
+    response.end()
+  }).catch(response.error)
 })
 
 // Export a function with the tape API.

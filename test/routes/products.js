@@ -233,11 +233,11 @@ test('GET /products has no inactive products', (t) => {
   t.request()
   .get('/products')
   .expect(200)
-  .expect((res) => {
-    if (~res.text.indexOf('/products/6')) {
+  .expect((response) => {
+    if (~response.text.indexOf('/products/6')) {
       return 'should not see inactive growers'
     }
-    if (~res.text.indexOf('/products/7')) {
+    if (~response.text.indexOf('/products/7')) {
       return 'should not see inactive products'
     }
   })

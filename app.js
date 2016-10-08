@@ -33,14 +33,14 @@ app.use('/signup', require('./routes/signup'))
 app.use('/session', require('ozymandias/session'))
 
 // Home
-app.get('/', (req, res) => res.react())
+app.get('/', (request, response) => response.react())
 
 // Learn
-app.get('/learn', (req, res) => res.react())
+app.get('/learn', (request, response) => response.react())
 
 // 404
-app.get('*', (req, res) => res.notfound())
+app.get('*', (request, response) => response.notfound())
 
 // 500
 app.use(bugsnag.errorHandler)
-app.use((error, req, res, next) => res.error(error))
+app.use((error, request, response, next) => response.error(error))

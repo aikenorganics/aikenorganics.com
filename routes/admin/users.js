@@ -10,62 +10,62 @@ router.find('user', () => db.User.select(`exists(
 ) as "hasOrder"`))
 
 // Index
-router.get('/', (req, res) => {
+router.get('/', (request, response) => {
   let users = db.User
 
   // Search
-  const {search} = req.query
+  const {search} = request.query
   if (search) users = users.search(search)
 
   // Pagination
-  const page = res.locals.page = +(req.query.page || 1)
+  const page = response.locals.page = +(request.query.page || 1)
 
   users.order('email').paginate(page, 100).then((users) => {
-    res.react(json.index, {page, search, users})
-  }).catch(res.error)
+    response.react(json.index, {page, search, users})
+  }).catch(response.error)
 })
 
 // Emails
-router.get('/emails', (req, res) => {
+router.get('/emails', (request, response) => {
   db.User.order('email').all().then((users) => {
-    res.react(json.emails, {users})
-  }).catch(res.error)
+    response.react(json.emails, {users})
+  }).catch(response.error)
 })
 
 // Edit
-router.get('/:userId/edit', (req, res) => {
-  res.react(json.edit)
+router.get('/:userId/edit', (request, response) => {
+  response.react(json.edit)
 })
 
 // New
-router.get('/new', (req, res) => res.react(json.new))
+router.get('/new', (request, response) => response.react(json.new))
 
 // Create
-router.post('/', (req, res) => {
-  db.User.create(req.permit(
+router.post('/', (request, response) => {
+  db.User.create(request.permit(
     'email', 'first', 'last', 'phone', 'memberUntil'
   )).then((user) => {
-    res.json(json.create, {user})
-  }).catch(res.error)
+    response.json(json.create, {user})
+  }).catch(response.error)
 })
 
 // Update
-router.post('/:userId', (req, res) => {
-  req.user.update(req.permit(
+router.post('/:userId', (request, response) => {
+  request.user.update(request.permit(
     'email', 'first', 'last', 'phone', 'isAdmin', 'memberUntil'
   )).then(() => {
-    res.json(json.update)
-  }).catch(res.error)
+    response.json(json.update)
+  }).catch(response.error)
 })
 
 // Image
-router.post('/:userId/image', (req, res) => {
-  req.user.uploadImage(req).then(() => {
-    res.json(json.image)
-  }).catch(res.error)
+router.post('/:userId/image', (request, response) => {
+  request.user.uploadImage(request).then(() => {
+    response.json(json.image)
+  }).catch(response.error)
 })
 
 // Delete
-router.delete('/:userId', (req, res) => {
-  req.user.destroy().then(() => res.json({})).catch(res.error)
+router.delete('/:userId', (request, response) => {
+  request.user.destroy().then(() => response.json({})).catch(response.error)
 })

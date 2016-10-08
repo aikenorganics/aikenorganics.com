@@ -16,9 +16,9 @@ test('POST /admin/market is a 200', (t) => {
     .send({open: true, message: 'test'})
     .expect(200)
     .expect('Content-Type', /json/)
-    .end((error, res) => {
+    .end((error, response) => {
       if (error) return t.end(error)
-      const {id, message, open} = res.body.market
+      const {id, message, open} = response.body.market
       t.is(id, 1)
       t.is(open, true)
       t.is(message, 'test')
@@ -38,9 +38,9 @@ test('POST /admin/market is a 200', (t) => {
     .send({open: false, message: 'test'})
     .expect(200)
     .expect('Content-Type', /json/)
-    .end((error, res) => {
+    .end((error, response) => {
       if (error) return t.end(error)
-      const {id, message, open} = res.body.market
+      const {id, message, open} = response.body.market
       t.is(id, 2)
       t.is(open, false)
       t.is(message, 'test')
