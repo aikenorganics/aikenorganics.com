@@ -1,7 +1,3 @@
-database:
-  override:
-    - psql -U ubuntu -c 'create database aikenorganics_test;'
-    - psql -U ubuntu < schema.sql
 machine:
   environment:
     NODE_ENV: test
