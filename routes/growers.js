@@ -8,7 +8,16 @@ const router = module.exports = require('ozymandias').Router()
 router.find('grower', () => db.Grower)
 
 // Authorize
-router.param('growerId', require('../mid/growers/authorize'))
+router.param('growerId', (req, res, next) => {
+  if (!req.currentUser || !req.grower) return next()
+  db.UserGrower.where({
+    userId: req.currentUser.id,
+    growerId: req.grower.id
+  }).find().then((userGrower) => {
+    req.canEdit = res.locals.canEdit = req.admin || !!userGrower
+    next()
+  }).catch(res.error)
+})
 
 // Index
 router.get('/', (req, res) => {
