@@ -1,5 +1,5 @@
 ID='aikenorganics'
 PORT=3333
-DATABASE_URL='postgres://localhost/aikenorganics_test'
+DATABASE_URL='postgres://localhost/aikenorganics'
 SECRET='test'
 NODE_ENV='test'
