@@ -8,7 +8,6 @@ const server = app.listen(4444)
 
 require('./db')
 require('./lib')
-require('./mid')
 require('./routes')
 require('./integration')
 
