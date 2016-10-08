@@ -7,7 +7,7 @@ standard --fix
 ./bin/postinstall
 
 # Reset
-./bin/reset
+ozy reset
 
 # Server Tests
 tape test/index.js
