@@ -14,7 +14,7 @@
   "scripts": {
     "build": "./bin/build",
     "postinstall": "./bin/postinstall",
-    "start": "./bin/start",
+    "start": "env $(cat .env | xargs) ./bin/start",
     "test": "env $(cat .testenv | xargs) ./bin/test"
   },
   "repository": {
