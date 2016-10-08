@@ -3,5 +3,7 @@ database:
     - psql -U ubuntu -c 'create database aikenorganics_test;'
     - psql -U ubuntu < schema.sql
 machine:
+  environment:
+    NODE_ENV: test
   node:
-    version: 6.5.0
+    version: 6.7.0
