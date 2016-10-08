@@ -1,3 +1,0 @@
-#!/bin/sh -e
-
-psql $DATABASE_URL < migrate.sql

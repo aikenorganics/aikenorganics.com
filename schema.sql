@@ -13,109 +13,23 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
-SET search_path = public, pg_catalog;
-
-ALTER TABLE ONLY public.user_growers DROP CONSTRAINT user_growers_user_id_fkey;
-ALTER TABLE ONLY public.user_growers DROP CONSTRAINT user_growers_grower_id_fkey;
-ALTER TABLE ONLY public.tokens DROP CONSTRAINT tokens_user_id_fkey;
-ALTER TABLE ONLY public.products DROP CONSTRAINT products_grower_id_fkey;
-ALTER TABLE ONLY public.products DROP CONSTRAINT products_category_id_fkey;
-ALTER TABLE ONLY public.product_orders DROP CONSTRAINT product_orders_product_id_fkey;
-ALTER TABLE ONLY public.product_orders DROP CONSTRAINT product_orders_order_id_fkey;
-ALTER TABLE ONLY public.payments DROP CONSTRAINT payments_order_id_fkey;
-ALTER TABLE ONLY public.orders DROP CONSTRAINT orders_user_id_fkey;
-ALTER TABLE ONLY public.orders DROP CONSTRAINT orders_location_id_fkey;
-DROP TRIGGER update_user_search ON public.users;
-DROP TRIGGER update_reserved ON public.product_orders;
-DROP TRIGGER update_product_search ON public.products;
-DROP TRIGGER update_order_status ON public.orders;
-DROP TRIGGER tidy_user ON public.users;
-DROP TRIGGER set_product_order_cost ON public.product_orders;
-DROP TRIGGER increment_reserved ON public.product_orders;
-DROP TRIGGER delete_product_orders ON public.orders;
-DROP TRIGGER decrement_reserved ON public.product_orders;
-DROP TRIGGER check_product_order ON public.product_orders;
-DROP INDEX public.users_lower_case_email_index;
-DROP INDEX public.user_growers_unique_index;
-DROP INDEX public.products_grower_id_index;
-DROP INDEX public.products_category_id_index;
-DROP INDEX public.products_active_index;
-DROP INDEX public.product_search_index;
-DROP INDEX public.product_orders_unique_index;
-DROP INDEX public.orders_user_id_index;
-DROP INDEX public.orders_status_location_id_index;
-DROP INDEX public.orders_location_id_status_index;
-DROP INDEX public.markets_domain_unique_index;
-DROP INDEX public.growers_active_index;
-DROP INDEX public.categories_name_uniq_index;
-ALTER TABLE ONLY public.users DROP CONSTRAINT users_pkey;
-ALTER TABLE ONLY public.user_growers DROP CONSTRAINT user_growers_pkey;
-ALTER TABLE ONLY public.tokens DROP CONSTRAINT tokens_pkey;
-ALTER TABLE ONLY public.growers DROP CONSTRAINT suppliers_pkey;
-ALTER TABLE ONLY public.products DROP CONSTRAINT products_pkey;
-ALTER TABLE ONLY public.product_orders DROP CONSTRAINT product_orders_pkey;
-ALTER TABLE ONLY public.orders DROP CONSTRAINT orders_pkey;
-ALTER TABLE ONLY public.markets DROP CONSTRAINT markets_pkey;
-ALTER TABLE ONLY public.locations DROP CONSTRAINT locations_pkey;
-ALTER TABLE ONLY public.categories DROP CONSTRAINT categories_pkey;
-ALTER TABLE public.users ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.user_growers ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.products ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.product_orders ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.payments ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.orders ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.markets ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.locations ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.growers ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.categories ALTER COLUMN id DROP DEFAULT;
-DROP SEQUENCE public.users_id_seq;
-DROP TABLE public.users;
-DROP SEQUENCE public.user_growers_id_seq;
-DROP TABLE public.user_growers;
-DROP TABLE public.tokens;
-DROP SEQUENCE public.suppliers_id_seq;
-DROP SEQUENCE public.products_id_seq;
-DROP TABLE public.products;
-DROP SEQUENCE public.product_orders_id_seq;
-DROP TABLE public.product_orders;
-DROP SEQUENCE public.payments_id_seq;
-DROP TABLE public.payments;
-DROP SEQUENCE public.orders_id_seq;
-DROP TABLE public.orders;
-DROP SEQUENCE public.markets_id_seq;
-DROP TABLE public.markets;
-DROP SEQUENCE public.locations_id_seq;
-DROP TABLE public.locations;
-DROP TABLE public.growers;
-DROP SEQUENCE public.categories_id_seq;
-DROP TABLE public.categories;
-DROP FUNCTION public.update_status();
-DROP FUNCTION public.update_reserved();
-DROP FUNCTION public.tidy_user();
-DROP FUNCTION public.set_product_order_cost();
-DROP FUNCTION public.reset_reserved();
-DROP FUNCTION public.is_product_active(integer);
-DROP FUNCTION public.increment_reserved();
-DROP FUNCTION public.delete_product_orders();
-DROP FUNCTION public.decrement_reserved();
-DROP FUNCTION public.checkout(integer, integer, integer[]);
-DROP FUNCTION public.check_product_order();
-DROP TYPE public.order_status;
-DROP EXTENSION plpgsql;
-DROP SCHEMA public;
+DROP DATABASE aikenorganics;
 --
--- Name: public; Type: SCHEMA; Schema: -; Owner: -
+-- Name: aikenorganics; Type: DATABASE; Schema: -; Owner: -
 --
 
-CREATE SCHEMA public;
+CREATE DATABASE aikenorganics WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
 
 
---
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
---
+\connect aikenorganics
 
-COMMENT ON SCHEMA public IS 'standard public schema';
-
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
