@@ -3,12 +3,12 @@
 const db = require('../db')
 const app = require('../app')
 
-module.exports = (req, res, next) => {
-  const domain = app.get('hostname') || req.hostname
+module.exports = (request, response, next) => {
+  const domain = app.get('hostname') || request.hostname
   db.Market.where({domain}).find().then((market) => {
-    if (!market) return res.notfound()
-    req.market = res.locals.market = market
-    req.open = res.locals.open = market.open
+    if (!market) return response.notfound()
+    request.market = response.locals.market = market
+    request.open = response.locals.open = market.open
     next()
   })
 }
