@@ -1,4 +1,0 @@
-#!/bin/sh -e
-
-# Load the schema.
-psql $DATABASE_URL < schema.sql
