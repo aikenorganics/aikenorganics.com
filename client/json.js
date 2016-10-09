@@ -1,71 +1,24 @@
+import xhr from 'ozymandias/client/xhr'
 import {setErrors, setMessage, clearMessage} from './actions'
 
-const json = (url, options = {}) => new Promise((resolve, reject) => {
-  const request = new window.XMLHttpRequest()
-  const headers = options.headers || {}
-  let {body} = options
-
-  // Display an error, optionally with state.
-  const error = (text, responseText = null) => {
-    setMessage('error', text)
-    const error = new Error('xhr error')
-    try {
-      error.state = JSON.parse(responseText)
-    } catch (error) {}
-    reject(error)
-  }
-
-  // Stringify the body if necessary.
-  if (typeof body === 'object' && !(body instanceof window.FormData)) {
-    body = JSON.stringify(body)
-    headers['Content-Type'] = 'application/json'
-  }
-
-  // Set Accept header.
-  headers.Accept = 'application/json'
-
-  // Open the request.
-  request.open(options.method || 'get', url)
-
-  // Include credentials (must be after open for IE11 and below).
-  request.withCredentials = true
-
-  // Set headers.
-  for (const key in headers) request.setRequestHeader(key, headers[key])
-
-  // Send it!
-  request.send(body)
-
-  // Complete
-  request.addEventListener('load', () => {
-    const {status, responseText} = request
-
-    if (status >= 200 && status < 400) {
-      clearMessage()
-      setErrors(null)
-      resolve(JSON.parse(responseText))
-    } else if (status === 422) {
-      const errors = JSON.parse(responseText)
-      setErrors(errors)
-      error('Whoops! Can you try that again?')
-    } else {
-      error('Whoops! Something went wrong…', responseText)
-    }
-  })
-
-  // Error
-  request.addEventListener('error', (event) => {
-    error('Whoops! Something went wrong…')
-  })
-
-  // Timeout
-  request.addEventListener('timeout', (event) => {
-    error('Whoops! Something went wrong…')
-  })
-
+const json = (url, options) => {
   // Let the user know we're doing something.
   setMessage('info', 'Working…')
-})
+
+  return xhr(url, options).then((response) => {
+    clearMessage()
+    setErrors(null)
+    return response
+  }).catch((error) => {
+    if (error.status === 422) {
+      setErrors(error.response)
+      setMessage('error', 'Whoops! Can you try that again?')
+    } else {
+      setMessage('error', 'Whoops! Something went wrong…')
+    }
+    throw error
+  })
+}
 
 export const GET = json
 
