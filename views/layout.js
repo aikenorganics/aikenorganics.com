@@ -24,12 +24,12 @@ module.exports = ({json, state}, content) => html`
   <link rel='stylesheet' href='${assets.path('css/app.css')}'>
   <link rel='shortcut icon' href='${assets.path('favicon.ico')}'>
   <link rel='apple-touch-icon' href='${assets.path('apple-touch-icon.png')}'>
-  <script defer src='${assets.path('js/app.js')}'></script>
   ${raw(analytics())}
+  ${raw(json('state', state || {}))}
+  <script defer src='${assets.path('js/app.js')}'></script>
 </head>
 <body>
   ${raw(content)}
-  ${raw(json('state', state || {}))}
 </body>
 </html>
 `

@@ -40,7 +40,7 @@ const json = (url, options = {}) => new Promise((resolve, reject) => {
   request.addEventListener('load', () => {
     const {status, responseText} = request
 
-    if (status === 200) {
+    if (status >= 200 && status < 400) {
       clearMessage()
       setErrors(null)
       resolve(JSON.parse(responseText))
