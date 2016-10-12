@@ -4,12 +4,11 @@
   "description": "aikenorganics.com",
   "main": "index.js",
   "cacheDirectories": [
-    "node_modules",
     "public/assets"
   ],
   "engines": {
     "node": "6.7.0",
-    "npm": "3.10.3"
+    "npm": "3.10.9"
   },
   "scripts": {
     "build": "./bin/build",
