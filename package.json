@@ -4,6 +4,7 @@
   "description": "aikenorganics.com",
   "main": "index.js",
   "cacheDirectories": [
+    "node_modules",
     "public/assets"
   ],
   "engines": {
