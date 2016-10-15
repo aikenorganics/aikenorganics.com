@@ -1,34 +1,36 @@
 'use strict'
 
-const db = require('../../db')
-const json = require('../../json/admin/product-orders')
-const router = module.exports = require('ozymandias').Router()
+const {ProductOrder} = require('../../db')
+const {del, post} = require('koa-route')
 
-// Find the ProductOrder
-router.find('productOrder', () => db.ProductOrder)
+module.exports = [
 
-// Create
-router.post('/', (request, response) => {
-  db.ProductOrder.create(request.permit('orderId', 'quantity', 'productId'))
-  .then(({id}) => (
-    db.ProductOrder.include('product').find(id).then((productOrder) => {
-      response.json(json.create, {productOrder})
-    })
-  )).catch(response.error)
-})
+  // Create
+  post('/admin/product-orders', function *() {
+    const {id} = yield ProductOrder.create(this.permit(
+      'orderId', 'quantity', 'productId'
+    ))
+    this.body = {
+      productOrder: yield ProductOrder.include('product').find(id)
+    }
+  }),
 
-// Delete
-router.delete('/:productOrderId', (request, response) => {
-  request.productOrder.destroy().then(() => {
-    response.json({})
-  }).catch(response.error)
-})
+  // Delete
+  del('/admin/product-orders/:id', function *(id) {
+    const productOrder = yield ProductOrder.find(id)
+    if (!productOrder) return this.notfound()
+    yield productOrder.destroy()
+    this.body = {}
+  }),
 
-// Update
-router.post('/:productOrderId', (request, response) => {
-  request.productOrder.update(request.permit('quantity', 'cost')).then(() => {
-    return db.ProductOrder.include('product').find(request.productOrder.id).then((productOrder) => {
-      response.json(json.update)
-    })
-  }).catch(response.error)
-})
+  // Update
+  post('/admin/product-orders/:id', function *(id) {
+    const productOrder = yield ProductOrder.find(id)
+    if (!productOrder) return this.notfound()
+    yield productOrder.update(this.permit('quantity', 'cost'))
+    this.body = {
+      productOrder: yield ProductOrder.include('product').find(id)
+    }
+  })
+
+]

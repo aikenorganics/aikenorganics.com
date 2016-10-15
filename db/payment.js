@@ -17,6 +17,15 @@ class Payment extends Model {
     ]
   }
 
+  toJSON () {
+    return this.slice(
+      'id',
+      'stripeId',
+      'orderId',
+      'amount'
+    )
+  }
+
 }
 
 module.exports = Payment

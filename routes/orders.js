@@ -1,76 +1,94 @@
 'use strict'
 
-const db = require('../db')
-const json = require('../json/orders')
-const router = module.exports = require('ozymandias').Router()
+const {Location, Order} = require('../db')
+const {all, del, get, post} = require('koa-route')
 
-router.use((request, response, next) => {
-  if (request.currentUser) return next()
-  response.unauthorized()
-})
+module.exports = [
 
-router.find('order', () => db.Order)
+  // User required!
+  all('/orders', function *(next) {
+    if (!this.state.currentUser) return this.unauthorized()
+    yield next
+  }, {end: false}),
 
-// Current
-router.get('/current', (request, response) => {
-  Promise.all([
-    db.Order
-      .include('location', {productOrders: 'product'})
-      .where({status: 'open', userId: request.currentUser.id})
-      .find(),
-    db.Location.where({active: true}).order('name').all()
-  ]).then(([order, locations]) => {
-    response.react(json.current, {locations, order})
-  }).catch(response.error)
-})
-
-// Previous
-router.get('/previous', (request, response) => {
-  const page = response.locals.page = +(request.query.page || 1)
-
-  db.Order
-  .include('location', {productOrders: 'product'})
-  .where({status: 'complete', userId: request.currentUser.id})
-  .order(['createdAt', 'descending'])
-  .paginate(page, 10)
-  .then((orders) => {
-    response.react(json.previous, {orders})
-  }).catch(response.error)
-})
-
-// Update
-router.post('/:orderId', (request, response) => {
-  // You can only update when the market is open.
-  if (!request.admin && !request.market.open) {
-    return response.unauthorized()
-  }
-
-  // You can only update your own order.
-  if (!request.admin && request.currentUser.id !== request.order.userId) {
-    return response.unauthorized()
-  }
-
-  const values = request.permit('locationId')
-
-  if (request.admin) {
-    Object.assign(values, request.permit('notes', 'status'))
-  }
-
-  request.order.update(values).then(() => (
-    db.Order.include('location').find(request.order.id).then((order) => {
-      response.json(json.update, {order})
+  // Current
+  get('/orders/current', function *() {
+    const {currentUser} = this.state
+    const [order, locations] = yield Promise.all([
+      Order
+        .include('location', {productOrders: 'product'})
+        .where({status: 'open', userId: currentUser.id})
+        .find(),
+      Location.where({active: true}).order('name').all()
+    ])
+    this.react({
+      locations: locations.map((location) => location.slice('id', 'name')),
+      order,
+      productOrders: order && order.productOrders
     })
-  )).catch(response.error)
-})
+  }),
 
-// Cancel
-router.delete('/:orderId', (request, response) => {
-  if (!request.market.open) return response.unauthorized()
+  // Previous
+  get('/orders/previous', function *() {
+    const page = +(this.query.page || 1)
+    const {currentUser} = this.state
+    const orders = yield Order
+      .include('location', {productOrders: 'product'})
+      .where({status: 'complete', userId: currentUser.id})
+      .order(['createdAt', 'descending'])
+      .paginate(page, 10)
 
-  // You can only cancel your own order.
-  if (request.currentUser.id !== request.order.userId) {
-    return response.unauthorized()
-  }
+    this.react({
+      more: orders.more,
+      orders: orders.map((order) => (
+        Object.assign(order.toJSON(), {productOrders: order.productOrders})
+      )),
+      page
+    })
+  }),
 
-  request.order.destroy().then(() => response.json({})).catch(response.error)
-})
+  // Update
+  post('/orders/:id', function *(id) {
+    const order = yield Order.find(id)
+    const {currentUser} = this.state
+
+    if (!order) return this.notfound()
+
+    // You can only update when the market is open.
+    if (!this.state.admin && !this.state.open) {
+      return this.unauthorized()
+    }
+
+    // You can only update your own order.
+    if (!this.state.admin && currentUser.id !== order.userId) {
+      return this.unauthorized()
+    }
+
+    const values = this.permit('locationId')
+
+    if (this.state.admin) {
+      Object.assign(values, this.permit('notes', 'status'))
+    }
+
+    yield order.update(values)
+    order.location = yield Location.find(order.locationId)
+    this.body = {order}
+  }),
+
+  // Cancel
+  del('/orders/:id', function *(id) {
+    if (!this.state.open) return this.unauthorized()
+
+    const order = yield Order.find(id)
+    const {currentUser} = this.state
+
+    if (!order) return this.notfound()
+
+    // You can only cancel your own order.
+    if (currentUser.id !== order.userId) return this.unauthorized()
+
+    yield order.destroy()
+    this.body = {}
+  })
+
+]

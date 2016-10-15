@@ -1,62 +1,70 @@
 'use strict'
 
 const db = require('../db')
-const json = require('../json/cart/index')
+const {Location, Order, Product} = require('../db')
 const updateMail = require('../mail/orders/update')
-const router = module.exports = require('ozymandias').Router()
+const {all, get, post} = require('koa-route')
 
-router.use((request, response, next) => {
-  if (request.currentUser && request.market.open) return next()
-  response.unauthorized()
-})
+module.exports = [
 
-// Index
-router.get('/', (request, response) => {
-  Promise.all([
-    db.Product
-      .include('category', 'grower')
-      .where({id: request.cart.ids})
-      .order('name').all(),
-    db.Location.where({active: true}).order('name').all(),
-    db.Order.where({status: 'open', userId: request.currentUser.id}).find()
-  ]).then(([products, locations, order]) => {
-    response.react(json.index, {products, locations, order})
-  }).catch(response.error)
-})
+  all('/cart', function *(next) {
+    const {currentUser, open} = this.state
+    if (!currentUser || !open) return this.unauthorized()
+    yield next
+  }, {end: false}),
 
-// Update
-router.post('/', (request, response, next) => {
-  const id = request.body.productId
+  // Index
+  get('/cart', function *() {
+    const {cart, currentUser} = this.state
+    const [products, locations, order] = yield Promise.all([
+      Product
+        .include('category', 'grower')
+        .where({id: cart.ids})
+        .order('name').all(),
+      Location.where({active: true}).order('name').all(),
+      Order.where({status: 'open', userId: currentUser.id}).find()
+    ])
 
-  db.Product.include('grower').find(id).then((product) => {
-    if (product && product.grower.active) {
-      request.product = response.locals.product = product
-      return next()
-    }
-    response.json({message: 'That product is unavailable'})
-  }).catch(response.error)
-})
-
-router.post('/', (request, response) => {
-  const quantity = +request.body.quantity
-  request.cart.update(request.product, quantity)
-  response.json({message: 'Cart updated.'})
-})
-
-// Checkout
-router.post('/checkout', (request, response) => {
-  db.query('select checkout($1, $2, $3)', [
-    request.currentUser.id,
-    request.body.locationId,
-    request.cart.ids.map((id) => [id, request.cart.cart[id]])
-  ]).then(() => (
-    request.mail(updateMail, {
-      to: [request.currentUser.email],
-      subject: 'Aiken Organics: Order Updated',
-      url: `http://${request.get('host')}/orders/current`
+    this.react({
+      locations: locations.map((location) => location.slice('id', 'name')),
+      order,
+      products
     })
-  )).then(() => {
-    request.cart.clear()
-    response.json({})
-  }).catch(response.error)
-})
+  }),
+
+  // Update
+  post('/cart', function *() {
+    const {productId, quantity} = this.request.body
+    const product = yield Product.include('grower').find(productId)
+
+    if (!product || !product.active || !product.grower.active) {
+      this.body = {message: 'That product is unavailable.'}
+      return
+    }
+
+    this.state.cart.update(product, +quantity)
+    this.body = {message: 'Cart updated.'}
+  }),
+
+  // Checkout
+  post('/cart/checkout', function *() {
+    const {cart, currentUser} = this.state
+    const {locationId} = this.request.body
+
+    yield db.query('select checkout($1, $2, $3)', [
+      currentUser.id,
+      locationId,
+      cart.ids.map((id) => [id, cart.cart[id]])
+    ])
+
+    yield this.mail(updateMail, {
+      to: [currentUser.email],
+      subject: 'Aiken Organics: Order Updated',
+      url: `http://${this.host}/orders/current`
+    })
+
+    cart.clear()
+    this.body = {}
+  })
+
+]

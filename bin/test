@@ -10,8 +10,8 @@ standard --fix
 ozy reset > /dev/null
 
 # Server Tests
-tape test/index.js
+tape test/index.js | faucet
 
 # Client Tests
 ozy browserify test/client/index.js > public/js/test.js
-tape public/js/test.js
+tape public/js/test.js | faucet

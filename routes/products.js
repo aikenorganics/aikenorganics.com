@@ -1,99 +1,124 @@
 'use strict'
 
-const db = require('../db')
-const json = require('../json/products')
-const router = module.exports = require('ozymandias').Router()
+const {Category, Product, UserGrower} = require('../db')
+const {all, get, post} = require('koa-route')
 
-// Find
-router.find('product', () => db.Product.include('grower', 'category'))
+module.exports = [
 
-// Authorize
-router.param('productId', (request, response, next) => {
-  if (!request.currentUser || !request.product) return next()
-  db.UserGrower.where({
-    userId: request.currentUser.id,
-    growerId: request.product.growerId
-  }).find().then((userGrower) => {
-    request.canEdit = response.locals.canEdit = request.admin || !!userGrower
-    next()
-  }).catch(response.error)
-})
+  // Find Product
+  all('/products/:id', function *(id, next) {
+    this.state.product = yield Product.include('grower', 'category').find(id)
+    if (!this.state.product) return this.notfound()
+    yield next
+  }, {end: false}),
 
-// Index
-router.get('/', (request, response) => {
-  let products = db.Product
-    .include('grower').join('grower')
-    .where({active: true, grower: {active: true}})
+  // Authorize
+  all('/products/:id', function *(id, next) {
+    const {currentUser, product} = this.state
+    this.state.canEdit = this.state.client.canEdit =
+    currentUser && product && (this.state.admin || !!(yield UserGrower.where({
+      userId: currentUser.id,
+      growerId: product.growerId
+    }).find()))
+    yield next
+  }, {end: false}),
 
-  // Search
-  const {search} = request.query
-  if (search) products.search(search)
+  // Index
+  get('/products', function *() {
+    const scope = Product
+      .include('grower').join('grower')
+      .where({active: true, grower: {active: true}})
 
-  // Category
-  const {categoryId} = request.query
-  if (categoryId) products = products.where({categoryId})
+    // Search
+    const {search} = this.query
+    if (search) scope.search(search)
 
-  // Grower
-  if (request.query.growerId) {
-    products = products.where({growerId: request.query.growerId})
-  }
+    // Category
+    const {categoryId} = this.query
+    if (categoryId) scope.where({categoryId})
 
-  // Pagination
-  const page = response.locals.page = +(request.query.page || 1)
+    // Grower
+    const {growerId} = this.query
+    if (growerId) scope.where({growerId})
 
-  Promise.all([
-    products.order('name').paginate(page, 30),
-    db.Category.where(`exists(
-      select 1 from products
-      inner join growers on growers.id = products.grower_id
-      where category_id = categories.id and products.active and growers.active
-    )`).order('position').all()
-  ]).then(([products, categories]) => {
-    response.react(json.index, {categories, categoryId, page, products, search})
-  }).catch(response.error)
-})
+    // Pagination
+    const page = +(this.query.page || 1)
 
-// Show
-router.get('/:productId', (request, response) => {
-  response.react(json.show, {product: request.product})
-})
+    const [products, categories] = yield Promise.all([
+      scope.order('name').paginate(page, 30),
+      Category.where(`exists(
+        select 1 from products
+        inner join growers on growers.id = products.grower_id
+        where category_id = categories.id and products.active and growers.active
+      )`).order('position').all()
+    ])
 
-// Edit
-router.get('/:productId/edit', (request, response) => {
-  if (!request.canEdit) return response.unauthorized()
+    this.react({
+      categories,
+      categoryId,
+      more: products.more,
+      page,
+      products,
+      search
+    })
+  }),
 
-  db.Category.order('position').all().then((categories) => {
-    response.react(json.edit, {categories, product: request.product})
-  }).catch(response.error)
-})
+  // Show
+  get('/products/:id', function *() {
+    const product = this.state.product.toJSON()
 
-// Update
-router.post('/:productId', (request, response) => {
-  if (!request.canEdit) return response.unauthorized()
+    product.descriptionHtml = this.state.product.descriptionHtml
+    this.react({product})
+  }),
 
-  const values = request.permit(
-    'active',
-    'categoryId',
-    'cost',
-    'description',
-    'name',
-    'supply',
-    'unit'
-  )
+  // Edit
+  get('/products/:id/edit', function *() {
+    if (!this.state.canEdit) return this.unauthorized()
 
-  if (request.admin) {
-    Object.assign(values, request.permit('featured'))
-  }
+    const {product} = this.state
+    const categories = yield Category.order('position').all()
 
-  request.product.update(values).then(() => {
-    response.json(json.update)
-  }).catch(response.error)
-})
+    this.react({
+      categories,
+      product: Object.assign(product.toJSON(), {
+        description: product.description
+      })
+    })
+  }),
 
-// Image
-router.post('/:productId/image', (request, response) => {
-  if (!request.canEdit) return response.unauthorized()
-  request.product.uploadImage(request).then(() => {
-    response.json(json.image)
-  }).catch(response.error)
-})
+  // Update
+  post('/products/:id', function *() {
+    if (!this.state.canEdit) return this.unauthorized()
+
+    const values = this.permit(
+      'active',
+      'categoryId',
+      'cost',
+      'description',
+      'name',
+      'supply',
+      'unit'
+    )
+
+    if (this.state.admin) Object.assign(values, this.permit('featured'))
+
+    const {product} = this.state
+
+    yield product.update(values)
+    this.body = {
+      product: Object.assign(product.toJSON(), {
+        description: product.description
+      })
+    }
+  }),
+
+  // Image
+  post('/products/:id/image', function *() {
+    if (!this.state.canEdit) return this.unauthorized()
+
+    const {product} = this.state
+    yield product.uploadImage(this.req)
+    this.body = {product}
+  })
+
+]

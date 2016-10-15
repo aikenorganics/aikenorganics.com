@@ -1,52 +1,70 @@
 'use strict'
 
-const db = require('../../db')
-const json = require('../../json/admin/growers')
-const router = module.exports = require('ozymandias').Router()
+const {Grower, Product, User} = require('../../db')
+const {get} = require('koa-route')
 
-// Find
-router.find('grower', () => db.Grower.include({userGrowers: 'user'}))
+const findGrower = (id) => Grower.include({userGrowers: 'user'}).find(id)
 
-// Index
-router.get('/', (request, response) => {
-  db.Grower
-  .select(`(
-    select sum(quantity * product_orders.cost) from product_orders
-    inner join products on products.id = product_orders.product_id
-    inner join orders on orders.id = product_orders.order_id
-    where products.grower_id = growers.id and orders.status = 'complete'
-  ) as total`)
-  .order('name').all().then((growers) => {
-    response.react(json.index, {growers})
-  }).catch(response.error)
-})
+module.exports = [
 
-// Orders
-router.get('/orders', (request, response) => {
-  db.Grower
-  .where('exists(select id from products where reserved > 0 and grower_id = growers.id)')
-  .include('products').all().then((growers) => {
-    response.react(json.orders, {growers})
-  }).catch(response.error)
-})
+  // Index
+  get('/admin/growers', function *() {
+    const growers = yield Grower
+    .select(`(
+      select sum(quantity * product_orders.cost) from product_orders
+      inner join products on products.id = product_orders.product_id
+      inner join orders on orders.id = product_orders.order_id
+      where products.grower_id = growers.id and orders.status = 'complete'
+    ) as total`)
+    .order('name').all()
+    this.react({growers})
+  }),
 
-// Show
-router.get('/:growerId', (request, response) => {
-  db.Product
-  .join({productOrders: 'order'})
-  .select('sum(quantity) as quantity')
-  .select('sum(quantity * product_orders.cost) as total')
-  .where({growerId: request.grower.id})
-  .where({productOrders: {order: {status: 'complete'}}})
-  .groupBy('products.id')
-  .all().then((products) => {
-    response.react(json.show, {grower: request.grower, products})
-  }).catch(response.error)
-})
+  // Orders
+  get('/admin/growers/orders', function *() {
+    const growers = yield Grower
+    .where('exists(select id from products where reserved > 0 and grower_id = growers.id)')
+    .include('products').all()
+    this.react({
+      growers: growers.map((grower) => (
+        Object.assign(grower.toJSON(), grower.slice('products'))
+      ))
+    })
+  }),
 
-// Users
-router.get('/:growerId/users', (request, response) => {
-  db.User.order('first').all().then((users) => {
-    response.react(json.users, {grower: request.grower, users})
-  }).catch(response.error)
-})
+  // Show
+  get('/admin/growers/:id', function *(id) {
+    const grower = yield findGrower(id)
+    if (!grower) return this.notfound()
+
+    const products = yield Product
+    .join({productOrders: 'order'})
+    .select('sum(quantity) as quantity')
+    .select('sum(quantity * product_orders.cost) as total')
+    .where({growerId: id})
+    .where({productOrders: {order: {status: 'complete'}}})
+    .groupBy('products.id')
+    .all()
+
+    this.react({
+      grower,
+      products: products.map((product) => (
+        Object.assign(product.toJSON(), product.slice('quantity', 'total'))
+      ))
+    })
+  }),
+
+  // Users
+  get('/admin/growers/:id/users', function *(id) {
+    const grower = yield findGrower(id)
+    if (!grower) return this.notfound()
+
+    const users = yield User.order('first').all()
+
+    this.react({
+      grower,
+      users: users.map((user) => user.slice('email', 'id', 'name'))
+    })
+  })
+
+]

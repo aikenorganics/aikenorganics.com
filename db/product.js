@@ -94,6 +94,27 @@ class Product extends Model {
     return +this.cost * this.reserved
   }
 
+  toJSON () {
+    return this.slice(
+      'id',
+      'cost',
+      'name',
+      'supply',
+      'unit',
+      'reserved',
+      'active',
+      'growerId',
+      'categoryId',
+      'available',
+      'oversold',
+      'smallImage',
+      'mediumImage',
+      'featured',
+      'category',
+      'grower'
+    )
+  }
+
 }
 
 Product.hasImage({

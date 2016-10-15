@@ -1,6 +1,6 @@
 'use strict'
 
-const db = require('../../../db')
+const {Category} = require('../../../db')
 const test = require('../../test')
 
 test('GET /admin/categories/show is a 404 for missing ids', (t) => {
@@ -68,7 +68,7 @@ test('DELETE /admin/categories/:id is a 200', (t) => {
     .expect('Content-Type', /json/)
     .end((error) => {
       if (error) return t.end(error)
-      db.Category.find(6).then((category) => {
+      Category.find(6).then((category) => {
         t.is(category, null)
         t.end()
       }).catch(t.end)

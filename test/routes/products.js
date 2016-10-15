@@ -1,6 +1,6 @@
 'use strict'
 
-const db = require('../../db')
+const {Product} = require('../../db')
 const test = require('../test')
 
 // Index
@@ -33,14 +33,14 @@ test('GET /products is a 200 as an authorized user', (t) => {
 })
 
 test('GET /products is a 200 signed out', (t) => {
-  t.request()
+  t.agent
   .get('/products')
   .expect(200)
   .end(t.end)
 })
 
 test('GET /products?categoryId=:id is a 200', (t) => {
-  t.request()
+  t.agent
   .get('/products?categoryId=1')
   .expect(200)
   .end(t.end)
@@ -56,14 +56,14 @@ test('GET /products?search=query is a 200 logged in', (t) => {
 })
 
 test('GET /products?search=query is a 200 logged out', (t) => {
-  t.request()
+  t.agent
   .get('/products?search=peach')
   .expect(200)
   .end(t.end)
 })
 
 test('GET /products?search=foo%20bar is a 200', (t) => {
-  t.request()
+  t.agent
   .get('/products?search=ice%20cream')
   .expect(200)
   .end(t.end)
@@ -99,7 +99,7 @@ test('GET /products/:id is a 200 as an authorized user', (t) => {
 })
 
 test('GET /products/:id is a 200 signed out', (t) => {
-  t.request()
+  t.agent
   .get('/products/1')
   .expect(200)
   .end(t.end)
@@ -108,7 +108,7 @@ test('GET /products/:id is a 200 signed out', (t) => {
 // Edit
 
 test('GET /products/edit is a 401 signed out', (t) => {
-  t.request().get('/products/1/edit')
+  t.agent.get('/products/1/edit')
   .expect(401)
   .end(t.end)
 })
@@ -196,7 +196,7 @@ test('admins can update featured', (t) => {
     .expect(200)
     .end((error, response) => {
       if (error) return t.end(error)
-      db.Product.find(1).then((product) => {
+      Product.find(1).then((product) => {
         t.is(product.featured, true)
         t.end()
       }).catch(t.end)
@@ -211,7 +211,7 @@ test('non-admins cannot update featured', (t) => {
     .expect(200)
     .end((error, response) => {
       if (error) return t.end(error)
-      db.Product.find(1).then((product) => {
+      Product.find(1).then((product) => {
         t.is(product.featured, false)
         t.end()
       }).catch(t.end)
@@ -230,7 +230,7 @@ test('POST /products/:id/image is a 401 as a non-admin', (t) => {
 })
 
 test('GET /products has no inactive products', (t) => {
-  t.request()
+  t.agent
   .get('/products')
   .expect(200)
   .expect((response) => {
@@ -251,7 +251,7 @@ test('POST /products/:id deactivates products', (t) => {
     .expect(200)
     .end((error) => {
       if (error) return t.end(error)
-      db.Product.find(1).then((product) => {
+      Product.find(1).then((product) => {
         t.equal(product.active, false)
         t.end()
       })
@@ -266,7 +266,7 @@ test('POST /products/:id activates products', (t) => {
     .expect(200)
     .end((error) => {
       if (error) return t.end(error)
-      db.Product.find(7).then((product) => {
+      Product.find(7).then((product) => {
         t.equal(product.active, true)
         t.end()
       })

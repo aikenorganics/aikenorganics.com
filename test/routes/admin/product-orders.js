@@ -3,7 +3,13 @@
 const db = require('../../../db')
 const test = require('../../test')
 
-test('DELETE /product_orders/:id is a 200', (t) => {
+test('DELETE /product-orders/missing is a 404', (t) => {
+  t.signIn('admin@example.com').then(() => {
+    t.agent.delete('/admin/product-orders/12345').expect(404).end(t.end)
+  })
+})
+
+test('DELETE /product-orders/:id is a 200', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .delete('/admin/product-orders/1')
@@ -15,6 +21,12 @@ test('DELETE /product_orders/:id is a 200', (t) => {
         t.end()
       })
     })
+  })
+})
+
+test('POST /product-orders/missing is a 404', (t) => {
+  t.signIn('admin@example.com').then(() => {
+    t.agent.post('/admin/product-orders/12345').expect(404).end(t.end)
   })
 })
 
@@ -66,7 +78,7 @@ test('editing an inactive product order', (t) => {
     .end((error, response) => {
       if (error) return t.end(error)
       const {cost, quantity} = response.body.productOrder
-      t.is(cost, '6')
+      t.is(cost, '6.00')
       t.is(quantity, 2)
       db.ProductOrder.find(9).then((productOrder) => {
         t.is(productOrder.quantity, 2)

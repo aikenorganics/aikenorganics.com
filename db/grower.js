@@ -70,6 +70,21 @@ class Grower extends Model {
     return marked(this.description, {sanitize: true})
   }
 
+  toJSON () {
+    return this.slice(
+      'id',
+      'url',
+      'name',
+      'email',
+      'total',
+      'active',
+      'location',
+      'smallImage',
+      'mediumImage',
+      'userGrowers'
+    )
+  }
+
 }
 
 Grower.hasImage({

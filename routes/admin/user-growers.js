@@ -1,25 +1,25 @@
 'use strict'
 
-const db = require('../../db')
-const json = require('../../json/admin/user-growers')
-const router = module.exports = require('ozymandias').Router()
+const {UserGrower} = require('../../db')
+const {del, post} = require('koa-route')
 
-// Find
-router.find('userGrower', () => db.UserGrower.include('user', 'grower'))
+module.exports = [
 
-// Create
-router.post('/', (request, response) => {
-  const {userId, growerId} = request.body
-  db.UserGrower.create({userId, growerId}).then((userGrower) => (
-    db.UserGrower.include('user', 'grower').find(userGrower.id).then((userGrower) => {
-      response.json(json.create, {userGrower})
-    })
-  )).catch(response.error)
-})
+  // Create
+  post('/admin/user-growers', function *() {
+    const {userId, growerId} = this.request.body
+    const {id} = yield UserGrower.create({userId, growerId})
+    this.body = {
+      userGrower: yield UserGrower.include('user', 'grower').find(id)
+    }
+  }),
 
-// Destroy
-router.delete('/:userGrowerId', (request, response) => {
-  request.userGrower.destroy().then(() => {
-    response.json({})
-  }).catch(response.error)
-})
+  // Destroy
+  del('/admin/user-growers/:id', function *(id) {
+    const userGrower = yield UserGrower.find(id)
+    if (!userGrower) return this.notfound()
+    yield userGrower.destroy()
+    this.body = {}
+  })
+
+]

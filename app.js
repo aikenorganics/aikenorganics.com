@@ -1,46 +1,41 @@
 'use strict'
 
-// Vendor
-const bugsnag = require('bugsnag').register(process.env.BUGSNAG_KEY)
-const ozymandias = require('ozymandias')
-
 // The App!
-const app = module.exports = ozymandias()
+const app = module.exports = require('ozymandias')()
+const {get} = require('koa-route')
 
 // Some settings.
-app.set('component', require('./client/component'))
-app.set('layout', require('./views/layout'))
-app.set('layout.json', require('./json/layout'))
-app.set('user', require('./db/user'))
+Object.assign(app.context, {
+  client: require('./client/component'),
+  User: require('./db/user')
+})
 
-// Bugsnag
-app.use(bugsnag.requestHandler)
-
-// Middleware
-app.use(require('./mid/market'))
-app.use(require('./mid/cart'))
+app.use(require('./cart'))
+app.use(require('./client-state'))
+app.use(require('./layout'))
+app.use(require('./market'))
 
 // Routes
-app.use('/cart', require('./routes/cart'))
-app.use('/admin', require('./routes/admin'))
-app.use('/market', require('./routes/market'))
-app.use('/orders', require('./routes/orders'))
-app.use('/growers', require('./routes/growers'))
-app.use('/products', require('./routes/products'))
-app.use('/settings', require('./routes/settings'))
-app.use('/signin', require('./routes/signin'))
-app.use('/signup', require('./routes/signup'))
-app.use('/session', require('ozymandias/session'))
+for (const route of [].concat(
+  require('./routes/admin'),
+  require('./routes/cart'),
+  require('./routes/growers'),
+  require('./routes/market'),
+  require('./routes/orders'),
+  require('./routes/products'),
+  require('./routes/settings'),
+  require('./routes/signin'),
+  require('./routes/signup'),
+  require('ozymandias/session')
+)) app.use(route)
 
 // Home
-app.get('/', (request, response) => response.react())
+app.use(get('/', function *() { this.react() }))
 
 // Learn
-app.get('/learn', (request, response) => response.react())
+app.use(get('/learn', function *() { this.react() }))
 
 // 404
-app.get('*', (request, response) => response.notfound())
-
-// 500
-app.use(bugsnag.errorHandler)
-app.use((error, request, response, next) => response.error(error))
+app.use(function *() {
+  this.notfound()
+})

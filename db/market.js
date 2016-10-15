@@ -29,6 +29,16 @@ class Market extends Model {
     return marked(this.news)
   }
 
+  toJSON () {
+    return this.slice(
+      'id',
+      'domain',
+      'message',
+      'messageHtml',
+      'open'
+    )
+  }
+
 }
 
 module.exports = Market

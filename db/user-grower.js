@@ -18,6 +18,15 @@ class UserGrower extends Model {
     ]
   }
 
+  toJSON () {
+    return this.slice(
+      'id',
+      'userId',
+      'growerId',
+      'user'
+    )
+  }
+
 }
 
 module.exports = UserGrower

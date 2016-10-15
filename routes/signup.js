@@ -1,27 +1,28 @@
 'use strict'
 
-const db = require('../db')
-const json = require('../json/signup')
-const router = module.exports = require('ozymandias').Router()
+const User = require('../db/user')
+const {get, post} = require('koa-route')
 
-router.get('/', (request, response) => response.react(json.index))
+module.exports = [
 
-// Validations
-router.post('/', (request, response, next) => {
-  db.User.where('trim(lower(email)) = trim(lower(?))', request.body.email).find()
-  .then((user) => {
-    if (!user) return next()
-    response.status(422).json({
-      email: ['That user already exists! Is it you?']
-    })
-  }).catch(response.error)
-})
+  get('/signup', function *() { this.react() }),
 
-router.post('/', (request, response) => {
-  db.User.create(request.permit(
-    'first', 'last', 'phone', 'password', 'email'
-  )).then((user) => {
-    request.signIn(user)
-    response.json({})
-  }).catch(response.error)
-})
+  post('/signup', function *() {
+    const {email} = this.request.body
+    let user = yield User.where('trim(lower(email)) = trim(lower(?))', email).find()
+
+    if (user) {
+      this.status = 422
+      this.body = {email: ['That user already exists! Is it you?']}
+      return
+    }
+
+    user = yield User.create(this.permit(
+      'first', 'last', 'phone', 'password', 'email'
+    ))
+
+    this.signIn(user)
+    this.body = {}
+  })
+
+]

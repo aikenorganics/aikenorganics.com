@@ -1,6 +1,6 @@
 'use strict'
 
-const db = require('../../../db')
+const {Market} = require('../../../db')
 const test = require('../../test')
 
 test('GET /admin/market is a 200', (t) => {
@@ -13,16 +13,17 @@ test('POST /admin/market is a 200', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/admin/market')
+    .set('accept', 'application/json')
     .send({open: true, message: 'test'})
     .expect(200)
-    .expect('Content-Type', /json/)
+    .expect('content-type', /json/)
     .end((error, response) => {
       if (error) return t.end(error)
       const {id, message, open} = response.body.market
       t.is(id, 1)
       t.is(open, true)
       t.is(message, 'test')
-      db.Market.find(1).then((market) => {
+      Market.find(1).then((market) => {
         t.ok(market.open)
         t.end()
       })
@@ -35,16 +36,17 @@ test('POST /admin/market is a 200', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/admin/market')
+    .set('accept', 'application/json')
     .send({open: false, message: 'test'})
     .expect(200)
-    .expect('Content-Type', /json/)
+    .expect('content-type', /json/)
     .end((error, response) => {
       if (error) return t.end(error)
       const {id, message, open} = response.body.market
       t.is(id, 2)
       t.is(open, false)
       t.is(message, 'test')
-      db.Market.find(2).then((market) => {
+      Market.find(2).then((market) => {
         t.ok(!market.open)
         t.end()
       })

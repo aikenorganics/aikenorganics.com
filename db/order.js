@@ -3,6 +3,12 @@
 const Model = require('./model')
 const stripe = require('stripe')(process.env.STRIPE_SK)
 
+const createCharge = (options) => new Promise((resolve, reject) => {
+  stripe.charges.create(options, (error, charge) => (
+    error ? reject(error) : resolve(charge)
+  ))
+})
+
 class Order extends Model {
 
   static get tableName () {
@@ -29,18 +35,18 @@ class Order extends Model {
   }
 
   charge (amount) {
-    return new Promise((resolve, reject) => {
-      if (!this.user.stripeId) {
-        return reject(new Error('User has no billing information.'))
-      }
-      stripe.charges.create({
+    return User.find(this.userId).then((user) => {
+      if (!user) throw new Error('Unable to find user.')
+      if (!user.stripeId) throw new Error('User has no billing information.')
+
+      return createCharge({
         amount: amount,
         currency: 'usd',
-        customer: this.user.stripeId,
+        customer: user.stripeId,
         description: `Aiken Organics - Order #${this.id}`,
-        receipt_email: this.user.email,
+        receipt_email: user.email,
         statement_descriptor: 'Aiken Organics'
-      }, (error, charge) => error ? reject(error) : resolve(charge))
+      })
     }).then((charge) => {
       return Payment.create({
         amount: amount,
@@ -48,6 +54,19 @@ class Order extends Model {
         orderId: this.id
       })
     })
+  }
+
+  toJSON () {
+    return this.slice(
+      'id',
+      'locationId',
+      'notes',
+      'status',
+      'userId',
+      'total',
+      'user',
+      'location'
+    )
   }
 
 }

@@ -3,7 +3,7 @@ import Link from '../../link'
 import {updateLocation, destroyLocation} from '../../../actions'
 
 export default ({busy, location}) => {
-  const {active, id, name} = location
+  const {active, id, name, removable} = location
 
   return <tr>
     <td>
@@ -27,11 +27,14 @@ export default ({busy, location}) => {
       </div>
     </td>
     <td>
-      <button type='button' disabled={busy}
-        className='btn btn-link btn-sm'
-        onClick={() => { if (window.confirm('Are you sure?')) destroyLocation(id).catch(() => {}) }}>
-        Delete
-      </button>
+      {removable
+        ? <button type='button' disabled={busy}
+          className='btn btn-link btn-sm'
+          onClick={() => { if (window.confirm('Are you sure?')) destroyLocation(id).catch(() => {}) }}>
+          Delete
+        </button>
+        : null
+      }
     </td>
   </tr>
 }

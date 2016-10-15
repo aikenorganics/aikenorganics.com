@@ -1,42 +1,50 @@
 'use strict'
 
-const db = require('../../db')
-const json = require('../../json/admin/locations')
-const router = module.exports = require('ozymandias').Router()
+const {Location} = require('../../db')
+const {del, get, post} = require('koa-route')
 
-// Find the location
-router.find('location', () => db.Location)
+module.exports = [
 
-// Index
-router.get('/', (request, response) => {
-  db.Location.order('name').all().then((locations) => {
-    response.react(json.index, {locations})
-  }).catch(response.error)
-})
+  // Index
+  get('/admin/locations', function *() {
+    const locations = yield Location
+      .select(`not exists(
+        select 1 from orders where location_id = locations.id
+      ) as removable`)
+      .order('name').all()
+    this.react({locations})
+  }),
 
-// New
-router.get('/new', (request, response) => response.react(json.new))
+  // New
+  get('/admin/locations/new', function *() { this.react() }),
 
-// Edit
-router.get('/:locationId/edit', (request, response) => {
-  response.react(json.edit, {location: request.location})
-})
+  // Edit
+  get('/admin/locations/:id/edit', function *(id) {
+    const location = yield Location.find(id)
+    if (!location) return this.notfound()
+    this.react({location})
+  }),
 
-// Create
-router.post('/', (request, response) => {
-  db.Location.create(request.permit('name')).then(() => {
-    response.json({})
-  }).catch(response.error)
-})
+  // Create
+  post('/admin/locations', function *() {
+    const location = yield Location.create(this.permit('name'))
+    this.body = {location}
+  }),
 
-// Update
-router.post('/:locationId', (request, response) => {
-  request.location.update(request.permit('name', 'active')).then(() => {
-    response.json({})
-  }).catch(response.error)
-})
+  // Update
+  post('/admin/locations/:id', function *(id) {
+    const location = yield Location.find(id)
+    if (!location) return this.notfound()
+    yield location.update(this.permit('name', 'active'))
+    this.body = {location}
+  }),
 
-// Destroy
-router.delete('/:locationId', (request, response) => {
-  request.location.destroy().then(() => response.json({})).catch(response.error)
-})
+  // Destroy
+  del('/admin/locations/:id', function *(id) {
+    const location = yield Location.find(id)
+    if (!location) return this.notfound()
+    yield location.destroy()
+    this.body = {}
+  })
+
+]

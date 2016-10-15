@@ -1,10 +1,13 @@
 'use strict'
 
-const json = require('../json/signin')
-const router = module.exports = require('ozymandias').Router()
+const {get} = require('koa-route')
 
-// Signin
-router.get('/', (request, response) => response.react(json.index))
+module.exports = [
 
-// Forgot
-router.get('/forgot', (request, response) => response.react(json.forgot))
+  // Signin
+  get('/signin', function *() { this.react() }),
+
+  // Forgot
+  get('/signin/forgot', function *() { this.react() })
+
+]

@@ -34,6 +34,15 @@ class Location extends Model {
     this._active = value || false
   }
 
+  toJSON () {
+    return this.slice(
+      'id',
+      'name',
+      'active',
+      'removable'
+    )
+  }
+
 }
 
 module.exports = Location

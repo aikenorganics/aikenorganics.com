@@ -1,23 +1,33 @@
 'use strict'
 
-const db = require('../../db')
-const json = require('../../json/admin/products')
-const router = module.exports = require('ozymandias').Router()
+const {Product} = require('../../db')
+const {get} = require('koa-route')
 
-router.get('/', (request, response) => {
-  let products = db.Product.include('grower')
+module.exports = [
 
-  const oversold = request.query.oversold === '1'
-  const page = +(request.query.page || 1)
+  get('/admin/products', function *() {
+    const scope = Product.include('grower')
 
-  // Oversold?
-  if (oversold) products.where('reserved > supply')
+    // Oversold?
+    const oversold = this.query.oversold === '1'
+    if (oversold) scope.where('reserved > supply')
 
-  // Search
-  const {search} = request.query
-  if (search) products = products.search(search)
+    // Search
+    const {search} = this.query
+    if (search) scope.search(search)
 
-  products.order('name').paginate(page, 100).then((products) => {
-    response.react(json.index, {oversold, page, products, search})
-  }).catch(response.error)
-})
+    // Pagination
+    const page = +(this.query.page || 1)
+
+    const products = yield scope.order('name').paginate(page, 100)
+
+    this.react({
+      more: products.more,
+      oversold,
+      page,
+      products,
+      search
+    })
+  })
+
+]

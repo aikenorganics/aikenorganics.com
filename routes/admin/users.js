@@ -1,71 +1,84 @@
 'use strict'
 
-const db = require('../../db')
-const json = require('../../json/admin/users')
-const router = module.exports = require('ozymandias').Router()
+const {User} = require('../../db')
+const {del, get, post} = require('koa-route')
 
-// Find
-router.find('user', () => db.User.select(`exists(
-  select id from orders where user_id = users.id
-) as "hasOrder"`))
+module.exports = [
 
-// Index
-router.get('/', (request, response) => {
-  let users = db.User
+  // Index
+  get('/admin/users', function *() {
+    let scope = User
 
-  // Search
-  const {search} = request.query
-  if (search) users = users.search(search)
+    // Search
+    const {search} = this.query
+    if (search) scope = scope.search(search)
 
-  // Pagination
-  const page = response.locals.page = +(request.query.page || 1)
+    // Pagination
+    const page = +(this.query.page || 1)
 
-  users.order('email').paginate(page, 100).then((users) => {
-    response.react(json.index, {page, search, users})
-  }).catch(response.error)
-})
+    const users = yield scope.order('email').paginate(page, 100)
 
-// Emails
-router.get('/emails', (request, response) => {
-  db.User.order('email').all().then((users) => {
-    response.react(json.emails, {users})
-  }).catch(response.error)
-})
+    this.react({
+      more: users.more,
+      page,
+      search,
+      users
+    })
+  }),
 
-// Edit
-router.get('/:userId/edit', (request, response) => {
-  response.react(json.edit)
-})
+  // Emails
+  get('/admin/users/emails', function *() {
+    const users = yield User.order('email').all()
+    this.react({
+      emails: users.map(({email}) => email)
+    })
+  }),
 
-// New
-router.get('/new', (request, response) => response.react(json.new))
+  // Edit
+  get('/admin/users/:id/edit', function *(id) {
+    const user = yield User.select(`exists(
+      select id from orders where user_id = users.id
+    ) as "hasOrder"`).find(id)
+    this.react({user})
+  }),
 
-// Create
-router.post('/', (request, response) => {
-  db.User.create(request.permit(
-    'email', 'first', 'last', 'phone', 'memberUntil'
-  )).then((user) => {
-    response.json(json.create, {user})
-  }).catch(response.error)
-})
+  // New
+  get('/admin/users/new', function *() {
+    this.react()
+  }),
 
-// Update
-router.post('/:userId', (request, response) => {
-  request.user.update(request.permit(
-    'email', 'first', 'last', 'phone', 'isAdmin', 'memberUntil'
-  )).then(() => {
-    response.json(json.update)
-  }).catch(response.error)
-})
+  // Create
+  post('/admin/users', function *() {
+    const user = yield User.create(this.permit(
+      'email', 'first', 'last', 'phone', 'memberUntil'
+    ))
+    this.body = {user}
+  }),
 
-// Image
-router.post('/:userId/image', (request, response) => {
-  request.user.uploadImage(request).then(() => {
-    response.json(json.image)
-  }).catch(response.error)
-})
+  // Update
+  post('/admin/users/:id', function *(id) {
+    const user = yield User.find(id)
+    if (!user) return this.notfound()
+    yield user.update(this.permit(
+      'email', 'first', 'last', 'phone', 'isAdmin', 'memberUntil'
+    ))
+    this.body = {user}
+  }),
 
-// Delete
-router.delete('/:userId', (request, response) => {
-  request.user.destroy().then(() => response.json({})).catch(response.error)
-})
+  // Image
+  post('/admin/users/:id/image', function *(id) {
+    const user = yield User.find(id)
+    if (!user) return this.notfound()
+    yield user.uploadImage(this.req)
+    this.body = {user}
+  }),
+
+  // Delete
+  del('/admin/users/:id', function *(id) {
+    const user = yield User.find(id)
+    if (!user) return this.notfound()
+    yield user.destroy()
+    this.body = {}
+  })
+
+]

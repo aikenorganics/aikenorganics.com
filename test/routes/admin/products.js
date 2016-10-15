@@ -2,6 +2,10 @@
 
 const test = require('../../test')
 
+test('/admin/products is a 401 signed out', (t) => {
+  t.agent.get('/admin/products').expect(401).end(t.end)
+})
+
 test('/admin/products?oversold=1 is a 200', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent

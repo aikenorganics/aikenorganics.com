@@ -3,17 +3,13 @@
 const assets = require('ozymandias/assets')
 const {html, raw} = require('ozymandias/html')
 
-const analytics = () => process.env.NODE_ENV !== 'production' ? '' : html`
-<script>
-  window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }
-  ga.l = +new Date
-  ga('create', 'UA-60091047-1', 'auto')
-  ga('send', 'pageview')
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-`
+module.exports = function *(next) {
+  yield next
 
-module.exports = ({json, state}, content) => html`
+  // Only HTML responses.
+  if (!this.response.is('html') || typeof this.body !== 'string') return
+
+  this.body = html`
 <!doctype html>
 <html>
 <head>
@@ -24,12 +20,20 @@ module.exports = ({json, state}, content) => html`
   <link rel='stylesheet' href='${assets.path('css/app.css')}'>
   <link rel='shortcut icon' href='${assets.path('favicon.ico')}'>
   <link rel='apple-touch-icon' href='${assets.path('apple-touch-icon.png')}'>
-  ${raw(analytics())}
-  ${raw(json('state', state || {}))}
+  ${raw(this.app.env === 'production' ? `
+  <script>
+    window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }
+    ga.l = +new Date
+    ga('create', 'UA-60091047-1', 'auto')
+    ga('send', 'pageview')
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>`
+  : '')}
+  ${raw(this.json('state', this.state.client || {}))}
   <script defer src='${assets.path('js/app.js')}'></script>
 </head>
 <body>
-  ${raw(content)}
+  ${raw(this.body)}
 </body>
-</html>
-`
+</html>`
+}

@@ -1,23 +1,10 @@
 'use strict'
 
-const db = require('../../db')
+const {Order, Product, ProductOrder} = require('../../db')
 const test = require('../test')
 
-test('POST /cart is a 401 logged out', (t) => {
-  t.request()
-  .post('/cart')
-  .expect(401)
-  .end(t.end)
-})
-
-test('POST /cart is a 200 logged in', (t) => {
-  t.signIn('admin@example.com').then(() => {
-    t.agent
-    .post('/cart')
-    .send({productId: 1, quantity: 2})
-    .expect(200)
-    .end(t.end)
-  })
+test('GET /cart is a 401 logged out', (t) => {
+  t.agent.get('/cart').expect(401).end(t.end)
 })
 
 test('GET /cart is a 200 logged in', (t) => {
@@ -35,12 +22,26 @@ test('GET /cart is a 200 logged in', (t) => {
   })
 })
 
+test('POST /cart is a 401 logged out', (t) => {
+  t.agent.post('/cart').expect(401).end(t.end)
+})
+
+test('POST /cart is a 200 logged in', (t) => {
+  t.signIn('admin@example.com').then(() => {
+    t.agent
+    .post('/cart')
+    .send({productId: 1, quantity: 2})
+    .expect(200)
+    .end(t.end)
+  })
+})
+
 test('POST /cart/checkout', (t) => {
   const verify = () => {
     Promise.all([
-      db.Order.find(1),
-      db.ProductOrder.where({orderId: 1}).order('productId').all(),
-      db.Product.where({id: [1, 2, 3, 4]}).order('id').all()
+      Order.find(1),
+      ProductOrder.where({orderId: 1}).order('productId').all(),
+      Product.where({id: [1, 2, 3, 4]}).order('id').all()
     ]).then((results) => {
       t.is(results[0].locationId, 2)
       t.deepEqual(results[1].map((productOrder) => {

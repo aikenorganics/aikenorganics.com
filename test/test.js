@@ -2,20 +2,12 @@
 
 const db = require('../db')
 const app = require('../app')
+const http = require('http')
 const tape = require('tape')
 const request = require('supertest')
 const query = db.query
 const {Builder, By} = require('selenium-webdriver')
 const driver = new Builder().forBrowser('chrome').build()
-
-// Convenient sign in.
-app.post('/signin', (request, response) => {
-  db.User.where({email: request.body.email}).find().then((user) => {
-    if (!user) throw new Error(`User not found: ${request.body.email}`)
-    request.signIn(user)
-    response.end()
-  }).catch(response.error)
-})
 
 // Export a function with the tape API.
 exports = module.exports = (name, callback) => {
@@ -46,25 +38,23 @@ exports = module.exports = (name, callback) => {
     db.query = transaction.query.bind(transaction)
 
     // Set a fake hostname
-    app.set('hostname', 'open.localhost')
-    t.hostname = (hostname) => app.set('hostname', hostname)
+    app.hostname = 'open.localhost'
+    t.hostname = (hostname) => { app.hostname = hostname }
 
     // Request without the app requirement.
     t.request = () => request(app)
 
     // Convenient agent reference.
-    t.agent = request.agent(app)
+    t.agent = request.agent(http.createServer(app.callback()))
 
     // Sign in, with error handling.
-    t.signIn = (email) => {
-      return new Promise((resolve, reject) => {
-        t.agent
-        .post('/signin')
-        .send({email: email})
-        .expect(200)
-        .end((error) => error ? reject(error) : resolve())
-      }).catch(t.end)
-    }
+    t.signIn = (email) => new Promise((resolve, reject) => {
+      t.agent
+      .post('/session')
+      .send({email, password: 'password'})
+      .expect(200)
+      .end((error) => error ? reject(error) : resolve())
+    }).catch(t.end)
 
     // Rollback the transaction before ending the test.
     const end = t.end.bind(t)

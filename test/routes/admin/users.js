@@ -1,6 +1,6 @@
 'use strict'
 
-const db = require('../../../db')
+const {User} = require('../../../db')
 const test = require('../../test')
 
 test('POST /admin/users/:id is a 200', (t) => {
@@ -17,7 +17,7 @@ test('POST /admin/users/:id is a 200', (t) => {
       t.is(first, 'first')
       t.is(last, 'last')
       t.is(phone, '555-555-5555')
-      db.User.find(2).then((user) => {
+      User.find(2).then((user) => {
         t.is(user.first, 'first')
         t.is(user.last, 'last')
         t.is(user.phone, '555-555-5555')
@@ -108,7 +108,7 @@ test('Delete a user', (t) => {
     .expect(200)
     .end((error) => {
       if (error) return t.end(error)
-      db.User.find(7).then((user) => {
+      User.find(7).then((user) => {
         t.ok(user == null)
         t.end()
       })
@@ -135,7 +135,7 @@ test('POST /admin/users is a 200', (t) => {
     .expect(200)
     .end((error) => {
       if (error) return t.end(error)
-      db.User.where({email: 'new@example.com'}).find().then((user) => {
+      User.where({email: 'new@example.com'}).find().then((user) => {
         t.is(user.password, null)
         t.is(user.email, 'new@example.com')
         t.is(user.first, 'first')

@@ -1,28 +1,30 @@
 'use strict'
 
-const json = require('../json/settings')
-const router = module.exports = require('ozymandias').Router()
+const {all, get, post} = require('koa-route')
 
-router.use((request, response, next) => {
-  if (request.currentUser) return next()
-  response.unauthorized()
-})
+module.exports = [
 
-// Index
-router.get('/', (request, response) => response.react(json.index))
+  all('/settings', function *(next) {
+    if (!this.state.currentUser) return this.unauthorized()
+    yield next
+  }, {end: false}),
 
-// Update
-router.post('/', (request, response) => {
-  request.currentUser.update(request.permit(
-    'first', 'last', 'phone', 'street', 'city', 'state', 'zip'
-  )).then(() => {
-    response.json(json.update)
-  }).catch(response.error)
-})
+  // Index
+  get('/settings', function *() { this.react() }),
 
-// Card
-router.post('/card', (request, response) => {
-  request.currentUser.updateCard(request.body.token).then(() => {
-    response.json(json.card)
-  }).catch(response.error)
-})
+  // Update
+  post('/settings', function *() {
+    yield this.state.currentUser.update(this.permit(
+      'first', 'last', 'phone', 'street', 'city', 'state', 'zip'
+    ))
+    this.body = {user: this.state.currentUser}
+  }),
+
+  // Card
+  post('/settings/card', function *() {
+    const {token} = this.request.body
+    yield this.state.currentUser.updateCard(token)
+    this.body = {user: this.state.currentUser}
+  })
+
+]

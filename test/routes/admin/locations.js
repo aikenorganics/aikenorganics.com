@@ -1,7 +1,9 @@
 'use strict'
 
-const db = require('../../../db')
+const {Location} = require('../../../db')
 const test = require('../../test')
+
+// Index
 
 test('GET /admin/locations is a 200', (t) => {
   t.signIn('admin@example.com').then(() => {
@@ -12,12 +14,22 @@ test('GET /admin/locations is a 200', (t) => {
   })
 })
 
+// New
+
 test('GET /admin/locations/new is a 200', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .get('/admin/locations/new')
     .expect(200)
     .end(t.end)
+  })
+})
+
+// Edit
+
+test('GET /admin/locations/missing/edit is a 404', (t) => {
+  t.signIn('admin@example.com').then(() => {
+    t.agent.get('/admin/locations/12345/edit').expect(404).end(t.end)
   })
 })
 
@@ -30,6 +42,8 @@ test('GET /admin/locations/:id/edit is a 200', (t) => {
   })
 })
 
+// Create
+
 test('POST /admin/locations is a 200', (t) => {
   t.signIn('admin@example.com').then(() => {
     t.agent
@@ -37,6 +51,14 @@ test('POST /admin/locations is a 200', (t) => {
     .send('name=Test')
     .expect(200)
     .end(t.end)
+  })
+})
+
+// Update
+
+test('POST /admin/locations/missing is a 404', (t) => {
+  t.signIn('admin@example.com').then(() => {
+    t.agent.post('/admin/locations/12345').expect(404).end(t.end)
   })
 })
 
@@ -48,11 +70,19 @@ test('POST /admin/locations/:id is a 200', (t) => {
     .expect(200)
     .end((error) => {
       if (error) return t.end(error)
-      db.Location.find(1).then((location) => {
+      Location.find(1).then((location) => {
         t.is(location.name, 'Test')
         t.end()
       })
     })
+  })
+})
+
+// Destroy
+
+test('DELETE /admin/locations/missing is a 404', (t) => {
+  t.signIn('admin@example.com').then(() => {
+    t.agent.delete('/admin/locations/12345').expect(404).end(t.end)
   })
 })
 
@@ -62,7 +92,7 @@ test('DELETE /admin/locations/:id is a 200', (t) => {
     .expect(200)
     .end((error) => {
       if (error) return t.end(error)
-      db.Location.find(2).then((location) => {
+      Location.find(2).then((location) => {
         t.ok(!location)
         t.end()
       })

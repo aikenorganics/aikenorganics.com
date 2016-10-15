@@ -43,6 +43,16 @@ class Category extends Model {
     this._meat = !!value
   }
 
+  toJSON () {
+    return this.slice(
+      'id',
+      'meat',
+      'name',
+      'position',
+      'removable'
+    )
+  }
+
 }
 
 module.exports = Category

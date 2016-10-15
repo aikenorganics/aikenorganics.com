@@ -167,6 +167,30 @@ class User extends require('ozymandias/user') {
     }
   }
 
+  toJSON () {
+    return this.slice(
+      'id',
+      'canDeliver',
+      'email',
+      'name',
+      'last',
+      'first',
+      'phone',
+      'isAdmin',
+      'memberUntil',
+      'stripeId',
+      'cardBrand',
+      'cardLast4',
+      'street',
+      'city',
+      'state',
+      'zip',
+      'address',
+      'hasOrder',
+      'mediumImage'
+    )
+  }
+
 }
 
 User.hasImage({

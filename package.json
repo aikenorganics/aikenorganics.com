@@ -34,7 +34,7 @@
     "marked": "0.3.6",
     "moment": "2.15.1",
     "object-assign": "4.1.0",
-    "ozymandias": "github:braddunbar/ozymandias#v0.127.1",
+    "ozymandias": "github:braddunbar/ozymandias#v1.2.0",
     "react": "15.3.2",
     "react-dom": "15.3.2",
     "redux": "3.6.0",
@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "deep-freeze": "0.0.1",
+    "faucet": "0.0.1",
     "selenium-webdriver": "2.53.1",
     "standard": "8.3.0",
     "supertest": "github:braddunbar/supertest#ipv6",

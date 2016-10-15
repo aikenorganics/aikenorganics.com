@@ -48,6 +48,18 @@ class ProductOrder extends Model {
     return +this.cost * this.quantity
   }
 
+  toJSON () {
+    return this.slice(
+      'id',
+      'cost',
+      'orderId',
+      'productId',
+      'quantity',
+      'total',
+      'product'
+    )
+  }
+
 }
 
 module.exports = ProductOrder

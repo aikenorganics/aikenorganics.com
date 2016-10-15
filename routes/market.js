@@ -1,15 +1,17 @@
 'use strict'
 
 const {Product} = require('../db')
-const json = require('../json/market')
-const router = module.exports = require('ozymandias').Router()
+const {get} = require('koa-route')
 
-router.get('/', (request, response) => {
-  Product
-  .include('grower')
-  .join('grower')
-  .where({active: true, featured: true, grower: {active: true}})
-  .all().then((products) => {
-    response.react(json.index, {products})
-  }).catch(response.error)
-})
+module.exports = [
+
+  get('/market', function *() {
+    const {newsHtml} = this.state.market
+    const products = yield Product.include('grower').join('grower')
+    .where({active: true, featured: true, grower: {active: true}})
+    .all()
+
+    this.react({newsHtml, products})
+  })
+
+]
