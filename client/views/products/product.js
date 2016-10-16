@@ -35,7 +35,7 @@ export default ({busy, cart, grower, open, product, currentUser}) => {
         : null
       }
       <div className='text-xs-center'>
-        <CartForm busy={busy} product={product} cart={cart} open={open} />
+        <CartForm busy={busy} currentUser={currentUser} product={product} cart={cart} open={open} />
       </div>
     </div>
   </div>

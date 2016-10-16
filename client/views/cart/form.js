@@ -1,7 +1,8 @@
 import React from 'react'
+import Link from '../link'
 import {updateCart} from '../../actions'
 
-export default ({busy, cart, open, product: {active, available, id}}) => {
+export default ({busy, cart, currentUser, open, product: {active, available, id}}) => {
   const quantity = cart[id] || 0
   const canIncrement = quantity < available
   const save = (quantity) => updateCart(id, quantity).catch(() => {})
@@ -18,6 +19,10 @@ export default ({busy, cart, open, product: {active, available, id}}) => {
 
   if (!active) {
     return <button className='btn btn-sm btn-secondary' disabled>Unavailable</button>
+  }
+
+  if (!currentUser) {
+    return <Link href='/signin' className='btn btn-sm btn-primary'>Sign In</Link>
   }
 
   return <span className='form-inline'>
