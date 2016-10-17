@@ -3,13 +3,13 @@
 const db = require('../../db')
 const test = require('../test')
 
-test('orders without productOrders have undefined total', (t) => {
+test('orders without productOrders have undefined total', function *(t) {
   const order = new db.Order()
   t.is(order.total, undefined)
   t.end()
 })
 
-test('Order reports the correct cost', (t) => {
+test('Order reports the correct cost', function *(t) {
   const order = new db.Order()
   order.productOrders = []
 
@@ -27,6 +27,7 @@ test('Order reports the correct cost', (t) => {
     cost: '2.50',
     quantity: 3
   }))
+
   order.productOrders[1].product = new db.Product({
     name: 'Strawberries',
     cost: '2.50',

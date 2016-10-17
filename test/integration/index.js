@@ -4,7 +4,7 @@ const User = require('ozymandias/user')
 const Token = require('ozymandias/token')
 const test = require('../test')
 
-test('sign in', (t) => {
+test('sign in', function *(t) {
   t.visit('/signin')
   t.$('#email').sendKeys('admin@example.com')
   t.$('#password').sendKeys('password')
@@ -14,7 +14,7 @@ test('sign in', (t) => {
   .catch(t.end)
 })
 
-test('incorrect password', (t) => {
+test('incorrect password', function *(t) {
   t.visit('/signin')
   t.$('#email').sendKeys('admin@example.com')
   t.$('#password').sendKeys('wrong')
@@ -29,7 +29,7 @@ test('incorrect password', (t) => {
   .catch(t.end)
 })
 
-test('email not found', (t) => {
+test('email not found', function *(t) {
   t.visit('/signin')
   t.$('#email').sendKeys('wrong@example.com')
   t.$('#password').sendKeys('password')
@@ -44,7 +44,7 @@ test('email not found', (t) => {
   .catch(t.end)
 })
 
-test('forgot password', (t) => {
+test('forgot password', function *(t) {
   // Send Token
   t.visit('/signin/forgot')
   t.$('#email').sendKeys('admin@example.com')

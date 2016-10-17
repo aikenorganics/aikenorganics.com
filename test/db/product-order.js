@@ -3,7 +3,7 @@
 const db = require('../../db')
 const test = require('../test')
 
-test('ProductOrder reports the correct cost', (t) => {
+test('ProductOrder reports the correct cost', function *(t) {
   const productOrder = new db.ProductOrder({
     cost: '5.75',
     quantity: 2
@@ -12,7 +12,7 @@ test('ProductOrder reports the correct cost', (t) => {
   t.end()
 })
 
-test('Cannot insert product order for inactive products', (t) => {
+test('Cannot insert product order for inactive products', function *(t) {
   db.ProductOrder.create({
     orderId: 2,
     productId: 7,
@@ -24,7 +24,7 @@ test('Cannot insert product order for inactive products', (t) => {
   })
 })
 
-test('Cannot insert product order for inactive grower', (t) => {
+test('Cannot insert product order for inactive grower', function *(t) {
   db.ProductOrder.create({
     orderId: 2,
     productId: 6,
@@ -36,7 +36,7 @@ test('Cannot insert product order for inactive grower', (t) => {
   })
 })
 
-test('Cannot insert product order with none available', (t) => {
+test('Cannot insert product order with none available', function *(t) {
   db.ProductOrder.create({
     orderId: 1,
     productId: 5,
@@ -48,7 +48,7 @@ test('Cannot insert product order with none available', (t) => {
   })
 })
 
-test('Cannot update product order with none available', (t) => {
+test('Cannot update product order with none available', function *(t) {
   db.ProductOrder.find(8).then((productOrder) => {
     productOrder.update({quantity: 15}).then(() => {
       t.end('Product order updated with none available')
@@ -58,7 +58,7 @@ test('Cannot update product order with none available', (t) => {
   }).catch(t.end)
 })
 
-test('Updating quantity updates product.reserved', (t) => {
+test('Updating quantity updates product.reserved', function *(t) {
   const verify = () => {
     return db.Product.find(1).then((product) => {
       t.is(product.reserved, 5)
@@ -71,7 +71,7 @@ test('Updating quantity updates product.reserved', (t) => {
   }).catch(t.end)
 })
 
-test('Inserting a new product order updates product.reserved', (t) => {
+test('Inserting a new product order updates product.reserved', function *(t) {
   const verify = () => {
     return db.Product.find(1).then((product) => {
       t.is(product.reserved, 5)
@@ -86,7 +86,7 @@ test('Inserting a new product order updates product.reserved', (t) => {
   }).then(verify).catch(t.end)
 })
 
-test('Deleting a product order updates product.reserved', (t) => {
+test('Deleting a product order updates product.reserved', function *(t) {
   const verify = () => {
     return db.Product.find(1).then((product) => {
       t.is(product.reserved, 0)
@@ -99,7 +99,7 @@ test('Deleting a product order updates product.reserved', (t) => {
   }).catch(t.end)
 })
 
-test('insert: completed orders don\'t affect product.reserved', (t) => {
+test('insert: completed orders don\'t affect product.reserved', function *(t) {
   const verify = () => {
     return db.Product.find(1).then((product) => {
       t.is(product.reserved, 2)
@@ -114,7 +114,7 @@ test('insert: completed orders don\'t affect product.reserved', (t) => {
   }).then(verify).catch(t.end)
 })
 
-test('delete: completed orders don\'t affect product.reserved', (t) => {
+test('delete: completed orders don\'t affect product.reserved', function *(t) {
   const verify = () => {
     return db.Product.find(5).then((product) => {
       t.is(product.reserved, 3)
@@ -127,7 +127,7 @@ test('delete: completed orders don\'t affect product.reserved', (t) => {
   }).catch(t.end)
 })
 
-test('Update: completed orders don\'t affect product.reserved', (t) => {
+test('Update: completed orders don\'t affect product.reserved', function *(t) {
   const verify = () => {
     return db.Product.find(5).then((product) => {
       t.is(product.reserved, 3)
@@ -140,7 +140,7 @@ test('Update: completed orders don\'t affect product.reserved', (t) => {
   }).catch(t.end)
 })
 
-test('Inserting a new product order sets cost', (t) => {
+test('Inserting a new product order sets cost', function *(t) {
   db.ProductOrder.create({orderId: 2, productId: 1, quantity: 3})
   .then((productOrder) => {
     t.is(productOrder.cost, '14.00')
@@ -148,7 +148,7 @@ test('Inserting a new product order sets cost', (t) => {
   }).catch(t.end)
 })
 
-test('Deleting an order updates reserved values', (t) => {
+test('Deleting an order updates reserved values', function *(t) {
   const verify = () => {
     return db.Product.find(1).then((product) => {
       t.is(product.reserved, 0)
@@ -161,7 +161,7 @@ test('Deleting an order updates reserved values', (t) => {
   }).catch(t.end)
 })
 
-test('Updating takes the previous quantity into account', (t) => {
+test('Updating takes the previous quantity into account', function *(t) {
   db.ProductOrder.find(8).then((productOrder) => {
     return productOrder.update({quantity: 1}).then(() => {
       t.end()
@@ -169,7 +169,7 @@ test('Updating takes the previous quantity into account', (t) => {
   }).catch(t.end)
 })
 
-test('validate cost', (t) => {
+test('validate cost', function *(t) {
   const productOrder = new db.ProductOrder({cost: 'asdf'})
   t.ok(!productOrder.valid)
   t.deepEqual(productOrder.errors, {
@@ -178,37 +178,37 @@ test('validate cost', (t) => {
   t.end()
 })
 
-test('validate cost', (t) => {
+test('validate cost', function *(t) {
   t.ok(new db.ProductOrder({cost: '.53'}).valid)
   t.end()
 })
 
-test('validate cost', (t) => {
+test('validate cost', function *(t) {
   t.ok(new db.ProductOrder({cost: '32'}).valid)
   t.end()
 })
 
-test('validate cost', (t) => {
+test('validate cost', function *(t) {
   t.ok(new db.ProductOrder({cost: '32.25'}).valid)
   t.end()
 })
 
-test('validate cost', (t) => {
+test('validate cost', function *(t) {
   t.ok(new db.ProductOrder({cost: '$32.25'}).valid)
   t.end()
 })
 
-test('validate cost', (t) => {
+test('validate cost', function *(t) {
   t.ok(new db.ProductOrder({cost: '  10  '}).valid)
   t.end()
 })
 
-test('validate cost', (t) => {
+test('validate cost', function *(t) {
   t.ok(new db.ProductOrder({cost: '  $32.25  '}).valid)
   t.end()
 })
 
-test('checkout() with non-existent product does not throw', (t) => {
+test('checkout() with non-existent product does not throw', function *(t) {
   db.query('select checkout($1, $2, $3)', [1, 1, [[12345, 1]]])
   .then(() => { t.end() }).catch(t.end)
 })

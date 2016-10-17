@@ -1,5 +1,6 @@
 'use strict'
 
+const co = require('co')
 const db = require('../db')
 const app = require('../app')
 const http = require('http')
@@ -9,8 +10,8 @@ const {Builder, By} = require('selenium-webdriver')
 const driver = new Builder().forBrowser('chrome').build()
 
 // Export a function with the tape API.
-exports = module.exports = (name, callback) => {
-  tape(name, (t) => {
+exports = module.exports = (name, test) => {
+  tape(name, (t) => co(function *() {
     // Have we visited any pages?
     let visited = false
 
@@ -66,8 +67,8 @@ exports = module.exports = (name, callback) => {
       .catch(() => end(...args))
     }
 
-    callback(t)
-  })
+    yield test(t)
+  }))
 }
 
 exports.driver = driver

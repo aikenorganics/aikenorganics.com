@@ -5,7 +5,7 @@ const test = require('../../test')
 
 // Index
 
-test('GET /admin/locations is a 200', (t) => {
+test('GET /admin/locations is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .get('/admin/locations')
@@ -16,7 +16,7 @@ test('GET /admin/locations is a 200', (t) => {
 
 // New
 
-test('GET /admin/locations/new is a 200', (t) => {
+test('GET /admin/locations/new is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .get('/admin/locations/new')
@@ -27,13 +27,13 @@ test('GET /admin/locations/new is a 200', (t) => {
 
 // Edit
 
-test('GET /admin/locations/missing/edit is a 404', (t) => {
+test('GET /admin/locations/missing/edit is a 404', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/admin/locations/12345/edit').expect(404).end(t.end)
   })
 })
 
-test('GET /admin/locations/:id/edit is a 200', (t) => {
+test('GET /admin/locations/:id/edit is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .get('/admin/locations/1/edit')
@@ -44,7 +44,7 @@ test('GET /admin/locations/:id/edit is a 200', (t) => {
 
 // Create
 
-test('POST /admin/locations is a 200', (t) => {
+test('POST /admin/locations is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/admin/locations')
@@ -56,13 +56,13 @@ test('POST /admin/locations is a 200', (t) => {
 
 // Update
 
-test('POST /admin/locations/missing is a 404', (t) => {
+test('POST /admin/locations/missing is a 404', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/admin/locations/12345').expect(404).end(t.end)
   })
 })
 
-test('POST /admin/locations/:id is a 200', (t) => {
+test('POST /admin/locations/:id is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/admin/locations/1')
@@ -80,13 +80,13 @@ test('POST /admin/locations/:id is a 200', (t) => {
 
 // Destroy
 
-test('DELETE /admin/locations/missing is a 404', (t) => {
+test('DELETE /admin/locations/missing is a 404', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.delete('/admin/locations/12345').expect(404).end(t.end)
   })
 })
 
-test('DELETE /admin/locations/:id is a 200', (t) => {
+test('DELETE /admin/locations/:id is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.delete('/admin/locations/2')
     .expect(200)

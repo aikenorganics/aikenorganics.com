@@ -3,7 +3,7 @@
 const db = require('../../db')
 const test = require('../test')
 
-test('User#name combines first and last', (t) => {
+test('User#name combines first and last', function *(t) {
   const user = new db.User({
     first: 'Steven',
     last: 'Tyler'
@@ -12,13 +12,13 @@ test('User#name combines first and last', (t) => {
   t.end()
 })
 
-test('User#name is trimmed', (t) => {
+test('User#name is trimmed', function *(t) {
   const user = new db.User({})
   t.is(user.name, '')
   t.end()
 })
 
-test('User#memberUntil is null for empty values', (t) => {
+test('User#memberUntil is null for empty values', function *(t) {
   const user = new db.User({memberUntil: ''})
   t.is(user.memberUntil, null)
   user.memberUntil = 0
@@ -28,14 +28,14 @@ test('User#memberUntil is null for empty values', (t) => {
   t.end()
 })
 
-test('trim street', (t) => {
+test('trim street', function *(t) {
   const user = new db.User()
   user.street = '  test  '
   t.is(user.street, 'test')
   t.end()
 })
 
-test('validate street', (t) => {
+test('validate street', function *(t) {
   const user = new db.User({street: null})
   user.validate()
   t.is(user.errors.street, undefined)
@@ -55,14 +55,14 @@ test('validate street', (t) => {
   t.end()
 })
 
-test('trim city', (t) => {
+test('trim city', function *(t) {
   const user = new db.User()
   user.city = '  test  '
   t.is(user.city, 'test')
   t.end()
 })
 
-test('validate city', (t) => {
+test('validate city', function *(t) {
   const user = new db.User({city: null})
   user.validate()
   t.is(user.errors.city, undefined)
@@ -82,13 +82,13 @@ test('validate city', (t) => {
   t.end()
 })
 
-test('trim and capitalize state', (t) => {
+test('trim and capitalize state', function *(t) {
   const user = new db.User({state: '  sc '})
   t.is(user.state, 'SC')
   t.end()
 })
 
-test('validate state', (t) => {
+test('validate state', function *(t) {
   const user = new db.User({state: null})
   user.validate()
   t.is(user.errors.state, undefined)
@@ -108,13 +108,13 @@ test('validate state', (t) => {
   t.end()
 })
 
-test('trim zip', (t) => {
+test('trim zip', function *(t) {
   const user = new db.User({zip: ' 12345 '})
   t.is(user.zip, '12345')
   t.end()
 })
 
-test('validate zip', (t) => {
+test('validate zip', function *(t) {
   const user = new db.User({zip: null})
   user.validate()
   t.is(user.errors.zip, undefined)
@@ -146,7 +146,7 @@ test('validate zip', (t) => {
   t.end()
 })
 
-test('canDeliver', (t) => {
+test('canDeliver', function *(t) {
   const user = new db.User({
     phone: '555.555.5555',
     street: '123 Street Drive',
@@ -163,7 +163,7 @@ test('canDeliver', (t) => {
   t.end()
 })
 
-test('address', (t) => {
+test('address', function *(t) {
   const user = new db.User({
     street: '123 Street Drive',
     city: 'Townsville',
@@ -179,7 +179,7 @@ test('address', (t) => {
   t.end()
 })
 
-test('validate email', (t) => {
+test('validate email', function *(t) {
   const user = new db.User()
 
   user.email = 'foo'

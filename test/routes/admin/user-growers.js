@@ -3,7 +3,7 @@
 const {UserGrower} = require('../../../db')
 const test = require('../../test')
 
-test('POST /admin/user-growers is a 200', (t) => {
+test('POST /admin/user-growers is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/admin/user-growers')
@@ -19,13 +19,13 @@ test('POST /admin/user-growers is a 200', (t) => {
   })
 })
 
-test('DELETE /admin/user-growers/missing is a 404', (t) => {
+test('DELETE /admin/user-growers/missing is a 404', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.delete('/admin/user-growers/12345').expect(404).end(t.end)
   })
 })
 
-test('DELETE /admin/user-growers/:userGrowerId is a 200', (t) => {
+test('DELETE /admin/user-growers/:userGrowerId is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .delete('/admin/user-growers/1')

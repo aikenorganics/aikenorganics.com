@@ -4,7 +4,7 @@ const test = require('../test')
 
 // Index
 
-test('GET /market is a 200', (t) => {
+test('GET /market is a 200', function *(t) {
   t.agent
   .get('/market')
   .expect(200)

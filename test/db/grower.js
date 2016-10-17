@@ -3,7 +3,7 @@
 const db = require('../../db')
 const test = require('../test')
 
-test('Grower#url prepends http://', (t) => {
+test('Grower#url prepends http://', function *(t) {
   const grower = new db.Grower({
     url: 'example.com'
   })
@@ -11,7 +11,7 @@ test('Grower#url prepends http://', (t) => {
   t.end()
 })
 
-test('Grower#url handles https://', (t) => {
+test('Grower#url handles https://', function *(t) {
   const grower = new db.Grower({
     url: 'https://example.com'
   })

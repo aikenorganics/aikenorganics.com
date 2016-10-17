@@ -3,13 +3,13 @@
 const db = require('../../../db')
 const test = require('../../test')
 
-test('DELETE /product-orders/missing is a 404', (t) => {
+test('DELETE /product-orders/missing is a 404', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.delete('/admin/product-orders/12345').expect(404).end(t.end)
   })
 })
 
-test('DELETE /product-orders/:id is a 200', (t) => {
+test('DELETE /product-orders/:id is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .delete('/admin/product-orders/1')
@@ -24,13 +24,13 @@ test('DELETE /product-orders/:id is a 200', (t) => {
   })
 })
 
-test('POST /product-orders/missing is a 404', (t) => {
+test('POST /product-orders/missing is a 404', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/admin/product-orders/12345').expect(404).end(t.end)
   })
 })
 
-test('POST /product-orders/:id is a 200', (t) => {
+test('POST /product-orders/:id is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/admin/product-orders/1')
@@ -50,7 +50,7 @@ test('POST /product-orders/:id is a 200', (t) => {
   })
 })
 
-test('POST /product-orders is a 200', (t) => {
+test('POST /product-orders is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/admin/product-orders')
@@ -70,7 +70,7 @@ test('POST /product-orders is a 200', (t) => {
   })
 })
 
-test('editing an inactive product order', (t) => {
+test('editing an inactive product order', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/admin/product-orders/9')
     .send({quantity: 2, cost: '6'})

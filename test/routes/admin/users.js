@@ -3,7 +3,7 @@
 const {User} = require('../../../db')
 const test = require('../../test')
 
-test('POST /admin/users/:id is a 200', (t) => {
+test('POST /admin/users/:id is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/admin/users/2')
@@ -27,7 +27,7 @@ test('POST /admin/users/:id is a 200', (t) => {
   })
 })
 
-test('GET /admin/users is a 200 as an admin', (t) => {
+test('GET /admin/users is a 200 as an admin', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/admin/users')
     .expect(200)
@@ -35,7 +35,7 @@ test('GET /admin/users is a 200 as an admin', (t) => {
   })
 })
 
-test('GET /admin/users is a 200 as an admin with a search', (t) => {
+test('GET /admin/users is a 200 as an admin with a search', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/admin/users?search=admin')
     .expect(200)
@@ -43,7 +43,7 @@ test('GET /admin/users is a 200 as an admin with a search', (t) => {
   })
 })
 
-test('GET /admin/users/show is a 200 as an admin', (t) => {
+test('GET /admin/users/show is a 200 as an admin', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/admin/users/1/edit')
     .expect(200)
@@ -52,7 +52,7 @@ test('GET /admin/users/show is a 200 as an admin', (t) => {
   })
 })
 
-test('missing users are a 404 as an admin', (t) => {
+test('missing users are a 404 as an admin', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/admin/users/123456789')
     .expect(404)
@@ -60,7 +60,7 @@ test('missing users are a 404 as an admin', (t) => {
   })
 })
 
-test('GET /admin/users is a 401 as a regular user', (t) => {
+test('GET /admin/users is a 401 as a regular user', function *(t) {
   t.signIn('user@example.com').then(() => {
     t.agent.get('/admin/users')
     .expect(401)
@@ -68,7 +68,7 @@ test('GET /admin/users is a 401 as a regular user', (t) => {
   })
 })
 
-test('GET /admin/users/show is a 401 as a regular user', (t) => {
+test('GET /admin/users/show is a 401 as a regular user', function *(t) {
   t.signIn('user@example.com').then(() => {
     t.agent.get('/admin/users/1/edit')
     .expect(401)
@@ -76,7 +76,7 @@ test('GET /admin/users/show is a 401 as a regular user', (t) => {
   })
 })
 
-test('GET /admin/users/emails is a 200', (t) => {
+test('GET /admin/users/emails is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/admin/users/emails')
     .expect(200)
@@ -84,7 +84,7 @@ test('GET /admin/users/emails is a 200', (t) => {
   })
 })
 
-test('Search for stop word', (t) => {
+test('Search for stop word', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/admin/users?search=with')
     .expect(200)
@@ -93,7 +93,7 @@ test('Search for stop word', (t) => {
   })
 })
 
-test('Search for joanne', (t) => {
+test('Search for joanne', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/admin/users?search=joanne')
     .expect(200)
@@ -102,7 +102,7 @@ test('Search for joanne', (t) => {
   })
 })
 
-test('Delete a user', (t) => {
+test('Delete a user', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.delete('/admin/users/7')
     .expect(200)
@@ -116,7 +116,7 @@ test('Delete a user', (t) => {
   })
 })
 
-test('/admin/users/new is a 200', (t) => {
+test('/admin/users/new is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/admin/users/new')
     .expect(200)
@@ -124,7 +124,7 @@ test('/admin/users/new is a 200', (t) => {
   })
 })
 
-test('POST /admin/users is a 200', (t) => {
+test('POST /admin/users is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/admin/users')
@@ -147,7 +147,7 @@ test('POST /admin/users is a 200', (t) => {
   })
 })
 
-test('return page in JSON', (t) => {
+test('return page in JSON', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .get('/admin/users')

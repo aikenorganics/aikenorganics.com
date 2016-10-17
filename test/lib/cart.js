@@ -4,45 +4,45 @@ const db = require('../../db')
 const test = require('../test')
 const Cart = require('../../lib/cart')
 
-test('get the correct keys', (t) => {
+test('get the correct keys', function *(t) {
   t.deepEqual(new Cart({cart: {1: 2, 3: 4}}).ids, [1, 3])
   t.end()
 })
 
-test('clear the cart', (t) => {
+test('clear the cart', function *(t) {
   const session = {cart: {1: 2, 3: 4}}
   new Cart(session).clear()
   t.deepEqual(session.cart, {})
   t.end()
 })
 
-test('cart size', (t) => {
+test('cart size', function *(t) {
   t.equal(new Cart({cart: {1: 2, 3: 4}}).size, 6)
   t.end()
 })
 
-test('update with positive key', (t) => {
+test('update with positive key', function *(t) {
   const session = {}
   new Cart(session).update(new db.Product({id: 5}), 2)
   t.deepEqual(session.cart, {5: 2})
   t.end()
 })
 
-test('update with zero key', (t) => {
+test('update with zero key', function *(t) {
   const session = {cart: {5: 2}}
   new Cart(session).update(new db.Product({id: 5}), 0)
   t.deepEqual(session.cart, {})
   t.end()
 })
 
-test('checkout quantity', (t) => {
+test('checkout quantity', function *(t) {
   const product = new db.Product({id: 1, supply: 5, reserved: 3})
   const cart = new Cart({cart: {1: 3}})
   t.equal(cart.quantity(product), 2)
   t.end()
 })
 
-test('checkout total', (t) => {
+test('checkout total', function *(t) {
   db.Product.include('grower').find(1).then((product) => {
     const cart = new Cart({cart: {1: 3}})
     t.equal(cart.total(product), 42)
@@ -50,7 +50,7 @@ test('checkout total', (t) => {
   }).catch(t.end)
 })
 
-test('checkout total for inactive product', (t) => {
+test('checkout total for inactive product', function *(t) {
   db.Product.include('grower').find(8).then((product) => {
     const cart = new Cart({cart: {8: 3}})
     t.equal(cart.total(product), 0)
@@ -58,7 +58,7 @@ test('checkout total for inactive product', (t) => {
   }).catch(t.end)
 })
 
-test('checkout total for inactive grower', (t) => {
+test('checkout total for inactive grower', function *(t) {
   db.Product.include('grower').find(6).then((product) => {
     const cart = new Cart({cart: {6: 3}})
     t.equal(cart.total(product), 0)
@@ -66,7 +66,7 @@ test('checkout total for inactive grower', (t) => {
   }).catch(t.end)
 })
 
-test('checkout total for multiple products', (t) => {
+test('checkout total for multiple products', function *(t) {
   db.Product.include('grower').where({id: [1, 2, 8]}).all()
   .then((products) => {
     const cart = new Cart({cart: {1: 3, 2: 2, 8: 1}})
@@ -75,7 +75,7 @@ test('checkout total for multiple products', (t) => {
   }).catch(t.end)
 })
 
-test('checking out with an inactive location raises', (t) => {
+test('checking out with an inactive location raises', function *(t) {
   db.query('select checkout($1, $2, $3)', [1, 3, [1, 1]]).then(() => {
     t.end('Inactive locations should raise.')
   }).catch(() => {
@@ -83,7 +83,7 @@ test('checking out with an inactive location raises', (t) => {
   })
 })
 
-test('oversold products do not create a product order', (t) => {
+test('oversold products do not create a product order', function *(t) {
   db.query('select checkout($1, $2, $3)', [1, 1, [9, 2]]).then(() => {
     return db.ProductOrder.where({
       orderId: 1,

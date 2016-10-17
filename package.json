@@ -41,6 +41,7 @@
     "stripe": "4.11.0"
   },
   "devDependencies": {
+    "co": "4.6.0",
     "deep-freeze": "0.0.1",
     "faucet": "0.0.1",
     "selenium-webdriver": "2.53.1",

@@ -3,11 +3,11 @@
 const {Order, Product, ProductOrder} = require('../../db')
 const test = require('../test')
 
-test('GET /cart is a 401 logged out', (t) => {
+test('GET /cart is a 401 logged out', function *(t) {
   t.agent.get('/cart').expect(401).end(t.end)
 })
 
-test('GET /cart is a 200 logged in', (t) => {
+test('GET /cart is a 200 logged in', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/cart')
@@ -22,11 +22,11 @@ test('GET /cart is a 200 logged in', (t) => {
   })
 })
 
-test('POST /cart is a 401 logged out', (t) => {
+test('POST /cart is a 401 logged out', function *(t) {
   t.agent.post('/cart').expect(401).end(t.end)
 })
 
-test('POST /cart is a 200 logged in', (t) => {
+test('POST /cart is a 200 logged in', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/cart')
@@ -36,7 +36,7 @@ test('POST /cart is a 200 logged in', (t) => {
   })
 })
 
-test('POST /cart/checkout', (t) => {
+test('POST /cart/checkout', function *(t) {
   const verify = () => {
     Promise.all([
       Order.find(1),
@@ -94,7 +94,7 @@ test('POST /cart/checkout', (t) => {
   })
 })
 
-test('POST /cart is a 200 for inactive products/growers', (t) => {
+test('POST /cart is a 200 for inactive products/growers', function *(t) {
   t.signIn('user@example.com').then(() => {
     t.agent
     .post('/cart')

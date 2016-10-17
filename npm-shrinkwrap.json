@@ -405,7 +405,7 @@
     },
     "co": {
       "version": "4.6.0",
-      "from": "co@>=4.4.0 <5.0.0",
+      "from": "https://registry.npmjs.org/co/-/co-4.6.0.tgz",
       "resolved": "https://registry.npmjs.org/co/-/co-4.6.0.tgz"
     },
     "co-body": {

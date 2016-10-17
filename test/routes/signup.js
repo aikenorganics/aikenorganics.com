@@ -2,14 +2,14 @@
 
 const test = require('../test')
 
-test('signup page is a 200', (t) => {
+test('signup page is a 200', function *(t) {
   t.agent
   .get('/signup')
   .expect(200)
   .end(t.end)
 })
 
-test('POST /signup handles mixed case emails', (t) => {
+test('POST /signup handles mixed case emails', function *(t) {
   t.agent
   .post('/signup')
   .send('email=AdMiN@eXaMpLe.CoM')
@@ -19,7 +19,7 @@ test('POST /signup handles mixed case emails', (t) => {
   .end(t.end)
 })
 
-test('POST /signup handles first, last, and phone', (t) => {
+test('POST /signup handles first, last, and phone', function *(t) {
   t.agent
   .post('/signup')
   .send({
@@ -33,7 +33,7 @@ test('POST /signup handles first, last, and phone', (t) => {
   .end(t.end)
 })
 
-test('Full signup flow', (t) => {
+test('Full signup flow', function *(t) {
   t.agent
   .post('/signup')
   .send({

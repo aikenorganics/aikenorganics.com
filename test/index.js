@@ -2,7 +2,6 @@
 
 const db = require('../db')
 const app = require('../app')
-const tape = require('tape')
 const test = require('./test')
 const server = app.listen(4444)
 
@@ -11,7 +10,7 @@ require('./lib')
 require('./routes')
 require('./integration')
 
-tape('teardown', (t) => {
+test('teardown', function *(t) {
   server.close()
   db.close()
   test.driver.quit()

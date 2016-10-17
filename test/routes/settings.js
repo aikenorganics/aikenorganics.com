@@ -2,19 +2,19 @@
 
 const test = require('../test')
 
-test('GET /settings is a 401 when logged out', (t) => {
+test('GET /settings is a 401 when logged out', function *(t) {
   t.agent.get('/settings').expect(401).end(t.end)
 })
 
-test('POST /settings is a 401 when logged out', (t) => {
+test('POST /settings is a 401 when logged out', function *(t) {
   t.agent.post('/settings').expect(401).end(t.end)
 })
 
-test('POST /settings/card is a 401 when logged out', (t) => {
+test('POST /settings/card is a 401 when logged out', function *(t) {
   t.agent.post('/settings/card').expect(401).end(t.end)
 })
 
-test('GET /settings is a 200 as an admin', (t) => {
+test('GET /settings is a 200 as an admin', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/settings')
     .expect(200)
@@ -22,7 +22,7 @@ test('GET /settings is a 200 as an admin', (t) => {
   })
 })
 
-test('GET /settings is a 200 as a regular user', (t) => {
+test('GET /settings is a 200 as a regular user', function *(t) {
   t.signIn('user@example.com').then(() => {
     t.agent.get('/settings')
     .expect(200)
@@ -30,7 +30,7 @@ test('GET /settings is a 200 as a regular user', (t) => {
   })
 })
 
-test('POST /settings is a 200 as a regular user', (t) => {
+test('POST /settings is a 200 as a regular user', function *(t) {
   t.signIn('user@example.com').then(() => {
     t.agent.post('/settings')
     .set('Content-Type', 'application/json')

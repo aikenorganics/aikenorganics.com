@@ -2,14 +2,14 @@
 
 const test = require('../test')
 
-test('GET /growers is a 200', (t) => {
+test('GET /growers is a 200', function *(t) {
   t.agent
   .get('/growers')
   .expect(200)
   .end(t.end)
 })
 
-test('GET /growers is a 200 for admins', (t) => {
+test('GET /growers is a 200 for admins', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .get('/growers')
@@ -18,7 +18,7 @@ test('GET /growers is a 200 for admins', (t) => {
   })
 })
 
-test('GET /growers is a 200 for non-admins', (t) => {
+test('GET /growers is a 200 for non-admins', function *(t) {
   t.signIn('user@example.com').then(() => {
     t.agent
     .get('/growers')
@@ -27,14 +27,14 @@ test('GET /growers is a 200 for non-admins', (t) => {
   })
 })
 
-test('GET /growers/:id is a 200', (t) => {
+test('GET /growers/:id is a 200', function *(t) {
   t.agent
   .get('/growers/1')
   .expect(200)
   .end(t.end)
 })
 
-test('GET /growers/:id is a 200 as an admin', (t) => {
+test('GET /growers/:id is a 200 as an admin', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .get('/growers/1')
@@ -43,7 +43,7 @@ test('GET /growers/:id is a 200 as an admin', (t) => {
   })
 })
 
-test('GET /growers/:id is a 200 as a grower', (t) => {
+test('GET /growers/:id is a 200 as a grower', function *(t) {
   t.signIn('grower@example.com').then(() => {
     t.agent
     .get('/growers/1')
@@ -52,14 +52,14 @@ test('GET /growers/:id is a 200 as a grower', (t) => {
   })
 })
 
-test('GET /growers/:id is a 404 for missing ids', (t) => {
+test('GET /growers/:id is a 404 for missing ids', function *(t) {
   t.agent
   .get('/growers/123456789')
   .expect(404)
   .end(t.end)
 })
 
-test('GET /growers/:id is a 404 for missing ids', (t) => {
+test('GET /growers/:id is a 404 for missing ids', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/growers/123456789')
     .expect(404)
@@ -67,7 +67,7 @@ test('GET /growers/:id is a 404 for missing ids', (t) => {
   })
 })
 
-test('GET /growers/new is a 200 as an admin', (t) => {
+test('GET /growers/new is a 200 as an admin', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/growers/new')
     .expect(200)
@@ -75,7 +75,7 @@ test('GET /growers/new is a 200 as an admin', (t) => {
   })
 })
 
-test('GET /growers/new is a 200', (t) => {
+test('GET /growers/new is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/growers/new')
     .expect(200)
@@ -83,7 +83,7 @@ test('GET /growers/new is a 200', (t) => {
   })
 })
 
-test('GET /growers/new is a 401 as a non-admin', (t) => {
+test('GET /growers/new is a 401 as a non-admin', function *(t) {
   t.signIn('user@example.com').then(() => {
     t.agent.get('/growers/new')
     .expect(401)
@@ -91,7 +91,7 @@ test('GET /growers/new is a 401 as a non-admin', (t) => {
   })
 })
 
-test('GET /growers/:id/products/new is a 401 as a non-admin', (t) => {
+test('GET /growers/:id/products/new is a 401 as a non-admin', function *(t) {
   t.signIn('user@example.com').then(() => {
     t.agent.get('/growers/1/products/new')
     .expect(401)
@@ -99,7 +99,7 @@ test('GET /growers/:id/products/new is a 401 as a non-admin', (t) => {
   })
 })
 
-test('GET /growers/:id/products/new is a 200 as an admin', (t) => {
+test('GET /growers/:id/products/new is a 200 as an admin', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/growers/1/products/new')
     .expect(200)
@@ -107,7 +107,7 @@ test('GET /growers/:id/products/new is a 200 as an admin', (t) => {
   })
 })
 
-test('GET /growers/:id/edit is a 401 for non-admins', (t) => {
+test('GET /growers/:id/edit is a 401 for non-admins', function *(t) {
   t.signIn('user@example.com').then(() => {
     t.agent.get('/growers/1/edit')
     .expect(401)
@@ -115,7 +115,7 @@ test('GET /growers/:id/edit is a 401 for non-admins', (t) => {
   })
 })
 
-test('GET /growers/:id/edit is a 200 for admins', (t) => {
+test('GET /growers/:id/edit is a 200 for admins', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/growers/1/edit')
     .expect(200)
@@ -123,7 +123,7 @@ test('GET /growers/:id/edit is a 200 for admins', (t) => {
   })
 })
 
-test('GET /growers/:id/edit is a 200 for allowed users', (t) => {
+test('GET /growers/:id/edit is a 200 for allowed users', function *(t) {
   t.signIn('grower@example.com').then(() => {
     t.agent.get('/growers/1/edit')
     .expect(200)
@@ -131,7 +131,7 @@ test('GET /growers/:id/edit is a 200 for allowed users', (t) => {
   })
 })
 
-test('GET /growers/:id/orders is a 200 for admins', (t) => {
+test('GET /growers/:id/orders is a 200 for admins', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/growers/1/orders')
     .expect(200)
@@ -139,7 +139,7 @@ test('GET /growers/:id/orders is a 200 for admins', (t) => {
   })
 })
 
-test('GET /growers/:id/orders is a 200 for allowed users', (t) => {
+test('GET /growers/:id/orders is a 200 for allowed users', function *(t) {
   t.signIn('grower@example.com').then(() => {
     t.agent.get('/growers/1/orders')
     .expect(200)
@@ -147,7 +147,7 @@ test('GET /growers/:id/orders is a 200 for allowed users', (t) => {
   })
 })
 
-test('GET /growers/:id/orders is a 401 for non-admins', (t) => {
+test('GET /growers/:id/orders is a 401 for non-admins', function *(t) {
   t.signIn('grower@example.com').then(() => {
     t.agent.get('/growers/2/orders')
     .expect(401)
@@ -155,7 +155,7 @@ test('GET /growers/:id/orders is a 401 for non-admins', (t) => {
   })
 })
 
-test('GET /growers/:id/orders is a 401 for non-admins', (t) => {
+test('GET /growers/:id/orders is a 401 for non-admins', function *(t) {
   t.signIn('user@example.com').then(() => {
     t.agent.get('/growers/1/orders')
     .expect(401)
@@ -163,7 +163,7 @@ test('GET /growers/:id/orders is a 401 for non-admins', (t) => {
   })
 })
 
-test('POST /growers/:id is a 401 for non-admins', (t) => {
+test('POST /growers/:id is a 401 for non-admins', function *(t) {
   t.signIn('user@example.com').then(() => {
     t.agent.post('/growers/1')
     .expect(401)
@@ -171,7 +171,7 @@ test('POST /growers/:id is a 401 for non-admins', (t) => {
   })
 })
 
-test('POST /growers/:id is a 200 for admins', (t) => {
+test('POST /growers/:id is a 200 for admins', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/growers/1')
     .send({name: 'Watsonia'})
@@ -181,7 +181,7 @@ test('POST /growers/:id is a 200 for admins', (t) => {
   })
 })
 
-test('POST /growers/:id is a 200 for allowed users', (t) => {
+test('POST /growers/:id is a 200 for allowed users', function *(t) {
   t.signIn('grower@example.com').then(() => {
     t.agent.post('/growers/1')
     .send({name: 'Watsonia'})
@@ -191,7 +191,7 @@ test('POST /growers/:id is a 200 for allowed users', (t) => {
   })
 })
 
-test('POST /growers is a 401 for non-admins', (t) => {
+test('POST /growers is a 401 for non-admins', function *(t) {
   t.signIn('user@example.com').then(() => {
     t.agent.post('/growers')
     .send({name: 'New Grower'})
@@ -200,7 +200,7 @@ test('POST /growers is a 401 for non-admins', (t) => {
   })
 })
 
-test('POST /growers is a 200 for admins', (t) => {
+test('POST /growers is a 200 for admins', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/growers')
     .send({name: 'New Grower'})
@@ -216,7 +216,7 @@ test('POST /growers is a 200 for admins', (t) => {
   })
 })
 
-test('POST /growers/:id/products is a 200 for admins', (t) => {
+test('POST /growers/:id/products is a 200 for admins', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/growers/1/products')
     .send({
@@ -241,7 +241,7 @@ test('POST /growers/:id/products is a 200 for admins', (t) => {
   })
 })
 
-test('POST /growers/:id/products is a 401 for non-admins', (t) => {
+test('POST /growers/:id/products is a 401 for non-admins', function *(t) {
   t.signIn('user@example.com').then(() => {
     t.agent.post('/growers/1/products')
     .send({
@@ -255,7 +255,7 @@ test('POST /growers/:id/products is a 401 for non-admins', (t) => {
   })
 })
 
-test('POST /growers/:id/products is a 200 if allowed', (t) => {
+test('POST /growers/:id/products is a 200 if allowed', function *(t) {
   t.signIn('grower@example.com').then(() => {
     t.agent.post('/growers/1/products')
     .send({
@@ -279,7 +279,7 @@ test('POST /growers/:id/products is a 200 if allowed', (t) => {
   })
 })
 
-test('POST /growers/:id/products is a 200 for admins', (t) => {
+test('POST /growers/:id/products is a 200 for admins', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/growers/1/products')
     .send({
@@ -303,7 +303,7 @@ test('POST /growers/:id/products is a 200 for admins', (t) => {
   })
 })
 
-test('POST /growers/:id/products is a 422 for invalid data', (t) => {
+test('POST /growers/:id/products is a 422 for invalid data', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.post('/growers/1/products')
     .send({
@@ -317,7 +317,7 @@ test('POST /growers/:id/products is a 422 for invalid data', (t) => {
   })
 })
 
-test('GET /growers/:id/products/new is a 200 for admins', (t) => {
+test('GET /growers/:id/products/new is a 200 for admins', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/growers/1/products/new')
     .expect(200)
@@ -325,7 +325,7 @@ test('GET /growers/:id/products/new is a 200 for admins', (t) => {
   })
 })
 
-test('GET /growers/:id/products/new is a 200 for allowed users', (t) => {
+test('GET /growers/:id/products/new is a 200 for allowed users', function *(t) {
   t.signIn('grower@example.com').then(() => {
     t.agent.get('/growers/1/products/new')
     .expect(200)
@@ -333,7 +333,7 @@ test('GET /growers/:id/products/new is a 200 for allowed users', (t) => {
   })
 })
 
-test('GET /growers/:id/products/new is a 401 for non-admins', (t) => {
+test('GET /growers/:id/products/new is a 401 for non-admins', function *(t) {
   t.signIn('user@example.com').then(() => {
     t.agent.get('/growers/1/products/new')
     .expect(401)
@@ -341,7 +341,7 @@ test('GET /growers/:id/products/new is a 401 for non-admins', (t) => {
   })
 })
 
-test('GET /growers/:id authorized users see new product link', (t) => {
+test('GET /growers/:id authorized users see new product link', function *(t) {
   t.signIn('grower@example.com').then(() => {
     t.agent
     .get('/growers/1')
@@ -355,7 +355,7 @@ test('GET /growers/:id authorized users see new product link', (t) => {
   })
 })
 
-test('GET /growers does not return inactive growers', (t) => {
+test('GET /growers does not return inactive growers', function *(t) {
   t.agent
   .get('/growers')
   .set('accept', 'application/json')
@@ -368,7 +368,7 @@ test('GET /growers does not return inactive growers', (t) => {
   .end(t.end)
 })
 
-test('GET /growers/:id as admin includes inactive products', (t) => {
+test('GET /growers/:id as admin includes inactive products', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .get('/growers/2')
@@ -386,7 +386,7 @@ test('GET /growers/:id as admin includes inactive products', (t) => {
   })
 })
 
-test('GET /growers/:id as grower includes inactive products', (t) => {
+test('GET /growers/:id as grower includes inactive products', function *(t) {
   t.signIn('info@planitfoods.com').then(() => {
     t.agent
     .get('/growers/2')
@@ -404,7 +404,7 @@ test('GET /growers/:id as grower includes inactive products', (t) => {
   })
 })
 
-test('GET /growers/:id as non-grower does not include inactive products', (t) => {
+test('GET /growers/:id as non-grower does not include inactive products', function *(t) {
   t.signIn('info@planitfoods.com').then(() => {
     t.agent
     .get('/growers/1')
@@ -422,7 +422,7 @@ test('GET /growers/:id as non-grower does not include inactive products', (t) =>
   })
 })
 
-test('GET /growers/:id/products is a 200 for admins', (t) => {
+test('GET /growers/:id/products is a 200 for admins', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/growers/1/products')
     .expect(200)
@@ -430,7 +430,7 @@ test('GET /growers/:id/products is a 200 for admins', (t) => {
   })
 })
 
-test('GET /growers/:id/products is a 200 for allowed users', (t) => {
+test('GET /growers/:id/products is a 200 for allowed users', function *(t) {
   t.signIn('grower@example.com').then(() => {
     t.agent.get('/growers/1/products')
     .expect(200)
@@ -438,7 +438,7 @@ test('GET /growers/:id/products is a 200 for allowed users', (t) => {
   })
 })
 
-test('GET /growers/:id/products is a 401 for non-growers', (t) => {
+test('GET /growers/:id/products is a 401 for non-growers', function *(t) {
   t.signIn('info@planitfoods.com').then(() => {
     t.agent.get('/growers/1/products')
     .expect(401)

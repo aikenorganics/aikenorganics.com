@@ -3,13 +3,13 @@
 const {Market} = require('../../../db')
 const test = require('../../test')
 
-test('GET /admin/market is a 200', (t) => {
+test('GET /admin/market is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent.get('/admin/market').expect(200).end(t.end)
   })
 })
 
-test('POST /admin/market is a 200', (t) => {
+test('POST /admin/market is a 200', function *(t) {
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/admin/market')
@@ -31,7 +31,7 @@ test('POST /admin/market is a 200', (t) => {
   })
 })
 
-test('POST /admin/market is a 200', (t) => {
+test('POST /admin/market is a 200', function *(t) {
   t.hostname('closed.localhost')
   t.signIn('admin@example.com').then(() => {
     t.agent
