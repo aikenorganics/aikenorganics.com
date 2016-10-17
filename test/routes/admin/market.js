@@ -32,7 +32,6 @@ test('POST /admin/market is a 200', function *(t) {
 })
 
 test('POST /admin/market is a 200', function *(t) {
-  t.hostname('closed.localhost')
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/admin/market')
@@ -43,10 +42,10 @@ test('POST /admin/market is a 200', function *(t) {
     .end((error, response) => {
       if (error) return t.end(error)
       const {id, message, open} = response.body.market
-      t.is(id, 2)
+      t.is(id, 1)
       t.is(open, false)
       t.is(message, 'test')
-      Market.find(2).then((market) => {
+      Market.find(1).then((market) => {
         t.ok(!market.open)
         t.end()
       })

@@ -18,7 +18,7 @@ exports = module.exports = (name, test) => {
     // Get a page.
     t.visit = (path) => {
       visited = true
-      return driver.get(`http://open.localhost:4444${path}`)
+      return driver.get(`http://localhost:4444${path}`)
     }
 
     // Find an element with a CSS selector.
@@ -38,7 +38,7 @@ exports = module.exports = (name, test) => {
     db.query = transaction.query.bind(transaction)
 
     // Set a fake hostname
-    app.hostname = 'open.localhost'
+    app.hostname = 'localhost'
     t.hostname = (hostname) => { app.hostname = hostname }
 
     // Request without the app requirement.

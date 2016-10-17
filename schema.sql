@@ -828,8 +828,7 @@ SELECT pg_catalog.setval('locations_id_seq', 3, true);
 --
 
 COPY markets (id, created_at, updated_at, open, domain, message, news) FROM stdin;
-2	2015-10-13 21:21:45.67863-04	2015-10-13 21:21:45.67863-04	f	closed.localhost		
-1	2015-10-13 21:21:45.67863-04	2016-10-02 07:40:38.128-04	t	open.localhost	**Hi!** Aiken Organics is still under development, so please bear with us while we work out the kinks! If something goes wrong, or you have a question, or you just want to shoot the breeze, send an email to [support@aikenorganics.com](mailto:support@aikenorganics.com).	## Some News\n\nLorem ipsum dolor sit amet!
+1	2015-10-13 21:21:45.67863-04	2016-10-02 07:40:38.128-04	t	localhost	**Hi!** Aiken Organics is still under development, so please bear with us while we work out the kinks! If something goes wrong, or you have a question, or you just want to shoot the breeze, send an email to [support@aikenorganics.com](mailto:support@aikenorganics.com).	## Some News\n\nLorem ipsum dolor sit amet!
 \.
 
 

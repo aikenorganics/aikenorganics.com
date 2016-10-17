@@ -34,13 +34,11 @@ test('DELETE /orders/:id is a 401 logged out', function *(t) {
 })
 
 test('DELETE /orders/:id is a 401 when closed', function *(t) {
-  Market.find(1).then((market) => (
-    market.update({open: false}).then(() => {
-      t.signIn('user@example.com').then(() => {
-        t.agent.delete('/orders/2').expect(401).end(t.end)
-      })
-    })
-  )).catch(t.end)
+  const market = yield Market.find(1)
+  yield market.update({open: false})
+  t.signIn('user@example.com').then(() => {
+    t.agent.delete('/orders/2').expect(401).end(t.end)
+  })
 })
 
 test('DELETE /orders/:id is a 200', function *(t) {
@@ -116,7 +114,8 @@ test('POST /orders/:id is a 200', function *(t) {
 })
 
 test('Cannout update an order when the market is closed', function *(t) {
-  t.hostname('closed.localhost')
+  const market = yield Market.find(1)
+  yield market.update({open: false})
   t.signIn('user@example.com').then(() => {
     t.agent
     .post('/orders/2')
@@ -164,7 +163,8 @@ test('Admins can update someone else\'s order', function *(t) {
 })
 
 test('Admins can update orders when the market is closed', function *(t) {
-  t.hostname('closed.localhost')
+  const market = yield Market.find(1)
+  yield market.update({open: false})
   t.signIn('admin@example.com').then(() => {
     t.agent
     .post('/orders/5')
