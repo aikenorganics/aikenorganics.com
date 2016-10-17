@@ -8,17 +8,16 @@ test('GET /cart is a 401 logged out', function *(t) {
 })
 
 test('GET /cart is a 200 logged in', function *(t) {
-  t.signIn('admin@example.com').then(() => {
-    t.agent
-    .post('/cart')
-    .send({productId: 1, quantity: 2})
+  yield t.signIn('admin@example.com')
+  t.agent
+  .post('/cart')
+  .send({productId: 1, quantity: 2})
+  .expect(200)
+  .end((error) => {
+    if (error) return t.end(error)
+    t.agent.get('/cart')
     .expect(200)
-    .end((error) => {
-      if (error) return t.end(error)
-      t.agent.get('/cart')
-      .expect(200)
-      .end(t.end)
-    })
+    .end(t.end)
   })
 })
 
@@ -27,13 +26,12 @@ test('POST /cart is a 401 logged out', function *(t) {
 })
 
 test('POST /cart is a 200 logged in', function *(t) {
-  t.signIn('admin@example.com').then(() => {
-    t.agent
-    .post('/cart')
-    .send({productId: 1, quantity: 2})
-    .expect(200)
-    .end(t.end)
-  })
+  yield t.signIn('admin@example.com')
+  t.agent
+  .post('/cart')
+  .send({productId: 1, quantity: 2})
+  .expect(200)
+  .end(t.end)
 })
 
 test('POST /cart/checkout', function *(t) {
@@ -95,11 +93,10 @@ test('POST /cart/checkout', function *(t) {
 })
 
 test('POST /cart is a 200 for inactive products/growers', function *(t) {
-  t.signIn('user@example.com').then(() => {
-    t.agent
-    .post('/cart')
-    .send({productId: 6, quantity: 1})
-    .expect(200)
-    .end(t.end)
-  })
+  yield t.signIn('user@example.com')
+  t.agent
+  .post('/cart')
+  .send({productId: 6, quantity: 1})
+  .expect(200)
+  .end(t.end)
 })
