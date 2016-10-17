@@ -6,6 +6,7 @@ const app = require('../app')
 const http = require('http')
 const tape = require('tape')
 const request = require('supertest')
+const Client = require('test-client')
 const {Builder, By} = require('selenium-webdriver')
 const driver = new Builder().forBrowser('chrome').build()
 
@@ -46,15 +47,19 @@ exports = module.exports = (name, test) => {
 
     // Convenient agent reference.
     t.agent = request.agent(http.createServer(app.callback()))
+    t.client = new Client(app)
 
     // Sign in, with error handling.
-    t.signIn = (email) => new Promise((resolve, reject) => {
-      t.agent
-      .post('/session')
-      .send({email, password: 'password'})
-      .expect(200)
-      .end((error) => error ? reject(error) : resolve())
-    }).catch(t.end)
+    t.signIn = (email) => Promise.all([
+      new Promise((resolve, reject) => {
+        t.agent
+        .post('/session')
+        .send({email, password: 'password'})
+        .expect(200)
+        .end((error) => error ? reject(error) : resolve())
+      }),
+      t.client.post('/session').send({email, password: 'password'})
+    ]).catch(t.end)
 
     // Rollback the transaction before ending the test.
     const end = t.end.bind(t)

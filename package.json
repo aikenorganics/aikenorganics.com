@@ -47,6 +47,7 @@
     "selenium-webdriver": "2.53.1",
     "standard": "8.3.0",
     "supertest": "github:braddunbar/supertest#ipv6",
-    "tape": "4.6.2"
+    "tape": "4.6.2",
+    "test-client": "0.3.1"
   }
 }
