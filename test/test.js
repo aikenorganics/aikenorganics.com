@@ -5,7 +5,6 @@ const app = require('../app')
 const http = require('http')
 const tape = require('tape')
 const request = require('supertest')
-const query = db.query
 const {Builder, By} = require('selenium-webdriver')
 const driver = new Builder().forBrowser('chrome').build()
 
@@ -65,7 +64,6 @@ exports = module.exports = (name, callback) => {
       ])
       .then(() => end(...args))
       .catch(() => end(...args))
-      db.query = query
     }
 
     callback(t)
