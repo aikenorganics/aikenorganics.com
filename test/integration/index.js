@@ -9,7 +9,7 @@ test('sign in', function *(t) {
   yield t.$('#email').sendKeys('admin@example.com')
   yield t.$('#password').sendKeys('password')
   yield t.$('#password').submit()
-  yield t.wait(() => t.present('#signout'))
+  yield t.wait(t.present('#signout'))
 })
 
 test('incorrect password', function *(t) {
@@ -17,7 +17,7 @@ test('incorrect password', function *(t) {
   yield t.$('#email').sendKeys('admin@example.com')
   yield t.$('#password').sendKeys('wrong')
   yield t.$('#password').submit()
-  yield t.wait(() => t.present('#errors'))
+  yield t.wait(t.present('#errors'))
   yield t.wait(() => (
     t.$('#errors').getText().then((text) => (
       /Sorry! That password is incorrect\./.test(text)
@@ -30,7 +30,7 @@ test('email not found', function *(t) {
   yield t.$('#email').sendKeys('wrong@example.com')
   yield t.$('#password').sendKeys('password')
   yield t.$('#password').submit()
-  yield t.wait(() => t.present('#errors'))
+  yield t.wait(t.present('#errors'))
   yield t.wait(() => (
     t.$('#errors').getText().then((text) => (
       /Sorry! We don’t recognize that email\./.test(text)

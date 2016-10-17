@@ -5,7 +5,7 @@ const db = require('../db')
 const app = require('../app')
 const tape = require('tape')
 const Client = require('test-client')
-const {Builder, By} = require('selenium-webdriver')
+const {Builder, By, until} = require('selenium-webdriver')
 const driver = new Builder().forBrowser('chrome').build()
 
 // Export a function with the tape API.
@@ -24,7 +24,7 @@ exports = module.exports = (name, test) => {
     t.$ = (selector) => driver.findElement(By.css(selector))
 
     // Does the element exist?
-    t.present = (selector) => driver.isElementPresent(By.css(selector))
+    t.present = (selector) => until.elementLocated(By.css(selector))
 
     // Wait for something to happen.
     t.wait = (predicate) => driver.wait(predicate)
