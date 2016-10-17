@@ -5,8 +5,6 @@ const test = require('../test')
 // Index
 
 test('GET /market is a 200', function *(t) {
-  t.agent
-  .get('/market')
-  .expect(200)
-  .end(t.end)
+  const response = yield t.client.get('/market').send()
+  response.expect(200)
 })

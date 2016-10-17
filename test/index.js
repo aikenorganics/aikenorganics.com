@@ -14,5 +14,4 @@ test('teardown', function *(t) {
   server.close()
   db.close()
   test.driver.quit()
-  t.end()
 })

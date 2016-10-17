@@ -9,13 +9,11 @@ test('User#name combines first and last', function *(t) {
     last: 'Tyler'
   })
   t.is(user.name, 'Steven Tyler')
-  t.end()
 })
 
 test('User#name is trimmed', function *(t) {
   const user = new db.User({})
   t.is(user.name, '')
-  t.end()
 })
 
 test('User#memberUntil is null for empty values', function *(t) {
@@ -25,14 +23,12 @@ test('User#memberUntil is null for empty values', function *(t) {
   t.is(user.memberUntil, null)
   user.memberUntil = undefined
   t.is(user.memberUntil, null)
-  t.end()
 })
 
 test('trim street', function *(t) {
   const user = new db.User()
   user.street = '  test  '
   t.is(user.street, 'test')
-  t.end()
 })
 
 test('validate street', function *(t) {
@@ -51,15 +47,12 @@ test('validate street', function *(t) {
   user.street = '123 street drive'
   user.validate()
   t.is(user.errors.street, undefined)
-
-  t.end()
 })
 
 test('trim city', function *(t) {
   const user = new db.User()
   user.city = '  test  '
   t.is(user.city, 'test')
-  t.end()
 })
 
 test('validate city', function *(t) {
@@ -78,14 +71,11 @@ test('validate city', function *(t) {
   user.city = 'Lexington'
   user.validate()
   t.is(user.errors.city, undefined)
-
-  t.end()
 })
 
 test('trim and capitalize state', function *(t) {
   const user = new db.User({state: '  sc '})
   t.is(user.state, 'SC')
-  t.end()
 })
 
 test('validate state', function *(t) {
@@ -104,14 +94,11 @@ test('validate state', function *(t) {
   user.state = 'sc'
   user.validate()
   t.is(user.errors.state, undefined)
-
-  t.end()
 })
 
 test('trim zip', function *(t) {
   const user = new db.User({zip: ' 12345 '})
   t.is(user.zip, '12345')
-  t.end()
 })
 
 test('validate zip', function *(t) {
@@ -142,8 +129,6 @@ test('validate zip', function *(t) {
   user.zip = '12345-1234'
   user.validate()
   t.is(user.errors.zip, undefined)
-
-  t.end()
 })
 
 test('canDeliver', function *(t) {
@@ -159,8 +144,6 @@ test('canDeliver', function *(t) {
 
   user.zip = null
   t.is(user.canDeliver, false)
-
-  t.end()
 })
 
 test('address', function *(t) {
@@ -175,8 +158,6 @@ test('address', function *(t) {
 
   user.zip = null
   t.is(user.address, null)
-
-  t.end()
 })
 
 test('validate email', function *(t) {
@@ -205,6 +186,4 @@ test('validate email', function *(t) {
   user.email = 'foo@bar.com'
   user.validate()
   t.is(user.errors.email, undefined)
-
-  t.end()
 })

@@ -1,84 +1,72 @@
 'use strict'
 
-const db = require('../../../db')
+const {ProductOrder} = require('../../../db')
 const test = require('../../test')
 
 test('DELETE /product-orders/missing is a 404', function *(t) {
   yield t.signIn('admin@example.com')
-  t.agent.delete('/admin/product-orders/12345').expect(404).end(t.end)
+  const response = yield t.client.delete('/admin/product-orders/12345').send()
+  response.expect(404)
 })
 
 test('DELETE /product-orders/:id is a 200', function *(t) {
   yield t.signIn('admin@example.com')
-  t.agent
-  .delete('/admin/product-orders/1')
-  .expect(200)
-  .end((error) => {
-    if (error) return t.end(error)
-    db.ProductOrder.find(1).then((productOrder) => {
-      t.ok(productOrder == null)
-      t.end()
-    })
-  })
+  const response = yield t.client.delete('/admin/product-orders/1').send()
+  response.expect(200)
+  const productOrder = yield ProductOrder.find(1)
+  t.ok(productOrder == null)
 })
 
 test('POST /product-orders/missing is a 404', function *(t) {
   yield t.signIn('admin@example.com')
-  t.agent.post('/admin/product-orders/12345').expect(404).end(t.end)
+  const response = yield t.client.post('/admin/product-orders/12345').send()
+  response.expect(404)
 })
 
 test('POST /product-orders/:id is a 200', function *(t) {
   yield t.signIn('admin@example.com')
-  t.agent
-  .post('/admin/product-orders/1')
-  .send({quantity: 1, cost: '1.23'})
-  .expect(200)
-  .end((error, response) => {
-    if (error) return t.end(error)
-    const {cost, quantity} = response.body.productOrder
-    t.is(cost, '1.23')
-    t.is(quantity, 1)
-    db.ProductOrder.find(1).then((productOrder) => {
-      t.equal(productOrder.cost, '1.23')
-      t.equal(productOrder.quantity, 1)
-      t.end()
-    })
-  })
+  const response = yield t.client
+    .post('/admin/product-orders/1')
+    .send({quantity: 1, cost: '1.23'})
+  response.expect(200)
+
+  const {cost, quantity} = response.body.productOrder
+  t.is(cost, '1.23')
+  t.is(quantity, 1)
+
+  const productOrder = yield ProductOrder.find(1)
+  t.equal(productOrder.cost, '1.23')
+  t.equal(productOrder.quantity, 1)
 })
 
 test('POST /product-orders is a 200', function *(t) {
   yield t.signIn('admin@example.com')
-  t.agent
-  .post('/admin/product-orders')
-  .send({quantity: 1, orderId: 1, productId: 3})
-  .expect(200)
-  .end((error, response) => {
-    if (error) return t.end(error)
-    const {id, orderId, productId, quantity} = response.body.productOrder
-    t.is(quantity, 1)
-    t.is(orderId, 1)
-    t.is(productId, 3)
-    db.ProductOrder.find(id).then((productOrder) => {
-      t.is(productOrder.quantity, 1)
-      t.end()
-    })
-  })
+  const response = yield t.client
+    .post('/admin/product-orders')
+    .send({quantity: 1, orderId: 1, productId: 3})
+  response.expect(200)
+
+  const {id, orderId, productId, quantity} = response.body.productOrder
+  t.is(quantity, 1)
+  t.is(orderId, 1)
+  t.is(productId, 3)
+
+  const productOrder = yield ProductOrder.find(id)
+  t.is(productOrder.quantity, 1)
 })
 
 test('editing an inactive product order', function *(t) {
   yield t.signIn('admin@example.com')
-  t.agent.post('/admin/product-orders/9')
-  .send({quantity: 2, cost: '6'})
-  .expect(200)
-  .end((error, response) => {
-    if (error) return t.end(error)
-    const {cost, quantity} = response.body.productOrder
-    t.is(cost, '6.00')
-    t.is(quantity, 2)
-    db.ProductOrder.find(9).then((productOrder) => {
-      t.is(productOrder.quantity, 2)
-      t.is(productOrder.cost, '6.00')
-      t.end()
-    })
-  })
+  const response = yield t.client
+    .post('/admin/product-orders/9')
+    .send({quantity: 2, cost: '6'})
+  response.expect(200)
+
+  const {cost, quantity} = response.body.productOrder
+  t.is(cost, '6.00')
+  t.is(quantity, 2)
+
+  const productOrder = yield ProductOrder.find(9)
+  t.is(productOrder.quantity, 2)
+  t.is(productOrder.cost, '6.00')
 })

@@ -5,74 +5,60 @@ const Token = require('ozymandias/token')
 const test = require('../test')
 
 test('sign in', function *(t) {
-  t.visit('/signin')
-  t.$('#email').sendKeys('admin@example.com')
-  t.$('#password').sendKeys('password')
-  t.$('#password').submit()
-  t.wait(() => t.present('#signout'))
-  .then(() => t.end())
-  .catch(t.end)
+  yield t.visit('/signin')
+  yield t.$('#email').sendKeys('admin@example.com')
+  yield t.$('#password').sendKeys('password')
+  yield t.$('#password').submit()
+  yield t.wait(() => t.present('#signout'))
 })
 
 test('incorrect password', function *(t) {
-  t.visit('/signin')
-  t.$('#email').sendKeys('admin@example.com')
-  t.$('#password').sendKeys('wrong')
-  t.$('#password').submit()
-  t.wait(() => t.present('#errors'))
-  t.wait(() => (
+  yield t.visit('/signin')
+  yield t.$('#email').sendKeys('admin@example.com')
+  yield t.$('#password').sendKeys('wrong')
+  yield t.$('#password').submit()
+  yield t.wait(() => t.present('#errors'))
+  yield t.wait(() => (
     t.$('#errors').getText().then((text) => (
       /Sorry! That password is incorrect\./.test(text)
     ))
   ))
-  .then(() => t.end())
-  .catch(t.end)
 })
 
 test('email not found', function *(t) {
-  t.visit('/signin')
-  t.$('#email').sendKeys('wrong@example.com')
-  t.$('#password').sendKeys('password')
-  t.$('#password').submit()
-  t.wait(() => t.present('#errors'))
-  t.wait(() => (
+  yield t.visit('/signin')
+  yield t.$('#email').sendKeys('wrong@example.com')
+  yield t.$('#password').sendKeys('password')
+  yield t.$('#password').submit()
+  yield t.wait(() => t.present('#errors'))
+  yield t.wait(() => (
     t.$('#errors').getText().then((text) => (
       /Sorry! We don’t recognize that email\./.test(text)
     ))
   ))
-  .then(() => t.end())
-  .catch(t.end)
 })
 
 test('forgot password', function *(t) {
   // Send Token
-  t.visit('/signin/forgot')
-  t.$('#email').sendKeys('admin@example.com')
-  t.$('#email').submit()
+  yield t.visit('/signin/forgot')
+  yield t.$('#email').sendKeys('admin@example.com')
+  yield t.$('#email').submit()
 
   // Wait for message
-  t.wait(() => (
+  yield t.wait(() => (
     t.$('#message').getText().then((text) => (
       /Thanks! We sent you an email to reset your password\./.test(text)
     ))
   ))
 
   // Reset password
-  .then(() => (
-    Token.find().then((token) => {
-      t.visit(`/session/reset/${token.id}`)
-      t.$('#password').sendKeys('newpassword')
-      t.$('#password').submit()
-      return t.wait(() => t.getPath().then((path) => path === '/products'))
-    })
-  ))
+  const token = yield Token.find()
+  yield t.visit(`/session/reset/${token.id}`)
+  yield t.$('#password').sendKeys('newpassword')
+  yield t.$('#password').submit()
+  yield t.wait(() => t.getPath().then((path) => path === '/products'))
 
   // Verify new password
-  .then(() => User.find(1)).then((user) => (
-    user.authenticate('newpassword').then((match) => {
-      t.ok(match)
-      t.end()
-    })
-  ))
-  .catch(t.end)
+  const user = yield User.find(1)
+  t.ok(yield user.authenticate('newpassword'))
 })

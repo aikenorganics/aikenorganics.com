@@ -6,7 +6,6 @@ const test = require('../test')
 test('orders without productOrders have undefined total', function *(t) {
   const order = new db.Order()
   t.is(order.total, undefined)
-  t.end()
 })
 
 test('Order reports the correct cost', function *(t) {
@@ -35,5 +34,4 @@ test('Order reports the correct cost', function *(t) {
   })
 
   t.equal(order.total, 19)
-  t.end()
 })

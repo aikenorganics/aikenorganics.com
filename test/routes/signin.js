@@ -3,9 +3,11 @@
 const test = require('../test')
 
 test('GET /signin is a 200', function *(t) {
-  t.agent.get('/signin').expect(200).end(t.end)
+  const response = yield t.client.get('/signin').send()
+  response.expect(200)
 })
 
 test('GET /signin/forgot is a 200', function *(t) {
-  t.agent.get('/signin/forgot').expect(200).end(t.end)
+  const response = yield t.client.get('/signin/forgot').send()
+  response.expect(200)
 })

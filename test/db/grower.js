@@ -7,14 +7,12 @@ test('Grower#url prepends http://', function *(t) {
   const grower = new db.Grower({
     url: 'example.com'
   })
-  t.equal(grower.url, 'http://example.com')
-  t.end()
+  t.is(grower.url, 'http://example.com')
 })
 
 test('Grower#url handles https://', function *(t) {
   const grower = new db.Grower({
     url: 'https://example.com'
   })
-  t.equal(grower.url, 'https://example.com')
-  t.end()
+  t.is(grower.url, 'https://example.com')
 })

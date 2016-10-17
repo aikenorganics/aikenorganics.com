@@ -11,15 +11,18 @@ require('./product-orders')
 const test = require('../../test')
 
 test('/admin is a 401 signed out', function *(t) {
-  t.agent.get('/admin').expect(401).end(t.end)
+  const response = yield t.client.get('/admin').send()
+  response.expect(401)
 })
 
 test('/admin is a 401 as a regular user', function *(t) {
   yield t.signIn('user@example.com')
-  t.agent.get('/admin').expect(401).end(t.end)
+  const response = yield t.client.get('/admin').send()
+  response.expect(401)
 })
 
 test('/admin is a 404 as an admin', function *(t) {
   yield t.signIn('admin@example.com')
-  t.agent.get('/admin').expect(404).end(t.end)
+  const response = yield t.client.get('/admin').send()
+  response.expect(404)
 })
