@@ -14,10 +14,6 @@ exports = module.exports = (name, test) => {
     const transaction = db.transaction()
     db.query = transaction.query.bind(transaction)
 
-    // Set a fake hostname
-    app.hostname = 'localhost'
-    t.hostname = (hostname) => { app.hostname = hostname }
-
     t.client = new Client(app)
 
     // Sign in, with error handling.
