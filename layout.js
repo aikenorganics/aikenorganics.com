@@ -20,17 +20,9 @@ module.exports = function *(next) {
   <link rel='stylesheet' href='${assets.path('css/app.css')}'>
   <link rel='shortcut icon' href='${assets.path('favicon.ico')}'>
   <link rel='apple-touch-icon' href='${assets.path('apple-touch-icon.png')}'>
-  ${raw(this.app.env === 'production' ? `
-  <script>
-    window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }
-    ga.l = +new Date
-    ga('create', 'UA-60091047-1', 'auto')
-    ga('send', 'pageview')
-  </script>
-  <script async src='https://www.google-analytics.com/analytics.js'></script>`
-  : '')}
   ${raw(this.json('state', this.state.client || {}))}
   <script defer src='${assets.path('js/app.js')}'></script>
+  <script defer src='https://www.google-analytics.com/analytics.js'></script>
 </head>
 <body>
   ${raw(this.body)}
