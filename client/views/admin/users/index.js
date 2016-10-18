@@ -8,7 +8,7 @@ export default ({more, page, search, url, users}) => {
   return <div>
     <Link href='/admin/users/new' className='btn btn-secondary'>
       New User
-    </Link> <div style={{display: 'inline-block'}}>
+    </Link> <div className='d-inline-block'>
       <Search url='/admin/users' value={search} inline />
     </div> <Link href='/admin/users/emails'>Email List</Link>
     <hr />

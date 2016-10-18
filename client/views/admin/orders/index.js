@@ -28,32 +28,39 @@ export default ({full, locationId, locations, more, orders, page, productId, pro
 
   return <div>
     <h1>Orders</h1>
-    <form className='form-inline hidden-print' method='get' action='/admin/orders'>
-      <label className='form-check-inline'>
-        <input className='form-check-input' type='checkbox' checked={full} onChange={toggleFull} />
-        <span> Full</span>
-      </label>
-      {['open', 'complete', 'canceled'].map((name) => {
-        return <label key={name} className='form-check-inline'>
-          <input className='form-check-input' type='checkbox' checked={~status.indexOf(name)} onChange={() => toggleStatus(name)} />
-          <span> {name.slice(0, 1).toUpperCase() + name.slice(1)}</span>
+    <form className='hidden-print' method='get' action='/admin/orders'>
+      <div className='form-group'>
+        <label className='form-check-inline'>
+          <input className='form-check-input' type='checkbox' checked={full} onChange={toggleFull} />
+          <span> Full</span>
         </label>
-      })} <div className='form-group'>
-        <select className='form-control' style={{maxWidth: 300}} value={locationId} onChange={changeLocation}>
+        {['open', 'complete', 'canceled'].map((name) => {
+          return <label key={name} className='form-check-inline'>
+            <input className='form-check-input' type='checkbox' checked={~status.indexOf(name)} onChange={() => toggleStatus(name)} />
+            <span> {name.slice(0, 1).toUpperCase() + name.slice(1)}</span>
+          </label>
+        })}
+      </div>
+      <div className='form-group'>
+        <label for='locationId'>Location</label>
+        <select id='locationId' className='form-control' value={locationId} onChange={changeLocation}>
           <option value=''>All Locations</option>
           <option value='delivery'>Delivery</option>
           {locations.map(({id, name}) => {
             return <option key={id} value={id}>{name}</option>
           })}
         </select>
-      </div> <div className='form-group'>
-        <select className='form-control' style={{maxWidth: 300}} onChange={changeProduct} value={productId}>
+      </div>
+      <div className='form-group'>
+        <label for='productId'>Product</label>
+        <select id='productId' className='form-control' onChange={changeProduct} value={productId}>
           <option value=''>All Products</option>
           {products.map(({id, name}) => {
             return <option key={id} value={id}>{name}</option>
           })}
         </select>
-      </div> <a className='btn btn-secondary' href={params(url, {csv: '1'})}>
+      </div>
+      <a className='btn btn-secondary' href={params(url, {csv: '1'})}>
         Export CSV
       </a>
     </form>

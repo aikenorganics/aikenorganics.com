@@ -24,7 +24,7 @@ export default ({more, oversold, page, products, search, url}) => {
             Oversold
           </Link>
         </div>
-      } <div style={{display: 'inline-block'}}>
+      } <div className='d-inline-block'>
         <Search url='/admin/products' value={search} inline />
       </div>
     </div>

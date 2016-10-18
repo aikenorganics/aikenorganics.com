@@ -27,13 +27,13 @@ export default class Form extends PureComponent {
   }
 
   render () {
-    return <form style={{display: 'inline'}}
+    return <form className='form-inline'
       onSubmit={(event) => this.submit(event)}
       onChange={(event) => this.change(event)}
       onBlur={(event) => this.blur(event)}
       onFocus={(event) => this.focus(event)}>
       {this.props.children}
-      <button style={{display: 'none'}} ref={(button) => { this.button = button }} />
+      <button hidden ref={(button) => { this.button = button }} />
     </form>
   }
 

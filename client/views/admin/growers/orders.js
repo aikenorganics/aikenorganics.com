@@ -12,8 +12,7 @@ export default ({growers, path}) => {
         return <div key={id}>
           <div className='media'>
             <div className='media-left'>
-              <img src={smallImage} className='img-rounded'
-                style={{maxWidth: '100px', maxHeight: '100px'}} />
+              <img src={smallImage} className='img-rounded' />
             </div>
             <div className='media-body'>
               <h1>{name}</h1>

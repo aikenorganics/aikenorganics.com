@@ -76,7 +76,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
             }
 
             return <tr key={id}>
-              <td style={{whiteSpace: 'nowrap'}}>
+              <td className='text-nowrap'>
                 <Link href={`/products/${product.id}`}>{product.name}</Link> {product.oversold
                   ? <span className='tag tag-danger'>Oversold</span>
                   : ''

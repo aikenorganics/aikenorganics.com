@@ -18,10 +18,10 @@ export default ({busy, canEdit, cart, grower, market: {open}, path, products, cu
         : ''
       }
       {location ? ` • ${location}` : ''}
-      <hr style={{clear: 'both'}} />
+      <hr className='clearfix' />
       <img className='img-rounded img-fluid pull-xs-right' src={mediumImage} />
       <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
-      <h2 style={{clear: 'both'}}>
+      <h2 className='clearfix'>
         <span>Products </span>
         {canEdit
           ? <Link href={`/growers/${id}/products/new`} className='btn btn-secondary btn-sm'>
