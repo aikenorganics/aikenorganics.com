@@ -16,3 +16,10 @@ test('done', (t) => {
   t.is(next.busy, false)
   t.end()
 })
+
+test('empty', (t) => {
+  const state = freeze({})
+  const next = reducer(state, {})
+  t.is(next.busy, false)
+  t.end()
+})

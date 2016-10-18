@@ -4,7 +4,7 @@ import Link from './link'
 import Footer from './footer'
 import Signin from './signin/index'
 import Message from './message'
-import logoPath from '../../public/img/logo-small.png'
+import logoPath from 'public/img/logo-small.png'
 
 const main = (props) => {
   const {children, currentUser, statusCode} = props

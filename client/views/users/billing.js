@@ -1,5 +1,6 @@
 import React, {PureComponent, PropTypes} from 'react'
 import {updateCard} from '../../actions'
+import key from 'env/STRIPE_PK'
 
 let stripe = null
 const getStripe = () => stripe || (stripe = new Promise((resolve, reject) => {
@@ -21,12 +22,12 @@ export default class Billing extends PureComponent {
   }
 
   open () {
-    const {user, stripeKey} = this.props
+    const {user} = this.props
     getStripe().then(() => {
       window.StripeCheckout.configure({
         allowRememberMe: false,
         email: user.email,
-        key: stripeKey,
+        key,
         panelLabel: 'Save',
         token: (token) => updateCard(user.id, token.id)
       }).open({

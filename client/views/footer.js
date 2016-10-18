@@ -1,8 +1,8 @@
 import React from 'react'
-import logoPath from '../../public/img/logo-small.png'
-import twitterPath from '../../public/img/twitter-32.png'
-import facebookPath from '../../public/img/facebook-3-32.png'
-import instagramPath from '../../public/img/instagram-32.png'
+import logoPath from 'public/img/logo-small.png'
+import twitterPath from 'public/img/twitter-32.png'
+import facebookPath from 'public/img/facebook-3-32.png'
+import instagramPath from 'public/img/instagram-32.png'
 
 export default () => {
   return <footer className='hidden-print'>

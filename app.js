@@ -11,7 +11,6 @@ Object.assign(app.context, {
 })
 
 app.use(require('./cart'))
-app.use(require('./client-state'))
 app.use(require('./layout'))
 app.use(require('./market'))
 

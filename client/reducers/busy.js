@@ -9,7 +9,6 @@ export default (state = null, action) => {
       return false
 
     default:
-      return state
+      return state || false
   }
 }
-

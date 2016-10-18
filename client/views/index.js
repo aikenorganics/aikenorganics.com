@@ -1,11 +1,11 @@
 import React from 'react'
 import Link from './link'
-import alexPath from '../../public/img/alex-small.jpg'
-import logoPath from '../../public/img/logo-small.png'
-import vegetablesPath from '../../public/img/vegetables-square.jpg'
-import penAndPadPath from '../../public/img/pen-and-pad-square.jpg'
-import veggiesPath from '../../public/img/veggies-in-boxes-square.jpg'
-import foodBasketPath from '../../public/img/food-basket-square.jpg'
+import alexPath from 'public/img/alex-small.jpg'
+import logoPath from 'public/img/logo-small.png'
+import vegetablesPath from 'public/img/vegetables-square.jpg'
+import penAndPadPath from 'public/img/pen-and-pad-square.jpg'
+import veggiesPath from 'public/img/veggies-in-boxes-square.jpg'
+import foodBasketPath from 'public/img/food-basket-square.jpg'
 
 export default () => {
   return <div>

@@ -42,8 +42,8 @@ export default ({full, locationId, locations, more, orders, page, productId, pro
         })}
       </div>
       <div className='form-group'>
-        <label for='locationId'>Location</label>
-        <select id='locationId' className='form-control' value={locationId} onChange={changeLocation}>
+        <label htmlFor='locationId'>Location</label>
+        <select id='locationId' className='form-control' value={locationId || ''} onChange={changeLocation}>
           <option value=''>All Locations</option>
           <option value='delivery'>Delivery</option>
           {locations.map(({id, name}) => {
@@ -52,8 +52,8 @@ export default ({full, locationId, locations, more, orders, page, productId, pro
         </select>
       </div>
       <div className='form-group'>
-        <label for='productId'>Product</label>
-        <select id='productId' className='form-control' onChange={changeProduct} value={productId}>
+        <label htmlFor='productId'>Product</label>
+        <select id='productId' className='form-control' onChange={changeProduct} value={productId || ''}>
           <option value=''>All Products</option>
           {products.map(({id, name}) => {
             return <option key={id} value={id}>{name}</option>

@@ -24,6 +24,7 @@ import {REPLACE} from './actions'
 const pass = (state = null) => state
 
 const reducer = combineReducers({
+  admin: pass,
   bugsnag: pass,
   busy,
   canEdit: pass,

@@ -1,15 +1,11 @@
-import './analytics'
+import './errors'
+import 'ozymandias/client/analytics'
 import 'es6-promise/auto'
 import React from 'react'
 import store from './store'
 import Routes from './routes'
 import {render} from 'react-dom'
-import Bugsnag from 'bugsnag-js'
-import assign from 'object-assign'
 import {navigate} from './actions'
-
-// Bugs!
-assign(Bugsnag, store.getState().bugsnag)
 
 // The element to render components into.
 const root = document.getElementById('root')
