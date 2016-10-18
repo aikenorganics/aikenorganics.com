@@ -1,64 +1,65 @@
 'use strict'
 
+const test = require('../test')
+const driver = require('../driver')
 const User = require('ozymandias/user')
 const Token = require('ozymandias/token')
-const test = require('../test')
 
-test('sign in', function *(t) {
-  yield t.visit('/signin')
-  yield t.$('#email').sendKeys('admin@example.com')
-  yield t.$('#password').sendKeys('password')
-  yield t.$('#password').submit()
-  yield t.wait(t.present('#signout'))
+test('sign in', function *(assert) {
+  yield driver.visit('/signin')
+  yield driver.$('#email').sendKeys('admin@example.com')
+  yield driver.$('#password').sendKeys('password')
+  yield driver.$('#password').submit()
+  yield driver.wait(driver.present('#signout'))
 })
 
-test('incorrect password', function *(t) {
-  yield t.visit('/signin')
-  yield t.$('#email').sendKeys('admin@example.com')
-  yield t.$('#password').sendKeys('wrong')
-  yield t.$('#password').submit()
-  yield t.wait(t.present('#errors'))
-  yield t.wait(() => (
-    t.$('#errors').getText().then((text) => (
+test('incorrect password', function *(assert) {
+  yield driver.visit('/signin')
+  yield driver.$('#email').sendKeys('admin@example.com')
+  yield driver.$('#password').sendKeys('wrong')
+  yield driver.$('#password').submit()
+  yield driver.wait(driver.present('#errors'))
+  yield driver.wait(() => (
+    driver.$('#errors').getText().then((text) => (
       /Sorry! That password is incorrect\./.test(text)
     ))
   ))
 })
 
-test('email not found', function *(t) {
-  yield t.visit('/signin')
-  yield t.$('#email').sendKeys('wrong@example.com')
-  yield t.$('#password').sendKeys('password')
-  yield t.$('#password').submit()
-  yield t.wait(t.present('#errors'))
-  yield t.wait(() => (
-    t.$('#errors').getText().then((text) => (
+test('email not found', function *(assert) {
+  yield driver.visit('/signin')
+  yield driver.$('#email').sendKeys('wrong@example.com')
+  yield driver.$('#password').sendKeys('password')
+  yield driver.$('#password').submit()
+  yield driver.wait(driver.present('#errors'))
+  yield driver.wait(() => (
+    driver.$('#errors').getText().then((text) => (
       /Sorry! We don’t recognize that email\./.test(text)
     ))
   ))
 })
 
-test('forgot password', function *(t) {
+test('forgot password', function *(assert) {
   // Send Token
-  yield t.visit('/signin/forgot')
-  yield t.$('#email').sendKeys('admin@example.com')
-  yield t.$('#email').submit()
+  yield driver.visit('/signin/forgot')
+  yield driver.$('#email').sendKeys('admin@example.com')
+  yield driver.$('#email').submit()
 
   // Wait for message
-  yield t.wait(() => (
-    t.$('#message').getText().then((text) => (
+  yield driver.wait(() => (
+    driver.$('#message').getText().then((text) => (
       /Thanks! We sent you an email to reset your password\./.test(text)
     ))
   ))
 
   // Reset password
   const token = yield Token.find()
-  yield t.visit(`/session/reset/${token.id}`)
-  yield t.$('#password').sendKeys('newpassword')
-  yield t.$('#password').submit()
-  yield t.wait(() => t.getPath().then((path) => path === '/products'))
+  yield driver.visit(`/session/reset/${token.id}`)
+  yield driver.$('#password').sendKeys('newpassword')
+  yield driver.$('#password').submit()
+  yield driver.wait(() => driver.getPath().then((path) => path === '/products'))
 
   // Verify new password
   const user = yield User.find(1)
-  t.ok(yield user.authenticate('newpassword'))
+  assert.ok(yield user.authenticate('newpassword'))
 })

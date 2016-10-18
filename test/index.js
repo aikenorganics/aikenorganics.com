@@ -1,9 +1,8 @@
 'use strict'
 
 const db = require('../db')
-const app = require('../app')
 const test = require('./test')
-const server = app.listen(4444)
+const driver = require('./driver')
 
 require('./db')
 require('./lib')
@@ -11,7 +10,6 @@ require('./routes')
 require('./integration')
 
 test('teardown', function *(t) {
-  server.close()
+  driver.close()
   db.close()
-  test.driver.quit()
 })
