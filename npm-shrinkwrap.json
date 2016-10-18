@@ -157,9 +157,9 @@
       "resolved": "https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz"
     },
     "aws-sdk": {
-      "version": "2.6.7",
-      "from": "aws-sdk@2.6.7",
-      "resolved": "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.6.7.tgz"
+      "version": "2.6.9",
+      "from": "aws-sdk@2.6.9",
+      "resolved": "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.6.9.tgz"
     },
     "aws-sign2": {
       "version": "0.6.0",
@@ -1191,9 +1191,9 @@
       "resolved": "https://registry.npmjs.org/koa-send/-/koa-send-3.1.1.tgz"
     },
     "koa-session": {
-      "version": "3.3.1",
-      "from": "koa-session@3.3.1",
-      "resolved": "https://registry.npmjs.org/koa-session/-/koa-session-3.3.1.tgz"
+      "version": "3.4.0",
+      "from": "koa-session@3.4.0",
+      "resolved": "https://registry.npmjs.org/koa-session/-/koa-session-3.4.0.tgz"
     },
     "koa-static": {
       "version": "2.0.0",
@@ -1489,9 +1489,9 @@
       "resolved": "https://registry.npmjs.org/osenv/-/osenv-0.1.3.tgz"
     },
     "ozymandias": {
-      "version": "1.2.2",
-      "from": "git://github.com/braddunbar/ozymandias.git#00a80cbcd4273ead27f3aeb1dcb9ec6ceac4dcf4",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#00a80cbcd4273ead27f3aeb1dcb9ec6ceac4dcf4"
+      "version": "1.2.3",
+      "from": "git://github.com/braddunbar/ozymandias.git#fae7efed344e94fb86cbf58f6ed790cbebb43512",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#fae7efed344e94fb86cbf58f6ed790cbebb43512"
     },
     "packet-reader": {
       "version": "0.2.0",
@@ -1797,9 +1797,9 @@
       "resolved": "https://registry.npmjs.org/ripemd160/-/ripemd160-1.0.1.tgz"
     },
     "rollup": {
-      "version": "0.36.1",
-      "from": "rollup@0.36.1",
-      "resolved": "https://registry.npmjs.org/rollup/-/rollup-0.36.1.tgz"
+      "version": "0.36.3",
+      "from": "rollup@0.36.3",
+      "resolved": "https://registry.npmjs.org/rollup/-/rollup-0.36.3.tgz"
     },
     "rollup-plugin-buble": {
       "version": "0.14.0",
@@ -1879,9 +1879,9 @@
       "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.5.6.tgz"
     },
     "source-map-support": {
-      "version": "0.4.4",
+      "version": "0.4.5",
       "from": "source-map-support@>=0.4.0 <0.5.0",
-      "resolved": "https://registry.npmjs.org/source-map-support/-/source-map-support-0.4.4.tgz"
+      "resolved": "https://registry.npmjs.org/source-map-support/-/source-map-support-0.4.5.tgz"
     },
     "spdx-correct": {
       "version": "1.0.2",
