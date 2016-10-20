@@ -24,7 +24,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
   }
 
   return <div>
-    <div className='pull-xs-right hidden-print'>
+    <div className='float-xs-right hidden-print'>
       {status !== 'complete'
         ? <button className='btn btn-success'
           onClick={() => updateOrder(id, {status: 'complete'})}>

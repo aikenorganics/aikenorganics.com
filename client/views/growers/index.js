@@ -7,7 +7,7 @@ export default ({currentUser, growers}) => {
 
   return <div>
     {isAdmin
-      ? <Link href='/growers/new' className='btn btn-secondary btn-sm pull-xs-right'>
+      ? <Link href='/growers/new' className='btn btn-secondary btn-sm float-xs-right'>
         + New Grower
       </Link>
       : ''

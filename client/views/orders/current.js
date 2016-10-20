@@ -64,7 +64,7 @@ export default ({busy, market: {open}, locations, order, productOrders, currentU
       : ''
     }
     {open
-      ? <button className='btn btn-danger pull-xs-right' onClick={cancel} disabled={busy}>
+      ? <button className='btn btn-danger float-xs-right' onClick={cancel} disabled={busy}>
         Cancel Order
       </button>
       : ''

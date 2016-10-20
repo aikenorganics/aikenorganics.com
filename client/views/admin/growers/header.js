@@ -8,10 +8,10 @@ export default ({busy, grower}) => {
 
   return <div>
     {grower.active
-      ? <button disabled={busy} className='btn btn-secondary btn-sm pull-xs-right' onClick={() => update({active: false})}>
+      ? <button disabled={busy} className='btn btn-secondary btn-sm float-xs-right' onClick={() => update({active: false})}>
         Deactivate
       </button>
-      : <button disabled={busy} className='btn btn-success btn-sm pull-xs-right' onClick={() => update({active: true})}>
+      : <button disabled={busy} className='btn btn-success btn-sm float-xs-right' onClick={() => update({active: true})}>
         Activate
       </button>
     }

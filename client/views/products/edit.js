@@ -21,7 +21,7 @@ export default ({busy, categories, canEdit, currentUser, errors, path, product})
     </div>
     <div className='col-md-9'>
       <h1>Edit Product</h1>
-      <div className='pull-xs-right'>
+      <div className='float-xs-right'>
         {active
           ? <button className='btn btn-secondary btn-sm' disabled={busy}
             onClick={() => updateProduct(id, {active: false}).catch(() => {})}>

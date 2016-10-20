@@ -10,7 +10,7 @@ export default ({busy, canEdit, cart, path, product, market: {open}, currentUser
     </div>
     <div className='col-md-9'>
       {canEdit
-        ? <Link className='btn btn-sm btn-secondary pull-xs-right' href={`/products/${id}/edit`}>
+        ? <Link className='btn btn-sm btn-secondary float-xs-right' href={`/products/${id}/edit`}>
           Edit
         </Link>
         : null

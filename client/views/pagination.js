@@ -5,7 +5,7 @@ import {params} from '../url'
 const Pagination = ({more, page, url}) => {
   return <div>
     {more
-      ? <Link href={params(url, {page: page + 1})} className='pull-xs-right'>
+      ? <Link href={params(url, {page: page + 1})} className='float-xs-right'>
         Next Page →
       </Link>
       : ''
