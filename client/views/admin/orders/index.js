@@ -28,7 +28,7 @@ export default ({full, locationId, locations, more, orders, page, productId, pro
 
   return <div>
     <h1>Orders</h1>
-    <form className='hidden-print' method='get' action='/admin/orders'>
+    <form className='hidden-print'>
       <div className='form-group'>
         <label className='form-check-inline'>
           <input className='form-check-input' type='checkbox' checked={full} onChange={toggleFull} />

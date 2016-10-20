@@ -65,6 +65,7 @@ const reducer = combineReducers({
   token: pass,
   url: pass,
   user,
+  userId: pass,
   users,
   version: pass
 })

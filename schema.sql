@@ -913,6 +913,7 @@ SELECT pg_catalog.setval('markets_id_seq', 2, true);
 
 COPY migrations (id) FROM stdin;
 2016-10-18-2233-events
+2016-10-20-0053-events-indexes
 \.
 
 
@@ -1155,6 +1156,13 @@ ALTER TABLE ONLY users
 --
 
 CREATE UNIQUE INDEX categories_name_uniq_index ON categories USING btree (name);
+
+
+--
+-- Name: events_created_at_user_id_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX events_created_at_user_id_index ON events USING btree (created_at, user_id);
 
 
 --
