@@ -102,9 +102,9 @@ module.exports = [
 
     if (this.state.admin) Object.assign(values, this.permit('featured'))
 
-    const {product} = this.state
+    const {currentUser, product} = this.state
+    yield product.update(values, currentUser)
 
-    yield product.update(values)
     this.body = {
       product: Object.assign(product.toJSON(), {
         description: product.description

@@ -11,6 +11,7 @@ module.exports = [
 
 ].concat(
   require('./users'),
+  require('./events'),
   require('./orders'),
   require('./market'),
   require('./growers'),

@@ -82,10 +82,10 @@ module.exports = [
   post('/growers/:id', function *() {
     if (!this.state.canEdit) return this.unauthorized()
 
-    const {grower} = this.state
+    const {currentUser, grower} = this.state
     yield grower.update(this.permit(
       'active', 'name', 'email', 'url', 'location', 'description'
-    ))
+    ), currentUser)
     this.body = {grower}
   }),
 

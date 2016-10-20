@@ -50,6 +50,8 @@ import AdminGrowersUsers from './views/admin/growers/users'
 import AdminOrders from './views/admin/orders/index'
 import AdminOrdersShow from './views/admin/orders/show'
 
+import Events from './views/admin/events/index'
+
 import Reset from './views/session/reset'
 import Signin from './views/signin/index'
 import Forgot from './views/signin/forgot'
@@ -70,6 +72,7 @@ export default (state) => {
       <Route path='/session/reset/:tokenId' Component={Reset} />
       <Route path='/signup' Component={Signup} />
       <Route path='/admin/' Component={AdminNav}>
+        <Route path='events' Component={Events} />
         <Route path='categories' Component={Categories} />
         <Route path='categories/:categoryId/edit' Component={EditCategory} />
         <Route path='categories/new' Component={NewCategory} />

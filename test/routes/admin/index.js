@@ -1,4 +1,7 @@
+'use strict'
+
 require('./users')
+require('./events')
 require('./market')
 require('./orders')
 require('./growers')

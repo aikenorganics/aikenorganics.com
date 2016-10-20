@@ -367,6 +367,39 @@ ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 
 
 --
+-- Name: events; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE events (
+    id integer NOT NULL,
+    user_id integer,
+    action character varying(50) NOT NULL,
+    target character varying(50) NOT NULL,
+    meta jsonb NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+--
+-- Name: events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE events_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE events_id_seq OWNED BY events.id;
+
+
+--
 -- Name: growers; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -448,6 +481,15 @@ CREATE SEQUENCE markets_id_seq
 --
 
 ALTER SEQUENCE markets_id_seq OWNED BY markets.id;
+
+
+--
+-- Name: migrations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE migrations (
+    id character varying(255) NOT NULL
+);
 
 
 --
@@ -714,6 +756,13 @@ ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY events ALTER COLUMN id SET DEFAULT nextval('events_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY growers ALTER COLUMN id SET DEFAULT nextval('suppliers_id_seq'::regclass);
 
 
@@ -795,13 +844,32 @@ SELECT pg_catalog.setval('categories_id_seq', 6, true);
 
 
 --
+-- Data for Name: events; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY events (id, user_id, action, target, meta, created_at) FROM stdin;
+1	1	update	products	{"id": 7, "supply": "4", "updatedAt": "2016-10-20T04:32:48.901Z"}	2016-10-20 00:32:48.90886
+2	1	update	products	{"id": 7, "active": true, "updatedAt": "2016-10-20T04:32:50.422Z"}	2016-10-20 00:32:50.42646
+3	1	update	products	{"id": 7, "active": false, "updatedAt": "2016-10-20T04:32:51.458Z"}	2016-10-20 00:32:51.460829
+4	1	update	growers	{"id": 2, "url": "http://planitfoods.com/", "name": "Plan It Foods", "email": "info@planitfoods.com", "location": "", "updatedAt": "2016-10-20T04:33:09.086Z", "description": "Plan It Foods offers homemade “heat and serve” meals that focus on local, all natural ingredients. Our frozen meals come in single serving or family sizes and are fully cooked and ready to heat in your oven. We use only chemical-free, hormone-free, antibiotic-free meats, milk and eggs from local farmers using sustainable & humane practices in the raising and butchering of their animals.  We also offer gluten free, vegetarian and vegan menu options and use as much local produce as possible from local farmers who are following organic growing practices. We are fully licensed and insured and all of our prepared foods are made in a DHEC approved kitchen. We strive to use the freshest, healthiest, best tasting local products available so that you do not have to sacrifice taste or nutrition for convenience!"}	2016-10-20 00:33:09.089551
+\.
+
+
+--
+-- Name: events_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('events_id_seq', 4, true);
+
+
+--
 -- Data for Name: growers; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY growers (id, created_at, updated_at, name, email, url, description, location, active, image_updated_at) FROM stdin;
 1	2015-10-13 21:21:45.683542-04	2015-10-13 21:21:45.683542-04	Watsonia Farms	wfsales@watsoniafarms.com	http://watsoniafarms.com/	For four generations, from 1918 to the present, the Watson family has been bringing the best in fruit and produce to the people of South Carolina. And now, you can enjoy the same farm-fresh goodness in your own home.		t	\N
-2	2015-10-13 21:21:45.683542-04	2015-10-13 21:21:45.683542-04	Plan It Foods	info@planitfoods.com	http://planitfoods.com/	Plan It Foods offers homemade “heat and serve” meals that focus on local, all natural ingredients. Our frozen meals come in single serving or family sizes and are fully cooked and ready to heat in your oven. We use only chemical-free, hormone-free, antibiotic-free meats, milk and eggs from local farmers using sustainable & humane practices in the raising and butchering of their animals.  We also offer gluten free, vegetarian and vegan menu options and use as much local produce as possible from local farmers who are following organic growing practices. We are fully licensed and insured and all of our prepared foods are made in a DHEC approved kitchen. We strive to use the freshest, healthiest, best tasting local products available so that you do not have to sacrifice taste or nutrition for convenience!		t	\N
 3	2015-10-13 21:21:45.683542-04	2015-10-13 21:21:45.683542-04	Happy Earth Farm [Inactive]	steve@happyearthfarm.com	http://happyearthfarm.com	Happy Earth Farm is your local Aiken family farm, where we’re dedicated to providing you with the freshest products in the purest fashion. We don’t use pesticides, herbicides or any other “cides”! We grow our crops using our own organic compost and other organic supplements and soil enhancers; we practice extensive crop rotation and companion planting; our flock of guineas provides natural pest control; and we never, ever use genetically modified seeds! We raise our chickens the old fashioned way: providing unadulterated, soy-free organic feed and offering up plenty of fresh air and sunshine. We’re passionate about “clean” healthy eating, and we offer to you what we feed our family: fresh and natural alternatives to store-bought fare.		f	\N
+2	2015-10-13 21:21:45.683542-04	2016-10-20 00:33:09.086-04	Plan It Foods	info@planitfoods.com	http://planitfoods.com/	Plan It Foods offers homemade “heat and serve” meals that focus on local, all natural ingredients. Our frozen meals come in single serving or family sizes and are fully cooked and ready to heat in your oven. We use only chemical-free, hormone-free, antibiotic-free meats, milk and eggs from local farmers using sustainable & humane practices in the raising and butchering of their animals.  We also offer gluten free, vegetarian and vegan menu options and use as much local produce as possible from local farmers who are following organic growing practices. We are fully licensed and insured and all of our prepared foods are made in a DHEC approved kitchen. We strive to use the freshest, healthiest, best tasting local products available so that you do not have to sacrifice taste or nutrition for convenience!		t	\N
 \.
 
 
@@ -837,6 +905,15 @@ COPY markets (id, created_at, updated_at, open, domain, message, news) FROM stdi
 --
 
 SELECT pg_catalog.setval('markets_id_seq', 2, true);
+
+
+--
+-- Data for Name: migrations; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY migrations (id) FROM stdin;
+2016-10-18-2233-events
+\.
 
 
 --
@@ -905,7 +982,6 @@ SELECT pg_catalog.setval('product_orders_id_seq', 10, true);
 
 COPY products (id, created_at, updated_at, name, grower_id, cost, supply, unit, description, category_id, reserved, active, search, image_updated_at, featured) FROM stdin;
 6	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Happy Pesto Sauce [Inactive Grower]	3	5.50	23	4 oz.	It starts with our own organically grown basil and ends with a finished product full of rich flavor.  Our Happy Pesto is the perfect pasta sauce, but is also delicious on fish, chicken, eggs or any other recipe calling for pesto.  Our pesto is made super concentrated so cutting it with additional olive oil will make this sauce go twice as far.	2	0	t	'grower':5 'happy':1 'inactive':4 'pesto':2 'sauce':3	\N	f
-7	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Spanish Rice [Inactive]	2	4.32	3	medium side item - (2 cups)	Made with all natural brown rice and organic tomatoes, corn and sweet peas, this rice packs a lot of flavor and is the perfect side for our enchiladas or great on its own! (vegetarian and gluten free)	2	0	f	'inactive':3 'rice':2 'spanish':1	\N	f
 8	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Mild Chow Chow [Inactive]	1	5.00	7	Pint Jar	Cabbage, onions, sugar, red bell pepper, vinegar, ground mustard, celery seed, salt, citric acid, turmeric, erythorbric acid to promote color retention.	2	0	f	'chow':2,3 'inactive':4 'mild':1	\N	f
 1	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Peaches	1	14.00	22	box	A box of peaches.	1	2	t	'peaches':1	\N	f
 4	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Vegan Gumbo - Small	2	7.00	15	small container (serves 1-2)	This hearty gumbo features local okra, tomatoes, peppers and corn (cut and frozen in season), fresh herbs and bay leaves simmered in organic vegetable stock and dark porter beer from the Aiken Brewing Company and comes with a side of all natural brown rice.	2	1	t	'gumbo':2 'small':3 'vegan':1	\N	f
@@ -913,6 +989,7 @@ COPY products (id, created_at, updated_at, name, grower_id, cost, supply, unit, 
 9	2016-03-28 22:18:30.836487-04	2016-10-02 07:28:45.275-04	Avocados [Oversold]	1	4.30	2	each		1	3	t	'avocados':1 'oversold':2	\N	t
 2	2015-10-13 21:21:45.686334-04	2016-10-02 07:28:50.283-04	Strawberries	1	8.00	15	box	Some strawberries.	1	3	t	'strawberries':1	\N	t
 3	2015-10-13 21:21:45.686334-04	2016-10-02 07:28:54.944-04	Kale	1	4.50	15	bunch	A buncha kale.	1	1	t	'kale':1	\N	t
+7	2015-10-13 21:21:45.686334-04	2016-10-20 00:32:51.458-04	Spanish Rice [Inactive]	2	4.32	4	medium side item - (2 cups)	Made with all natural brown rice and organic tomatoes, corn and sweet peas, this rice packs a lot of flavor and is the perfect side for our enchiladas or great on its own! (vegetarian and gluten free)	2	0	f	'inactive':3 'rice':2 'spanish':1	\N	f
 \.
 
 
@@ -986,6 +1063,14 @@ ALTER TABLE ONLY categories
 
 
 --
+-- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY events
+    ADD CONSTRAINT events_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: locations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -999,6 +1084,14 @@ ALTER TABLE ONLY locations
 
 ALTER TABLE ONLY markets
     ADD CONSTRAINT markets_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY migrations
+    ADD CONSTRAINT migrations_pkey PRIMARY KEY (id);
 
 
 --
@@ -1216,6 +1309,14 @@ CREATE TRIGGER update_reserved AFTER UPDATE ON product_orders FOR EACH ROW EXECU
 --
 
 CREATE TRIGGER update_user_search BEFORE INSERT OR UPDATE ON users FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('search', 'pg_catalog.simple', 'first', 'last', 'email');
+
+
+--
+-- Name: events_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY events
+    ADD CONSTRAINT events_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --

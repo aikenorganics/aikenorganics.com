@@ -25,6 +25,9 @@ export default ({path, children}) => {
       <li className='nav-item'>
         <Link className={`nav-link${/^\/admin\/market/.test(path) ? ' active' : ''}`} href='/admin/market'>Market</Link>
       </li>
+      <li className='nav-item'>
+        <Link className={`nav-link${/^\/admin\/events/.test(path) ? ' active' : ''}`} href='/admin/events'>Events</Link>
+      </li>
     </ul>
     {children}
   </main>

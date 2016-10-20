@@ -36,6 +36,7 @@ const reducer = combineReducers({
   email: pass,
   emails: pass,
   errors,
+  events: pass,
   expired: pass,
   full: pass,
   grower,
