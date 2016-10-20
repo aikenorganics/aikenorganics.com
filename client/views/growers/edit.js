@@ -14,7 +14,7 @@ export default ({busy, canEdit, errors, grower, path}) => {
   return <div className='row'>
     <div className='col-md-3 text-xs-center'>
       <p>
-        <img className='img-rounded img-fluid' src={mediumImage} />
+        <img className='rounded img-fluid' src={mediumImage} />
       </p>
       <p>
         <input type='file' className='form-control' disabled={busy} onChange={upload} />

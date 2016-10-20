@@ -9,7 +9,7 @@ export default ({busy, user: {id, mediumImage}}) => {
 
   return <div>
     <div className='form-group text-xs-center'>
-      <img className='img-rounded' src={mediumImage} />
+      <img className='rounded' src={mediumImage} />
     </div>
     <div className='form-group'>
       <input type='file' className='form-control' onChange={upload} disabled={busy} />

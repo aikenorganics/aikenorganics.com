@@ -13,7 +13,7 @@ export default ({busy, categories, canEdit, currentUser, errors, path, product})
   return <div className='row'>
     <div className='col-md-3'>
       <p className='text-xs-center'>
-        <img className='img-rounded img-fluid' src={mediumImage} />
+        <img className='rounded img-fluid' src={mediumImage} />
       </p>
       <p>
         <input type='file' className='form-control' onChange={upload} disabled={busy} />

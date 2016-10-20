@@ -19,7 +19,7 @@ export default ({busy, canEdit, cart, grower, market: {open}, path, products, cu
       }
       {location ? ` • ${location}` : ''}
       <hr className='clearfix' />
-      <img className='img-rounded img-fluid pull-xs-right' src={mediumImage} />
+      <img className='rounded img-fluid pull-xs-right' src={mediumImage} />
       <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
       <h2 className='clearfix'>
         <span>Products </span>

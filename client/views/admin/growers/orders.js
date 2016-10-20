@@ -12,7 +12,7 @@ export default ({growers, path}) => {
         return <div key={id}>
           <div className='media'>
             <div className='media-left'>
-              <img src={smallImage} className='img-rounded' />
+              <img src={smallImage} className='rounded' />
             </div>
             <div className='media-body'>
               <h1>{name}</h1>

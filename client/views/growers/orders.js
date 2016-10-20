@@ -8,7 +8,7 @@ export default ({canEdit, grower, path, products}) => {
   return <div className='row'>
     <div className='col-md-3 text-xs-center'>
       <p>
-        <img className='img-rounded img-fluid' src={mediumImage} />
+        <img className='rounded img-fluid' src={mediumImage} />
       </p>
       <Nav canEdit={canEdit} grower={grower} path={path} />
     </div>
