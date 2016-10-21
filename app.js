@@ -10,7 +10,6 @@ Object.assign(app.context, {
   User: require('./db/user')
 })
 
-app.use(require('./csp'))
 app.use(require('./cart'))
 app.use(require('./layout'))
 app.use(require('./market'))

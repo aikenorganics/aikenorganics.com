@@ -42,3 +42,14 @@ test('POST /settings is a 200 as a regular user', function *(t) {
     })
   response.expect(200).expect('content-type', /json/)
 })
+
+test('GET /settings adds stripe to the csp', function *(t) {
+  yield t.signIn('user@example.com')
+  const response = yield t.client.get('/settings').send()
+  response
+  .expect(200)
+  .expect('content-security-policy', /img-src[^;]+https:\/\/q.stripe.com/)
+  .expect('content-security-policy', /frame-src[^;]+https:\/\/checkout.stripe.com/)
+  .expect('content-security-policy', /script-src[^;]+https:\/\/checkout.stripe.com/)
+  .expect('content-security-policy', /connect-src[^;]+https:\/\/checkout.stripe.com/)
+})
