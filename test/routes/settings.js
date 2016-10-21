@@ -53,3 +53,9 @@ test('GET /settings adds stripe to the csp', function *(t) {
   .expect('content-security-policy', /script-src[^;]+https:\/\/checkout.stripe.com/)
   .expect('content-security-policy', /connect-src[^;]+https:\/\/checkout.stripe.com/)
 })
+
+test('GET /settings only adds csp to HTML responses', function *(t) {
+  yield t.signIn('user@example.com')
+  const response = yield t.client.get('/settings').accept('json').send()
+  t.ok(!/stripe/.test(response.headers['content-security-policy']))
+})
