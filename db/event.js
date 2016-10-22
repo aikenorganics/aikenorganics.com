@@ -11,9 +11,10 @@ class Event extends require('ozymandias/db/instance').Model {
       'id',
       'userId',
       'action',
-      'target',
       'meta',
-      'createdAt'
+      'createdAt',
+      'growerId',
+      'productId'
     ]
   }
 
@@ -22,10 +23,13 @@ class Event extends require('ozymandias/db/instance').Model {
       'id',
       'userId',
       'action',
-      'target',
       'meta',
       'createdAt',
-      'user'
+      'growerId',
+      'productId',
+      'user',
+      'product',
+      'grower'
     )
   }
 
@@ -34,5 +38,9 @@ class Event extends require('ozymandias/db/instance').Model {
 module.exports = Event
 
 const User = require('./user')
+const Grower = require('./grower')
+const Product = require('./product')
 
 Event.belongsTo('user', {key: 'userId', model: User})
+Event.belongsTo('grower', {key: 'growerId', model: Grower})
+Event.belongsTo('product', {key: 'productId', model: Product})

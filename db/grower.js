@@ -103,8 +103,10 @@ Grower.hasImage({
 
 module.exports = Grower
 
+const Event = require('./event')
 const Product = require('./product')
 const UserGrower = require('./user-grower')
 
+Grower.hasMany('events', {key: 'growerId', model: Event})
 Grower.hasMany('products', {key: 'growerId', model: Product})
 Grower.hasMany('userGrowers', {key: 'growerId', model: UserGrower})

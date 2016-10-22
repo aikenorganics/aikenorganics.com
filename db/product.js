@@ -133,10 +133,12 @@ Product.hasImage({
 
 module.exports = Product
 
+const Event = require('./event')
 const Grower = require('./grower')
 const Category = require('./category')
 const ProductOrder = require('./product-order')
 
+Product.hasMany('events', {key: 'productId', model: Event})
 Product.belongsTo('grower', {key: 'growerId', model: Grower})
 Product.belongsTo('category', {key: 'categoryId', model: Category})
 Product.hasMany('productOrders', {key: 'productId', model: ProductOrder})

@@ -48,6 +48,16 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 SET search_path = public, pg_catalog;
 
 --
+-- Name: event_action; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE event_action AS ENUM (
+    'create',
+    'update'
+);
+
+
+--
 -- Name: order_status; Type: TYPE; Schema: public; Owner: -
 --
 
@@ -373,10 +383,11 @@ ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 CREATE TABLE events (
     id integer NOT NULL,
     user_id integer,
-    action character varying(50) NOT NULL,
-    target character varying(50) NOT NULL,
+    action event_action NOT NULL,
     meta jsonb NOT NULL,
-    created_at timestamp without time zone DEFAULT now() NOT NULL
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    product_id integer,
+    grower_id integer
 );
 
 
@@ -847,11 +858,11 @@ SELECT pg_catalog.setval('categories_id_seq', 6, true);
 -- Data for Name: events; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY events (id, user_id, action, target, meta, created_at) FROM stdin;
-1	1	update	products	{"id": 7, "supply": "4", "updatedAt": "2016-10-20T04:32:48.901Z"}	2016-10-20 00:32:48.90886
-2	1	update	products	{"id": 7, "active": true, "updatedAt": "2016-10-20T04:32:50.422Z"}	2016-10-20 00:32:50.42646
-3	1	update	products	{"id": 7, "active": false, "updatedAt": "2016-10-20T04:32:51.458Z"}	2016-10-20 00:32:51.460829
-4	1	update	growers	{"id": 2, "url": "http://planitfoods.com/", "name": "Plan It Foods", "email": "info@planitfoods.com", "location": "", "updatedAt": "2016-10-20T04:33:09.086Z", "description": "Plan It Foods offers homemade “heat and serve” meals that focus on local, all natural ingredients. Our frozen meals come in single serving or family sizes and are fully cooked and ready to heat in your oven. We use only chemical-free, hormone-free, antibiotic-free meats, milk and eggs from local farmers using sustainable & humane practices in the raising and butchering of their animals.  We also offer gluten free, vegetarian and vegan menu options and use as much local produce as possible from local farmers who are following organic growing practices. We are fully licensed and insured and all of our prepared foods are made in a DHEC approved kitchen. We strive to use the freshest, healthiest, best tasting local products available so that you do not have to sacrifice taste or nutrition for convenience!"}	2016-10-20 00:33:09.089551
+COPY events (id, user_id, action, meta, created_at, product_id, grower_id) FROM stdin;
+1	1	update	{"supply": "4", "updatedAt": "2016-10-20T04:32:48.901Z"}	2016-10-20 00:32:48.90886	7	\N
+2	1	update	{"active": true, "updatedAt": "2016-10-20T04:32:50.422Z"}	2016-10-20 00:32:50.42646	7	\N
+3	1	update	{"active": false, "updatedAt": "2016-10-20T04:32:51.458Z"}	2016-10-20 00:32:51.460829	7	\N
+4	1	update	{"url": "http://planitfoods.com/", "name": "Plan It Foods", "email": "info@planitfoods.com", "location": "", "updatedAt": "2016-10-20T04:33:09.086Z", "description": "Plan It Foods offers homemade “heat and serve” meals that focus on local, all natural ingredients. Our frozen meals come in single serving or family sizes and are fully cooked and ready to heat in your oven. We use only chemical-free, hormone-free, antibiotic-free meats, milk and eggs from local farmers using sustainable & humane practices in the raising and butchering of their animals.  We also offer gluten free, vegetarian and vegan menu options and use as much local produce as possible from local farmers who are following organic growing practices. We are fully licensed and insured and all of our prepared foods are made in a DHEC approved kitchen. We strive to use the freshest, healthiest, best tasting local products available so that you do not have to sacrifice taste or nutrition for convenience!"}	2016-10-20 00:33:09.089551	\N	2
 \.
 
 
@@ -914,6 +925,12 @@ SELECT pg_catalog.setval('markets_id_seq', 2, true);
 COPY migrations (id) FROM stdin;
 2016-10-18-2233-events
 2016-10-20-0053-events-indexes
+2016-10-21-1509-events-product-id
+2016-10-21-1513-events-grower-id
+2016-10-21-1536-event-ids
+2016-10-21-2246-event-action
+2016-10-21-2251-action-type
+2016-10-21-2251-drop-target
 \.
 
 
@@ -1317,6 +1334,22 @@ CREATE TRIGGER update_reserved AFTER UPDATE ON product_orders FOR EACH ROW EXECU
 --
 
 CREATE TRIGGER update_user_search BEFORE INSERT OR UPDATE ON users FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('search', 'pg_catalog.simple', 'first', 'last', 'email');
+
+
+--
+-- Name: events_grower_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY events
+    ADD CONSTRAINT events_grower_id_fkey FOREIGN KEY (grower_id) REFERENCES growers(id);
+
+
+--
+-- Name: events_product_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY events
+    ADD CONSTRAINT events_product_id_fkey FOREIGN KEY (product_id) REFERENCES products(id);
 
 
 --

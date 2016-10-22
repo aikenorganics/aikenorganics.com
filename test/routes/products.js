@@ -1,6 +1,7 @@
 'use strict'
 
-const {Product} = require('../../db')
+const Event = require('../../db/event')
+const Product = require('../../db/product')
 const test = require('../test')
 
 // Index
@@ -153,6 +154,19 @@ test('non-admins cannot update featured', function *(t) {
   response.expect(200)
   const product = yield Product.find(1)
   t.is(product.featured, false)
+})
+
+test('updating creates an event', function *(t) {
+  yield t.signIn('admin@example.com')
+  const response = yield t.client.post('/products/1').send({featured: true})
+  response.expect(200)
+  const event = yield Event.where({productId: 1}).find()
+  t.deepEqual(Object.keys(event.meta), ['featured', 'updatedAt'])
+  t.is(event.meta.featured, true)
+  t.is(event.userId, 1)
+  t.is(event.action, 'update')
+  t.is(event.growerId, null)
+  t.is(event.productId, 1)
 })
 
 // Image

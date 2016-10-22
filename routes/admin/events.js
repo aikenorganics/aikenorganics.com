@@ -8,7 +8,7 @@ module.exports = [
 
   // Index
   get('/admin/events', function *() {
-    const scope = Event.include('user')
+    const scope = Event.include('user', 'product', 'grower')
 
     // Paginate!
     const page = +(this.query.page || 1)
