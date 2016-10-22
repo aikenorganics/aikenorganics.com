@@ -19,3 +19,31 @@ test('edit cost', function *(assert) {
   const product = yield Product.find(3)
   assert.is(product.cost, '5.55')
 })
+
+test('deactivate product', function *(assert) {
+  yield driver.visit('/signin')
+  yield driver.$('#email').sendKeys('admin@example.com')
+  yield driver.$('#password').sendKeys('password')
+  yield driver.$('#password').submit()
+  yield driver.wait(driver.present('#signout'))
+
+  yield driver.visit('/products/1/edit')
+  yield driver.$('#deactivate').click()
+  yield driver.wait(driver.present('#activate'))
+  const product = yield Product.find(1)
+  assert.is(product.active, false)
+})
+
+test('activate product', function *(assert) {
+  yield driver.visit('/signin')
+  yield driver.$('#email').sendKeys('admin@example.com')
+  yield driver.$('#password').sendKeys('password')
+  yield driver.$('#password').submit()
+  yield driver.wait(driver.present('#signout'))
+
+  yield driver.visit('/products/8/edit')
+  yield driver.$('#activate').click()
+  yield driver.wait(driver.present('#deactivate'))
+  const product = yield Product.find(8)
+  assert.is(product.active, true)
+})

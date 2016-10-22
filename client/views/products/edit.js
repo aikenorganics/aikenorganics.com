@@ -23,11 +23,11 @@ export default ({busy, categories, canEdit, currentUser, errors, path, product})
       <h1>Edit Product</h1>
       <div className='float-xs-right'>
         {active
-          ? <button className='btn btn-secondary btn-sm' disabled={busy}
+          ? <button id='deactivate' className='btn btn-secondary btn-sm' disabled={busy}
             onClick={() => updateProduct(id, {active: false}).catch(() => {})}>
             Deactivate
           </button>
-          : <button className='btn btn-success btn-sm' disabled={busy}
+          : <button id='activate' className='btn btn-success btn-sm' disabled={busy}
             onClick={() => updateProduct(id, {active: true}).catch(() => {})}>
             Activate
           </button>
