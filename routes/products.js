@@ -1,6 +1,9 @@
 'use strict'
 
-const {Category, Product, UserGrower} = require('../db')
+const Category = require('../db/category')
+const Event = require('../db/event')
+const Product = require('../db/product')
+const UserGrower = require('../db/user-grower')
 const {all, get, post} = require('koa-route')
 
 module.exports = [
@@ -88,7 +91,9 @@ module.exports = [
 
   // Update
   post('/products/:id', function *() {
-    if (!this.state.canEdit) return this.unauthorized()
+    const {admin, canEdit, currentUser, product} = this.state
+
+    if (!canEdit) return this.unauthorized()
 
     const values = this.permit(
       'active',
@@ -100,10 +105,15 @@ module.exports = [
       'unit'
     )
 
-    if (this.state.admin) Object.assign(values, this.permit('featured'))
+    if (admin) Object.assign(values, this.permit('featured'))
 
-    const {currentUser, product} = this.state
-    yield product.update(values, currentUser)
+    yield product.update(values)
+    yield Event.create({
+      action: 'update',
+      userId: currentUser.id,
+      productId: product.id,
+      meta: JSON.stringify(values)
+    })
 
     this.body = {
       product: Object.assign(product.toJSON(), {
