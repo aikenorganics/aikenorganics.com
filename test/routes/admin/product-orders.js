@@ -6,13 +6,13 @@ const test = require('../../test')
 test('DELETE /product-orders/missing is a 404', function *(t) {
   yield t.signIn('admin@example.com')
   const response = yield t.client.delete('/admin/product-orders/12345').send()
-  response.expect(404)
+  response.assert(404)
 })
 
 test('DELETE /product-orders/:id is a 200', function *(t) {
   yield t.signIn('admin@example.com')
   const response = yield t.client.delete('/admin/product-orders/1').send()
-  response.expect(200)
+  response.assert(200)
   const productOrder = yield ProductOrder.find(1)
   t.ok(productOrder == null)
 })
@@ -20,7 +20,7 @@ test('DELETE /product-orders/:id is a 200', function *(t) {
 test('POST /product-orders/missing is a 404', function *(t) {
   yield t.signIn('admin@example.com')
   const response = yield t.client.post('/admin/product-orders/12345').send()
-  response.expect(404)
+  response.assert(404)
 })
 
 test('POST /product-orders/:id is a 200', function *(t) {
@@ -28,7 +28,7 @@ test('POST /product-orders/:id is a 200', function *(t) {
   const response = yield t.client
     .post('/admin/product-orders/1')
     .send({quantity: 1, cost: '1.23'})
-  response.expect(200)
+  response.assert(200)
 
   const {cost, quantity} = response.body.productOrder
   t.is(cost, '1.23')
@@ -44,7 +44,7 @@ test('POST /product-orders is a 200', function *(t) {
   const response = yield t.client
     .post('/admin/product-orders')
     .send({quantity: 1, orderId: 1, productId: 3})
-  response.expect(200)
+  response.assert(200)
 
   const {id, orderId, productId, quantity} = response.body.productOrder
   t.is(quantity, 1)
@@ -60,7 +60,7 @@ test('editing an inactive product order', function *(t) {
   const response = yield t.client
     .post('/admin/product-orders/9')
     .send({quantity: 2, cost: '6'})
-  response.expect(200)
+  response.assert(200)
 
   const {cost, quantity} = response.body.productOrder
   t.is(cost, '6.00')

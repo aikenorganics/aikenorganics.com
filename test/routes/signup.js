@@ -4,7 +4,7 @@ const test = require('../test')
 
 test('signup page is a 200', function *(t) {
   const response = yield t.client.get('/signup').send()
-  response.expect(200)
+  response.assert(200)
 })
 
 test('POST /signup handles mixed case emails', function *(t) {
@@ -12,7 +12,7 @@ test('POST /signup handles mixed case emails', function *(t) {
     email: 'AdMiN@eXaMpLe.CoM',
     password: 'password'
   })
-  response.expect(422).expect('content-type', /json/)
+  response.assert(422).assert('content-type', /json/)
 })
 
 test('POST /signup handles first, last, and phone', function *(t) {
@@ -23,7 +23,7 @@ test('POST /signup handles first, last, and phone', function *(t) {
     email: 'finn@ooo.net',
     password: 'password'
   })
-  response.expect(200)
+  response.assert(200)
 })
 
 test('Full signup flow', function *(t) {
@@ -34,26 +34,26 @@ test('Full signup flow', function *(t) {
     email: 'jake@ooo.net',
     password: 'sandwich'
   })
-  signup.expect(200)
+  signup.assert(200)
 
   const signout = yield t.client.delete('/session').send()
-  signout.expect(200)
+  signout.assert(200)
 
   const incorrectPassword = yield t.client.post('/session').send({
     email: 'jake@ooo.net',
     password: 'sandwiches'
   })
-  incorrectPassword.expect(422)
+  incorrectPassword.assert(422)
 
   const incorrectEmail = yield t.client.post('/session').send({
     email: 'jake@oooo.net',
     password: 'sandwich'
   })
-  incorrectEmail.expect(422)
+  incorrectEmail.assert(422)
 
   const correct = yield t.client.post('/session').send({
     email: 'jake@ooo.net',
     password: 'sandwich'
   })
-  correct.expect(200)
+  correct.assert(200)
 })

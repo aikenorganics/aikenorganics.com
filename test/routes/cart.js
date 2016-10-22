@@ -5,7 +5,7 @@ const test = require('../test')
 
 test('GET /cart is a 401 logged out', function *(t) {
   const response = yield t.client.get('/cart').send()
-  response.expect(401)
+  response.assert(401)
 })
 
 test('GET /cart is a 200 logged in', function *(t) {
@@ -13,15 +13,15 @@ test('GET /cart is a 200 logged in', function *(t) {
   let response = yield t.client
     .post('/cart')
     .send({productId: 1, quantity: 2})
-  response.expect(200)
+  response.assert(200)
 
   response = yield t.client.get('/cart').send()
-  response.expect(200)
+  response.assert(200)
 })
 
 test('POST /cart is a 401 logged out', function *(t) {
   const response = yield t.client.post('/cart').send()
-  response.expect(401)
+  response.assert(401)
 })
 
 test('POST /cart is a 200 logged in', function *(t) {
@@ -29,7 +29,7 @@ test('POST /cart is a 200 logged in', function *(t) {
   const response = yield t.client
     .post('/cart')
     .send({productId: 1, quantity: 2})
-  response.expect(200)
+  response.assert(200)
 })
 
 test('POST /cart/checkout', function *(t) {
@@ -37,22 +37,22 @@ test('POST /cart/checkout', function *(t) {
 
   let response
   response = yield t.client.post('/cart').send({productId: 1, quantity: 2})
-  response.expect(200)
+  response.assert(200)
 
   response = yield t.client.post('/cart').send({productId: 3, quantity: 4})
-  response.expect(200)
+  response.assert(200)
 
   response = yield t.client.post('/cart').send({productId: 4, quantity: 20})
-  response.expect(200)
+  response.assert(200)
 
   response = yield t.client.post('/cart').send({productId: 5, quantity: 1})
-  response.expect(200)
+  response.assert(200)
 
   response = yield t.client.post('/cart').send({productId: 8, quantity: 1})
-  response.expect(200)
+  response.assert(200)
 
   response = yield t.client.post('/cart/checkout').send({locationId: 2})
-  response.expect(200)
+  response.assert(200)
 
   const order = yield Order.find(1)
   const productOrders = yield ProductOrder.where({orderId: 1}).order('productId').all()
@@ -83,5 +83,5 @@ test('POST /cart is a 200 for inactive products/growers', function *(t) {
   const response = yield t.client
     .post('/cart')
     .send({productId: 6, quantity: 1})
-  response.expect(200)
+  response.assert(200)
 })
