@@ -1,5 +1,5 @@
 import React from 'react'
-import Router, {Route} from './router'
+import Router, {Route} from 'ozymandias/client/router'
 
 import App from './views/app'
 import SubNav from './views/sub-nav'
