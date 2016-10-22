@@ -21,8 +21,10 @@ export default ({event: {action, createdAt, grower, meta, product, user}}) => {
   return <details>
     <summary>
       {moment(createdAt).format('MM/DD/YYYY h:mma')}
-      <Link href={`/admin/users/${user.id}/edit`}>{user.name}</Link>
-      {actionText()} {link()}
+      {' » '}
+      <Link href={`/admin/users/${user.id}/edit`}>
+        {user.name}
+      </Link> {actionText()} {link()}
     </summary>
     <div className='table-responsive'>
       <table className='table table-sm'>
