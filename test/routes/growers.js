@@ -2,6 +2,8 @@
 
 const test = require('../test')
 
+// Index
+
 test('GET /growers is a 200', function *(t) {
   const response = yield t.client.get('/growers').send()
   response.expect(200)
@@ -17,6 +19,23 @@ test('GET /growers is a 200 for non-admins', function *(t) {
   yield t.signIn('user@example.com')
   const response = yield t.client.get('/growers').send()
   response.expect(200)
+})
+
+test('GET /growers does not return inactive growers', function *(t) {
+  const response = yield t.client
+    .get('/growers')
+    .set('accept', 'application/json')
+    .send()
+  response.expect(200)
+  t.ok(response.body.growers.every(({id}) => id !== 3))
+})
+
+// Show
+
+test('GET /growers/:id authorized users see new product link', function *(t) {
+  yield t.signIn('grower@example.com')
+  const response = yield t.client.get('/growers/1').send()
+  response.expect(200).expect(/\/growers\/1\/products\/new/)
 })
 
 test('GET /growers/:id is a 200', function *(t) {
@@ -47,6 +66,44 @@ test('GET /growers/:id is a 404 for missing ids', function *(t) {
   response.expect(404)
 })
 
+test('GET /growers/:id as admin includes inactive products', function *(t) {
+  yield t.signIn('admin@example.com')
+  const response = yield t.client
+    .get('/growers/2')
+    .set('accept', 'application/json')
+    .send()
+  response.expect(200)
+  const {products} = response.body
+  t.ok(products.some(({id}) => id === 7), 'should see inactive products')
+  t.ok(products.some(({id}) => id === 4), 'should see active products')
+})
+
+test('GET /growers/:id as grower includes inactive products', function *(t) {
+  yield t.signIn('info@planitfoods.com')
+  const response = yield t.client
+    .get('/growers/2')
+    .set('accept', 'application/json')
+    .send()
+  response.expect(200)
+  const {products} = response.body
+  t.ok(products.some(({id}) => id === 7), 'should see inactive products')
+  t.ok(products.some(({id}) => id === 4), 'should see active products')
+})
+
+test('GET /growers/:id as non-grower does not include inactive products', function *(t) {
+  yield t.signIn('info@planitfoods.com')
+  const response = yield t.client
+    .get('/growers/1')
+    .set('accept', 'application/json')
+    .send()
+  response.expect(200)
+  const {products} = response.body
+  t.ok(products.every(({id}) => id !== 8), 'should not see inactive products')
+  t.ok(products.some(({id}) => id === 1), 'should see active products')
+})
+
+// New
+
 test('GET /growers/new is a 200 as an admin', function *(t) {
   yield t.signIn('admin@example.com')
   const response = yield t.client.get('/growers/new').send()
@@ -65,17 +122,7 @@ test('GET /growers/new is a 401 as a non-admin', function *(t) {
   response.expect(401)
 })
 
-test('GET /growers/:id/products/new is a 401 as a non-admin', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client.get('/growers/1/products/new').send()
-  response.expect(401)
-})
-
-test('GET /growers/:id/products/new is a 200 as an admin', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/growers/1/products/new').send()
-  response.expect(200)
-})
+// Edit
 
 test('GET /growers/:id/edit is a 401 for non-admins', function *(t) {
   yield t.signIn('user@example.com')
@@ -94,6 +141,8 @@ test('GET /growers/:id/edit is a 200 for allowed users', function *(t) {
   const response = yield t.client.get('/growers/1/edit').send()
   response.expect(200)
 })
+
+// Orders
 
 test('GET /growers/:id/orders is a 200 for admins', function *(t) {
   yield t.signIn('admin@example.com')
@@ -119,6 +168,8 @@ test('GET /growers/:id/orders is a 401 for non-admins', function *(t) {
   response.expect(401)
 })
 
+// Update
+
 test('POST /growers/:id is a 401 for non-admins', function *(t) {
   yield t.signIn('user@example.com')
   const response = yield t.client.post('/growers/1').send()
@@ -137,6 +188,8 @@ test('POST /growers/:id is a 200 for allowed users', function *(t) {
   response.expect(200).expect('content-type', /json/)
 })
 
+// Create
+
 test('POST /growers is a 401 for non-admins', function *(t) {
   yield t.signIn('user@example.com')
   const response = yield t.client.post('/growers').send({name: 'New Grower'})
@@ -151,6 +204,8 @@ test('POST /growers is a 200 for admins', function *(t) {
   t.is(name, 'New Grower')
   t.is(typeof id, 'number')
 })
+
+// Create Product
 
 test('POST /growers/:id/products is a 200 for admins', function *(t) {
   yield t.signIn('admin@example.com')
@@ -228,6 +283,20 @@ test('POST /growers/:id/products is a 422 for invalid data', function *(t) {
   response.expect(422)
 })
 
+// New Product
+
+test('GET /growers/:id/products/new is a 401 as a non-admin', function *(t) {
+  yield t.signIn('user@example.com')
+  const response = yield t.client.get('/growers/1/products/new').send()
+  response.expect(401)
+})
+
+test('GET /growers/:id/products/new is a 200 as an admin', function *(t) {
+  yield t.signIn('admin@example.com')
+  const response = yield t.client.get('/growers/1/products/new').send()
+  response.expect(200)
+})
+
 test('GET /growers/:id/products/new is a 200 for admins', function *(t) {
   yield t.signIn('admin@example.com')
   const response = yield t.client.get('/growers/1/products/new').send()
@@ -246,56 +315,7 @@ test('GET /growers/:id/products/new is a 401 for non-admins', function *(t) {
   response.expect(401)
 })
 
-test('GET /growers/:id authorized users see new product link', function *(t) {
-  yield t.signIn('grower@example.com')
-  const response = yield t.client.get('/growers/1').send()
-  response.expect(200).expect(/\/growers\/1\/products\/new/)
-})
-
-test('GET /growers does not return inactive growers', function *(t) {
-  const response = yield t.client
-    .get('/growers')
-    .set('accept', 'application/json')
-    .send()
-  response.expect(200)
-  t.ok(response.body.growers.every(({id}) => id !== 3))
-})
-
-test('GET /growers/:id as admin includes inactive products', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client
-    .get('/growers/2')
-    .set('accept', 'application/json')
-    .send()
-  response.expect(200)
-  const {products} = response.body
-  t.ok(products.some(({id}) => id === 7), 'should see inactive products')
-  t.ok(products.some(({id}) => id === 4), 'should see active products')
-})
-
-test('GET /growers/:id as grower includes inactive products', function *(t) {
-  yield t.signIn('info@planitfoods.com')
-  const response = yield t.client
-    .get('/growers/2')
-    .set('accept', 'application/json')
-    .send()
-  response.expect(200)
-  const {products} = response.body
-  t.ok(products.some(({id}) => id === 7), 'should see inactive products')
-  t.ok(products.some(({id}) => id === 4), 'should see active products')
-})
-
-test('GET /growers/:id as non-grower does not include inactive products', function *(t) {
-  yield t.signIn('info@planitfoods.com')
-  const response = yield t.client
-    .get('/growers/1')
-    .set('accept', 'application/json')
-    .send()
-  response.expect(200)
-  const {products} = response.body
-  t.ok(products.every(({id}) => id !== 8), 'should not see inactive products')
-  t.ok(products.some(({id}) => id === 1), 'should see active products')
-})
+// Products
 
 test('GET /growers/:id/products is a 200 for admins', function *(t) {
   yield t.signIn('admin@example.com')
