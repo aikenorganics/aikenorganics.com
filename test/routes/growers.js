@@ -1,5 +1,6 @@
 'use strict'
 
+const Event = require('../../db/event')
 const test = require('../test')
 
 // Index
@@ -186,6 +187,18 @@ test('POST /growers/:id is a 200 for allowed users', function *(t) {
   yield t.signIn('grower@example.com')
   const response = yield t.client.post('/growers/1').send({name: 'Watsonia'})
   response.expect(200).expect('content-type', /json/)
+})
+
+test('updating creates an event', function *(t) {
+  yield t.signIn('grower@example.com')
+  const response = yield t.client.post('/growers/1').send({name: 'Test'})
+  response.expect(200)
+  const event = yield Event.where({growerId: 1}).find()
+  t.deepEqual(event.meta, {name: 'Test'})
+  t.is(event.userId, 5)
+  t.is(event.action, 'update')
+  t.is(event.growerId, 1)
+  t.is(event.productId, null)
 })
 
 // Create

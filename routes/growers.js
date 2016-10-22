@@ -1,6 +1,10 @@
 'use strict'
 
-const {Category, Grower, Product, UserGrower} = require('../db')
+const Event = require('../db/event')
+const Grower = require('../db/grower')
+const Product = require('../db/product')
+const Category = require('../db/category')
+const UserGrower = require('../db/user-grower')
 const {all, get, post} = require('koa-route')
 
 module.exports = [
@@ -80,12 +84,22 @@ module.exports = [
 
   // Update
   post('/growers/:id', function *() {
-    if (!this.state.canEdit) return this.unauthorized()
+    const {canEdit, currentUser, grower} = this.state
 
-    const {currentUser, grower} = this.state
-    yield grower.update(this.permit(
+    if (!canEdit) return this.unauthorized()
+
+    const values = this.permit(
       'active', 'name', 'email', 'url', 'location', 'description'
-    ), currentUser)
+    )
+
+    yield grower.update(values)
+    yield Event.create({
+      action: 'update',
+      userId: currentUser.id,
+      growerId: grower.id,
+      meta: JSON.stringify(values)
+    })
+
     this.body = {grower}
   }),
 

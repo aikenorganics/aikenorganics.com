@@ -4,9 +4,10 @@ const db = require('ozymandias/db/instance')
 
 class Model extends db.Model {
 
-  update (values, currentUser) {
-    values.updatedAt = new Date()
-    return super.update(values)
+  update (values) {
+    return super.update(Object.assign({
+      updatedAt: new Date()
+    }, values))
   }
 
 }
