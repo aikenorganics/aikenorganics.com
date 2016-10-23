@@ -5,12 +5,7 @@ const driver = require('../driver')
 const Product = require('../../db/product')
 
 test('edit cost', function *(assert) {
-  yield driver.visit('/signin')
-  yield driver.$('#email').sendKeys('admin@example.com')
-  yield driver.$('#password').sendKeys('password')
-  yield driver.$('#password').submit()
-  yield driver.wait(driver.present('#signout'))
-
+  yield driver.signIn('admin@example.com')
   yield driver.visit('/products/3/edit')
   yield driver.$('#cost').clear()
   yield driver.$('#cost').sendKeys('5.55')
@@ -21,12 +16,7 @@ test('edit cost', function *(assert) {
 })
 
 test('deactivate product', function *(assert) {
-  yield driver.visit('/signin')
-  yield driver.$('#email').sendKeys('admin@example.com')
-  yield driver.$('#password').sendKeys('password')
-  yield driver.$('#password').submit()
-  yield driver.wait(driver.present('#signout'))
-
+  yield driver.signIn('admin@example.com')
   yield driver.visit('/products/1/edit')
   yield driver.$('#deactivate').click()
   yield driver.wait(driver.present('#activate'))
@@ -35,12 +25,7 @@ test('deactivate product', function *(assert) {
 })
 
 test('activate product', function *(assert) {
-  yield driver.visit('/signin')
-  yield driver.$('#email').sendKeys('admin@example.com')
-  yield driver.$('#password').sendKeys('password')
-  yield driver.$('#password').submit()
-  yield driver.wait(driver.present('#signout'))
-
+  yield driver.signIn('admin@example.com')
   yield driver.visit('/products/8/edit')
   yield driver.$('#activate').click()
   yield driver.wait(driver.present('#deactivate'))
