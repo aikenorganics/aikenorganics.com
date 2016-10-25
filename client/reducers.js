@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux'
+import {busy} from 'ozymandias/client/reducers'
 
-import busy from './reducers/busy'
 import cart from './reducers/cart'
 import categories from './reducers/categories'
 import currentUser from './reducers/current-user'
