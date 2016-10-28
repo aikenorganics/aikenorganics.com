@@ -1,16 +1,19 @@
 import {combineReducers} from 'redux'
-import {busy} from 'ozymandias/client/reducers'
+
+import {
+  busy,
+  errors,
+  message
+} from 'ozymandias/client/reducers'
 
 import cart from './reducers/cart'
 import categories from './reducers/categories'
 import currentUser from './reducers/current-user'
-import errors from './reducers/errors'
 import grower from './reducers/grower'
 import growers from './reducers/growers'
 import location from './reducers/location'
 import locations from './reducers/locations'
 import market from './reducers/market'
-import message from './reducers/message'
 import order from './reducers/order'
 import page from './reducers/page'
 import payments from './reducers/payments'
