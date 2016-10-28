@@ -1,53 +1,30 @@
-import React, {PureComponent, PropTypes} from 'react'
+import React from 'react'
 import {createLocation, navigate, updateLocation} from '../../../actions'
 
-export default class Form extends PureComponent {
+export default ({busy, location}) => {
+  let name = null
 
-  static propTypes () {
-    return {
-      location: PropTypes.object
-    }
-  }
-
-  constructor (props) {
-    super(props)
-    const {name} = props.location || {}
-    this.state = {
-      name: name || ''
-    }
-  }
-
-  save (event) {
+  const save = (event) => {
     event.preventDefault()
-    if (this.props.location) {
-      const {id} = this.props.location
-      updateLocation(id, this.state).then(() => {
-        navigate('/admin/locations')
-      }).catch(() => {})
-    } else {
-      createLocation(this.state).then(() => {
-        navigate('/admin/locations')
-      }).catch(() => {})
-    }
+    const values = {name: name.value}
+    const request = location
+      ? updateLocation(location.id, values)
+      : createLocation(values)
+    request.then(() => navigate('/admin/locations')).catch(() => {})
   }
 
-  render () {
-    const {name} = this.state
-    const {busy} = this.props
-
-    return <form onSubmit={(event) => this.save(event)}>
-      <div className='form-group'>
-        <label htmlFor='name'>Name</label>
-        <input autoFocus type='text' id='name' className='form-control' required value={name}
-          onChange={(event) => this.setState({name: event.target.value})} disabled={busy} />
-      </div>
-      <p className='text-xs-right'>
-        <button type='submit' className='btn btn-success' disabled={busy}>
-          Save
-        </button>
-      </p>
-    </form>
-  }
-
+  return <form onSubmit={save}>
+    <div className='form-group'>
+      <label htmlFor='name'>Name</label>
+      <input autoFocus type='text' id='name' className='form-control' required
+        defaultValue={location ? location.name : ''}
+        ref={(input) => { name = input }}
+        disabled={busy} />
+    </div>
+    <p className='text-xs-right'>
+      <button type='submit' className='btn btn-success' disabled={busy}>
+        Save
+      </button>
+    </p>
+  </form>
 }
-
