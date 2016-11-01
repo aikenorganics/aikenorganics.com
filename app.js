@@ -14,6 +14,16 @@ app.use(require('./cart'))
 app.use(require('./layout'))
 app.use(require('./market'))
 
+// CSP
+app.use(function *(next) {
+  yield next
+  if (!this.response.is('html')) return
+  this.csp('img-src', 'https://q.stripe.com')
+  this.csp('frame-src', 'https://checkout.stripe.com')
+  this.csp('script-src', 'https://checkout.stripe.com')
+  this.csp('connect-src', 'https://checkout.stripe.com')
+})
+
 // Routes
 for (const route of [].concat(
   require('./routes/admin'),
