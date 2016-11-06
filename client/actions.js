@@ -24,23 +24,6 @@ export const UPDATE_USER = 'UPDATE_USER'
 export const UPDATE_MARKET = 'UPDATE_MARKET'
 export const ADD_PAYMENT = 'ADD_PAYMENT'
 
-// Signin
-
-export const signin = (values) => {
-  busy()
-  return post('/session', values).then(done).catch(done)
-}
-
-export const forgot = (values) => {
-  busy()
-  return post('/session/forgot', values).then(done).catch(done)
-}
-
-export const reset = (token, values) => {
-  busy()
-  return post(`/session/reset/${token}`, values).then(done).catch(done)
-}
-
 // Signup
 
 export const signup = (values) => {
