@@ -2,7 +2,7 @@ import React from 'react'
 import Nav from './nav'
 import Link from './link'
 import Footer from './footer'
-import Signin from './session/signin'
+import Signin from 'ozymandias/client/views/signin'
 import Message from './message'
 import logoPath from 'public/img/logo-small.png'
 
@@ -27,7 +27,11 @@ const main = (props) => {
           </div>
           : <div>
             <p className='text-xs-center'>You need to sign in to access to this page.</p>
-            <Signin {...props} />
+            <div className='row'>
+              <div className='col-md-6 offset-md-3'>
+                <Signin {...props} />
+              </div>
+            </div>
           </div>
         }
       </main>
