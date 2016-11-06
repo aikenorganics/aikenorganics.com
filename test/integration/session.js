@@ -6,7 +6,7 @@ const User = require('ozymandias/user')
 const Token = require('ozymandias/token')
 
 test('sign in', function *(assert) {
-  yield driver.visit('/signin')
+  yield driver.visit('/session/signin')
   yield driver.$('#email').sendKeys('admin@example.com')
   yield driver.$('#password').sendKeys('password')
   yield driver.$('#password').submit()
@@ -14,7 +14,7 @@ test('sign in', function *(assert) {
 })
 
 test('incorrect password', function *(assert) {
-  yield driver.visit('/signin')
+  yield driver.visit('/session/signin')
   yield driver.$('#email').sendKeys('admin@example.com')
   yield driver.$('#password').sendKeys('wrong')
   yield driver.$('#password').submit()
@@ -27,7 +27,7 @@ test('incorrect password', function *(assert) {
 })
 
 test('email not found', function *(assert) {
-  yield driver.visit('/signin')
+  yield driver.visit('/session/signin')
   yield driver.$('#email').sendKeys('wrong@example.com')
   yield driver.$('#password').sendKeys('password')
   yield driver.$('#password').submit()
@@ -41,7 +41,7 @@ test('email not found', function *(assert) {
 
 test('forgot password', function *(assert) {
   // Send Token
-  yield driver.visit('/signin/forgot')
+  yield driver.visit('/session/forgot')
   yield driver.$('#email').sendKeys('admin@example.com')
   yield driver.$('#email').submit()
 

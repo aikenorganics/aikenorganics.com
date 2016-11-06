@@ -48,7 +48,7 @@ export default ({currentUser}) => {
         {currentUser
           ? null
           : <li className='nav-item'>
-            <Link className='nav-link' href='/signin'>Sign In</Link>
+            <Link className='nav-link' href='/session/signin'>Sign In</Link>
           </li>
         }
         {currentUser

@@ -33,7 +33,6 @@ for (const route of [].concat(
   require('./routes/orders'),
   require('./routes/products'),
   require('./routes/settings'),
-  require('./routes/signin'),
   require('./routes/signup'),
   require('ozymandias/session')
 )) app.use(route)

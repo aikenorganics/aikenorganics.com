@@ -53,8 +53,8 @@ import AdminOrdersShow from './views/admin/orders/show'
 import Events from './views/admin/events/index'
 
 import Reset from './views/session/reset'
-import Signin from './views/signin/index'
-import Forgot from './views/signin/forgot'
+import Signin from './views/session/signin'
+import Forgot from './views/session/forgot'
 
 import Signup from './views/signup/index'
 import Settings from './views/settings/index'
@@ -67,8 +67,8 @@ export default (state) => {
     <Route path='' Component={App}>
       <Route path='/' Component={Index} />
       <Route path='/learn' Component={Learn} />
-      <Route path='/signin' Component={Signin} />
-      <Route path='/signin/forgot' Component={Forgot} />
+      <Route path='/session/signin' Component={Signin} />
+      <Route path='/session/forgot' Component={Forgot} />
       <Route path='/session/reset/:tokenId' Component={Reset} />
       <Route path='/signup' Component={Signup} />
       <Route path='/admin/' Component={AdminNav}>

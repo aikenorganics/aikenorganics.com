@@ -46,7 +46,7 @@ class Driver {
 
   signIn (email) {
     return co(function *() {
-      yield this.visit('/signin')
+      yield this.visit('/session/signin')
       yield this.$('#email').sendKeys('admin@example.com')
       yield this.$('#password').sendKeys('password')
       yield this.$('#password').submit()

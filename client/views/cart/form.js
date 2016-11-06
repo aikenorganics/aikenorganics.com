@@ -22,7 +22,7 @@ export default ({busy, cart, currentUser, open, product: {active, available, id}
   }
 
   if (!currentUser) {
-    return <Link href='/signin' className='btn btn-sm btn-primary'>Sign In</Link>
+    return <Link href='/session/signin' className='btn btn-sm btn-primary'>Sign In</Link>
   }
 
   return <span className='form-inline'>

@@ -2,7 +2,7 @@ import React from 'react'
 import Nav from './nav'
 import Link from './link'
 import Footer from './footer'
-import Signin from './signin/index'
+import Signin from './session/signin'
 import Message from './message'
 import logoPath from 'public/img/logo-small.png'
 
