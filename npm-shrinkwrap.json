@@ -332,9 +332,9 @@
       "resolved": "https://registry.npmjs.org/bugsnag/-/bugsnag-1.8.0.tgz"
     },
     "bugsnag-js": {
-      "version": "3.0.5",
-      "from": "bugsnag-js@3.0.5",
-      "resolved": "https://registry.npmjs.org/bugsnag-js/-/bugsnag-js-3.0.5.tgz"
+      "version": "3.0.6",
+      "from": "bugsnag-js@latest",
+      "resolved": "https://registry.npmjs.org/bugsnag-js/-/bugsnag-js-3.0.6.tgz"
     },
     "builtin-modules": {
       "version": "1.1.1",
