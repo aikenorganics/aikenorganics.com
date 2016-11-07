@@ -45,7 +45,7 @@
     "deep-freeze": "0.0.1",
     "faucet": "0.0.1",
     "selenium-webdriver": "3.0.0-beta-3",
-    "standard": "8.4.0",
+    "standard": "8.5.0",
     "tape": "4.6.2",
     "test-client": "1.0.1"
   }
