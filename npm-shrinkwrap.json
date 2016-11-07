@@ -1259,6 +1259,11 @@
       "from": "lodash.clonedeep@>=4.3.2 <5.0.0",
       "resolved": "https://registry.npmjs.org/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz"
     },
+    "lodash.isplainobject": {
+      "version": "4.0.6",
+      "from": "lodash.isplainobject@>=4.0.6 <5.0.0",
+      "resolved": "https://registry.npmjs.org/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz"
+    },
     "lodash.memoize": {
       "version": "3.0.4",
       "from": "lodash.memoize@>=3.0.3 <3.1.0",
@@ -2014,15 +2019,10 @@
       "resolved": "https://registry.npmjs.org/strip-indent/-/strip-indent-1.0.1.tgz"
     },
     "stripe": {
-      "version": "4.11.0",
-      "from": "stripe@4.11.0",
-      "resolved": "https://registry.npmjs.org/stripe/-/stripe-4.11.0.tgz",
+      "version": "4.12.0",
+      "from": "stripe@latest",
+      "resolved": "https://registry.npmjs.org/stripe/-/stripe-4.12.0.tgz",
       "dependencies": {
-        "lodash": {
-          "version": "4.16.4",
-          "from": "lodash@>=4.11.1 <5.0.0",
-          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.16.4.tgz"
-        },
         "qs": {
           "version": "2.4.2",
           "from": "qs@>=2.4.2 <3.0.0",

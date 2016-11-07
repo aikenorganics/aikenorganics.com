@@ -38,7 +38,7 @@
     "react": "15.3.2",
     "react-dom": "15.3.2",
     "redux": "3.6.0",
-    "stripe": "4.11.0"
+    "stripe": "4.12.0"
   },
   "devDependencies": {
     "co": "4.6.0",
