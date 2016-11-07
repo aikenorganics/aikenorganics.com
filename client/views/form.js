@@ -27,7 +27,7 @@ export default class Form extends PureComponent {
   }
 
   render () {
-    return <form className='form-inline'
+    return <form
       onSubmit={(event) => this.submit(event)}
       onChange={(event) => this.change(event)}
       onBlur={(event) => this.blur(event)}
