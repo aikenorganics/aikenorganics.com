@@ -1,4 +1,4 @@
-import './errors'
+import 'ozymandias/client/errors'
 import 'ozymandias/client/analytics'
 import 'es6-promise/auto'
 import React from 'react'
