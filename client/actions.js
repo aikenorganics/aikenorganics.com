@@ -31,13 +31,6 @@ export const signup = (values) => {
   return post('/signup', values).then(done).catch(done)
 }
 
-// Signout
-
-export const signout = () => {
-  busy()
-  return del('/session').then(done).catch(done)
-}
-
 // Market
 
 export const updateMarket = (values) => {
