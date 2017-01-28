@@ -1,2 +1,2 @@
-export * from 'ozymandias/client/views/errors'
-
+import Errors from 'ozymandias/client/views/errors'
+export default Errors
