@@ -1359,9 +1359,9 @@
       "resolved": "https://registry.npmjs.org/module-deps/-/module-deps-4.0.8.tgz"
     },
     "moment": {
-      "version": "2.15.2",
+      "version": "2.17.1",
       "from": "moment@latest",
-      "resolved": "https://registry.npmjs.org/moment/-/moment-2.15.2.tgz"
+      "resolved": "https://registry.npmjs.org/moment/-/moment-2.17.1.tgz"
     },
     "ms": {
       "version": "0.7.1",
@@ -2051,9 +2051,9 @@
       "resolved": "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-1.0.4.tgz"
     },
     "stripe": {
-      "version": "4.12.0",
+      "version": "4.15.0",
       "from": "stripe@latest",
-      "resolved": "https://registry.npmjs.org/stripe/-/stripe-4.12.0.tgz",
+      "resolved": "https://registry.npmjs.org/stripe/-/stripe-4.15.0.tgz",
       "dependencies": {
         "qs": {
           "version": "2.4.2",

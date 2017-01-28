@@ -32,13 +32,13 @@
     "bugsnag-js": "3.0.7",
     "es6-promise": "4.0.5",
     "marked": "0.3.6",
-    "moment": "2.15.2",
+    "moment": "2.17.1",
     "object-assign": "4.1.1",
     "ozymandias": "github:braddunbar/ozymandias#v1.3.16",
     "react": "15.4.2",
     "react-dom": "15.4.2",
     "redux": "3.6.0",
-    "stripe": "4.12.0"
+    "stripe": "4.15.0"
   },
   "devDependencies": {
     "co": "4.6.0",
