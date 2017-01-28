@@ -1463,9 +1463,9 @@
       "resolved": "https://registry.npmjs.org/oauth-sign/-/oauth-sign-0.8.2.tgz"
     },
     "object-assign": {
-      "version": "4.1.0",
-      "from": "object-assign@4.1.0",
-      "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.0.tgz"
+      "version": "4.1.1",
+      "from": "object-assign@latest",
+      "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz"
     },
     "object-tojson": {
       "version": "1.0.1",
@@ -1621,7 +1621,14 @@
     "pg-pool": {
       "version": "1.6.0",
       "from": "pg-pool@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/pg-pool/-/pg-pool-1.6.0.tgz"
+      "resolved": "https://registry.npmjs.org/pg-pool/-/pg-pool-1.6.0.tgz",
+      "dependencies": {
+        "object-assign": {
+          "version": "4.1.0",
+          "from": "object-assign@4.1.0",
+          "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.0.tgz"
+        }
+      }
     },
     "pg-types": {
       "version": "1.11.0",
