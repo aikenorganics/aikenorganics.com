@@ -34,7 +34,7 @@
     "marked": "0.3.6",
     "moment": "2.15.2",
     "object-assign": "4.1.0",
-    "ozymandias": "github:braddunbar/ozymandias#v1.3.14",
+    "ozymandias": "github:braddunbar/ozymandias#v1.3.15",
     "react": "15.4.0",
     "react-dom": "15.4.0",
     "redux": "3.6.0",
