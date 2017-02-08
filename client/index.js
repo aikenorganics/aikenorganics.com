@@ -1,19 +1,23 @@
 import 'ozymandias/client/errors'
 import 'ozymandias/client/analytics'
 import 'es6-promise/auto'
-import React from 'react'
+import React, {Component} from 'react'
 import store from './store'
 import Routes from './routes'
 import {render} from 'react-dom'
 
-// The element to render components into.
-const root = document.getElementById('root')
+class App extends Component {
 
-// Update the DOM
-const update = () => render(<Routes {...store.getState()} />, root)
+  constructor (props) {
+    super(props)
+    this.state = store.getState()
+    store.subscribe(() => this.setState(store.getState()))
+  }
 
-// Render when the store is updated.
-store.subscribe(update)
+  render () {
+    return <Routes {...this.state} />
+  }
 
-// Kick the tires
-if (root) update()
+}
+
+render(<App />, document.getElementById('root'))
