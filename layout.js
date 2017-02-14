@@ -17,11 +17,11 @@ module.exports = function *(next) {
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no'>
   <title>Aiken Organics</title>
-  <link rel='stylesheet' href='${assets.path('css/app.css')}' integrity='${assets.integrity('css/app.css')}'>
+  <link rel='stylesheet' href='${assets.path('css/app.css')}' integrity='${assets.integrity('css/app.css')}' crossorigin='anonymous'>
   <link rel='shortcut icon' href='${assets.path('favicon.ico')}'>
   <link rel='apple-touch-icon' href='${assets.path('apple-touch-icon.png')}'>
   ${raw(this.json('state', this.state.client || {}))}
-  <script defer src='${assets.path('js/app.js')}' integrity='${assets.integrity('js/app.js')}'></script>
+  <script defer src='${assets.path('js/app.js')}' integrity='${assets.integrity('js/app.js')}' crossorigin='anonymous'></script>
   <script defer src='https://www.google-analytics.com/analytics.js'></script>
 </head>
 <body>
