@@ -49,7 +49,7 @@ module.exports = [
     const page = +(this.query.page || 1)
 
     // Include product orders?
-    if (full) scope.include({productOrders: 'product'})
+    if (full) scope.include({productOrders: {product: 'grower'}})
 
     const [orders, locations, products] = yield Promise.all([
       scope.order(['createdAt', 'descending']).paginate(page, 50),

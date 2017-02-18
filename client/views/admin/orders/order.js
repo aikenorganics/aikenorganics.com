@@ -18,7 +18,8 @@ export default ({order}) => {
       <table className='table'>
         <thead>
           <tr>
-            <th>Name</th>
+            <th />
+            <th />
             <th>Cost</th>
             <th>Quantity</th>
             <th>Total</th>
@@ -34,6 +35,7 @@ export default ({order}) => {
                   : ''
                 }
               </td>
+              <td>{product.grower.name}</td>
               <td>${cost}</td>
               <td>{quantity}</td>
               <td>{total.toFixed(2)}</td>
