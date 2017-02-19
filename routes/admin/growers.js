@@ -24,7 +24,7 @@ module.exports = [
   get('/admin/growers/orders', function *() {
     const growers = yield Grower
     .where('exists(select id from products where reserved > 0 and grower_id = growers.id)')
-    .include('products').all()
+    .include('products').order('name').all()
     this.react({
       growers: growers.map((grower) => (
         Object.assign(grower.toJSON(), grower.slice('products'))
