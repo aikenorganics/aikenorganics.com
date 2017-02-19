@@ -2,11 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.4
--- Dumped by pg_dump version 9.5.4
+-- Dumped from database version 9.6.2
+-- Dumped by pg_dump version 9.6.2
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -25,6 +26,7 @@ CREATE DATABASE aikenorganics WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COL
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -757,77 +759,77 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: categories id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: events id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY events ALTER COLUMN id SET DEFAULT nextval('events_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: growers id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY growers ALTER COLUMN id SET DEFAULT nextval('suppliers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: locations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY locations ALTER COLUMN id SET DEFAULT nextval('locations_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: markets id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY markets ALTER COLUMN id SET DEFAULT nextval('markets_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: orders id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY orders ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: payments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY payments ALTER COLUMN id SET DEFAULT nextval('payments_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: product_orders id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY product_orders ALTER COLUMN id SET DEFAULT nextval('product_orders_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: products id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY products ALTER COLUMN id SET DEFAULT nextval('products_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: user_growers id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY user_growers ALTER COLUMN id SET DEFAULT nextval('user_growers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
@@ -1073,7 +1075,7 @@ SELECT pg_catalog.setval('users_id_seq', 7, true);
 
 
 --
--- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: categories categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY categories
@@ -1081,7 +1083,7 @@ ALTER TABLE ONLY categories
 
 
 --
--- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY events
@@ -1089,7 +1091,7 @@ ALTER TABLE ONLY events
 
 
 --
--- Name: locations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: locations locations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY locations
@@ -1097,7 +1099,7 @@ ALTER TABLE ONLY locations
 
 
 --
--- Name: markets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: markets markets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY markets
@@ -1105,7 +1107,7 @@ ALTER TABLE ONLY markets
 
 
 --
--- Name: migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: migrations migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY migrations
@@ -1113,7 +1115,7 @@ ALTER TABLE ONLY migrations
 
 
 --
--- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY orders
@@ -1121,7 +1123,7 @@ ALTER TABLE ONLY orders
 
 
 --
--- Name: product_orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: product_orders product_orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY product_orders
@@ -1129,7 +1131,7 @@ ALTER TABLE ONLY product_orders
 
 
 --
--- Name: products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: products products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY products
@@ -1137,7 +1139,7 @@ ALTER TABLE ONLY products
 
 
 --
--- Name: suppliers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: growers suppliers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY growers
@@ -1145,7 +1147,7 @@ ALTER TABLE ONLY growers
 
 
 --
--- Name: tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tokens tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tokens
@@ -1153,7 +1155,7 @@ ALTER TABLE ONLY tokens
 
 
 --
--- Name: user_growers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: user_growers user_growers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY user_growers
@@ -1161,7 +1163,7 @@ ALTER TABLE ONLY user_growers
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -1267,77 +1269,77 @@ CREATE UNIQUE INDEX users_lower_case_email_index ON users USING btree (lower((em
 
 
 --
--- Name: check_product_order; Type: TRIGGER; Schema: public; Owner: -
+-- Name: product_orders check_product_order; Type: TRIGGER; Schema: public; Owner: -
 --
 
 CREATE TRIGGER check_product_order BEFORE INSERT OR UPDATE ON product_orders FOR EACH ROW EXECUTE PROCEDURE check_product_order();
 
 
 --
--- Name: decrement_reserved; Type: TRIGGER; Schema: public; Owner: -
+-- Name: product_orders decrement_reserved; Type: TRIGGER; Schema: public; Owner: -
 --
 
 CREATE TRIGGER decrement_reserved AFTER DELETE ON product_orders FOR EACH ROW EXECUTE PROCEDURE decrement_reserved();
 
 
 --
--- Name: delete_product_orders; Type: TRIGGER; Schema: public; Owner: -
+-- Name: orders delete_product_orders; Type: TRIGGER; Schema: public; Owner: -
 --
 
 CREATE TRIGGER delete_product_orders BEFORE DELETE ON orders FOR EACH ROW EXECUTE PROCEDURE delete_product_orders();
 
 
 --
--- Name: increment_reserved; Type: TRIGGER; Schema: public; Owner: -
+-- Name: product_orders increment_reserved; Type: TRIGGER; Schema: public; Owner: -
 --
 
 CREATE TRIGGER increment_reserved AFTER INSERT ON product_orders FOR EACH ROW EXECUTE PROCEDURE increment_reserved();
 
 
 --
--- Name: set_product_order_cost; Type: TRIGGER; Schema: public; Owner: -
+-- Name: product_orders set_product_order_cost; Type: TRIGGER; Schema: public; Owner: -
 --
 
 CREATE TRIGGER set_product_order_cost BEFORE INSERT ON product_orders FOR EACH ROW EXECUTE PROCEDURE set_product_order_cost();
 
 
 --
--- Name: tidy_user; Type: TRIGGER; Schema: public; Owner: -
+-- Name: users tidy_user; Type: TRIGGER; Schema: public; Owner: -
 --
 
 CREATE TRIGGER tidy_user BEFORE INSERT OR UPDATE ON users FOR EACH ROW EXECUTE PROCEDURE tidy_user();
 
 
 --
--- Name: update_order_status; Type: TRIGGER; Schema: public; Owner: -
+-- Name: orders update_order_status; Type: TRIGGER; Schema: public; Owner: -
 --
 
 CREATE TRIGGER update_order_status AFTER UPDATE OF status ON orders FOR EACH ROW EXECUTE PROCEDURE update_status();
 
 
 --
--- Name: update_product_search; Type: TRIGGER; Schema: public; Owner: -
+-- Name: products update_product_search; Type: TRIGGER; Schema: public; Owner: -
 --
 
 CREATE TRIGGER update_product_search BEFORE INSERT OR UPDATE ON products FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('search', 'pg_catalog.simple', 'name');
 
 
 --
--- Name: update_reserved; Type: TRIGGER; Schema: public; Owner: -
+-- Name: product_orders update_reserved; Type: TRIGGER; Schema: public; Owner: -
 --
 
 CREATE TRIGGER update_reserved AFTER UPDATE ON product_orders FOR EACH ROW EXECUTE PROCEDURE update_reserved();
 
 
 --
--- Name: update_user_search; Type: TRIGGER; Schema: public; Owner: -
+-- Name: users update_user_search; Type: TRIGGER; Schema: public; Owner: -
 --
 
 CREATE TRIGGER update_user_search BEFORE INSERT OR UPDATE ON users FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('search', 'pg_catalog.simple', 'first', 'last', 'email');
 
 
 --
--- Name: events_grower_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: events events_grower_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY events
@@ -1345,7 +1347,7 @@ ALTER TABLE ONLY events
 
 
 --
--- Name: events_product_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: events events_product_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY events
@@ -1353,7 +1355,7 @@ ALTER TABLE ONLY events
 
 
 --
--- Name: events_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: events events_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY events
@@ -1361,7 +1363,7 @@ ALTER TABLE ONLY events
 
 
 --
--- Name: orders_location_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: orders orders_location_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY orders
@@ -1369,7 +1371,7 @@ ALTER TABLE ONLY orders
 
 
 --
--- Name: orders_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: orders orders_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY orders
@@ -1377,7 +1379,7 @@ ALTER TABLE ONLY orders
 
 
 --
--- Name: payments_order_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: payments payments_order_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY payments
@@ -1385,7 +1387,7 @@ ALTER TABLE ONLY payments
 
 
 --
--- Name: product_orders_order_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: product_orders product_orders_order_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY product_orders
@@ -1393,7 +1395,7 @@ ALTER TABLE ONLY product_orders
 
 
 --
--- Name: product_orders_product_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: product_orders product_orders_product_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY product_orders
@@ -1401,7 +1403,7 @@ ALTER TABLE ONLY product_orders
 
 
 --
--- Name: products_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: products products_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY products
@@ -1409,7 +1411,7 @@ ALTER TABLE ONLY products
 
 
 --
--- Name: products_grower_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: products products_grower_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY products
@@ -1417,7 +1419,7 @@ ALTER TABLE ONLY products
 
 
 --
--- Name: tokens_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: tokens tokens_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tokens
@@ -1425,7 +1427,7 @@ ALTER TABLE ONLY tokens
 
 
 --
--- Name: user_growers_grower_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: user_growers user_growers_grower_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY user_growers
@@ -1433,7 +1435,7 @@ ALTER TABLE ONLY user_growers
 
 
 --
--- Name: user_growers_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: user_growers user_growers_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY user_growers
