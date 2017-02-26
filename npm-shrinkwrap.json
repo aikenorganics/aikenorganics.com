@@ -152,9 +152,9 @@
       "resolved": "https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz"
     },
     "aws-sdk": {
-      "version": "2.10.0",
-      "from": "aws-sdk@2.10.0",
-      "resolved": "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.10.0.tgz",
+      "version": "2.20.0",
+      "from": "aws-sdk@2.20.0",
+      "resolved": "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.20.0.tgz",
       "dependencies": {
         "uuid": {
           "version": "3.0.0",
@@ -245,9 +245,9 @@
       "resolved": "https://registry.npmjs.org/browser-resolve/-/browser-resolve-1.11.2.tgz"
     },
     "browserify": {
-      "version": "14.0.0",
-      "from": "browserify@14.0.0",
-      "resolved": "https://registry.npmjs.org/browserify/-/browserify-14.0.0.tgz",
+      "version": "14.1.0",
+      "from": "browserify@14.1.0",
+      "resolved": "https://registry.npmjs.org/browserify/-/browserify-14.1.0.tgz",
       "dependencies": {
         "buffer": {
           "version": "5.0.5",
@@ -1123,9 +1123,9 @@
       "resolved": "https://registry.npmjs.org/jsonpointer/-/jsonpointer-4.0.0.tgz"
     },
     "JSONStream": {
-      "version": "1.3.0",
+      "version": "1.3.1",
       "from": "JSONStream@>=1.0.3 <2.0.0",
-      "resolved": "https://registry.npmjs.org/JSONStream/-/JSONStream-1.3.0.tgz"
+      "resolved": "https://registry.npmjs.org/JSONStream/-/JSONStream-1.3.1.tgz"
     },
     "jsprim": {
       "version": "1.3.1",
@@ -1143,9 +1143,9 @@
       "resolved": "https://registry.npmjs.org/kind-of/-/kind-of-3.1.0.tgz"
     },
     "koa": {
-      "version": "2.0.0",
-      "from": "koa@2.0.0",
-      "resolved": "https://registry.npmjs.org/koa/-/koa-2.0.0.tgz"
+      "version": "2.0.1",
+      "from": "koa@2.0.1",
+      "resolved": "https://registry.npmjs.org/koa/-/koa-2.0.1.tgz"
     },
     "koa-bodyparser": {
       "version": "3.2.0",
@@ -1528,19 +1528,34 @@
       "resolved": "https://registry.npmjs.org/osenv/-/osenv-0.1.4.tgz"
     },
     "ozymandias": {
-      "version": "1.5.0",
-      "from": "git://github.com/braddunbar/ozymandias.git#568b601ec1aa5e7c1a25b631ed5cb0399f726787",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#568b601ec1aa5e7c1a25b631ed5cb0399f726787",
+      "version": "1.5.1",
+      "from": "git://github.com/braddunbar/ozymandias.git#785a7d79557e5b7b0433a5c87bb1069d61ce41f7",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#785a7d79557e5b7b0433a5c87bb1069d61ce41f7",
       "dependencies": {
+        "bugsnag": {
+          "version": "1.9.1",
+          "from": "bugsnag@1.9.1",
+          "resolved": "https://registry.npmjs.org/bugsnag/-/bugsnag-1.9.1.tgz"
+        },
+        "bugsnag-js": {
+          "version": "3.1.0",
+          "from": "bugsnag-js@3.1.0",
+          "resolved": "https://registry.npmjs.org/bugsnag-js/-/bugsnag-js-3.1.0.tgz"
+        },
         "ms": {
           "version": "0.7.2",
           "from": "ms@0.7.2",
           "resolved": "https://registry.npmjs.org/ms/-/ms-0.7.2.tgz"
         },
         "resolve": {
-          "version": "1.2.0",
-          "from": "resolve@1.2.0",
-          "resolved": "https://registry.npmjs.org/resolve/-/resolve-1.2.0.tgz"
+          "version": "1.3.1",
+          "from": "resolve@1.3.1",
+          "resolved": "https://registry.npmjs.org/resolve/-/resolve-1.3.1.tgz"
+        },
+        "rimraf": {
+          "version": "2.6.1",
+          "from": "rimraf@2.6.1",
+          "resolved": "https://registry.npmjs.org/rimraf/-/rimraf-2.6.1.tgz"
         }
       }
     },
@@ -1588,6 +1603,11 @@
       "version": "1.0.1",
       "from": "path-is-absolute@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/path-is-absolute/-/path-is-absolute-1.0.1.tgz"
+    },
+    "path-parse": {
+      "version": "1.0.5",
+      "from": "path-parse@>=1.0.5 <2.0.0",
+      "resolved": "https://registry.npmjs.org/path-parse/-/path-parse-1.0.5.tgz"
     },
     "path-platform": {
       "version": "0.11.15",
@@ -1979,9 +1999,9 @@
       "resolved": "https://registry.npmjs.org/split/-/split-1.0.0.tgz"
     },
     "sql": {
-      "version": "0.73.0",
-      "from": "sql@0.73.0",
-      "resolved": "https://registry.npmjs.org/sql/-/sql-0.73.0.tgz",
+      "version": "0.74.0",
+      "from": "sql@0.74.0",
+      "resolved": "https://registry.npmjs.org/sql/-/sql-0.74.0.tgz",
       "dependencies": {
         "lodash": {
           "version": "4.1.0",
