@@ -15,13 +15,13 @@ app.use(require('./layout'))
 app.use(require('./market'))
 
 // CSP
-app.use(function *(next) {
-  yield next
-  if (!this.response.is('html')) return
-  this.csp('img-src', 'https://q.stripe.com')
-  this.csp('frame-src', 'https://checkout.stripe.com')
-  this.csp('script-src', 'https://checkout.stripe.com')
-  this.csp('connect-src', 'https://checkout.stripe.com')
+app.use(async (_, next) => {
+  await next()
+  if (!_.response.is('html')) return
+  _.csp('img-src', 'https://q.stripe.com')
+  _.csp('frame-src', 'https://checkout.stripe.com')
+  _.csp('script-src', 'https://checkout.stripe.com')
+  _.csp('connect-src', 'https://checkout.stripe.com')
 })
 
 // Routes
@@ -38,12 +38,12 @@ for (const route of [].concat(
 )) app.use(route)
 
 // Home
-app.use(get('/', function *() { this.react() }))
+app.use(get('/', async (_) => { _.react() }))
 
 // Learn
-app.use(get('/learn', function *() { this.react() }))
+app.use(get('/learn', async (_) => { _.react() }))
 
 // 404
-app.use(function *() {
-  this.notfound()
+app.use(async (_) => {
+  _.notfound()
 })

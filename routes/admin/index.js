@@ -4,9 +4,9 @@ const {all} = require('koa-route')
 
 module.exports = [
 
-  all('/admin', function *(next) {
-    if (!this.state.admin) return this.unauthorized()
-    yield next
+  all('/admin', async (_, next) => {
+    if (!_.state.admin) return _.unauthorized()
+    await next()
   }, {end: false})
 
 ].concat(

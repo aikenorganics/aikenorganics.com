@@ -6,19 +6,19 @@ const {del, get, post} = require('koa-route')
 module.exports = [
 
   // Index
-  get('/admin/users', function *() {
+  get('/admin/users', async (_) => {
     let scope = User
 
     // Search
-    const {search} = this.query
+    const {search} = _.query
     if (search) scope = scope.search(search)
 
     // Pagination
-    const page = +(this.query.page || 1)
+    const page = +(_.query.page || 1)
 
-    const users = yield scope.order('email').paginate(page, 100)
+    const users = await scope.order('email').paginate(page, 100)
 
-    this.react({
+    _.react({
       more: users.more,
       page,
       search,
@@ -27,58 +27,58 @@ module.exports = [
   }),
 
   // Emails
-  get('/admin/users/emails', function *() {
-    const users = yield User.order('email').all()
-    this.react({
+  get('/admin/users/emails', async (_) => {
+    const users = await User.order('email').all()
+    _.react({
       emails: users.map(({email}) => email)
     })
   }),
 
   // Edit
-  get('/admin/users/:id/edit', function *(id) {
-    const user = yield User.select(`exists(
+  get('/admin/users/:id/edit', async (_, id) => {
+    const user = await User.select(`exists(
       select id from orders where user_id = users.id
     ) as "hasOrder"`).find(id)
-    this.react({user})
+    _.react({user})
   }),
 
   // New
-  get('/admin/users/new', function *() {
-    this.react()
+  get('/admin/users/new', async (_) => {
+    _.react()
   }),
 
   // Create
-  post('/admin/users', function *() {
-    const user = yield User.create(this.permit(
+  post('/admin/users', async (_) => {
+    const user = await User.create(_.permit(
       'email', 'first', 'last', 'phone', 'memberUntil'
     ))
-    this.body = {user}
+    _.body = {user}
   }),
 
   // Update
-  post('/admin/users/:id', function *(id) {
-    const user = yield User.find(id)
-    if (!user) return this.notfound()
-    yield user.update(this.permit(
+  post('/admin/users/:id', async (_, id) => {
+    const user = await User.find(id)
+    if (!user) return _.notfound()
+    await user.update(_.permit(
       'email', 'first', 'last', 'phone', 'isAdmin', 'memberUntil'
     ))
-    this.body = {user}
+    _.body = {user}
   }),
 
   // Image
-  post('/admin/users/:id/image', function *(id) {
-    const user = yield User.find(id)
-    if (!user) return this.notfound()
-    yield user.uploadImage(this.req)
-    this.body = {user}
+  post('/admin/users/:id/image', async (_, id) => {
+    const user = await User.find(id)
+    if (!user) return _.notfound()
+    await user.uploadImage(_.req)
+    _.body = {user}
   }),
 
   // Delete
-  del('/admin/users/:id', function *(id) {
-    const user = yield User.find(id)
-    if (!user) return this.notfound()
-    yield user.destroy()
-    this.body = {}
+  del('/admin/users/:id', async (_, id) => {
+    const user = await User.find(id)
+    if (!user) return _.notfound()
+    await user.destroy()
+    _.body = {}
   })
 
 ]

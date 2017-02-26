@@ -5,58 +5,58 @@ const test = require('../test')
 
 // Current
 
-test('GET /orders/current is a 401 logged out', function *(t) {
-  const response = yield t.client.get('/orders/current').send()
+test('GET /orders/current is a 401 logged out', async (t) => {
+  const response = await t.client.get('/orders/current').send()
   response.assert(401)
 })
 
-test('GET /orders/current is a 200', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client.get('/orders/current').send()
+test('GET /orders/current is a 200', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client.get('/orders/current').send()
   response.assert(200)
 })
 
-test('GET /orders/current with no order', function *(t) {
-  yield t.signIn('finn@example.com')
-  const response = yield t.client.get('/orders/current').send()
+test('GET /orders/current with no order', async (t) => {
+  await t.signIn('finn@example.com')
+  const response = await t.client.get('/orders/current').send()
   response.assert(200)
 })
 
 // Cancel
 
-test('DELETE /orders/:id is a 401 logged out', function *(t) {
-  const response = yield t.client.delete('/orders/2').send()
+test('DELETE /orders/:id is a 401 logged out', async (t) => {
+  const response = await t.client.delete('/orders/2').send()
   response.assert(401)
 })
 
-test('DELETE /orders/:id is a 401 when closed', function *(t) {
-  const market = yield Market.find(1)
-  yield market.update({open: false})
-  yield t.signIn('user@example.com')
-  const response = yield t.client.delete('/orders/2').send()
+test('DELETE /orders/:id is a 401 when closed', async (t) => {
+  const market = await Market.find(1)
+  await market.update({open: false})
+  await t.signIn('user@example.com')
+  const response = await t.client.delete('/orders/2').send()
   response.assert(401)
 })
 
-test('DELETE /orders/:id is a 200', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client.delete('/orders/2').send()
+test('DELETE /orders/:id is a 200', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client.delete('/orders/2').send()
   response.assert(200).assert('content-type', /json/)
-  const order = yield Order.find(2)
+  const order = await Order.find(2)
   t.ok(order == null, 'the order was deleted')
 })
 
-test('Canceling a missing order returns a 404', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client
+test('Canceling a missing order returns a 404', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client
     .delete('/orders/123456789')
     .set('accept', 'application/json')
     .send()
   response.assert(404).assert('content-type', /json/)
 })
 
-test('Cannot cancel someone else\'s order', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client
+test('Cannot cancel someone else\'s order', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client
     .delete('/orders/1')
     .set('accept', 'application/json')
     .send()
@@ -65,14 +65,14 @@ test('Cannot cancel someone else\'s order', function *(t) {
 
 // Update
 
-test('POST /orders/:id is a 401 logged out', function *(t) {
-  const response = yield t.client.post('/orders/2').send()
+test('POST /orders/:id is a 401 logged out', async (t) => {
+  const response = await t.client.post('/orders/2').send()
   response.assert(401)
 })
 
-test('POST /orders/:id is a 200', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client.post('/orders/2').send({
+test('POST /orders/:id is a 200', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client.post('/orders/2').send({
     locationId: 2,
     status: 'canceled',
     notes: 'updated'
@@ -85,29 +85,29 @@ test('POST /orders/:id is a 200', function *(t) {
   t.is(status, 'open')
   t.is(notes, '')
 
-  const order = yield Order.find(2)
+  const order = await Order.find(2)
   t.is(order.locationId, 2)
   t.is(order.status, 'open')
   t.is(order.notes, '')
 })
 
-test('Cannout update an order when the market is closed', function *(t) {
-  const market = yield Market.find(1)
-  yield market.update({open: false})
-  yield t.signIn('user@example.com')
-  const response = yield t.client.post('/orders/2').send({locationId: 2})
+test('Cannout update an order when the market is closed', async (t) => {
+  const market = await Market.find(1)
+  await market.update({open: false})
+  await t.signIn('user@example.com')
+  const response = await t.client.post('/orders/2').send({locationId: 2})
   response.assert(401)
 })
 
-test('Cannout update someone else\'s order', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client.post('/orders/1').send({locationId: 2})
+test('Cannout update someone else\'s order', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client.post('/orders/1').send({locationId: 2})
   response.assert(401)
 })
 
-test('Admins can update someone else\'s order', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.post('/orders/5').send({
+test('Admins can update someone else\'s order', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.post('/orders/5').send({
     locationId: 2,
     status: 'canceled',
     notes: 'updated'
@@ -120,35 +120,35 @@ test('Admins can update someone else\'s order', function *(t) {
   t.is(notes, 'updated')
   t.is(status, 'canceled')
 
-  const order = yield Order.find(5)
+  const order = await Order.find(5)
   t.is(order.locationId, 2)
   t.is(order.status, 'canceled')
   t.is(order.notes, 'updated')
 })
 
-test('Admins can update orders when the market is closed', function *(t) {
-  const market = yield Market.find(1)
-  yield market.update({open: false})
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.post('/orders/5').send({locationId: 2})
+test('Admins can update orders when the market is closed', async (t) => {
+  const market = await Market.find(1)
+  await market.update({open: false})
+  await t.signIn('admin@example.com')
+  const response = await t.client.post('/orders/5').send({locationId: 2})
   response.assert(200)
 })
 
-test('Updating a missing order returns a 404', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client.post('/orders/123456789').send({locationId: 2})
+test('Updating a missing order returns a 404', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client.post('/orders/123456789').send({locationId: 2})
   response.assert(404)
 })
 
 // Previous
 
-test('GET /orders/previous is a 401 logged out', function *(t) {
-  const response = yield t.client.get('/orders/previous').send()
+test('GET /orders/previous is a 401 logged out', async (t) => {
+  const response = await t.client.get('/orders/previous').send()
   response.assert(401)
 })
 
-test('GET /orders/previous', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/orders/previous').send()
+test('GET /orders/previous', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/orders/previous').send()
   response.assert(200)
 })

@@ -5,23 +5,23 @@ const {get} = require('koa-route')
 
 module.exports = [
 
-  get('/admin/products', function *() {
+  get('/admin/products', async (_) => {
     const scope = Product.include('grower')
 
     // Oversold?
-    const oversold = this.query.oversold === '1'
+    const oversold = _.query.oversold === '1'
     if (oversold) scope.where('reserved > supply')
 
     // Search
-    const {search} = this.query
+    const {search} = _.query
     if (search) scope.search(search)
 
     // Pagination
-    const page = +(this.query.page || 1)
+    const page = +(_.query.page || 1)
 
-    const products = yield scope.order('name').paginate(page, 100)
+    const products = await scope.order('name').paginate(page, 100)
 
-    this.react({
+    _.react({
       more: products.more,
       oversold,
       page,

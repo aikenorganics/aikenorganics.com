@@ -5,13 +5,13 @@ const {get} = require('koa-route')
 
 module.exports = [
 
-  get('/market', function *() {
-    const {newsHtml} = this.state.market
-    const products = yield Product.include('grower').join('grower')
+  get('/market', async (_) => {
+    const {newsHtml} = _.state.market
+    const products = await Product.include('grower').join('grower')
     .where({active: true, featured: true, grower: {active: true}})
     .all()
 
-    this.react({newsHtml, products})
+    _.react({newsHtml, products})
   })
 
 ]

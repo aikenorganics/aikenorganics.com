@@ -6,30 +6,30 @@ const {del, post} = require('koa-route')
 module.exports = [
 
   // Create
-  post('/admin/product-orders', function *() {
-    const {id} = yield ProductOrder.create(this.permit(
+  post('/admin/product-orders', async (_) => {
+    const {id} = await ProductOrder.create(_.permit(
       'orderId', 'quantity', 'productId'
     ))
-    this.body = {
-      productOrder: yield ProductOrder.include('product').find(id)
+    _.body = {
+      productOrder: await ProductOrder.include('product').find(id)
     }
   }),
 
   // Delete
-  del('/admin/product-orders/:id', function *(id) {
-    const productOrder = yield ProductOrder.find(id)
-    if (!productOrder) return this.notfound()
-    yield productOrder.destroy()
-    this.body = {}
+  del('/admin/product-orders/:id', async (_, id) => {
+    const productOrder = await ProductOrder.find(id)
+    if (!productOrder) return _.notfound()
+    await productOrder.destroy()
+    _.body = {}
   }),
 
   // Update
-  post('/admin/product-orders/:id', function *(id) {
-    const productOrder = yield ProductOrder.find(id)
-    if (!productOrder) return this.notfound()
-    yield productOrder.update(this.permit('quantity', 'cost'))
-    this.body = {
-      productOrder: yield ProductOrder.include('product').find(id)
+  post('/admin/product-orders/:id', async (_, id) => {
+    const productOrder = await ProductOrder.find(id)
+    if (!productOrder) return _.notfound()
+    await productOrder.update(_.permit('quantity', 'cost'))
+    _.body = {
+      productOrder: await ProductOrder.include('product').find(id)
     }
   })
 

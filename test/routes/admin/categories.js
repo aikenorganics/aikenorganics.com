@@ -3,28 +3,28 @@
 const {Category} = require('../../../db')
 const test = require('../../test')
 
-test('GET /admin/categories/show is a 404 for missing ids', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/admin/categories/123456789').send()
+test('GET /admin/categories/show is a 404 for missing ids', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/admin/categories/123456789').send()
   response.assert(404)
 })
 
-test('GET /admin/categories/new is a 200', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/admin/categories/new').send()
+test('GET /admin/categories/new is a 200', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/admin/categories/new').send()
   response.assert(200)
 })
 
-test('GET /admin/categories/:id/edit is a 200', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/admin/categories/1/edit').send()
+test('GET /admin/categories/:id/edit is a 200', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/admin/categories/1/edit').send()
   response.assert(200)
 })
 
-test('POST /admin/categories is a 200', function *(t) {
-  yield t.signIn('admin@example.com')
+test('POST /admin/categories is a 200', async (t) => {
+  await t.signIn('admin@example.com')
 
-  const response = yield t.client
+  const response = await t.client
     .post('/admin/categories')
     .send({name: 'test', position: 2, meat: true})
   response.assert(200).assert('content-type', /json/)
@@ -35,10 +35,10 @@ test('POST /admin/categories is a 200', function *(t) {
   t.is(category.meat, true)
 })
 
-test('POST /admin/categories/:id is a 200', function *(t) {
-  yield t.signIn('admin@example.com')
+test('POST /admin/categories/:id is a 200', async (t) => {
+  await t.signIn('admin@example.com')
 
-  const response = yield t.client
+  const response = await t.client
     .post('/admin/categories/1')
     .send({name: 'test', position: 106, meat: true})
   response.assert(200).assert('content-type', /json/)
@@ -49,14 +49,14 @@ test('POST /admin/categories/:id is a 200', function *(t) {
   t.is(meat, true)
 })
 
-test('DELETE /admin/categories/:id is a 200', function *(t) {
-  yield t.signIn('admin@example.com')
+test('DELETE /admin/categories/:id is a 200', async (t) => {
+  await t.signIn('admin@example.com')
 
-  const response = yield t.client
+  const response = await t.client
     .delete('/admin/categories/6')
     .send()
   response.assert(200).assert('content-type', /json/)
 
-  const category = yield Category.find(6)
+  const category = await Category.find(6)
   t.is(category, null)
 })

@@ -5,24 +5,24 @@ const {get, post} = require('koa-route')
 
 module.exports = [
 
-  get('/signup', function *() { this.react() }),
+  get('/signup', async (_) => { _.react() }),
 
-  post('/signup', function *() {
-    const {email} = this.request.body
-    let user = yield User.where('trim(lower(email)) = trim(lower(?))', email).find()
+  post('/signup', async (_) => {
+    const {email} = _.request.body
+    let user = await User.where('trim(lower(email)) = trim(lower(?))', email).find()
 
     if (user) {
-      this.status = 422
-      this.body = {email: ['That user already exists! Is it you?']}
+      _.status = 422
+      _.body = {email: ['That user already exists! Is it you?']}
       return
     }
 
-    user = yield User.create(this.permit(
+    user = await User.create(_.permit(
       'first', 'last', 'phone', 'password', 'email'
     ))
 
-    this.signIn(user)
-    this.body = {}
+    _.signIn(user)
+    _.body = {}
   })
 
 ]

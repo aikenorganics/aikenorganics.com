@@ -9,7 +9,7 @@ require('./lib')
 require('./routes')
 require('./integration')
 
-test('teardown', function *(t) {
+test('teardown', async (t) => {
   driver.close()
   db.close()
 })

@@ -3,15 +3,15 @@
 const {Market} = require('../../../db')
 const test = require('../../test')
 
-test('GET /admin/market is a 200', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/admin/market').send()
+test('GET /admin/market is a 200', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/admin/market').send()
   response.assert(200)
 })
 
-test('POST /admin/market is a 200', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client
+test('POST /admin/market is a 200', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client
     .post('/admin/market')
     .set('accept', 'application/json')
     .send({open: true, message: 'test'})
@@ -20,13 +20,13 @@ test('POST /admin/market is a 200', function *(t) {
   t.is(id, 1)
   t.is(open, true)
   t.is(message, 'test')
-  const market = yield Market.find(1)
+  const market = await Market.find(1)
   t.ok(market.open)
 })
 
-test('POST /admin/market is a 200', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client
+test('POST /admin/market is a 200', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client
     .post('/admin/market')
     .set('accept', 'application/json')
     .send({open: false, message: 'test'})
@@ -35,6 +35,6 @@ test('POST /admin/market is a 200', function *(t) {
   t.is(id, 1)
   t.is(open, false)
   t.is(message, 'test')
-  const market = yield Market.find(1)
+  const market = await Market.find(1)
   t.ok(!market.open)
 })

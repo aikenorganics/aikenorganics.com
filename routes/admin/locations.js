@@ -6,45 +6,45 @@ const {del, get, post} = require('koa-route')
 module.exports = [
 
   // Index
-  get('/admin/locations', function *() {
-    const locations = yield Location
+  get('/admin/locations', async (_) => {
+    const locations = await Location
       .select(`not exists(
         select 1 from orders where location_id = locations.id
       ) as removable`)
       .order('name').all()
-    this.react({locations})
+    _.react({locations})
   }),
 
   // New
-  get('/admin/locations/new', function *() { this.react() }),
+  get('/admin/locations/new', async (_) => { _.react() }),
 
   // Edit
-  get('/admin/locations/:id/edit', function *(id) {
-    const location = yield Location.find(id)
-    if (!location) return this.notfound()
-    this.react({location})
+  get('/admin/locations/:id/edit', async (_, id) => {
+    const location = await Location.find(id)
+    if (!location) return _.notfound()
+    _.react({location})
   }),
 
   // Create
-  post('/admin/locations', function *() {
-    const location = yield Location.create(this.permit('name'))
-    this.body = {location}
+  post('/admin/locations', async (_) => {
+    const location = await Location.create(_.permit('name'))
+    _.body = {location}
   }),
 
   // Update
-  post('/admin/locations/:id', function *(id) {
-    const location = yield Location.find(id)
-    if (!location) return this.notfound()
-    yield location.update(this.permit('name', 'active'))
-    this.body = {location}
+  post('/admin/locations/:id', async (_, id) => {
+    const location = await Location.find(id)
+    if (!location) return _.notfound()
+    await location.update(_.permit('name', 'active'))
+    _.body = {location}
   }),
 
   // Destroy
-  del('/admin/locations/:id', function *(id) {
-    const location = yield Location.find(id)
-    if (!location) return this.notfound()
-    yield location.destroy()
-    this.body = {}
+  del('/admin/locations/:id', async (_, id) => {
+    const location = await Location.find(id)
+    if (!location) return _.notfound()
+    await location.destroy()
+    _.body = {}
   })
 
 ]

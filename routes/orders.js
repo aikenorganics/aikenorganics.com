@@ -6,22 +6,22 @@ const {all, del, get, post} = require('koa-route')
 module.exports = [
 
   // User required!
-  all('/orders', function *(next) {
-    if (!this.state.currentUser) return this.unauthorized()
-    yield next
+  all('/orders', async (_, next) => {
+    if (!_.state.currentUser) return _.unauthorized()
+    await next()
   }, {end: false}),
 
   // Current
-  get('/orders/current', function *() {
-    const {currentUser} = this.state
-    const [order, locations] = yield Promise.all([
+  get('/orders/current', async (_) => {
+    const {currentUser} = _.state
+    const [order, locations] = await Promise.all([
       Order
         .include('location', {productOrders: 'product'})
         .where({status: 'open', userId: currentUser.id})
         .find(),
       Location.where({active: true}).order('name').all()
     ])
-    this.react({
+    _.react({
       locations: locations.map((location) => location.slice('id', 'name')),
       order,
       productOrders: order && order.productOrders
@@ -29,16 +29,16 @@ module.exports = [
   }),
 
   // Previous
-  get('/orders/previous', function *() {
-    const page = +(this.query.page || 1)
-    const {currentUser} = this.state
-    const orders = yield Order
+  get('/orders/previous', async (_) => {
+    const page = +(_.query.page || 1)
+    const {currentUser} = _.state
+    const orders = await Order
       .include('location', {productOrders: 'product'})
       .where({status: 'complete', userId: currentUser.id})
       .order(['createdAt', 'descending'])
       .paginate(page, 10)
 
-    this.react({
+    _.react({
       more: orders.more,
       orders: orders.map((order) => (
         Object.assign(order.toJSON(), {productOrders: order.productOrders})
@@ -48,47 +48,47 @@ module.exports = [
   }),
 
   // Update
-  post('/orders/:id', function *(id) {
-    const order = yield Order.find(id)
-    const {currentUser} = this.state
+  post('/orders/:id', async (_, id) => {
+    const order = await Order.find(id)
+    const {currentUser} = _.state
 
-    if (!order) return this.notfound()
+    if (!order) return _.notfound()
 
     // You can only update when the market is open.
-    if (!this.state.admin && !this.state.open) {
-      return this.unauthorized()
+    if (!_.state.admin && !_.state.open) {
+      return _.unauthorized()
     }
 
     // You can only update your own order.
-    if (!this.state.admin && currentUser.id !== order.userId) {
-      return this.unauthorized()
+    if (!_.state.admin && currentUser.id !== order.userId) {
+      return _.unauthorized()
     }
 
-    const values = this.permit('locationId')
+    const values = _.permit('locationId')
 
-    if (this.state.admin) {
-      Object.assign(values, this.permit('notes', 'status'))
+    if (_.state.admin) {
+      Object.assign(values, _.permit('notes', 'status'))
     }
 
-    yield order.update(values)
-    order.location = yield Location.find(order.locationId)
-    this.body = {order}
+    await order.update(values)
+    order.location = await Location.find(order.locationId)
+    _.body = {order}
   }),
 
   // Cancel
-  del('/orders/:id', function *(id) {
-    if (!this.state.open) return this.unauthorized()
+  del('/orders/:id', async (_, id) => {
+    if (!_.state.open) return _.unauthorized()
 
-    const order = yield Order.find(id)
-    const {currentUser} = this.state
+    const order = await Order.find(id)
+    const {currentUser} = _.state
 
-    if (!order) return this.notfound()
+    if (!order) return _.notfound()
 
     // You can only cancel your own order.
-    if (currentUser.id !== order.userId) return this.unauthorized()
+    if (currentUser.id !== order.userId) return _.unauthorized()
 
-    yield order.destroy()
-    this.body = {}
+    await order.destroy()
+    _.body = {}
   })
 
 ]

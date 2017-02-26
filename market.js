@@ -2,11 +2,11 @@
 
 const Market = require('./db/market')
 
-module.exports = function *(next) {
-  const market = yield Market.where({domain: this.hostname}).find()
-  if (!market) return this.notfound()
-  this.state.market = market
-  this.state.open = market.open
-  this.state.client.market = market
-  yield next
+module.exports = async (_, next) => {
+  const market = await Market.where({domain: _.hostname}).find()
+  if (!market) return _.notfound()
+  _.state.market = market
+  _.state.open = market.open
+  _.state.client.market = market
+  await next()
 }

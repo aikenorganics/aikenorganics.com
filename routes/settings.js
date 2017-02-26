@@ -4,29 +4,29 @@ const {all, get, post} = require('koa-route')
 
 module.exports = [
 
-  all('/settings', function *(next) {
-    if (!this.state.currentUser) return this.unauthorized()
-    yield next
+  all('/settings', async (_, next) => {
+    if (!_.state.currentUser) return _.unauthorized()
+    await next()
   }, {end: false}),
 
   // Index
-  get('/settings', function *() {
-    this.react()
+  get('/settings', async (_) => {
+    _.react()
   }),
 
   // Update
-  post('/settings', function *() {
-    yield this.state.currentUser.update(this.permit(
+  post('/settings', async (_) => {
+    await _.state.currentUser.update(_.permit(
       'first', 'last', 'phone', 'street', 'city', 'state', 'zip'
     ))
-    this.body = {user: this.state.currentUser}
+    _.body = {user: _.state.currentUser}
   }),
 
   // Card
-  post('/settings/card', function *() {
-    const {token} = this.request.body
-    yield this.state.currentUser.updateCard(token)
-    this.body = {user: this.state.currentUser}
+  post('/settings/card', async (_) => {
+    const {token} = _.request.body
+    await _.state.currentUser.updateCard(token)
+    _.body = {user: _.state.currentUser}
   })
 
 ]

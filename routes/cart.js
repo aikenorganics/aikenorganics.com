@@ -7,16 +7,16 @@ const {all, get, post} = require('koa-route')
 
 module.exports = [
 
-  all('/cart', function *(next) {
-    const {currentUser, open} = this.state
-    if (!currentUser || !open) return this.unauthorized()
-    yield next
+  all('/cart', async (_, next) => {
+    const {currentUser, open} = _.state
+    if (!currentUser || !open) return _.unauthorized()
+    await next()
   }, {end: false}),
 
   // Index
-  get('/cart', function *() {
-    const {cart, currentUser} = this.state
-    const [products, locations, order] = yield Promise.all([
+  get('/cart', async (_) => {
+    const {cart, currentUser} = _.state
+    const [products, locations, order] = await Promise.all([
       Product
         .include('category', 'grower')
         .where({id: cart.ids})
@@ -25,7 +25,7 @@ module.exports = [
       Order.where({status: 'open', userId: currentUser.id}).find()
     ])
 
-    this.react({
+    _.react({
       locations: locations.map((location) => location.slice('id', 'name')),
       order,
       products
@@ -33,38 +33,38 @@ module.exports = [
   }),
 
   // Update
-  post('/cart', function *() {
-    const {productId, quantity} = this.request.body
-    const product = yield Product.include('grower').find(productId)
+  post('/cart', async (_) => {
+    const {productId, quantity} = _.request.body
+    const product = await Product.include('grower').find(productId)
 
     if (!product || !product.active || !product.grower.active) {
-      this.body = {message: 'That product is unavailable.'}
+      _.body = {message: 'That product is unavailable.'}
       return
     }
 
-    this.state.cart.update(product, +quantity)
-    this.body = {message: 'Cart updated.'}
+    _.state.cart.update(product, +quantity)
+    _.body = {message: 'Cart updated.'}
   }),
 
   // Checkout
-  post('/cart/checkout', function *() {
-    const {cart, currentUser} = this.state
-    const {locationId} = this.request.body
+  post('/cart/checkout', async (_) => {
+    const {cart, currentUser} = _.state
+    const {locationId} = _.request.body
 
-    yield db.query('select checkout($1, $2, $3)', [
+    await db.query('select checkout($1, $2, $3)', [
       currentUser.id,
       locationId,
       cart.ids.map((id) => [id, cart.cart[id]])
     ])
 
-    yield this.mail(updateMail, {
+    await _.mail(updateMail, {
       to: [currentUser.email],
       subject: 'Aiken Organics: Order Updated',
-      url: `http://${this.host}/orders/current`
+      url: `http://${_.host}/orders/current`
     })
 
     cart.clear()
-    this.body = {}
+    _.body = {}
   })
 
 ]

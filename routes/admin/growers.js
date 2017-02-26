@@ -8,8 +8,8 @@ const findGrower = (id) => Grower.include({userGrowers: 'user'}).find(id)
 module.exports = [
 
   // Index
-  get('/admin/growers', function *() {
-    const growers = yield Grower
+  get('/admin/growers', async (_) => {
+    const growers = await Grower
     .select(`(
       select sum(quantity * product_orders.cost) from product_orders
       inner join products on products.id = product_orders.product_id
@@ -17,15 +17,15 @@ module.exports = [
       where products.grower_id = growers.id and orders.status = 'complete'
     ) as total`)
     .order('name').all()
-    this.react({growers})
+    _.react({growers})
   }),
 
   // Orders
-  get('/admin/growers/orders', function *() {
-    const growers = yield Grower
+  get('/admin/growers/orders', async (_) => {
+    const growers = await Grower
     .where('exists(select id from products where reserved > 0 and grower_id = growers.id)')
     .include('products').order('name').all()
-    this.react({
+    _.react({
       growers: growers.map((grower) => (
         Object.assign(grower.toJSON(), grower.slice('products'))
       ))
@@ -33,11 +33,11 @@ module.exports = [
   }),
 
   // Show
-  get('/admin/growers/:id', function *(id) {
-    const grower = yield findGrower(id)
-    if (!grower) return this.notfound()
+  get('/admin/growers/:id', async (_, id) => {
+    const grower = await findGrower(id)
+    if (!grower) return _.notfound()
 
-    const products = yield Product
+    const products = await Product
     .join({productOrders: 'order'})
     .select('sum(quantity) as quantity')
     .select('sum(quantity * product_orders.cost) as total')
@@ -46,7 +46,7 @@ module.exports = [
     .groupBy('products.id')
     .all()
 
-    this.react({
+    _.react({
       grower,
       products: products.map((product) => (
         Object.assign(product.toJSON(), product.slice('quantity', 'total'))
@@ -55,13 +55,13 @@ module.exports = [
   }),
 
   // Users
-  get('/admin/growers/:id/users', function *(id) {
-    const grower = yield findGrower(id)
-    if (!grower) return this.notfound()
+  get('/admin/growers/:id/users', async (_, id) => {
+    const grower = await findGrower(id)
+    if (!grower) return _.notfound()
 
-    const users = yield User.order('first').all()
+    const users = await User.order('first').all()
 
-    this.react({
+    _.react({
       grower,
       users: users.map((user) => user.slice('email', 'id', 'name'))
     })

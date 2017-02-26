@@ -7,23 +7,23 @@ const {get} = require('koa-route')
 module.exports = [
 
   // Index
-  get('/admin/events', function *() {
+  get('/admin/events', async (_) => {
     const scope = Event.include('user', 'product', 'grower')
 
     // Paginate!
-    const page = +(this.query.page || 1)
+    const page = +(_.query.page || 1)
 
     // User?
-    const {userId} = this.query
+    const {userId} = _.query
     if (userId) scope.where({userId})
 
     // Load 'em up.
-    const [users, events] = yield Promise.all([
+    const [users, events] = await Promise.all([
       User.order('email').all(),
       scope.order(['createdAt', 'descending']).paginate(page, 50)
     ])
 
-    this.react({
+    _.react({
       events,
       more: events.more,
       page,

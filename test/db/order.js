@@ -3,12 +3,12 @@
 const db = require('../../db')
 const test = require('../test')
 
-test('orders without productOrders have undefined total', function *(t) {
+test('orders without productOrders have undefined total', async (t) => {
   const order = new db.Order()
   t.is(order.total, undefined)
 })
 
-test('Order reports the correct cost', function *(t) {
+test('Order reports the correct cost', async (t) => {
   const order = new db.Order()
   order.productOrders = []
 

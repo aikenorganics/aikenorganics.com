@@ -4,7 +4,7 @@ const db = require('../../db')
 const {Order, Product, ProductOrder} = require('../../db')
 const test = require('../test')
 
-test('ProductOrder reports the correct cost', function *(t) {
+test('ProductOrder reports the correct cost', async (t) => {
   const productOrder = new db.ProductOrder({
     cost: '5.75',
     quantity: 2
@@ -12,9 +12,9 @@ test('ProductOrder reports the correct cost', function *(t) {
   t.is(productOrder.total, 11.50)
 })
 
-test('Cannot insert product order for inactive products', function *(t) {
+test('Cannot insert product order for inactive products', async (t) => {
   try {
-    yield ProductOrder.create({
+    await ProductOrder.create({
       orderId: 2,
       productId: 7,
       quantity: 1
@@ -23,9 +23,9 @@ test('Cannot insert product order for inactive products', function *(t) {
   } catch (error) { }
 })
 
-test('Cannot insert product order for inactive grower', function *(t) {
+test('Cannot insert product order for inactive grower', async (t) => {
   try {
-    yield ProductOrder.create({
+    await ProductOrder.create({
       orderId: 2,
       productId: 6,
       quantity: 1
@@ -34,9 +34,9 @@ test('Cannot insert product order for inactive grower', function *(t) {
   } catch (error) { }
 })
 
-test('Cannot insert product order with none available', function *(t) {
+test('Cannot insert product order with none available', async (t) => {
   try {
-    yield ProductOrder.create({
+    await ProductOrder.create({
       orderId: 1,
       productId: 5,
       quantity: 1
@@ -45,64 +45,64 @@ test('Cannot insert product order with none available', function *(t) {
   } catch (error) { }
 })
 
-test('Cannot update product order with none available', function *(t) {
+test('Cannot update product order with none available', async (t) => {
   try {
-    const productOrder = yield ProductOrder.find(8)
-    yield productOrder.update({quantity: 15})
+    const productOrder = await ProductOrder.find(8)
+    await productOrder.update({quantity: 15})
     t.end('Product order updated with none available')
   } catch (error) { }
 })
 
-test('Updating quantity updates product.reserved', function *(t) {
-  const productOrder = yield ProductOrder.find(1)
-  yield productOrder.update({quantity: 5})
-  const product = yield Product.find(1)
+test('Updating quantity updates product.reserved', async (t) => {
+  const productOrder = await ProductOrder.find(1)
+  await productOrder.update({quantity: 5})
+  const product = await Product.find(1)
   t.is(product.reserved, 5)
 })
 
-test('Inserting a new product order updates product.reserved', function *(t) {
-  yield ProductOrder.create({
+test('Inserting a new product order updates product.reserved', async (t) => {
+  await ProductOrder.create({
     orderId: 2,
     productId: 1,
     quantity: 3
   })
-  const product = yield Product.find(1)
+  const product = await Product.find(1)
   t.is(product.reserved, 5)
 })
 
-test('Deleting a product order updates product.reserved', function *(t) {
-  const productOrder = yield ProductOrder.find(1)
-  yield productOrder.destroy()
-  const product = yield Product.find(1)
+test('Deleting a product order updates product.reserved', async (t) => {
+  const productOrder = await ProductOrder.find(1)
+  await productOrder.destroy()
+  const product = await Product.find(1)
   t.is(product.reserved, 0)
 })
 
-test('insert: completed orders don\'t affect product.reserved', function *(t) {
-  yield ProductOrder.create({
+test('insert: completed orders don\'t affect product.reserved', async (t) => {
+  await ProductOrder.create({
     orderId: 3,
     productId: 1,
     quantity: 3
   })
-  const product = yield Product.find(1)
+  const product = await Product.find(1)
   t.is(product.reserved, 2)
 })
 
-test('delete: completed orders don\'t affect product.reserved', function *(t) {
-  const productOrder = yield ProductOrder.find(6)
-  yield productOrder.destroy()
-  const product = yield Product.find(5)
+test('delete: completed orders don\'t affect product.reserved', async (t) => {
+  const productOrder = await ProductOrder.find(6)
+  await productOrder.destroy()
+  const product = await Product.find(5)
   t.is(product.reserved, 3)
 })
 
-test('Update: completed orders don\'t affect product.reserved', function *(t) {
-  const productOrder = yield ProductOrder.find(6)
-  yield productOrder.update({quantity: 5})
-  const product = yield Product.find(5)
+test('Update: completed orders don\'t affect product.reserved', async (t) => {
+  const productOrder = await ProductOrder.find(6)
+  await productOrder.update({quantity: 5})
+  const product = await Product.find(5)
   t.is(product.reserved, 3)
 })
 
-test('Inserting a new product order sets cost', function *(t) {
-  const productOrder = yield ProductOrder.create({
+test('Inserting a new product order sets cost', async (t) => {
+  const productOrder = await ProductOrder.create({
     orderId: 2,
     productId: 1,
     quantity: 3
@@ -110,19 +110,19 @@ test('Inserting a new product order sets cost', function *(t) {
   t.is(productOrder.cost, '14.00')
 })
 
-test('Deleting an order updates reserved values', function *(t) {
-  const order = yield Order.find(1)
-  yield order.destroy()
-  const product = yield Product.find(1)
+test('Deleting an order updates reserved values', async (t) => {
+  const order = await Order.find(1)
+  await order.destroy()
+  const product = await Product.find(1)
   t.is(product.reserved, 0)
 })
 
-test('Updating takes the previous quantity into account', function *(t) {
-  const productOrder = yield ProductOrder.find(8)
-  yield productOrder.update({quantity: 1})
+test('Updating takes the previous quantity into account', async (t) => {
+  const productOrder = await ProductOrder.find(8)
+  await productOrder.update({quantity: 1})
 })
 
-test('validate cost', function *(t) {
+test('validate cost', async (t) => {
   const productOrder = new db.ProductOrder({cost: 'asdf'})
   t.ok(!productOrder.valid)
   t.deepEqual(productOrder.errors, {
@@ -130,30 +130,30 @@ test('validate cost', function *(t) {
   })
 })
 
-test('validate cost', function *(t) {
+test('validate cost', async (t) => {
   t.ok(new db.ProductOrder({cost: '.53'}).valid)
 })
 
-test('validate cost', function *(t) {
+test('validate cost', async (t) => {
   t.ok(new db.ProductOrder({cost: '32'}).valid)
 })
 
-test('validate cost', function *(t) {
+test('validate cost', async (t) => {
   t.ok(new db.ProductOrder({cost: '32.25'}).valid)
 })
 
-test('validate cost', function *(t) {
+test('validate cost', async (t) => {
   t.ok(new db.ProductOrder({cost: '$32.25'}).valid)
 })
 
-test('validate cost', function *(t) {
+test('validate cost', async (t) => {
   t.ok(new db.ProductOrder({cost: '  10  '}).valid)
 })
 
-test('validate cost', function *(t) {
+test('validate cost', async (t) => {
   t.ok(new db.ProductOrder({cost: '  $32.25  '}).valid)
 })
 
-test('checkout() with non-existent product does not throw', function *(t) {
-  yield db.query('select checkout($1, $2, $3)', [1, 1, [[12345, 1]]])
+test('checkout() with non-existent product does not throw', async (t) => {
+  await db.query('select checkout($1, $2, $3)', [1, 1, [[12345, 1]]])
 })

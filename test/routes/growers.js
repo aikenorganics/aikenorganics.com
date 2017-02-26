@@ -5,25 +5,25 @@ const test = require('../test')
 
 // Index
 
-test('GET /growers is a 200', function *(t) {
-  const response = yield t.client.get('/growers').send()
+test('GET /growers is a 200', async (t) => {
+  const response = await t.client.get('/growers').send()
   response.assert(200)
 })
 
-test('GET /growers is a 200 for admins', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/growers').send()
+test('GET /growers is a 200 for admins', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/growers').send()
   response.assert(200)
 })
 
-test('GET /growers is a 200 for non-admins', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client.get('/growers').send()
+test('GET /growers is a 200 for non-admins', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client.get('/growers').send()
   response.assert(200)
 })
 
-test('GET /growers does not return inactive growers', function *(t) {
-  const response = yield t.client
+test('GET /growers does not return inactive growers', async (t) => {
+  const response = await t.client
     .get('/growers')
     .set('accept', 'application/json')
     .send()
@@ -33,43 +33,43 @@ test('GET /growers does not return inactive growers', function *(t) {
 
 // Show
 
-test('GET /growers/:id authorized users see new product link', function *(t) {
-  yield t.signIn('grower@example.com')
-  const response = yield t.client.get('/growers/1').send()
+test('GET /growers/:id authorized users see new product link', async (t) => {
+  await t.signIn('grower@example.com')
+  const response = await t.client.get('/growers/1').send()
   response.assert(200).assert(/\/growers\/1\/products\/new/)
 })
 
-test('GET /growers/:id is a 200', function *(t) {
-  const response = yield t.client.get('/growers/1').send()
+test('GET /growers/:id is a 200', async (t) => {
+  const response = await t.client.get('/growers/1').send()
   response.assert(200)
 })
 
-test('GET /growers/:id is a 200 as an admin', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/growers/1').send()
+test('GET /growers/:id is a 200 as an admin', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/growers/1').send()
   response.assert(200)
 })
 
-test('GET /growers/:id is a 200 as a grower', function *(t) {
-  yield t.signIn('grower@example.com')
-  const response = yield t.client.get('/growers/1').send()
+test('GET /growers/:id is a 200 as a grower', async (t) => {
+  await t.signIn('grower@example.com')
+  const response = await t.client.get('/growers/1').send()
   response.assert(200)
 })
 
-test('GET /growers/:id is a 404 for missing ids', function *(t) {
-  const response = yield t.client.get('/growers/123456789').send()
+test('GET /growers/:id is a 404 for missing ids', async (t) => {
+  const response = await t.client.get('/growers/123456789').send()
   response.assert(404)
 })
 
-test('GET /growers/:id is a 404 for missing ids', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/growers/123456789').send()
+test('GET /growers/:id is a 404 for missing ids', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/growers/123456789').send()
   response.assert(404)
 })
 
-test('GET /growers/:id as admin includes inactive products', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client
+test('GET /growers/:id as admin includes inactive products', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client
     .get('/growers/2')
     .set('accept', 'application/json')
     .send()
@@ -79,9 +79,9 @@ test('GET /growers/:id as admin includes inactive products', function *(t) {
   t.ok(products.some(({id}) => id === 4), 'should see active products')
 })
 
-test('GET /growers/:id as grower includes inactive products', function *(t) {
-  yield t.signIn('info@planitfoods.com')
-  const response = yield t.client
+test('GET /growers/:id as grower includes inactive products', async (t) => {
+  await t.signIn('info@planitfoods.com')
+  const response = await t.client
     .get('/growers/2')
     .set('accept', 'application/json')
     .send()
@@ -91,9 +91,9 @@ test('GET /growers/:id as grower includes inactive products', function *(t) {
   t.ok(products.some(({id}) => id === 4), 'should see active products')
 })
 
-test('GET /growers/:id as non-grower does not include inactive products', function *(t) {
-  yield t.signIn('info@planitfoods.com')
-  const response = yield t.client
+test('GET /growers/:id as non-grower does not include inactive products', async (t) => {
+  await t.signIn('info@planitfoods.com')
+  const response = await t.client
     .get('/growers/1')
     .set('accept', 'application/json')
     .send()
@@ -105,95 +105,95 @@ test('GET /growers/:id as non-grower does not include inactive products', functi
 
 // New
 
-test('GET /growers/new is a 200 as an admin', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/growers/new').send()
+test('GET /growers/new is a 200 as an admin', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/growers/new').send()
   response.assert(200)
 })
 
-test('GET /growers/new is a 200', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/growers/new').send()
+test('GET /growers/new is a 200', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/growers/new').send()
   response.assert(200)
 })
 
-test('GET /growers/new is a 401 as a non-admin', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client.get('/growers/new').send()
+test('GET /growers/new is a 401 as a non-admin', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client.get('/growers/new').send()
   response.assert(401)
 })
 
 // Edit
 
-test('GET /growers/:id/edit is a 401 for non-admins', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client.get('/growers/1/edit').send()
+test('GET /growers/:id/edit is a 401 for non-admins', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client.get('/growers/1/edit').send()
   response.assert(401)
 })
 
-test('GET /growers/:id/edit is a 200 for admins', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/growers/1/edit').send()
+test('GET /growers/:id/edit is a 200 for admins', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/growers/1/edit').send()
   response.assert(200)
 })
 
-test('GET /growers/:id/edit is a 200 for allowed users', function *(t) {
-  yield t.signIn('grower@example.com')
-  const response = yield t.client.get('/growers/1/edit').send()
+test('GET /growers/:id/edit is a 200 for allowed users', async (t) => {
+  await t.signIn('grower@example.com')
+  const response = await t.client.get('/growers/1/edit').send()
   response.assert(200)
 })
 
 // Orders
 
-test('GET /growers/:id/orders is a 200 for admins', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/growers/1/orders').send()
+test('GET /growers/:id/orders is a 200 for admins', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/growers/1/orders').send()
   response.assert(200)
 })
 
-test('GET /growers/:id/orders is a 200 for allowed users', function *(t) {
-  yield t.signIn('grower@example.com')
-  const response = yield t.client.get('/growers/1/orders').send()
+test('GET /growers/:id/orders is a 200 for allowed users', async (t) => {
+  await t.signIn('grower@example.com')
+  const response = await t.client.get('/growers/1/orders').send()
   response.assert(200)
 })
 
-test('GET /growers/:id/orders is a 401 for non-admins', function *(t) {
-  yield t.signIn('grower@example.com')
-  const response = yield t.client.get('/growers/2/orders').send()
+test('GET /growers/:id/orders is a 401 for non-admins', async (t) => {
+  await t.signIn('grower@example.com')
+  const response = await t.client.get('/growers/2/orders').send()
   response.assert(401)
 })
 
-test('GET /growers/:id/orders is a 401 for non-admins', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client.get('/growers/1/orders').send()
+test('GET /growers/:id/orders is a 401 for non-admins', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client.get('/growers/1/orders').send()
   response.assert(401)
 })
 
 // Update
 
-test('POST /growers/:id is a 401 for non-admins', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client.post('/growers/1').send()
+test('POST /growers/:id is a 401 for non-admins', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client.post('/growers/1').send()
   response.assert(401)
 })
 
-test('POST /growers/:id is a 200 for admins', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.post('/growers/1').send({name: 'Watsonia'})
+test('POST /growers/:id is a 200 for admins', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.post('/growers/1').send({name: 'Watsonia'})
   response.assert(200).assert('content-type', /json/)
 })
 
-test('POST /growers/:id is a 200 for allowed users', function *(t) {
-  yield t.signIn('grower@example.com')
-  const response = yield t.client.post('/growers/1').send({name: 'Watsonia'})
+test('POST /growers/:id is a 200 for allowed users', async (t) => {
+  await t.signIn('grower@example.com')
+  const response = await t.client.post('/growers/1').send({name: 'Watsonia'})
   response.assert(200).assert('content-type', /json/)
 })
 
-test('updating creates an event', function *(t) {
-  yield t.signIn('grower@example.com')
-  const response = yield t.client.post('/growers/1').send({name: 'Test'})
+test('updating creates an event', async (t) => {
+  await t.signIn('grower@example.com')
+  const response = await t.client.post('/growers/1').send({name: 'Test'})
   response.assert(200)
-  const event = yield Event.where({growerId: 1}).find()
+  const event = await Event.where({growerId: 1}).find()
   t.deepEqual(event.meta, {name: 'Test'})
   t.is(event.userId, 5)
   t.is(event.action, 'update')
@@ -203,15 +203,15 @@ test('updating creates an event', function *(t) {
 
 // Create
 
-test('POST /growers is a 401 for non-admins', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client.post('/growers').send({name: 'New Grower'})
+test('POST /growers is a 401 for non-admins', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client.post('/growers').send({name: 'New Grower'})
   response.assert(401)
 })
 
-test('POST /growers is a 200 for admins', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.post('/growers').send({name: 'New Grower'})
+test('POST /growers is a 200 for admins', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.post('/growers').send({name: 'New Grower'})
   response.assert(200).assert('content-type', /json/)
   const {id, name} = response.body.grower
   t.is(name, 'New Grower')
@@ -220,9 +220,9 @@ test('POST /growers is a 200 for admins', function *(t) {
 
 // Create Product
 
-test('POST /growers/:id/products is a 200 for admins', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.post('/growers/1/products').send({
+test('POST /growers/:id/products is a 200 for admins', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.post('/growers/1/products').send({
     name: 'New Product',
     cost: '2.45',
     supply: 32,
@@ -238,9 +238,9 @@ test('POST /growers/:id/products is a 200 for admins', function *(t) {
   t.is(typeof id, 'number')
 })
 
-test('POST /growers/:id/products is a 401 for non-admins', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client.post('/growers/1/products').send({
+test('POST /growers/:id/products is a 401 for non-admins', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client.post('/growers/1/products').send({
     name: 'New Product',
     cost: '2.45',
     supply: 32,
@@ -249,9 +249,9 @@ test('POST /growers/:id/products is a 401 for non-admins', function *(t) {
   response.assert(401)
 })
 
-test('POST /growers/:id/products is a 200 if allowed', function *(t) {
-  yield t.signIn('grower@example.com')
-  const response = yield t.client.post('/growers/1/products').send({
+test('POST /growers/:id/products is a 200 if allowed', async (t) => {
+  await t.signIn('grower@example.com')
+  const response = await t.client.post('/growers/1/products').send({
     categoryId: 1,
     cost: '2.50',
     featured: true,
@@ -267,9 +267,9 @@ test('POST /growers/:id/products is a 200 if allowed', function *(t) {
   t.is(supply, 23)
 })
 
-test('POST /growers/:id/products is a 200 for admins', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.post('/growers/1/products').send({
+test('POST /growers/:id/products is a 200 for admins', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.post('/growers/1/products').send({
     name: 'New Product',
     cost: '2.50',
     supply: 23,
@@ -285,9 +285,9 @@ test('POST /growers/:id/products is a 200 for admins', function *(t) {
   t.is(supply, 23)
 })
 
-test('POST /growers/:id/products is a 422 for invalid data', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.post('/growers/1/products').send({
+test('POST /growers/:id/products is a 422 for invalid data', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.post('/growers/1/products').send({
     name: 'New Product',
     cost: 'asdf',
     supply: 23,
@@ -298,52 +298,52 @@ test('POST /growers/:id/products is a 422 for invalid data', function *(t) {
 
 // New Product
 
-test('GET /growers/:id/products/new is a 401 as a non-admin', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client.get('/growers/1/products/new').send()
+test('GET /growers/:id/products/new is a 401 as a non-admin', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client.get('/growers/1/products/new').send()
   response.assert(401)
 })
 
-test('GET /growers/:id/products/new is a 200 as an admin', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/growers/1/products/new').send()
+test('GET /growers/:id/products/new is a 200 as an admin', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/growers/1/products/new').send()
   response.assert(200)
 })
 
-test('GET /growers/:id/products/new is a 200 for admins', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/growers/1/products/new').send()
+test('GET /growers/:id/products/new is a 200 for admins', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/growers/1/products/new').send()
   response.assert(200)
 })
 
-test('GET /growers/:id/products/new is a 200 for allowed users', function *(t) {
-  yield t.signIn('grower@example.com')
-  const response = yield t.client.get('/growers/1/products/new').send()
+test('GET /growers/:id/products/new is a 200 for allowed users', async (t) => {
+  await t.signIn('grower@example.com')
+  const response = await t.client.get('/growers/1/products/new').send()
   response.assert(200)
 })
 
-test('GET /growers/:id/products/new is a 401 for non-admins', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client.get('/growers/1/products/new').send()
+test('GET /growers/:id/products/new is a 401 for non-admins', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client.get('/growers/1/products/new').send()
   response.assert(401)
 })
 
 // Products
 
-test('GET /growers/:id/products is a 200 for admins', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/growers/1/products').send()
+test('GET /growers/:id/products is a 200 for admins', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/growers/1/products').send()
   response.assert(200)
 })
 
-test('GET /growers/:id/products is a 200 for allowed users', function *(t) {
-  yield t.signIn('grower@example.com')
-  const response = yield t.client.get('/growers/1/products').send()
+test('GET /growers/:id/products is a 200 for allowed users', async (t) => {
+  await t.signIn('grower@example.com')
+  const response = await t.client.get('/growers/1/products').send()
   response.assert(200)
 })
 
-test('GET /growers/:id/products is a 401 for non-growers', function *(t) {
-  yield t.signIn('info@planitfoods.com')
-  const response = yield t.client.get('/growers/1/products').send()
+test('GET /growers/:id/products is a 401 for non-growers', async (t) => {
+  await t.signIn('info@planitfoods.com')
+  const response = await t.client.get('/growers/1/products').send()
   response.assert(401)
 })

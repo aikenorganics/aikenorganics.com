@@ -1,6 +1,5 @@
 'use strict'
 
-const co = require('co')
 const app = require('../app')
 const server = app.listen(4444)
 const {Builder, By, until} = require('selenium-webdriver')
@@ -44,14 +43,12 @@ class Driver {
     return driver.executeScript('return window.location.pathname')
   }
 
-  signIn (email) {
-    return co(function *() {
-      yield this.visit('/session/signin')
-      yield this.$('#email').sendKeys('admin@example.com')
-      yield this.$('#password').sendKeys('password')
-      yield this.$('#password').submit()
-      yield this.wait(this.present('#signout'))
-    }.bind(this))
+  async signIn (email) {
+    await this.visit('/session/signin')
+    await this.$('#email').sendKeys('admin@example.com')
+    await this.$('#password').sendKeys('password')
+    await this.$('#password').submit()
+    await this.wait(this.present('#signout'))
   }
 }
 

@@ -5,62 +5,62 @@ const driver = require('../driver')
 const User = require('ozymandias/user')
 const Token = require('ozymandias/token')
 
-test('sign in', function *(assert) {
-  yield driver.visit('/session/signin')
-  yield driver.$('#email').sendKeys('admin@example.com')
-  yield driver.$('#password').sendKeys('password')
-  yield driver.$('#password').submit()
-  yield driver.wait(driver.present('#signout'))
+test('sign in', async (assert) => {
+  await driver.visit('/session/signin')
+  await driver.$('#email').sendKeys('admin@example.com')
+  await driver.$('#password').sendKeys('password')
+  await driver.$('#password').submit()
+  await driver.wait(driver.present('#signout'))
 })
 
-test('incorrect password', function *(assert) {
-  yield driver.visit('/session/signin')
-  yield driver.$('#email').sendKeys('admin@example.com')
-  yield driver.$('#password').sendKeys('wrong')
-  yield driver.$('#password').submit()
-  yield driver.wait(driver.present('#errors'))
-  yield driver.wait(() => (
+test('incorrect password', async (assert) => {
+  await driver.visit('/session/signin')
+  await driver.$('#email').sendKeys('admin@example.com')
+  await driver.$('#password').sendKeys('wrong')
+  await driver.$('#password').submit()
+  await driver.wait(driver.present('#errors'))
+  await driver.wait(() => (
     driver.$('#errors').getText().then((text) => (
       /Sorry! That password is incorrect\./.test(text)
     ))
   ))
 })
 
-test('email not found', function *(assert) {
-  yield driver.visit('/session/signin')
-  yield driver.$('#email').sendKeys('wrong@example.com')
-  yield driver.$('#password').sendKeys('password')
-  yield driver.$('#password').submit()
-  yield driver.wait(driver.present('#errors'))
-  yield driver.wait(() => (
+test('email not found', async (assert) => {
+  await driver.visit('/session/signin')
+  await driver.$('#email').sendKeys('wrong@example.com')
+  await driver.$('#password').sendKeys('password')
+  await driver.$('#password').submit()
+  await driver.wait(driver.present('#errors'))
+  await driver.wait(() => (
     driver.$('#errors').getText().then((text) => (
       /Sorry! We don’t recognize that email\./.test(text)
     ))
   ))
 })
 
-test('forgot password', function *(assert) {
+test('forgot password', async (assert) => {
   // Send Token
-  yield driver.visit('/session/forgot')
-  yield driver.$('#email').sendKeys('admin@example.com')
-  yield driver.$('#email').submit()
+  await driver.visit('/session/forgot')
+  await driver.$('#email').sendKeys('admin@example.com')
+  await driver.$('#email').submit()
 
   // Wait for message
-  yield driver.wait(() => (
+  await driver.wait(() => (
     driver.$('#message').getText().then((text) => (
       /Thanks! We sent you an email to reset your password\./.test(text)
     ))
   ))
 
   // Reset password
-  const token = yield Token.find()
-  yield driver.visit(`/session/reset/${token.id}`)
-  yield driver.$('#password').sendKeys('newpassword')
-  yield driver.$('#password').submit()
-  yield driver.wait(() => driver.getPath().then((path) => path === '/products'))
+  const token = await Token.find()
+  await driver.visit(`/session/reset/${token.id}`)
+  await driver.$('#password').sendKeys('newpassword')
+  await driver.$('#password').submit()
+  await driver.wait(() => driver.getPath().then((path) => path === '/products'))
 
   // Verify new password
-  const user = yield User.find(1)
-  assert.ok(yield user.authenticate('newpassword'))
+  const user = await User.find(1)
+  assert.ok(await user.authenticate('newpassword'))
 })
 

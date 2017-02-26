@@ -9,45 +9,45 @@ const {all, get, post} = require('koa-route')
 module.exports = [
 
   // Find Product
-  all('/products/:id', function *(id, next) {
-    this.state.product = yield Product.include('grower', 'category').find(id)
-    if (!this.state.product) return this.notfound()
-    yield next
+  all('/products/:id', async (_, id, next) => {
+    _.state.product = await Product.include('grower', 'category').find(id)
+    if (!_.state.product) return _.notfound()
+    await next()
   }, {end: false}),
 
   // Authorize
-  all('/products/:id', function *(id, next) {
-    const {currentUser, product} = this.state
-    this.state.canEdit = this.state.client.canEdit =
-    currentUser && product && (this.state.admin || !!(yield UserGrower.where({
+  all('/products/:id', async (_, id, next) => {
+    const {currentUser, product} = _.state
+    _.state.canEdit = _.state.client.canEdit =
+    currentUser && product && (_.state.admin || !!(await UserGrower.where({
       userId: currentUser.id,
       growerId: product.growerId
     }).find()))
-    yield next
+    await next()
   }, {end: false}),
 
   // Index
-  get('/products', function *() {
+  get('/products', async (_) => {
     const scope = Product
       .include('grower').join('grower')
       .where({active: true, grower: {active: true}})
 
     // Search
-    const {search} = this.query
+    const {search} = _.query
     if (search) scope.search(search)
 
     // Category
-    const {categoryId} = this.query
+    const {categoryId} = _.query
     if (categoryId) scope.where({categoryId})
 
     // Grower
-    const {growerId} = this.query
+    const {growerId} = _.query
     if (growerId) scope.where({growerId})
 
     // Pagination
-    const page = +(this.query.page || 1)
+    const page = +(_.query.page || 1)
 
-    const [products, categories] = yield Promise.all([
+    const [products, categories] = await Promise.all([
       scope.order('name').paginate(page, 30),
       Category.where(`exists(
         select 1 from products
@@ -56,7 +56,7 @@ module.exports = [
       )`).order('position').all()
     ])
 
-    this.react({
+    _.react({
       categories,
       categoryId,
       more: products.more,
@@ -67,21 +67,21 @@ module.exports = [
   }),
 
   // Show
-  get('/products/:id', function *() {
-    const product = this.state.product.toJSON()
+  get('/products/:id', async (_) => {
+    const product = _.state.product.toJSON()
 
-    product.descriptionHtml = this.state.product.descriptionHtml
-    this.react({product})
+    product.descriptionHtml = _.state.product.descriptionHtml
+    _.react({product})
   }),
 
   // Edit
-  get('/products/:id/edit', function *() {
-    if (!this.state.canEdit) return this.unauthorized()
+  get('/products/:id/edit', async (_) => {
+    if (!_.state.canEdit) return _.unauthorized()
 
-    const {product} = this.state
-    const categories = yield Category.order('position').all()
+    const {product} = _.state
+    const categories = await Category.order('position').all()
 
-    this.react({
+    _.react({
       categories,
       product: Object.assign(product.toJSON(), {
         description: product.description
@@ -90,12 +90,12 @@ module.exports = [
   }),
 
   // Update
-  post('/products/:id', function *() {
-    const {admin, canEdit, currentUser, product} = this.state
+  post('/products/:id', async (_) => {
+    const {admin, canEdit, currentUser, product} = _.state
 
-    if (!canEdit) return this.unauthorized()
+    if (!canEdit) return _.unauthorized()
 
-    const values = this.permit(
+    const values = _.permit(
       'active',
       'categoryId',
       'cost',
@@ -105,17 +105,17 @@ module.exports = [
       'unit'
     )
 
-    if (admin) Object.assign(values, this.permit('featured'))
+    if (admin) Object.assign(values, _.permit('featured'))
 
-    yield product.update(values)
-    yield Event.create({
+    await product.update(values)
+    await Event.create({
       action: 'update',
       userId: currentUser.id,
       productId: product.id,
       meta: JSON.stringify(values)
     })
 
-    this.body = {
+    _.body = {
       product: Object.assign(product.toJSON(), {
         description: product.description
       })
@@ -123,12 +123,12 @@ module.exports = [
   }),
 
   // Image
-  post('/products/:id/image', function *() {
-    if (!this.state.canEdit) return this.unauthorized()
+  post('/products/:id/image', async (_) => {
+    if (!_.state.canEdit) return _.unauthorized()
 
-    const {product} = this.state
-    yield product.uploadImage(this.req)
-    this.body = {product}
+    const {product} = _.state
+    await product.uploadImage(_.req)
+    _.body = {product}
   })
 
 ]

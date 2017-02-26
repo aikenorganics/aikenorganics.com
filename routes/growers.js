@@ -10,44 +10,44 @@ const {all, get, post} = require('koa-route')
 module.exports = [
 
   // New Grower
-  get('/growers/new', function *() {
-    if (!this.state.admin) return this.unauthorized()
-    this.react()
+  get('/growers/new', async (_) => {
+    if (!_.state.admin) return _.unauthorized()
+    _.react()
   }),
 
   // Find Grower
-  all('/growers/:id', function *(id, next) {
-    this.state.grower = yield Grower.find(id)
-    if (!this.state.grower) return this.notfound()
-    yield next
+  all('/growers/:id', async (_, id, next) => {
+    _.state.grower = await Grower.find(id)
+    if (!_.state.grower) return _.notfound()
+    await next()
   }, {end: false}),
 
   // Authorize
-  all('/growers/:id', function *(id, next) {
-    const {currentUser, grower} = this.state
-    this.state.canEdit = this.state.client.canEdit =
-    currentUser && grower && (this.state.admin || !!(yield UserGrower.where({
+  all('/growers/:id', async (_, id, next) => {
+    const {currentUser, grower} = _.state
+    _.state.canEdit = _.state.client.canEdit =
+    currentUser && grower && (_.state.admin || !!(await UserGrower.where({
       userId: currentUser.id,
       growerId: grower.id
     }).find()))
-    yield next
+    await next()
   }, {end: false}),
 
   // Index
-  get('/growers', function *() {
-    const growers = yield Grower.where({active: true}).order('name').all()
-    this.react({growers})
+  get('/growers', async (_) => {
+    const growers = await Grower.where({active: true}).order('name').all()
+    _.react({growers})
   }),
 
   // Create
-  post('/growers', function *() {
-    if (!this.state.admin) return this.unauthorized()
+  post('/growers', async (_) => {
+    if (!_.state.admin) return _.unauthorized()
 
-    const grower = yield Grower.create(this.permit(
+    const grower = await Grower.create(_.permit(
       'url', 'name', 'email', 'location', 'description'
     ))
 
-    this.body = {
+    _.body = {
       grower: Object.assign(grower.toJSON(), {
         description: grower.description
       })
@@ -55,15 +55,15 @@ module.exports = [
   }),
 
   // Show
-  get('/growers/:id', function *(id) {
+  get('/growers/:id', async (_, id) => {
     const scope = Product.where({growerId: id})
 
-    if (!this.state.canEdit) scope.where({active: true})
+    if (!_.state.canEdit) scope.where({active: true})
 
-    const {grower} = this.state
-    const products = yield scope.order('name').all()
+    const {grower} = _.state
+    const products = await scope.order('name').all()
 
-    this.react({
+    _.react({
       grower: Object.assign(grower.toJSON(), {
         descriptionHtml: grower.descriptionHtml
       }),
@@ -72,10 +72,10 @@ module.exports = [
   }),
 
   // Edit Grower
-  get('/growers/:id/edit', function *() {
-    if (!this.state.canEdit) return this.unauthorized()
-    const {grower} = this.state
-    this.react({
+  get('/growers/:id/edit', async (_) => {
+    if (!_.state.canEdit) return _.unauthorized()
+    const {grower} = _.state
+    _.react({
       grower: Object.assign(grower.toJSON(), {
         description: grower.description
       })
@@ -83,40 +83,40 @@ module.exports = [
   }),
 
   // Update
-  post('/growers/:id', function *() {
-    const {canEdit, currentUser, grower} = this.state
+  post('/growers/:id', async (_) => {
+    const {canEdit, currentUser, grower} = _.state
 
-    if (!canEdit) return this.unauthorized()
+    if (!canEdit) return _.unauthorized()
 
-    const values = this.permit(
+    const values = _.permit(
       'active', 'name', 'email', 'url', 'location', 'description'
     )
 
-    yield grower.update(values)
-    yield Event.create({
+    await grower.update(values)
+    await Event.create({
       action: 'update',
       userId: currentUser.id,
       growerId: grower.id,
       meta: JSON.stringify(values)
     })
 
-    this.body = {grower}
+    _.body = {grower}
   }),
 
   // New Product
-  get('/growers/:id/products/new', function *() {
-    if (!this.state.canEdit) return this.unauthorized()
-    const {grower} = this.state
-    const categories = yield Category.all()
-    this.react({categories, grower})
+  get('/growers/:id/products/new', async (_) => {
+    if (!_.state.canEdit) return _.unauthorized()
+    const {grower} = _.state
+    const categories = await Category.all()
+    _.react({categories, grower})
   }),
 
   // Create Product
-  post('/growers/:id/products', function *() {
-    if (!this.state.canEdit) return this.unauthorized()
+  post('/growers/:id/products', async (_) => {
+    if (!_.state.canEdit) return _.unauthorized()
 
-    const {grower} = this.state
-    const values = this.permit(
+    const {grower} = _.state
+    const values = _.permit(
       'name',
       'cost',
       'unit',
@@ -129,42 +129,42 @@ module.exports = [
     values.growerId = grower.id
 
     // Admins can set featured.
-    if (this.state.admin) {
-      Object.assign(values, this.permit('featured'))
+    if (_.state.admin) {
+      Object.assign(values, _.permit('featured'))
     }
 
-    const product = yield Product.create(values)
-    this.body = {product}
+    const product = await Product.create(values)
+    _.body = {product}
   }),
 
   // Orders
-  get('/growers/:id/orders', function *() {
-    if (!this.state.canEdit) return this.unauthorized()
+  get('/growers/:id/orders', async (_) => {
+    if (!_.state.canEdit) return _.unauthorized()
 
-    const {grower} = this.state
-    const products = yield Product
+    const {grower} = _.state
+    const products = await Product
       .where({growerId: grower.id}).where('reserved > 0').all()
 
-    this.react({grower, products})
+    _.react({grower, products})
   }),
 
   // Products
-  get('/growers/:id/products', function *() {
-    if (!this.state.canEdit) return this.unauthorized()
+  get('/growers/:id/products', async (_) => {
+    if (!_.state.canEdit) return _.unauthorized()
 
-    const {grower} = this.state
-    const products = yield Product.where({growerId: grower.id}).order('name').all()
+    const {grower} = _.state
+    const products = await Product.where({growerId: grower.id}).order('name').all()
 
-    this.react({grower, products})
+    _.react({grower, products})
   }),
 
   // Image
-  post('/growers/:id/image', function *() {
-    if (!this.state.canEdit) return this.unauthorized()
+  post('/growers/:id/image', async (_) => {
+    if (!_.state.canEdit) return _.unauthorized()
 
-    const {grower} = this.state
-    yield grower.uploadImage(this.req)
-    this.body = {grower}
+    const {grower} = _.state
+    await grower.uploadImage(_.req)
+    _.body = {grower}
   })
 
 ]

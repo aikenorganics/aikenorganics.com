@@ -3,9 +3,9 @@
 const {User} = require('../../../db')
 const test = require('../../test')
 
-test('POST /admin/users/:id is a 200', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client
+test('POST /admin/users/:id is a 200', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client
     .post('/admin/users/2')
     .send({
       first: 'first',
@@ -19,83 +19,83 @@ test('POST /admin/users/:id is a 200', function *(t) {
   t.is(last, 'last')
   t.is(phone, '555-555-5555')
 
-  const user = yield User.find(2)
+  const user = await User.find(2)
   t.is(user.first, 'first')
   t.is(user.last, 'last')
   t.is(user.phone, '555-555-5555')
 })
 
-test('GET /admin/users is a 200 as an admin', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/admin/users').send()
+test('GET /admin/users is a 200 as an admin', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/admin/users').send()
   response.assert(200)
 })
 
-test('GET /admin/users is a 200 as an admin with a search', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/admin/users?search=admin').send()
+test('GET /admin/users is a 200 as an admin with a search', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/admin/users?search=admin').send()
   response.assert(200)
 })
 
-test('GET /admin/users/show is a 200 as an admin', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/admin/users/1/edit').send()
+test('GET /admin/users/show is a 200 as an admin', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/admin/users/1/edit').send()
   response.assert(200).assert(/isAdmin/)
 })
 
-test('missing users are a 404 as an admin', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/admin/users/123456789').send()
+test('missing users are a 404 as an admin', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/admin/users/123456789').send()
   response.assert(404)
 })
 
-test('GET /admin/users is a 401 as a regular user', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client.get('/admin/users').send()
+test('GET /admin/users is a 401 as a regular user', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client.get('/admin/users').send()
   response.assert(401)
 })
 
-test('GET /admin/users/show is a 401 as a regular user', function *(t) {
-  yield t.signIn('user@example.com')
-  const response = yield t.client.get('/admin/users/1/edit').send()
+test('GET /admin/users/show is a 401 as a regular user', async (t) => {
+  await t.signIn('user@example.com')
+  const response = await t.client.get('/admin/users/1/edit').send()
   response.assert(401)
 })
 
-test('GET /admin/users/emails is a 200', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/admin/users/emails').send()
+test('GET /admin/users/emails is a 200', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/admin/users/emails').send()
   response.assert(200)
 })
 
-test('Search for stop word', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/admin/users?search=with').send()
+test('Search for stop word', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/admin/users?search=with').send()
   response.assert(200).assert(/jwitherow@example\.com/i)
 })
 
-test('Search for joanne', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/admin/users?search=joanne').send()
+test('Search for joanne', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/admin/users?search=joanne').send()
   response.assert(200).assert(/jwitherow@example\.com/i)
 })
 
-test('Delete a user', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.delete('/admin/users/7').send()
+test('Delete a user', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.delete('/admin/users/7').send()
   response.assert(200)
-  const user = yield User.find(7)
+  const user = await User.find(7)
   t.ok(user == null)
 })
 
-test('/admin/users/new is a 200', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client.get('/admin/users/new').send()
+test('/admin/users/new is a 200', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client.get('/admin/users/new').send()
   response.assert(200)
 })
 
-test('POST /admin/users is a 200', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client
+test('POST /admin/users is a 200', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client
     .post('/admin/users')
     .send({
       email: 'new@example.com',
@@ -104,7 +104,7 @@ test('POST /admin/users is a 200', function *(t) {
       phone: '555-555-5555'
     })
   response.assert(200)
-  const user = yield User.where({email: 'new@example.com'}).find()
+  const user = await User.where({email: 'new@example.com'}).find()
   t.is(user.password, null)
   t.is(user.email, 'new@example.com')
   t.is(user.first, 'first')
@@ -112,9 +112,9 @@ test('POST /admin/users is a 200', function *(t) {
   t.is(user.phone, '555-555-5555')
 })
 
-test('return page in JSON', function *(t) {
-  yield t.signIn('admin@example.com')
-  const response = yield t.client
+test('return page in JSON', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client
     .get('/admin/users')
     .set('accept', 'application/json')
     .send()

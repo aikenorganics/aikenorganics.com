@@ -6,20 +6,20 @@ const {del, post} = require('koa-route')
 module.exports = [
 
   // Create
-  post('/admin/user-growers', function *() {
-    const {userId, growerId} = this.request.body
-    const {id} = yield UserGrower.create({userId, growerId})
-    this.body = {
-      userGrower: yield UserGrower.include('user', 'grower').find(id)
+  post('/admin/user-growers', async (_) => {
+    const {userId, growerId} = _.request.body
+    const {id} = await UserGrower.create({userId, growerId})
+    _.body = {
+      userGrower: await UserGrower.include('user', 'grower').find(id)
     }
   }),
 
   // Destroy
-  del('/admin/user-growers/:id', function *(id) {
-    const userGrower = yield UserGrower.find(id)
-    if (!userGrower) return this.notfound()
-    yield userGrower.destroy()
-    this.body = {}
+  del('/admin/user-growers/:id', async (_, id) => {
+    const userGrower = await UserGrower.find(id)
+    if (!userGrower) return _.notfound()
+    await userGrower.destroy()
+    _.body = {}
   })
 
 ]

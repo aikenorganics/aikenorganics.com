@@ -7,9 +7,9 @@ const {get, post} = require('koa-route')
 module.exports = [
 
   // Index
-  get('/admin/orders', function *() {
-    const full = this.query.full === '1'
-    let {locationId, productId, status} = this.query
+  get('/admin/orders', async (_) => {
+    const full = _.query.full === '1'
+    let {locationId, productId, status} = _.query
 
     if (!Array.isArray(status)) status = [status || 'open']
 
@@ -28,12 +28,12 @@ module.exports = [
     }
 
     // CSV
-    if (this.query.csv) {
-      const orders = yield scope.all()
-      this.type = 'csv'
-      this.body = csv.row('id', 'name', 'email', 'member', 'location', 'delivery')
+    if (_.query.csv) {
+      const orders = await scope.all()
+      _.type = 'csv'
+      _.body = csv.row('id', 'name', 'email', 'member', 'location', 'delivery')
       for (const {id, location, user} of orders) {
-        this.body += csv.row(
+        _.body += csv.row(
           id,
           user.name,
           user.email,
@@ -46,18 +46,18 @@ module.exports = [
     }
 
     // Pagination
-    const page = +(this.query.page || 1)
+    const page = +(_.query.page || 1)
 
     // Include product orders?
     if (full) scope.include({productOrders: {product: 'grower'}})
 
-    const [orders, locations, products] = yield Promise.all([
+    const [orders, locations, products] = await Promise.all([
       scope.order(['createdAt', 'descending']).paginate(page, 50),
       Location.order('name').all(),
       Product.order('name').all()
     ])
 
-    this.react({
+    _.react({
       full,
       locations: locations.map((location) => location.slice('id', 'name')),
       locationId,
@@ -73,8 +73,8 @@ module.exports = [
   }),
 
   // Show
-  get('/admin/orders/:id', function *(id) {
-    const [order, products, locations] = yield Promise.all([
+  get('/admin/orders/:id', async (_, id) => {
+    const [order, products, locations] = await Promise.all([
       Order.include(
         'user', 'location', 'payments', {productOrders: 'product'}
       ).find(id),
@@ -85,9 +85,9 @@ module.exports = [
 
       Location.order('name').all()
     ])
-    if (!order) return this.notfound()
+    if (!order) return _.notfound()
 
-    this.react({
+    _.react({
       locations: locations.map((location) => location.slice('id', 'name')),
       order,
       payments: order.payments,
@@ -97,12 +97,12 @@ module.exports = [
   }),
 
   // Charge
-  post('/admin/orders/:id/charge', function *(id) {
-    const order = yield Order.find(id)
-    if (!order) return this.notfound()
-    const amount = (+this.request.body.amount * 100) | 0
-    const payment = yield order.charge(amount)
-    this.body = {payment}
+  post('/admin/orders/:id/charge', async (_, id) => {
+    const order = await Order.find(id)
+    if (!order) return _.notfound()
+    const amount = (+_.request.body.amount * 100) | 0
+    const payment = await order.charge(amount)
+    _.body = {payment}
   })
 
 ]

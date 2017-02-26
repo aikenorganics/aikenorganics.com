@@ -3,13 +3,13 @@
 const assets = require('ozymandias/assets')
 const {html, raw} = require('ozymandias/html')
 
-module.exports = function *(next) {
-  yield next
+module.exports = async (_, next) => {
+  await next()
 
   // Only HTML responses.
-  if (!this.response.is('html') || typeof this.body !== 'string') return
+  if (!_.response.is('html') || typeof _.body !== 'string') return
 
-  this.body = html`
+  _.body = html`
 <!doctype html>
 <html>
 <head>
@@ -19,13 +19,13 @@ module.exports = function *(next) {
   <title>Aiken Organics</title>
   <link rel='shortcut icon' href='${assets.path('favicon.ico')}'>
   <link rel='apple-touch-icon' href='${assets.path('apple-touch-icon.png')}'>
-  ${raw(this.styles('css/app.css'))}
-  ${raw(this.json('state', this.state.client || {}))}
-  ${raw(this.script('js/app.js'))}
+  ${raw(_.styles('css/app.css'))}
+  ${raw(_.json('state', _.state.client || {}))}
+  ${raw(_.script('js/app.js'))}
   <script defer src='https://www.google-analytics.com/analytics.js'></script>
 </head>
 <body>
-  ${raw(this.body)}
+  ${raw(_.body)}
 </body>
 </html>`
 }
