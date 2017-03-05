@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from 'moment'
 import Link from '../../link'
 import Errors from '../../errors'
 import Status from './status'
@@ -51,8 +50,8 @@ export default ({errors, locations, order, payments, products, productOrders}) =
     </h2>
     <h3>
       <Link href={`/admin/users/${user.id}/edit`}>{user.name}</Link> <small>
-        {user.email} - {moment(user.memberUntil).isSameOrAfter(new Date())
-          ? `Member until ${moment(user.memberUntil).format('MM/DD/YYYY')}`
+        {user.email} - {new Date(user.memberUntil) >= new Date()
+          ? `Member until ${new Date(user.memberUntil).toLocaleDateString('en', {timeZone: 'America/New_York'})}`
           : 'Not a Member'
         }
       </small>

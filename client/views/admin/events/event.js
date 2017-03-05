@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from 'moment'
 import Link from '../../link'
 
 export default ({event: {action, createdAt, grower, meta, product, user}}) => {
@@ -20,7 +19,7 @@ export default ({event: {action, createdAt, grower, meta, product, user}}) => {
 
   return <details>
     <summary>
-      {moment(createdAt).format('MM/DD/YYYY h:mma')}
+      {new Date(createdAt).toLocaleString('en', {timeZone: 'America/New_York'})}
       {' » '}
       <Link href={`/admin/users/${user.id}/edit`}>
         {user.name}

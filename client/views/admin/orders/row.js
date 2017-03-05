@@ -1,4 +1,3 @@
-import moment from 'moment'
 import React from 'react'
 import Link from '../../link'
 import Status from './status'
@@ -12,8 +11,8 @@ export default ({order}) => {
     <td>{user.phone || '-'}</td>
     <td><Status order={order} /></td>
     <td>
-      {moment(user.memberUntil).isSameOrAfter(new Date())
-        ? <span className='tag tag-info' title={`Until ${moment(user.memberUntil).format('MM/DD/YYYY')}`}>
+      {new Date(user.memberUntil) >= new Date()
+        ? <span className='tag tag-info' title={`Until ${new Date(user.memberUntil).toLocaleDateString('en', {timeZone: 'America/New_York'})}`}>
           Member
         </span>
         : ''

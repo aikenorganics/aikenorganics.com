@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from 'moment'
 import Search from '../../search'
 import Link from '../../link'
 import Pagination from '../../pagination'
@@ -36,7 +35,7 @@ export default ({more, page, search, url, users}) => {
               <td>{name}</td>
               <td>{phone || '-'}</td>
               <td>
-                {moment(memberUntil).isAfter(new Date())
+                {new Date(memberUntil) > new Date()
                   ? <span className='tag tag-info'>Member</span>
                   : ''
                 }
