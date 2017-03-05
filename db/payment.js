@@ -3,7 +3,6 @@
 const Model = require('./model')
 
 class Payment extends Model {
-
   static get tableName () {
     return 'payments'
   }
@@ -25,7 +24,6 @@ class Payment extends Model {
       'amount'
     )
   }
-
 }
 
 module.exports = Payment

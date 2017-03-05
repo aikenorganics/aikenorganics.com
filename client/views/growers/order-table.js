@@ -3,7 +3,7 @@ import Row from './order-row'
 
 export default ({products}) => {
   const total = products.reduce((sum, {cost, reserved}) => {
-    return sum + +cost * reserved
+    return sum + (+cost * reserved)
   }, 0)
 
   return <div>

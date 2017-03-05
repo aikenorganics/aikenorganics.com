@@ -3,7 +3,6 @@
 const Model = require('./model')
 
 class Location extends Model {
-
   static get tableName () {
     return 'locations'
   }
@@ -42,7 +41,6 @@ class Location extends Model {
       'removable'
     )
   }
-
 }
 
 module.exports = Location

@@ -10,7 +10,6 @@ const createCharge = (options) => new Promise((resolve, reject) => {
 })
 
 class Order extends Model {
-
   static get tableName () {
     return 'orders'
   }
@@ -68,7 +67,6 @@ class Order extends Model {
       'location'
     )
   }
-
 }
 
 module.exports = Order

@@ -3,7 +3,6 @@ import Link from '../link'
 import {updateOrder} from '../../actions'
 
 export default class Form extends PureComponent {
-
   constructor (props) {
     super(props)
     const {locationId} = props.order
@@ -40,5 +39,4 @@ export default class Form extends PureComponent {
       </small>
     </div>
   }
-
 }

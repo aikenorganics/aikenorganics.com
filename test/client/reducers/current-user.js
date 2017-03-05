@@ -24,4 +24,3 @@ test('update currentUser - wrong id', (t) => {
   t.deepEqual(next.currentUser, {id: 1, email: 'foo@example.com'})
   t.end()
 })
-

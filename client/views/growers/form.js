@@ -2,7 +2,6 @@ import React, {PureComponent, PropTypes} from 'react'
 import {createGrower, navigate, updateGrower} from '../../actions'
 
 export default class Form extends PureComponent {
-
   static get propTypes () {
     return {
       busy: PropTypes.bool,

@@ -2,7 +2,6 @@ import React, {PureComponent} from 'react'
 import {createPayment} from '../../../actions'
 
 export default class Charge extends PureComponent {
-
   constructor (props) {
     super(props)
     this.state = {
@@ -37,5 +36,4 @@ export default class Charge extends PureComponent {
       </div>
     </form>
   }
-
 }

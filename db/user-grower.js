@@ -3,7 +3,6 @@
 const Model = require('./model')
 
 class UserGrower extends Model {
-
   static get tableName () {
     return 'user_growers'
   }
@@ -26,7 +25,6 @@ class UserGrower extends Model {
       'user'
     )
   }
-
 }
 
 module.exports = UserGrower

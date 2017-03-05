@@ -13,7 +13,6 @@ const getStripe = () => stripe || (stripe = new Promise((resolve, reject) => {
 }))
 
 export default class Billing extends PureComponent {
-
   static propTypes () {
     return {
       busy: PropTypes.bool,
@@ -44,5 +43,4 @@ export default class Billing extends PureComponent {
       {user.stripeId ? 'Update Billing Info' : 'Enter Billing Info'}
     </button>
   }
-
 }

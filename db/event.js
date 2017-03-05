@@ -1,7 +1,6 @@
 'use strict'
 
 class Event extends require('ozymandias/db/instance').Model {
-
   static get tableName () {
     return 'events'
   }
@@ -32,7 +31,6 @@ class Event extends require('ozymandias/db/instance').Model {
       'grower'
     )
   }
-
 }
 
 module.exports = Event

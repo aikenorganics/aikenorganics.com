@@ -4,7 +4,6 @@ const marked = require('marked')
 const Model = require('./model')
 
 class Market extends Model {
-
   static get tableName () {
     return 'markets'
   }
@@ -38,7 +37,6 @@ class Market extends Model {
       'open'
     )
   }
-
 }
 
 module.exports = Market

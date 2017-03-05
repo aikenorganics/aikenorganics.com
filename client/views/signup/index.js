@@ -3,7 +3,6 @@ import Errors from '../errors'
 import {navigate, signup} from '../../actions'
 
 export default class Index extends PureComponent {
-
   constructor (props) {
     super(props)
     this.state = {
@@ -67,5 +66,4 @@ export default class Index extends PureComponent {
       </div>
     </main>
   }
-
 }

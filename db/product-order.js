@@ -3,7 +3,6 @@
 const Model = require('./model')
 
 class ProductOrder extends Model {
-
   static get tableName () {
     return 'product_orders'
   }
@@ -59,7 +58,6 @@ class ProductOrder extends Model {
       'product'
     )
   }
-
 }
 
 module.exports = ProductOrder

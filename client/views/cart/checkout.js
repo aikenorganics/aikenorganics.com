@@ -3,7 +3,6 @@ import Link from '../link'
 import {checkout, navigate} from '../../actions'
 
 export default class Checkout extends PureComponent {
-
   constructor (props) {
     super(props)
     const {locations, order} = props

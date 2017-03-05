@@ -4,7 +4,6 @@ import Billing from '../users/billing'
 import {updateSettings} from '../../actions'
 
 export default class Index extends PureComponent {
-
   constructor (props) {
     super(props)
     const {first, last, phone, street, city, state, zip} = props.currentUser
@@ -91,5 +90,4 @@ export default class Index extends PureComponent {
       <Billing busy={busy} user={currentUser} stripeKey={stripeKey} />
     </div>
   }
-
 }

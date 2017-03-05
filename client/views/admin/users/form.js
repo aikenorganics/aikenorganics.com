@@ -2,7 +2,6 @@ import React, {PureComponent, PropTypes} from 'react'
 import {createUser, navigate, updateUser} from '../../../actions'
 
 export default class Form extends PureComponent {
-
   static get propTypes () {
     return {
       busy: PropTypes.bool,
@@ -76,5 +75,4 @@ export default class Form extends PureComponent {
       </div>
     </form>
   }
-
 }

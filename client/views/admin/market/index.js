@@ -2,7 +2,6 @@ import React, {PureComponent, PropTypes} from 'react'
 import {updateMarket} from '../../../actions'
 
 export default class Index extends PureComponent {
-
   static get propTypes () {
     return {
       busy: PropTypes.bool,
@@ -58,5 +57,4 @@ export default class Index extends PureComponent {
       </form>
     </div>
   }
-
 }

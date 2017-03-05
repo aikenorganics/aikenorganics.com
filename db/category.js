@@ -3,7 +3,6 @@
 const Model = require('./model')
 
 class Category extends Model {
-
   static get tableName () {
     return 'categories'
   }
@@ -52,7 +51,6 @@ class Category extends Model {
       'removable'
     )
   }
-
 }
 
 module.exports = Category

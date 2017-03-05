@@ -4,7 +4,6 @@ import Errors from '../errors'
 import {createProduct, navigate, updateProduct} from '../../actions'
 
 export default class Form extends PureComponent {
-
   static get propTypes () {
     return {
       busy: PropTypes.bool,
@@ -108,5 +107,4 @@ export default class Form extends PureComponent {
       </p>
     </form>
   }
-
 }

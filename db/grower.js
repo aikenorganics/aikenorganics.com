@@ -4,7 +4,6 @@ const marked = require('marked')
 const Model = require('./model')
 
 class Grower extends Model {
-
   static get tableName () {
     return 'growers'
   }
@@ -84,7 +83,6 @@ class Grower extends Model {
       'userGrowers'
     )
   }
-
 }
 
 Grower.hasImage({

@@ -3,7 +3,6 @@
 const stripe = require('stripe')(process.env.STRIPE_SK)
 
 class User extends require('ozymandias/user') {
-
   static get columns () {
     return super.columns.concat([
       'last',
@@ -190,7 +189,6 @@ class User extends require('ozymandias/user') {
       'mediumImage'
     )
   }
-
 }
 
 User.hasImage({

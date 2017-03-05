@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react'
 
 export default class Form extends PureComponent {
-
   focus ({target: {value}}) {
     this.value = value
   }
@@ -36,5 +35,4 @@ export default class Form extends PureComponent {
       <button hidden ref={(button) => { this.button = button }} />
     </form>
   }
-
 }

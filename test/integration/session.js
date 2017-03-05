@@ -63,4 +63,3 @@ test('forgot password', async (assert) => {
   const user = await User.find(1)
   assert.ok(await user.authenticate('newpassword'))
 })
-

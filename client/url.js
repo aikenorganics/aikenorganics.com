@@ -6,7 +6,7 @@ export const params = (url, values) => {
   values = assign(qs.parse(search), values)
   Object.keys(values).forEach((key) => {
     const value = values[key]
-    if (!value || Array.isArray(value) && !value.length) delete values[key]
+    if (!value || (Array.isArray(value) && !value.length)) delete values[key]
   })
   const result = qs.stringify(values)
   return result ? path + '?' + result : path
