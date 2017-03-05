@@ -38,12 +38,13 @@ export default ({order}) => {
               <td>{product.grower.name}</td>
               <td>${cost}</td>
               <td>{quantity}</td>
-              <td>{total.toFixed(2)}</td>
+              <td>${total.toFixed(2)}</td>
             </tr>
           })}
         </tbody>
         <tfoot>
           <tr>
+            <td />
             <td />
             <td />
             <td />
