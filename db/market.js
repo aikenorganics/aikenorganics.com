@@ -35,6 +35,13 @@ class Market extends Model {
     return marked(this.news)
   }
 
+  get open () {
+    return this.isOpenAt(new Date())
+  }
+
+  set open (value) {
+  }
+
   isOpenAt (date) {
     time.tzset('America/New_York')
     const {gmtOffset} = time.localtime(date / 1000)

@@ -71,30 +71,25 @@ export default ({busy, market}) => {
     <h1>Market</h1>
     <p>
       <strong>The market is {open ? 'open' : 'closed'}. </strong>
-      <button type='button' disabled={busy}
-        className={`btn ${open ? 'btn-danger' : 'btn-success'}`}
-        onClick={() => updateMarket({open: !open}).catch(() => {})}>
-        {open ? 'Close' : 'Open'} It
-      </button>
     </p>
     <hr />
     <form onSubmit={save}>
       <div className='form-group form-inline'>
         <label htmlFor='openDay'>Opens on</label>
         {' '}
-        <select defaultValue={openDay} ref={(input) => {openDayInput = input}} className='form-control'>
+        <select defaultValue={openDay} ref={(input) => { openDayInput = input }} className='form-control'>
           {days()}
         </select>
         {' at '}
-        <select defaultValue={openHours % 12} ref={(input) => {openHoursInput = input}} className='form-control'>
+        <select defaultValue={openHours % 12} ref={(input) => { openHoursInput = input }} className='form-control'>
           {hours()}
         </select>
         {' : '}
-        <select defaultValue={openMinutes} ref={(input) => {openMinutesInput = input}} className='form-control'>
+        <select defaultValue={openMinutes} ref={(input) => { openMinutesInput = input }} className='form-control'>
           {minutes()}
         </select>
         {' '}
-        <select defaultValue={openHours < 12 ? 'am' : 'pm'} ref={(input) => {openMeridiemInput = input}} className='form-control'>
+        <select defaultValue={openHours < 12 ? 'am' : 'pm'} ref={(input) => { openMeridiemInput = input }} className='form-control'>
           <option value='am'>am</option>
           <option value='pm'>pm</option>
         </select>
@@ -102,19 +97,19 @@ export default ({busy, market}) => {
       <div className='form-group form-inline'>
         <label htmlFor='openDay'>Closes on</label>
         {' '}
-        <select defaultValue={closeDay} ref={(input) => {closeDayInput = input}} className='form-control'>
+        <select defaultValue={closeDay} ref={(input) => { closeDayInput = input }} className='form-control'>
           {days()}
         </select>
         {' at '}
-        <select defaultValue={closeHours % 12} ref={(input) => {closeHoursInput = input}} className='form-control'>
+        <select defaultValue={closeHours % 12} ref={(input) => { closeHoursInput = input }} className='form-control'>
           {hours()}
         </select>
         {' : '}
-        <select defaultValue={closeMinutes} ref={(input) => {closeMinutesInput = input}} className='form-control'>
+        <select defaultValue={closeMinutes} ref={(input) => { closeMinutesInput = input }} className='form-control'>
           {minutes()}
         </select>
         {' '}
-        <select defaultValue={closeHours < 12 ? 'am' : 'pm'} ref={(input) => {closeMeridiemInput = input}} className='form-control'>
+        <select defaultValue={closeHours < 12 ? 'am' : 'pm'} ref={(input) => { closeMeridiemInput = input }} className='form-control'>
           <option value='am'>am</option>
           <option value='pm'>pm</option>
         </select>

@@ -14,14 +14,13 @@ test('POST /admin/market is a 200', async (t) => {
   const response = await t.client
     .post('/admin/market')
     .set('accept', 'application/json')
-    .send({open: true, message: 'test'})
+    .send({message: 'test'})
   response.assert(200).assert('content-type', /json/)
-  const {id, message, open} = response.body.market
+  const {id, message} = response.body.market
   t.is(id, 1)
-  t.is(open, true)
   t.is(message, 'test')
   const market = await Market.find(1)
-  t.ok(market.open)
+  t.is(market.message, 'test')
 })
 
 test('POST /admin/market is a 200', async (t) => {
@@ -29,12 +28,11 @@ test('POST /admin/market is a 200', async (t) => {
   const response = await t.client
     .post('/admin/market')
     .set('accept', 'application/json')
-    .send({open: false, message: 'test'})
+    .send({message: 'test'})
   response.assert(200).assert('content-type', /json/)
-  const {id, message, open} = response.body.market
+  const {id, message} = response.body.market
   t.is(id, 1)
-  t.is(open, false)
   t.is(message, 'test')
   const market = await Market.find(1)
-  t.ok(!market.open)
+  t.is(market.message, 'test')
 })
