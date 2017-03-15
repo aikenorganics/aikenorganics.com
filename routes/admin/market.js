@@ -8,16 +8,42 @@ module.exports = [
   get('/admin/market', async (_) => {
     const {market} = _.state
     _.react({
-      market: Object.assign(market.toJSON(), market.slice('news'))
+      market: Object.assign(market.toJSON(), market.slice(
+        'news',
+        'openDay',
+        'openHours',
+        'openMinutes',
+        'closeDay',
+        'closeHours',
+        'closeMinutes'
+      ))
     })
   }),
 
   // Update
   post('/admin/market', async (_) => {
     const {market} = _.state
-    await market.update(_.permit('message', 'news', 'open'))
+    await market.update(_.permit(
+      'message',
+      'news',
+      'open',
+      'openDay',
+      'openHours',
+      'openMinutes',
+      'closeDay',
+      'closeHours',
+      'closeMinutes'
+    ))
     _.react({
-      market: Object.assign(market.toJSON(), market.slice('news'))
+      market: Object.assign(market.toJSON(), market.slice(
+        'news',
+        'openDay',
+        'openHours',
+        'openMinutes',
+        'closeDay',
+        'closeHours',
+        'closeMinutes'
+      ))
     })
   })
 
