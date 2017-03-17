@@ -29,15 +29,17 @@ test('DELETE /orders/:id is a 401 logged out', async (t) => {
   response.assert(401)
 })
 
-/* TODO: Fix Me
 test('DELETE /orders/:id is a 401 when closed', async (t) => {
-  const market = await Market.find(1)
-  await market.update({open: false})
-  await t.signIn('user@example.com')
-  const response = await t.client.delete('/orders/2').send()
-  response.assert(401)
+  const {isOpenAt} = Market.prototype
+  try {
+    Market.prototype.isOpenAt = () => false
+    await t.signIn('user@example.com')
+    const response = await t.client.delete('/orders/2').send()
+    response.assert(401)
+  } finally {
+    Market.prototype.isOpenAt = isOpenAt
+  }
 })
-*/
 
 test('DELETE /orders/:id is a 200', async (t) => {
   await t.signIn('user@example.com')
@@ -93,15 +95,17 @@ test('POST /orders/:id is a 200', async (t) => {
   t.is(order.notes, '')
 })
 
-/* TODO: Fix Me
 test('Cannout update an order when the market is closed', async (t) => {
-  const market = await Market.find(1)
-  await market.update({open: false})
-  await t.signIn('user@example.com')
-  const response = await t.client.post('/orders/2').send({locationId: 2})
-  response.assert(401)
+  const {isOpenAt} = Market.prototype
+  try {
+    Market.prototype.isOpenAt = () => false
+    await t.signIn('user@example.com')
+    const response = await t.client.post('/orders/2').send({locationId: 2})
+    response.assert(401)
+  } finally {
+    Market.prototype.isOpenAt = isOpenAt
+  }
 })
-*/
 
 test('Cannout update someone else\'s order', async (t) => {
   await t.signIn('user@example.com')
@@ -131,11 +135,15 @@ test('Admins can update someone else\'s order', async (t) => {
 })
 
 test('Admins can update orders when the market is closed', async (t) => {
-  const market = await Market.find(1)
-  await market.update({open: false})
-  await t.signIn('admin@example.com')
-  const response = await t.client.post('/orders/5').send({locationId: 2})
-  response.assert(200)
+  const {isOpenAt} = Market.prototype
+  try {
+    Market.prototype.isOpenAt = () => false
+    await t.signIn('admin@example.com')
+    const response = await t.client.post('/orders/5').send({locationId: 2})
+    response.assert(200)
+  } finally {
+    Market.prototype.isOpenAt = isOpenAt
+  }
 })
 
 test('Updating a missing order returns a 404', async (t) => {
