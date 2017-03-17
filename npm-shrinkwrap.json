@@ -2135,14 +2135,14 @@
       "resolved": "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-2.0.1.tgz"
     },
     "stripe": {
-      "version": "4.15.0",
+      "version": "4.15.1",
       "from": "stripe@latest",
-      "resolved": "https://registry.npmjs.org/stripe/-/stripe-4.15.0.tgz",
+      "resolved": "https://registry.npmjs.org/stripe/-/stripe-4.15.1.tgz",
       "dependencies": {
         "qs": {
-          "version": "2.4.2",
-          "from": "qs@>=2.4.2 <3.0.0",
-          "resolved": "https://registry.npmjs.org/qs/-/qs-2.4.2.tgz"
+          "version": "6.0.4",
+          "from": "qs@>=6.0.4 <6.1.0",
+          "resolved": "https://registry.npmjs.org/qs/-/qs-6.0.4.tgz"
         }
       }
     },
