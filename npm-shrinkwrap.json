@@ -700,9 +700,9 @@
       "resolved": "https://registry.npmjs.org/error-inject/-/error-inject-1.0.0.tgz"
     },
     "es6-promise": {
-      "version": "4.0.5",
-      "from": "es6-promise@4.0.5",
-      "resolved": "https://registry.npmjs.org/es6-promise/-/es6-promise-4.0.5.tgz"
+      "version": "4.1.0",
+      "from": "es6-promise@latest",
+      "resolved": "https://registry.npmjs.org/es6-promise/-/es6-promise-4.1.0.tgz"
     },
     "escape-html": {
       "version": "1.0.3",
