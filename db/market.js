@@ -13,7 +13,6 @@ class Market extends Model {
     return [
       'id',
       'news',
-      'open',
       'openDay',
       'openHours',
       'openMinutes',
@@ -37,9 +36,6 @@ class Market extends Model {
 
   get open () {
     return this.isOpenAt(new Date())
-  }
-
-  set open (value) {
   }
 
   isOpenAt (date) {

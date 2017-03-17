@@ -26,7 +26,6 @@ module.exports = [
     await market.update(_.permit(
       'message',
       'news',
-      'open',
       'openDay',
       'openHours',
       'openMinutes',
