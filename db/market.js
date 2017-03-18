@@ -42,16 +42,20 @@ class Market extends Model {
     return marked(this.news)
   }
 
+  get now () {
+    return this._now || new Date()
+  }
+
+  set now (value) {
+    this._now = value
+  }
+
   get open () {
-    return this.isOpenAt(new Date())
+    return !this.closed && this.nextOpen >= this.nextClose
   }
 
-  isOpenAt (date) {
-    return this.nextOpen(date) >= this.nextClose(date)
-  }
-
-  nextClose (date) {
-    const now = localDate(date)
+  get nextClose () {
+    const now = localDate(this.now)
     const close = new Date(now)
     close.setUTCDate(close.getUTCDate() - now.getUTCDay() + this.closeDay)
     close.setUTCHours(this.closeHours)
@@ -60,8 +64,8 @@ class Market extends Model {
     return close
   }
 
-  nextOpen (date) {
-    const now = localDate(date)
+  get nextOpen () {
+    const now = localDate(this.now)
     const open = new Date(now)
     open.setUTCDate(open.getUTCDate() - now.getUTCDay() + this.openDay)
     open.setUTCHours(this.openHours)

@@ -30,15 +30,10 @@ test('DELETE /orders/:id is a 401 logged out', async (t) => {
 })
 
 test('DELETE /orders/:id is a 401 when closed', async (t) => {
-  const {isOpenAt} = Market.prototype
-  try {
-    Market.prototype.isOpenAt = () => false
-    await t.signIn('user@example.com')
-    const response = await t.client.delete('/orders/2').send()
-    response.assert(401)
-  } finally {
-    Market.prototype.isOpenAt = isOpenAt
-  }
+  await (await Market.find(1)).update({closed: true})
+  await t.signIn('user@example.com')
+  const response = await t.client.delete('/orders/2').send()
+  response.assert(401)
 })
 
 test('DELETE /orders/:id is a 200', async (t) => {
@@ -96,15 +91,10 @@ test('POST /orders/:id is a 200', async (t) => {
 })
 
 test('Cannout update an order when the market is closed', async (t) => {
-  const {isOpenAt} = Market.prototype
-  try {
-    Market.prototype.isOpenAt = () => false
-    await t.signIn('user@example.com')
-    const response = await t.client.post('/orders/2').send({locationId: 2})
-    response.assert(401)
-  } finally {
-    Market.prototype.isOpenAt = isOpenAt
-  }
+  await (await Market.find(1)).update({closed: true})
+  await t.signIn('user@example.com')
+  const response = await t.client.post('/orders/2').send({locationId: 2})
+  response.assert(401)
 })
 
 test('Cannout update someone else\'s order', async (t) => {
@@ -135,15 +125,10 @@ test('Admins can update someone else\'s order', async (t) => {
 })
 
 test('Admins can update orders when the market is closed', async (t) => {
-  const {isOpenAt} = Market.prototype
-  try {
-    Market.prototype.isOpenAt = () => false
-    await t.signIn('admin@example.com')
-    const response = await t.client.post('/orders/5').send({locationId: 2})
-    response.assert(200)
-  } finally {
-    Market.prototype.isOpenAt = isOpenAt
-  }
+  await (await Market.find(1)).update({closed: true})
+  await t.signIn('admin@example.com')
+  const response = await t.client.post('/orders/5').send({locationId: 2})
+  response.assert(200)
 })
 
 test('Updating a missing order returns a 404', async (t) => {
