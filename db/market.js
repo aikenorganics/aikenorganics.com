@@ -4,13 +4,6 @@ const time = require('time')
 const marked = require('marked')
 const Model = require('./model')
 
-const localDate = (date) => {
-  date = new Date(date)
-  time.tzset('America/New_York')
-  date.setUTCSeconds(date.getUTCSeconds() + time.localtime(date / 1000).gmtOffset)
-  return date
-}
-
 class Market extends Model {
   static get tableName () {
     return 'markets'
@@ -55,23 +48,33 @@ class Market extends Model {
   }
 
   get nextClose () {
-    const now = localDate(this.now)
-    const close = new Date(now)
-    close.setUTCDate(close.getUTCDate() - now.getUTCDay() + this.closeDay)
-    close.setUTCHours(this.closeHours)
-    close.setUTCMinutes(this.closeMinutes)
-    if (close < now) close.setUTCDate(close.getUTCDate() + 7)
-    return close
+    return this.nextDate(this.closeDay, this.closeHours, this.closeMinutes)
   }
 
   get nextOpen () {
-    const now = localDate(this.now)
-    const open = new Date(now)
-    open.setUTCDate(open.getUTCDate() - now.getUTCDay() + this.openDay)
-    open.setUTCHours(this.openHours)
-    open.setUTCMinutes(this.openMinutes)
-    if (open < now) open.setUTCDate(open.getUTCDate() + 7)
-    return open
+    return this.nextDate(this.openDay, this.openHours, this.openMinutes)
+  }
+
+  nextDate (day, hours, minutes) {
+    const date = new Date(this.now)
+
+    // Shift to local zone
+    time.tzset('America/New_York')
+    const {gmtOffset} = time.localtime(date / 1000)
+    date.setUTCSeconds(date.getUTCSeconds() + gmtOffset)
+
+    // Set day, hours, minutes
+    date.setUTCDate(date.getUTCDate() - date.getUTCDay() + day)
+    date.setUTCHours(hours)
+    date.setUTCMinutes(minutes)
+
+    // Shift back to UTC
+    date.setUTCSeconds(date.getUTCSeconds() - gmtOffset)
+
+    // Shift forward if necessary
+    if (date < this.now) date.setUTCDate(date.getUTCDate() + 7)
+
+    return date
   }
 
   toJSON () {

@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from './link'
 
-export default ({cart, children, market: {messageHtml, open}, currentUser, path}) => {
+export default ({cart, children, market: {messageHtml, nextOpen, open}, currentUser, path}) => {
   const cartSize = Object.keys(cart).reduce((total, id) => total + cart[id], 0)
 
   return <main className='container'>
@@ -10,7 +10,16 @@ export default ({cart, children, market: {messageHtml, open}, currentUser, path}
         ? <div className='alert alert-info' dangerouslySetInnerHTML={{__html: messageHtml}} />
         : <div className='alert alert-warning text-xs-center'>
           <p>
-            <strong>The market is currently closed and will re-open on Sunday at 8:00AM. </strong>
+            <strong>
+              The market is currently closed and will re-open
+              {new Date(nextOpen).toLocaleString('en-US', {
+                timeZone: 'America/New_York',
+                weekday: 'long',
+                hour: 'numeric',
+                minute: 'numeric'
+              })}.
+            </strong>
+            {' '}
             If you need help in the meantime, feel free to drop us a line
             at <a href='mailto:support@aikenorganics.com'>support@aikenorganics.com</a>.
           </p>

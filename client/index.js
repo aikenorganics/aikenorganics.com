@@ -1,6 +1,7 @@
 import 'ozymandias/client/errors'
 import 'ozymandias/client/analytics'
 import 'es6-promise/auto'
+import './to-locale-string'
 import React, {Component} from 'react'
 import store from './store'
 import Routes from './routes'
