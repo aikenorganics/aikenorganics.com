@@ -18,6 +18,7 @@ class Market extends Model {
 
   static get columns () {
     return [
+      'closed',
       'id',
       'news',
       'openDay',
