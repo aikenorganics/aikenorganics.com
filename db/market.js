@@ -78,8 +78,9 @@ class Market extends Model {
     return this.slice(
       'id',
       'domain',
-      'message',
       'messageHtml',
+      'nextClose',
+      'nextOpen',
       'open'
     )
   }
