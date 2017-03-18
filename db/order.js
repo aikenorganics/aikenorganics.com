@@ -33,25 +33,24 @@ class Order extends Model {
     }, 0)
   }
 
-  charge (amount) {
-    return User.find(this.userId).then((user) => {
-      if (!user) throw new Error('Unable to find user.')
-      if (!user.stripeId) throw new Error('User has no billing information.')
+  async charge (amount) {
+    const user = await User.find(this.userId)
+    if (!user) throw new Error('Unable to find user.')
+    if (!user.stripeId) throw new Error('User has no billing information.')
 
-      return createCharge({
-        amount: amount,
-        currency: 'usd',
-        customer: user.stripeId,
-        description: `Aiken Organics - Order #${this.id}`,
-        receipt_email: user.email,
-        statement_descriptor: 'Aiken Organics'
-      })
-    }).then((charge) => {
-      return Payment.create({
-        amount: amount,
-        stripeId: charge.id,
-        orderId: this.id
-      })
+    const charge = await createCharge({
+      amount: amount,
+      currency: 'usd',
+      customer: user.stripeId,
+      description: `Aiken Organics - Order #${this.id}`,
+      receipt_email: user.email,
+      statement_descriptor: 'Aiken Organics'
+    })
+
+    return Payment.create({
+      amount: amount,
+      stripeId: charge.id,
+      orderId: this.id
     })
   }
 
