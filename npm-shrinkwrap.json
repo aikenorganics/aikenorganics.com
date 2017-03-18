@@ -909,9 +909,9 @@
       "resolved": "https://registry.npmjs.org/hoek/-/hoek-2.16.3.tgz"
     },
     "hosted-git-info": {
-      "version": "2.2.0",
+      "version": "2.3.1",
       "from": "hosted-git-info@>=2.1.4 <3.0.0",
-      "resolved": "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-2.2.0.tgz"
+      "resolved": "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-2.3.1.tgz"
     },
     "htmlescape": {
       "version": "1.1.1",
@@ -1553,9 +1553,9 @@
       "resolved": "https://registry.npmjs.org/osenv/-/osenv-0.1.4.tgz"
     },
     "ozymandias": {
-      "version": "1.5.4",
-      "from": "git://github.com/braddunbar/ozymandias.git#41e207042c21ae8d37dd5189d940b4c2c608db4e",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#41e207042c21ae8d37dd5189d940b4c2c608db4e",
+      "version": "1.5.5",
+      "from": "git://github.com/braddunbar/ozymandias.git#93a0716425c4640d54a36b31d72abb15756efb2e",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#93a0716425c4640d54a36b31d72abb15756efb2e",
       "dependencies": {
         "ms": {
           "version": "0.7.3",
@@ -2004,9 +2004,9 @@
       "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.5.6.tgz"
     },
     "source-map-support": {
-      "version": "0.4.13",
+      "version": "0.4.14",
       "from": "source-map-support@>=0.4.0 <0.5.0",
-      "resolved": "https://registry.npmjs.org/source-map-support/-/source-map-support-0.4.13.tgz"
+      "resolved": "https://registry.npmjs.org/source-map-support/-/source-map-support-0.4.14.tgz"
     },
     "spdx-correct": {
       "version": "1.0.2",
