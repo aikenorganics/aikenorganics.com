@@ -130,40 +130,28 @@ class User extends require('ozymandias/user') {
     }
   }
 
-  createCustomer (token) {
-    return new Promise((resolve, reject) => {
-      stripe.customers.create({
+  async updateCard (token) {
+    let customer
+
+    if (this.stripeId) {
+      customer = await stripe.customers.update(this.stripeId, {source: token})
+    } else {
+      customer = await stripe.customers.create({
         email: this.email,
         metadata: {id: this.id},
         source: token
-      }, (error, customer) => error ? reject(error) : resolve(customer))
-    })
-  }
-
-  updateCustomer (values) {
-    return new Promise((resolve, reject) => {
-      stripe.customers.update(this.stripeId, values, (error, customer) => {
-        error ? reject(error) : resolve(customer)
-      })
-    })
-  }
-
-  updateCard (token) {
-    const update = (customer) => {
-      const card = customer.sources.data.find((source) => {
-        return source.id === customer.default_source
-      })
-      return this.update({
-        stripeId: customer.id,
-        cardBrand: card.brand,
-        cardLast4: card.last4
       })
     }
-    if (this.stripeId) {
-      return this.updateCustomer({source: token}).then(update)
-    } else {
-      return this.createCustomer(token).then(update)
-    }
+
+    const card = customer.sources.data.find(({id}) =>
+      id === customer.default_source
+    )
+
+    return this.update({
+      stripeId: customer.id,
+      cardBrand: card.brand,
+      cardLast4: card.last4
+    })
   }
 
   toJSON () {
