@@ -46,21 +46,27 @@ class Market extends Model {
   }
 
   isOpenAt (date) {
+    return this.nextOpen(date) >= this.nextClose(date)
+  }
+
+  nextClose (date) {
     const now = localDate(date)
-
-    const open = new Date(now)
-    open.setUTCDate(open.getUTCDate() - now.getUTCDay() + this.openDay)
-    open.setUTCHours(this.openHours)
-    open.setUTCMinutes(this.openMinutes)
-    if (open < now) open.setUTCDate(open.getUTCDate() + 7)
-
     const close = new Date(now)
     close.setUTCDate(close.getUTCDate() - now.getUTCDay() + this.closeDay)
     close.setUTCHours(this.closeHours)
     close.setUTCMinutes(this.closeMinutes)
     if (close < now) close.setUTCDate(close.getUTCDate() + 7)
+    return close
+  }
 
-    return open >= close
+  nextOpen (date) {
+    const now = localDate(date)
+    const open = new Date(now)
+    open.setUTCDate(open.getUTCDate() - now.getUTCDay() + this.openDay)
+    open.setUTCHours(this.openHours)
+    open.setUTCMinutes(this.openMinutes)
+    if (open < now) open.setUTCDate(open.getUTCDate() + 7)
+    return open
   }
 
   toJSON () {
