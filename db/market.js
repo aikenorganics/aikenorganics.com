@@ -4,6 +4,13 @@ const time = require('time')
 const marked = require('marked')
 const Model = require('./model')
 
+const localDate = (date) => {
+  date = new Date(date)
+  time.tzset('America/New_York')
+  date.setUTCSeconds(date.getUTCSeconds() + time.localtime(date / 1000).gmtOffset)
+  return date
+}
+
 class Market extends Model {
   static get tableName () {
     return 'markets'
@@ -39,11 +46,7 @@ class Market extends Model {
   }
 
   isOpenAt (date) {
-    time.tzset('America/New_York')
-    const {gmtOffset} = time.localtime(date / 1000)
-
-    const now = new Date(date)
-    now.setUTCSeconds(now.getUTCSeconds() + gmtOffset)
+    const now = localDate(date)
 
     const open = new Date(now)
     open.setUTCDate(open.getUTCDate() - now.getUTCDay() + this.openDay)
