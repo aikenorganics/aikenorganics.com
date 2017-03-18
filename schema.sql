@@ -479,6 +479,7 @@ CREATE TABLE markets (
     close_hours smallint DEFAULT 0 NOT NULL,
     open_minutes smallint DEFAULT 0 NOT NULL,
     close_minutes smallint DEFAULT 0 NOT NULL,
+    closed boolean DEFAULT false NOT NULL,
     CONSTRAINT markets_close_day_check CHECK (((close_day >= 0) AND (close_day <= 6))),
     CONSTRAINT markets_close_hours_check CHECK (((close_hours >= 0) AND (close_hours <= 23))),
     CONSTRAINT markets_close_minutes_check CHECK (((close_minutes >= 0) AND (close_minutes <= 59))),
@@ -919,8 +920,8 @@ SELECT pg_catalog.setval('locations_id_seq', 3, true);
 -- Data for Name: markets; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY markets (id, created_at, updated_at, domain, message, news, open_day, close_day, open_hours, close_hours, open_minutes, close_minutes) FROM stdin;
-1	2015-10-13 21:21:45.67863-04	2016-10-02 07:40:38.128-04	localhost	**Hi!** Aiken Organics is still under development, so please bear with us while we work out the kinks! If something goes wrong, or you have a question, or you just want to shoot the breeze, send an email to [support@aikenorganics.com](mailto:support@aikenorganics.com).	## Some News\n\nLorem ipsum dolor sit amet!	0	0	0	0	0	0
+COPY markets (id, created_at, updated_at, domain, message, news, open_day, close_day, open_hours, close_hours, open_minutes, close_minutes, closed) FROM stdin;
+1	2015-10-13 21:21:45.67863-04	2016-10-02 07:40:38.128-04	localhost	**Hi!** Aiken Organics is still under development, so please bear with us while we work out the kinks! If something goes wrong, or you have a question, or you just want to shoot the breeze, send an email to [support@aikenorganics.com](mailto:support@aikenorganics.com).	## Some News\n\nLorem ipsum dolor sit amet!	0	0	0	0	0	0	f
 \.
 
 
@@ -946,6 +947,7 @@ COPY migrations (id) FROM stdin;
 2016-10-21-2251-drop-target
 2017-02-18-2253-open-and-close
 2017-03-17-0011-remove-open
+2017-03-18-1224-market-closed
 \.
 
 
