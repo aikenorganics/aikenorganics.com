@@ -3,12 +3,6 @@
 const Model = require('./model')
 const stripe = require('stripe')(process.env.STRIPE_SK)
 
-const createCharge = (options) => new Promise((resolve, reject) => {
-  stripe.charges.create(options, (error, charge) => (
-    error ? reject(error) : resolve(charge)
-  ))
-})
-
 class Order extends Model {
   static get tableName () {
     return 'orders'
@@ -38,8 +32,8 @@ class Order extends Model {
     if (!user) throw new Error('Unable to find user.')
     if (!user.stripeId) throw new Error('User has no billing information.')
 
-    const charge = await createCharge({
-      amount: amount,
+    const charge = await stripe.charges.create({
+      amount,
       currency: 'usd',
       customer: user.stripeId,
       description: `Aiken Organics - Order #${this.id}`,
@@ -48,7 +42,7 @@ class Order extends Model {
     })
 
     return Payment.create({
-      amount: amount,
+      amount,
       stripeId: charge.id,
       orderId: this.id
     })
