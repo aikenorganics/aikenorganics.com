@@ -88,16 +88,17 @@ export default () => {
           <a id='membership-fees' className='anchor' />
           <h2>Are there membership fees?</h2>
           <p>
-            Yes, we ask that you pay an annual fee of $29 per household for one calendar
-            year. That is around $0.50 per week. You are welcome to try us for two orders
-            before officially becoming members. We are not a retail shop. We do not
-            purchase items from local growers, mark them up, and then resell them. You
-            purchase things directly from the growers and producers. Everything is picked
-            or made fresh for you. The sellers set the price, and that is the price you
-            pay, similar to a farmers market. For that reason, the membership fee keeps
-            Aiken Organics going! It is an alternative business model, with a priority on
-            making local food viable for growers and producers. Customers are getting local
-            food at the lowest possible price, set by the farmers themselves.
+						Yes, we ask that you pay a one time fee of $29. You are welcome to
+						try us for two orders before officially becoming members.  We are
+						not a retail shop. We do not purchase items from local growers,
+						mark them up, and then resell them. You purchase things directly
+						from the growers and producers. Everything is picked or made fresh
+						for you. The sellers set the price, and that is the price you pay,
+						similar to a farmers market. For that reason, the membership fee
+						keeps Aiken Organics going! It is an alternative business model,
+						with a priority on making local food viable for growers and
+						producers. Customers are getting local food at the lowest possible
+						price, set by the farmers themselves.
           </p>
 
           <a id='buy-what-you-want' className='anchor' />
