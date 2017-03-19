@@ -49,10 +49,10 @@ export default () => {
           <img src={foodBasketPath} className='rounded-circle img-fluid mx-auto' />
           <h2>4. Customer picks up order</h2>
           <p>
-            Aiken Yoga, Thursday 3:00pm — 6:30pm
+            The Alley Downtown Taproom
           </p>
           <p>
-            116 B Pendleton St SW<br />
+            214 The Alley<br />
             Aiken, SC 29801
           </p>
           <p>
