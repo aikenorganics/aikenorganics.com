@@ -134,7 +134,7 @@ export default () => {
           <a id='pick-up' className='anchor' />
           <h2>When and Where do I pick up my order?</h2>
           <p>
-            You pick up your order on Thursday from 3-6:30pm at The Alley Downtown Taproom
+            You pick up your order on Thursday from 3-6:30pm at The Alley Downtown Taproom;
             214 The Alley; Aiken, South Carolina 29801.
           </p>
 
