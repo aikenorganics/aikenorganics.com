@@ -384,7 +384,7 @@ ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 
 CREATE TABLE events (
     id integer NOT NULL,
-    user_id integer,
+    user_id integer NOT NULL,
     action event_action NOT NULL,
     meta jsonb NOT NULL,
     created_at timestamp without time zone DEFAULT now() NOT NULL,
@@ -948,6 +948,7 @@ COPY migrations (id) FROM stdin;
 2017-02-18-2253-open-and-close
 2017-03-17-0011-remove-open
 2017-03-18-1224-market-closed
+2017-03-18-2254-events-user-id-not-null
 \.
 
 
