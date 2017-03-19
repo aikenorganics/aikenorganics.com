@@ -81,12 +81,9 @@ export default ({errors, locations, order, payments, products, productOrders}) =
                   : ''
                 }
               </td>
-              <td>
+              <td className='form-inline'>
                 <Form onUpdate={(value) => update({cost: value || 0})}>
-                  <div className='input-group'>
-                    <span className='input-group-addon'>$</span>
-                    <input className='form-control' defaultValue={cost || 0} required />
-                  </div>
+                  $ <input className='form-control' defaultValue={cost || 0} required />
                 </Form>
               </td>
               <td>
