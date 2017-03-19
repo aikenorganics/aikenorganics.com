@@ -121,15 +121,17 @@ export default () => {
           <a id='when-do-i-pay' className='anchor' />
           <h2>When do I pay?</h2>
           <p>
-            We do not accept advance payment on the website right now. We accept
-            payment when you pick up your order. Because we may have to adjust your total,
-            there are sometimes unexpected changes that need to be made to orders between
-            the time you order and the time you pick up, such as weather damage, inaccurate
-            quantity prediction, or a farmer unable to deliver. These situations will be
-            rare, but occasionally may happen. When they do, we need to make changes to
-            your order so you are not charged for items you are not receiving. Also, some
-            items are priced by the pound (meat). It makes life easier to adjust orders at
-            time of pick-up.
+						We DO accept advance payment on the website AND this makes the
+						whole process much easier for you.  We also accept payment when you
+						pick up your order. Because we may have to adjust your total. There
+						are sometimes unexpected changes that need to be made to orders
+						between the time you order and the time you pick up, such as
+						weather damage, inaccurate quantity prediction, or a farmer unable
+						to deliver.  These situations will be rare, but occasionally may
+						happen. When they do, we need me make changes to your order so you
+						are not charged for items you are not receiving. Also, some items
+						are priced by the pound (meat). It makes life easier to adjust
+						orders at time of pick-up.
           </p>
 
           <a id='pick-up' className='anchor' />
