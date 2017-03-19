@@ -134,8 +134,8 @@ export default () => {
           <a id='pick-up' className='anchor' />
           <h2>When and Where do I pick up my order?</h2>
           <p>
-            You pick up your order on Thursday from 4:30-7pm at Aiken Yoga
-            116B Pendleton Street SW; Aiken, South Carolina 29801.
+            You pick up your order on Thursday from 3-6:30pm at The Alley Downtown Taproom
+            214 The Alley; Aiken, South Carolina 29801.
           </p>
 
           <a id='not-picked-up' className='anchor' />
