@@ -3,135 +3,135 @@
 const db = require('../../db')
 const test = require('../test')
 
-test('User#name combines first and last', async (t) => {
+test('User#name combines first and last', async (assert) => {
   const user = new db.User({
     first: 'Steven',
     last: 'Tyler'
   })
-  t.is(user.name, 'Steven Tyler')
+  assert.is(user.name, 'Steven Tyler')
 })
 
-test('User#name is trimmed', async (t) => {
+test('User#name is trimmed', async (assert) => {
   const user = new db.User({})
-  t.is(user.name, '')
+  assert.is(user.name, '')
 })
 
-test('User#memberUntil is null for empty values', async (t) => {
+test('User#memberUntil is null for empty values', async (assert) => {
   const user = new db.User({memberUntil: ''})
-  t.is(user.memberUntil, null)
+  assert.is(user.memberUntil, null)
   user.memberUntil = 0
-  t.is(user.memberUntil, null)
+  assert.is(user.memberUntil, null)
   user.memberUntil = undefined
-  t.is(user.memberUntil, null)
+  assert.is(user.memberUntil, null)
 })
 
-test('trim street', async (t) => {
+test('trim street', async (assert) => {
   const user = new db.User()
   user.street = '  test  '
-  t.is(user.street, 'test')
+  assert.is(user.street, 'test')
 })
 
-test('validate street', async (t) => {
+test('validate street', async (assert) => {
   const user = new db.User({street: null})
   user.validate()
-  t.is(user.errors.street, undefined)
+  assert.is(user.errors.street, undefined)
 
   user.street = ''
   user.validate()
-  t.deepEqual(user.errors.street, ['Street cannot be blank'])
+  assert.deepEqual(user.errors.street, ['Street cannot be blank'])
 
   user.street = '   '
   user.validate()
-  t.deepEqual(user.errors.street, ['Street cannot be blank'])
+  assert.deepEqual(user.errors.street, ['Street cannot be blank'])
 
   user.street = '123 street drive'
   user.validate()
-  t.is(user.errors.street, undefined)
+  assert.is(user.errors.street, undefined)
 })
 
-test('trim city', async (t) => {
+test('trim city', async (assert) => {
   const user = new db.User()
   user.city = '  test  '
-  t.is(user.city, 'test')
+  assert.is(user.city, 'test')
 })
 
-test('validate city', async (t) => {
+test('validate city', async (assert) => {
   const user = new db.User({city: null})
   user.validate()
-  t.is(user.errors.city, undefined)
+  assert.is(user.errors.city, undefined)
 
   user.city = ''
   user.validate()
-  t.deepEqual(user.errors.city, ['City cannot be blank'])
+  assert.deepEqual(user.errors.city, ['City cannot be blank'])
 
   user.city = '   '
   user.validate()
-  t.deepEqual(user.errors.city, ['City cannot be blank'])
+  assert.deepEqual(user.errors.city, ['City cannot be blank'])
 
   user.city = 'Lexington'
   user.validate()
-  t.is(user.errors.city, undefined)
+  assert.is(user.errors.city, undefined)
 })
 
-test('trim and capitalize state', async (t) => {
+test('trim and capitalize state', async (assert) => {
   const user = new db.User({state: '  sc '})
-  t.is(user.state, 'SC')
+  assert.is(user.state, 'SC')
 })
 
-test('validate state', async (t) => {
+test('validate state', async (assert) => {
   const user = new db.User({state: null})
   user.validate()
-  t.is(user.errors.state, undefined)
+  assert.is(user.errors.state, undefined)
 
   user.state = ''
   user.validate()
-  t.deepEqual(user.errors.state, ['State must be two letters'])
+  assert.deepEqual(user.errors.state, ['State must be two letters'])
 
   user.state = ' '
   user.validate()
-  t.deepEqual(user.errors.state, ['State must be two letters'])
+  assert.deepEqual(user.errors.state, ['State must be two letters'])
 
   user.state = 'sc'
   user.validate()
-  t.is(user.errors.state, undefined)
+  assert.is(user.errors.state, undefined)
 })
 
-test('trim zip', async (t) => {
+test('trim zip', async (assert) => {
   const user = new db.User({zip: ' 12345 '})
-  t.is(user.zip, '12345')
+  assert.is(user.zip, '12345')
 })
 
-test('validate zip', async (t) => {
+test('validate zip', async (assert) => {
   const user = new db.User({zip: null})
   user.validate()
-  t.is(user.errors.zip, undefined)
+  assert.is(user.errors.zip, undefined)
 
   user.zip = ''
   user.validate()
-  t.deepEqual(user.errors.zip, ['Zip must be valid (12345 or 12345-1234)'])
+  assert.deepEqual(user.errors.zip, ['Zip must be valid (12345 or 12345-1234)'])
 
   user.zip = ' '
   user.validate()
-  t.deepEqual(user.errors.zip, ['Zip must be valid (12345 or 12345-1234)'])
+  assert.deepEqual(user.errors.zip, ['Zip must be valid (12345 or 12345-1234)'])
 
   user.zip = '1234'
   user.validate()
-  t.deepEqual(user.errors.zip, ['Zip must be valid (12345 or 12345-1234)'])
+  assert.deepEqual(user.errors.zip, ['Zip must be valid (12345 or 12345-1234)'])
 
   user.zip = '12345-'
   user.validate()
-  t.deepEqual(user.errors.zip, ['Zip must be valid (12345 or 12345-1234)'])
+  assert.deepEqual(user.errors.zip, ['Zip must be valid (12345 or 12345-1234)'])
 
   user.zip = '12345'
   user.validate()
-  t.is(user.errors.zip, undefined)
+  assert.is(user.errors.zip, undefined)
 
   user.zip = '12345-1234'
   user.validate()
-  t.is(user.errors.zip, undefined)
+  assert.is(user.errors.zip, undefined)
 })
 
-test('canDeliver', async (t) => {
+test('canDeliver', async (assert) => {
   const user = new db.User({
     phone: '555.555.5555',
     street: '123 Street Drive',
@@ -140,13 +140,13 @@ test('canDeliver', async (t) => {
     stripeId: '12345',
     zip: '12345'
   })
-  t.is(user.canDeliver, true)
+  assert.is(user.canDeliver, true)
 
   user.zip = null
-  t.is(user.canDeliver, false)
+  assert.is(user.canDeliver, false)
 })
 
-test('address', async (t) => {
+test('address', async (assert) => {
   const user = new db.User({
     street: '123 Street Drive',
     city: 'Townsville',
@@ -154,36 +154,36 @@ test('address', async (t) => {
     zip: '12345'
   })
 
-  t.is(user.address, '123 Street Drive, Townsville SC 12345')
+  assert.is(user.address, '123 Street Drive, Townsville SC 12345')
 
   user.zip = null
-  t.is(user.address, null)
+  assert.is(user.address, null)
 })
 
-test('validate email', async (t) => {
+test('validate email', async (assert) => {
   const user = new db.User()
 
   user.email = 'foo'
   user.validate()
-  t.deepEqual(user.errors.email, ['Invalid Email'])
+  assert.deepEqual(user.errors.email, ['Invalid Email'])
 
   user.email = ' '
   user.validate()
-  t.deepEqual(user.errors.email, ['Invalid Email'])
+  assert.deepEqual(user.errors.email, ['Invalid Email'])
 
   user.email = 'foo@'
   user.validate()
-  t.deepEqual(user.errors.email, ['Invalid Email'])
+  assert.deepEqual(user.errors.email, ['Invalid Email'])
 
   user.email = 'foo@bar'
   user.validate()
-  t.deepEqual(user.errors.email, ['Invalid Email'])
+  assert.deepEqual(user.errors.email, ['Invalid Email'])
 
   user.email = '@bar.com'
   user.validate()
-  t.deepEqual(user.errors.email, ['Invalid Email'])
+  assert.deepEqual(user.errors.email, ['Invalid Email'])
 
   user.email = 'foo@bar.com'
   user.validate()
-  t.is(user.errors.email, undefined)
+  assert.is(user.errors.email, undefined)
 })

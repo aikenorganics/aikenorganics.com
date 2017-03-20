@@ -3,12 +3,12 @@
 const db = require('../../db')
 const test = require('../test')
 
-test('orders without productOrders have undefined total', async (t) => {
+test('orders without productOrders have undefined total', async (assert) => {
   const order = new db.Order()
-  t.is(order.total, undefined)
+  assert.is(order.total, undefined)
 })
 
-test('Order reports the correct cost', async (t) => {
+test('Order reports the correct cost', async (assert) => {
   const order = new db.Order()
   order.productOrders = []
 
@@ -33,5 +33,5 @@ test('Order reports the correct cost', async (t) => {
     supply: 10
   })
 
-  t.equal(order.total, 19)
+  assert.equal(order.total, 19)
 })
