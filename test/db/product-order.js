@@ -5,7 +5,7 @@ const {Order, Product, ProductOrder} = require('../../db')
 const test = require('../test')
 
 test('ProductOrder reports the correct cost', async (assert) => {
-  const productOrder = new db.ProductOrder({
+  const productOrder = new ProductOrder({
     cost: '5.75',
     quantity: 2
   })
@@ -123,7 +123,7 @@ test('Updating takes the previous quantity into account', async (assert) => {
 })
 
 test('validate cost', async (assert) => {
-  const productOrder = new db.ProductOrder({cost: 'asdf'})
+  const productOrder = new ProductOrder({cost: 'asdf'})
   assert.ok(!productOrder.valid)
   assert.deepEqual(productOrder.errors, {
     cost: ['Cost must be a valid dollar amount']
@@ -131,27 +131,27 @@ test('validate cost', async (assert) => {
 })
 
 test('validate cost', async (assert) => {
-  assert.ok(new db.ProductOrder({cost: '.53'}).valid)
+  assert.ok(new ProductOrder({cost: '.53'}).valid)
 })
 
 test('validate cost', async (assert) => {
-  assert.ok(new db.ProductOrder({cost: '32'}).valid)
+  assert.ok(new ProductOrder({cost: '32'}).valid)
 })
 
 test('validate cost', async (assert) => {
-  assert.ok(new db.ProductOrder({cost: '32.25'}).valid)
+  assert.ok(new ProductOrder({cost: '32.25'}).valid)
 })
 
 test('validate cost', async (assert) => {
-  assert.ok(new db.ProductOrder({cost: '$32.25'}).valid)
+  assert.ok(new ProductOrder({cost: '$32.25'}).valid)
 })
 
 test('validate cost', async (assert) => {
-  assert.ok(new db.ProductOrder({cost: '  10  '}).valid)
+  assert.ok(new ProductOrder({cost: '  10  '}).valid)
 })
 
 test('validate cost', async (assert) => {
-  assert.ok(new db.ProductOrder({cost: '  $32.25  '}).valid)
+  assert.ok(new ProductOrder({cost: '  $32.25  '}).valid)
 })
 
 test('checkout() with non-existent product does not throw', async (assert) => {

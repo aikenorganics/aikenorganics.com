@@ -1,10 +1,10 @@
 'use strict'
 
-const db = require('../../db')
+const {User} = require('../../db')
 const test = require('../test')
 
 test('User#name combines first and last', async (assert) => {
-  const user = new db.User({
+  const user = new User({
     first: 'Steven',
     last: 'Tyler'
   })
@@ -12,12 +12,12 @@ test('User#name combines first and last', async (assert) => {
 })
 
 test('User#name is trimmed', async (assert) => {
-  const user = new db.User({})
+  const user = new User({})
   assert.is(user.name, '')
 })
 
 test('User#memberUntil is null for empty values', async (assert) => {
-  const user = new db.User({memberUntil: ''})
+  const user = new User({memberUntil: ''})
   assert.is(user.memberUntil, null)
   user.memberUntil = 0
   assert.is(user.memberUntil, null)
@@ -26,13 +26,13 @@ test('User#memberUntil is null for empty values', async (assert) => {
 })
 
 test('trim street', async (assert) => {
-  const user = new db.User()
+  const user = new User()
   user.street = '  test  '
   assert.is(user.street, 'test')
 })
 
 test('validate street', async (assert) => {
-  const user = new db.User({street: null})
+  const user = new User({street: null})
   user.validate()
   assert.is(user.errors.street, undefined)
 
@@ -50,13 +50,13 @@ test('validate street', async (assert) => {
 })
 
 test('trim city', async (assert) => {
-  const user = new db.User()
+  const user = new User()
   user.city = '  test  '
   assert.is(user.city, 'test')
 })
 
 test('validate city', async (assert) => {
-  const user = new db.User({city: null})
+  const user = new User({city: null})
   user.validate()
   assert.is(user.errors.city, undefined)
 
@@ -74,12 +74,12 @@ test('validate city', async (assert) => {
 })
 
 test('trim and capitalize state', async (assert) => {
-  const user = new db.User({state: '  sc '})
+  const user = new User({state: '  sc '})
   assert.is(user.state, 'SC')
 })
 
 test('validate state', async (assert) => {
-  const user = new db.User({state: null})
+  const user = new User({state: null})
   user.validate()
   assert.is(user.errors.state, undefined)
 
@@ -97,12 +97,12 @@ test('validate state', async (assert) => {
 })
 
 test('trim zip', async (assert) => {
-  const user = new db.User({zip: ' 12345 '})
+  const user = new User({zip: ' 12345 '})
   assert.is(user.zip, '12345')
 })
 
 test('validate zip', async (assert) => {
-  const user = new db.User({zip: null})
+  const user = new User({zip: null})
   user.validate()
   assert.is(user.errors.zip, undefined)
 
@@ -132,7 +132,7 @@ test('validate zip', async (assert) => {
 })
 
 test('canDeliver', async (assert) => {
-  const user = new db.User({
+  const user = new User({
     phone: '555.555.5555',
     street: '123 Street Drive',
     city: 'Townsville',
@@ -147,7 +147,7 @@ test('canDeliver', async (assert) => {
 })
 
 test('address', async (assert) => {
-  const user = new db.User({
+  const user = new User({
     street: '123 Street Drive',
     city: 'Townsville',
     state: 'SC',
@@ -161,7 +161,7 @@ test('address', async (assert) => {
 })
 
 test('validate email', async (assert) => {
-  const user = new db.User()
+  const user = new User()
 
   user.email = 'foo'
   user.validate()
