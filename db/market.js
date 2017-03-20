@@ -36,7 +36,7 @@ class Market extends Model {
   }
 
   get now () {
-    return this._now || new Date()
+    return this._now || (this._now = new Date())
   }
 
   set now (value) {
