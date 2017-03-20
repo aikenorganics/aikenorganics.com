@@ -1,7 +1,7 @@
 'use strict'
 
 const {ProductOrder} = require('../../db')
-const {del, post} = require('koa-route')
+const {post} = require('koa-route')
 
 module.exports = [
 
@@ -13,14 +13,6 @@ module.exports = [
     _.body = {
       productOrder: await ProductOrder.include('product').find(id)
     }
-  }),
-
-  // Delete
-  del('/admin/product-orders/:id', async (_, id) => {
-    const productOrder = await ProductOrder.find(id)
-    if (!productOrder) return _.notfound()
-    await productOrder.destroy()
-    _.body = {}
   }),
 
   // Update

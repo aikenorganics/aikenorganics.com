@@ -3,20 +3,6 @@
 const {ProductOrder} = require('../../../db')
 const test = require('../../test')
 
-test('DELETE /product-orders/missing is a 404', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client.delete('/admin/product-orders/12345').send()
-  response.assert(404)
-})
-
-test('DELETE /product-orders/:id is a 200', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client.delete('/admin/product-orders/1').send()
-  response.assert(200)
-  const productOrder = await ProductOrder.find(1)
-  t.ok(productOrder == null)
-})
-
 test('POST /product-orders/missing is a 404', async (t) => {
   await t.signIn('admin@example.com')
   const response = await t.client.post('/admin/product-orders/12345').send()

@@ -171,7 +171,7 @@ export const updateProductOrder = (id, values) => {
 
 export const destroyProductOrder = (id) => {
   busy()
-  return del(`/admin/product-orders/${id}`).then(() => {
+  return del(`/product-orders/${id}`).then(() => {
     store.dispatch({type: REMOVE_PRODUCT_ORDER, id})
     done()
   }).catch(done)

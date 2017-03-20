@@ -31,6 +31,7 @@ for (const route of [].concat(
   require('./routes/growers'),
   require('./routes/market'),
   require('./routes/orders'),
+  require('./routes/product-orders'),
   require('./routes/products'),
   require('./routes/settings'),
   require('./routes/signup'),
