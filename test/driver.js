@@ -42,6 +42,10 @@ class Driver {
     return driver.executeScript('return window.location.pathname')
   }
 
+  alert () {
+    return driver.switchTo().alert()
+  }
+
   async signIn (email) {
     await this.visit('/session/signin')
     await this.$('#email').sendKeys('admin@example.com')

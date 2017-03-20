@@ -58,7 +58,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
     </h3>
     <Errors errors={errors} />
     <div className='table-responsive'>
-      <table className='table'>
+      <table id='product-orders' className='table'>
         <thead>
           <tr>
             <th>Name</th>

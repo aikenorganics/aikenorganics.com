@@ -1,5 +1,6 @@
 'use strict'
 
 require('./categories')
-require('./market')
 require('./locations')
+require('./market')
+require('./orders')
