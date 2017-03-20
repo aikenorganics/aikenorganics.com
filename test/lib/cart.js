@@ -21,18 +21,18 @@ test('cart size', async (t) => {
 
 test('update with positive key', async (t) => {
   const session = {}
-  new Cart(session).update(new db.Product({id: 5}), 2)
+  new Cart(session).update(new Product({id: 5}), 2)
   t.deepEqual(session.cart, {5: 2})
 })
 
 test('update with zero key', async (t) => {
   const session = {cart: {5: 2}}
-  new Cart(session).update(new db.Product({id: 5}), 0)
+  new Cart(session).update(new Product({id: 5}), 0)
   t.deepEqual(session.cart, {})
 })
 
 test('checkout quantity', async (t) => {
-  const product = new db.Product({id: 1, supply: 5, reserved: 3})
+  const product = new Product({id: 1, supply: 5, reserved: 3})
   const cart = new Cart({cart: {1: 3}})
   t.equal(cart.quantity(product), 2)
 })
