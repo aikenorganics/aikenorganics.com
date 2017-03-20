@@ -30,6 +30,10 @@ class Driver {
     return driver.findElement(By.css(selector))
   }
 
+  async exists (selector) {
+    return (await driver.findElements(By.css(selector))).length > 0
+  }
+
   present (selector) {
     return until.elementLocated(By.css(selector))
   }
@@ -48,7 +52,7 @@ class Driver {
 
   async signIn (email) {
     await this.visit('/session/signin')
-    await this.$('#email').sendKeys('admin@example.com')
+    await this.$('#email').sendKeys(email)
     await this.$('#password').sendKeys('password')
     await this.$('#password').submit()
     await this.wait(this.present('#signout'))

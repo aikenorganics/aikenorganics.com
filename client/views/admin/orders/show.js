@@ -58,7 +58,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
     </h3>
     <Errors errors={errors} />
     <div className='table-responsive'>
-      <table id='product-orders' className='table'>
+      <table className='table'>
         <thead>
           <tr>
             <th>Name</th>
@@ -93,7 +93,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
               </td>
               <td>${total.toFixed(2)}</td>
               <td>
-                <button className='btn btn-danger btn-sm'
+                <button id={`remove-product-order-${id}`} className='btn btn-danger btn-sm'
                   onClick={() => { if (window.confirm('Are you sure?')) destroyProductOrder(id) }}>
                   Remove
                 </button>

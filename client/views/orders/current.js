@@ -1,7 +1,10 @@
 import React from 'react'
 import Link from '../link'
 import Form from './form'
-import {cancelOrder} from '../../actions'
+import {
+  cancelOrder,
+  destroyProductOrder
+} from '../../actions'
 
 export default ({busy, market: {open}, locations, order, productOrders, currentUser}) => {
   if (!order) {
@@ -33,6 +36,7 @@ export default ({busy, market: {open}, locations, order, productOrders, currentU
             <th>Cost</th>
             <th>Quantity</th>
             <th>Total</th>
+            <th />
           </tr>
         </thead>
         <tbody>
@@ -44,6 +48,15 @@ export default ({busy, market: {open}, locations, order, productOrders, currentU
               <td>${cost}</td>
               <td>{quantity}</td>
               <td>${total.toFixed(2)}</td>
+              <td>
+                {open
+                  ? <button id={`remove-product-order-${id}`} className='btn btn-danger btn-sm'
+                    onClick={() => { if (window.confirm('Are you sure?')) destroyProductOrder(id) }}>
+                    Remove
+                  </button>
+                  : null
+                }
+              </td>
             </tr>
           })}
         </tbody>
@@ -53,8 +66,9 @@ export default ({busy, market: {open}, locations, order, productOrders, currentU
             <td />
             <td />
             <td>
-              <strong>${order.total.toFixed(2)}</strong>
+              <strong>${productOrders.reduce((sum, {total}) => sum + total, 0).toFixed(2)}</strong>
             </td>
+            <td />
           </tr>
         </tfoot>
       </table>

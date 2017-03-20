@@ -10,7 +10,7 @@ test('delete product order', async (assert) => {
 
   const count = await ProductOrder.where({orderId: 2}).count()
 
-  await driver.$('#product-orders tbody tr:first-child button:not([hidden])').click()
+  await driver.$('#remove-product-order-3').click()
   await driver.alert().accept()
   await driver.wait(driver.present('#message:not(.active)'))
 
