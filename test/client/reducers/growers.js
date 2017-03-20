@@ -3,7 +3,7 @@ import freeze from 'deep-freeze'
 import {UPDATE_GROWER} from '../../../client/actions'
 import reducer from '../../../client/reducers'
 
-test('update grower', (t) => {
+test('update grower', (assert) => {
   const state = freeze({
     growers: [
       {id: 1, active: false},
@@ -15,9 +15,9 @@ test('update grower', (t) => {
     id: 2,
     values: {active: true}
   })
-  t.deepEqual(next.growers, [
+  assert.deepEqual(next.growers, [
     {id: 1, active: false},
     {id: 2, active: true}
   ])
-  t.end()
+  assert.end()
 })

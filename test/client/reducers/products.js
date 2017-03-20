@@ -3,7 +3,7 @@ import freeze from 'deep-freeze'
 import {UPDATE_PRODUCT} from '../../../client/actions'
 import reducer from '../../../client/reducers'
 
-test('update product - activate', (t) => {
+test('update product - activate', (assert) => {
   const state = freeze({
     products: [
       {id: 1, active: false},
@@ -15,14 +15,14 @@ test('update product - activate', (t) => {
     id: 2,
     values: {active: true}
   })
-  t.deepEqual(next.products, [
+  assert.deepEqual(next.products, [
     {id: 1, active: false},
     {id: 2, active: true}
   ])
-  t.end()
+  assert.end()
 })
 
-test('update product - deactivate', (t) => {
+test('update product - deactivate', (assert) => {
   const state = freeze({
     products: [
       {id: 1, active: true},
@@ -34,9 +34,9 @@ test('update product - deactivate', (t) => {
     id: 2,
     values: {active: false}
   })
-  t.deepEqual(next.products, [
+  assert.deepEqual(next.products, [
     {id: 1, active: true},
     {id: 2, active: false}
   ])
-  t.end()
+  assert.end()
 })

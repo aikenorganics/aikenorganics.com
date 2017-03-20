@@ -7,7 +7,7 @@ import {
 } from '../../../client/actions'
 import reducer from '../../../client/reducers'
 
-test('add productOrder', (t) => {
+test('add productOrder', (assert) => {
   const state = freeze({
     productOrders: [
       {id: 1, cost: '5.50', quantity: 3}
@@ -17,14 +17,14 @@ test('add productOrder', (t) => {
     type: ADD_PRODUCT_ORDER,
     values: {id: 2, cost: '4.50', quantity: 2}
   })
-  t.deepEqual(next.productOrders, [
+  assert.deepEqual(next.productOrders, [
     {id: 1, cost: '5.50', quantity: 3},
     {id: 2, cost: '4.50', quantity: 2}
   ])
-  t.end()
+  assert.end()
 })
 
-test('update productOrder', (t) => {
+test('update productOrder', (assert) => {
   const state = freeze({
     productOrders: [
       {id: 1, cost: '5.50', quantity: 3},
@@ -39,14 +39,14 @@ test('update productOrder', (t) => {
       quantity: 4
     }
   })
-  t.deepEqual(next.productOrders, [
+  assert.deepEqual(next.productOrders, [
     {id: 1, cost: '6.25', quantity: 4},
     {id: 2, cost: '4.50', quantity: 2}
   ])
-  t.end()
+  assert.end()
 })
 
-test('remove productOrder', (t) => {
+test('remove productOrder', (assert) => {
   const state = freeze({
     productOrders: [
       {id: 1, cost: '5.50', quantity: 3},
@@ -57,8 +57,8 @@ test('remove productOrder', (t) => {
     type: REMOVE_PRODUCT_ORDER,
     id: 1
   })
-  t.deepEqual(next.productOrders, [
+  assert.deepEqual(next.productOrders, [
     {id: 2, cost: '4.50', quantity: 2}
   ])
-  t.end()
+  assert.end()
 })

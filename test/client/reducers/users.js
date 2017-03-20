@@ -3,7 +3,7 @@ import freeze from 'deep-freeze'
 import {UPDATE_USER} from '../../../client/actions'
 import reducer from '../../../client/reducers'
 
-test('update user - email', (t) => {
+test('update user - email', (assert) => {
   const state = freeze({
     users: [
       {id: 1, email: 'foo@example.com'},
@@ -15,9 +15,9 @@ test('update user - email', (t) => {
     id: 2,
     values: {email: 'user@example.com'}
   })
-  t.deepEqual(next.users, [
+  assert.deepEqual(next.users, [
     {id: 1, email: 'foo@example.com'},
     {id: 2, email: 'user@example.com'}
   ])
-  t.end()
+  assert.end()
 })

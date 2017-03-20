@@ -3,7 +3,7 @@ import freeze from 'deep-freeze'
 import {REPLACE} from '../../../client/actions'
 import reducer from '../../../client/reducers'
 
-test('replace state', (t) => {
+test('replace state', (assert) => {
   const state = freeze({
     busy: true,
     categoryId: 7,
@@ -16,8 +16,8 @@ test('replace state', (t) => {
       user: {id: 7, email: 'jake@ooo.net'}
     }
   })
-  t.is(next.categoryId, null)
-  t.is(next.busy, false)
-  t.deepEqual(next.user, {id: 7, email: 'jake@ooo.net'})
-  t.end()
+  assert.is(next.categoryId, null)
+  assert.is(next.busy, false)
+  assert.deepEqual(next.user, {id: 7, email: 'jake@ooo.net'})
+  assert.end()
 })

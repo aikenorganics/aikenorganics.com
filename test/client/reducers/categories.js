@@ -6,7 +6,7 @@ import {
 } from '../../../client/actions'
 import reducer from '../../../client/reducers'
 
-test('update category - activate', (t) => {
+test('update category - activate', (assert) => {
   const state = freeze({
     categories: [
       {id: 1, name: 'foo'},
@@ -18,23 +18,23 @@ test('update category - activate', (t) => {
     id: 2,
     values: {name: 'baz'}
   })
-  t.deepEqual(next.categories, [
+  assert.deepEqual(next.categories, [
     {id: 1, name: 'foo'},
     {id: 2, name: 'baz'}
   ])
-  t.end()
+  assert.end()
 })
 
-test('remove category', (t) => {
+test('remove category', (assert) => {
   const state = freeze({categories: [{id: 1}, {id: 2}]})
   const next = reducer(state, {type: REMOVE_CATEGORY, id: 2})
-  t.deepEqual(next.categories, [{id: 1}])
-  t.end()
+  assert.deepEqual(next.categories, [{id: 1}])
+  assert.end()
 })
 
-test('no category to remove', (t) => {
+test('no category to remove', (assert) => {
   const state = freeze({})
   const next = reducer(state, {type: REMOVE_CATEGORY, id: 2})
-  t.deepEqual(next.categories, null)
-  t.end()
+  assert.deepEqual(next.categories, null)
+  assert.end()
 })

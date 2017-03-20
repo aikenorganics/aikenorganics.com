@@ -6,7 +6,7 @@ import {
 } from '../../../client/actions'
 import reducer from '../../../client/reducers'
 
-test('update location - activate', (t) => {
+test('update location - activate', (assert) => {
   const state = freeze({
     locations: [
       {id: 1, active: false},
@@ -18,14 +18,14 @@ test('update location - activate', (t) => {
     id: 2,
     values: {active: true}
   })
-  t.deepEqual(next.locations, [
+  assert.deepEqual(next.locations, [
     {id: 1, active: false},
     {id: 2, active: true}
   ])
-  t.end()
+  assert.end()
 })
 
-test('update location - deactivate', (t) => {
+test('update location - deactivate', (assert) => {
   const state = freeze({
     locations: [
       {id: 1, active: true},
@@ -37,23 +37,23 @@ test('update location - deactivate', (t) => {
     id: 2,
     values: {active: false}
   })
-  t.deepEqual(next.locations, [
+  assert.deepEqual(next.locations, [
     {id: 1, active: true},
     {id: 2, active: false}
   ])
-  t.end()
+  assert.end()
 })
 
-test('remove location', (t) => {
+test('remove location', (assert) => {
   const state = freeze({locations: [{id: 1}, {id: 2}]})
   const next = reducer(state, {type: REMOVE_LOCATION, id: 2})
-  t.deepEqual(next.locations, [{id: 1}])
-  t.end()
+  assert.deepEqual(next.locations, [{id: 1}])
+  assert.end()
 })
 
-test('no location to remove', (t) => {
+test('no location to remove', (assert) => {
   const state = freeze({})
   const next = reducer(state, {type: REMOVE_LOCATION, id: 2})
-  t.deepEqual(next.locations, null)
-  t.end()
+  assert.deepEqual(next.locations, null)
+  assert.end()
 })
