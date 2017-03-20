@@ -1,5 +1,6 @@
 import React, {PureComponent, PropTypes} from 'react'
 import {createGrower, navigate, updateGrower} from '../../actions'
+import Errors from '../errors'
 
 export default class Form extends PureComponent {
   static get propTypes () {
@@ -29,8 +30,10 @@ export default class Form extends PureComponent {
   }
 
   render () {
+    const {errors} = this.props
     const {description, email, location, name, url} = this.state
     return <form onSubmit={(event) => this.save(event)}>
+      <Errors errors={errors} />
       <div className='form-group'>
         <label htmlFor='name'>Name</label>
         <input autoFocus type='text' id='name' className='form-control' required value={name || ''} onChange={(event) => this.setState({name: event.target.value})} />

@@ -40,13 +40,11 @@ class Grower extends Model {
   }
 
   get url () {
-    let url = this._url
-    if (!/^https?:\/\//.test(url)) url = 'http://' + url
-    return url
+    return this._url || ''
   }
 
   set url (value) {
-    this._url = value || ''
+    this._url = (value || '').trim()
   }
 
   get location () {
@@ -67,6 +65,14 @@ class Grower extends Model {
 
   get descriptionHtml () {
     return marked(this.description, {sanitize: true})
+  }
+
+  validate () {
+    this.errors = {}
+
+    if (this.url && !/^https?:\/\//.test(this.url)) {
+      this.errors.url = ['URL must start with http(s)://']
+    }
   }
 
   toJSON () {
