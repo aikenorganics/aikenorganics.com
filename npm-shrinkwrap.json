@@ -423,9 +423,9 @@
       "resolved": "https://registry.npmjs.org/co/-/co-4.6.0.tgz"
     },
     "co-body": {
-      "version": "5.0.2",
+      "version": "5.1.0",
       "from": "co-body@>=5.0.0 <6.0.0",
-      "resolved": "https://registry.npmjs.org/co-body/-/co-body-5.0.2.tgz",
+      "resolved": "https://registry.npmjs.org/co-body/-/co-body-5.1.0.tgz",
       "dependencies": {
         "qs": {
           "version": "6.4.0",
@@ -1553,9 +1553,9 @@
       "resolved": "https://registry.npmjs.org/osenv/-/osenv-0.1.4.tgz"
     },
     "ozymandias": {
-      "version": "1.5.7",
-      "from": "git://github.com/braddunbar/ozymandias.git#35ce681fdb7633410f28642614f5150d692eb880",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#35ce681fdb7633410f28642614f5150d692eb880",
+      "version": "1.5.9",
+      "from": "git://github.com/braddunbar/ozymandias.git#4ce14652f2e77ca462ea1e88e88c984875ecbba7",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#4ce14652f2e77ca462ea1e88e88c984875ecbba7",
       "dependencies": {
         "ms": {
           "version": "0.7.3",
@@ -2363,9 +2363,9 @@
       "resolved": "https://registry.npmjs.org/validate-npm-package-license/-/validate-npm-package-license-3.0.1.tgz"
     },
     "vary": {
-      "version": "1.1.0",
+      "version": "1.1.1",
       "from": "vary@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/vary/-/vary-1.1.0.tgz"
+      "resolved": "https://registry.npmjs.org/vary/-/vary-1.1.1.tgz"
     },
     "verror": {
       "version": "1.3.6",
