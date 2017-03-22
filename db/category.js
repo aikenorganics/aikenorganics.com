@@ -26,20 +26,20 @@ class Category extends Model {
     this._name = value || ''
   }
 
-  get position () {
-    return this._position || 0
-  }
-
-  set position (value) {
-    this._position = value || 0
-  }
-
   get meat () {
     return !!this._meat
   }
 
   set meat (value) {
     this._meat = !!value
+  }
+
+  validate () {
+    this.errors = {}
+
+    if (!Number.isFinite(this.position)) {
+      this.errors.position = ['Position must be a number.']
+    }
   }
 
   toJSON () {

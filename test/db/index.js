@@ -1,3 +1,4 @@
+require('./category')
 require('./user')
 require('./order')
 require('./grower')

@@ -12,7 +12,7 @@ export default ({busy, category}) => {
     const values = {
       meat: meat.checked,
       name: name.value,
-      position: position.value
+      position: +position.value
     }
 
     if (category) {
