@@ -48,7 +48,7 @@ module.exports = [
   // Order
   post('/admin/users/:id/order', async (_, id) => {
     let order = await Order.where({status: 'open', userId: id}).find()
-    if (!order) order = await Order.create({userId: id})
+    if (!order) order = await Order.create({userId: +id})
     _.body = {order}
   }),
 

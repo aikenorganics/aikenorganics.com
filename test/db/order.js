@@ -35,3 +35,35 @@ test('Order reports the correct cost', async (assert) => {
 
   assert.equal(order.total, 19)
 })
+
+test('validate locationId', async (assert) => {
+  const order = new Order()
+
+  for (const value of [1, 1.5, -2, 1.23, 0, undefined, null]) {
+    order.locationId = value
+    order.validate()
+    assert.ok(!order.errors.locationId)
+  }
+
+  for (const value of ['', '1', 'asdf', NaN, Infinity]) {
+    order.locationId = value
+    order.validate()
+    assert.deepEqual(order.errors.locationId, ['Location ID must be a number.'])
+  }
+})
+
+test('validate userId', async (assert) => {
+  const order = new Order()
+
+  for (const value of [1, 1.5, -2, 1.23, 0]) {
+    order.userId = value
+    order.validate()
+    assert.ok(!order.errors.userId)
+  }
+
+  for (const value of ['', '1', 'asdf', NaN, Infinity, undefined, null]) {
+    order.userId = value
+    order.validate()
+    assert.deepEqual(order.errors.userId, ['User ID must be a number.'])
+  }
+})

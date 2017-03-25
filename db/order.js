@@ -48,6 +48,18 @@ class Order extends Model {
     })
   }
 
+  validate () {
+    this.errors = {}
+
+    if (this.locationId != null && !Number.isFinite(this.locationId)) {
+      this.errors.locationId = ['Location ID must be a number.']
+    }
+
+    if (!Number.isFinite(this.userId)) {
+      this.errors.userId = ['User ID must be a number.']
+    }
+  }
+
   toJSON () {
     return this.slice(
       'id',

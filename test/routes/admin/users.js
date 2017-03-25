@@ -134,7 +134,7 @@ test('find an open order', async (t) => {
   t.is(order.userId, 2)
 })
 
-test('create an order order', async (t) => {
+test('create an order', async (t) => {
   await t.signIn('admin@example.com')
   const orders = await Order.all()
   const response = await t.client
