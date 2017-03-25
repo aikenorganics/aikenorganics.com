@@ -38,14 +38,15 @@ module.exports = [
 
     // Category
     const {categoryId} = _.query
-    if (categoryId) scope.where({categoryId})
+    if (Number.isFinite(+categoryId)) scope.where({categoryId})
 
     // Grower
     const {growerId} = _.query
-    if (growerId) scope.where({growerId})
+    if (Number.isFinite(+growerId)) scope.where({growerId})
 
     // Pagination
-    const page = +(_.query.page || 1)
+    let page = +(_.query.page || 1)
+    if (!Number.isFinite(page)) page = 1
 
     const [products, categories] = await Promise.all([
       scope.order('name').paginate(page, 30),

@@ -50,6 +50,21 @@ test('GET /products?search=foo%20bar is a 200', async (t) => {
   response.assert(200)
 })
 
+test('GET /products?categoryId=junk is a 200', async (t) => {
+  const response = await t.client.get('/products?categoryId=junk').send()
+  response.assert(200)
+})
+
+test('GET /products?growerId=junk is a 200', async (t) => {
+  const response = await t.client.get('/products?growerId=junk').send()
+  response.assert(200)
+})
+
+test('GET /products?page=junk is a 200', async (t) => {
+  const response = await t.client.get('/products?page=junk').send()
+  response.assert(200)
+})
+
 // Show
 
 test('GET /products/:id is a 200 as an admin', async (t) => {
