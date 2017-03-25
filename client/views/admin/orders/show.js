@@ -121,7 +121,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
     </div>
     <div className='form-group'>
       <label>Location</label>
-      <select className='form-control' defaultValue={locationId} onChange={(event) => updateOrder(id, {locationId: event.target.value || null})}>
+      <select id='location' className='form-control' defaultValue={locationId} onChange={(event) => updateOrder(id, {locationId: +event.target.value || null})}>
         {user.canDeliver
           ? <option value=''>Deliver to {user.address}</option>
           : ''
