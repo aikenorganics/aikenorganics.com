@@ -28,3 +28,15 @@ test('change location', async (assert) => {
 
   assert.is((await Order.find(2)).locationId, 3)
 })
+
+test('add product', async (assert) => {
+  await driver.signIn('admin@example.com')
+  await driver.visit('/admin/orders/2')
+
+  const count = await ProductOrder.where({orderId: 2}).count()
+
+  await driver.$('#add-to-order [value="1"]').click()
+  await driver.wait(driver.present('#message:not(.active)'))
+
+  assert.is(await ProductOrder.where({orderId: 2}).count(), count + 1)
+})

@@ -104,7 +104,7 @@ export default ({errors, locations, order, payments, products, productOrders}) =
         <tfoot>
           <tr>
             <td colSpan='3'>
-              <select className='form-control' onChange={(event) => addProduct(event.target.value)} value=''>
+              <select id='add-to-order' className='form-control' onChange={(event) => addProduct(event.target.value)} value=''>
                 <option value=''>Add to Order…</option>
                 {products.filter(({id}) => {
                   return !productOrders.some(({productId}) => id === productId)
