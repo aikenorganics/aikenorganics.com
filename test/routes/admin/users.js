@@ -1,6 +1,6 @@
 'use strict'
 
-const {User} = require('../../../db')
+const {Order, User} = require('../../../db')
 const test = require('../../test')
 
 test('POST /admin/users/:id is a 200', async (t) => {
@@ -120,4 +120,29 @@ test('return page in JSON', async (t) => {
     .send()
   response.assert(200)
   t.is(response.body.page, 1)
+})
+
+test('find an open order', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client
+    .post('/admin/users/2/order')
+    .set('accept', 'application/json')
+    .send()
+  response.assert(200)
+  const {order} = response.body
+  t.is(order.id, 2)
+  t.is(order.userId, 2)
+})
+
+test('create an order order', async (t) => {
+  await t.signIn('admin@example.com')
+  const orders = await Order.all()
+  const response = await t.client
+    .post('/admin/users/4/order')
+    .set('accept', 'application/json')
+    .send()
+  response.assert(200)
+  const {order} = response.body
+  t.is(order.userId, 4)
+  t.ok(!orders.map(({id}) => id).includes(order.id))
 })

@@ -270,3 +270,11 @@ export const imageUser = (id, file) => {
     done()
   }).catch(done)
 }
+
+export const findOrCreateOrder = (id) => {
+  busy()
+  return post(`/admin/users/${id}/order`).then(({order}) => {
+    done()
+    return order
+  }).catch(done)
+}

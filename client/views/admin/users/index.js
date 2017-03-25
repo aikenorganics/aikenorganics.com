@@ -2,6 +2,7 @@ import React from 'react'
 import Search from '../../search'
 import Link from '../../link'
 import Pagination from '../../pagination'
+import {findOrCreateOrder, navigate} from '../../../actions'
 
 export default ({more, page, search, url, users}) => {
   return <div>
@@ -15,22 +16,22 @@ export default ({more, page, search, url, users}) => {
       <table className='table'>
         <thead>
           <tr>
-            <th />
             <th>Email</th>
             <th>Name</th>
             <th>Phone</th>
             <th>Member</th>
             <th>Admin</th>
+            <th />
           </tr>
         </thead>
         <tbody>
           {users.map(({id, email, isAdmin, memberUntil, name, phone}) => {
+            const toOrder = (event) => {
+              findOrCreateOrder(id).then(({id}) => {
+                navigate(`/admin/orders/${id}`)
+              }).catch(() => {})
+            }
             return <tr key={id}>
-              <td>
-                <Link href={`/admin/users/${id}/edit`} className='btn btn-link btn-sm'>
-                  Edit
-                </Link>
-              </td>
               <td>{email}</td>
               <td>{name}</td>
               <td>{phone || '-'}</td>
@@ -45,6 +46,15 @@ export default ({more, page, search, url, users}) => {
                   ? <span className='tag tag-primary'>Admin</span>
                   : ''
                 }
+              </td>
+              <td>
+                <Link href={`/admin/users/${id}/edit`} className='btn btn-sm btn-secondary'>
+                  Edit
+                </Link>
+                {' '}
+                <button className='btn btn-sm btn-secondary' onClick={toOrder}>
+                  Order
+                </button>
               </td>
             </tr>
           })}

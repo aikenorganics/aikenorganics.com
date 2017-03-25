@@ -1,6 +1,6 @@
 'use strict'
 
-const {User} = require('../../db')
+const {Order, User} = require('../../db')
 const {del, get, post} = require('koa-route')
 
 module.exports = [
@@ -32,6 +32,13 @@ module.exports = [
     _.react({
       emails: users.map(({email}) => email)
     })
+  }),
+
+  // Order
+  post('/admin/users/:id/order', async (_, id) => {
+    let order = await Order.where({status: 'open', userId: id}).find()
+    if (!order) order = await Order.create({userId: id})
+    _.body = {order}
   }),
 
   // Edit
