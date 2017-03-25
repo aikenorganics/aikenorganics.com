@@ -2177,9 +2177,9 @@
       "resolved": "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-2.0.1.tgz"
     },
     "stripe": {
-      "version": "4.15.1",
+      "version": "4.16.0",
       "from": "stripe@latest",
-      "resolved": "https://registry.npmjs.org/stripe/-/stripe-4.15.1.tgz",
+      "resolved": "https://registry.npmjs.org/stripe/-/stripe-4.16.0.tgz",
       "dependencies": {
         "qs": {
           "version": "6.0.4",
