@@ -1,9 +1,20 @@
 'use strict'
 
 const {Order, User} = require('../../db')
-const {del, get, post} = require('koa-route')
+const {all, del, get, post} = require('koa-route')
 
 module.exports = [
+
+  // Handle duplicate email errors
+  all('/admin/users', async (_, next) => {
+    try {
+      await next()
+    } catch (error) {
+      if (error.constraint !== 'users_lower_case_email_index') throw error
+      _.status = 422
+      _.body = {email: ['A user with that email already exists.']}
+    }
+  }, {end: false}),
 
   // Index
   get('/admin/users', async (_) => {

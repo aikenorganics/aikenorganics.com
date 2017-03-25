@@ -146,3 +146,21 @@ test('create an order order', async (t) => {
   t.is(order.userId, 4)
   t.ok(!orders.map(({id}) => id).includes(order.id))
 })
+
+test('creating a user with an existing email returns 422', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client
+    .post('/admin/users')
+    .set('accept', 'application/json')
+    .send({email: 'admin@example.com'})
+  response.assert(422, {email: ['A user with that email already exists.']})
+})
+
+test('updating a user with an existing email returns 422', async (t) => {
+  await t.signIn('admin@example.com')
+  const response = await t.client
+    .post('/admin/users/1')
+    .set('accept', 'application/json')
+    .send({email: 'finn@example.com'})
+  response.assert(422, {email: ['A user with that email already exists.']})
+})
