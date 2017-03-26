@@ -69,10 +69,9 @@ module.exports = [
 
   // Show
   get('/products/:id', async (_) => {
-    const product = _.state.product.toJSON()
-
-    product.descriptionHtml = _.state.product.descriptionHtml
-    _.react({product})
+    const {product} = _.state
+    const {descriptionHtml} = product
+    _.react({product: Object.assign(product.toJSON(), {descriptionHtml})})
   }),
 
   // Edit
