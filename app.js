@@ -39,12 +39,10 @@ for (const route of [].concat(
 )) app.use(route)
 
 // Home
-app.use(get('/', async (_) => { _.react() }))
+app.use(get('/', async (_) => _.react()))
 
 // Learn
-app.use(get('/learn', async (_) => { _.react() }))
+app.use(get('/learn', async (_) => _.react()))
 
 // 404
-app.use(async (_) => {
-  _.notfound()
-})
+app.use(async (_) => _.notfound())
