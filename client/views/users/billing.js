@@ -1,4 +1,4 @@
-import React, {PureComponent, PropTypes} from 'react'
+import React, {PureComponent} from 'react'
 import {updateCard} from '../../actions'
 import key from 'env/STRIPE_PK'
 
@@ -13,13 +13,6 @@ const getStripe = () => stripe || (stripe = new Promise((resolve, reject) => {
 }))
 
 export default class Billing extends PureComponent {
-  static propTypes () {
-    return {
-      busy: PropTypes.bool,
-      user: PropTypes.object
-    }
-  }
-
   open () {
     const {user} = this.props
     getStripe().then(() => {

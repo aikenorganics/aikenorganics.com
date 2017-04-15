@@ -1,14 +1,7 @@
-import React, {PureComponent, PropTypes} from 'react'
+import React, {PureComponent} from 'react'
 import {createUser, navigate, updateUser} from '../../../actions'
 
 export default class Form extends PureComponent {
-  static get propTypes () {
-    return {
-      busy: PropTypes.bool,
-      user: PropTypes.object
-    }
-  }
-
   constructor (props) {
     super(props)
     const {email, first, isAdmin, last, phone, memberUntil} = props.user || {}

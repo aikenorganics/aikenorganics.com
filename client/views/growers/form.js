@@ -1,16 +1,8 @@
-import React, {PureComponent, PropTypes} from 'react'
+import React, {PureComponent} from 'react'
 import {createGrower, navigate, updateGrower} from '../../actions'
 import Errors from '../errors'
 
 export default class Form extends PureComponent {
-  static get propTypes () {
-    return {
-      busy: PropTypes.bool,
-      errors: PropTypes.object,
-      grower: PropTypes.object
-    }
-  }
-
   constructor (props) {
     super(props)
     const {description, email, location, name, url} = props.grower || {}

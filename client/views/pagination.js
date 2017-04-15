@@ -1,8 +1,8 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
 import Link from './link'
 import {params} from '../url'
 
-const Pagination = ({more, page, url}) => {
+export default ({more, page, url}) => {
   return <div>
     {more
       ? <Link href={params(url, {page: page + 1})} className='float-xs-right'>
@@ -18,11 +18,3 @@ const Pagination = ({more, page, url}) => {
     }
   </div>
 }
-
-Pagination.propTypes = {
-  more: PropTypes.bool,
-  page: PropTypes.number,
-  url: PropTypes.string
-}
-
-export default Pagination

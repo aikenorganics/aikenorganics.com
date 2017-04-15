@@ -1,20 +1,9 @@
-import React, {PureComponent, PropTypes} from 'react'
+import React, {PureComponent} from 'react'
 import Link from '../link'
 import Errors from '../errors'
 import {createProduct, navigate, updateProduct} from '../../actions'
 
 export default class Form extends PureComponent {
-  static get propTypes () {
-    return {
-      busy: PropTypes.bool,
-      currentUser: PropTypes.object,
-      categories: PropTypes.array,
-      errors: PropTypes.object,
-      grower: PropTypes.object,
-      product: PropTypes.object
-    }
-  }
-
   constructor (props) {
     super(props)
 
