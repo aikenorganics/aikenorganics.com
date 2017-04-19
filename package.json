@@ -28,8 +28,8 @@
   },
   "homepage": "https://github.com/aikenorganics/aikenorganics",
   "dependencies": {
-    "bugsnag": "1.9.1",
-    "bugsnag-js": "3.1.0",
+    "bugsnag": "1.10.0",
+    "bugsnag-js": "3.2.0",
     "es6-promise": "4.1.0",
     "koa-route": "3.2.0",
     "marked": "0.3.6",
