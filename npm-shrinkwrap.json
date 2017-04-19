@@ -752,9 +752,9 @@
       "resolved": "https://registry.npmjs.org/extsprintf/-/extsprintf-1.0.2.tgz"
     },
     "fbjs": {
-      "version": "0.8.8",
-      "from": "fbjs@>=0.8.4 <0.9.0",
-      "resolved": "https://registry.npmjs.org/fbjs/-/fbjs-0.8.8.tgz"
+      "version": "0.8.12",
+      "from": "fbjs@>=0.8.9 <0.9.0",
+      "resolved": "https://registry.npmjs.org/fbjs/-/fbjs-0.8.12.tgz"
     },
     "find-up": {
       "version": "1.1.2",
@@ -963,9 +963,9 @@
       "resolved": "https://registry.npmjs.org/https-browserify/-/https-browserify-1.0.0.tgz"
     },
     "iconv-lite": {
-      "version": "0.4.13",
-      "from": "iconv-lite@0.4.13",
-      "resolved": "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.13.tgz"
+      "version": "0.4.15",
+      "from": "iconv-lite@>=0.4.13 <0.5.0",
+      "resolved": "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.15.tgz"
     },
     "ieee754": {
       "version": "1.1.8",
@@ -1802,6 +1802,11 @@
       "from": "promise@>=7.0.0 <8.0.0",
       "resolved": "https://registry.npmjs.org/promise/-/promise-7.1.1.tgz"
     },
+    "prop-types": {
+      "version": "15.5.8",
+      "from": "prop-types@>=15.5.7 <16.0.0",
+      "resolved": "https://registry.npmjs.org/prop-types/-/prop-types-15.5.8.tgz"
+    },
     "pseudomap": {
       "version": "1.0.2",
       "from": "pseudomap@>=1.0.1 <2.0.0",
@@ -1860,14 +1865,14 @@
       "resolved": "https://registry.npmjs.org/rc/-/rc-1.1.7.tgz"
     },
     "react": {
-      "version": "15.4.2",
+      "version": "15.5.4",
       "from": "react@latest",
-      "resolved": "https://registry.npmjs.org/react/-/react-15.4.2.tgz"
+      "resolved": "https://registry.npmjs.org/react/-/react-15.5.4.tgz"
     },
     "react-dom": {
-      "version": "15.4.2",
+      "version": "15.5.4",
       "from": "react-dom@latest",
-      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-15.4.2.tgz"
+      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-15.5.4.tgz"
     },
     "read-only-stream": {
       "version": "2.0.0",
@@ -2444,9 +2449,9 @@
       "resolved": "https://registry.npmjs.org/vm-browserify/-/vm-browserify-0.0.4.tgz"
     },
     "whatwg-fetch": {
-      "version": "2.0.2",
+      "version": "2.0.3",
       "from": "whatwg-fetch@>=0.10.0",
-      "resolved": "https://registry.npmjs.org/whatwg-fetch/-/whatwg-fetch-2.0.2.tgz"
+      "resolved": "https://registry.npmjs.org/whatwg-fetch/-/whatwg-fetch-2.0.3.tgz"
     },
     "which": {
       "version": "1.2.14",
