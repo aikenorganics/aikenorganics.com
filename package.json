@@ -8,8 +8,8 @@
     "public/assets"
   ],
   "engines": {
-    "node": "7.7.3",
-    "npm": "4.1.2"
+    "node": "7.9.0",
+    "npm": "4.2.0"
   },
   "scripts": {
     "build": "./bin/build",
