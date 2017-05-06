@@ -47,7 +47,7 @@ export default ({more, page, search, url, users}) => {
                   : ''
                 }
               </td>
-              <td>
+              <td className='text-nowrap'>
                 <Link href={`/admin/users/${id}/edit`} className='btn btn-sm btn-secondary'>
                   Edit
                 </Link>
