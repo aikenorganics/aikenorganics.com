@@ -1,13 +1,23 @@
 'use strict'
 
 const app = require('../app')
-const server = app.listen()
 const {Builder, By, until} = require('selenium-webdriver')
 const driver = new Builder().forBrowser('chrome').build()
 
+const listen = (app) => new Promise((resolve, reject) => {
+  const server = app.listen()
+  server.on('listening', () => resolve(server))
+  server.on('error', reject)
+})
+
 class Driver {
-  constructor () {
+  constructor (app) {
+    this.app = app
     this.visited = false
+  }
+
+  server () {
+    return this._server || (this._server = listen(this.app))
   }
 
   async clear () {
@@ -19,12 +29,13 @@ class Driver {
 
   async visit (path) {
     this.visited = true
-    await driver.get(`http://localhost:${server.address().port}${path}`)
+    const {port} = (await this.server()).address()
+    await driver.get(`http://localhost:${port}${path}`)
     await driver.executeScript('window.scrollTo(0, 0)')
   }
 
-  close () {
-    server.close()
+  async close () {
+    (await this.server()).close()
     driver.quit()
   }
 
@@ -61,4 +72,4 @@ class Driver {
   }
 }
 
-module.exports = new Driver()
+module.exports = new Driver(app)
