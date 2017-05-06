@@ -4,7 +4,7 @@ const test = require('../../test')
 const browser = require('../../browser')
 const Category = require('../../../db/category')
 
-test('new category', async (assert) => {
+test('new category', async ({assert}) => {
   await browser.signIn('admin@example.com')
   await browser.visit('/admin/categories/new')
   await browser.$('#name').sendKeys('Test Category')
@@ -18,7 +18,7 @@ test('new category', async (assert) => {
   assert.is(category.meat, true)
 })
 
-test('edit a category', async (assert) => {
+test('edit a category', async ({assert}) => {
   await browser.signIn('admin@example.com')
   await browser.visit('/admin/categories/1/edit')
   await browser.$('#name').clear()

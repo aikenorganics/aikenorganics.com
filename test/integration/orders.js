@@ -4,7 +4,7 @@ const test = require('../test')
 const browser = require('../browser')
 const {Market, ProductOrder} = require('../../db')
 
-test('remove an item from your order', async (assert) => {
+test('remove an item from your order', async ({assert}) => {
   await browser.signIn('user@example.com')
   await browser.visit('/orders/current')
 
@@ -17,7 +17,7 @@ test('remove an item from your order', async (assert) => {
   assert.is(await ProductOrder.where({orderId: 2}).count(), count - 1)
 })
 
-test('cannot remove an item from your order when closed', async (assert) => {
+test('cannot remove an item from your order when closed', async ({assert}) => {
   await (await Market.find(1)).update({closed: true})
   await browser.signIn('user@example.com')
   await browser.visit('/orders/current')

@@ -21,7 +21,7 @@ exports = module.exports = (name, test) => tape(name, async (assert) => {
 
   try {
     await browser.clear()
-    await test(assert)
+    await test({assert})
     assert.end()
   } catch (error) {
     assert.end(error)

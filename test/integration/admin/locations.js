@@ -4,7 +4,7 @@ const test = require('../../test')
 const browser = require('../../browser')
 const Location = require('../../../db/location')
 
-test('new location', async (assert) => {
+test('new location', async ({assert}) => {
   await browser.signIn('admin@example.com')
   await browser.visit('/admin/locations/new')
   await browser.$('#name').sendKeys('Test Location')
@@ -13,7 +13,7 @@ test('new location', async (assert) => {
   assert.ok(await Location.where({name: 'Test Location'}).find())
 })
 
-test('edit a location', async (assert) => {
+test('edit a location', async ({assert}) => {
   await browser.signIn('admin@example.com')
   await browser.visit('/admin/locations/1/edit')
   await browser.$('#name').clear()

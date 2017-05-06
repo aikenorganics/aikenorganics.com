@@ -3,12 +3,12 @@
 const {Order, Product, ProductOrder} = require('../../db')
 const test = require('../test')
 
-test('GET /cart is a 401 logged out', async (assert) => {
+test('GET /cart is a 401 logged out', async ({assert}) => {
   const response = await assert.client.get('/cart').send()
   response.assert(401)
 })
 
-test('GET /cart is a 200 logged in', async (assert) => {
+test('GET /cart is a 200 logged in', async ({assert}) => {
   await assert.signIn('admin@example.com')
   let response = await assert.client
     .post('/cart')
@@ -19,12 +19,12 @@ test('GET /cart is a 200 logged in', async (assert) => {
   response.assert(200)
 })
 
-test('POST /cart is a 401 logged out', async (assert) => {
+test('POST /cart is a 401 logged out', async ({assert}) => {
   const response = await assert.client.post('/cart').send()
   response.assert(401)
 })
 
-test('POST /cart is a 200 logged in', async (assert) => {
+test('POST /cart is a 200 logged in', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client
     .post('/cart')
@@ -32,7 +32,7 @@ test('POST /cart is a 200 logged in', async (assert) => {
   response.assert(200)
 })
 
-test('POST /cart/checkout', async (assert) => {
+test('POST /cart/checkout', async ({assert}) => {
   await assert.signIn('admin@example.com')
 
   let response
@@ -78,7 +78,7 @@ test('POST /cart/checkout', async (assert) => {
   ])
 })
 
-test('POST /cart is a 200 for inactive products/growers', async (assert) => {
+test('POST /cart is a 200 for inactive products/growers', async ({assert}) => {
   await assert.signIn('user@example.com')
   const response = await assert.client
     .post('/cart')

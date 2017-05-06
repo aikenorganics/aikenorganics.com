@@ -3,7 +3,7 @@
 const {Order, User} = require('../../../db')
 const test = require('../../test')
 
-test('POST /admin/users/:id is a 200', async (assert) => {
+test('POST /admin/users/:id is a 200', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client
     .post('/admin/users/2')
@@ -25,61 +25,61 @@ test('POST /admin/users/:id is a 200', async (assert) => {
   assert.is(user.phone, '555-555-5555')
 })
 
-test('GET /admin/users is a 200 as an admin', async (assert) => {
+test('GET /admin/users is a 200 as an admin', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client.get('/admin/users').send()
   response.assert(200)
 })
 
-test('GET /admin/users is a 200 as an admin with a search', async (assert) => {
+test('GET /admin/users is a 200 as an admin with a search', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client.get('/admin/users?search=admin').send()
   response.assert(200)
 })
 
-test('GET /admin/users/show is a 200 as an admin', async (assert) => {
+test('GET /admin/users/show is a 200 as an admin', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client.get('/admin/users/1/edit').send()
   response.assert(200).assert(/isAdmin/)
 })
 
-test('missing users are a 404 as an admin', async (assert) => {
+test('missing users are a 404 as an admin', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client.get('/admin/users/123456789').send()
   response.assert(404)
 })
 
-test('GET /admin/users is a 401 as a regular user', async (assert) => {
+test('GET /admin/users is a 401 as a regular user', async ({assert}) => {
   await assert.signIn('user@example.com')
   const response = await assert.client.get('/admin/users').send()
   response.assert(401)
 })
 
-test('GET /admin/users/show is a 401 as a regular user', async (assert) => {
+test('GET /admin/users/show is a 401 as a regular user', async ({assert}) => {
   await assert.signIn('user@example.com')
   const response = await assert.client.get('/admin/users/1/edit').send()
   response.assert(401)
 })
 
-test('GET /admin/users/emails is a 200', async (assert) => {
+test('GET /admin/users/emails is a 200', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client.get('/admin/users/emails').send()
   response.assert(200)
 })
 
-test('Search for stop word', async (assert) => {
+test('Search for stop word', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client.get('/admin/users?search=with').send()
   response.assert(200).assert(/jwitherow@example\.com/i)
 })
 
-test('Search for joanne', async (assert) => {
+test('Search for joanne', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client.get('/admin/users?search=joanne').send()
   response.assert(200).assert(/jwitherow@example\.com/i)
 })
 
-test('Delete a user', async (assert) => {
+test('Delete a user', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client.delete('/admin/users/7').send()
   response.assert(200)
@@ -87,13 +87,13 @@ test('Delete a user', async (assert) => {
   assert.ok(user == null)
 })
 
-test('/admin/users/new is a 200', async (assert) => {
+test('/admin/users/new is a 200', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client.get('/admin/users/new').send()
   response.assert(200)
 })
 
-test('POST /admin/users is a 200', async (assert) => {
+test('POST /admin/users is a 200', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client
     .post('/admin/users')
@@ -112,7 +112,7 @@ test('POST /admin/users is a 200', async (assert) => {
   assert.is(user.phone, '555-555-5555')
 })
 
-test('return page in JSON', async (assert) => {
+test('return page in JSON', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client
     .get('/admin/users')
@@ -122,7 +122,7 @@ test('return page in JSON', async (assert) => {
   assert.is(response.body.page, 1)
 })
 
-test('find an open order', async (assert) => {
+test('find an open order', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client
     .post('/admin/users/2/order')
@@ -134,7 +134,7 @@ test('find an open order', async (assert) => {
   assert.is(order.userId, 2)
 })
 
-test('create an order', async (assert) => {
+test('create an order', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const orders = await Order.all()
   const response = await assert.client
@@ -147,7 +147,7 @@ test('create an order', async (assert) => {
   assert.ok(!orders.map(({id}) => id).includes(order.id))
 })
 
-test('creating a user with an existing email returns 422', async (assert) => {
+test('creating a user with an existing email returns 422', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client
     .post('/admin/users')
@@ -156,7 +156,7 @@ test('creating a user with an existing email returns 422', async (assert) => {
   response.assert(422, {email: ['A user with that email already exists.']})
 })
 
-test('updating a user with an existing email returns 422', async (assert) => {
+test('updating a user with an existing email returns 422', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client
     .post('/admin/users/1')

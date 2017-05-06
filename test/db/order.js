@@ -3,12 +3,12 @@
 const {Order, Product, ProductOrder} = require('../../db')
 const test = require('../test')
 
-test('orders without productOrders have undefined total', async (assert) => {
+test('orders without productOrders have undefined total', async ({assert}) => {
   const order = new Order()
   assert.is(order.total, undefined)
 })
 
-test('Order reports the correct cost', async (assert) => {
+test('Order reports the correct cost', async ({assert}) => {
   const order = new Order()
   order.productOrders = []
 
@@ -36,7 +36,7 @@ test('Order reports the correct cost', async (assert) => {
   assert.equal(order.total, 19)
 })
 
-test('validate locationId', async (assert) => {
+test('validate locationId', async ({assert}) => {
   const order = new Order()
 
   for (const value of [1, 1.5, -2, 1.23, 0, undefined, null]) {
@@ -52,7 +52,7 @@ test('validate locationId', async (assert) => {
   }
 })
 
-test('validate userId', async (assert) => {
+test('validate userId', async ({assert}) => {
   const order = new Order()
 
   for (const value of [1, 1.5, -2, 1.23, 0]) {

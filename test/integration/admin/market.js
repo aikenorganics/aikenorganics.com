@@ -4,7 +4,7 @@ const test = require('../../test')
 const browser = require('../../browser')
 const Market = require('../../../db/market')
 
-test('edit news, message', async (assert) => {
+test('edit news, message', async ({assert}) => {
   await browser.signIn('admin@example.com')
   await browser.visit('/admin/market')
 

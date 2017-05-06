@@ -3,13 +3,13 @@
 const {ProductOrder} = require('../../../db')
 const test = require('../../test')
 
-test('POST /product-orders/missing is a 404', async (assert) => {
+test('POST /product-orders/missing is a 404', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client.post('/admin/product-orders/12345').send()
   response.assert(404)
 })
 
-test('POST /product-orders/:id is a 200', async (assert) => {
+test('POST /product-orders/:id is a 200', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client
     .post('/admin/product-orders/1')
@@ -25,7 +25,7 @@ test('POST /product-orders/:id is a 200', async (assert) => {
   assert.equal(productOrder.quantity, 1)
 })
 
-test('POST /product-orders is a 200', async (assert) => {
+test('POST /product-orders is a 200', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client
     .post('/admin/product-orders')
@@ -41,7 +41,7 @@ test('POST /product-orders is a 200', async (assert) => {
   assert.is(productOrder.quantity, 1)
 })
 
-test('editing an inactive product order', async (assert) => {
+test('editing an inactive product order', async ({assert}) => {
   await assert.signIn('admin@example.com')
   const response = await assert.client
     .post('/admin/product-orders/9')

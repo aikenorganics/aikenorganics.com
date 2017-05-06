@@ -3,7 +3,7 @@
 const test = require('../test')
 const Market = require('../../db/market')
 
-test('closed when #closed is true, even in open period', async (assert) => {
+test('closed when #closed is true, even in open period', async ({assert}) => {
   const market = new Market({
     openDay: 0,
     openHours: 8,
@@ -20,7 +20,7 @@ test('closed when #closed is true, even in open period', async (assert) => {
   assert.ok(!market.open)
 })
 
-test('open Sunday to Wednesday', async (assert) => {
+test('open Sunday to Wednesday', async ({assert}) => {
   const market = new Market({
     openDay: 0,
     openHours: 8,
@@ -58,7 +58,7 @@ test('open Sunday to Wednesday', async (assert) => {
   assert.ok(!market.open)
 })
 
-test('open Friday to Monday', async (assert) => {
+test('open Friday to Monday', async ({assert}) => {
   const market = new Market({
     openDay: 5,
     openHours: 8,
@@ -90,7 +90,7 @@ test('open Friday to Monday', async (assert) => {
   assert.ok(!market.open)
 })
 
-test('open Saturday only', async (assert) => {
+test('open Saturday only', async ({assert}) => {
   const market = new Market({
     openDay: 6,
     openHours: 8,

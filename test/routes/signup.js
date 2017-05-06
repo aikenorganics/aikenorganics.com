@@ -2,12 +2,12 @@
 
 const test = require('../test')
 
-test('signup page is a 200', async (assert) => {
+test('signup page is a 200', async ({assert}) => {
   const response = await assert.client.get('/signup').send()
   response.assert(200)
 })
 
-test('POST /signup handles mixed case emails', async (assert) => {
+test('POST /signup handles mixed case emails', async ({assert}) => {
   const response = await assert.client.post('/signup').send({
     email: 'AdMiN@eXaMpLe.CoM',
     password: 'password'
@@ -15,7 +15,7 @@ test('POST /signup handles mixed case emails', async (assert) => {
   response.assert(422).assert('content-type', /json/)
 })
 
-test('POST /signup handles first, last, and phone', async (assert) => {
+test('POST /signup handles first, last, and phone', async ({assert}) => {
   const response = await assert.client.post('/signup').send({
     first: 'Finn',
     last: 'Mertens',
@@ -26,7 +26,7 @@ test('POST /signup handles first, last, and phone', async (assert) => {
   response.assert(200)
 })
 
-test('Full signup flow', async (assert) => {
+test('Full signup flow', async ({assert}) => {
   const signup = await assert.client.post('/signup').send({
     first: 'Jake',
     last: 'The Dog',
