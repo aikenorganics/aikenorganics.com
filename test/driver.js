@@ -16,9 +16,10 @@ class Driver {
     return driver.manage().deleteAllCookies()
   }
 
-  visit (path) {
+  async visit (path) {
     this.visited = true
-    return driver.get(`http://localhost:4444${path}`)
+    await driver.get(`http://localhost:4444${path}`)
+    await driver.executeScript('window.scrollTo(0, 0)')
   }
 
   close () {
