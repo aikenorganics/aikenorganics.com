@@ -9,7 +9,7 @@ require('./lib')
 require('./routes')
 require('./integration')
 
-test('teardown', async (t) => {
+test('teardown', async (assert) => {
   await browser.close()
   db.close()
 })

@@ -5,224 +5,224 @@ const test = require('../test')
 
 // Index
 
-test('GET /growers is a 200', async (t) => {
-  const response = await t.client.get('/growers').send()
+test('GET /growers is a 200', async (assert) => {
+  const response = await assert.client.get('/growers').send()
   response.assert(200)
 })
 
-test('GET /growers is a 200 for admins', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client.get('/growers').send()
+test('GET /growers is a 200 for admins', async (assert) => {
+  await assert.signIn('admin@example.com')
+  const response = await assert.client.get('/growers').send()
   response.assert(200)
 })
 
-test('GET /growers is a 200 for non-admins', async (t) => {
-  await t.signIn('user@example.com')
-  const response = await t.client.get('/growers').send()
+test('GET /growers is a 200 for non-admins', async (assert) => {
+  await assert.signIn('user@example.com')
+  const response = await assert.client.get('/growers').send()
   response.assert(200)
 })
 
-test('GET /growers does not return inactive growers', async (t) => {
-  const response = await t.client
+test('GET /growers does not return inactive growers', async (assert) => {
+  const response = await assert.client
     .get('/growers')
     .set('accept', 'application/json')
     .send()
   response.assert(200)
-  t.ok(response.body.growers.every(({id}) => id !== 3))
+  assert.ok(response.body.growers.every(({id}) => id !== 3))
 })
 
 // Show
 
-test('GET /growers/:id authorized users see new product link', async (t) => {
-  await t.signIn('grower@example.com')
-  const response = await t.client.get('/growers/1').send()
+test('GET /growers/:id authorized users see new product link', async (assert) => {
+  await assert.signIn('grower@example.com')
+  const response = await assert.client.get('/growers/1').send()
   response.assert(200).assert(/\/growers\/1\/products\/new/)
 })
 
-test('GET /growers/:id is a 200', async (t) => {
-  const response = await t.client.get('/growers/1').send()
+test('GET /growers/:id is a 200', async (assert) => {
+  const response = await assert.client.get('/growers/1').send()
   response.assert(200)
 })
 
-test('GET /growers/:id is a 200 as an admin', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client.get('/growers/1').send()
+test('GET /growers/:id is a 200 as an admin', async (assert) => {
+  await assert.signIn('admin@example.com')
+  const response = await assert.client.get('/growers/1').send()
   response.assert(200)
 })
 
-test('GET /growers/:id is a 200 as a grower', async (t) => {
-  await t.signIn('grower@example.com')
-  const response = await t.client.get('/growers/1').send()
+test('GET /growers/:id is a 200 as a grower', async (assert) => {
+  await assert.signIn('grower@example.com')
+  const response = await assert.client.get('/growers/1').send()
   response.assert(200)
 })
 
-test('GET /growers/:id is a 404 for missing ids', async (t) => {
-  const response = await t.client.get('/growers/123456789').send()
+test('GET /growers/:id is a 404 for missing ids', async (assert) => {
+  const response = await assert.client.get('/growers/123456789').send()
   response.assert(404)
 })
 
-test('GET /growers/:id is a 404 for missing ids', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client.get('/growers/123456789').send()
+test('GET /growers/:id is a 404 for missing ids', async (assert) => {
+  await assert.signIn('admin@example.com')
+  const response = await assert.client.get('/growers/123456789').send()
   response.assert(404)
 })
 
-test('GET /growers/:id as admin includes inactive products', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client
+test('GET /growers/:id as admin includes inactive products', async (assert) => {
+  await assert.signIn('admin@example.com')
+  const response = await assert.client
     .get('/growers/2')
     .set('accept', 'application/json')
     .send()
   response.assert(200)
   const {products} = response.body
-  t.ok(products.some(({id}) => id === 7), 'should see inactive products')
-  t.ok(products.some(({id}) => id === 4), 'should see active products')
+  assert.ok(products.some(({id}) => id === 7), 'should see inactive products')
+  assert.ok(products.some(({id}) => id === 4), 'should see active products')
 })
 
-test('GET /growers/:id as grower includes inactive products', async (t) => {
-  await t.signIn('info@planitfoods.com')
-  const response = await t.client
+test('GET /growers/:id as grower includes inactive products', async (assert) => {
+  await assert.signIn('info@planitfoods.com')
+  const response = await assert.client
     .get('/growers/2')
     .set('accept', 'application/json')
     .send()
   response.assert(200)
   const {products} = response.body
-  t.ok(products.some(({id}) => id === 7), 'should see inactive products')
-  t.ok(products.some(({id}) => id === 4), 'should see active products')
+  assert.ok(products.some(({id}) => id === 7), 'should see inactive products')
+  assert.ok(products.some(({id}) => id === 4), 'should see active products')
 })
 
-test('GET /growers/:id as non-grower does not include inactive products', async (t) => {
-  await t.signIn('info@planitfoods.com')
-  const response = await t.client
+test('GET /growers/:id as non-grower does not include inactive products', async (assert) => {
+  await assert.signIn('info@planitfoods.com')
+  const response = await assert.client
     .get('/growers/1')
     .set('accept', 'application/json')
     .send()
   response.assert(200)
   const {products} = response.body
-  t.ok(products.every(({id}) => id !== 8), 'should not see inactive products')
-  t.ok(products.some(({id}) => id === 1), 'should see active products')
+  assert.ok(products.every(({id}) => id !== 8), 'should not see inactive products')
+  assert.ok(products.some(({id}) => id === 1), 'should see active products')
 })
 
 // New
 
-test('GET /growers/new is a 200 as an admin', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client.get('/growers/new').send()
+test('GET /growers/new is a 200 as an admin', async (assert) => {
+  await assert.signIn('admin@example.com')
+  const response = await assert.client.get('/growers/new').send()
   response.assert(200)
 })
 
-test('GET /growers/new is a 200', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client.get('/growers/new').send()
+test('GET /growers/new is a 200', async (assert) => {
+  await assert.signIn('admin@example.com')
+  const response = await assert.client.get('/growers/new').send()
   response.assert(200)
 })
 
-test('GET /growers/new is a 401 as a non-admin', async (t) => {
-  await t.signIn('user@example.com')
-  const response = await t.client.get('/growers/new').send()
+test('GET /growers/new is a 401 as a non-admin', async (assert) => {
+  await assert.signIn('user@example.com')
+  const response = await assert.client.get('/growers/new').send()
   response.assert(401)
 })
 
 // Edit
 
-test('GET /growers/:id/edit is a 401 for non-admins', async (t) => {
-  await t.signIn('user@example.com')
-  const response = await t.client.get('/growers/1/edit').send()
+test('GET /growers/:id/edit is a 401 for non-admins', async (assert) => {
+  await assert.signIn('user@example.com')
+  const response = await assert.client.get('/growers/1/edit').send()
   response.assert(401)
 })
 
-test('GET /growers/:id/edit is a 200 for admins', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client.get('/growers/1/edit').send()
+test('GET /growers/:id/edit is a 200 for admins', async (assert) => {
+  await assert.signIn('admin@example.com')
+  const response = await assert.client.get('/growers/1/edit').send()
   response.assert(200)
 })
 
-test('GET /growers/:id/edit is a 200 for allowed users', async (t) => {
-  await t.signIn('grower@example.com')
-  const response = await t.client.get('/growers/1/edit').send()
+test('GET /growers/:id/edit is a 200 for allowed users', async (assert) => {
+  await assert.signIn('grower@example.com')
+  const response = await assert.client.get('/growers/1/edit').send()
   response.assert(200)
 })
 
 // Orders
 
-test('GET /growers/:id/orders is a 200 for admins', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client.get('/growers/1/orders').send()
+test('GET /growers/:id/orders is a 200 for admins', async (assert) => {
+  await assert.signIn('admin@example.com')
+  const response = await assert.client.get('/growers/1/orders').send()
   response.assert(200)
 })
 
-test('GET /growers/:id/orders is a 200 for allowed users', async (t) => {
-  await t.signIn('grower@example.com')
-  const response = await t.client.get('/growers/1/orders').send()
+test('GET /growers/:id/orders is a 200 for allowed users', async (assert) => {
+  await assert.signIn('grower@example.com')
+  const response = await assert.client.get('/growers/1/orders').send()
   response.assert(200)
 })
 
-test('GET /growers/:id/orders is a 401 for non-admins', async (t) => {
-  await t.signIn('grower@example.com')
-  const response = await t.client.get('/growers/2/orders').send()
+test('GET /growers/:id/orders is a 401 for non-admins', async (assert) => {
+  await assert.signIn('grower@example.com')
+  const response = await assert.client.get('/growers/2/orders').send()
   response.assert(401)
 })
 
-test('GET /growers/:id/orders is a 401 for non-admins', async (t) => {
-  await t.signIn('user@example.com')
-  const response = await t.client.get('/growers/1/orders').send()
+test('GET /growers/:id/orders is a 401 for non-admins', async (assert) => {
+  await assert.signIn('user@example.com')
+  const response = await assert.client.get('/growers/1/orders').send()
   response.assert(401)
 })
 
 // Update
 
-test('POST /growers/:id is a 401 for non-admins', async (t) => {
-  await t.signIn('user@example.com')
-  const response = await t.client.post('/growers/1').send()
+test('POST /growers/:id is a 401 for non-admins', async (assert) => {
+  await assert.signIn('user@example.com')
+  const response = await assert.client.post('/growers/1').send()
   response.assert(401)
 })
 
-test('POST /growers/:id is a 200 for admins', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client.post('/growers/1').send({name: 'Watsonia'})
+test('POST /growers/:id is a 200 for admins', async (assert) => {
+  await assert.signIn('admin@example.com')
+  const response = await assert.client.post('/growers/1').send({name: 'Watsonia'})
   response.assert(200).assert('content-type', /json/)
 })
 
-test('POST /growers/:id is a 200 for allowed users', async (t) => {
-  await t.signIn('grower@example.com')
-  const response = await t.client.post('/growers/1').send({name: 'Watsonia'})
+test('POST /growers/:id is a 200 for allowed users', async (assert) => {
+  await assert.signIn('grower@example.com')
+  const response = await assert.client.post('/growers/1').send({name: 'Watsonia'})
   response.assert(200).assert('content-type', /json/)
 })
 
-test('updating creates an event', async (t) => {
-  await t.signIn('grower@example.com')
-  const response = await t.client.post('/growers/1').send({name: 'Test'})
+test('updating creates an event', async (assert) => {
+  await assert.signIn('grower@example.com')
+  const response = await assert.client.post('/growers/1').send({name: 'Test'})
   response.assert(200)
   const event = await Event.where({growerId: 1}).find()
-  t.deepEqual(event.meta, {name: 'Test'})
-  t.is(event.userId, 5)
-  t.is(event.action, 'update')
-  t.is(event.growerId, 1)
-  t.is(event.productId, null)
+  assert.deepEqual(event.meta, {name: 'Test'})
+  assert.is(event.userId, 5)
+  assert.is(event.action, 'update')
+  assert.is(event.growerId, 1)
+  assert.is(event.productId, null)
 })
 
 // Create
 
-test('POST /growers is a 401 for non-admins', async (t) => {
-  await t.signIn('user@example.com')
-  const response = await t.client.post('/growers').send({name: 'New Grower'})
+test('POST /growers is a 401 for non-admins', async (assert) => {
+  await assert.signIn('user@example.com')
+  const response = await assert.client.post('/growers').send({name: 'New Grower'})
   response.assert(401)
 })
 
-test('POST /growers is a 200 for admins', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client.post('/growers').send({name: 'New Grower'})
+test('POST /growers is a 200 for admins', async (assert) => {
+  await assert.signIn('admin@example.com')
+  const response = await assert.client.post('/growers').send({name: 'New Grower'})
   response.assert(200).assert('content-type', /json/)
   const {id, name} = response.body.grower
-  t.is(name, 'New Grower')
-  t.is(typeof id, 'number')
+  assert.is(name, 'New Grower')
+  assert.is(typeof id, 'number')
 })
 
 // Create Product
 
-test('POST /growers/:id/products is a 200 for admins', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client.post('/growers/1/products').send({
+test('POST /growers/:id/products is a 200 for admins', async (assert) => {
+  await assert.signIn('admin@example.com')
+  const response = await assert.client.post('/growers/1/products').send({
     name: 'New Product',
     cost: '2.45',
     supply: 32,
@@ -230,17 +230,17 @@ test('POST /growers/:id/products is a 200 for admins', async (t) => {
   })
   response.assert(200).assert('Content-Type', /json/)
   const {categoryId, cost, growerId, id, name, supply} = response.body.product
-  t.is(categoryId, 1)
-  t.is(cost, '2.45')
-  t.is(growerId, 1)
-  t.is(name, 'New Product')
-  t.is(supply, 32)
-  t.is(typeof id, 'number')
+  assert.is(categoryId, 1)
+  assert.is(cost, '2.45')
+  assert.is(growerId, 1)
+  assert.is(name, 'New Product')
+  assert.is(supply, 32)
+  assert.is(typeof id, 'number')
 })
 
-test('POST /growers/:id/products is a 401 for non-admins', async (t) => {
-  await t.signIn('user@example.com')
-  const response = await t.client.post('/growers/1/products').send({
+test('POST /growers/:id/products is a 401 for non-admins', async (assert) => {
+  await assert.signIn('user@example.com')
+  const response = await assert.client.post('/growers/1/products').send({
     name: 'New Product',
     cost: '2.45',
     supply: 32,
@@ -249,9 +249,9 @@ test('POST /growers/:id/products is a 401 for non-admins', async (t) => {
   response.assert(401)
 })
 
-test('POST /growers/:id/products is a 200 if allowed', async (t) => {
-  await t.signIn('grower@example.com')
-  const response = await t.client.post('/growers/1/products').send({
+test('POST /growers/:id/products is a 200 if allowed', async (assert) => {
+  await assert.signIn('grower@example.com')
+  const response = await assert.client.post('/growers/1/products').send({
     categoryId: 1,
     cost: '2.50',
     featured: true,
@@ -260,16 +260,16 @@ test('POST /growers/:id/products is a 200 if allowed', async (t) => {
   })
   response.assert(200)
   const {categoryId, cost, featured, name, supply} = response.body.product
-  t.is(categoryId, 1)
-  t.is(cost, '2.50')
-  t.is(featured, false)
-  t.is(name, 'New Product')
-  t.is(supply, 23)
+  assert.is(categoryId, 1)
+  assert.is(cost, '2.50')
+  assert.is(featured, false)
+  assert.is(name, 'New Product')
+  assert.is(supply, 23)
 })
 
-test('POST /growers/:id/products is a 200 for admins', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client.post('/growers/1/products').send({
+test('POST /growers/:id/products is a 200 for admins', async (assert) => {
+  await assert.signIn('admin@example.com')
+  const response = await assert.client.post('/growers/1/products').send({
     name: 'New Product',
     cost: '2.50',
     supply: 23,
@@ -278,16 +278,16 @@ test('POST /growers/:id/products is a 200 for admins', async (t) => {
   })
   response.assert(200)
   const {categoryId, cost, featured, name, supply} = response.body.product
-  t.is(categoryId, 1)
-  t.is(cost, '2.50')
-  t.is(featured, true)
-  t.is(name, 'New Product')
-  t.is(supply, 23)
+  assert.is(categoryId, 1)
+  assert.is(cost, '2.50')
+  assert.is(featured, true)
+  assert.is(name, 'New Product')
+  assert.is(supply, 23)
 })
 
-test('POST /growers/:id/products is a 422 for invalid data', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client.post('/growers/1/products').send({
+test('POST /growers/:id/products is a 422 for invalid data', async (assert) => {
+  await assert.signIn('admin@example.com')
+  const response = await assert.client.post('/growers/1/products').send({
     name: 'New Product',
     cost: 'asdf',
     supply: 23,
@@ -298,52 +298,52 @@ test('POST /growers/:id/products is a 422 for invalid data', async (t) => {
 
 // New Product
 
-test('GET /growers/:id/products/new is a 401 as a non-admin', async (t) => {
-  await t.signIn('user@example.com')
-  const response = await t.client.get('/growers/1/products/new').send()
+test('GET /growers/:id/products/new is a 401 as a non-admin', async (assert) => {
+  await assert.signIn('user@example.com')
+  const response = await assert.client.get('/growers/1/products/new').send()
   response.assert(401)
 })
 
-test('GET /growers/:id/products/new is a 200 as an admin', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client.get('/growers/1/products/new').send()
+test('GET /growers/:id/products/new is a 200 as an admin', async (assert) => {
+  await assert.signIn('admin@example.com')
+  const response = await assert.client.get('/growers/1/products/new').send()
   response.assert(200)
 })
 
-test('GET /growers/:id/products/new is a 200 for admins', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client.get('/growers/1/products/new').send()
+test('GET /growers/:id/products/new is a 200 for admins', async (assert) => {
+  await assert.signIn('admin@example.com')
+  const response = await assert.client.get('/growers/1/products/new').send()
   response.assert(200)
 })
 
-test('GET /growers/:id/products/new is a 200 for allowed users', async (t) => {
-  await t.signIn('grower@example.com')
-  const response = await t.client.get('/growers/1/products/new').send()
+test('GET /growers/:id/products/new is a 200 for allowed users', async (assert) => {
+  await assert.signIn('grower@example.com')
+  const response = await assert.client.get('/growers/1/products/new').send()
   response.assert(200)
 })
 
-test('GET /growers/:id/products/new is a 401 for non-admins', async (t) => {
-  await t.signIn('user@example.com')
-  const response = await t.client.get('/growers/1/products/new').send()
+test('GET /growers/:id/products/new is a 401 for non-admins', async (assert) => {
+  await assert.signIn('user@example.com')
+  const response = await assert.client.get('/growers/1/products/new').send()
   response.assert(401)
 })
 
 // Products
 
-test('GET /growers/:id/products is a 200 for admins', async (t) => {
-  await t.signIn('admin@example.com')
-  const response = await t.client.get('/growers/1/products').send()
+test('GET /growers/:id/products is a 200 for admins', async (assert) => {
+  await assert.signIn('admin@example.com')
+  const response = await assert.client.get('/growers/1/products').send()
   response.assert(200)
 })
 
-test('GET /growers/:id/products is a 200 for allowed users', async (t) => {
-  await t.signIn('grower@example.com')
-  const response = await t.client.get('/growers/1/products').send()
+test('GET /growers/:id/products is a 200 for allowed users', async (assert) => {
+  await assert.signIn('grower@example.com')
+  const response = await assert.client.get('/growers/1/products').send()
   response.assert(200)
 })
 
-test('GET /growers/:id/products is a 401 for non-growers', async (t) => {
-  await t.signIn('info@planitfoods.com')
-  const response = await t.client.get('/growers/1/products').send()
+test('GET /growers/:id/products is a 401 for non-growers', async (assert) => {
+  await assert.signIn('info@planitfoods.com')
+  const response = await assert.client.get('/growers/1/products').send()
   response.assert(401)
 })
