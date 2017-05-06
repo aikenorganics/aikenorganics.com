@@ -9,6 +9,6 @@ require('./routes')
 require('./integration')
 
 test('teardown', async ({browser}) => {
-  await browser.close()
+  browser.quit()
   db.close()
 })

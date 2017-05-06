@@ -1605,9 +1605,9 @@
       "resolved": "https://registry.npmjs.org/osenv/-/osenv-0.1.4.tgz"
     },
     "ozymandias": {
-      "version": "1.5.17",
-      "from": "git://github.com/braddunbar/ozymandias.git#8b2d5e075f99dd56488310127a561f41eb2515ce",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#8b2d5e075f99dd56488310127a561f41eb2515ce",
+      "version": "1.6.0",
+      "from": "git://github.com/braddunbar/ozymandias.git#0f7db31059858feaa589b4ab180a871ba72f0708",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#0f7db31059858feaa589b4ab180a871ba72f0708",
       "dependencies": {
         "ms": {
           "version": "1.0.0",
