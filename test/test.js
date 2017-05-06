@@ -7,24 +7,24 @@ const browser = require('./browser')
 const Client = require('test-client')
 
 // Export a function with the tape API.
-exports = module.exports = (name, test) => tape(name, async (t) => {
+exports = module.exports = (name, test) => tape(name, async (assert) => {
   // Set up transactions.
   const transaction = db.transaction()
   db.query = transaction.query.bind(transaction)
 
-  t.client = new Client(app)
+  assert.client = new Client(app)
 
   // Sign in, with error handling.
-  t.signIn = (email) => (
-    t.client.post('/session').send({email, password: 'secret'})
+  assert.signIn = (email) => (
+    assert.client.post('/session').send({email, password: 'secret'})
   )
 
   try {
     await browser.clear()
-    await test(t)
-    t.end()
+    await test(assert)
+    assert.end()
   } catch (error) {
-    t.end(error)
+    assert.end(error)
   } finally {
     transaction.rollback()
   }
