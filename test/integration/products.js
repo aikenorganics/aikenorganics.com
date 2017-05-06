@@ -1,10 +1,9 @@
 'use strict'
 
 const test = require('../test')
-const browser = require('../browser')
 const Product = require('../../db/product')
 
-test('edit cost', async ({assert}) => {
+test('edit cost', async ({assert, browser}) => {
   await browser.signIn('admin@example.com')
   await browser.visit('/products/3/edit')
   await browser.$('#cost').clear()
@@ -15,7 +14,7 @@ test('edit cost', async ({assert}) => {
   assert.is(product.cost, '5.55')
 })
 
-test('deactivate product', async ({assert}) => {
+test('deactivate product', async ({assert, browser}) => {
   await browser.signIn('admin@example.com')
   await browser.visit('/products/1/edit')
   await browser.$('#deactivate').click()
@@ -24,7 +23,7 @@ test('deactivate product', async ({assert}) => {
   assert.is(product.active, false)
 })
 
-test('activate product', async ({assert}) => {
+test('activate product', async ({assert, browser}) => {
   await browser.signIn('admin@example.com')
   await browser.visit('/products/8/edit')
   await browser.$('#activate').click()

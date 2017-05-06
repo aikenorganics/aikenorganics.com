@@ -1,6 +1,5 @@
 'use strict'
 
-const app = require('../app')
 const {Builder, By, until} = require('selenium-webdriver')
 const driver = new Builder().forBrowser('chrome').build()
 
@@ -72,4 +71,4 @@ class Browser {
   }
 }
 
-module.exports = new Browser(app)
+module.exports = Browser

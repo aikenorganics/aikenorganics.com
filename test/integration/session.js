@@ -1,11 +1,10 @@
 'use strict'
 
 const test = require('../test')
-const browser = require('../browser')
 const User = require('ozymandias/user')
 const Token = require('ozymandias/token')
 
-test('sign in', async ({assert}) => {
+test('sign in', async ({assert, browser}) => {
   await browser.visit('/session/signin')
   await browser.$('#email').sendKeys('admin@example.com')
   await browser.$('#password').sendKeys('secret')
@@ -13,7 +12,7 @@ test('sign in', async ({assert}) => {
   await browser.wait(browser.present('#signout'))
 })
 
-test('incorrect password', async ({assert}) => {
+test('incorrect password', async ({assert, browser}) => {
   await browser.visit('/session/signin')
   await browser.$('#email').sendKeys('admin@example.com')
   await browser.$('#password').sendKeys('wrong')
@@ -26,7 +25,7 @@ test('incorrect password', async ({assert}) => {
   ))
 })
 
-test('email not found', async ({assert}) => {
+test('email not found', async ({assert, browser}) => {
   await browser.visit('/session/signin')
   await browser.$('#email').sendKeys('wrong@example.com')
   await browser.$('#password').sendKeys('secret')
@@ -39,7 +38,7 @@ test('email not found', async ({assert}) => {
   ))
 })
 
-test('forgot password', async ({assert}) => {
+test('forgot password', async ({assert, browser}) => {
   // Send Token
   await browser.visit('/session/forgot')
   await browser.$('#email').sendKeys('admin@example.com')

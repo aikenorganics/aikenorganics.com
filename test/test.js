@@ -3,8 +3,10 @@
 const db = require('../db')
 const app = require('../app')
 const tape = require('tape')
-const browser = require('./browser')
+const Browser = require('./browser')
 const Client = require('test-client')
+
+const browser = new Browser(app)
 
 // Export a function with the tape API.
 exports = module.exports = (name, test) => tape(name, async (assert) => {
@@ -22,7 +24,7 @@ exports = module.exports = (name, test) => tape(name, async (assert) => {
 
   try {
     await browser.clear()
-    await test({assert, client})
+    await test({assert, browser, client})
     assert.end()
   } catch (error) {
     assert.end(error)

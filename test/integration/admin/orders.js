@@ -1,10 +1,9 @@
 'use strict'
 
 const test = require('../../test')
-const browser = require('../../browser')
 const {Order, ProductOrder} = require('../../../db')
 
-test('delete product order', async ({assert}) => {
+test('delete product order', async ({assert, browser}) => {
   await browser.signIn('admin@example.com')
   await browser.visit('/admin/orders/2')
 
@@ -17,7 +16,7 @@ test('delete product order', async ({assert}) => {
   assert.is(await ProductOrder.where({orderId: 2}).count(), count - 1)
 })
 
-test('change location', async ({assert}) => {
+test('change location', async ({assert, browser}) => {
   await browser.signIn('admin@example.com')
   await browser.visit('/admin/orders/2')
 
@@ -29,7 +28,7 @@ test('change location', async ({assert}) => {
   assert.is((await Order.find(2)).locationId, 3)
 })
 
-test('add product', async ({assert}) => {
+test('add product', async ({assert, browser}) => {
   await browser.signIn('admin@example.com')
   await browser.visit('/admin/orders/2')
 
