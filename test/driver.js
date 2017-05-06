@@ -1,7 +1,7 @@
 'use strict'
 
 const app = require('../app')
-const server = app.listen(4444)
+const server = app.listen()
 const {Builder, By, until} = require('selenium-webdriver')
 const driver = new Builder().forBrowser('chrome').build()
 
@@ -18,7 +18,7 @@ class Driver {
 
   async visit (path) {
     this.visited = true
-    await driver.get(`http://localhost:4444${path}`)
+    await driver.get(`http://localhost:${server.address().port}${path}`)
     await driver.executeScript('window.scrollTo(0, 0)')
   }
 
