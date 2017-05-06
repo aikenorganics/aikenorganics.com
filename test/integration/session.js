@@ -9,7 +9,7 @@ test('sign in', async ({assert, browser}) => {
   await browser.$('#email').sendKeys('admin@example.com')
   await browser.$('#password').sendKeys('secret')
   await browser.$('#password').submit()
-  await browser.wait(browser.present('#signout'))
+  await browser.assert('#signout')
 })
 
 test('incorrect password', async ({assert, browser}) => {
@@ -17,7 +17,7 @@ test('incorrect password', async ({assert, browser}) => {
   await browser.$('#email').sendKeys('admin@example.com')
   await browser.$('#password').sendKeys('wrong')
   await browser.$('#password').submit()
-  await browser.wait(browser.present('#errors'))
+  await browser.assert('#errors')
   await browser.wait(() => (
     browser.$('#errors').getText().then((text) => (
       /Sorry! That password is incorrect\./.test(text)
@@ -30,7 +30,7 @@ test('email not found', async ({assert, browser}) => {
   await browser.$('#email').sendKeys('wrong@example.com')
   await browser.$('#password').sendKeys('secret')
   await browser.$('#password').submit()
-  await browser.wait(browser.present('#errors'))
+  await browser.assert('#errors')
   await browser.wait(() => (
     browser.$('#errors').getText().then((text) => (
       /Sorry! We don’t recognize that email\./.test(text)

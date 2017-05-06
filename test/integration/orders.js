@@ -11,7 +11,7 @@ test('remove an item from your order', async ({assert, browser}) => {
 
   await browser.$('#remove-product-order-3').click()
   await browser.alert().accept()
-  await browser.wait(browser.present('#message:not(.active)'))
+  await browser.assert('#message:not(.active)')
 
   assert.is(await ProductOrder.where({orderId: 2}).count(), count - 1)
 })
@@ -20,6 +20,5 @@ test('cannot remove an item from your order when closed', async ({assert, browse
   await (await Market.find(1)).update({closed: true})
   await browser.signIn('user@example.com')
   await browser.visit('/orders/current')
-
-  assert.ok(!await browser.exists('#remove-product-order-3'))
+  await browser.refute('#remove-product-order-3')
 })

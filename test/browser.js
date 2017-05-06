@@ -42,16 +42,18 @@ class Browser {
     return driver.findElement(By.css(selector))
   }
 
-  async exists (selector) {
-    return (await driver.findElements(By.css(selector))).length > 0
-  }
-
-  present (selector) {
-    return until.elementLocated(By.css(selector))
-  }
-
   wait (predicate) {
-    return driver.wait(predicate)
+    return driver.wait(predicate, 5000)
+  }
+
+  assert (selector) {
+    return this.wait(until.elementLocated(By.css(selector)))
+  }
+
+  refute (selector) {
+    return this.wait(async () => {
+      return !(await driver.findElements(By.css(selector))).length
+    })
   }
 
   getPath () {
@@ -67,7 +69,7 @@ class Browser {
     await this.$('#email').sendKeys(email)
     await this.$('#password').sendKeys('secret')
     await this.$('#password').submit()
-    await this.wait(this.present('#signout'))
+    await this.assert('#signout')
   }
 }
 

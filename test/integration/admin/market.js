@@ -24,7 +24,7 @@ test('edit news, message', async ({assert, browser}) => {
   await browser.$('#market-message').sendKeys('Test Message')
   await browser.$('#market-message').submit()
 
-  await browser.wait(browser.present('#message:not(.active)'))
+  await browser.assert('#message:not(.active)')
 
   const market = await Market.find(1)
 
