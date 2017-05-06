@@ -12,16 +12,16 @@ exports = module.exports = (name, test) => tape(name, async (assert) => {
   const transaction = db.transaction()
   db.query = transaction.query.bind(transaction)
 
-  assert.client = new Client(app)
+  const client = assert.client = new Client(app)
 
   // Sign in, with error handling.
   assert.signIn = (email) => (
-    assert.client.post('/session').send({email, password: 'secret'})
+    client.post('/session').send({email, password: 'secret'})
   )
 
   try {
     await browser.clear()
-    await test({assert})
+    await test({assert, client})
     assert.end()
   } catch (error) {
     assert.end(error)
