@@ -4,13 +4,13 @@ const {Market} = require('../../../db')
 const test = require('../../test')
 
 test('GET /admin/market is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.get('/admin/market').send()
   response.assert(200)
 })
 
 test('POST /admin/market is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client
     .post('/admin/market')
     .set('accept', 'application/json')
@@ -24,7 +24,7 @@ test('POST /admin/market is a 200', async ({assert, client}) => {
 })
 
 test('POST /admin/market is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client
     .post('/admin/market')
     .set('accept', 'application/json')

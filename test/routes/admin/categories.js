@@ -4,25 +4,25 @@ const {Category} = require('../../../db')
 const test = require('../../test')
 
 test('GET /admin/categories/show is a 404 for missing ids', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.get('/admin/categories/123456789').send()
   response.assert(404)
 })
 
 test('GET /admin/categories/new is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.get('/admin/categories/new').send()
   response.assert(200)
 })
 
 test('GET /admin/categories/:id/edit is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.get('/admin/categories/1/edit').send()
   response.assert(200)
 })
 
 test('POST /admin/categories is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
 
   const response = await client
     .post('/admin/categories')
@@ -36,7 +36,7 @@ test('POST /admin/categories is a 200', async ({assert, client}) => {
 })
 
 test('POST /admin/categories/:id is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
 
   const response = await client
     .post('/admin/categories/1')
@@ -50,7 +50,7 @@ test('POST /admin/categories/:id is a 200', async ({assert, client}) => {
 })
 
 test('DELETE /admin/categories/:id is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
 
   const response = await client
     .delete('/admin/categories/6')

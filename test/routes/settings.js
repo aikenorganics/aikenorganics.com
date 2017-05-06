@@ -18,19 +18,19 @@ test('POST /settings/card is a 401 when logged out', async ({assert, client}) =>
 })
 
 test('GET /settings is a 200 as an admin', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.get('/settings').send()
   response.assert(200)
 })
 
 test('GET /settings is a 200 as a regular user', async ({assert, client}) => {
-  await assert.signIn('user@example.com')
+  await client.signIn('user@example.com')
   const response = await client.get('/settings').send()
   response.assert(200)
 })
 
 test('POST /settings is a 200 as a regular user', async ({assert, client}) => {
-  await assert.signIn('user@example.com')
+  await client.signIn('user@example.com')
   const response = await client
     .post('/settings')
     .set('content-type', 'application/json')
@@ -44,7 +44,7 @@ test('POST /settings is a 200 as a regular user', async ({assert, client}) => {
 })
 
 test('GET /settings adds stripe to the csp', async ({assert, client}) => {
-  await assert.signIn('user@example.com')
+  await client.signIn('user@example.com')
   const response = await client.get('/settings').send()
   response
   .assert(200)
@@ -55,7 +55,7 @@ test('GET /settings adds stripe to the csp', async ({assert, client}) => {
 })
 
 test('GET /settings only adds csp to HTML responses', async ({assert, client}) => {
-  await assert.signIn('user@example.com')
+  await client.signIn('user@example.com')
   const response = await client.get('/settings').accept('json').send()
   assert.ok(!/stripe/.test(response.headers['content-security-policy']))
 })

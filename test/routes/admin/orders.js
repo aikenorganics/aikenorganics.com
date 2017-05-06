@@ -3,43 +3,43 @@
 const test = require('../../test')
 
 test('GET /admin/orders is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.get('/admin/orders').send()
   response.assert(200)
 })
 
 test('GET /admin/orders/:id is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.get('/admin/orders/1').send()
   response.assert(200)
 })
 
 test('GET /admin/orders?productId=:id is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.get('/admin/orders?productId=1').send()
   response.assert(200)
 })
 
 test('GET /admin/orders?locationId=:id is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.get('/admin/orders?locationId=1').send()
   response.assert(200)
 })
 
 test('GET /admin/orders?full=1 is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.get('/admin/orders?full=1').send()
   response.assert(200)
 })
 
 test('GET /admin/orders?status=complete is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.get('/admin/orders?status=complete&full=1').send()
   response.assert(200)
 })
 
 test('Download a CSV', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client
     .get('/admin/orders?status=complete&csv=1')
     .send()
@@ -50,7 +50,7 @@ test('Download a CSV', async ({assert, client}) => {
 })
 
 test('Download a CSV with a delivery', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client
     .get('/admin/orders?locationId=delivery&csv=1')
     .send()

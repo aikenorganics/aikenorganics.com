@@ -4,7 +4,7 @@ const {UserGrower} = require('../../../db')
 const test = require('../../test')
 
 test('POST /admin/user-growers is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client
     .post('/admin/user-growers')
     .send({userId: 2, growerId: 1})
@@ -14,13 +14,13 @@ test('POST /admin/user-growers is a 200', async ({assert, client}) => {
 })
 
 test('DELETE /admin/user-growers/missing is a 404', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.delete('/admin/user-growers/12345').send()
   response.assert(404)
 })
 
 test('DELETE /admin/user-growers/:userGrowerId is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.delete('/admin/user-growers/1').send()
   response.assert(200)
   const userGrower = await UserGrower.find(1)

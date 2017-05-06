@@ -18,7 +18,7 @@ exports = module.exports = (name, test) => tape(name, async (assert) => {
   const client = new Client(app)
 
   // Sign in, with error handling.
-  assert.signIn = (email) => (
+  client.signIn = (email) => (
     client.post('/session').send({email, password: 'secret'})
   )
 

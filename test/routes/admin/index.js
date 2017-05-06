@@ -19,13 +19,13 @@ test('/admin is a 401 signed out', async ({assert, client}) => {
 })
 
 test('/admin is a 401 as a regular user', async ({assert, client}) => {
-  await assert.signIn('user@example.com')
+  await client.signIn('user@example.com')
   const response = await client.get('/admin').send()
   response.assert(401)
 })
 
 test('/admin is a 404 as an admin', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.get('/admin').send()
   response.assert(404)
 })

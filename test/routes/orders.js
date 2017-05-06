@@ -11,13 +11,13 @@ test('GET /orders/current is a 401 logged out', async ({assert, client}) => {
 })
 
 test('GET /orders/current is a 200', async ({assert, client}) => {
-  await assert.signIn('user@example.com')
+  await client.signIn('user@example.com')
   const response = await client.get('/orders/current').send()
   response.assert(200)
 })
 
 test('GET /orders/current with no order', async ({assert, client}) => {
-  await assert.signIn('finn@example.com')
+  await client.signIn('finn@example.com')
   const response = await client.get('/orders/current').send()
   response.assert(200)
 })
@@ -31,13 +31,13 @@ test('DELETE /orders/:id is a 401 logged out', async ({assert, client}) => {
 
 test('DELETE /orders/:id is a 401 when closed', async ({assert, client}) => {
   await (await Market.find(1)).update({closed: true})
-  await assert.signIn('user@example.com')
+  await client.signIn('user@example.com')
   const response = await client.delete('/orders/2').send()
   response.assert(401)
 })
 
 test('DELETE /orders/:id is a 200', async ({assert, client}) => {
-  await assert.signIn('user@example.com')
+  await client.signIn('user@example.com')
   const response = await client.delete('/orders/2').send()
   response.assert(200).assert('content-type', /json/)
   const order = await Order.find(2)
@@ -45,7 +45,7 @@ test('DELETE /orders/:id is a 200', async ({assert, client}) => {
 })
 
 test('Canceling a missing order returns a 404', async ({assert, client}) => {
-  await assert.signIn('user@example.com')
+  await client.signIn('user@example.com')
   const response = await client
     .delete('/orders/123456789')
     .set('accept', 'application/json')
@@ -54,7 +54,7 @@ test('Canceling a missing order returns a 404', async ({assert, client}) => {
 })
 
 test('Cannot cancel someone else\'s order', async ({assert, client}) => {
-  await assert.signIn('user@example.com')
+  await client.signIn('user@example.com')
   const response = await client
     .delete('/orders/1')
     .set('accept', 'application/json')
@@ -70,7 +70,7 @@ test('POST /orders/:id is a 401 logged out', async ({assert, client}) => {
 })
 
 test('POST /orders/:id is a 200', async ({assert, client}) => {
-  await assert.signIn('user@example.com')
+  await client.signIn('user@example.com')
   const response = await client.post('/orders/2').send({
     locationId: 2,
     status: 'canceled',
@@ -92,19 +92,19 @@ test('POST /orders/:id is a 200', async ({assert, client}) => {
 
 test('Cannout update an order when the market is closed', async ({assert, client}) => {
   await (await Market.find(1)).update({closed: true})
-  await assert.signIn('user@example.com')
+  await client.signIn('user@example.com')
   const response = await client.post('/orders/2').send({locationId: 2})
   response.assert(401)
 })
 
 test('Cannout update someone else\'s order', async ({assert, client}) => {
-  await assert.signIn('user@example.com')
+  await client.signIn('user@example.com')
   const response = await client.post('/orders/1').send({locationId: 2})
   response.assert(401)
 })
 
 test('Admins can update someone else\'s order', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.post('/orders/5').send({
     locationId: 2,
     status: 'canceled',
@@ -126,13 +126,13 @@ test('Admins can update someone else\'s order', async ({assert, client}) => {
 
 test('Admins can update orders when the market is closed', async ({assert, client}) => {
   await (await Market.find(1)).update({closed: true})
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.post('/orders/5').send({locationId: 2})
   response.assert(200)
 })
 
 test('Updating a missing order returns a 404', async ({assert, client}) => {
-  await assert.signIn('user@example.com')
+  await client.signIn('user@example.com')
   const response = await client.post('/orders/123456789').send({locationId: 2})
   response.assert(404)
 })
@@ -145,7 +145,7 @@ test('GET /orders/previous is a 401 logged out', async ({assert, client}) => {
 })
 
 test('GET /orders/previous', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.get('/orders/previous').send()
   response.assert(200)
 })

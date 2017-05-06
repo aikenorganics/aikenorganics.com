@@ -9,7 +9,7 @@ test('GET /cart is a 401 logged out', async ({assert, client}) => {
 })
 
 test('GET /cart is a 200 logged in', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   let response = await client
     .post('/cart')
     .send({productId: 1, quantity: 2})
@@ -25,7 +25,7 @@ test('POST /cart is a 401 logged out', async ({assert, client}) => {
 })
 
 test('POST /cart is a 200 logged in', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client
     .post('/cart')
     .send({productId: 1, quantity: 2})
@@ -33,7 +33,7 @@ test('POST /cart is a 200 logged in', async ({assert, client}) => {
 })
 
 test('POST /cart/checkout', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
 
   let response
   response = await client.post('/cart').send({productId: 1, quantity: 2})
@@ -79,7 +79,7 @@ test('POST /cart/checkout', async ({assert, client}) => {
 })
 
 test('POST /cart is a 200 for inactive products/growers', async ({assert, client}) => {
-  await assert.signIn('user@example.com')
+  await client.signIn('user@example.com')
   const response = await client
     .post('/cart')
     .send({productId: 6, quantity: 1})

@@ -4,13 +4,13 @@ const {ProductOrder} = require('../../../db')
 const test = require('../../test')
 
 test('POST /product-orders/missing is a 404', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client.post('/admin/product-orders/12345').send()
   response.assert(404)
 })
 
 test('POST /product-orders/:id is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client
     .post('/admin/product-orders/1')
     .send({quantity: 1, cost: '1.23'})
@@ -26,7 +26,7 @@ test('POST /product-orders/:id is a 200', async ({assert, client}) => {
 })
 
 test('POST /product-orders is a 200', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client
     .post('/admin/product-orders')
     .send({quantity: 1, orderId: 1, productId: 3})
@@ -42,7 +42,7 @@ test('POST /product-orders is a 200', async ({assert, client}) => {
 })
 
 test('editing an inactive product order', async ({assert, client}) => {
-  await assert.signIn('admin@example.com')
+  await client.signIn('admin@example.com')
   const response = await client
     .post('/admin/product-orders/9')
     .send({quantity: 2, cost: '6'})
