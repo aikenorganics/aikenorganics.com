@@ -66,7 +66,7 @@ class Browser {
   async signIn (email) {
     await this.visit('/session/signin')
     await this.$('#email').sendKeys(email)
-    await this.$('#password').sendKeys('password')
+    await this.$('#password').sendKeys('secret')
     await this.$('#password').submit()
     await this.wait(this.present('#signout'))
   }

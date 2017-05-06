@@ -8,7 +8,7 @@ const Token = require('ozymandias/token')
 test('sign in', async (assert) => {
   await browser.visit('/session/signin')
   await browser.$('#email').sendKeys('admin@example.com')
-  await browser.$('#password').sendKeys('password')
+  await browser.$('#password').sendKeys('secret')
   await browser.$('#password').submit()
   await browser.wait(browser.present('#signout'))
 })
@@ -29,7 +29,7 @@ test('incorrect password', async (assert) => {
 test('email not found', async (assert) => {
   await browser.visit('/session/signin')
   await browser.$('#email').sendKeys('wrong@example.com')
-  await browser.$('#password').sendKeys('password')
+  await browser.$('#password').sendKeys('secret')
   await browser.$('#password').submit()
   await browser.wait(browser.present('#errors'))
   await browser.wait(() => (

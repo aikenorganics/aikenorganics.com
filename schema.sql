@@ -1073,13 +1073,13 @@ SELECT pg_catalog.setval('user_growers_id_seq', 2, true);
 --
 
 COPY users (id, created_at, updated_at, email, password, is_admin, first, last, phone, member_until, search, image_updated_at, stripe_id, card_brand, card_last4, street, city, state, zip) FROM stdin;
-2	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	user@example.com	$2a$04$Xji0a5KEjoHOXGI4IfrxWevHLnYM81iLZmSBpuvQgeK8KgMrHHBlm	f	Regular	User	803.532.5859	\N	'regular':1 'user':2 'user@example.com':3	\N	\N	\N	\N	\N	\N	\N	\N
-3	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	jake@example.com	$2a$04$dhus2Ml6LznTeN/A.hCM/Oay6xJvt1gwSMF1wIuRrKWthFOvEr15a	f	Jake	The Dog	803.532.5859	\N	'dog':3 'jake':1 'jake@example.com':4 'the':2	\N	\N	\N	\N	\N	\N	\N	\N
-5	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	grower@example.com	$2a$04$Su42VK4JwDRq8fyLDtxpo.xRtvGAfOAKvOJmWz.Iw5Ulfn49LYQ1G	f	Grower	Montgomery	803.532.5859	\N	'grower':1 'grower@example.com':3 'montgomery':2	\N	\N	\N	\N	\N	\N	\N	\N
-6	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	info@planitfoods.com	$2a$04$u6vrFtGNstxbCn.o3pC1oOnB0CtStY0MazKmd4sDOo.tiJjOi1CzK	f	PlanIt	Foods	803.532.5859	\N	'foods':2 'info@planitfoods.com':3 'planit':1	\N	\N	\N	\N	\N	\N	\N	\N
-7	2015-10-20 15:49:18.595797-04	2015-10-20 15:49:18.595797-04	jwitherow@example.com	$2a$04$tGkU7nuX578X/1MYdSn6R.1iMTllPIAi3Zd21aZOy0bTxHNbQVXqW	f	Joanne	Witherow	803.555.5555	\N	'joanne':1 'jwitherow@example.com':3 'witherow':2	\N	\N	\N	\N	\N	\N	\N	\N
-4	2015-10-13 21:21:45.681861-04	2015-11-15 08:22:41.492-05	finn@example.com	$2a$04$upNAjx.c/6cAwwSwc41JduJJuqthrbwZoSpQAjIU05F7tLLC5gnpu	f	Finn	The Human	803.532.5859	\N	'finn':1 'finn@example.com':4 'human':3 'the':2	\N	\N	\N	\N	\N	\N	\N	\N
-1	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	admin@example.com	$2a$04$xSJ1pVH1G3I0QRIHmAqml.4.Sk2UGzBo6zFoRCn2JvF5X/4dyEedy	t	Admin	User	803.555.5555	\N	'admin':1 'admin@example.com':3 'user':2	\N	cus_9DvnTA3OTM99Xz	Visa	4242	123 Street Drive	Townville	SC	55555
+3	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	jake@example.com	$2a$04$PnIo63amgcpNACRmOrAAoeeyLTEi.Ed61ASNwVgfpWrM0.GTYPDGK	f	Jake	The Dog	803.532.5859	\N	'dog':3 'jake':1 'jake@example.com':4 'the':2	\N	\N	\N	\N	\N	\N	\N	\N
+6	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	info@planitfoods.com	$2a$04$9w.77BTf/e221.7JR0TKv.Z8.yXjtUu2GOon82YJrrFYG6fomN7.a	f	PlanIt	Foods	803.532.5859	\N	'foods':2 'info@planitfoods.com':3 'planit':1	\N	\N	\N	\N	\N	\N	\N	\N
+2	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	user@example.com	$2a$04$UPkfffp/qXtGJ54WP7ImgulVhAmKHMU7DJlMXWlq1T4Ks/IT12EPS	f	Regular	User	803.532.5859	\N	'regular':1 'user':2 'user@example.com':3	\N	\N	\N	\N	\N	\N	\N	\N
+5	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	grower@example.com	$2a$04$slxwM7AJ6DhHVFl6tpFqqewu21rol86YsI1hD0G529f2Ra7beJ236	f	Grower	Montgomery	803.532.5859	\N	'grower':1 'grower@example.com':3 'montgomery':2	\N	\N	\N	\N	\N	\N	\N	\N
+7	2015-10-20 15:49:18.595797-04	2015-10-20 15:49:18.595797-04	jwitherow@example.com	$2a$04$FoI4VOpJWuUc.89jTljSJOLHUwIaJvz3qIBCQgOpX5bwrNH4lDhzi	f	Joanne	Witherow	803.555.5555	\N	'joanne':1 'jwitherow@example.com':3 'witherow':2	\N	\N	\N	\N	\N	\N	\N	\N
+1	2015-10-13 21:21:45.681861-04	2015-10-13 21:21:45.681861-04	admin@example.com	$2a$04$rolH1YPNm0MQOiAptbnMOehc8DbiwVtD6XH2yC6dnuAaMCmEhgZFi	t	Admin	User	803.555.5555	\N	'admin':1 'admin@example.com':3 'user':2	\N	cus_9DvnTA3OTM99Xz	Visa	4242	123 Street Drive	Townville	SC	55555
+4	2015-10-13 21:21:45.681861-04	2015-11-15 08:22:41.492-05	finn@example.com	$2a$04$8J8k.dXjjM.uKuPfqmhQS.XU5RfSn6/kc/CDTSRv64oY0efU2JkPi	f	Finn	The Human	803.532.5859	\N	'finn':1 'finn@example.com':4 'human':3 'the':2	\N	\N	\N	\N	\N	\N	\N	\N
 \.
 
 

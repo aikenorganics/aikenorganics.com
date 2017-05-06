@@ -16,7 +16,7 @@ exports = module.exports = (name, test) => tape(name, async (t) => {
 
   // Sign in, with error handling.
   t.signIn = (email) => (
-    t.client.post('/session').send({email, password: 'password'})
+    t.client.post('/session').send({email, password: 'secret'})
   )
 
   try {
