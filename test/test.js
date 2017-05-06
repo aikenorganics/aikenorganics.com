@@ -12,7 +12,8 @@ exports = module.exports = (name, test) => tape(name, async (assert) => {
   const transaction = db.transaction()
   db.query = transaction.query.bind(transaction)
 
-  const client = assert.client = new Client(app)
+  // Test Client
+  const client = new Client(app)
 
   // Sign in, with error handling.
   assert.signIn = (email) => (

@@ -5,39 +5,39 @@ const test = require('../../test')
 
 // Index
 
-test('GET /admin/locations is a 200', async ({assert}) => {
+test('GET /admin/locations is a 200', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
-  const response = await assert.client.get('/admin/locations').send()
+  const response = await client.get('/admin/locations').send()
   response.assert(200)
 })
 
 // New
 
-test('GET /admin/locations/new is a 200', async ({assert}) => {
+test('GET /admin/locations/new is a 200', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
-  const response = await assert.client.get('/admin/locations/new').send()
+  const response = await client.get('/admin/locations/new').send()
   response.assert(200)
 })
 
 // Edit
 
-test('GET /admin/locations/missing/edit is a 404', async ({assert}) => {
+test('GET /admin/locations/missing/edit is a 404', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
-  const response = await assert.client.get('/admin/locations/12345/edit').send()
+  const response = await client.get('/admin/locations/12345/edit').send()
   response.assert(404)
 })
 
-test('GET /admin/locations/:id/edit is a 200', async ({assert}) => {
+test('GET /admin/locations/:id/edit is a 200', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
-  const response = await assert.client.get('/admin/locations/1/edit').send()
+  const response = await client.get('/admin/locations/1/edit').send()
   response.assert(200)
 })
 
 // Create
 
-test('POST /admin/locations is a 200', async ({assert}) => {
+test('POST /admin/locations is a 200', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
-  const response = await assert.client.post('/admin/locations').send({name: 'Test'})
+  const response = await client.post('/admin/locations').send({name: 'Test'})
   response.assert(200)
   const location = await Location.find(response.body.location.id)
   assert.is(location.name, 'Test')
@@ -45,16 +45,16 @@ test('POST /admin/locations is a 200', async ({assert}) => {
 
 // Update
 
-test('POST /admin/locations/missing is a 404', async ({assert}) => {
+test('POST /admin/locations/missing is a 404', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
-  const response = await assert.client.post('/admin/locations/12345').send()
+  const response = await client.post('/admin/locations/12345').send()
   response.assert(404)
 })
 
-test('POST /admin/locations/:id is a 200', async ({assert}) => {
+test('POST /admin/locations/:id is a 200', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
 
-  const response = await assert.client
+  const response = await client
     .post('/admin/locations/1')
     .send({name: 'Test'})
   response.assert(200)
@@ -65,15 +65,15 @@ test('POST /admin/locations/:id is a 200', async ({assert}) => {
 
 // Destroy
 
-test('DELETE /admin/locations/missing is a 404', async ({assert}) => {
+test('DELETE /admin/locations/missing is a 404', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
-  const response = await assert.client.delete('/admin/locations/12345').send()
+  const response = await client.delete('/admin/locations/12345').send()
   response.assert(404)
 })
 
-test('DELETE /admin/locations/:id is a 200', async ({assert}) => {
+test('DELETE /admin/locations/:id is a 200', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
-  const response = await assert.client.delete('/admin/locations/2').send()
+  const response = await client.delete('/admin/locations/2').send()
   response.assert(200)
   const location = await Location.find(2)
   assert.ok(!location)

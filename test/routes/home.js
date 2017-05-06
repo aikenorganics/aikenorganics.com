@@ -2,7 +2,7 @@
 
 const test = require('../test')
 
-test('home page is a 200', async ({assert}) => {
-  const response = await assert.client.get('/').send()
+test('home page is a 200', async ({assert, client}) => {
+  const response = await client.get('/').send()
   response.assert(200)
 })

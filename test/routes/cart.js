@@ -3,55 +3,55 @@
 const {Order, Product, ProductOrder} = require('../../db')
 const test = require('../test')
 
-test('GET /cart is a 401 logged out', async ({assert}) => {
-  const response = await assert.client.get('/cart').send()
+test('GET /cart is a 401 logged out', async ({assert, client}) => {
+  const response = await client.get('/cart').send()
   response.assert(401)
 })
 
-test('GET /cart is a 200 logged in', async ({assert}) => {
+test('GET /cart is a 200 logged in', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
-  let response = await assert.client
+  let response = await client
     .post('/cart')
     .send({productId: 1, quantity: 2})
   response.assert(200)
 
-  response = await assert.client.get('/cart').send()
+  response = await client.get('/cart').send()
   response.assert(200)
 })
 
-test('POST /cart is a 401 logged out', async ({assert}) => {
-  const response = await assert.client.post('/cart').send()
+test('POST /cart is a 401 logged out', async ({assert, client}) => {
+  const response = await client.post('/cart').send()
   response.assert(401)
 })
 
-test('POST /cart is a 200 logged in', async ({assert}) => {
+test('POST /cart is a 200 logged in', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
-  const response = await assert.client
+  const response = await client
     .post('/cart')
     .send({productId: 1, quantity: 2})
   response.assert(200)
 })
 
-test('POST /cart/checkout', async ({assert}) => {
+test('POST /cart/checkout', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
 
   let response
-  response = await assert.client.post('/cart').send({productId: 1, quantity: 2})
+  response = await client.post('/cart').send({productId: 1, quantity: 2})
   response.assert(200)
 
-  response = await assert.client.post('/cart').send({productId: 3, quantity: 4})
+  response = await client.post('/cart').send({productId: 3, quantity: 4})
   response.assert(200)
 
-  response = await assert.client.post('/cart').send({productId: 4, quantity: 20})
+  response = await client.post('/cart').send({productId: 4, quantity: 20})
   response.assert(200)
 
-  response = await assert.client.post('/cart').send({productId: 5, quantity: 1})
+  response = await client.post('/cart').send({productId: 5, quantity: 1})
   response.assert(200)
 
-  response = await assert.client.post('/cart').send({productId: 8, quantity: 1})
+  response = await client.post('/cart').send({productId: 8, quantity: 1})
   response.assert(200)
 
-  response = await assert.client.post('/cart/checkout').send({locationId: 2})
+  response = await client.post('/cart/checkout').send({locationId: 2})
   response.assert(200)
 
   const order = await Order.find(1)
@@ -78,9 +78,9 @@ test('POST /cart/checkout', async ({assert}) => {
   ])
 })
 
-test('POST /cart is a 200 for inactive products/growers', async ({assert}) => {
+test('POST /cart is a 200 for inactive products/growers', async ({assert, client}) => {
   await assert.signIn('user@example.com')
-  const response = await assert.client
+  const response = await client
     .post('/cart')
     .send({productId: 6, quantity: 1})
   response.assert(200)

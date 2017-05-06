@@ -3,28 +3,28 @@
 const {Category} = require('../../../db')
 const test = require('../../test')
 
-test('GET /admin/categories/show is a 404 for missing ids', async ({assert}) => {
+test('GET /admin/categories/show is a 404 for missing ids', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
-  const response = await assert.client.get('/admin/categories/123456789').send()
+  const response = await client.get('/admin/categories/123456789').send()
   response.assert(404)
 })
 
-test('GET /admin/categories/new is a 200', async ({assert}) => {
+test('GET /admin/categories/new is a 200', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
-  const response = await assert.client.get('/admin/categories/new').send()
+  const response = await client.get('/admin/categories/new').send()
   response.assert(200)
 })
 
-test('GET /admin/categories/:id/edit is a 200', async ({assert}) => {
+test('GET /admin/categories/:id/edit is a 200', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
-  const response = await assert.client.get('/admin/categories/1/edit').send()
+  const response = await client.get('/admin/categories/1/edit').send()
   response.assert(200)
 })
 
-test('POST /admin/categories is a 200', async ({assert}) => {
+test('POST /admin/categories is a 200', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
 
-  const response = await assert.client
+  const response = await client
     .post('/admin/categories')
     .send({name: 'test', position: 2, meat: true})
   response.assert(200).assert('content-type', /json/)
@@ -35,10 +35,10 @@ test('POST /admin/categories is a 200', async ({assert}) => {
   assert.is(category.meat, true)
 })
 
-test('POST /admin/categories/:id is a 200', async ({assert}) => {
+test('POST /admin/categories/:id is a 200', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
 
-  const response = await assert.client
+  const response = await client
     .post('/admin/categories/1')
     .send({name: 'test', position: 106, meat: true})
   response.assert(200).assert('content-type', /json/)
@@ -49,10 +49,10 @@ test('POST /admin/categories/:id is a 200', async ({assert}) => {
   assert.is(meat, true)
 })
 
-test('DELETE /admin/categories/:id is a 200', async ({assert}) => {
+test('DELETE /admin/categories/:id is a 200', async ({assert, client}) => {
   await assert.signIn('admin@example.com')
 
-  const response = await assert.client
+  const response = await client
     .delete('/admin/categories/6')
     .send()
   response.assert(200).assert('content-type', /json/)
