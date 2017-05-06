@@ -10,7 +10,7 @@ const listen = (app) => new Promise((resolve, reject) => {
   server.on('error', reject)
 })
 
-class Driver {
+class Browser {
   constructor (app) {
     this.app = app
     this.visited = false
@@ -72,4 +72,4 @@ class Driver {
   }
 }
 
-module.exports = new Driver(app)
+module.exports = new Browser(app)

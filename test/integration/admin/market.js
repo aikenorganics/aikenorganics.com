@@ -1,31 +1,31 @@
 'use strict'
 
 const test = require('../../test')
-const driver = require('../../driver')
+const browser = require('../../browser')
 const Market = require('../../../db/market')
 
 test('edit news, message', async (assert) => {
-  await driver.signIn('admin@example.com')
-  await driver.visit('/admin/market')
+  await browser.signIn('admin@example.com')
+  await browser.visit('/admin/market')
 
-  await driver.$('#open-day [value="3"]').click()
-  await driver.$('#open-hours [value="2"]').click()
-  await driver.$('#open-minutes [value="23"]').click()
-  await driver.$('#open-meridiem [value="am"]').click()
+  await browser.$('#open-day [value="3"]').click()
+  await browser.$('#open-hours [value="2"]').click()
+  await browser.$('#open-minutes [value="23"]').click()
+  await browser.$('#open-meridiem [value="am"]').click()
 
-  await driver.$('#close-day [value="5"]').click()
-  await driver.$('#close-hours [value="1"]').click()
-  await driver.$('#close-minutes [value="30"]').click()
-  await driver.$('#close-meridiem [value="pm"]').click()
+  await browser.$('#close-day [value="5"]').click()
+  await browser.$('#close-hours [value="1"]').click()
+  await browser.$('#close-minutes [value="30"]').click()
+  await browser.$('#close-meridiem [value="pm"]').click()
 
-  await driver.$('#news').clear()
-  await driver.$('#news').sendKeys('Test News')
+  await browser.$('#news').clear()
+  await browser.$('#news').sendKeys('Test News')
 
-  await driver.$('#market-message').clear()
-  await driver.$('#market-message').sendKeys('Test Message')
-  await driver.$('#market-message').submit()
+  await browser.$('#market-message').clear()
+  await browser.$('#market-message').sendKeys('Test Message')
+  await browser.$('#market-message').submit()
 
-  await driver.wait(driver.present('#message:not(.active)'))
+  await browser.wait(browser.present('#message:not(.active)'))
 
   const market = await Market.find(1)
 

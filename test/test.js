@@ -3,7 +3,7 @@
 const db = require('../db')
 const app = require('../app')
 const tape = require('tape')
-const driver = require('./driver')
+const browser = require('./browser')
 const Client = require('test-client')
 
 // Export a function with the tape API.
@@ -20,7 +20,7 @@ exports = module.exports = (name, test) => tape(name, async (t) => {
   )
 
   try {
-    await driver.clear()
+    await browser.clear()
     await test(t)
     t.end()
   } catch (error) {
