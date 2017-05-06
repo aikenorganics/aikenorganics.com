@@ -10,10 +10,11 @@ class Driver {
     this.visited = false
   }
 
-  clear () {
-    if (!this.visited) return Promise.resolve()
-    this.visited = false
-    return driver.manage().deleteAllCookies()
+  async clear () {
+    if (this.visited) {
+      this.visited = false
+      await driver.manage().deleteAllCookies()
+    }
   }
 
   async visit (path) {
