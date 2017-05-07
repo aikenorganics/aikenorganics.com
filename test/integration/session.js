@@ -6,57 +6,43 @@ const Token = require('ozymandias/token')
 
 test('sign in', async ({assert, browser}) => {
   await browser.visit('/session/signin')
-  await browser.$('#email').sendKeys('admin@example.com')
-  await browser.$('#password').sendKeys('secret')
-  await browser.$('#password').submit()
-  await browser.assert('#signout')
+  await browser.find('#email').sendKeys('admin@example.com')
+  await browser.find('#password').sendKeys('secret')
+  await browser.find('#password').submit()
+  await browser.assertSelector('#signout')
 })
 
 test('incorrect password', async ({assert, browser}) => {
   await browser.visit('/session/signin')
-  await browser.$('#email').sendKeys('admin@example.com')
-  await browser.$('#password').sendKeys('wrong')
-  await browser.$('#password').submit()
-  await browser.assert('#errors')
-  await browser.wait(() => (
-    browser.$('#errors').getText().then((text) => (
-      /Sorry! That password is incorrect\./.test(text)
-    ))
-  ))
+  await browser.find('#email').sendKeys('admin@example.com')
+  await browser.find('#password').sendKeys('wrong')
+  await browser.find('#password').submit()
+  await browser.assertSelector('#errors', {text: /Sorry! That password is incorrect\./})
 })
 
 test('email not found', async ({assert, browser}) => {
   await browser.visit('/session/signin')
-  await browser.$('#email').sendKeys('wrong@example.com')
-  await browser.$('#password').sendKeys('secret')
-  await browser.$('#password').submit()
-  await browser.assert('#errors')
-  await browser.wait(() => (
-    browser.$('#errors').getText().then((text) => (
-      /Sorry! We don’t recognize that email\./.test(text)
-    ))
-  ))
+  await browser.find('#email').sendKeys('wrong@example.com')
+  await browser.find('#password').sendKeys('secret')
+  await browser.find('#password').submit()
+  await browser.assertSelector('#errors', {text: /Sorry! We don’t recognize that email\./})
 })
 
 test('forgot password', async ({assert, browser}) => {
   // Send Token
   await browser.visit('/session/forgot')
-  await browser.$('#email').sendKeys('admin@example.com')
-  await browser.$('#email').submit()
+  await browser.find('#email').sendKeys('admin@example.com')
+  await browser.find('#email').submit()
 
   // Wait for message
-  await browser.wait(() => (
-    browser.$('#message').getText().then((text) => (
-      /Thanks! We sent you an email to reset your password\./.test(text)
-    ))
-  ))
+  await browser.assertSelector('#message', {text: /Thanks! We sent you an email to reset your password\./})
 
   // Reset password
   const token = await Token.find()
   await browser.visit(`/session/reset/${token.id}`)
-  await browser.$('#password').sendKeys('newpassword')
-  await browser.$('#password').submit()
-  await browser.wait(() => browser.getPath().then((path) => path === '/products'))
+  await browser.find('#password').sendKeys('newpassword')
+  await browser.find('#password').submit()
+  await browser.assertUrl('/products')
 
   // Verify new password
   const user = await User.find(1)

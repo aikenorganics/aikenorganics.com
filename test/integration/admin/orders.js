@@ -9,9 +9,9 @@ test('delete product order', async ({assert, browser}) => {
 
   const count = await ProductOrder.where({orderId: 2}).count()
 
-  await browser.$('#remove-product-order-3').click()
+  await browser.find('#remove-product-order-3').click()
   await browser.alert().accept()
-  await browser.assert('#message:not(.active)')
+  await browser.assertSelector('#message:not(.active)')
 
   assert.is(await ProductOrder.where({orderId: 2}).count(), count - 1)
 })
@@ -22,8 +22,8 @@ test('change location', async ({assert, browser}) => {
 
   assert.is((await Order.find(2)).locationId, 1)
 
-  await browser.$('#location [value="3"]').click()
-  await browser.assert('#message:not(.active)')
+  await browser.find('#location [value="3"]').click()
+  await browser.assertSelector('#message:not(.active)')
 
   assert.is((await Order.find(2)).locationId, 3)
 })
@@ -34,8 +34,8 @@ test('add product', async ({assert, browser}) => {
 
   const count = await ProductOrder.where({orderId: 2}).count()
 
-  await browser.$('#add-to-order [value="1"]').click()
-  await browser.assert('#message:not(.active)')
+  await browser.find('#add-to-order [value="1"]').click()
+  await browser.assertSelector('#message:not(.active)')
 
   assert.is(await ProductOrder.where({orderId: 2}).count(), count + 1)
 })
