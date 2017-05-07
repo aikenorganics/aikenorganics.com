@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react'
 import {navigate} from '../actions'
+import {params} from '../url'
 
 export default class Search extends PureComponent {
   constructor (props) {
@@ -19,10 +20,9 @@ export default class Search extends PureComponent {
 
   submit (event) {
     event.preventDefault()
+    const {url} = this.props
     const {value} = this.state
-    const url = new window.URL(this.props.url, window.location.origin)
-    if (value) url.searchParams.set('search', value)
-    navigate(url.toString())
+    navigate(value ? params(url, {search: value}) : url)
   }
 
   render () {
