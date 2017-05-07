@@ -3,6 +3,25 @@
 const test = require('../test')
 const Product = require('../../db/product')
 
+test('search for a product', async ({assert, browser}) => {
+  await browser.visit('/products')
+  const search = await browser.find('input[type="search"]')
+
+  await browser.assertText('Avocados')
+  await browser.assertText('Strawberries')
+
+  await search.sendKeys('avocado')
+  await search.submit()
+  await browser.assertText('Avocados')
+  await browser.refuteText('Strawberries')
+
+  await search.clear()
+  await search.sendKeys('straw')
+  await search.submit()
+  await browser.refuteText('Avocados')
+  await browser.assertText('Strawberries')
+})
+
 test('edit cost', async ({assert, browser}) => {
   await browser.signIn('admin@example.com')
   await browser.visit('/products/3/edit')
