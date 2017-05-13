@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 import {navigate} from '../actions'
-import {params} from '../url'
+import {set} from 'ozymandias/client/querystring'
 
 export default class Search extends PureComponent {
   constructor (props) {
@@ -22,7 +22,7 @@ export default class Search extends PureComponent {
     event.preventDefault()
     const {url} = this.props
     const {value} = this.state
-    navigate(value ? params(url, {search: value}) : url)
+    navigate(value ? set(url, {search: value}) : url)
   }
 
   render () {
