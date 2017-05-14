@@ -2,11 +2,11 @@ import React from 'react'
 import Event from './event'
 import Pagination from '../../pagination'
 import {navigate} from '../../../actions'
-import {set} from 'ozymandias/client/querystring'
+import {setParams} from 'ozymandias/client/querystring'
 
 export default ({events, more, page, url, userId, users}) => {
   const changeUser = ({target}) => {
-    navigate(set(url, {page: null, userId: target.value || null}))
+    navigate(setParams(url, {page: null, userId: target.value || null}))
   }
 
   return <div>

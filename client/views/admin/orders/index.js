@@ -3,27 +3,27 @@ import Pagination from '../../pagination'
 import Row from './row'
 import Order from './order'
 import {navigate} from '../../../actions'
-import {set} from 'ozymandias/client/querystring'
+import {setParams} from 'ozymandias/client/querystring'
 
 export default ({full, locationId, locations, more, orders, page, productId, products, status, url}) => {
   const toggleFull = () => {
-    navigate(set(url, {full: full ? null : '1'}))
+    navigate(setParams(url, {full: full ? null : '1'}))
   }
 
   const toggleStatus = (name) => {
     if (~status.indexOf(name)) {
-      navigate(set(url, {page: null, status: status.filter((status) => status !== name)}))
+      navigate(setParams(url, {page: null, status: status.filter((status) => status !== name)}))
     } else {
-      navigate(set(url, {page: null, status: status.concat([name])}))
+      navigate(setParams(url, {page: null, status: status.concat([name])}))
     }
   }
 
   const changeLocation = (event) => {
-    navigate(set(url, {page: null, locationId: event.target.value || null}))
+    navigate(setParams(url, {page: null, locationId: event.target.value || null}))
   }
 
   const changeProduct = (event) => {
-    navigate(set(url, {page: null, productId: event.target.value || null}))
+    navigate(setParams(url, {page: null, productId: event.target.value || null}))
   }
 
   return <div>
@@ -60,7 +60,7 @@ export default ({full, locationId, locations, more, orders, page, productId, pro
           })}
         </select>
       </div>
-      <a className='btn btn-secondary' href={set(url, {csv: '1'})}>
+      <a className='btn btn-secondary' href={setParams(url, {csv: '1'})}>
         Export CSV
       </a>
     </form>
