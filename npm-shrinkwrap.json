@@ -164,9 +164,9 @@
       "resolved": "https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz"
     },
     "aws-sdk": {
-      "version": "2.50.0",
-      "from": "aws-sdk@2.50.0",
-      "resolved": "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.50.0.tgz",
+      "version": "2.51.0",
+      "from": "aws-sdk@2.51.0",
+      "resolved": "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.51.0.tgz",
       "dependencies": {
         "uuid": {
           "version": "3.0.1",
@@ -455,9 +455,9 @@
       "resolved": "https://registry.npmjs.org/compressible/-/compressible-2.0.10.tgz",
       "dependencies": {
         "mime-db": {
-          "version": "1.27.0",
-          "from": "mime-db@>= 1.27.0 < 2",
-          "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.27.0.tgz"
+          "version": "1.28.0",
+          "from": "mime-db@>=1.27.0 <2.0.0",
+          "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.28.0.tgz"
         }
       }
     },
@@ -1640,9 +1640,9 @@
       "resolved": "https://registry.npmjs.org/osenv/-/osenv-0.1.4.tgz"
     },
     "ozymandias": {
-      "version": "1.6.9",
-      "from": "git://github.com/braddunbar/ozymandias.git#bfc69fe95d68249b62e8c2152f0c01270cabbe3a",
-      "resolved": "git://github.com/braddunbar/ozymandias.git#bfc69fe95d68249b62e8c2152f0c01270cabbe3a",
+      "version": "1.6.10",
+      "from": "git://github.com/braddunbar/ozymandias.git#3637113e44cf2ea396bef4db567fb877c110d083",
+      "resolved": "git://github.com/braddunbar/ozymandias.git#3637113e44cf2ea396bef4db567fb877c110d083",
       "dependencies": {
         "ms": {
           "version": "1.0.0",
@@ -1662,9 +1662,9 @@
       }
     },
     "packet-reader": {
-      "version": "0.2.0",
-      "from": "packet-reader@0.2.0",
-      "resolved": "https://registry.npmjs.org/packet-reader/-/packet-reader-0.2.0.tgz"
+      "version": "0.3.1",
+      "from": "packet-reader@0.3.1",
+      "resolved": "https://registry.npmjs.org/packet-reader/-/packet-reader-0.3.1.tgz"
     },
     "pako": {
       "version": "0.2.9",
@@ -1744,9 +1744,9 @@
       "resolved": "https://registry.npmjs.org/performance-now/-/performance-now-0.2.0.tgz"
     },
     "pg": {
-      "version": "6.1.5",
-      "from": "pg@6.1.5",
-      "resolved": "https://registry.npmjs.org/pg/-/pg-6.1.5.tgz",
+      "version": "6.2.2",
+      "from": "pg@6.2.2",
+      "resolved": "https://registry.npmjs.org/pg/-/pg-6.2.2.tgz",
       "dependencies": {
         "semver": {
           "version": "4.3.2",
@@ -2404,15 +2404,9 @@
       "resolved": "https://registry.npmjs.org/ua-parser-js/-/ua-parser-js-0.7.12.tgz"
     },
     "uglify-js": {
-      "version": "3.0.4",
-      "from": "uglify-js@3.0.4",
-      "resolved": "https://registry.npmjs.org/uglify-js/-/uglify-js-3.0.4.tgz"
-    },
-    "uglify-to-browserify": {
-      "version": "1.0.2",
-      "from": "uglify-to-browserify@>=1.0.0 <1.1.0",
-      "resolved": "https://registry.npmjs.org/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz",
-      "optional": true
+      "version": "3.0.5",
+      "from": "uglify-js@3.0.5",
+      "resolved": "https://registry.npmjs.org/uglify-js/-/uglify-js-3.0.5.tgz"
     },
     "uid-number": {
       "version": "0.0.6",
