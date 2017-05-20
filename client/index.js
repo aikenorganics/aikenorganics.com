@@ -2,21 +2,9 @@ import 'ozymandias/client/errors'
 import 'ozymandias/client/analytics'
 import 'es6-promise/auto'
 import './to-locale-string'
-import React, {Component} from 'react'
-import store from './store'
+import App from 'ozymandias/client/app'
+import React from 'react'
 import Routes from './routes'
 import {render} from 'react-dom'
 
-class App extends Component {
-  constructor (props) {
-    super(props)
-    this.state = store.getState()
-    store.subscribe(() => this.setState(store.getState()))
-  }
-
-  render () {
-    return <Routes {...this.state} />
-  }
-}
-
-render(<App />, document.getElementById('root'))
+render(<App View={Routes} />, document.getElementById('root'))
