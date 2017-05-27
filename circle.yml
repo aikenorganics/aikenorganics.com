@@ -1,8 +1,8 @@
 machine:
-  dependencies:
-    pre:
-      - npm install -g npm@5.0.0
   environment:
     NODE_ENV: test
   node:
     version: 7.10.0
+dependencies:
+  pre:
+    - npm install -g npm@5.0.0
