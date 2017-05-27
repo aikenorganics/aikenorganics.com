@@ -213,3 +213,11 @@ test('POST /products/:id activates products', async ({assert, client}) => {
   const product = await Product.find(7)
   assert.equal(product.active, true)
 })
+
+test('POST /products/:id changes certified', async ({assert, client}) => {
+  await client.signIn('admin@example.com')
+  assert.equal((await Product.find(1)).certified, false)
+  const response = await client.post('/products/1').send({certified: true})
+  response.assert(200)
+  assert.equal((await Product.find(1)).certified, true)
+})

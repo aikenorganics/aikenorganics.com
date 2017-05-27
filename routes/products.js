@@ -98,6 +98,7 @@ module.exports = [
     const values = _.permit(
       'active',
       'categoryId',
+      'certified',
       'cost',
       'description',
       'name',

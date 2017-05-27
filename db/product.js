@@ -23,7 +23,8 @@ class Product extends Model {
       'categoryId',
       'createdAt',
       'updatedAt',
-      'featured'
+      'featured',
+      'certified'
     ]
   }
 
@@ -96,6 +97,7 @@ class Product extends Model {
   toJSON () {
     return this.slice(
       'id',
+      'certified',
       'cost',
       'name',
       'supply',

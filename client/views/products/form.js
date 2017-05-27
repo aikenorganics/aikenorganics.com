@@ -9,6 +9,7 @@ export default class Form extends PureComponent {
 
     const {
       categoryId,
+      certified,
       cost,
       description,
       featured,
@@ -19,6 +20,7 @@ export default class Form extends PureComponent {
 
     this.state = {
       categoryId: categoryId || props.categories[0].id,
+      certified: certified || false,
       cost: cost || '',
       description: description || '',
       featured: featured || false,
@@ -43,7 +45,7 @@ export default class Form extends PureComponent {
 
   render () {
     const {busy, categories, currentUser: {isAdmin}, errors} = this.props
-    const {categoryId, cost, description, featured, name, supply, unit} = this.state
+    const {categoryId, certified, cost, description, featured, name, supply, unit} = this.state
 
     return <form onSubmit={(event) => this.save(event)}>
       <Errors errors={errors} />
@@ -77,6 +79,12 @@ export default class Form extends PureComponent {
       <div className='form-group'>
         <label htmlFor='description'>Description</label>
         <textarea rows='5' id='description' className='form-control' value={description} onChange={({target: {value}}) => this.setState({description: value})} />
+      </div>
+      <div className='form-check'>
+        <label className='form-check-label'>
+          <input className='form-check-input' type='checkbox' checked={certified} onChange={({target: {checked}}) => this.setState({certified: checked})} />
+          <span> Certified Organic</span>
+        </label>
       </div>
       {isAdmin
         ? <div className='form-check'>
