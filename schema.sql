@@ -1025,9 +1025,9 @@ COPY products (id, created_at, updated_at, name, grower_id, cost, supply, unit, 
 4	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Vegan Gumbo - Small	2	7.00	15	small container (serves 1-2)	This hearty gumbo features local okra, tomatoes, peppers and corn (cut and frozen in season), fresh herbs and bay leaves simmered in organic vegetable stock and dark porter beer from the Aiken Brewing Company and comes with a side of all natural brown rice.	2	1	t	'gumbo':2 'small':3 'vegan':1	\N	f	f
 5	2015-10-13 21:21:45.686334-04	2015-10-13 21:21:45.686334-04	Vegan Gumbo - Medium	2	14.00	3	Medium container (serves 2-4)	This hearty gumbo features local okra, tomatoes, peppers and corn (cut and frozen in season), fresh herbs and bay leaves simmered in organic vegetable stock and dark porter beer from the Aiken Brewing Company and comes with a side of all natural brown rice.	2	3	t	'gumbo':2 'medium':3 'vegan':1	\N	f	f
 9	2016-03-28 22:18:30.836487-04	2016-10-02 07:28:45.275-04	Avocados [Oversold]	1	4.30	2	each		1	3	t	'avocados':1 'oversold':2	\N	t	f
-2	2015-10-13 21:21:45.686334-04	2016-10-02 07:28:50.283-04	Strawberries	1	8.00	15	box	Some strawberries.	1	3	t	'strawberries':1	\N	t	f
 3	2015-10-13 21:21:45.686334-04	2016-10-02 07:28:54.944-04	Kale	1	4.50	15	bunch	A buncha kale.	1	1	t	'kale':1	\N	t	f
 7	2015-10-13 21:21:45.686334-04	2016-10-20 00:32:51.458-04	Spanish Rice [Inactive]	2	4.32	4	medium side item - (2 cups)	Made with all natural brown rice and organic tomatoes, corn and sweet peas, this rice packs a lot of flavor and is the perfect side for our enchiladas or great on its own! (vegetarian and gluten free)	2	0	f	'inactive':3 'rice':2 'spanish':1	\N	f	f
+2	2015-10-13 21:21:45.686334-04	2016-10-02 07:28:50.283-04	Strawberries	1	8.00	15	box	Some strawberries.	1	3	t	'strawberries':1	\N	t	t
 \.
 
 

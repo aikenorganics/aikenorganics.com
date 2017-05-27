@@ -35,6 +35,7 @@ const reducer = combineReducers({
   categories,
   category: pass,
   categoryId: pass,
+  certified: pass,
   currentUser,
   email: pass,
   emails: pass,

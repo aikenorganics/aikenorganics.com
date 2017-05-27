@@ -4,11 +4,23 @@ import Pagination from '../pagination'
 import Search from '../search'
 import Product from './product'
 import {navigate} from '../../actions'
+import {setParams} from 'ozymandias/client/querystring'
 
-export default ({busy, cart, categoryId, categories, page, products, market: {open}, more, search, url, currentUser}) => {
+export default ({busy, cart, categoryId, categories, certified, page, products, market: {open}, more, search, url, currentUser}) => {
+  const clickCertified = ({target: {checked}}) => {
+    navigate(setParams(url, {certified: checked ? '1' : null}))
+  }
+
   return <div className='row'>
     <div className='col-md-2'>
       <Search url='/products' value={search} />
+      <hr />
+      <div className='form-check'>
+        <label className='form-check-label'>
+          <input className='form-check-input' type='checkbox' defaultChecked={certified} onClick={clickCertified} />
+          <span> Certified Organic</span>
+        </label>
+      </div>
       <hr />
       <ul className='nav nav-pills nav-stacked hidden-sm-down'>
         {categories.map(({id, name}) => {

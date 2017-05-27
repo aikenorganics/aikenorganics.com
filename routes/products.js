@@ -48,6 +48,10 @@ module.exports = [
     let page = +(_.query.page || 1)
     if (!Number.isFinite(page)) page = 1
 
+    // Certified
+    let certified = _.query.certified === '1'
+    if (certified) scope.where({certified: true})
+
     const [products, categories] = await Promise.all([
       scope.order('name').paginate(page, 30),
       Category.where(`exists(
@@ -60,6 +64,7 @@ module.exports = [
     _.react({
       categories,
       categoryId,
+      certified,
       more: products.more,
       page,
       products,

@@ -65,6 +65,21 @@ test('GET /products?page=junk is a 200', async ({assert, client}) => {
   response.assert(200)
 })
 
+test('GET /products?certified=1 is a 200', async ({assert, client}) => {
+  const response = await client.get('/products?certified=1').send()
+  response.assert(200)
+})
+
+test('GET /products?certified=1 returns the correct products', async ({assert, client}) => {
+  const response = await client
+    .get('/products?certified=1')
+    .set('accept', 'application/json')
+    .send()
+  response.assert(200)
+  response.assert('content-type', /json/)
+  assert.deepEqual(response.body.products.map(({id}) => id), [2])
+})
+
 // Show
 
 test('GET /products/:id is a 200 as an admin', async ({assert, client}) => {
