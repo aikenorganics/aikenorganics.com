@@ -22,6 +22,19 @@ test('search for a product', async ({assert, browser}) => {
   await browser.assertText('Strawberries')
 })
 
+test('search for certified products', async ({assert, browser}) => {
+  await browser.visit('/products')
+  const certified = await browser.find('#certified')
+
+  await browser.assertText('Avocados')
+  await browser.assertText('Strawberries')
+
+  await certified.click()
+
+  await browser.refuteText('Avocados')
+  await browser.assertText('Strawberries')
+})
+
 test('edit cost', async ({assert, browser}) => {
   await browser.signIn('admin@example.com')
   await browser.visit('/products/3/edit')

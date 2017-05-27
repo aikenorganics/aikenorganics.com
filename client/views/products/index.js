@@ -17,7 +17,7 @@ export default ({busy, cart, categoryId, categories, certified, page, products, 
       <hr />
       <div className='form-check'>
         <label className='form-check-label'>
-          <input className='form-check-input' type='checkbox' defaultChecked={certified} onClick={clickCertified} />
+          <input id='certified' className='form-check-input' type='checkbox' defaultChecked={certified} onClick={clickCertified} />
           <span> Certified Organic</span>
         </label>
       </div>
