@@ -46,6 +46,16 @@ test('edit cost', async ({assert, browser}) => {
   assert.is(product.cost, '5.55')
 })
 
+test('edit certified', async ({assert, browser}) => {
+  assert.is((await Product.find(1)).certified, false)
+  await browser.signIn('admin@example.com')
+  await browser.visit('/products/1/edit')
+  await browser.find('#certified').click()
+  await browser.find('#certified').submit()
+  await browser.assertSelector('#message:not(.active)')
+  assert.is((await Product.find(1)).certified, true)
+})
+
 test('deactivate product', async ({assert, browser}) => {
   await browser.signIn('admin@example.com')
   await browser.visit('/products/1/edit')

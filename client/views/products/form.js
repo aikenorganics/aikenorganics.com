@@ -82,7 +82,7 @@ export default class Form extends PureComponent {
       </div>
       <div className='form-check'>
         <label className='form-check-label'>
-          <input className='form-check-input' type='checkbox' defaultChecked={certified} onClick={({target: {checked}}) => this.setState({certified: checked})} />
+          <input id='certified' className='form-check-input' type='checkbox' checked={certified} onChange={({target: {checked}}) => this.setState({certified: checked})} />
           <span> Certified Organic</span>
         </label>
       </div>
