@@ -7,7 +7,7 @@ import {navigate} from '../../actions'
 import {setParams} from 'ozymandias/client/querystring'
 
 export default ({busy, cart, categoryId, categories, certified, page, products, market: {open}, more, search, url, currentUser}) => {
-  const clickCertified = ({target: {checked}}) => {
+  const changeCertified = ({target: {checked}}) => {
     navigate(setParams(url, {certified: checked ? '1' : null}))
   }
 
@@ -17,7 +17,7 @@ export default ({busy, cart, categoryId, categories, certified, page, products, 
       <hr />
       <div className='form-check'>
         <label className='form-check-label'>
-          <input id='certified' className='form-check-input' type='checkbox' defaultChecked={certified} onClick={clickCertified} />
+          <input id='certified' className='form-check-input' type='checkbox' checked={certified} onChange={changeCertified} />
           <span> Certified Organic</span>
         </label>
       </div>
