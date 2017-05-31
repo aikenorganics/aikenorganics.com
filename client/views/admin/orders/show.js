@@ -75,13 +75,13 @@ export default ({errors, locations, order, payments, products, productOrders}) =
             }
 
             return <tr key={id}>
-              <td className='text-nowrap'>
+              <td>
                 <Link href={`/products/${product.id}`}>{product.name}</Link> {product.oversold
                   ? <span className='tag tag-danger'>Oversold</span>
                   : ''
                 }
               </td>
-              <td className='form-inline'>
+              <td className='form-inline text-nowrap'>
                 <Form onUpdate={(value) => update({cost: value || 0})}>
                   $ <input className='form-control' defaultValue={cost || 0} required />
                 </Form>
