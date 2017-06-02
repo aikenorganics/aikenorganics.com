@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from '../link'
 
-export default () => {
+export default ({market: {nextClose, nextOpen}}) => {
   return <main className='container'>
     <div className='row'>
       <div className='col-md-3'>
@@ -113,9 +113,14 @@ export default () => {
           <a id='how-do-i-order' className='anchor' />
           <h2>How do I order?</h2>
           <p>
-            Every Sunday at 8am, a list of available products is sent to all of
-            our registered customers via e-mail. Customers must place their order for the
-            week no later than Wednesday at noon. Orders can be placed here on our website.
+            Every {new Date(nextOpen).toLocaleString('en-US', {timeZone: 'America/New_York', weekday: 'long'})} at
+            {new Date(nextOpen).toLocaleString('en-US', {timeZone: 'America/New_York', hour: 'numeric', minute: 'numeric'})},
+            a list of available products is sent to all of our registered
+            customers via e-mail. Customers must place their order for the week
+            no later than
+            {new Date(nextClose).toLocaleString('en-US', {timeZone: 'America/New_York', weekday: 'long'})} at
+            {new Date(nextClose).toLocaleString('en-US', {timeZone: 'America/New_York', hour: 'numeric', minute: 'numeric'})}.
+            Orders can be placed here on our website.
           </p>
 
           <a id='when-do-i-pay' className='anchor' />

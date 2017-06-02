@@ -7,7 +7,7 @@ import penAndPadPath from 'public/img/pen-and-pad-square.jpg'
 import veggiesPath from 'public/img/veggies-in-boxes-square.jpg'
 import foodBasketPath from 'public/img/food-basket-square.jpg'
 
-export default () => {
+export default ({market: {nextClose, nextOpen}}) => {
   return <div>
     <div className='hero jumbotron covered'>
       <div className='cover' />
@@ -37,7 +37,21 @@ export default () => {
         <div className='col-md-6 text-xs-center'>
           <img src={penAndPadPath} className='rounded-circle img-fluid mx-auto' />
           <h2>2. Customers place their order</h2>
-          <p>Sunday 8am — Wednesday 12pm</p>
+          <p>
+            {new Date(nextOpen).toLocaleString('en-US', {
+              timeZone: 'America/New_York',
+              weekday: 'long',
+              hour: 'numeric',
+              minute: 'numeric'
+            })}
+            -
+            {new Date(nextClose).toLocaleString('en-US', {
+              timeZone: 'America/New_York',
+              weekday: 'long',
+              hour: 'numeric',
+              minute: 'numeric'
+            })}
+          </p>
         </div>
       </div>
       <div className='row'>
