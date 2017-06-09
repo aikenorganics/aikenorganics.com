@@ -5,7 +5,7 @@ export default ({canEdit, grower: {id}, path}) => {
   if (!canEdit) return null
   return <ul className='nav nav-pills nav-stacked hidden-print'>
     <li className='nav-item'>
-      <Link className={`nav-link${/^\/growers\/\d\/?$/.test(path) ? ' active' : ''}`} href={`/growers/${id}`}>
+      <Link className={`nav-link${/^\/growers\/\d+\/?$/.test(path) ? ' active' : ''}`} href={`/growers/${id}`}>
         Info
       </Link>
     </li>
