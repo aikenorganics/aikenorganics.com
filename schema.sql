@@ -951,6 +951,7 @@ COPY migrations (id) FROM stdin;
 2017-03-18-1224-market-closed
 2017-03-18-2254-events-user-id-not-null
 2017-05-27-1437-products-certified
+2017-06-17-0952-users
 \.
 
 

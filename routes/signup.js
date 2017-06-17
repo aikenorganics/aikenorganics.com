@@ -21,7 +21,7 @@ module.exports = [
       'first', 'last', 'phone', 'password', 'email'
     ))
 
-    _.signIn(user)
+    await _.signIn(user)
     _.body = {}
   })
 
