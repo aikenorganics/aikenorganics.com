@@ -47,6 +47,20 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
+--
+-- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
+
+
 SET search_path = public, pg_catalog;
 
 --
@@ -683,8 +697,8 @@ ALTER SEQUENCE suppliers_id_seq OWNED BY growers.id;
 --
 
 CREATE TABLE tokens (
-    id character varying(255) NOT NULL,
-    expires_at timestamp with time zone NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    expires_at timestamp without time zone NOT NULL,
     user_id integer NOT NULL
 );
 
@@ -952,6 +966,9 @@ COPY migrations (id) FROM stdin;
 2017-03-18-2254-events-user-id-not-null
 2017-05-27-1437-products-certified
 2017-06-17-0952-users
+2017-06-17-1031-tokens
+2017-06-17-1040-tokens-timestamp
+2017-06-17-1043-tokens-id
 \.
 
 
