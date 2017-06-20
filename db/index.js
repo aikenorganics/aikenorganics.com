@@ -1,14 +1,15 @@
 'use strict'
 
-const db = module.exports = require('ozymandias/db/instance')
-
-db.User = require('./user')
-db.Order = require('./order')
-db.Grower = require('./grower')
-db.Market = require('./market')
-db.Payment = require('./payment')
-db.Product = require('./product')
-db.Category = require('./category')
-db.Location = require('./location')
-db.UserGrower = require('./user-grower')
-db.ProductOrder = require('./product-order')
+module.exports = Object.assign(require('ozymandias/db/instance'), {
+  User: require('./user'),
+  Event: require('./event'),
+  Order: require('./order'),
+  Grower: require('./grower'),
+  Market: require('./market'),
+  Payment: require('./payment'),
+  Product: require('./product'),
+  Category: require('./category'),
+  Location: require('./location'),
+  UserGrower: require('./user-grower'),
+  ProductOrder: require('./product-order')
+})
