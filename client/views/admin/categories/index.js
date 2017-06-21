@@ -4,7 +4,7 @@ import {destroyCategory} from '../../../actions'
 
 export default ({busy, categories}) => {
   const destroy = (id) => {
-    if (window.confirm('Are you sure?')) destroyCategory(id).catch(() => {})
+    destroyCategory(id).catch(() => {})
   }
 
   return <div>

@@ -30,7 +30,7 @@ export default ({busy, location}) => {
       {removable
         ? <button type='button' disabled={busy}
           className='btn btn-link btn-sm'
-          onClick={() => { if (window.confirm('Are you sure?')) destroyLocation(id).catch(() => {}) }}>
+          onClick={() => { destroyLocation(id).catch(() => {}) }}>
           Delete
         </button>
         : null
