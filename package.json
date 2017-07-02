@@ -34,7 +34,7 @@
     "ozymandias": "github:braddunbar/ozymandias#semver:v1.6.24",
     "react": "15.6.1",
     "react-dom": "15.6.1",
-    "redux": "3.6.0",
+    "redux": "3.7.1",
     "stripe": "4.22.0",
     "time": "0.12.0"
   },
