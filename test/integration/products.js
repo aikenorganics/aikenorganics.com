@@ -4,17 +4,19 @@ const test = require('../test')
 const Product = require('../../db/product')
 
 test('search for a product', async ({assert, browser}) => {
+  let search
   await browser.visit('/products')
-  const search = await browser.find('input[type="search"]')
 
   await browser.assertText('Avocados')
   await browser.assertText('Strawberries')
 
+  search = await browser.find('input[type="search"]')
   await search.sendKeys('avocado')
   await search.submit()
   await browser.assertText('Avocados')
   await browser.refuteText('Strawberries')
 
+  search = await browser.find('input[type="search"]')
   await search.clear()
   await search.sendKeys('straw')
   await search.submit()
