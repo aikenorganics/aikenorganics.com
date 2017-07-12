@@ -11,6 +11,12 @@ module.exports = () => {
     User: require('./db/user')
   })
 
+  // Sections
+  Object.assign(app.sections, {
+    admin: '/admin/(.*)*',
+    app: '*'
+  })
+
   app.use(require('./cart'))
   app.use(require('./layout'))
   app.use(require('./market'))

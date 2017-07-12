@@ -63,6 +63,8 @@ const reducer = combineReducers({
   products,
   productOrders,
   search: pass,
+  section: pass,
+  sections: pass,
   status: pass,
   statusCode: pass,
   stripeKey: pass,
