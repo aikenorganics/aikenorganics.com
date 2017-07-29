@@ -13,7 +13,7 @@
   "scripts": {
     "build": "./bin/build",
     "postinstall": "./bin/postinstall",
-    "start": "env $(cat .env | xargs) ./bin/start",
+    "start": "./bin/start",
     "test": "env $(cat .testenv | xargs) ./bin/test"
   },
   "repository": {
@@ -30,7 +30,7 @@
     "koa-route": "3.2.0",
     "marked": "0.3.6",
     "object-assign": "4.1.1",
-    "ozymandias": "github:braddunbar/ozymandias#semver:v1.6.35",
+    "ozymandias": "github:braddunbar/ozymandias#semver:v1.6.36",
     "react": "15.6.1",
     "react-dom": "15.6.1",
     "redux": "3.7.1",

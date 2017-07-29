@@ -4,4 +4,4 @@ printf 'Compiling assets…\n'
 ./bin/postinstall
 
 printf 'Starting server…\n'
-node index.js
+ozy server
