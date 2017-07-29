@@ -6,10 +6,12 @@ module.exports = () => {
   const {get} = require('koa-route')
 
   // Some settings.
-  Object.assign(app.context, {
-    client: require('./client/component'),
-    User: require('./db/user')
-  })
+  try {
+    Object.assign(app.context, {
+      client: require('./client/component'),
+      User: require('./db/user')
+    })
+  } catch (error) {}
 
   // Sections
   Object.assign(app.sections, {
