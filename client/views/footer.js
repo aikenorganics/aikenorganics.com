@@ -1,5 +1,5 @@
 import React from 'react'
-import logoPath from 'public/img/logo-small.png'
+import logoPath from 'asset-path:img/logo-small.png'
 
 export default () => {
   return <footer className='hidden-print'>

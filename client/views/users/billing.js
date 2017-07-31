@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 import {updateCard} from '../../actions'
-import key from 'env/STRIPE_PK'
+import key from 'env:STRIPE_PK'
 
 let stripe = null
 const getStripe = () => stripe || (stripe = new Promise((resolve, reject) => {

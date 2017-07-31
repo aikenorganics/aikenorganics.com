@@ -4,7 +4,7 @@ import Link from './link'
 import Footer from './footer'
 import Signin from 'ozymandias/client/views/signin'
 import Message from './message'
-import logoPath from 'public/img/logo-small.png'
+import logoPath from 'asset-path:img/logo-small.png'
 
 const main = (props) => {
   const {children, currentUser, statusCode} = props
