@@ -21,7 +21,7 @@ module.exports = [
 
     const products = await scope.order('name').paginate(page, 100)
 
-    _.react({
+    _.render({
       more: products.more,
       oversold,
       page,

@@ -23,7 +23,7 @@ module.exports = [
       scope.order(['createdAt', 'descending']).paginate(page, 50)
     ])
 
-    _.react({
+    _.render({
       events,
       more: events.more,
       page,

@@ -17,7 +17,7 @@ module.exports = [
       where products.grower_id = growers.id and orders.status = 'complete'
     ) as total`)
     .order('name').all()
-    _.react({growers})
+    _.render({growers})
   }),
 
   // Orders
@@ -25,7 +25,7 @@ module.exports = [
     const growers = await Grower
     .where('exists(select id from products where reserved > 0 and grower_id = growers.id)')
     .include('products').order('name').all()
-    _.react({
+    _.render({
       growers: growers.map((grower) => (
         Object.assign(grower.toJSON(), grower.slice('products'))
       ))
@@ -46,7 +46,7 @@ module.exports = [
     .groupBy('products.id')
     .all()
 
-    _.react({
+    _.render({
       grower,
       products: products.map((product) => (
         Object.assign(product.toJSON(), product.slice('quantity', 'total'))
@@ -61,7 +61,7 @@ module.exports = [
 
     const users = await User.order('first').all()
 
-    _.react({
+    _.render({
       grower,
       users: users.map((user) => user.slice('email', 'id', 'name'))
     })

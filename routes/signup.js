@@ -5,7 +5,7 @@ const {get, post} = require('koa-route')
 
 module.exports = [
 
-  get('/signup', async (_) => { _.react() }),
+  get('/signup', async (_) => { _.render() }),
 
   post('/signup', async (_) => {
     const {email} = _.request.body

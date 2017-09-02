@@ -13,17 +13,17 @@ module.exports = [
       ) as removable`)
       .order('position').all()
 
-    _.react({categories})
+    _.render({categories})
   }),
 
   // New
-  get('/admin/categories/new', async (_) => { _.react() }),
+  get('/admin/categories/new', async (_) => { _.render() }),
 
   // Edit
   get('/admin/categories/:id/edit', async (_, id) => {
     const category = await Category.find(id)
     if (!category) return _.notfound()
-    _.react({category})
+    _.render({category})
   }),
 
   // Create

@@ -57,7 +57,7 @@ module.exports = [
       Product.order('name').all()
     ])
 
-    _.react({
+    _.render({
       full,
       locations: locations.map((location) => location.slice('id', 'name')),
       locationId,
@@ -87,7 +87,7 @@ module.exports = [
     ])
     if (!order) return _.notfound()
 
-    _.react({
+    _.render({
       locations: locations.map((location) => location.slice('id', 'name')),
       order,
       payments: order.payments,

@@ -48,10 +48,10 @@ module.exports = () => {
   )) app.use(route)
 
   // Home
-  app.use(get('/', async (_) => _.react()))
+  app.use(get('/', async (_) => _.render()))
 
   // Learn
-  app.use(get('/learn', async (_) => _.react()))
+  app.use(get('/learn', async (_) => _.render()))
 
   // 404
   app.use(async (_) => _.notfound())

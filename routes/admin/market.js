@@ -18,7 +18,7 @@ module.exports = [
   // Index
   get('/admin/market', async (_) => {
     const {market} = _.state
-    _.react({
+    _.render({
       market: Object.assign(market.toJSON(), market.slice(...attributes))
     })
   }),
@@ -27,7 +27,7 @@ module.exports = [
   post('/admin/market', async (_) => {
     const {market} = _.state
     await market.update(_.permit(...attributes))
-    _.react({
+    _.render({
       market: Object.assign(market.toJSON(), market.slice(...attributes))
     })
   })

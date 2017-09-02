@@ -21,7 +21,7 @@ module.exports = [
         .find(),
       Location.where({active: true}).order('name').all()
     ])
-    _.react({
+    _.render({
       locations: locations.map((location) => location.slice('id', 'name')),
       order,
       productOrders: order && order.productOrders
@@ -38,7 +38,7 @@ module.exports = [
       .order(['createdAt', 'descending'])
       .paginate(page, 10)
 
-    _.react({
+    _.render({
       more: orders.more,
       orders: orders.map((order) => (
         Object.assign(order.toJSON(), {productOrders: order.productOrders})

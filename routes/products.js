@@ -61,7 +61,7 @@ module.exports = [
       )`).order('position').all()
     ])
 
-    _.react({
+    _.render({
       categories,
       categoryId,
       certified,
@@ -76,7 +76,7 @@ module.exports = [
   get('/products/:id', async (_) => {
     const {product} = _.state
     const {descriptionHtml} = product
-    _.react({product: Object.assign(product.toJSON(), {descriptionHtml})})
+    _.render({product: Object.assign(product.toJSON(), {descriptionHtml})})
   }),
 
   // Edit
@@ -86,7 +86,7 @@ module.exports = [
     const {product} = _.state
     const categories = await Category.order('position').all()
 
-    _.react({
+    _.render({
       categories,
       product: Object.assign(product.toJSON(), {
         description: product.description

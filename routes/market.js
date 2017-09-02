@@ -11,7 +11,7 @@ module.exports = [
     .where({active: true, featured: true, grower: {active: true}})
     .all()
 
-    _.react({newsHtml, products})
+    _.render({newsHtml, products})
   })
 
 ]

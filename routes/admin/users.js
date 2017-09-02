@@ -29,7 +29,7 @@ module.exports = [
 
     const users = await scope.order('email').paginate(page, 100)
 
-    _.react({
+    _.render({
       more: users.more,
       page,
       search,
@@ -40,7 +40,7 @@ module.exports = [
   // Emails
   get('/admin/users/emails', async (_) => {
     const users = await User.order('email').all()
-    _.react({
+    _.render({
       emails: users.map(({email}) => email)
     })
   }),
@@ -57,12 +57,12 @@ module.exports = [
     const user = await User.select(`exists(
       select id from orders where user_id = users.id
     ) as "hasOrder"`).find(id)
-    _.react({user})
+    _.render({user})
   }),
 
   // New
   get('/admin/users/new', async (_) => {
-    _.react()
+    _.render()
   }),
 
   // Create

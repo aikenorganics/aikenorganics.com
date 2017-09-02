@@ -25,7 +25,7 @@ module.exports = [
       Order.where({status: 'open', userId: currentUser.id}).find()
     ])
 
-    _.react({
+    _.render({
       locations: locations.map((location) => location.slice('id', 'name')),
       order,
       products

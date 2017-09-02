@@ -12,17 +12,17 @@ module.exports = [
         select 1 from orders where location_id = locations.id
       ) as removable`)
       .order('name').all()
-    _.react({locations})
+    _.render({locations})
   }),
 
   // New
-  get('/admin/locations/new', async (_) => { _.react() }),
+  get('/admin/locations/new', async (_) => { _.render() }),
 
   // Edit
   get('/admin/locations/:id/edit', async (_, id) => {
     const location = await Location.find(id)
     if (!location) return _.notfound()
-    _.react({location})
+    _.render({location})
   }),
 
   // Create

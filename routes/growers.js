@@ -12,7 +12,7 @@ module.exports = [
   // New Grower
   get('/growers/new', async (_) => {
     if (!_.state.admin) return _.unauthorized()
-    _.react()
+    _.render()
   }),
 
   // Find Grower
@@ -36,7 +36,7 @@ module.exports = [
   // Index
   get('/growers', async (_) => {
     const growers = await Grower.where({active: true}).order('name').all()
-    _.react({growers})
+    _.render({growers})
   }),
 
   // Create
@@ -63,7 +63,7 @@ module.exports = [
     const {grower} = _.state
     const products = await scope.order('name').all()
 
-    _.react({
+    _.render({
       grower: Object.assign(grower.toJSON(), {
         descriptionHtml: grower.descriptionHtml
       }),
@@ -75,7 +75,7 @@ module.exports = [
   get('/growers/:id/edit', async (_) => {
     if (!_.state.canEdit) return _.unauthorized()
     const {grower} = _.state
-    _.react({
+    _.render({
       grower: Object.assign(grower.toJSON(), {
         description: grower.description
       })
@@ -108,7 +108,7 @@ module.exports = [
     if (!_.state.canEdit) return _.unauthorized()
     const {grower} = _.state
     const categories = await Category.all()
-    _.react({categories, grower})
+    _.render({categories, grower})
   }),
 
   // Create Product
@@ -145,7 +145,7 @@ module.exports = [
     const products = await Product
       .where({growerId: grower.id}).where('reserved > 0').all()
 
-    _.react({grower, products})
+    _.render({grower, products})
   }),
 
   // Products
@@ -155,7 +155,7 @@ module.exports = [
     const {grower} = _.state
     const products = await Product.where({growerId: grower.id}).order('name').all()
 
-    _.react({grower, products})
+    _.render({grower, products})
   }),
 
   // Image

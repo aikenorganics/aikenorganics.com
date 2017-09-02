@@ -11,7 +11,7 @@ module.exports = [
 
   // Index
   get('/settings', async (_) => {
-    _.react()
+    _.render()
   }),
 
   // Update
