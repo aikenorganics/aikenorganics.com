@@ -7,8 +7,8 @@
     "public/assets"
   ],
   "engines": {
-    "node": "8.4.0",
-    "npm": "5.4.0"
+    "node": "8.7.0",
+    "npm": "5.4.2"
   },
   "scripts": {
     "build": "./bin/build",
@@ -30,9 +30,9 @@
     "koa-route": "3.2.0",
     "marked": "0.3.6",
     "object-assign": "4.1.1",
-    "ozymandias": "github:braddunbar/ozymandias#semver:v1.6.46",
-    "react": "15.6.1",
-    "react-dom": "15.6.1",
+    "ozymandias": "github:braddunbar/ozymandias#v1.6.47",
+    "react": "16.0.0",
+    "react-dom": "16.0.0",
     "redux": "3.7.2",
     "stripe": "4.24.1",
     "time": "0.12.0"
