@@ -9,7 +9,7 @@ test('remove an item from your order', async ({assert, browser}) => {
 
   const count = await ProductOrder.where({orderId: 2}).count()
 
-  await browser.find('#remove-product-order-3').click()
+  await (await browser.find('#remove-product-order-3')).click()
   await browser.alert().accept()
   await browser.assertSelector('#message:not(.active)')
 

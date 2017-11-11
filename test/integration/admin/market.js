@@ -7,22 +7,22 @@ test('edit news, message', async ({assert, browser}) => {
   await browser.signIn('admin@example.com')
   await browser.visit('/admin/market')
 
-  await browser.find('#open-day [value="3"]').click()
-  await browser.find('#open-hours [value="2"]').click()
-  await browser.find('#open-minutes [value="23"]').click()
-  await browser.find('#open-meridiem [value="am"]').click()
+  await (await browser.find('#open-day [value="3"]')).click()
+  await (await browser.find('#open-hours [value="2"]')).click()
+  await (await browser.find('#open-minutes [value="23"]')).click()
+  await (await browser.find('#open-meridiem [value="am"]')).click()
 
-  await browser.find('#close-day [value="5"]').click()
-  await browser.find('#close-hours [value="1"]').click()
-  await browser.find('#close-minutes [value="30"]').click()
-  await browser.find('#close-meridiem [value="pm"]').click()
+  await (await browser.find('#close-day [value="5"]')).click()
+  await (await browser.find('#close-hours [value="1"]')).click()
+  await (await browser.find('#close-minutes [value="30"]')).click()
+  await (await browser.find('#close-meridiem [value="pm"]')).click()
 
-  await browser.find('#news').clear()
-  await browser.find('#news').sendKeys('Test News')
+  await (await browser.find('#news')).clear()
+  await (await browser.find('#news')).sendKeys('Test News')
 
-  await browser.find('#market-message').clear()
-  await browser.find('#market-message').sendKeys('Test Message')
-  await browser.find('#market-message').submit()
+  await (await browser.find('#market-message')).clear()
+  await (await browser.find('#market-message')).sendKeys('Test Message')
+  await (await browser.find('#market-message')).submit()
 
   await browser.assertSelector('#message:not(.active)')
 
