@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from '../link'
 
-export default ({market: {nextClose, nextOpen}}) => {
+export default ({locations, market: {nextClose, nextOpen}}) => {
   return <main className='container'>
     <div className='row'>
       <div className='col-md-3'>
@@ -142,8 +142,11 @@ export default ({market: {nextClose, nextOpen}}) => {
           <a id='pick-up' className='anchor' />
           <h2>When and Where do I pick up my order?</h2>
           <p>
-            You pick up your order on Thursday from 3-6:30pm at The Alley Downtown Taproom;
-            214 The Alley; Aiken, South Carolina 29801.
+            <ul>
+              {locations.map((location) => (
+                <li>{location.name}</li>
+              ))}
+            </ul>
           </p>
 
           <a id='not-picked-up' className='anchor' />

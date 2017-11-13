@@ -38,6 +38,7 @@ module.exports = () => {
     require('./routes/admin'),
     require('./routes/cart'),
     require('./routes/growers'),
+    require('./routes/learn'),
     require('./routes/market'),
     require('./routes/orders'),
     require('./routes/product-orders'),
@@ -49,9 +50,6 @@ module.exports = () => {
 
   // Home
   app.use(get('/', async (_) => _.render()))
-
-  // Learn
-  app.use(get('/learn', async (_) => _.render()))
 
   // 404
   app.use(async (_) => _.notfound())
