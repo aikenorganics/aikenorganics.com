@@ -16,7 +16,7 @@ module.exports = () => {
   // Sections
   Object.assign(app.sections, {
     admin: '/admin/(.*)*',
-    app: '*'
+    app: '(.*)*'
   })
 
   app.use(require('./cart'))
