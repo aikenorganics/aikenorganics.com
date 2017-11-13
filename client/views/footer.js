@@ -13,7 +13,7 @@ export default () => {
         <div className='col-md-4'>
           <h2>Contact</h2>
           <p>
-            <strong>Phone:</strong> <a href='tel:803-920-7153'>(803) 920-7153</a>
+            <strong>Phone:</strong> <a href='tel:803-270-5919'>(803) 270-5919</a>
             <br />
             <strong>Email:</strong> <a href='mailto:support@aikenorganics.com'>support@aikenorganics.com</a>
           </p>
