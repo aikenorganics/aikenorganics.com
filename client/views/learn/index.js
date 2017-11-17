@@ -141,13 +141,11 @@ export default ({locations, market: {nextClose, nextOpen}}) => {
 
           <a id='pick-up' className='anchor' />
           <h2>When and Where do I pick up my order?</h2>
-          <p>
-            <ul>
-              {locations.map((location) => (
-                <li>{location.name}</li>
-              ))}
-            </ul>
-          </p>
+          <ul>
+            {locations.map(({id, name}) => (
+              <li key={id}>{name}</li>
+            ))}
+          </ul>
 
           <a id='not-picked-up' className='anchor' />
           <h2>Am I still charged for my order if I do not pick it up?</h2>
