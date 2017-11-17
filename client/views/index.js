@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from './link'
-import alexPath from 'asset-path:img/alex-small.jpg'
+import bannerPath from 'asset-path:img/banner.jpg'
 import logoPath from 'asset-path:img/logo-small.png'
 import vegetablesPath from 'asset-path:img/vegetables-square.jpg'
 import penAndPadPath from 'asset-path:img/pen-and-pad-square.jpg'
@@ -102,7 +102,7 @@ export default ({market: {nextClose, nextOpen}}) => {
         </div>
         <div className='col-md-6'>
           <p className='text-xs-center'>
-            <img className='rounded' src={alexPath} />
+            <img className='rounded' src={bannerPath} />
           </p>
         </div>
       </div>
