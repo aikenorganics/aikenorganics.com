@@ -133,7 +133,7 @@ export default ({locations, market: {nextClose, nextOpen}}) => {
             between the time you order and the time you pick up, such as
             weather damage, inaccurate quantity prediction, or a farmer unable
             to deliver.  These situations will be rare, but occasionally may
-            happen. When they do, we need me make changes to your order so you
+            happen. When they do, we need to make changes to your order so you
             are not charged for items you are not receiving. Also, some items
             are priced by the pound (meat). It makes life easier to adjust
             orders at time of pick-up.
