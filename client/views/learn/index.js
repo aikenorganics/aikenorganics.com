@@ -191,7 +191,7 @@ export default ({locations, market: {nextClose, nextOpen}}) => {
           <a id='how-do-i-sell' className='anchor' />
           <h2>How can I sell through this market?</h2>
           <p>
-            Contact Alexandrea Kneece at 803.920.7153 or <a href='mailto:Alexandrea@aikenorganics.com'>Alexandrea@aikenorganics.com</a>
+            Contact Katie Kule at 803.270.5919 or <a href='mailto:katiekule_94@yahoo.com'>katiekule_94@yahoo.com</a>
           </p>
         </section>
       </div>
